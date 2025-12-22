@@ -20,6 +20,7 @@ import {
   HiSparkles,
 } from "react-icons/hi";
 import { useApp } from "../context/AppContext";
+import { Image } from "./ui";
 
 const Footer = () => {
   const { theme, changeTheme } = useApp();
@@ -64,23 +65,23 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: FaFacebookF, url: "https://facebook.com", label: "Facebook" },
-    { icon: FaTwitter, url: "https://twitter.com", label: "Twitter" },
-    { icon: FaLinkedinIn, url: "https://linkedin.com", label: "LinkedIn" },
-    { icon: FaInstagram, url: "https://instagram.com", label: "Instagram" },
-    { icon: FaGithub, url: "https://github.com", label: "GitHub" },
+    { icon: FaFacebookF, url: "https://facebook.com/limitlessinfotech", label: "Facebook" },
+    { icon: FaTwitter, url: "https://twitter.com/limitlessinfotech", label: "Twitter" },
+    { icon: FaLinkedinIn, url: "https://linkedin.com/in/limitlessinfotech", label: "LinkedIn" },
+    { icon: FaInstagram, url: "https://instagram.com/limitless.infotech", label: "Instagram" },
+    { icon: FaGithub, url: "https://github.com/limitlessinfotech", label: "GitHub" },
   ];
 
   return (
     <footer className="bg-gradient-dark text-gray-300 border-t border-dark-800">
       {/* Main Footer Content */}
-      <div className="container-custom px-4 md:px-8 lg:px-16 py-16">
+      <div className="container-custom px-4 md:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
           <div className="space-y-6">
             <div className="flex items-center space-x-2">
-              <img
-                src="public\images\logos\Limitlessinfotech Logo - 3D.png"
+              <Image
+                src="/images/logos/limitlessinfotech Logo - 3D.png"
                 alt="Limitless Infotech Solution"
                 className="w-20 h-20 object-contain"
               />
@@ -97,8 +98,9 @@ const Footer = () => {
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="inline-flex items-center space-x-3 px-5 py-3 bg-gray-100 dark:bg-dark-800 hover:bg-gray-200 dark:hover:bg-dark-700 text-gray-700 dark:text-gray-300 rounded-xl transition-all duration-300 border border-gray-200 dark:border-dark-700 hover:border-primary-500 shadow-sm hover:shadow-md"
+              className="inline-flex items-center space-x-3 px-5 py-3 bg-gray-100 dark:bg-dark-800 hover:bg-gray-200 dark:hover:bg-dark-700 text-gray-700 dark:text-gray-300 rounded-xl transition-all duration-300 border border-gray-200 dark:border-dark-700 hover:border-primary-500 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-500"
               title={`Current theme: ${theme}`}
+              aria-label={`Toggle ${theme} mode`}
             >
               {getThemeIcon()}
               <span className="text-sm font-semibold capitalize">
@@ -124,17 +126,17 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-6">
+            <h3 className="text-lg font-semibold text-white mb-6" id="quick-links">
               Quick Links
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-3" aria-labelledby="quick-links">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <Link
                     to={link.path}
-                    className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group"
+                    className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
                   >
-                    <span className="w-0 h-0.5 bg-primary-400 group-hover:w-4 transition-all duration-300 mr-2"></span>
+                    <span className="w-0 h-0.5 bg-primary-400 group-hover:w-4 group-focus:w-4 transition-all duration-300 mr-2"></span>
                     {link.name}
                   </Link>
                 </li>
@@ -144,17 +146,17 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-6">
+            <h3 className="text-lg font-semibold text-white mb-6" id="our-services">
               Our Services
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-3" aria-labelledby="our-services">
               {services.map((service, index) => (
                 <li key={index}>
                   <Link
                     to={service.path}
-                    className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group"
+                    className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
                   >
-                    <service.icon className="w-4 h-4 mr-2 group-hover:text-primary-400" />
+                    <service.icon className="w-4 h-4 mr-2 group-hover:text-primary-400 group-focus:text-primary-400" />
                     {service.name}
                   </Link>
                 </li>
@@ -164,17 +166,17 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-6">
+            <h3 className="text-lg font-semibold text-white mb-6" id="contact-info">
               Contact Us
             </h3>
-            <ul className="space-y-4">
+            <ul className="space-y-4" aria-labelledby="contact-info">
               <li className="flex items-start space-x-3">
                 <FaEnvelope className="w-5 h-5 text-primary-400 mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-sm text-gray-500 mb-1">Email</p>
                   <a
                     href="mailto:Info@limitlessinfotech.com"
-                    className="text-gray-300 hover:text-primary-400 transition-colors duration-300"
+                    className="text-gray-300 hover:text-primary-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1 inline-block"
                   >
                     Info@limitlessinfotech.com
                   </a>
@@ -187,7 +189,7 @@ const Footer = () => {
                   <p className="text-sm text-gray-500 mb-1">Phone</p>
                   <a
                     href="tel:+917710909492"
-                    className="text-gray-300 hover:text-primary-400 transition-colors duration-300"
+                    className="text-gray-300 hover:text-primary-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1 inline-block"
                   >
                     +91 77109 09492
                   </a>
@@ -208,7 +210,7 @@ const Footer = () => {
 
       {/* CTA Section */}
       <div className="border-t border-dark-800">
-        <div className="container-custom px-4 md:px-8 lg:px-16 py-8">
+        <div className="container-custom px-4 md:px-6 lg:px-8 py-8">
           <div className="bg-gradient-to-r from-primary-600/10 to-secondary-600/10 rounded-2xl p-8 text-center">
             <h3 className="text-2xl font-bold text-white mb-3">
               Ready to Start Your Project?
@@ -217,7 +219,11 @@ const Footer = () => {
               Build Limitless | Manage Limitless | Grow Limitless with our
               innovative solutions
             </p>
-            <Link to="/get-started" className="btn-primary inline-block">
+            <Link 
+              to="/get-started" 
+              className="btn-primary inline-block focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+              aria-label="Get started with our services today"
+            >
               Get Started Today
             </Link>
           </div>
@@ -226,7 +232,7 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="border-t border-dark-800">
-        <div className="container-custom px-4 md:px-8 lg:px-16 py-6">
+        <div className="container-custom px-4 md:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm text-gray-500">
               © {currentYear} Limitless Infotech Solution. All rights reserved.
@@ -254,8 +260,7 @@ const Footer = () => {
             </div>
 
             <p className="text-sm text-gray-500">
-              Crafted with <span className="text-red-500">♥</span> by Limitless
-              Team
+              Crafted with <span className="text-red-500">♥</span> by Limitless Infotech Solution
             </p>
           </div>
         </div>

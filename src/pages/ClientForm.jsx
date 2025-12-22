@@ -246,7 +246,7 @@ const ClientForm = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-dark-900 dark:to-dark-800">
       {/* Header */}
       <section className="bg-gradient-to-r from-primary-600 to-secondary-600 text-white py-12">
-        <div className="container-custom px-4 md:px-8 lg:px-16">
+        <div className="container-custom px-4 md:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center space-x-2 bg-white/20 px-4 py-2 rounded-full mb-4">
               <HiSparkles className="w-4 h-4" />
@@ -265,7 +265,7 @@ const ClientForm = () => {
 
       {/* Progress Bar */}
       <div className="bg-white dark:bg-dark-800 border-b border-gray-200 dark:border-dark-700 sticky top-20 z-40">
-        <div className="container-custom px-4 md:px-8 lg:px-16 py-4">
+        <div className="container-custom px-4 md:px-6 lg:px-8 py-4">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
@@ -287,7 +287,7 @@ const ClientForm = () => {
 
       {/* Form Content */}
       <section className="section-padding">
-        <div className="container-custom px-4 md:px-8 lg:px-16">
+        <div className="container-custom px-4 md:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <form onSubmit={handleSubmit}>
               {/* Step 1: Personal Information */}

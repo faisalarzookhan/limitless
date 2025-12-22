@@ -333,6 +333,9 @@ const Products = () => {
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary-600/10 to-secondary-600/10"></div>
+        <div className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8" aria-hidden="true">
+          <div className="absolute inset-0 bg-pattern-grid opacity-10"></div>
+        </div>
 
         <div className="container-custom relative z-10">
           <div className="max-w-4xl mx-auto text-center">

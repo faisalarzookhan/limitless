@@ -1,12 +1,21 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { HiX, HiCheckCircle, HiExclamationCircle, HiInformationCircle, HiExclamation } from 'react-icons/hi';
 import { useApp } from '../context/AppContext';
+import { generateId } from '../utils/accessibility';
 
 const Toast = () => {
   const { notifications, removeNotification } = useApp();
+  const regionId = generateId('notifications');
 
   return (
-    <div className="fixed top-24 right-4 z-50 space-y-3 max-w-sm w-full pointer-events-none">
+    <div 
+      id={regionId}
+      className="fixed top-24 right-4 z-50 space-y-3 max-w-sm w-full pointer-events-none"
+      role="region"
+      aria-label="Notifications"
+      aria-live="polite"
+      aria-relevant="additions"
+    >
       {notifications.map((notification) => (
         <ToastItem
           key={notification.id}
@@ -20,8 +29,15 @@ const Toast = () => {
 
 const ToastItem = ({ notification, onClose }) => {
   const { type, title, message, duration } = notification;
+  const toastRef = useRef(null);
+  const toastId = generateId('toast');
 
   useEffect(() => {
+    // Auto-focus the toast for screen readers
+    if (toastRef.current) {
+      toastRef.current.focus();
+    }
+
     if (duration) {
       const timer = setTimeout(onClose, duration);
       return () => clearTimeout(timer);
@@ -70,10 +86,28 @@ const ToastItem = ({ notification, onClose }) => {
     }
   };
 
+  // Determine the politeness setting for screen readers
+  const getAriaLive = () => {
+    switch (type) {
+      case 'error':
+        return 'assertive';
+      case 'warning':
+      case 'info':
+      case 'success':
+      default:
+        return 'polite';
+    }
+  };
+
   return (
     <div
+      id={toastId}
+      ref={toastRef}
       className={`${getBgColor()} ${getTextColor()} border rounded-xl shadow-lg p-4 flex items-start space-x-3 animate-slide-in-right pointer-events-auto backdrop-blur-sm`}
       role="alert"
+      aria-live={getAriaLive()}
+      aria-atomic="true"
+      tabIndex={-1}
     >
       <div className="flex-shrink-0 mt-0.5">{getIcon()}</div>
       <div className="flex-1 min-w-0">

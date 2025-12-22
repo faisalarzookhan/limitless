@@ -227,7 +227,7 @@ const PortfolioDetail = () => {
     <div className="min-h-screen">
       {/* Back Button */}
       <div className="bg-white dark:bg-dark-900 border-b border-gray-200 dark:border-dark-700">
-        <div className="container-custom px-4 md:px-8 lg:px-16 py-4">
+        <div className="container-custom px-4 md:px-6 lg:px-8 py-4">
           <button
             onClick={() => navigate('/portfolio')}
             className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300"
@@ -240,8 +240,10 @@ const PortfolioDetail = () => {
 
       {/* Hero Section */}
       <section className={`relative py-20 bg-gradient-to-br ${project.color} text-white overflow-hidden`}>
-        <div className="absolute inset-0 bg-pattern-grid opacity-10"></div>
-        <div className="container-custom px-4 md:px-8 lg:px-16 relative z-10">
+        <div className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8" aria-hidden="true">
+          <div className="absolute inset-0 bg-pattern-grid opacity-10"></div>
+        </div>
+        <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <div className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-3xl flex items-center justify-center mx-auto mb-8">
               <project.icon className="w-12 h-12" />

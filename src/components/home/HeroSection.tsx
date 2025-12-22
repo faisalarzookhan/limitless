@@ -4,29 +4,38 @@ import { HiCode, HiDeviceMobile, HiCube, HiChartBar, HiLightningBolt, HiShieldCh
 
 const HeroSection: React.FC = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-dark-900 dark:via-dark-800 dark:to-dark-900">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-pattern-grid opacity-30"></div>
+    <section 
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-dark-900 dark:via-dark-800 dark:to-dark-900"
+      aria-labelledby="hero-heading"
+    >
+      {/* Background Pattern - Aligned with container */}
+      <div className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8" aria-hidden="true">
+        <div className="absolute inset-0 bg-pattern-grid opacity-30"></div>
+      </div>
 
       {/* Animated Background Elements */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl animate-float"></div>
+      <div className="absolute top-20 left-10 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl animate-float" aria-hidden="true"></div>
       <div
         className="absolute bottom-20 right-10 w-96 h-96 bg-secondary-500/10 rounded-full blur-3xl animate-float"
         style={{ animationDelay: "1s" }}
+        aria-hidden="true"
       ></div>
 
-      <div className="container-custom px-4 md:px-8 lg:px-16 relative z-10">
+      <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-5xl mx-auto">
           {/* Badge */}
           <div className="inline-flex items-center space-x-2 bg-white dark:bg-dark-800 px-6 py-3 rounded-full shadow-soft mb-8 animate-fade-in-down">
-            <HiSparkles className="w-5 h-5 text-primary-600" />
+            <HiSparkles className="w-5 h-5 text-primary-600" aria-hidden="true" />
             <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
               Where Innovation Meets Execution
             </span>
           </div>
 
           {/* Main Heading */}
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 animate-fade-in-up">
+          <h1 
+            id="hero-heading"
+            className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 animate-fade-in-up"
+          >
             Empowering Businesses with{" "}
             <span className="text-gradient">Technology</span>
             <br />
@@ -51,14 +60,26 @@ const HeroSection: React.FC = () => {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up"
             style={{ animationDelay: "0.4s" }}
           >
-            <Link to="/get-started" className="btn-primary">
+            <Link 
+              to="/get-started" 
+              className="btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+              aria-label="Get started with our services"
+            >
               Get Started
-              <HiArrowRight className="inline-block ml-2 w-5 h-5" />
+              <HiArrowRight className="inline-block ml-2 w-5 h-5" aria-hidden="true" />
             </Link>
-            <Link to="/products" className="btn-secondary">
+            <Link 
+              to="/products" 
+              className="btn-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500"
+              aria-label="Explore our products"
+            >
               Explore Our Products
             </Link>
-            <Link to="/portfolio" className="btn-outline">
+            <Link 
+              to="/portfolio" 
+              className="btn-outline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+              aria-label="View our portfolio"
+            >
               View Our Work
             </Link>
           </div>
@@ -88,8 +109,8 @@ const HeroSection: React.FC = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <HiChevronDown className="w-8 h-8 text-gray-400" />
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce" aria-label="Scroll down">
+        <HiChevronDown className="w-8 h-8 text-gray-400" aria-hidden="true" />
       </div>
     </section>
   );

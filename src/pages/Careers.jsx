@@ -404,9 +404,11 @@ const Careers = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative py-20 md:py-32 bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-pattern-grid opacity-10"></div>
+        <div className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8" aria-hidden="true">
+          <div className="absolute inset-0 bg-pattern-grid opacity-10"></div>
+        </div>
 
-        <div className="container-custom px-4 md:px-8 lg:px-16 relative z-10">
+        <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8 animate-fade-in-down">
               <HiBriefcase className="w-5 h-5" />

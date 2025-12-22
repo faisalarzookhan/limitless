@@ -91,11 +91,106 @@ export interface AppContextType {
 // Component prop types
 export interface ButtonProps {
   children: React.ReactNode;
-  variant?: 'primary' | 'secondary' | 'outline';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'success';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   onClick?: () => void;
   disabled?: boolean;
   className?: string;
+  type?: 'button' | 'submit' | 'reset';
+  ariaLabel?: string;
+  icon?: React.ReactNode;
+  iconPosition?: 'left' | 'right';
+  fullWidth?: boolean;
+}
+
+export interface AccordionProps {
+  children: React.ReactNode;
+  className?: string;
+  allowMultiple?: boolean;
+}
+
+export interface AccordionItemProps {
+  title: string;
+  children: React.ReactNode;
+  isOpen?: boolean;
+  onClick?: () => void;
+  className?: string;
+}
+
+export interface TabsProps {
+  children: React.ReactNode;
+  className?: string;
+  defaultActiveTab?: number;
+  onTabChange?: (index: number) => void;
+  variant?: 'default' | 'pill';
+  id?: string;
+}
+
+export interface TabProps {
+  label: string;
+  isActive?: boolean;
+  onClick?: () => void;
+  className?: string;
+  disabled?: boolean;
+  id?: string;
+}
+
+export interface ProgressProps {
+  value: number;
+  max?: number;
+  className?: string;
+  variant?: 'default' | 'success' | 'warning' | 'danger';
+  showPercentage?: boolean;
+  label?: string;
+}
+
+export interface BadgeProps {
+  children: React.ReactNode;
+  variant?: 'primary' | 'secondary' | 'accent' | 'success' | 'warning' | 'danger' | 'info' | 'neutral';
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+}
+
+export interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  src: string;
+  alt: string;
+  className?: string;
+  loading?: 'lazy' | 'eager';
+  placeholder?: string;
+  blurDataURL?: string;
+  onLoad?: (event: React.SyntheticEvent<HTMLImageElement>) => void;
+  onError?: (event: React.SyntheticEvent<HTMLImageElement>) => void;
+}
+
+export interface CardProps {
+  children: React.ReactNode;
+  variant?: 'default' | 'elevated' | 'outlined' | 'filled' | 'gradient';
+  className?: string;
+  hoverable?: boolean;
+  clickable?: boolean;
+}
+
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  error?: string;
+  variant?: 'default' | 'filled' | 'outlined';
+  className?: string;
+  icon?: React.ReactNode;
+}
+
+export interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  label?: string;
+  error?: string;
+  variant?: 'default' | 'filled' | 'outlined';
+  className?: string;
+}
+
+export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  label?: string;
+  error?: string;
+  variant?: 'default' | 'filled' | 'outlined';
+  className?: string;
+  children: React.ReactNode;
 }
 
 export interface ModalProps {
@@ -103,6 +198,15 @@ export interface ModalProps {
   onClose: () => void;
   title?: string;
   children: React.ReactNode;
+  size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+}
+
+export interface TooltipProps {
+  children: React.ReactNode;
+  content: string;
+  position?: 'top' | 'bottom' | 'left' | 'right';
+  className?: string;
+  delay?: number;
 }
 
 // Navigation types
@@ -138,4 +242,42 @@ export interface WhyLimitlessItem {
   icon: React.ComponentType<{ className?: string }>;
   title: string;
   description: string;
+}
+
+// UI Component Props
+export interface SkeletonProps {
+  className?: string;
+  variant?: 'rectangular' | 'circular' | 'text';
+  width?: number;
+  height?: number;
+  borderRadius?: number;
+  animation?: 'pulse' | 'wave' | 'none';
+}
+
+export interface TooltipProps {
+  children: React.ReactNode;
+  content: string;
+  position?: 'top' | 'bottom' | 'left' | 'right';
+  className?: string;
+  delay?: number;
+}
+
+export interface DividerProps {
+  className?: string;
+  orientation?: 'horizontal' | 'vertical';
+  variant?: 'solid' | 'dashed' | 'dotted';
+  thickness?: number;
+  color?: 'gray' | 'primary' | 'secondary' | 'accent';
+  textAlign?: 'left' | 'center' | 'right';
+  children?: React.ReactNode;
+}
+
+export interface NotificationProps {
+  type?: 'success' | 'error' | 'warning' | 'info';
+  title?: string;
+  message: string;
+  onClose?: () => void;
+  duration?: number;
+  className?: string;
+  closable?: boolean;
 }

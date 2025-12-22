@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   HiMenu,
@@ -16,10 +16,9 @@ import {
   HiMail,
   HiDatabase,
   HiArrowRight,
-  HiStar,
-  HiSparkles,
 } from "react-icons/hi";
 import { useApp } from "../context/AppContext";
+import { Image } from "./ui";
 
 const Navbar = () => {
   const { theme } = useApp();
@@ -29,22 +28,8 @@ const Navbar = () => {
   const [isMobileSubmenuOpen, setIsMobileSubmenuOpen] = useState(null);
   const location = useLocation();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    setIsOpen(false);
-    setActiveDropdown(null);
-    setIsMobileSubmenuOpen(null);
-  }, [location]);
-
-  const products = [
+  // Memoize navigation data to prevent unnecessary re-renders
+  const memoizedProducts = useMemo(() => [
     {
       id: "trackit",
       name: "TrackIT",
@@ -101,9 +86,9 @@ const Navbar = () => {
       color: "text-indigo-600",
       badge: "New",
     },
-  ];
+  ], []);
 
-  const services = [
+  const memoizedServices = useMemo(() => [
     { name: "Web Development", icon: HiCode, path: "/services#web" },
     { name: "Mobile Apps", icon: HiDeviceMobile, path: "/services#mobile" },
     { name: "Custom Software", icon: HiCube, path: "/services#software" },
@@ -113,9 +98,9 @@ const Navbar = () => {
       icon: HiLightningBolt,
       path: "/services#automation",
     },
-  ];
+  ], []);
 
-  const navItems = [
+  const memoizedNavItems = useMemo(() => [
     { name: "Home", path: "/" },
     {
       name: "Products",
@@ -132,59 +117,101 @@ const Navbar = () => {
     { name: "Portfolio", path: "/portfolio" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
-  ];
+  ], []);
 
-  const isActive = (path) => {
-    return location.pathname === path;
-  };
+  // Optimize scroll handler with useCallback
+  const handleScroll = useCallback(() => {
+    setIsScrolled(window.scrollY > 20);
+  }, []);
 
-  const handleDropdownEnter = (itemName) => {
-    setActiveDropdown(itemName);
-  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
 
-  const handleDropdownLeave = () => {
+  useEffect(() => {
+    setIsOpen(false);
     setActiveDropdown(null);
-  };
+    setIsMobileSubmenuOpen(null);
+  }, [location]);
 
-  const toggleMobileSubmenu = (itemName) => {
+  const isActive = useCallback((path) => {
+    return location.pathname === path;
+  }, [location.pathname]);
+
+  const handleDropdownEnter = useCallback((itemName) => {
+    setActiveDropdown(itemName);
+  }, []);
+
+  const handleDropdownLeave = useCallback(() => {
+    setActiveDropdown(null);
+  }, []);
+
+  const toggleMobileSubmenu = useCallback((itemName) => {
     setIsMobileSubmenuOpen(isMobileSubmenuOpen === itemName ? null : itemName);
-  };
+  }, [isMobileSubmenuOpen]);
+
+  // Close mobile menu when pressing Escape key
+  useEffect(() => {
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+        setActiveDropdown(null);
+        setIsMobileSubmenuOpen(null);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, []);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
   return (
     <>
       {/* Main Navbar */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "py-3 bg-white/70 dark:bg-dark-900/70 backdrop-blur-xl shadow-lg border-b border-gray-200/30 dark:border-dark-700/30"
-            : "py-5 bg-white/50 dark:bg-dark-900/50 backdrop-blur-lg"
+            ? "py-3 bg-white/90 dark:bg-dark-900/90 backdrop-blur-xl shadow-lg border-b border-gray-200/30 dark:border-dark-700/30"
+            : "py-5 bg-white/70 dark:bg-dark-900/70 backdrop-blur-lg"
         }`}
-        style={{
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-        }}
+        aria-label="Main navigation"
       >
-        <div className="container-custom px-6 md:px-10 lg:px-20">
-          <div className="flex items-center justify-between gap-8">
-            {/* Logo - Only */}
+        <div className="container-custom px-4 md:px-6 lg:px-8">
+          <div className="flex items-center justify-between gap-4 md:gap-6">
+            {/* Logo */}
             <Link
               to="/"
-              className="flex items-center group z-50 relative flex-shrink-0"
+              className="flex items-center group z-50 relative flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg"
+              aria-label="Limitless Infotech Solution homepage"
             >
               <div className="relative">
-                <img
-                  src="public\images\logos\Limitlessinfotech Logo - 3D.png"
+                <Image
+                  src="/images/logos/Limitlessinfotech Logo - 3D.png"
                   alt="Limitless Infotech Solution"
-                  className="h-20 w-20 object-contain transform group-hover:scale-110 transition-all duration-300 drop-shadow-lg"
+                  className="h-16 w-16 md:h-20 md:w-20 object-contain transform group-hover:scale-105 transition-all duration-300 drop-shadow-lg"
+                  width="80"
+                  height="80"
+                  loading="eager"
                 />
-                {/* Glow effect on hover */}
                 <div className="absolute inset-0 bg-gradient-primary rounded-full opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300"></div>
               </div>
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-3 flex-1 justify-end">
-              {navItems.map((item) => (
+            <div className="hidden lg:flex items-center space-x-1 xl:space-x-2 flex-1 justify-center">
+              {memoizedNavItems.map((item) => (
                 <div
                   key={item.path}
                   className="relative"
@@ -192,14 +219,19 @@ const Navbar = () => {
                     item.hasDropdown && handleDropdownEnter(item.name)
                   }
                   onMouseLeave={() => item.hasDropdown && handleDropdownLeave()}
+                  onFocus={() =>
+                    item.hasDropdown && handleDropdownEnter(item.name)
+                  }
+                  onBlur={() => item.hasDropdown && handleDropdownLeave()}
                 >
                   <Link
                     to={item.path}
-                    className={`flex items-center space-x-2 px-5 py-3 rounded-xl font-medium transition-all duration-300 ${
+                    className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 ${
                       isActive(item.path)
                         ? "bg-gradient-primary text-white shadow-lg shadow-primary-500/30"
                         : "text-gray-700 dark:text-gray-300 hover:bg-white/60 dark:hover:bg-dark-800/60 hover:shadow-md"
                     }`}
+                    aria-current={isActive(item.path) ? "page" : undefined}
                   >
                     <span>{item.name}</span>
                     {item.hasDropdown && (
@@ -207,15 +239,20 @@ const Navbar = () => {
                         className={`w-4 h-4 transition-transform duration-300 ${
                           activeDropdown === item.name ? "rotate-180" : ""
                         }`}
+                        aria-hidden="true"
                       />
                     )}
                   </Link>
 
                   {/* Dropdown Menu */}
                   {item.hasDropdown && activeDropdown === item.name && (
-                    <div className="absolute top-full left-0 mt-3 w-max min-w-[600px] bg-white/95 dark:bg-dark-800/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200/50 dark:border-dark-700/50 overflow-hidden animate-fade-in">
+                    <div 
+                      className="absolute top-full left-0 mt-2 w-max min-w-[300px] md:min-w-[500px] bg-white/95 dark:bg-dark-800/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200/50 dark:border-dark-700/50 overflow-hidden animate-fade-in"
+                      role="menu"
+                      aria-label={`${item.name} submenu`}
+                    >
                       {item.dropdownType === "products" && (
-                        <div className="p-6">
+                        <div className="p-5 md:p-6">
                           <div className="mb-4 pb-4 border-b border-gray-200 dark:border-dark-700">
                             <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
                               Our Products
@@ -225,18 +262,20 @@ const Navbar = () => {
                             </p>
                           </div>
 
-                          <div className="grid grid-cols-2 gap-3 mb-4">
-                            {products.map((product) => (
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 mb-4">
+                            {memoizedProducts.map((product) => (
                               <Link
                                 key={product.id}
-                                to="/products"
-                                className="group flex items-start space-x-3 p-3 rounded-xl hover:bg-gray-50/80 dark:hover:bg-dark-700/80 transition-all duration-300 hover:shadow-md"
+                                to={`/products#${product.id}`}
+                                className="group flex items-start space-x-3 p-3 rounded-xl hover:bg-gray-50/80 dark:hover:bg-dark-700/80 transition-all duration-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                                onClick={() => setActiveDropdown(null)}
                               >
                                 <div
                                   className={`flex-shrink-0 w-10 h-10 ${product.color} bg-opacity-10 dark:bg-opacity-20 rounded-lg flex items-center justify-center`}
                                 >
                                   <product.icon
                                     className={`w-5 h-5 ${product.color}`}
+                                    aria-hidden="true"
                                   />
                                 </div>
                                 <div className="flex-1 min-w-0">
@@ -265,16 +304,17 @@ const Navbar = () => {
 
                           <Link
                             to="/products"
-                            className="flex items-center justify-center space-x-2 w-full py-3 bg-gradient-primary text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300"
+                            className="flex items-center justify-center space-x-2 w-full py-3 bg-gradient-primary text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            onClick={() => setActiveDropdown(null)}
                           >
                             <span>View All Products</span>
-                            <HiArrowRight className="w-4 h-4" />
+                            <HiArrowRight className="w-4 h-4" aria-hidden="true" />
                           </Link>
                         </div>
                       )}
 
                       {item.dropdownType === "services" && (
-                        <div className="p-6">
+                        <div className="p-5 md:p-6">
                           <div className="mb-4 pb-4 border-b border-gray-200 dark:border-dark-700">
                             <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
                               Our Services
@@ -285,29 +325,31 @@ const Navbar = () => {
                           </div>
 
                           <div className="grid gap-2 mb-4">
-                            {services.map((service, index) => (
+                            {memoizedServices.map((service, index) => (
                               <Link
                                 key={index}
                                 to={service.path}
-                                className="group flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50/80 dark:hover:bg-dark-700/80 transition-all duration-300 hover:shadow-md"
+                                className="group flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50/80 dark:hover:bg-dark-700/80 transition-all duration-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                                onClick={() => setActiveDropdown(null)}
                               >
                                 <div className="flex-shrink-0 w-10 h-10 bg-gradient-primary opacity-10 rounded-lg flex items-center justify-center group-hover:opacity-100 transition-opacity duration-300">
-                                  <service.icon className="w-5 h-5 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors" />
+                                  <service.icon className="w-5 h-5 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors" aria-hidden="true" />
                                 </div>
                                 <span className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                                   {service.name}
                                 </span>
-                                <HiArrowRight className="w-4 h-4 ml-auto text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" />
+                                <HiArrowRight className="w-4 h-4 ml-auto text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" aria-hidden="true" />
                               </Link>
                             ))}
                           </div>
 
                           <Link
                             to="/services"
-                            className="flex items-center justify-center space-x-2 w-full py-3 bg-gradient-primary text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300"
+                            className="flex items-center justify-center space-x-2 w-full py-3 bg-gradient-primary text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            onClick={() => setActiveDropdown(null)}
                           >
                             <span>View All Services</span>
-                            <HiArrowRight className="w-4 h-4" />
+                            <HiArrowRight className="w-4 h-4" aria-hidden="true" />
                           </Link>
                         </div>
                       )}
@@ -319,10 +361,11 @@ const Navbar = () => {
               {/* CTA Button */}
               <Link
                 to="/get-started"
-                className="ml-4 btn-primary flex items-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
+                className="ml-2 md:ml-4 btn-primary flex items-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                aria-label="Get started with our services"
               >
                 <span>Get Started</span>
-                <HiArrowRight className="w-4 h-4" />
+                <HiArrowRight className="w-4 h-4" aria-hidden="true" />
               </Link>
             </div>
 
@@ -330,13 +373,15 @@ const Navbar = () => {
             <div className="lg:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-2.5 rounded-xl bg-white/80 dark:bg-dark-800/80 text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-dark-700/80 transition-all duration-300 border border-gray-200/50 dark:border-dark-700/50"
-                aria-label="Toggle menu"
+                className="p-2 rounded-lg bg-white/80 dark:bg-dark-800/80 text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-dark-700/80 transition-all duration-300 border border-gray-200/50 dark:border-dark-700/50 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                aria-label={isOpen ? "Close menu" : "Open menu"}
+                aria-expanded={isOpen}
+                aria-controls="mobile-menu"
               >
                 {isOpen ? (
-                  <HiX className="w-6 h-6" />
+                  <HiX className="w-6 h-6" aria-hidden="true" />
                 ) : (
-                  <HiMenu className="w-6 h-6" />
+                  <HiMenu className="w-6 h-6" aria-hidden="true" />
                 )}
               </button>
             </div>
@@ -346,70 +391,79 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 z-40 lg:hidden transition-all duration-500 ${
-          isOpen ? "visible opacity-100" : "invisible opacity-0"
+        id="mobile-menu"
+        className={`fixed inset-0 z-40 lg:hidden transition-all duration-300 ${
+          isOpen ? "visible opacity-100" : "invisible opacity-0 pointer-events-none"
         }`}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="mobile-menu-title"
       >
         {/* Backdrop */}
         <div
           className="absolute inset-0 bg-black/60 backdrop-blur-sm"
           onClick={() => setIsOpen(false)}
+          aria-hidden="true"
         ></div>
 
         {/* Menu Content */}
         <div
-          className={`absolute top-0 right-0 bottom-0 w-full max-w-sm bg-white/95 dark:bg-dark-900/95 backdrop-blur-xl shadow-2xl transform transition-transform duration-500 ${
+          className={`absolute top-0 right-0 bottom-0 w-full max-w-sm bg-white/95 dark:bg-dark-900/95 backdrop-blur-xl shadow-2xl transform transition-transform duration-300 ${
             isOpen ? "translate-x-0" : "translate-x-full"
           }`}
-          style={{
-            backdropFilter: "blur(16px)",
-            WebkitBackdropFilter: "blur(16px)",
-          }}
         >
           <div className="flex flex-col h-full">
             {/* Mobile Menu Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-gray-200 dark:border-dark-700">
               <Link
                 to="/"
-                className="flex items-center"
+                className="flex items-center focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg"
                 onClick={() => setIsOpen(false)}
+                aria-label="Limitless Infotech Solution homepage"
               >
-                <img
-                  src="/logo.png"
+                <Image
+                  src="/images/logos/Limitlessinfotech Logo - 3D.png"
                   alt="Limitless Infotech Solution"
                   className="h-12 w-12 object-contain"
+                  width="48"
+                  height="48"
+                  loading="lazy"
                 />
               </Link>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-2.5 rounded-xl bg-gray-100 dark:bg-dark-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-dark-700 transition-colors"
+                className="p-2 rounded-lg bg-gray-100 dark:bg-dark-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-dark-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
                 aria-label="Close menu"
               >
-                <HiX className="w-7 h-7" />
+                <HiX className="w-7 h-7" aria-hidden="true" />
               </button>
             </div>
 
             {/* Mobile Menu Items */}
             <div className="flex-1 overflow-y-auto px-6 py-8">
-              <nav className="space-y-3">
-                {navItems.map((item) => (
+              <nav className="space-y-2" role="menubar">
+                {memoizedNavItems.map((item) => (
                   <div key={item.path}>
                     <div className="flex items-center justify-between">
                       <Link
                         to={item.path}
                         onClick={() => !item.hasDropdown && setIsOpen(false)}
-                        className={`flex-1 flex items-center space-x-3 px-5 py-4 rounded-xl font-medium transition-all duration-300 ${
+                        className={`flex-1 flex items-center space-x-3 px-5 py-4 rounded-xl font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 ${
                           isActive(item.path)
                             ? "bg-gradient-primary text-white shadow-lg"
                             : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-800"
                         }`}
+                        aria-current={isActive(item.path) ? "page" : undefined}
                       >
                         <span>{item.name}</span>
                       </Link>
                       {item.hasDropdown && (
                         <button
                           onClick={() => toggleMobileSubmenu(item.name)}
-                          className="p-4 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-800 rounded-xl transition-colors ml-2"
+                          className="p-4 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-800 rounded-xl transition-colors ml-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                          aria-expanded={isMobileSubmenuOpen === item.name}
+                          aria-controls={`submenu-${item.name}`}
+                          aria-label={`Toggle ${item.name} submenu`}
                         >
                           <HiChevronDown
                             className={`w-5 h-5 transition-transform duration-300 ${
@@ -417,6 +471,7 @@ const Navbar = () => {
                                 ? "rotate-180"
                                 : ""
                             }`}
+                            aria-hidden="true"
                           />
                         </button>
                       )}
@@ -424,17 +479,22 @@ const Navbar = () => {
 
                     {/* Mobile Submenu */}
                     {item.hasDropdown && isMobileSubmenuOpen === item.name && (
-                      <div className="mt-2 ml-4 pl-6 border-l-2 border-gray-200 dark:border-dark-700 space-y-2 animate-fade-in">
+                      <div 
+                        id={`submenu-${item.name}`}
+                        className="mt-2 ml-4 pl-6 border-l-2 border-gray-200 dark:border-dark-700 space-y-2 animate-fade-in"
+                        role="menu"
+                      >
                         {item.dropdownType === "products" &&
-                          products.map((product) => (
+                          memoizedProducts.map((product) => (
                             <Link
                               key={product.id}
-                              to="/products"
+                              to={`/products#${product.id}`}
                               onClick={() => setIsOpen(false)}
-                              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-dark-800 transition-all duration-300"
+                              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-dark-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
                             >
                               <product.icon
                                 className={`w-4 h-4 ${product.color}`}
+                                aria-hidden="true"
                               />
                               <span className="text-sm">{product.name}</span>
                               {product.popular && (
@@ -446,14 +506,14 @@ const Navbar = () => {
                           ))}
 
                         {item.dropdownType === "services" &&
-                          services.map((service, index) => (
+                          memoizedServices.map((service, index) => (
                             <Link
                               key={index}
                               to={service.path}
                               onClick={() => setIsOpen(false)}
-                              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-dark-800 transition-all duration-300"
+                              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-dark-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
                             >
-                              <service.icon className="w-4 h-4" />
+                              <service.icon className="w-4 h-4" aria-hidden="true" />
                               <span className="text-sm">{service.name}</span>
                             </Link>
                           ))}
@@ -468,10 +528,11 @@ const Navbar = () => {
                 <Link
                   to="/get-started"
                   onClick={() => setIsOpen(false)}
-                  className="btn-primary w-full flex items-center justify-center space-x-2"
+                  className="btn-primary w-full flex items-center justify-center space-x-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                  aria-label="Get started with our services"
                 >
                   <span>Get Started</span>
-                  <HiArrowRight className="w-4 h-4" />
+                  <HiArrowRight className="w-4 h-4" aria-hidden="true" />
                 </Link>
               </div>
             </div>
@@ -479,7 +540,7 @@ const Navbar = () => {
             {/* Mobile Footer Info */}
             <div className="px-6 py-5 bg-gray-50/50 dark:bg-dark-800/50 border-t border-gray-200 dark:border-dark-700">
               <p className="text-xs text-center text-gray-500 dark:text-gray-400">
-                © 2024 Limitless Infotech Solution
+                © {new Date().getFullYear()} Limitless Infotech Solution
                 <br />
                 Where Innovation Meets Execution
               </p>

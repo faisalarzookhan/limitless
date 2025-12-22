@@ -25,15 +25,21 @@ import Pricing from "./pages/Pricing";
 import Products from "./pages/Products";
 import Careers from "./pages/Careers";
 import NotFound from "./pages/NotFound";
+import { BackToTop } from "./components/ui";
 
 function AppContent() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-white dark:bg-dark-900">
         <Navbar />
 
-        <main className="flex-grow pt-28">
+        <main 
+          className="flex-grow pt-28 pb-16 container-custom px-4 md:px-6 lg:px-8"
+          id="main-content"
+          tabIndex={-1}
+          role="main"
+        >
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/services" element={<Services />} />
@@ -60,6 +66,7 @@ function AppContent() {
         <Footer />
         <Chatbot />
         <Toast />
+        <BackToTop />
         {/* <ThemeWelcome /> */}
       </div>
     </Router>

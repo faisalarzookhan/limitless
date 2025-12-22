@@ -266,8 +266,10 @@ const Home = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-dark-900 dark:via-dark-800 dark:to-dark-900">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 bg-pattern-grid opacity-30"></div>
+        {/* Background Pattern - Aligned with container */}
+        <div className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8" aria-hidden="true">
+          <div className="absolute inset-0 bg-pattern-grid opacity-30"></div>
+        </div>
 
         {/* Animated Background Elements */}
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl animate-float"></div>
@@ -276,7 +278,7 @@ const Home = () => {
           style={{ animationDelay: "1s" }}
         ></div>
 
-        <div className="container-custom px-4 md:px-8 lg:px-16 relative z-10">
+        <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-5xl mx-auto">
             {/* Badge */}
             <div className="inline-flex items-center space-x-2 bg-white dark:bg-dark-800 px-6 py-3 rounded-full shadow-soft mb-8 animate-fade-in-down">
@@ -381,10 +383,16 @@ const Home = () => {
       </section>
 
       {/* Core Services Section */}
-      <section className="section-padding bg-gray-50 dark:bg-dark-800">
+      <section 
+        className="section-padding bg-gray-50 dark:bg-dark-800 transition-colors duration-300"
+        aria-labelledby="core-services-heading"
+      >
         <div className="container-custom">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+            <h2 
+              id="core-services-heading"
+              className="text-4xl md:text-5xl font-display font-bold mb-4"
+            >
               Our <span className="text-gradient">Core Services</span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
@@ -393,27 +401,33 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            role="list"
+            aria-label="Core services"
+          >
             {coreServices.map((service, index) => (
               <div
                 key={index}
-                className="service-card card-hover"
+                className="service-card card-hover focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 dark:focus-within:ring-offset-dark-900 rounded-2xl transition-all duration-300 flex flex-col h-full"
                 style={{ animationDelay: `${index * 0.1}s` }}
+                role="listitem"
               >
                 <div
-                  className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+                  className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 self-start`}
+                  aria-hidden="true"
                 >
                   <service.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                <p className="text-gray-600 dark:text-gray-400 mb-4 flex-grow">
                   {service.description}
                 </p>
                 <Link
                   to="/services"
-                  className="inline-flex items-center text-primary-600 dark:text-primary-400 font-semibold hover:gap-2 transition-all duration-300"
+                  className="inline-flex items-center text-primary-600 dark:text-primary-400 font-semibold hover:gap-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded mt-auto"
                 >
                   Learn More
                   <HiArrowRight className="ml-1 w-5 h-5" />
@@ -423,7 +437,10 @@ const Home = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Link to="/services" className="btn-primary">
+            <Link 
+              to="/services" 
+              className="btn-primary focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-dark-900 rounded-xl"
+            >
               View All Services
             </Link>
           </div>
@@ -431,10 +448,16 @@ const Home = () => {
       </section>
 
       {/* Why Limitless Section */}
-      <section className="section-padding bg-white dark:bg-dark-900">
+      <section 
+        className="section-padding bg-white dark:bg-dark-900 transition-colors duration-300"
+        aria-labelledby="why-limitless-heading"
+      >
         <div className="container-custom">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+            <h2 
+              id="why-limitless-heading"
+              className="text-4xl md:text-5xl font-display font-bold mb-4"
+            >
               Why Choose <span className="text-gradient">Limitless</span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
@@ -442,19 +465,28 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            role="list"
+            aria-label="Company values and advantages"
+          >
             {whyLimitless.map((item, index) => (
               <div
                 key={index}
-                className="group p-8 rounded-2xl bg-gradient-to-br from-white to-gray-50 dark:from-dark-800 dark:to-dark-900 border border-gray-100 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-500 transition-all duration-300 hover:shadow-xl"
+                className="group p-8 rounded-2xl bg-gradient-to-br from-white to-gray-50 dark:from-dark-800 dark:to-dark-900 border border-gray-100 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-500 transition-all duration-300 hover:shadow-xl focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 dark:focus-within:ring-offset-dark-900 flex flex-col h-full"
+                role="listitem"
+                tabIndex={0}
               >
-                <div className="w-14 h-14 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary-600 transition-colors duration-300">
+                <div 
+                  className="w-14 h-14 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary-600 transition-colors duration-300 self-start"
+                  aria-hidden="true"
+                >
                   <item.icon className="w-7 h-7 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors duration-300" />
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
                   {item.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400">
+                <p className="text-gray-600 dark:text-gray-400 flex-grow">
                   {item.description}
                 </p>
               </div>
@@ -480,7 +512,7 @@ const Home = () => {
               <Link
                 key={product.id}
                 to={product.link}
-                className="group relative bg-white dark:bg-dark-800 rounded-2xl p-6 border-2 border-gray-200 dark:border-dark-700 hover:border-primary-500 transition-all duration-300 card-hover"
+                className="group relative bg-white dark:bg-dark-800 rounded-2xl p-6 border-2 border-gray-200 dark:border-dark-700 hover:border-primary-500 transition-all duration-300 card-hover flex flex-col h-full"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {product.popular && (
@@ -492,17 +524,17 @@ const Home = () => {
                   </div>
                 )}
                 <div
-                  className={`w-14 h-14 bg-gradient-to-br ${product.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}
+                  className={`w-14 h-14 bg-gradient-to-br ${product.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 self-start`}
                 >
                   <product.icon className="w-7 h-7 text-white" />
                 </div>
                 <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                   {product.name}
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-grow">
                   {product.description}
                 </p>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between mt-auto">
                   <span className="text-sm text-gray-500 dark:text-gray-500">
                     {product.users} users
                   </span>
@@ -538,18 +570,18 @@ const Home = () => {
               <Link
                 key={story.id}
                 to={story.link}
-                className="group bg-white dark:bg-dark-900 rounded-2xl overflow-hidden border-2 border-gray-200 dark:border-dark-700 hover:border-primary-500 transition-all duration-300 card-hover"
+                className="group bg-white dark:bg-dark-900 rounded-2xl overflow-hidden border-2 border-gray-200 dark:border-dark-700 hover:border-primary-500 transition-all duration-300 card-hover flex flex-col h-full"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className={`h-3 bg-gradient-to-r ${story.color}`}></div>
-                <div className="p-8">
+                <div className="p-8 flex flex-col flex-grow">
                   <h3 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                     {story.title}
                   </h3>
                   <p className="text-primary-600 dark:text-primary-400 font-semibold mb-4">
                     {story.subtitle}
                   </p>
-                  <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                  <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed flex-grow">
                     {story.description}
                   </p>
                   <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-200 dark:border-dark-700">
@@ -597,7 +629,7 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="testimonial-card">
+              <div key={index} className="testimonial-card flex flex-col h-full">
                 {/* Rating */}
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
@@ -606,12 +638,12 @@ const Home = () => {
                 </div>
 
                 {/* Testimonial Text */}
-                <p className="text-gray-700 dark:text-gray-300 mb-6 italic">
+                <p className="text-gray-700 dark:text-gray-300 mb-6 italic flex-grow">
                   "{testimonial.text}"
                 </p>
 
                 {/* Author */}
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-4 mt-auto">
                   <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center text-white font-bold text-lg">
                     {testimonial.name.charAt(0)}
                   </div>
