@@ -183,6 +183,17 @@ const Home = () => {
     },
   ];
 
+  const clientLogos = [
+    { name: "IVOLEX", logo: null, category: "Enterprise" },
+    { name: "Wakilni", logo: null, category: "LegalTech" },
+    { name: "TechVision", logo: null, category: "Technology" },
+    { name: "StyleHub", logo: null, category: "E-commerce" },
+    { name: "LogiTrack", logo: null, category: "Logistics" },
+    { name: "EduLearn", logo: null, category: "Education" },
+    { name: "HealthCare Plus", logo: null, category: "Healthcare" },
+    { name: "SecurePay", logo: null, category: "FinTech" },
+  ];
+
   const testimonials = [
     {
       name: "Rajesh Kumar",
@@ -491,6 +502,54 @@ const Home = () => {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Trusted By Section */}
+      <section className="section-padding bg-gray-50 dark:bg-dark-800">
+        <div className="container-custom">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+              Trusted By <span className="text-gradient">Industry Leaders</span>
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              Join thousands of satisfied clients who have transformed their businesses with our solutions
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8 items-center justify-items-center">
+            {clientLogos.map((client, index) => (
+              <div 
+                key={index}
+                className="flex flex-col items-center text-center group"
+                style={{ animationDelay: `${index * 0.05}s` }}
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-primary-600 to-secondary-400 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-white font-bold text-lg">
+                    {client.name.charAt(0)}
+                  </span>
+                </div>
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  {client.name}
+                </span>
+                <span className="text-xs text-gray-500 dark:text-gray-500">
+                  {client.category}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <div className="inline-flex items-center space-x-4 text-gray-500 dark:text-gray-400 text-sm">
+              <span>Trusted by industry leaders worldwide</span>
+              <div className="flex space-x-1">
+                {[...Array(5)].map((_, i) => (
+                  <HiStar key={i} className="w-4 h-4 text-yellow-500" />
+                ))}
+              </div>
+              <span>4.9/5 from 200+ reviews</span>
+            </div>
           </div>
         </div>
       </section>

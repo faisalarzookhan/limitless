@@ -30,7 +30,7 @@ const Services = () => {
       icon: HiCode,
       title: 'Web Development',
       subtitle: 'Powerful, Responsive, and Scalable Web Solutions',
-      description: 'Transform your digital presence with cutting-edge web applications that drive business growth and deliver exceptional user experiences.',
+      description: 'Transform your digital presence with cutting-edge web applications using React, Next.js, Node.js, and modern frameworks that drive business growth and deliver exceptional user experiences.',
       color: 'from-blue-500 to-cyan-500',
       features: [
         'Responsive & Mobile-First Design',
@@ -57,7 +57,7 @@ const Services = () => {
       icon: HiDeviceMobile,
       title: 'Mobile App Development',
       subtitle: 'Native and Cross-Platform Mobile Excellence',
-      description: 'Build powerful mobile applications that engage users, streamline operations, and drive business success across iOS and Android platforms.',
+      description: 'Build powerful mobile applications using React Native, Flutter, Swift, and Kotlin that engage users, streamline operations, and drive business success across iOS and Android platforms.',
       color: 'from-purple-500 to-pink-500',
       features: [
         'Native iOS & Android Development',
@@ -84,7 +84,7 @@ const Services = () => {
       icon: HiCube,
       title: 'Custom Software & Systems',
       subtitle: 'Tailored Solutions for Your Unique Needs',
-      description: 'Get bespoke software solutions designed specifically for your business processes, challenges, and goals. No compromises, just perfect fit.',
+      description: 'Get bespoke software solutions built with Python, Java, .NET, and microservices architecture designed specifically for your business processes, challenges, and goals. No compromises, just perfect fit.',
       color: 'from-orange-500 to-red-500',
       features: [
         'Requirements Analysis & Planning',
@@ -111,7 +111,7 @@ const Services = () => {
       icon: HiChartBar,
       title: 'CRM & Task Management Apps',
       subtitle: 'Manage Relationships, Optimize Operations',
-      description: 'Custom CRM and task management systems that help you track customers, manage leads, automate workflows, and boost productivity.',
+      description: 'Custom CRM and task management systems built with React, Node.js, PostgreSQL, and real-time technologies that help you track customers, manage leads, automate workflows, and boost productivity.',
       color: 'from-green-500 to-emerald-500',
       features: [
         'Customer Relationship Management',
@@ -138,7 +138,7 @@ const Services = () => {
       icon: HiLightningBolt,
       title: 'Business Automation & AI Integration',
       subtitle: 'Intelligent Systems for the Modern Business',
-      description: 'Leverage AI and automation to eliminate repetitive tasks, reduce errors, and free your team to focus on what matters most.',
+      description: 'Leverage AI and automation using Python, TensorFlow, OpenAI, and Azure AI to eliminate repetitive tasks, reduce errors, and free your team to focus on what matters most.',
       color: 'from-yellow-500 to-amber-500',
       features: [
         'Process Automation',
@@ -166,49 +166,49 @@ const Services = () => {
     {
       icon: HiChip,
       title: 'IoT Solutions',
-      description: 'Connect physical devices to the digital world with secure IoT implementations.',
+      description: 'Connect physical devices to the digital world with secure IoT implementations using Arduino, Raspberry Pi, MQTT, and AWS IoT.',
       features: ['Device Integration', 'Real-Time Monitoring', 'Data Analytics', 'Cloud Connectivity']
     },
     {
       icon: HiServer,
       title: 'Network Installation',
-      description: 'Professional network setup for reliable and secure business connectivity.',
+      description: 'Professional network setup using Cisco, Juniper, and enterprise-grade equipment for reliable and secure business connectivity.',
       features: ['LAN/WAN Setup', 'Router Configuration', 'Security Implementation', 'Network Optimization']
     },
     {
       icon: HiDatabase,
       title: 'Server Setup',
-      description: 'Robust server infrastructure for your applications and data.',
+      description: 'Robust server infrastructure using AWS, Azure, GCP, and Linux/Windows Server for your applications and data.',
       features: ['Server Configuration', 'Load Balancing', 'Security Hardening', 'Backup Solutions']
     },
     {
       icon: HiPuzzle,
       title: 'UI/UX Design',
-      description: 'Create intuitive and engaging user experiences that delight customers.',
+      description: 'Create intuitive and engaging user experiences using Figma, Adobe XD, and modern design principles that delight customers.',
       features: ['User Research', 'Wireframing', 'Prototyping', 'Visual Design']
     },
     {
       icon: HiPhotograph,
       title: 'Branding & Logo Design',
-      description: 'Build a strong visual identity that represents your brand perfectly.',
+      description: 'Build a strong visual identity using Adobe Creative Suite, Canva, and brand strategy principles that represents your brand perfectly.',
       features: ['Logo Design', 'Brand Guidelines', 'Color Palette', 'Typography Selection']
     },
     {
       icon: HiCloud,
       title: 'Cloud Hosting & Infrastructure',
-      description: 'Secure, scalable cloud hosting with performance monitoring.',
+      description: 'Secure, scalable cloud hosting on AWS, Azure, and GCP with performance monitoring and DevOps automation.',
       features: ['AWS/Azure/GCP', 'Performance Monitoring', 'Auto-Scaling', 'CDN Integration']
     },
     {
       icon: HiRefresh,
       title: 'Maintenance & Support',
-      description: 'Keep your systems running flawlessly with ongoing maintenance.',
+      description: 'Keep your systems running flawlessly with ongoing maintenance using DevOps practices and monitoring tools.',
       features: ['24/7 Support', 'Regular Updates', 'Bug Fixes', 'Security Patches']
     },
     {
       icon: HiTrendingUp,
       title: 'Digital Marketing',
-      description: 'Grow your online presence with data-driven marketing strategies.',
+      description: 'Grow your online presence with data-driven marketing strategies using Google Analytics, Meta Ads, and SEO tools.',
       features: ['Social Media Management', 'Content Strategy', 'SEO/SEM', 'Analytics']
     }
   ];

@@ -465,6 +465,220 @@ const About = () => {
         </div>
       </section>
 
+      {/* Tech Stack Section */}
+      <section className="section-padding bg-gray-50 dark:bg-dark-800">
+        <div className="container-custom max-w-6xl">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+              Our <span className="text-gradient">Tech Stack</span>
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              Cutting-edge technologies we use to build your solutions
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+            {/* Frontend Technologies */}
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">JS</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">JavaScript</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Frontend</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">RE</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">React</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Frontend</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">NG</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">Angular</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Frontend</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-teal-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">VU</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">Vue.js</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Frontend</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">NX</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">Next.js</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Frontend</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">TS</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">TypeScript</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Frontend</p>
+            </div>
+            
+            {/* Backend Technologies */}
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">ND</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">Node.js</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Backend</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-pink-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">PY</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">Python</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Backend</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">DJ</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">Django</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Backend</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">SP</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">Spring</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Backend</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">.N</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">.NET</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Backend</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-red-600 to-red-700 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">PH</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">PHP</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Backend</p>
+            </div>
+            
+            {/* Databases */}
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">MG</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">MongoDB</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Database</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-700 to-blue-800 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">PS</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">PostgreSQL</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Database</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-600 to-orange-700 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">MY</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">MySQL</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Database</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-700 to-purple-800 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">RD</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">Redis</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Database</p>
+            </div>
+            
+            {/* Mobile */}
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-indigo-600 to-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">RN</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">React Native</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Mobile</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">FL</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">Flutter</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Mobile</p>
+            </div>
+            
+            {/* AI & ML */}
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-yellow-600 to-red-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">TF</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">TensorFlow</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">AI/ML</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">PY</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">PyTorch</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">AI/ML</p>
+            </div>
+            
+            {/* Cloud & DevOps */}
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">AW</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">AWS</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Cloud</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">AZ</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">Azure</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Cloud</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-green-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">GC</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">GCP</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Cloud</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold">DO</span>
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">Docker</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">DevOps</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="section-padding bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
         <div className="container-custom text-center">

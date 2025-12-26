@@ -25,6 +25,17 @@ import Pricing from "./pages/Pricing";
 import Products from "./pages/Products";
 import Careers from "./pages/Careers";
 import NotFound from "./pages/NotFound";
+import Compliance from "./pages/Compliance";
+import InnovationLab from "./pages/InnovationLab";
+import ApiDocumentation from "./pages/ApiDocumentation";
+import ROICalculator from "./pages/ROICalculator";
+import ClientPortal from "./pages/ClientPortal";
+import KnowledgeBase from "./pages/KnowledgeBase";
+import AIFeatures from "./pages/AIFeatures";
+import NaturalLanguageQueryPage from "./pages/NaturalLanguageQueryPage";
+import ProgressiveProfilingPage from "./pages/ProgressiveProfilingPage";
+import WhatsAppBusinessIntegration from "./components/WhatsAppBusinessIntegration";
+import WhatsAppIntegrationPage from "./pages/WhatsAppIntegrationPage";
 import { BackToTop } from "./components/ui";
 
 function AppContent() {
@@ -59,6 +70,16 @@ function AppContent() {
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/products" element={<Products />} />
             <Route path="/careers" element={<Careers />} />
+            <Route path="/compliance" element={<Compliance />} />
+            <Route path="/innovation-lab" element={<InnovationLab />} />
+            <Route path="/api-documentation" element={<ApiDocumentation />} />
+            <Route path="/roi-calculator" element={<ROICalculator />} />
+            <Route path="/client-portal" element={<ClientPortal />} />
+            <Route path="/knowledge-base" element={<KnowledgeBase />} />
+            <Route path="/ai-features" element={<AIFeatures />} />
+            <Route path="/natural-language-query" element={<NaturalLanguageQueryPage />} />
+            <Route path="/progressive-profiling" element={<ProgressiveProfilingPage />} />
+            <Route path="/whatsapp-integration" element={<WhatsAppIntegrationPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
@@ -67,6 +88,7 @@ function AppContent() {
         <Chatbot />
         <Toast />
         <BackToTop />
+        <WhatsAppBusinessIntegration />
         {/* <ThemeWelcome /> */}
       </div>
     </Router>

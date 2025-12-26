@@ -354,7 +354,7 @@ const Products = () => {
             </p>
 
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/get-started" className="btn-primary">
+              <Link to="/get-started?product=all-products" className="btn-primary">
                 Request Demo
                 <HiPlay className="w-5 h-5 ml-2 inline" />
               </Link>
@@ -482,7 +482,7 @@ const Products = () => {
                         <HiArrowRight className="w-5 h-5 ml-2 inline" />
                       </button>
                       <Link
-                        to="/get-started"
+                        to={`/get-started?product=${product.name.replace(/\s+/g, '-').toLowerCase()}`}
                         className="btn-block text-center btn-secondary"
                       >
                         Request Demo
@@ -578,7 +578,7 @@ const Products = () => {
 
               {/* CTAs */}
               <div className="flex flex-wrap gap-4">
-                <Link to="/get-started" className="btn-primary">
+                <Link to={`/get-started?product=${selectedProduct.name.replace(/\s+/g, '-').toLowerCase()}`} className="btn-primary">
                   Request Demo
                   <HiPlay className="w-5 h-5 ml-2 inline" />
                 </Link>
@@ -662,7 +662,7 @@ const Products = () => {
             </p>
 
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/get-started" className="btn-primary">
+              <Link to="/get-started?product=all-products" className="btn-primary">
                 Request Demo
               </Link>
               <Link to="/contact" className="btn-secondary">

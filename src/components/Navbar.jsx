@@ -16,12 +16,16 @@ import {
   HiMail,
   HiDatabase,
   HiArrowRight,
+  HiSun,
+  HiMoon,
+  HiShieldCheck,
+  HiCurrencyDollar,
 } from "react-icons/hi";
 import { useApp } from "../context/AppContext";
 import { Image } from "./ui";
 
 const Navbar = () => {
-  const { theme } = useApp();
+  const { theme, changeTheme } = useApp();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -113,6 +117,12 @@ const Navbar = () => {
       path: "/services",
       hasDropdown: true,
       dropdownType: "services",
+    },
+    {
+      name: "Enterprise",
+      path: "/compliance",
+      hasDropdown: true,
+      dropdownType: "enterprise",
     },
     { name: "Portfolio", path: "/portfolio" },
     { name: "About", path: "/about" },
@@ -353,11 +363,101 @@ const Navbar = () => {
                           </Link>
                         </div>
                       )}
+
+                      {item.dropdownType === "enterprise" && (
+                        <div className="p-5 md:p-6">
+                          <div className="mb-4 pb-4 border-b border-gray-200 dark:border-dark-700">
+                            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
+                              Enterprise Solutions
+                            </h3>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">
+                              Enterprise-grade tools and compliance
+                            </p>
+                          </div>
+
+                          <div className="grid gap-2 mb-4">
+                            <Link
+                              to="/compliance"
+                              className="group flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50/80 dark:hover:bg-dark-700/80 transition-all duration-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                              onClick={() => setActiveDropdown(null)}
+                            >
+                              <div className="flex-shrink-0 w-10 h-10 bg-gradient-primary opacity-10 rounded-lg flex items-center justify-center group-hover:opacity-100 transition-opacity duration-300">
+                                <HiShieldCheck className="w-5 h-5 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors" aria-hidden="true" />
+                              </div>
+                              <span className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                                Compliance & Security
+                              </span>
+                              <HiArrowRight className="w-4 h-4 ml-auto text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" aria-hidden="true" />
+                            </Link>
+                            <Link
+                              to="/innovation-lab"
+                              className="group flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50/80 dark:hover:bg-dark-700/80 transition-all duration-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                              onClick={() => setActiveDropdown(null)}
+                            >
+                              <div className="flex-shrink-0 w-10 h-10 bg-gradient-primary opacity-10 rounded-lg flex items-center justify-center group-hover:opacity-100 transition-opacity duration-300">
+                                <HiLightningBolt className="w-5 h-5 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors" aria-hidden="true" />
+                              </div>
+                              <span className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                                Innovation Lab
+                              </span>
+                              <HiArrowRight className="w-4 h-4 ml-auto text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" aria-hidden="true" />
+                            </Link>
+                            <Link
+                              to="/api-documentation"
+                              className="group flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50/80 dark:hover:bg-dark-700/80 transition-all duration-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                              onClick={() => setActiveDropdown(null)}
+                            >
+                              <div className="flex-shrink-0 w-10 h-10 bg-gradient-primary opacity-10 rounded-lg flex items-center justify-center group-hover:opacity-100 transition-opacity duration-300">
+                                <HiCode className="w-5 h-5 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors" aria-hidden="true" />
+                              </div>
+                              <span className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                                API Documentation
+                              </span>
+                              <HiArrowRight className="w-4 h-4 ml-auto text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" aria-hidden="true" />
+                            </Link>
+                            <Link
+                              to="/roi-calculator"
+                              className="group flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50/80 dark:hover:bg-dark-700/80 transition-all duration-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                              onClick={() => setActiveDropdown(null)}
+                            >
+                              <div className="flex-shrink-0 w-10 h-10 bg-gradient-primary opacity-10 rounded-lg flex items-center justify-center group-hover:opacity-100 transition-opacity duration-300">
+                                <HiCurrencyDollar className="w-5 h-5 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors" aria-hidden="true" />
+                              </div>
+                              <span className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                                ROI Calculator
+                              </span>
+                              <HiArrowRight className="w-4 h-4 ml-auto text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" aria-hidden="true" />
+                            </Link>
+                          </div>
+
+                          <Link
+                            to="/compliance"
+                            className="flex items-center justify-center space-x-2 w-full py-3 bg-gradient-primary text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            <span>Enterprise Hub</span>
+                            <HiArrowRight className="w-4 h-4" aria-hidden="true" />
+                          </Link>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
               ))}
 
+              {/* Theme Toggle */}
+              <button
+                onClick={() => changeTheme(theme === 'light' ? 'dark' : 'light')}
+                className="ml-2 md:ml-4 p-3 rounded-xl bg-white/80 dark:bg-dark-800/80 text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-dark-700 transition-all duration-300 border border-gray-200/50 dark:border-dark-700/50 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+              >
+                {theme === 'light' ? (
+                  <HiMoon className="w-5 h-5" aria-hidden="true" />
+                ) : (
+                  <HiSun className="w-5 h-5" aria-hidden="true" />
+                )}
+              </button>
+              
               {/* CTA Button */}
               <Link
                 to="/get-started"
@@ -517,14 +617,70 @@ const Navbar = () => {
                               <span className="text-sm">{service.name}</span>
                             </Link>
                           ))}
+
+                        {item.dropdownType === "enterprise" && (
+                          <>
+                            <Link
+                              to="/compliance"
+                              onClick={() => setIsOpen(false)}
+                              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-dark-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            >
+                              <HiShieldCheck className="w-4 h-4" aria-hidden="true" />
+                              <span className="text-sm">Compliance & Security</span>
+                            </Link>
+                            <Link
+                              to="/innovation-lab"
+                              onClick={() => setIsOpen(false)}
+                              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-dark-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            >
+                              <HiLightningBolt className="w-4 h-4" aria-hidden="true" />
+                              <span className="text-sm">Innovation Lab</span>
+                            </Link>
+                            <Link
+                              to="/api-documentation"
+                              onClick={() => setIsOpen(false)}
+                              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-dark-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            >
+                              <HiCode className="w-4 h-4" aria-hidden="true" />
+                              <span className="text-sm">API Documentation</span>
+                            </Link>
+                            <Link
+                              to="/roi-calculator"
+                              onClick={() => setIsOpen(false)}
+                              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-dark-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            >
+                              <HiCurrencyDollar className="w-4 h-4" aria-hidden="true" />
+                              <span className="text-sm">ROI Calculator</span>
+                            </Link>
+                          </>
+                        )}
                       </div>
                     )}
                   </div>
                 ))}
               </nav>
 
+              {/* Mobile Theme Toggle */}
+              <div className="mt-4 pt-4 border-t border-gray-200 dark:border-dark-700">
+                <button
+                  onClick={() => {
+                    changeTheme(theme === 'light' ? 'dark' : 'light');
+                    setIsOpen(false);
+                  }}
+                  className="w-full flex items-center justify-center space-x-3 px-6 py-4 rounded-xl bg-white/80 dark:bg-dark-800/80 text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-dark-700 transition-all duration-300 border border-gray-200/50 dark:border-dark-700/50 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+                >
+                  {theme === 'light' ? (
+                    <HiMoon className="w-5 h-5" aria-hidden="true" />
+                  ) : (
+                    <HiSun className="w-5 h-5" aria-hidden="true" />
+                  )}
+                  <span>Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode</span>
+                </button>
+              </div>
+              
               {/* Mobile CTA */}
-              <div className="mt-8 pt-8 border-t border-gray-200 dark:border-dark-700">
+              <div className="mt-4 pt-4 border-t border-gray-200 dark:border-dark-700">
                 <Link
                   to="/get-started"
                   onClick={() => setIsOpen(false)}
