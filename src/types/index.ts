@@ -25,7 +25,7 @@ export interface Service {
 export interface Testimonial {
   name: string;
   role: string;
-  image?: string;
+  image?: string | null;
   rating: number;
   text: string;
 }
@@ -90,7 +90,7 @@ export interface AppContextType {
 
 // Component prop types
 export interface ButtonProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'success';
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   onClick?: () => void;
@@ -252,14 +252,6 @@ export interface SkeletonProps {
   height?: number;
   borderRadius?: number;
   animation?: 'pulse' | 'wave' | 'none';
-}
-
-export interface TooltipProps {
-  children: React.ReactNode;
-  content: string;
-  position?: 'top' | 'bottom' | 'left' | 'right';
-  className?: string;
-  delay?: number;
 }
 
 export interface DividerProps {

@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { SelectProps } from '../../../types';
 import { generateId } from '../../../utils/accessibility';
 

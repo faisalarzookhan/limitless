@@ -20,6 +20,7 @@ import {
   FaWhatsapp,
   FaLink
 } from 'react-icons/fa';
+import { sendUserInteractionNotification } from '../services/notificationService';
 
 const BlogDetail = () => {
   const { slug } = useParams();
@@ -261,9 +262,23 @@ const BlogDetail = () => {
     }
   };
 
-  const handleCommentSubmit = (e) => {
+  const handleCommentSubmit = async (e) => {
     e.preventDefault();
     if (comment.trim()) {
+      // Send notification about the comment
+      try {
+        await sendUserInteractionNotification('blog-comment', {
+          blogTitle: post.title,
+          blogSlug: post.slug,
+          comment: comment,
+          author: 'You', // In a real app, this would be the actual user
+          timestamp: new Date().toISOString(),
+          page: window.location.pathname
+        });
+      } catch (error) {
+        console.error('Error sending comment notification:', error);
+      }
+
       const newComment = {
         id: comments.length + 1,
         author: 'You',

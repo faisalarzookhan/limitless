@@ -3,9 +3,11 @@ export { default as Button } from './Button';
 
 // Export all components from the components directory
 export { default as Accordion } from './components/Accordion';
+export { default as AnimatedElement } from './components/AnimatedElement';
 export { default as Badge } from './components/Badge';
 export { default as Card } from './components/Card';
 export { default as Divider } from './components/Divider';
+export { default as DuoToneIcon } from './components/DuoToneIcon';
 export { default as Image } from './components/Image';
 export { default as Input } from './components/Input';
 export { default as Modal } from './components/Modal';

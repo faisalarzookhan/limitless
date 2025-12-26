@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { HiChat, HiPhone, HiPaperAirplane, HiX, HiCheck, HiClock, HiUser, HiSparkles } from 'react-icons/hi';
+import { sendUserInteractionNotification } from '../services/notificationService';
 
 const WhatsAppBusinessIntegration = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +23,7 @@ const WhatsAppBusinessIntegration = () => {
     "Schedule a call"
   ];
 
-  const handleSendMessage = (message = inputMessage) => {
+  const handleSendMessage = async (message = inputMessage) => {
     if (!message.trim()) return;
 
     const newMessage = {
@@ -35,6 +36,18 @@ const WhatsAppBusinessIntegration = () => {
 
     setMessages(prev => [...prev, newMessage]);
     setInputMessage('');
+
+    // Send notification about the user's message
+    try {
+      await sendUserInteractionNotification('whatsapp-chat', {
+        message: message,
+        sender: 'user',
+        timestamp: new Date().toISOString(),
+        page: window.location.pathname
+      });
+    } catch (error) {
+      console.error('Error sending WhatsApp chat notification:', error);
+    }
 
     // Simulate bot response
     setIsTyping(true);
@@ -66,7 +79,7 @@ const WhatsAppBusinessIntegration = () => {
     } else if (lowerMsg.includes('hr-ims') || lowerMsg.includes('trackit')) {
       return "HR-IMS and TrackIT are our flagship SaaS products. HR-IMS handles HR management, while TrackIT manages project tracking. Would you like a demo of either product?";
     } else {
-      return "Thanks for your message! Our team will get back to you shortly. In the meantime, you can also reach us at +1 (555) 123-4567 or email us at contact@limitlessinfotech.com";
+      return "Thanks for your message! Our team will get back to you shortly. In the meantime, you can also reach us at +917710909492 or email us at contact@limitlessinfotech.com";
     }
   };
 

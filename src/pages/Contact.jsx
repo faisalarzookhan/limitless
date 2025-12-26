@@ -13,6 +13,7 @@ import {
   HiChat,
   HiCalendar
 } from 'react-icons/hi';
+import ContactForm from '../components/ContactForm';
 import {
   FaFacebookF,
   FaTwitter,
@@ -23,43 +24,7 @@ import {
 } from 'react-icons/fa';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    company: '',
-    subject: '',
-    message: '',
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Simulate API call
-    setTimeout(() => {
-      setSubmitStatus('success');
-      setIsSubmitting(false);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        company: '',
-        subject: '',
-        message: '',
-      });
-
-      // Reset status after 5 seconds
-      setTimeout(() => setSubmitStatus(null), 5000);
-    }, 2000);
-  };
 
   const contactInfo = [
     {
@@ -215,154 +180,7 @@ const Contact = () => {
                   Fill out the form below and we'll get back to you within 24 hours
                 </p>
 
-                {submitStatus === 'success' && (
-                  <div className="mb-6 p-4 bg-green-100 dark:bg-green-900/30 border border-green-500 rounded-xl flex items-center space-x-3 animate-fade-in">
-                    <HiCheckCircle className="w-6 h-6 text-green-600 dark:text-green-400 flex-shrink-0" />
-                    <div>
-                      <p className="font-semibold text-green-800 dark:text-green-300">
-                        Message Sent Successfully!
-                      </p>
-                      <p className="text-sm text-green-700 dark:text-green-400">
-                        We'll get back to you shortly.
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Name */}
-                    <div>
-                      <label htmlFor="name" className="label-text">
-                        <HiUser className="inline w-4 h-4 mr-1" />
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className="input-field"
-                        placeholder="John Doe"
-                      />
-                    </div>
-
-                    {/* Email */}
-                    <div>
-                      <label htmlFor="email" className="label-text">
-                        <HiMail className="inline w-4 h-4 mr-1" />
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="input-field"
-                        placeholder="john@example.com"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Phone */}
-                    <div>
-                      <label htmlFor="phone" className="label-text">
-                        <HiPhone className="inline w-4 h-4 mr-1" />
-                        Phone Number
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="input-field"
-                        placeholder="+91 98765 43210"
-                      />
-                    </div>
-
-                    {/* Company */}
-                    <div>
-                      <label htmlFor="company" className="label-text">
-                        <HiOfficeBuilding className="inline w-4 h-4 mr-1" />
-                        Company Name
-                      </label>
-                      <input
-                        type="text"
-                        id="company"
-                        name="company"
-                        value={formData.company}
-                        onChange={handleChange}
-                        className="input-field"
-                        placeholder="Your Company"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Subject */}
-                  <div>
-                    <label htmlFor="subject" className="label-text">
-                      Subject *
-                    </label>
-                    <select
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                      className="select-field"
-                    >
-                      <option value="">Select a subject</option>
-                      <option value="general">General Inquiry</option>
-                      <option value="project">New Project</option>
-                      <option value="support">Technical Support</option>
-                      <option value="partnership">Partnership Opportunity</option>
-                      <option value="career">Career Inquiry</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-
-                  {/* Message */}
-                  <div>
-                    <label htmlFor="message" className="label-text">
-                      Your Message *
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows="6"
-                      className="textarea-field"
-                      placeholder="Tell us about your project or inquiry..."
-                    ></textarea>
-                  </div>
-
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="spinner inline-block w-5 h-5 mr-2"></div>
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        Send Message
-                        <HiArrowRight className="inline-block ml-2 w-5 h-5" />
-                      </>
-                    )}
-                  </button>
-                </form>
+                <ContactForm />
               </div>
             </div>
 

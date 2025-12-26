@@ -213,7 +213,7 @@ export const gridClasses = (
 export const typographyClasses = (
   fontSize: string,
   fontWeight?: string,
-  textAlign?: 'left' | 'center' | 'right' = 'left',
+  textAlign: 'left' | 'center' | 'right' = 'left',
   lineHeight?: string
 ): string => {
   const classes = [`text-${fontSize}`];

@@ -23,6 +23,7 @@ import {
   HiShoppingCart,
   HiAcademicCap,
 } from "react-icons/hi";
+import { sendLeadGenerationNotification } from "../services/notificationService";
 
 const ClientForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -111,6 +112,19 @@ const ClientForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    // Send lead generation notification
+    try {
+      await sendLeadGenerationNotification({
+        ...formData,
+        formType: 'client-inquiry',
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        url: window.location.href
+      });
+    } catch (error) {
+      console.error('Error sending lead notification:', error);
+    }
 
     // Simulate API call
     setTimeout(() => {

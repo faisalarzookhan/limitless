@@ -10,7 +10,7 @@ interface BackToTopProps {
 
 const BackToTop: React.FC<BackToTopProps> = ({ 
   threshold = 300, 
-  className = '',
+  className = 'scroll-to-top',
   children 
 }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -38,7 +38,7 @@ const BackToTop: React.FC<BackToTopProps> = ({
   if (!isVisible) return null;
 
   return (
-    <div className={`fixed bottom-8 right-8 z-50 ${className}`}>
+    <div className={`fixed bottom-8 right-8 z-40 ${className}`}>
       {children ? (
         <button
           onClick={scrollToTop}

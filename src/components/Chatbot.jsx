@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   HiX,
   HiChatAlt2,
@@ -6,8 +7,10 @@ import {
   HiUser,
   HiChip,
 } from "react-icons/hi";
+import { sendUserInteractionNotification } from '../services/notificationService';
 
 const Chatbot = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     {
@@ -45,6 +48,126 @@ const Chatbot = () => {
         "Hello! I'm Auralis, your AI assistant. How can I help you today?",
         "Hi there! I'm Auralis. What can I help you with?",
         "Hey! Welcome to Limitless Infotech. I'm Auralis, here to assist you. What brings you here today?",
+      ],
+    },
+    contact: {
+      keywords: [
+        "contact",
+        "reach",
+        "email",
+        "phone",
+        "call",
+        "location",
+        "address",
+        "support",
+        "help",
+      ],
+      responses: [
+        "You can reach us at:\n\n📧 Email: Info@limitlessinfotech.com\n📱 Phone: +917710909492\n📍 Location: Mumbai, Maharashtra, IN\n\nWould you like me to connect you with our support team?",
+      ],
+    },
+    pricing: {
+      keywords: ["price", "pricing", "cost", "how much", "budget", "quote", "estimate"],
+      responses: [
+        "Our pricing is tailored to each project based on:\n\n• Project Scope & Complexity\n• Timeline Requirements\n• Technology Stack\n• Features & Functionality\n\nI recommend filling out our client form to get a detailed quote. Would you like me to direct you there?",
+      ],
+    },
+    timeline: {
+      keywords: [
+        "timeline",
+        "how long",
+        "duration",
+        "time",
+        "delivery",
+        "deadline",
+        "when",
+      ],
+      responses: [
+        "Project timelines vary based on complexity:\n\n• Simple Website: 2-4 weeks\n• Complex Web App: 2-4 months\n• Mobile App: 3-6 months\n• Custom Software: 3-12 months\n\nWe provide detailed timelines during project planning. Want to discuss your project?",
+      ],
+    },
+    technology: {
+      keywords: [
+        "technology",
+        "tech stack",
+        "technologies",
+        "framework",
+        "language",
+        "platform",
+      ],
+      responses: [
+        "We work with cutting-edge technologies:\n\n• Frontend: React, Vue, Angular, Next.js\n• Backend: Node.js, Python, PHP, .NET\n• Mobile: React Native, Flutter\n• Database: MongoDB, PostgreSQL, MySQL\n• Cloud: AWS, Azure, Google Cloud\n\nWhat technology are you interested in?",
+      ],
+    },
+    support: {
+      keywords: ["support", "maintenance", "help", "assistance", "update", "bug", "issue"],
+      responses: [
+        "We provide comprehensive support:\n\n• 24/7 Technical Support\n• Regular Updates & Maintenance\n• Bug Fixes & Security Patches\n• Performance Monitoring\n• Training & Documentation\n\nNeed support for an existing project?",
+      ],
+    },
+    portfolio: {
+      keywords: [
+        "portfolio",
+        "projects",
+        "work",
+        "examples",
+        "case studies",
+        "previous work",
+      ],
+      responses: [
+        "We have successfully delivered projects across various industries. You can view our portfolio with detailed case studies showing:\n\n• Project Challenges\n• Our Solutions\n• Technologies Used\n• Results & Impact\n\nWould you like to see our portfolio?",
+      ],
+    },
+    start: {
+      keywords: [
+        "start",
+        "begin",
+        "get started",
+        "new project",
+        "hire",
+        "work with you",
+      ],
+      responses: [
+        "Great! Let's get started:\n\n1. Fill out our Client Requirements Form\n2. Schedule a consultation call\n3. Receive a detailed proposal\n4. Start development\n\nShall I direct you to our client form?",
+      ],
+    },
+    security: {
+      keywords: [
+        "security",
+        "secure",
+        "safety",
+        "data protection",
+        "encryption",
+        "privacy",
+      ],
+      responses: [
+        "Security is our top priority:\n\n• Enterprise-grade Encryption\n• Secure Coding Practices\n• Regular Security Audits\n• Data Protection Compliance\n• Backup & Disaster Recovery\n\nYour data and systems are completely secure with us.",
+      ],
+    },
+    team: {
+      keywords: ["team", "who", "founder", "about", "company", "employees"],
+      responses: [
+        "Limitless Infotech Solution is led by Faisal Khan and a talented team of developers, designers, and engineers. We are passionate about creating innovative solutions that transform businesses.\n\nWould you like to learn more about our company?",
+      ],
+    },
+    thanks: {
+      keywords: ["thank", "thanks", "appreciate", "grateful"],
+      responses: [
+        "You're welcome! 😊 Is there anything else I can help you with?",
+        "Happy to help! Feel free to ask if you have more questions.",
+        "My pleasure! Let me know if you need anything else.",
+      ],
+    },
+    integration: {
+      keywords: ["integration", "api", "connect", "system", "third-party", "connectivity"],
+      responses: [
+        "We specialize in system integrations:\n\n• API Development & Integration\n• Third-party Service Integration\n• CRM & ERP Integration\n• Payment Gateway Integration\n• Cloud Service Integration\n\nWhat systems would you like to integrate?",
+      ],
+    },
+    ai: {
+      keywords: ["ai", "artificial intelligence", "machine learning", "ml", "automation", "intelligent"],
+      responses: [
+        "We offer comprehensive AI solutions:\n\n• Custom Machine Learning Models\n• Natural Language Processing\n• Computer Vision\n• Predictive Analytics\n• Intelligent Automation\n\nWould you like to know how AI can benefit your business?",
       ],
     },
     services: {
@@ -109,7 +232,7 @@ const Chatbot = () => {
         "address",
       ],
       responses: [
-        "You can reach us at:\n\n📧 Email: Info@limitlessinfotech.com\n📱 Phone: +91 77109 09492\n📍 Location: Mumbai, Maharashtra, IN\n\nWould you like to schedule a consultation?",
+        "You can reach us at:\n\n📧 Email: Info@limitlessinfotech.com\n📱 Phone: +917710909492\n📍 Location: Mumbai, Maharashtra, IN\n\nWould you like to schedule a consultation?",
       ],
     },
     timeline: {
@@ -200,6 +323,39 @@ const Chatbot = () => {
   const findBestResponse = (message) => {
     const lowerMessage = message.toLowerCase();
 
+    // Check for page redirection keywords
+    if (lowerMessage.includes("service") || lowerMessage.includes("services")) {
+      setTimeout(() => {
+        navigate('/services');
+      }, 1000);
+      return "I'm redirecting you to our services page where you can explore all our offerings. Just a moment...";
+    } else if (lowerMessage.includes("portfolio") || lowerMessage.includes("project") || lowerMessage.includes("work")) {
+      setTimeout(() => {
+        navigate('/portfolio');
+      }, 1000);
+      return "I'm redirecting you to our portfolio page where you can see our completed projects and case studies. Just a moment...";
+    } else if (lowerMessage.includes("product") || lowerMessage.includes("products")) {
+      setTimeout(() => {
+        navigate('/products');
+      }, 1000);
+      return "I'm redirecting you to our products page where you can explore our SaaS solutions. Just a moment...";
+    } else if (lowerMessage.includes("about") || lowerMessage.includes("company")) {
+      setTimeout(() => {
+        navigate('/about');
+      }, 1000);
+      return "I'm redirecting you to our about page where you can learn more about Limitless Infotech Solution. Just a moment...";
+    } else if (lowerMessage.includes("contact") || lowerMessage.includes("reach") || lowerMessage.includes("get in touch")) {
+      setTimeout(() => {
+        navigate('/contact');
+      }, 1000);
+      return "I'm redirecting you to our contact page where you can get in touch with our team. Just a moment...";
+    } else if (lowerMessage.includes("pricing") || lowerMessage.includes("price") || lowerMessage.includes("cost")) {
+      setTimeout(() => {
+        navigate('/pricing');
+      }, 1000);
+      return "I'm redirecting you to our pricing page where you can find detailed information about our packages. Just a moment...";
+    }
+
     // Check each category in knowledge base
     for (const [category, data] of Object.entries(knowledgeBase)) {
       if (data.keywords.some((keyword) => lowerMessage.includes(keyword))) {
@@ -212,7 +368,7 @@ const Chatbot = () => {
     return "I'm here to help! You can ask me about our services, pricing, portfolio, or how to get started. Would you like to speak with a human agent for more detailed assistance?";
   };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!inputMessage.trim()) return;
 
     // Add user message
@@ -225,6 +381,19 @@ const Chatbot = () => {
     setMessages((prev) => [...prev, userMessage]);
     setInputMessage("");
     setIsTyping(true);
+
+    // Send notification about the user's message
+    try {
+      await sendUserInteractionNotification('chat-message', {
+        userId: 'anonymous', // In a real app, this would be the actual user ID
+        message: inputMessage,
+        timestamp: new Date().toISOString(),
+        page: window.location.pathname,
+        userAgent: navigator.userAgent
+      });
+    } catch (error) {
+      console.error('Error sending chat notification:', error);
+    }
 
     // Simulate bot typing and response
     setTimeout(
@@ -265,14 +434,14 @@ const Chatbot = () => {
   const connectToAgent = () => {
     const agentMessage = {
       type: "bot",
-      text: "I'm connecting you with one of our specialists. In the meantime, you can also:\n\n• Call us: +91 77109 09492\n• Email us: Info@limitlessinfotech.com\n• Fill out our contact form for a detailed response",
+      text: "I'm connecting you with one of our specialists. In the meantime, you can also:\n\n• Call us: +917710909492\n• Email us: Info@limitlessinfotech.com\n• Fill out our contact form for a detailed response",
       timestamp: new Date(),
     };
     setMessages((prev) => [...prev, agentMessage]);
   };
 
   return (
-    <div className="chatbot-container">
+    <div className="fixed bottom-8 right-32 z-50">
       {/* Chatbot Button */}
       {!isOpen && (
         <button

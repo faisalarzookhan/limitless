@@ -9,7 +9,31 @@
     }
 
     body {
-        @apply bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100 transition-colors duration-300;
+        @apply bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100 transition-colors duration-300 leading-normal;
+    }
+    
+    .dark .text-gray-900 {
+        color: #f8fafc; /* lighter text for better contrast */
+    }
+    
+    .dark .text-gray-700 {
+        color: #e2e8f0; /* lighter text for better contrast */
+    }
+    
+    .dark .text-gray-600 {
+        color: #cbd5e1; /* lighter text for better contrast */
+    }
+    
+    .dark .text-gray-500 {
+        color: #94a3b8; /* lighter text for better contrast */
+    }
+    
+    .dark .border-gray-200 {
+        border-color: #334155; /* darker border for better contrast */
+    }
+    
+    .dark .border-gray-100 {
+        border-color: #334155; /* darker border for better contrast */
     }
 
     /* Custom Scrollbar Styles */
@@ -49,7 +73,7 @@
     }
 
     .card-hover {
-        @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-2;
+        @apply transition-all duration-300 hover:shadow-2xl dark:hover:shadow-2xl hover:-translate-y-2 transform-gpu;
     }
 
     .btn-primary {
@@ -69,11 +93,19 @@
     }
 
     .section-padding {
-        @apply py-16 px-6 md:py-20 md:px-10 lg:py-24 lg:px-20;
+        @apply py-20 px-6 md:py-24 md:px-10 lg:py-32 lg:px-20;
     }
 
     .container-custom {
         @apply max-w-7xl mx-auto px-4 md:px-6 lg:px-8;
+    }
+    
+    .container-wide {
+        @apply max-w-[1440px] mx-auto px-4 md:px-6 lg:px-8;
+    }
+    
+    .container-fluid {
+        @apply max-w-full mx-auto px-4 md:px-6 lg:px-8;
     }
 
     .glass-effect {
@@ -158,19 +190,19 @@
     }
 
     .service-card {
-        @apply bg-white dark:bg-dark-800 rounded-2xl p-6 md:p-8 lg:p-10 shadow-soft hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-dark-700;
+        @apply bg-white/70 dark:bg-dark-800/60 backdrop-blur-xl rounded-2xl p-6 md:p-8 lg:p-10 shadow-soft dark:shadow-soft-dark hover:shadow-2xl transition-all duration-300 border border-gray-100/30 dark:border-dark-700/30 transform-gpu hover:-translate-y-2;
     }
 
     .testimonial-card {
-        @apply bg-gradient-to-br from-white to-gray-50 dark:from-dark-800 dark:to-dark-900 rounded-2xl p-6 md:p-8 lg:p-10 shadow-soft border border-gray-100 dark:border-dark-700;
+        @apply bg-white/70 dark:bg-dark-800/60 backdrop-blur-xl rounded-2xl p-6 md:p-8 lg:p-10 shadow-soft dark:shadow-soft-dark border border-gray-100/30 dark:border-dark-700/30;
     }
 
     .portfolio-card {
-        @apply relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer;
+        @apply relative overflow-hidden rounded-2xl bg-white/70 dark:bg-dark-800/60 backdrop-blur-xl shadow-lg dark:shadow-soft-dark hover:shadow-2xl transition-all duration-300 cursor-pointer border border-gray-100/30 dark:border-dark-700/30 transform-gpu hover:-translate-y-2;
     }
 
     .faq-item {
-        @apply bg-white dark:bg-dark-800 rounded-xl p-5 md:p-6 lg:p-8 shadow-soft border border-gray-100 dark:border-dark-700 transition-all duration-300;
+        @apply bg-white/70 dark:bg-dark-800/60 backdrop-blur-xl rounded-xl p-5 md:p-6 lg:p-8 shadow-soft dark:shadow-soft-dark border border-gray-100/30 dark:border-dark-700/30 transition-all duration-300;
     }
 
     .input-field {
@@ -220,7 +252,7 @@
 
     /* Content Section Spacing */
     .content-section {
-        @apply py-16 md:py-20 lg:py-24;
+        @apply py-20 md:py-24 lg:py-32;
     }
 
     .content-spacing {
@@ -238,6 +270,22 @@
     .badge-success {
         @apply bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300;
     }
+}
+
+/* Skeleton Animation */
+@keyframes skeleton {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.skeleton-gradient {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton 1.5s infinite;
 }
 
 /* Animations */

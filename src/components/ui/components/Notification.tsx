@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect } from 'react';
+import { forwardRef, useEffect } from 'react';
 import { HiX, HiInformationCircle, HiCheckCircle, HiExclamation, HiExclamationCircle } from 'react-icons/hi';
 import { NotificationProps } from '../../../types';
 import { generateId } from '../../../utils/accessibility';

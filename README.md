@@ -224,6 +224,14 @@ Target metrics (Lighthouse):
 - **Best Practices:** 95+
 - **SEO:** 95+
 
+### Bundle Optimization
+- **Chunked bundles** - Dependencies separated into logical chunks
+- **Lazy loading** - Components loaded on-demand
+- **Tree shaking** - Unused code automatically removed
+- **Gzipped assets** - All assets compressed for faster loading
+
+Run `npm run analyze` to generate a bundle size report.
+
 ---
 
 ## 🤝 Contributing
@@ -247,12 +255,12 @@ Target metrics (Lighthouse):
 
 ## 📞 Contact
 
-**Limitless Infotech Solution**
+**Limitless Infotech Solution Pvt Ltd.**
 
 - **Email:** Info@limitlessinfotech.com
 - **Phone:** +91 77109 09492
 - **Location:** Mumbai, Maharashtra, India
-- **Website:** [Coming Soon]
+- **Website:** www.limitlessinfotech.com
 
 **Founder & CEO:** Faisal Khan
 
@@ -293,6 +301,6 @@ This project is licensed under the ISC License.
 
 ---
 
-**Built with ❤️ by Limitless Infotech Solution**
+**Built with ❤️ by Limitless Infotech Solution Pvt Ltd.**
 
 *Where Innovation Meets Execution*# limitless

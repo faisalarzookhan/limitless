@@ -1,8 +1,8 @@
-import React, { forwardRef } from 'react';
+import { forwardRef, HTMLAttributes } from 'react';
 import { ProgressProps } from '../../../types';
 import { generateId } from '../../../utils/accessibility';
 
-const Progress = forwardRef<HTMLDivElement, ProgressProps>(({
+const Progress = forwardRef<HTMLDivElement, ProgressProps & HTMLAttributes<HTMLDivElement>>(({
   value,
   max = 100,
   className = '',

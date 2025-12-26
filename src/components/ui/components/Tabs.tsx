@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useState, KeyboardEvent } from 'react';
 import { TabsProps, TabProps } from '../../../types';
 import { generateId } from '../../../utils/accessibility';
 
@@ -61,7 +61,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(({
     }
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent, index: number) => {
+  const handleKeyDown = (event: KeyboardEvent, _index: number) => {
     switch (event.key) {
       case 'ArrowLeft':
         event.preventDefault();
@@ -89,7 +89,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(({
       return React.cloneElement(child, {
         isActive: activeTab === index,
         onClick: () => handleTabClick(index),
-        onKeyDown: (e: React.KeyboardEvent) => handleKeyDown(e, index),
+        onKeyDown: (e: KeyboardEvent) => handleKeyDown(e, index),
       } as Partial<TabProps>);
     }
     return child;

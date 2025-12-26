@@ -43,7 +43,7 @@ A modern, professional, and feature-rich website for **Limitless Infotech Soluti
 - **Company:** Limitless Infotech Solution
 - **Founder & CEO:** Faisal Khan
 - **Email:** Info@limitlessinfotech.com
-- **Phone:** +91 77109 09492
+- **Phone:** +917710909492
 - **Location:** Mumbai, Maharashtra, India
 - **Tagline:** Where Innovation Meets Execution
 

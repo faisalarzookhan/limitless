@@ -21,6 +21,7 @@ import {
 } from "react-icons/hi";
 import { useApp } from "../context/AppContext";
 import { Image } from "./ui";
+import NewsletterForm from "./NewsletterForm";
 
 const Footer = () => {
   const { theme, changeTheme } = useApp();
@@ -69,7 +70,7 @@ const Footer = () => {
     { icon: FaTwitter, url: "https://twitter.com/limitlessinfotech", label: "Twitter" },
     { icon: FaLinkedinIn, url: "https://linkedin.com/in/limitlessinfotech", label: "LinkedIn" },
     { icon: FaInstagram, url: "https://instagram.com/limitless.infotech", label: "Instagram" },
-    { icon: FaGithub, url: "https://github.com/limitlessinfotech", label: "GitHub" },
+    { icon: FaGithub, url: "https://github.com/limitlessinfotechsolution", label: "GitHub" },
   ];
 
   return (
@@ -86,7 +87,7 @@ const Footer = () => {
                 className="w-20 h-20 object-contain"
               />
               <span className="text-2xl font-display font-bold text-white">
-                Limitless
+                Limitless Infotech Solution
               </span>
             </div>
 
@@ -164,46 +165,55 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact Info */}
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-6" id="contact-info">
-              Contact Us
-            </h3>
-            <ul className="space-y-4" aria-labelledby="contact-info">
-              <li className="flex items-start space-x-3">
-                <FaEnvelope className="w-5 h-5 text-primary-400 mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-sm text-gray-500 mb-1">Email</p>
-                  <a
-                    href="mailto:Info@limitlessinfotech.com"
-                    className="text-gray-300 hover:text-primary-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1 inline-block"
-                  >
-                    Info@limitlessinfotech.com
-                  </a>
-                </div>
-              </li>
+          {/* Contact Info & Newsletter */}
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-6" id="contact-info">
+                Contact Us
+              </h3>
+              <ul className="space-y-4" aria-labelledby="contact-info">
+                <li className="flex items-start space-x-3">
+                  <FaEnvelope className="w-5 h-5 text-primary-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">Email</p>
+                    <a
+                      href="mailto:Info@limitlessinfotech.com"
+                      className="text-gray-300 hover:text-primary-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1 inline-block"
+                    >
+                      Info@limitlessinfotech.com
+                    </a>
+                  </div>
+                </li>
 
-              <li className="flex items-start space-x-3">
-                <FaPhone className="w-5 h-5 text-primary-400 mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-sm text-gray-500 mb-1">Phone</p>
-                  <a
-                    href="tel:+917710909492"
-                    className="text-gray-300 hover:text-primary-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1 inline-block"
-                  >
-                    +91 77109 09492
-                  </a>
-                </div>
-              </li>
+                <li className="flex items-start space-x-3">
+                  <FaPhone className="w-5 h-5 text-primary-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">Phone</p>
+                    <a
+                      href="tel:+917710909492"
+                      className="text-gray-300 hover:text-primary-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1 inline-block"
+                    >
+                      +91 77109 09492
+                    </a>
+                  </div>
+                </li>
 
-              <li className="flex items-start space-x-3">
-                <FaMapMarkerAlt className="w-5 h-5 text-primary-400 mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-sm text-gray-500 mb-1">Location</p>
-                  <p className="text-gray-300">Mumbai, Maharashtra, IN</p>
-                </div>
-              </li>
-            </ul>
+                <li className="flex items-start space-x-3">
+                  <FaMapMarkerAlt className="w-5 h-5 text-primary-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">Location</p>
+                    <p className="text-gray-300">Mumbai, Maharashtra, IN</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-6">
+                Newsletter
+              </h3>
+              <NewsletterForm />
+            </div>
           </div>
         </div>
       </div>
@@ -235,7 +245,7 @@ const Footer = () => {
         <div className="container-custom px-4 md:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm text-gray-500">
-              © {currentYear} Limitless Infotech Solution. All rights reserved.
+              © {currentYear} Limitless Infotech Solution Pvt Ltd. All rights reserved.
             </p>
 
             <div className="flex flex-wrap justify-center gap-6 text-sm">
@@ -260,7 +270,7 @@ const Footer = () => {
             </div>
 
             <p className="text-sm text-gray-500">
-              Crafted with <span className="text-red-500">♥</span> by Limitless Infotech Solution
+              Crafted with <span className="text-red-500">♥</span> by Limitless Infotech Solution Pvt Ltd.
             </p>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useRef, useEffect } from 'react';
+import { forwardRef, useState, useRef, useEffect } from 'react';
 import { TooltipProps } from '../../../types';
 import { generateId } from '../../../utils/accessibility';
 

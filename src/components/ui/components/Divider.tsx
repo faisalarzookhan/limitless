@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { DividerProps } from '../../../types';
 
 const Divider = forwardRef<HTMLDivElement, DividerProps>(({

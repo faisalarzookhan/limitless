@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AppProvider } from "./context/AppContext";
+import { NotificationProvider } from "./context/NotificationContext";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Chatbot from "./components/Chatbot";
 import ScrollToTop from "./components/ScrollToTop";
 import Toast from "./components/Toast";
+import FloatingButtons from "./components/FloatingButtons";
 // import ThemeWelcome from "./components/ThemeWelcome"; // Disabled as per user request
 import Home from "./pages/Home";
 import Services from "./pages/Services";
@@ -34,8 +35,8 @@ import KnowledgeBase from "./pages/KnowledgeBase";
 import AIFeatures from "./pages/AIFeatures";
 import NaturalLanguageQueryPage from "./pages/NaturalLanguageQueryPage";
 import ProgressiveProfilingPage from "./pages/ProgressiveProfilingPage";
-import WhatsAppBusinessIntegration from "./components/WhatsAppBusinessIntegration";
 import WhatsAppIntegrationPage from "./pages/WhatsAppIntegrationPage";
+import JobApplication from "./pages/JobApplication";
 import { BackToTop } from "./components/ui";
 
 function AppContent() {
@@ -46,7 +47,7 @@ function AppContent() {
         <Navbar />
 
         <main 
-          className="flex-grow pt-28 pb-16 container-custom px-4 md:px-6 lg:px-8"
+          className="flex-grow pt-28 pb-16"
           id="main-content"
           tabIndex={-1}
           role="main"
@@ -79,16 +80,15 @@ function AppContent() {
             <Route path="/ai-features" element={<AIFeatures />} />
             <Route path="/natural-language-query" element={<NaturalLanguageQueryPage />} />
             <Route path="/progressive-profiling" element={<ProgressiveProfilingPage />} />
+            <Route path="/careers/apply/:jobId" element={<JobApplication />} />
             <Route path="/whatsapp-integration" element={<WhatsAppIntegrationPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
 
         <Footer />
-        <Chatbot />
         <Toast />
-        <BackToTop />
-        <WhatsAppBusinessIntegration />
+        <FloatingButtons />
         {/* <ThemeWelcome /> */}
       </div>
     </Router>
@@ -98,7 +98,9 @@ function AppContent() {
 function App() {
   return (
     <AppProvider>
-      <AppContent />
+      <NotificationProvider>
+        <AppContent />
+      </NotificationProvider>
     </AppProvider>
   );
 }

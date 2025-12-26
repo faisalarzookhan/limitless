@@ -27,6 +27,7 @@ import {
   FaLink,
   FaCalendarPlus,
 } from "react-icons/fa";
+import { sendUserInteractionNotification } from '../services/notificationService';
 
 const EventDetail = () => {
   const { slug } = useParams();
@@ -303,8 +304,22 @@ const EventDetail = () => {
     return null;
   }
 
-  const handleRegistration = (e) => {
+  const handleRegistration = async (e) => {
     e.preventDefault();
+    
+    // Send notification about the event registration
+    try {
+      await sendUserInteractionNotification('event-registration', {
+        eventName: event.title,
+        eventSlug: event.slug,
+        ...formData,
+        timestamp: new Date().toISOString(),
+        page: window.location.pathname
+      });
+    } catch (error) {
+      console.error('Error sending registration notification:', error);
+    }
+    
     // In real app, send to API
     console.log("Registration submitted:", formData);
     setRegistered(true);

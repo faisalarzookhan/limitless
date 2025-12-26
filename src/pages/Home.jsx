@@ -19,6 +19,8 @@ import {
   HiArrowRight,
 } from "react-icons/hi";
 
+import { AnimatedElement, DuoToneIcon } from "../components/ui";
+
 const Home = () => {
   const [openFaq, setOpenFaq] = useState(null);
 
@@ -371,24 +373,30 @@ const Home = () => {
       <section className="section-padding bg-white dark:bg-dark-900">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-              Our <span className="text-gradient">Foundation</span>
-            </h2>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
-              At Limitless Infotech Solution, we are more than developers – we
-              are{" "}
-              <span className="font-semibold text-primary-600 dark:text-primary-400">
-                architects of transformation
-              </span>
-              . We believe that technology should empower, not complicate. Every
-              line of code we write, every system we build, is crafted with
-              precision, security, and your success in mind.
-            </p>
-            <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-              Our vision is to lead the world into the next era of intelligent
-              business systems, where innovation meets execution, and where your
-              business potential becomes truly limitless.
-            </p>
+            <AnimatedElement animation="fade-in-up" delay={0.1}>
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+                Our <span className="text-gradient">Foundation</span>
+              </h2>
+            </AnimatedElement>
+            <AnimatedElement animation="fade-in-up" delay={0.2}>
+              <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
+                At Limitless Infotech Solution, we are more than developers – we
+                are{" "}
+                <span className="font-semibold text-primary-600 dark:text-primary-400">
+                  architects of transformation
+                </span>
+                . We believe that technology should empower, not complicate. Every
+                line of code we write, every system we build, is crafted with
+                precision, security, and your success in mind.
+              </p>
+            </AnimatedElement>
+            <AnimatedElement animation="fade-in-up" delay={0.3}>
+              <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                Our vision is to lead the world into the next era of intelligent
+                business systems, where innovation meets execution, and where your
+                business potential becomes truly limitless.
+              </p>
+            </AnimatedElement>
           </div>
         </div>
       </section>
@@ -400,16 +408,20 @@ const Home = () => {
       >
         <div className="container-custom">
           <div className="text-center mb-16">
-            <h2 
-              id="core-services-heading"
-              className="text-4xl md:text-5xl font-display font-bold mb-4"
-            >
-              Our <span className="text-gradient">Core Services</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Comprehensive technology solutions designed to transform your
-              business
-            </p>
+            <AnimatedElement animation="fade-in-up" delay={0.1}>
+              <h2 
+                id="core-services-heading"
+                className="text-4xl md:text-5xl font-display font-bold mb-4"
+              >
+                Our <span className="text-gradient">Core Services</span>
+              </h2>
+            </AnimatedElement>
+            <AnimatedElement animation="fade-in-up" delay={0.2}>
+              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Comprehensive technology solutions designed to transform your
+                business
+              </p>
+            </AnimatedElement>
           </div>
 
           <div 
@@ -418,17 +430,23 @@ const Home = () => {
             aria-label="Core services"
           >
             {coreServices.map((service, index) => (
-              <div
+              <AnimatedElement
                 key={index}
+                animation="fade-in-up"
+                delay={0.3 + index * 0.1}
                 className="service-card card-hover focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 dark:focus-within:ring-offset-dark-900 rounded-2xl transition-all duration-300 flex flex-col h-full"
-                style={{ animationDelay: `${index * 0.1}s` }}
                 role="listitem"
               >
                 <div
                   className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 self-start`}
                   aria-hidden="true"
                 >
-                  <service.icon className="w-8 h-8 text-white" />
+                  <DuoToneIcon 
+                    icon={service.icon} 
+                    size="xl" 
+                    primaryColor="text-white" 
+                    secondaryColor="text-white/30" 
+                  />
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
                   {service.title}
@@ -443,17 +461,19 @@ const Home = () => {
                   Learn More
                   <HiArrowRight className="ml-1 w-5 h-5" />
                 </Link>
-              </div>
+              </AnimatedElement>
             ))}
           </div>
 
           <div className="text-center mt-12">
-            <Link 
-              to="/services" 
-              className="btn-primary focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-dark-900 rounded-xl"
-            >
-              View All Services
-            </Link>
+            <AnimatedElement animation="fade-in-up" delay={0.5}>
+              <Link 
+                to="/services" 
+                className="btn-primary focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-dark-900 rounded-xl"
+              >
+                View All Services
+              </Link>
+            </AnimatedElement>
           </div>
         </div>
       </section>
@@ -465,15 +485,19 @@ const Home = () => {
       >
         <div className="container-custom">
           <div className="text-center mb-16">
-            <h2 
-              id="why-limitless-heading"
-              className="text-4xl md:text-5xl font-display font-bold mb-4"
-            >
-              Why Choose <span className="text-gradient">Limitless</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Our core qualities and competitive advantages that set us apart
-            </p>
+            <AnimatedElement animation="fade-in-up" delay={0.1}>
+              <h2 
+                id="why-limitless-heading"
+                className="text-4xl md:text-5xl font-display font-bold mb-4"
+              >
+                Why Choose <span className="text-gradient">Limitless</span>
+              </h2>
+            </AnimatedElement>
+            <AnimatedElement animation="fade-in-up" delay={0.2}>
+              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Our core qualities and competitive advantages that set us apart
+              </p>
+            </AnimatedElement>
           </div>
 
           <div 
@@ -482,8 +506,10 @@ const Home = () => {
             aria-label="Company values and advantages"
           >
             {whyLimitless.map((item, index) => (
-              <div
+              <AnimatedElement
                 key={index}
+                animation="fade-in-up"
+                delay={0.3 + index * 0.1}
                 className="group p-8 rounded-2xl bg-gradient-to-br from-white to-gray-50 dark:from-dark-800 dark:to-dark-900 border border-gray-100 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-500 transition-all duration-300 hover:shadow-xl focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 dark:focus-within:ring-offset-dark-900 flex flex-col h-full"
                 role="listitem"
                 tabIndex={0}
@@ -492,7 +518,12 @@ const Home = () => {
                   className="w-14 h-14 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary-600 transition-colors duration-300 self-start"
                   aria-hidden="true"
                 >
-                  <item.icon className="w-7 h-7 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors duration-300" />
+                  <DuoToneIcon 
+                    icon={item.icon} 
+                    size="lg" 
+                    primaryColor="text-primary-600 dark:text-primary-400 group-hover:text-white" 
+                    secondaryColor="text-primary-600/30 dark:text-primary-400/30 group-hover:text-white/30" 
+                  />
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
                   {item.title}
@@ -500,7 +531,7 @@ const Home = () => {
                 <p className="text-gray-600 dark:text-gray-400 flex-grow">
                   {item.description}
                 </p>
-              </div>
+              </AnimatedElement>
             ))}
           </div>
         </div>
@@ -510,20 +541,25 @@ const Home = () => {
       <section className="section-padding bg-gray-50 dark:bg-dark-800">
         <div className="container-custom">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Trusted By <span className="text-gradient">Industry Leaders</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Join thousands of satisfied clients who have transformed their businesses with our solutions
-            </p>
+            <AnimatedElement animation="fade-in-up" delay={0.1}>
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+                Trusted By <span className="text-gradient">Industry Leaders</span>
+              </h2>
+            </AnimatedElement>
+            <AnimatedElement animation="fade-in-up" delay={0.2}>
+              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Join thousands of satisfied clients who have transformed their businesses with our solutions
+              </p>
+            </AnimatedElement>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8 items-center justify-items-center">
             {clientLogos.map((client, index) => (
-              <div 
+              <AnimatedElement
                 key={index}
+                animation="fade-in-up"
+                delay={0.3 + index * 0.05}
                 className="flex flex-col items-center text-center group"
-                style={{ animationDelay: `${index * 0.05}s` }}
               >
                 <div className="w-16 h-16 bg-gradient-to-br from-primary-600 to-secondary-400 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
                   <span className="text-white font-bold text-lg">
@@ -536,20 +572,22 @@ const Home = () => {
                 <span className="text-xs text-gray-500 dark:text-gray-500">
                   {client.category}
                 </span>
-              </div>
+              </AnimatedElement>
             ))}
           </div>
 
           <div className="text-center mt-12">
-            <div className="inline-flex items-center space-x-4 text-gray-500 dark:text-gray-400 text-sm">
-              <span>Trusted by industry leaders worldwide</span>
-              <div className="flex space-x-1">
-                {[...Array(5)].map((_, i) => (
-                  <HiStar key={i} className="w-4 h-4 text-yellow-500" />
-                ))}
+            <AnimatedElement animation="fade-in-up" delay={0.5}>
+              <div className="inline-flex items-center space-x-4 text-gray-500 dark:text-gray-400 text-sm">
+                <span>Trusted by industry leaders worldwide</span>
+                <div className="flex space-x-1">
+                  {[...Array(5)].map((_, i) => (
+                    <HiStar key={i} className="w-4 h-4 text-yellow-500" />
+                  ))}
+                </div>
+                <span>4.9/5 from 200+ reviews</span>
               </div>
-              <span>4.9/5 from 200+ reviews</span>
-            </div>
+            </AnimatedElement>
           </div>
         </div>
       </section>
@@ -558,56 +596,69 @@ const Home = () => {
       <section className="section-padding bg-white dark:bg-dark-900 border-t border-gray-200 dark:border-dark-800">
         <div className="container-custom">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Our <span className="text-gradient">Enterprise Products</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Production-ready SaaS solutions serving 10,000+ users worldwide
-            </p>
+            <AnimatedElement animation="fade-in-up" delay={0.1}>
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+                Our <span className="text-gradient">Enterprise Products</span>
+              </h2>
+            </AnimatedElement>
+            <AnimatedElement animation="fade-in-up" delay={0.2}>
+              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Production-ready SaaS solutions serving 10,000+ users worldwide
+              </p>
+            </AnimatedElement>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             {featuredProducts.map((product, index) => (
-              <Link
+              <AnimatedElement
                 key={product.id}
-                to={product.link}
+                animation="fade-in-up"
+                delay={0.3 + index * 0.1}
                 className="group relative bg-white dark:bg-dark-800 rounded-2xl p-6 border-2 border-gray-200 dark:border-dark-700 hover:border-primary-500 transition-all duration-300 card-hover flex flex-col h-full"
-                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                {product.popular && (
-                  <div className="absolute -top-3 right-4">
-                    <span className="bg-gradient-primary px-3 py-1 rounded-full text-xs font-semibold text-white flex items-center">
-                      <HiStar className="w-3 h-3 mr-1" />
-                      Popular
-                    </span>
+                <Link to={product.link}>
+                  {product.popular && (
+                    <div className="absolute -top-3 right-4">
+                      <span className="bg-gradient-primary px-3 py-1 rounded-full text-xs font-semibold text-white flex items-center">
+                        <HiStar className="w-3 h-3 mr-1" />
+                        Popular
+                      </span>
+                    </div>
+                  )}
+                  <div
+                    className={`w-14 h-14 bg-gradient-to-br ${product.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 self-start`}
+                  >
+                    <DuoToneIcon 
+                      icon={product.icon} 
+                      size="lg" 
+                      primaryColor="text-white" 
+                      secondaryColor="text-white/30" 
+                    />
                   </div>
-                )}
-                <div
-                  className={`w-14 h-14 bg-gradient-to-br ${product.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 self-start`}
-                >
-                  <product.icon className="w-7 h-7 text-white" />
-                </div>
-                <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-                  {product.name}
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-grow">
-                  {product.description}
-                </p>
-                <div className="flex items-center justify-between mt-auto">
-                  <span className="text-sm text-gray-500 dark:text-gray-500">
-                    {product.users} users
-                  </span>
-                  <HiArrowRight className="w-5 h-5 text-primary-600 dark:text-primary-400 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </Link>
+                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                    {product.name}
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-grow">
+                    {product.description}
+                  </p>
+                  <div className="flex items-center justify-between mt-auto">
+                    <span className="text-sm text-gray-500 dark:text-gray-500">
+                      {product.users} users
+                    </span>
+                    <HiArrowRight className="w-5 h-5 text-primary-600 dark:text-primary-400 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </Link>
+              </AnimatedElement>
             ))}
           </div>
 
           <div className="text-center">
-            <Link to="/products" className="btn-primary">
-              View All 7 Products
-              <HiArrowRight className="inline-block ml-2 w-5 h-5" />
-            </Link>
+            <AnimatedElement animation="fade-in-up" delay={0.5}>
+              <Link to="/products" className="btn-primary">
+                View All 7 Products
+                <HiArrowRight className="inline-block ml-2 w-5 h-5" />
+              </Link>
+            </AnimatedElement>
           </div>
         </div>
       </section>
@@ -616,58 +667,66 @@ const Home = () => {
       <section className="section-padding bg-gray-50 dark:bg-dark-800">
         <div className="container-custom">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Client <span className="text-gradient">Success Stories</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Transforming businesses with innovative custom solutions
-            </p>
+            <AnimatedElement animation="fade-in-up" delay={0.1}>
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+                Client <span className="text-gradient">Success Stories</span>
+              </h2>
+            </AnimatedElement>
+            <AnimatedElement animation="fade-in-up" delay={0.2}>
+              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Transforming businesses with innovative custom solutions
+              </p>
+            </AnimatedElement>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {successStories.map((story, index) => (
-              <Link
+              <AnimatedElement
                 key={story.id}
-                to={story.link}
+                animation="fade-in-up"
+                delay={0.3 + index * 0.1}
                 className="group bg-white dark:bg-dark-900 rounded-2xl overflow-hidden border-2 border-gray-200 dark:border-dark-700 hover:border-primary-500 transition-all duration-300 card-hover flex flex-col h-full"
-                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className={`h-3 bg-gradient-to-r ${story.color}`}></div>
-                <div className="p-8 flex flex-col flex-grow">
-                  <h3 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-                    {story.title}
-                  </h3>
-                  <p className="text-primary-600 dark:text-primary-400 font-semibold mb-4">
-                    {story.subtitle}
-                  </p>
-                  <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed flex-grow">
-                    {story.description}
-                  </p>
-                  <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-200 dark:border-dark-700">
-                    {story.results.map((result, idx) => (
-                      <div key={idx} className="text-center">
-                        <div className="text-2xl font-bold text-primary-600 dark:text-primary-400 mb-1">
-                          {result.value}
+                <Link to={story.link}>
+                  <div className={`h-3 bg-gradient-to-r ${story.color}`}></div>
+                  <div className="p-8 flex flex-col flex-grow">
+                    <h3 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                      {story.title}
+                    </h3>
+                    <p className="text-primary-600 dark:text-primary-400 font-semibold mb-4">
+                      {story.subtitle}
+                    </p>
+                    <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed flex-grow">
+                      {story.description}
+                    </p>
+                    <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-200 dark:border-dark-700">
+                      {story.results.map((result, idx) => (
+                        <div key={idx} className="text-center">
+                          <div className="text-2xl font-bold text-primary-600 dark:text-primary-400 mb-1">
+                            {result.value}
+                          </div>
+                          <div className="text-xs text-gray-500 dark:text-gray-500">
+                            {result.label}
+                          </div>
                         </div>
-                        <div className="text-xs text-gray-500 dark:text-gray-500">
-                          {result.label}
-                        </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
+                    <div className="mt-6 flex items-center text-primary-600 dark:text-primary-400 font-semibold">
+                      Read Full Case Study
+                      <HiArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                    </div>
                   </div>
-                  <div className="mt-6 flex items-center text-primary-600 dark:text-primary-400 font-semibold">
-                    Read Full Case Study
-                    <HiArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-2 transition-transform" />
-                  </div>
-                </div>
-              </Link>
+                </Link>
+              </AnimatedElement>
             ))}
           </div>
 
           <div className="text-center mt-12">
-            <Link to="/portfolio" className="btn-secondary">
-              View All Projects
-            </Link>
+            <AnimatedElement animation="fade-in-up" delay={0.5}>
+              <Link to="/portfolio" className="btn-secondary">
+                View All Projects
+              </Link>
+            </AnimatedElement>
           </div>
         </div>
       </section>
@@ -677,18 +736,27 @@ const Home = () => {
       <section className="section-padding bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-dark-800 dark:to-dark-900">
         <div className="container-custom">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              What Clients Say About{" "}
-              <span className="text-gradient">Limitless</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Real experiences from businesses we've helped transform
-            </p>
+            <AnimatedElement animation="fade-in-up" delay={0.1}>
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+                What Clients Say About{" "}
+                <span className="text-gradient">Limitless</span>
+              </h2>
+            </AnimatedElement>
+            <AnimatedElement animation="fade-in-up" delay={0.2}>
+              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Real experiences from businesses we've helped transform
+              </p>
+            </AnimatedElement>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="testimonial-card flex flex-col h-full">
+              <AnimatedElement
+                key={index}
+                animation="fade-in-up"
+                delay={0.3 + index * 0.1}
+                className="testimonial-card flex flex-col h-full"
+              >
                 {/* Rating */}
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
@@ -715,14 +783,16 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </AnimatedElement>
             ))}
           </div>
 
           <div className="text-center">
-            <Link to="/testimonials" className="btn-outline">
-              View All Testimonials
-            </Link>
+            <AnimatedElement animation="fade-in-up" delay={0.5}>
+              <Link to="/testimonials" className="btn-outline">
+                View All Testimonials
+              </Link>
+            </AnimatedElement>
           </div>
         </div>
       </section>
@@ -731,17 +801,26 @@ const Home = () => {
       <section className="section-padding bg-white dark:bg-dark-900">
         <div className="container-custom max-w-4xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Frequently Asked <span className="text-gradient">Questions</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400">
-              Find answers to common questions about our services
-            </p>
+            <AnimatedElement animation="fade-in-up" delay={0.1}>
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+                Frequently Asked <span className="text-gradient">Questions</span>
+              </h2>
+            </AnimatedElement>
+            <AnimatedElement animation="fade-in-up" delay={0.2}>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                Find answers to common questions about our services
+              </p>
+            </AnimatedElement>
           </div>
 
           <div className="space-y-4">
             {faqs.map((faq, index) => (
-              <div key={index} className="faq-item">
+              <AnimatedElement
+                key={index}
+                animation="fade-in-up"
+                delay={0.3 + index * 0.1}
+                className="faq-item"
+              >
                 <button
                   onClick={() => toggleFaq(index)}
                   className="w-full flex items-center justify-between text-left"
@@ -763,7 +842,7 @@ const Home = () => {
                     </p>
                   </div>
                 )}
-              </div>
+              </AnimatedElement>
             ))}
           </div>
         </div>
@@ -773,34 +852,42 @@ const Home = () => {
       <section className="section-padding bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
         <div className="container-custom">
           <div className="text-center max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">
-              Want To Start Your Own Business?
-              <br />
-              But Don't Know Where To Start?
-            </h2>
-            <p className="text-xl md:text-2xl mb-8 opacity-90">
-              Get Started With Limitless & Grow Your Business{" "}
-              <span className="font-bold">"Limitless"</span>
-            </p>
-            <p className="text-lg mb-12 opacity-80 max-w-2xl mx-auto">
-              We provide complete end-to-end solutions for startups and growing
-              businesses. From ideation to execution, we're with you every step
-              of the way.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                to="/get-started"
-                className="px-10 py-4 bg-white text-primary-600 font-bold text-lg rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
-              >
-                Get Started with Limitless
-              </Link>
-              <Link
-                to="/contact"
-                className="px-10 py-4 bg-transparent border-2 border-white text-white font-bold text-lg rounded-xl hover:bg-white hover:text-primary-600 transition-all duration-300"
-              >
-                Schedule Consultation
-              </Link>
-            </div>
+            <AnimatedElement animation="fade-in-up" delay={0.1}>
+              <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">
+                Want To Start Your Own Business?
+                <br />
+                But Don't Know Where To Start?
+              </h2>
+            </AnimatedElement>
+            <AnimatedElement animation="fade-in-up" delay={0.2}>
+              <p className="text-xl md:text-2xl mb-8 opacity-90">
+                Get Started With Limitless & Grow Your Business{" "}
+                <span className="font-bold">"Limitless"</span>
+              </p>
+            </AnimatedElement>
+            <AnimatedElement animation="fade-in-up" delay={0.3}>
+              <p className="text-lg mb-12 opacity-80 max-w-2xl mx-auto">
+                We provide complete end-to-end solutions for startups and growing
+                businesses. From ideation to execution, we're with you every step
+                of the way.
+              </p>
+            </AnimatedElement>
+            <AnimatedElement animation="fade-in-up" delay={0.4}>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link
+                  to="/get-started"
+                  className="px-10 py-4 bg-white text-primary-600 font-bold text-lg rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                >
+                  Get Started with Limitless
+                </Link>
+                <Link
+                  to="/contact"
+                  className="px-10 py-4 bg-transparent border-2 border-white text-white font-bold text-lg rounded-xl hover:bg-white hover:text-primary-600 transition-all duration-300"
+                >
+                  Schedule Consultation
+                </Link>
+              </div>
+            </AnimatedElement>
 
             {/* Features */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
@@ -809,13 +896,15 @@ const Home = () => {
                 { icon: HiCheckCircle, text: "Manage Limitless" },
                 { icon: HiCheckCircle, text: "Grow Limitless" },
               ].map((feature, index) => (
-                <div
+                <AnimatedElement
                   key={index}
+                  animation="fade-in-up"
+                  delay={0.5 + index * 0.1}
                   className="flex items-center justify-center space-x-3"
                 >
                   <feature.icon className="w-8 h-8" />
                   <span className="text-xl font-semibold">{feature.text}</span>
-                </div>
+                </AnimatedElement>
               ))}
             </div>
           </div>
@@ -826,21 +915,27 @@ const Home = () => {
       <section className="section-padding bg-gray-50 dark:bg-dark-800">
         <div className="container-custom">
           <div className="bg-gradient-to-br from-white to-primary-50 dark:from-dark-900 dark:to-dark-800 rounded-3xl p-12 md:p-16 text-center border border-primary-200 dark:border-dark-700">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 text-gray-900 dark:text-white">
-              Ready to Transform Your Business?
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-              Let's discuss how we can help you achieve your goals with
-              innovative technology solutions
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/get-started" className="btn-primary">
-                Start Your Project
-              </Link>
-              <Link to="/contact" className="btn-outline">
-                Get In Touch
-              </Link>
-            </div>
+            <AnimatedElement animation="fade-in-up" delay={0.1}>
+              <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 text-gray-900 dark:text-white">
+                Ready to Transform Your Business?
+              </h2>
+            </AnimatedElement>
+            <AnimatedElement animation="fade-in-up" delay={0.2}>
+              <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+                Let's discuss how we can help you achieve your goals with
+                innovative technology solutions
+              </p>
+            </AnimatedElement>
+            <AnimatedElement animation="fade-in-up" delay={0.3}>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link to="/get-started" className="btn-primary">
+                  Start Your Project
+                </Link>
+                <Link to="/contact" className="btn-outline">
+                  Get In Touch
+                </Link>
+              </div>
+            </AnimatedElement>
           </div>
         </div>
       </section>

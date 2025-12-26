@@ -445,18 +445,6 @@ const Navbar = () => {
                 </div>
               ))}
 
-              {/* Theme Toggle */}
-              <button
-                onClick={() => changeTheme(theme === 'light' ? 'dark' : 'light')}
-                className="ml-2 md:ml-4 p-3 rounded-xl bg-white/80 dark:bg-dark-800/80 text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-dark-700 transition-all duration-300 border border-gray-200/50 dark:border-dark-700/50 focus:outline-none focus:ring-2 focus:ring-primary-500"
-                aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-              >
-                {theme === 'light' ? (
-                  <HiMoon className="w-5 h-5" aria-hidden="true" />
-                ) : (
-                  <HiSun className="w-5 h-5" aria-hidden="true" />
-                )}
-              </button>
               
               {/* CTA Button */}
               <Link
@@ -660,24 +648,6 @@ const Navbar = () => {
                 ))}
               </nav>
 
-              {/* Mobile Theme Toggle */}
-              <div className="mt-4 pt-4 border-t border-gray-200 dark:border-dark-700">
-                <button
-                  onClick={() => {
-                    changeTheme(theme === 'light' ? 'dark' : 'light');
-                    setIsOpen(false);
-                  }}
-                  className="w-full flex items-center justify-center space-x-3 px-6 py-4 rounded-xl bg-white/80 dark:bg-dark-800/80 text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-dark-700 transition-all duration-300 border border-gray-200/50 dark:border-dark-700/50 focus:outline-none focus:ring-2 focus:ring-primary-500"
-                  aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-                >
-                  {theme === 'light' ? (
-                    <HiMoon className="w-5 h-5" aria-hidden="true" />
-                  ) : (
-                    <HiSun className="w-5 h-5" aria-hidden="true" />
-                  )}
-                  <span>Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode</span>
-                </button>
-              </div>
               
               {/* Mobile CTA */}
               <div className="mt-4 pt-4 border-t border-gray-200 dark:border-dark-700">

@@ -365,6 +365,12 @@ export const api = {
     // Track event
     trackEvent: (event, data) => apiClient.post('/analytics/event', { event, data }),
 
+    // Get notification stats
+    getNotificationStats: (notificationId) => apiClient.get(`/analytics/notifications/${notificationId}/stats`),
+
+    // Get notification performance metrics
+    getNotificationPerformance: (params) => apiClient.post('/analytics/notifications/performance', params),
+
     // Get site statistics
     getStats: () => apiClient.get('/analytics/stats'),
   },
@@ -406,8 +412,32 @@ export const api = {
     // Delete notification
     delete: (notificationId) => apiClient.delete(`/notifications/${notificationId}`),
 
+    // Get notification by ID
+    getById: (id) => apiClient.get(`/notifications/${id}`),
+
+    // Update notification status
+    updateStatus: (id, data) => apiClient.put(`/notifications/${id}/status`, data),
+
     // Get unread count
     getUnreadCount: () => apiClient.get('/notifications/unread-count'),
+
+    // Get user preferences
+    getUserPreferences: (userId) => apiClient.get(`/notifications/preferences/${userId}`),
+
+    // Set user preferences
+    setUserPreferences: (userId, data) => apiClient.post(`/notifications/preferences/${userId}`, data),
+
+    // Send notification
+    send: (data) => apiClient.post('/notifications', data),
+
+    // Send email notification
+    sendEmail: (data) => apiClient.post('/notifications/email', data),
+
+    // Send WhatsApp notification
+    sendWhatsApp: (data) => apiClient.post('/notifications/whatsapp', data),
+
+    // Send multiple notifications
+    sendMultiple: (data) => apiClient.post('/notifications/multiple', data),
   },
 
   // ============= Search =============

@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import { forwardRef, useState } from 'react';
 import { HiEye, HiEyeOff } from 'react-icons/hi';
 import { InputProps } from '../../../types';
 import { generateId } from '../../../utils/accessibility';

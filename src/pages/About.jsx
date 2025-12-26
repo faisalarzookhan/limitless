@@ -14,6 +14,7 @@ import {
   HiPhone,
   HiLocationMarker,
 } from "react-icons/hi";
+import FeedbackForm from "../components/FeedbackForm";
 
 const About = () => {
   const values = [
@@ -68,9 +69,9 @@ const About = () => {
       ],
       image: null,
       social: {
-        linkedin: "#",
-        twitter: "#",
-        email: "faisal@limitlessinfotech.com",
+        linkedin: "https://www.linkedin.com/in/faisalarzookhan",
+        twitter: "https://twitter.com/faisalarzookhan",
+        email: "faisal.khan@limitlessinfotech.com",
       },
     },
     {
@@ -85,8 +86,9 @@ const About = () => {
       ],
       image: null,
       social: {
-        linkedin: "#",
-        email: "taj@limitlessinfotech.com",
+        linkedin: "https://www.linkedin.com/in/taj-nadaf",
+        twitter: "https://twitter.com/tajnadaf",
+        email: "taj.nadaf@limitlessinfotech.com",
       },
     },
   ];
@@ -140,10 +142,10 @@ const About = () => {
   ];
 
   const stats = [
-    { number: "100+", label: "Projects Delivered" },
-    { number: "50+", label: "Happy Clients" },
-    { number: "15+", label: "Team Members" },
-    { number: "5+", label: "Years Experience" },
+    { number: "7+", label: "Projects Delivered" },
+    { number: "+", label: "Happy Clients" },
+    { number: "3+", label: "Team Members" },
+    { number: "+", label: "Years Experience" },
   ];
 
   return (
@@ -183,7 +185,7 @@ const About = () => {
               <p>
                 At{" "}
                 <span className="font-semibold text-primary-600 dark:text-primary-400">
-                  Limitless Infotech Solution
+                  LimitlessInotech
                 </span>
                 , we believe that technology should empower, not complicate.
                 Founded with a vision to transform how businesses operate, we
@@ -675,6 +677,24 @@ const About = () => {
               <h3 className="font-bold text-gray-900 dark:text-white mb-1">Docker</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">DevOps</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Feedback Section */}
+      <section className="section-padding bg-white dark:bg-dark-900">
+        <div className="container-custom max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 text-gray-900 dark:text-white">
+              Share Your <span className="text-gradient">Feedback</span>
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              Your thoughts and experiences help us improve and grow
+            </p>
+          </div>
+          
+          <div className="bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-dark-800 dark:to-dark-900 rounded-3xl p-8 md:p-10 shadow-soft border border-gray-100 dark:border-dark-700">
+            <FeedbackForm />
           </div>
         </div>
       </section>

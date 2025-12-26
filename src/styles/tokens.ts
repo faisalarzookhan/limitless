@@ -149,8 +149,8 @@ export const typography = {
     none: '1',
     tight: '1.25',
     snug: '1.375',
-    normal: '1.5',
-    relaxed: '1.625',
+    normal: '1.75',
+    relaxed: '1.875',
     loose: '2',
   }
 };
@@ -215,8 +215,10 @@ export const boxShadow = {
   xl: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
   '2xl': '0 25px 50px -12px rgb(0 0 0 / 0.25)',
   inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
+  innerSoftDark: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.2)',
   none: 'none',
   soft: '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+  softDark: '0 2px 15px -3px rgba(0, 0, 0, 0.15), 0 10px 20px -2px rgba(0, 0, 0, 0.12)',
   glow: '0 0 20px rgba(14, 165, 233, 0.3)',
   glowLg: '0 0 30px rgba(14, 165, 233, 0.4)',
 };

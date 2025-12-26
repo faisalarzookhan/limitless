@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import {
   HiCode,
   HiDeviceMobile,
@@ -20,10 +21,21 @@ import {
   HiRefresh,
   HiLockClosed,
   HiPhotograph,
-  HiPuzzle
+  HiPuzzle,
+  HiChevronDown,
+  HiChevronUp
 } from 'react-icons/hi';
 
 const Services = () => {
+  const [expandedMobileFeatures, setExpandedMobileFeatures] = useState({});
+  
+  const toggleMobileFeatures = (serviceId) => {
+    setExpandedMobileFeatures(prev => ({
+      ...prev,
+      [serviceId]: !prev[serviceId]
+    }));
+  };
+  
   const mainServices = [
     {
       id: 'web',
@@ -316,8 +328,37 @@ const Services = () => {
               {/* Features & Benefits */}
               <div className={index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}>
                 <div className="space-y-6">
-                  {/* Features */}
-                  <div className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700">
+                  {/* Features - Mobile Accordion */}
+                  <div className="lg:hidden bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-dark-700">
+                    <button 
+                      className="w-full flex justify-between items-center text-xl font-bold text-gray-900 dark:text-white py-2"
+                      onClick={() => toggleMobileFeatures(service.id)}
+                      aria-expanded={expandedMobileFeatures[service.id]}
+                    >
+                      <div className="flex items-center">
+                        <HiCheckCircle className="w-6 h-6 text-green-500 mr-2" />
+                        Key Features
+                      </div>
+                      {expandedMobileFeatures[service.id] ? (
+                        <HiChevronUp className="w-6 h-6 text-gray-600 dark:text-gray-400" />
+                      ) : (
+                        <HiChevronDown className="w-6 h-6 text-gray-600 dark:text-gray-400" />
+                      )}
+                    </button>
+                    {expandedMobileFeatures[service.id] && (
+                      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {service.features.map((feature, i) => (
+                          <div key={i} className="flex items-start space-x-2">
+                            <HiCheckCircle className="w-5 h-5 text-primary-600 dark:text-primary-400 flex-shrink-0 mt-0.5" />
+                            <span className="text-sm text-gray-700 dark:text-gray-300">{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Features - Desktop */}
+                  <div className="hidden lg:block bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700">
                     <h3 className="text-xl font-bold mb-6 text-gray-900 dark:text-white flex items-center">
                       <HiCheckCircle className="w-6 h-6 text-green-500 mr-2" />
                       Key Features
@@ -378,7 +419,35 @@ const Services = () => {
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
                   {service.description}
                 </p>
-                <ul className="space-y-2">
+                            
+                {/* Features - Mobile Accordion */}
+                <div className="md:hidden">
+                  <button 
+                    className="w-full flex justify-between items-center text-xs font-semibold text-gray-700 dark:text-gray-300 py-2"
+                    onClick={() => toggleMobileFeatures(`additional-${index}`)}
+                    aria-expanded={expandedMobileFeatures[`additional-${index}`]}
+                  >
+                    <span>Features</span>
+                    {expandedMobileFeatures[`additional-${index}`] ? (
+                      <HiChevronUp className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                    ) : (
+                      <HiChevronDown className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                    )}
+                  </button>
+                  {expandedMobileFeatures[`additional-${index}`] && (
+                    <ul className="space-y-2 mt-2">
+                      {service.features.map((feature, i) => (
+                        <li key={i} className="flex items-center text-xs text-gray-600 dark:text-gray-400">
+                          <div className="w-1.5 h-1.5 bg-primary-600 rounded-full mr-2"></div>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+                            
+                {/* Features - Desktop */}
+                <ul className="space-y-2 hidden md:block">
                   {service.features.map((feature, i) => (
                     <li key={i} className="flex items-center text-xs text-gray-600 dark:text-gray-400">
                       <div className="w-1.5 h-1.5 bg-primary-600 rounded-full mr-2"></div>
