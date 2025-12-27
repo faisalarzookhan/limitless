@@ -8,7 +8,7 @@ class NotificationService {
     this.whatsappEndpoint = '/api/notifications/whatsapp';
   }
 
-  // Generic notification function
+  // Enhanced notification function with fallbacks
   async sendNotification(type, data) {
     try {
       const notificationData = {
@@ -22,13 +22,34 @@ class NotificationService {
         priority: 'normal'
       };
 
-      // Send notification to backend
-      const response = await api.notifications.send(notificationData);
-      return response;
+      // Try to send notification to backend
+      try {
+        const response = await api.notifications.send(notificationData);
+        return response;
+      } catch (apiError) {
+        console.error('API notification failed:', apiError);
+        
+        // Fallback 1: Try to send via email if primary method fails
+        try {
+          const fallbackResponse = await api.notifications.sendEmail({
+            ...notificationData,
+            type: `${type}-fallback`
+          });
+          return { ...fallbackResponse, fallback: true };
+        } catch (fallbackError) {
+          console.error('Fallback notification failed:', fallbackError);
+          
+          // Fallback 2: Store in local storage for later retry
+          this.queueNotificationForRetry(notificationData);
+          
+          // Fallback 3: Log to console
+          console.log(`Notification failed: ${type}`, data);
+          
+          return { success: false, error: apiError.message, queuedForRetry: true };
+        }
+      }
     } catch (error) {
       console.error('Error sending notification:', error);
-      // Fallback: log to console if API fails
-      console.log(`Notification failed: ${type}`, data);
       return { success: false, error: error.message };
     }
   }
@@ -114,51 +135,7 @@ class NotificationService {
     });
   }
 
-  // Enhanced notification function with fallbacks
-  async sendNotification(type, data) {
-    try {
-      const notificationData = {
-        type,
-        data,
-        timestamp: new Date().toISOString(),
-        userAgent: navigator.userAgent,
-        url: window.location.href,
-        referrer: document.referrer,
-        source: 'frontend',
-        priority: 'normal'
-      };
 
-      // Try to send notification to backend
-      try {
-        const response = await api.notifications.send(notificationData);
-        return response;
-      } catch (apiError) {
-        console.error('API notification failed:', apiError);
-        
-        // Fallback 1: Try to send via email if primary method fails
-        try {
-          const fallbackResponse = await api.notifications.sendEmail({
-            ...notificationData,
-            type: `${type}-fallback`
-          });
-          return { ...fallbackResponse, fallback: true };
-        } catch (fallbackError) {
-          console.error('Fallback notification failed:', fallbackError);
-          
-          // Fallback 2: Store in local storage for later retry
-          this.queueNotificationForRetry(notificationData);
-          
-          // Fallback 3: Log to console
-          console.log(`Notification failed: ${type}`, data);
-          
-          return { success: false, error: apiError.message, queuedForRetry: true };
-        }
-      }
-    } catch (error) {
-      console.error('Error sending notification:', error);
-      return { success: false, error: error.message };
-    }
-  }
 
   // Queue notification for retry when connection is available
   queueNotificationForRetry(notificationData) {

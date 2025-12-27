@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { HiChat, HiPhone, HiPaperAirplane, HiX, HiCheck, HiClock, HiUser, HiSparkles } from 'react-icons/hi';
+import { HiChat, HiPhone, HiPaperAirplane, HiX, HiCheck, HiClock, HiUser, HiSparkles, HiQuestionMarkCircle, HiInformationCircle } from 'react-icons/hi';
 import { sendUserInteractionNotification } from '../services/notificationService';
 
 const WhatsAppBusinessIntegration = () => {
@@ -109,11 +109,11 @@ const WhatsAppBusinessIntegration = () => {
           {/* Header */}
           <div className="bg-gradient-to-r from-green-500 to-emerald-500 p-4 text-white flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                <HiChat className="w-6 h-6" />
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center">
+                <HiChat className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h3 className="font-bold">WhatsApp Support</h3>
+                <h3 className="font-bold text-lg">WhatsApp Support</h3>
                 <p className="text-xs opacity-80 flex items-center">
                   <HiClock className="w-3 h-3 mr-1" /> Always available
                 </p>
@@ -185,23 +185,29 @@ const WhatsAppBusinessIntegration = () => {
           {/* Input */}
           <div className="p-3 border-t border-gray-200 dark:border-dark-600 bg-white dark:bg-dark-800">
             <div className="flex space-x-2">
-              <input
+              <div className="relative flex-1">
+                <input
                 type="text"
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                placeholder="Type a message..."
-                className="flex-1 px-3 py-2 border border-gray-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                placeholder="Type your message to our WhatsApp support..."
+                className="w-full px-4 py-3 pl-10 bg-gray-100 dark:bg-dark-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-sm"
+                aria-label="Type your message to WhatsApp support"
+                disabled={isTyping}
               />
-              <button
-                onClick={() => handleSendMessage()}
-                disabled={!inputMessage.trim()}
-                className="w-10 h-10 bg-green-500 hover:bg-green-600 disabled:bg-gray-300 dark:disabled:bg-dark-600 rounded-lg flex items-center justify-center text-white transition-colors"
-              >
-                <HiPaperAirplane className="w-5 h-5" />
-              </button>
+              <HiQuestionMarkCircle className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
             </div>
+            <button
+              onClick={() => handleSendMessage()}
+              disabled={!inputMessage.trim()}
+              className="w-10 h-10 bg-green-500 hover:bg-green-600 disabled:bg-gray-300 dark:disabled:bg-dark-600 rounded-lg flex items-center justify-center text-white transition-colors"
+              aria-label="Send message to WhatsApp support"
+            >
+              <HiPaperAirplane className="w-5 h-5" />
+            </button>
           </div>
+        </div>
         </div>
       )}
     </div>
