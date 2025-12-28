@@ -18,7 +18,7 @@ export default defineConfig({
   },
   build: {
     outDir: "dist",
-    sourcemap: false,
+    sourcemap: true,
     minify: "esbuild",
     chunkSizeWarningLimit: 1000, // Increase limit to 1MB since we have a large app
     rollupOptions: {

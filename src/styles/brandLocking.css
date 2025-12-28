@@ -1,0 +1,344 @@
+/* 
+ * Brand Locking CSS Overrides
+ * Explicit CSS overrides and color-scheme: light properties to prevent 
+ * browser auto-darkening from muddying the Royal Gold and Deep Blue palette
+ */
+
+/* Root level brand locking */
+:root {
+  /* Royal Gold colors */
+  --royal-gold-primary: #d4af37;
+  --royal-gold-secondary: #b8860b;
+  --royal-gold-light: #e6c567;
+  --royal-gold-dark: #a67c00;
+  
+  /* Deep Blue colors */
+  --deep-blue-primary: #1e3a8a;
+  --deep-blue-secondary: #1e40af;
+  --deep-blue-light: #3b82f6;
+  --deep-blue-dark: #1e3a8a;
+  
+  /* Supporting colors */
+  --white: #ffffff;
+  --light-gray: #f9fafb;
+  --medium-gray: #f3f4f6;
+  --dark-gray: #1f2937;
+  --black: #111827;
+  
+  /* Brand-specific accent colors */
+  --brand-accent: var(--royal-gold-primary);
+  --brand-primary: var(--deep-blue-primary);
+  --brand-secondary: var(--royal-gold-primary);
+}
+
+/* Force light color scheme globally */
+* {
+  color-scheme: light !important;
+}
+
+/* Prevent browser dark mode from overriding styles */
+html, body {
+  color-scheme: light !important;
+  background-color: var(--white) !important;
+  color: var(--dark-gray) !important;
+}
+
+/* Override any forced dark mode settings */
+html[data-theme="dark"],
+body[data-theme="dark"],
+html.dark,
+body.dark {
+  color-scheme: light !important;
+  filter: none !important;
+}
+
+/* Brand locked elements */
+.brand-locked {
+  color-scheme: light !important;
+}
+
+/* Prevent system color adjustments */
+.brand-locked,
+.brand-locked * {
+  -webkit-text-stroke: 0px !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
+}
+
+/* Specific brand color locking */
+.brand-locked .royal-gold {
+  color: var(--royal-gold-primary) !important;
+  background-color: unset !important;
+}
+
+.brand-locked .deep-blue {
+  color: var(--deep-blue-primary) !important;
+  background-color: unset !important;
+}
+
+.brand-locked .royal-gold-bg {
+  background-color: var(--royal-gold-primary) !important;
+  color: var(--white) !important;
+}
+
+.brand-locked .deep-blue-bg {
+  background-color: var(--deep-blue-primary) !important;
+  color: var(--white) !important;
+}
+
+/* Lock header elements */
+.brand-locked header,
+.brand-locked .header,
+.brand-locked .navbar,
+.brand-locked .nav {
+  color-scheme: light !important;
+  background-color: var(--white) !important;
+  border-color: var(--medium-gray) !important;
+}
+
+/* Lock button elements */
+.brand-locked button,
+.brand-locked .button,
+.brand-locked .btn {
+  color-scheme: light !important;
+  background-color: var(--white) !important;
+  border-color: var(--dark-gray) !important;
+  color: var(--dark-gray) !important;
+}
+
+.brand-locked button.royal-gold,
+.brand-locked .button.royal-gold,
+.brand-locked .btn.royal-gold {
+  background-color: var(--royal-gold-primary) !important;
+  border-color: var(--royal-gold-primary) !important;
+  color: var(--white) !important;
+}
+
+.brand-locked button.deep-blue,
+.brand-locked .button.deep-blue,
+.brand-locked .btn.deep-blue {
+  background-color: var(--deep-blue-primary) !important;
+  border-color: var(--deep-blue-primary) !important;
+  color: var(--white) !important;
+}
+
+/* Lock form elements */
+.brand-locked input,
+.brand-locked textarea,
+.brand-locked select,
+.brand-locked .input,
+.brand-locked .textarea,
+.brand-locked .select {
+  color-scheme: light !important;
+  background-color: var(--white) !important;
+  border-color: var(--medium-gray) !important;
+  color: var(--dark-gray) !important;
+}
+
+.brand-locked input:focus,
+.brand-locked textarea:focus,
+.brand-locked select:focus,
+.brand-locked .input:focus,
+.brand-locked .textarea:focus,
+.brand-locked .select:focus {
+  outline: 2px solid var(--deep-blue-primary) !important;
+  outline-offset: 2px !important;
+  border-color: var(--deep-blue-light) !important;
+}
+
+/* Lock link elements */
+.brand-locked a,
+.brand-locked .link {
+  color-scheme: light !important;
+  color: var(--deep-blue-primary) !important;
+}
+
+.brand-locked a:hover,
+.brand-locked .link:hover {
+  color: var(--deep-blue-secondary) !important;
+}
+
+/* Lock card and container elements */
+.brand-locked .card,
+.brand-locked .container,
+.brand-locked .section {
+  color-scheme: light !important;
+  background-color: var(--white) !important;
+  border-color: var(--medium-gray) !important;
+}
+
+/* Lock image elements to preserve brand colors */
+.brand-locked img,
+.brand-locked .image {
+  color-scheme: light !important;
+  filter: none !important;
+  background-color: transparent !important;
+}
+
+/* Prevent dark mode adjustments for SVGs */
+.brand-locked svg,
+.brand-locked .svg {
+  color-scheme: light !important;
+  fill: currentColor !important;
+}
+
+/* Lock typography elements */
+.brand-locked h1,
+.brand-locked h2,
+.brand-locked h3,
+.brand-locked h4,
+.brand-locked h5,
+.brand-locked h6,
+.brand-locked .heading,
+.brand-locked .title {
+  color-scheme: light !important;
+  color: var(--dark-gray) !important;
+}
+
+.brand-locked h1.royal-gold,
+.brand-locked h2.royal-gold,
+.brand-locked h3.royal-gold,
+.brand-locked .heading.royal-gold,
+.brand-locked .title.royal-gold {
+  color: var(--royal-gold-primary) !important;
+}
+
+.brand-locked h1.deep-blue,
+.brand-locked h2.deep-blue,
+.brand-locked h3.deep-blue,
+.brand-locked .heading.deep-blue,
+.brand-locked .title.deep-blue {
+  color: var(--deep-blue-primary) !important;
+}
+
+/* Lock specific brand elements */
+.brand-locked .logo,
+.brand-locked .brand-mark,
+.brand-locked .brand-element {
+  color-scheme: light !important;
+  color: var(--royal-gold-primary) !important;
+  fill: var(--royal-gold-primary) !important;
+}
+
+/* Prevent system dark mode on media elements */
+.brand-locked video,
+.brand-locked .video,
+.brand-locked iframe,
+.brand-locked .iframe {
+  color-scheme: light !important;
+  background-color: var(--white) !important;
+}
+
+/* Lock table elements */
+.brand-locked table,
+.brand-locked .table {
+  color-scheme: light !important;
+  background-color: var(--white) !important;
+  border-color: var(--medium-gray) !important;
+}
+
+.brand-locked table th,
+.brand-locked table td,
+.brand-locked .table th,
+.brand-locked .table td {
+  color-scheme: light !important;
+  background-color: var(--white) !important;
+  border-color: var(--medium-gray) !important;
+  color: var(--dark-gray) !important;
+}
+
+/* Lock modal and overlay elements */
+.brand-locked .modal,
+.brand-locked .overlay,
+.brand-locked .backdrop {
+  color-scheme: light !important;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.brand-locked .modal-content,
+.brand-locked .popup {
+  color-scheme: light !important;
+  background-color: var(--white) !important;
+  border-color: var(--medium-gray) !important;
+  color: var(--dark-gray) !important;
+}
+
+/* Prevent dark mode on list elements */
+.brand-locked ul,
+.brand-locked ol,
+.brand-locked .list {
+  color-scheme: light !important;
+  background-color: var(--white) !important;
+  color: var(--dark-gray) !important;
+}
+
+/* Lock navigation elements */
+.brand-locked nav,
+.brand-locked .navigation,
+.brand-locked .nav-item {
+  color-scheme: light !important;
+  background-color: var(--white) !important;
+  color: var(--dark-gray) !important;
+}
+
+/* Lock footer elements */
+.brand-locked footer,
+.brand-locked .footer {
+  color-scheme: light !important;
+  background-color: var(--white) !important;
+  border-color: var(--medium-gray) !important;
+  color: var(--dark-gray) !important;
+}
+
+/* Override any dark mode media queries */
+@media (prefers-color-scheme: dark) {
+  .brand-locked,
+  .brand-locked * {
+    color-scheme: light !important;
+  }
+}
+
+/* Additional override for forced dark mode extensions */
+.brand-locked,
+.brand-locked * {
+  background-color: var(--white) !important;
+  color: var(--dark-gray) !important;
+  border-color: var(--medium-gray) !important;
+}
+
+/* Ensure brand colors are preserved */
+.brand-locked {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+}
+
+/* Prevent dark mode on interactive elements */
+.brand-locked button:hover,
+.brand-locked button:focus,
+.brand-locked input:hover,
+.brand-locked input:focus,
+.brand-locked a:focus {
+  filter: none !important;
+  background-color: var(--white) !important;
+  color: var(--dark-gray) !important;
+}
+
+/* Lock specific brand components */
+.brand-locked .limitless-component,
+.brand-locked .limitless-ui,
+.brand-locked .limitless-element {
+  color-scheme: light !important;
+  background-color: var(--white) !important;
+  color: var(--dark-gray) !important;
+}
+
+/* Lock all child elements by default */
+.brand-locked :not(.override-brand-lock) {
+  color-scheme: light !important;
+}
+
+/* Class to override brand locking when needed */
+.override-brand-lock {
+  color-scheme: normal !important;
+}

@@ -24,7 +24,7 @@ import {
 import { useApp } from "../context/AppContext";
 import { Image } from "./ui";
 
-const Navbar = () => {
+const Navbar = ({ isTransparent = false }) => {
   const { theme, changeTheme } = useApp();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -192,9 +192,11 @@ const Navbar = () => {
       {/* Main Navbar */}
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? "py-3 bg-white/90 dark:bg-dark-900/90 backdrop-blur-xl shadow-lg border-b border-gray-200/30 dark:border-dark-700/30"
-            : "py-5 bg-white/70 dark:bg-dark-900/70 backdrop-blur-lg"
+          isTransparent
+            ? "py-5 bg-transparent backdrop-blur-none"
+            : isScrolled
+              ? "py-3 bg-white/90 dark:bg-dark-900/90 backdrop-blur-xl shadow-lg border-b border-gray-200/30 dark:border-dark-700/30"
+              : "py-5 bg-white/70 dark:bg-dark-900/70 backdrop-blur-lg"
         }`}
         aria-label="Main navigation"
       >

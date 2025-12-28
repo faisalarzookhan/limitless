@@ -44,6 +44,7 @@ const Footer = () => {
     { name: "Home", path: "/" },
     { name: "About Us", path: "/about" },
     { name: "Services", path: "/services" },
+    { name: "Products", path: "/products" },
     { name: "Portfolio", path: "/portfolio" },
     { name: "Testimonials", path: "/testimonials" },
     { name: "Contact Us", path: "/contact" },
@@ -77,7 +78,7 @@ const Footer = () => {
     <footer className="bg-gradient-dark text-gray-300 border-t border-dark-800">
       {/* Main Footer Content */}
       <div className="container-custom px-4 md:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Company Info */}
           <div className="space-y-6">
             <div className="flex items-center space-x-2">
@@ -165,8 +166,124 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact Info & Newsletter */}
-          <div className="space-y-8">
+          {/* Blog & Events */}
+          <div>
+            <h3 className="text-lg font-semibold text-white mb-6" id="blog-events">
+              Blog & Events
+            </h3>
+            <ul className="space-y-3" aria-labelledby="blog-events">
+              <li>
+                <Link
+                  to="/blog"
+                  className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
+                >
+                  <span className="w-0 h-0.5 bg-primary-400 group-hover:w-4 group-focus:w-4 transition-all duration-300 mr-2"></span>
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/blog/limitless-innovation"
+                  className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
+                >
+                  <span className="w-0 h-0.5 bg-primary-400 group-hover:w-4 group-focus:w-4 transition-all duration-300 mr-2"></span>
+                  Innovation Stories
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/events"
+                  className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
+                >
+                  <span className="w-0 h-0.5 bg-primary-400 group-hover:w-4 group-focus:w-4 transition-all duration-300 mr-2"></span>
+                  Events
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/events/webinar-series"
+                  className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
+                >
+                  <span className="w-0 h-0.5 bg-primary-400 group-hover:w-4 group-focus:w-4 transition-all duration-300 mr-2"></span>
+                  Webinar Series
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Career & Resources */}
+          <div>
+            <h3 className="text-lg font-semibold text-white mb-6" id="career-resources">
+              Career & Resources
+            </h3>
+            <ul className="space-y-3" aria-labelledby="career-resources">
+              <li>
+                <Link
+                  to="/careers"
+                  className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
+                >
+                  <span className="w-0 h-0.5 bg-primary-400 group-hover:w-4 group-focus:w-4 transition-all duration-300 mr-2"></span>
+                  Careers
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/careers/open-positions"
+                  className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
+                >
+                  <span className="w-0 h-0.5 bg-primary-400 group-hover:w-4 group-focus:w-4 transition-all duration-300 mr-2"></span>
+                  Open Positions
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/knowledge-base"
+                  className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
+                >
+                  <span className="w-0 h-0.5 bg-primary-400 group-hover:w-4 group-focus:w-4 transition-all duration-300 mr-2"></span>
+                  Knowledge Base
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/api-documentation"
+                  className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
+                >
+                  <span className="w-0 h-0.5 bg-primary-400 group-hover:w-4 group-focus:w-4 transition-all duration-300 mr-2"></span>
+                  API Documentation
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="border-t border-dark-800">
+        <div className="container-custom px-4 md:px-6 lg:px-8 py-8">
+          <div className="bg-gradient-to-r from-primary-600/10 to-secondary-600/10 rounded-2xl p-8 text-center">
+            <h3 className="text-2xl font-bold text-white mb-3">
+              Ready to Start Your Project?
+            </h3>
+            <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
+              Build Limitless | Manage Limitless | Grow Limitless with our
+              innovative solutions
+            </p>
+            <Link 
+              to="/get-started" 
+              className="btn-primary inline-block focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+              aria-label="Get started with our services today"
+            >
+              Get Started Today
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Contact Info & Newsletter */}
+      <div className="border-t border-dark-800 bg-dark-900/50 py-8">
+        <div className="container-custom px-4 md:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
               <h3 className="text-lg font-semibold text-white mb-6" id="contact-info">
                 Contact Us
@@ -210,36 +327,14 @@ const Footer = () => {
             
             <div>
               <h3 className="text-lg font-semibold text-white mb-6">
-                Newsletter
+                Stay Updated
               </h3>
               <NewsletterForm />
             </div>
           </div>
         </div>
       </div>
-
-      {/* CTA Section */}
-      <div className="border-t border-dark-800">
-        <div className="container-custom px-4 md:px-6 lg:px-8 py-8">
-          <div className="bg-gradient-to-r from-primary-600/10 to-secondary-600/10 rounded-2xl p-8 text-center">
-            <h3 className="text-2xl font-bold text-white mb-3">
-              Ready to Start Your Project?
-            </h3>
-            <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
-              Build Limitless | Manage Limitless | Grow Limitless with our
-              innovative solutions
-            </p>
-            <Link 
-              to="/get-started" 
-              className="btn-primary inline-block focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-              aria-label="Get started with our services today"
-            >
-              Get Started Today
-            </Link>
-          </div>
-        </div>
-      </div>
-
+      
       {/* Bottom Bar */}
       <div className="border-t border-dark-800">
         <div className="container-custom px-4 md:px-6 lg:px-8 py-6">

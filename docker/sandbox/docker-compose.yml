@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  sandbox:
+    build:
+      context: ../..
+      dockerfile: docker/sandbox/Dockerfile
+    container_name: limitless_sandbox
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=production
+      - REACT_APP_API_URL=https://api.limitlessinfotech.com
+      - REACT_APP_SUBDOMAIN=sandbox
+    volumes:
+      - /app/node_modules
+      - ./sandbox-data:/app/data
+    networks:
+      - limitless_sandbox_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  nginx:
+    image: nginx:alpine
+    container_name: limitless_sandbox_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./ssl:/etc/nginx/ssl
+    depends_on:
+      - sandbox
+    networks:
+      - limitless_sandbox_network
+    restart: unless-stopped
+
+  redis:
+    image: redis:alpine
+    container_name: limitless_sandbox_redis
+    volumes:
+      - sandbox_redis_data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - limitless_sandbox_network
+    restart: unless-stopped
+
+networks:
+  limitless_sandbox_network:
+    driver: bridge
+
+volumes:
+  sandbox_redis_data:

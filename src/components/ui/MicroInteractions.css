@@ -1,0 +1,252 @@
+/* 
+ * Micro Interactions with Haptic-like Feedback Styles
+ * Following the "Limitless UI/UX Library Standards" with Royal Gold and Deep Blue aesthetic
+ */
+
+.limitless-micro-interaction {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+  position: relative;
+  will-change: transform;
+}
+
+.limitless-micro-interaction.interaction-active {
+  transform: scale(0.98);
+}
+
+.limitless-micro-interaction.feedback-active {
+  animation: microFeedback 0.2s ease-in-out;
+}
+
+@keyframes microFeedback {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.96); }
+  100% { transform: scale(1); }
+}
+
+/* Royal Button Styles */
+.royal-button {
+  background-color: #1e3a8a; /* Deep blue */
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  min-width: 100px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.royal-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.royal-button:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+}
+
+.royal-button:disabled {
+  background-color: #d1d5db;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Royal Button Variants */
+.royal-button.royal-button-secondary {
+  background-color: transparent;
+  color: #1e3a8a;
+  border: 2px solid #1e3a8a;
+}
+
+.royal-button.royal-button-secondary:hover:not(:disabled) {
+  background-color: #eff6ff;
+}
+
+.royal-button.royal-button-gold {
+  background-color: #d4af37; /* Royal Gold */
+  color: white;
+}
+
+.royal-button.royal-button-gold:hover:not(:disabled) {
+  background-color: #b8860b;
+}
+
+.royal-button.royal-button-outline {
+  background-color: transparent;
+  color: #1e3a8a;
+  border: 2px solid #1e3a8a;
+}
+
+.royal-button.royal-button-outline:hover:not(:disabled) {
+  background-color: #1e3a8a;
+  color: white;
+}
+
+/* Royal Button Sizes */
+.royal-button.royal-button-small {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  min-width: 80px;
+}
+
+.royal-button.royal-button-large {
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  min-width: 140px;
+}
+
+/* Royal Input Styles */
+.royal-input-container {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.royal-input-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #1e3a8a; /* Deep blue */
+  font-size: 0.875rem;
+}
+
+.royal-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.royal-input:focus {
+  border-color: #3b82f6; /* Light blue */
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Royal Card Styles */
+.royal-card {
+  background-color: white;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.royal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Haptic Feedback Animation */
+.haptic-feedback {
+  animation: hapticFeedback 0.2s ease-in-out;
+}
+
+@keyframes hapticFeedback {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(0.96); }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .royal-button {
+    /* Adjust for touch devices */
+    min-height: 44px; /* Minimum touch target size */
+  }
+  
+  .royal-button:hover:not(:disabled) {
+    /* On touch devices, hover effects are not as relevant */
+    transform: none;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .limitless-micro-interaction,
+  .royal-button,
+  .royal-card {
+    transition: none;
+    animation: none;
+  }
+  
+  .limitless-micro-interaction.interaction-active {
+    transform: none;
+  }
+  
+  @keyframes microFeedback {
+    from, to { transform: none; }
+  }
+  
+  @keyframes hapticFeedback {
+    from, to { transform: none; }
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .royal-button {
+    border: 2px solid;
+  }
+  
+  .royal-input {
+    border-width: 2px;
+  }
+}
+
+/* Focus styles for accessibility */
+.limitless-micro-interaction:focus,
+.royal-button:focus,
+.royal-input:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Feedback overlay for button press effects */
+.feedback-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  border-radius: 0.5rem;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.royal-button:active .feedback-overlay {
+  opacity: 1;
+}
+
+/* Royal Gold theme enhancements */
+.royal-gold-theme .royal-button.royal-button-gold {
+  background-color: #d4af37;
+  border-color: #d4af37;
+}
+
+.royal-gold-theme .royal-button.royal-button-gold:hover:not(:disabled) {
+  background-color: #c5a227;
+  border-color: #c5a227;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Custom cubic-bezier for premium feel */
+.limitless-micro-interaction,
+.royal-button,
+.royal-card,
+.royal-input {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}

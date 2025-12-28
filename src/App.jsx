@@ -1,4 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { I18nextProvider } from 'react-i18next';
+import i18n from './i18n/i18n';
+import { RTLProvider } from './components/RTLProvider';
+import './styles/rtl.css';
 import { AppProvider } from "./context/AppContext";
 import { NotificationProvider } from "./context/NotificationContext";
 import Navbar from "./components/Navbar";
@@ -41,6 +45,8 @@ import { BackToTop } from "./components/ui";
 
 function AppContent() {
   return (
+    <I18nextProvider i18n={i18n}>
+    <RTLProvider>
     <Router>
       <ScrollToTop />
       <div className="min-h-screen flex flex-col bg-white dark:bg-dark-900">
@@ -92,6 +98,8 @@ function AppContent() {
         {/* <ThemeWelcome /> */}
       </div>
     </Router>
+    </RTLProvider>
+    </I18nextProvider>
   );
 }
 

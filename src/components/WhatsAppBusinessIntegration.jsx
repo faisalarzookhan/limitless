@@ -8,7 +8,7 @@ const WhatsAppBusinessIntegration = () => {
     {
       id: 1,
       text: "Hi there! 👋 Thanks for visiting Limitless Infotech. How can we help you today?",
-      sender: 'bot',
+      sender: 'Auralis',
       timestamp: new Date(Date.now() - 300000), // 5 minutes ago
       status: 'read'
     }
@@ -29,7 +29,7 @@ const WhatsAppBusinessIntegration = () => {
     const newMessage = {
       id: messages.length + 1,
       text: message,
-      sender: 'user',
+      sender: 'Auralis',
       timestamp: new Date(),
       status: 'sent'
     };
@@ -39,9 +39,9 @@ const WhatsAppBusinessIntegration = () => {
 
     // Send notification about the user's message
     try {
-      await sendUserInteractionNotification('whatsapp-chat', {
+      await sendUserInteractionNotification('Auralis Connect', {
         message: message,
-        sender: 'user',
+        sender: 'Auralis',
         timestamp: new Date().toISOString(),
         page: window.location.pathname
       });
@@ -56,7 +56,7 @@ const WhatsAppBusinessIntegration = () => {
       const responseMessage = {
         id: messages.length + 2,
         text: botResponse,
-        sender: 'bot',
+        sender: 'Auralis',
         timestamp: new Date(),
         status: 'delivered'
       };

@@ -1,0 +1,240 @@
+/* 
+ * Side Sliding Drawer Component Styles
+ * Following the "Limitless UI/UX Library Standards" with Royal Gold and Deep Blue aesthetic
+ */
+
+.limitless-drawer {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: #333;
+  box-sizing: border-box;
+}
+
+/* Header styles */
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #ffffff;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.drawer-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e3a8a; /* Deep blue */
+  line-height: 1.5;
+}
+
+/* Close button styles */
+.drawer-close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  color: #6b7280; /* Gray */
+  transition: all 0.2s ease;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drawer-close-button:hover {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.drawer-close-button:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Content styles */
+.drawer-content {
+  flex: 1;
+  overflow: auto;
+  padding: 1.5rem;
+  background-color: #fafafa;
+}
+
+/* Position-specific styles */
+.drawer-right {
+  top: 0;
+  right: 0;
+  height: 100%;
+  transform: translateX(0);
+}
+
+.drawer-left {
+  top: 0;
+  left: 0;
+  height: 100%;
+  transform: translateX(0);
+}
+
+.drawer-top {
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(0);
+}
+
+.drawer-bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(0);
+}
+
+/* Animation states */
+.drawer-open.drawer-right {
+  transform: translateX(0);
+}
+
+.drawer-closed.drawer-right {
+  transform: translateX(100%);
+}
+
+.drawer-open.drawer-left {
+  transform: translateX(0);
+}
+
+.drawer-closed.drawer-left {
+  transform: translateX(-100%);
+}
+
+.drawer-open.drawer-top {
+  transform: translateY(0);
+}
+
+.drawer-closed.drawer-top {
+  transform: translateY(-100%);
+}
+
+.drawer-open.drawer-bottom {
+  transform: translateY(0);
+}
+
+.drawer-closed.drawer-bottom {
+  transform: translateY(100%);
+}
+
+/* Visibility states */
+.drawer-visible {
+  display: flex !important;
+}
+
+.drawer-hidden {
+  display: none !important;
+}
+
+/* Backdrop styles */
+.drawer-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  transition: opacity 0.3s ease;
+}
+
+.backdrop-fade-in {
+  opacity: 1;
+}
+
+.backdrop-fade-out {
+  opacity: 0;
+}
+
+/* Royal Gold accent styles */
+.limitless-drawer .royal-gold-accent {
+  color: #d4af37; /* Royal Gold */
+}
+
+.limitless-drawer .royal-gold-border {
+  border-color: #d4af37 !important;
+}
+
+.limitless-drawer .royal-gold-bg {
+  background-color: #d4af37 !important;
+  color: white;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .drawer-right,
+  .drawer-left {
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+  
+  .drawer-top,
+  .drawer-bottom {
+    height: 50vh !important;
+  }
+  
+  .drawer-header {
+    padding: 0.75rem 1rem;
+  }
+  
+  .drawer-title {
+    font-size: 1.1rem;
+  }
+  
+  .drawer-content {
+    padding: 1rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .limitless-drawer {
+    border: 2px solid;
+  }
+  
+  .drawer-header {
+    border-bottom-width: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .limitless-drawer,
+  .drawer-backdrop {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Focus styles for accessibility */
+.limitless-drawer :focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Scrollbar styling */
+.limitless-drawer .drawer-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.limitless-drawer .drawer-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.limitless-drawer .drawer-content::-webkit-scrollbar-thumb {
+  background: #c5c5c5;
+  border-radius: 4px;
+}
+
+.limitless-drawer .drawer-content::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

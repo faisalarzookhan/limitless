@@ -1,0 +1,260 @@
+/* 
+ * Adaptive Grid and Aspect Ratio Components Styles
+ * Following the "Limitless UI/UX Library Standards" with responsive design for all devices
+ */
+
+.limitless-adaptive-grid {
+  display: grid;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.limitless-adaptive-grid-item {
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.limitless-adaptive-grid-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.limitless-aspect-ratio-box {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Default aspect ratios */
+.limitless-aspect-ratio-1-1 {
+  aspect-ratio: 1/1;
+}
+
+.limitless-aspect-ratio-16-9 {
+  aspect-ratio: 16/9;
+}
+
+.limitless-aspect-ratio-4-3 {
+  aspect-ratio: 4/3;
+}
+
+.limitless-aspect-ratio-3-2 {
+  aspect-ratio: 3/2;
+}
+
+.limitless-aspect-ratio-21-9 {
+  aspect-ratio: 21/9;
+}
+
+/* Responsive grid layouts */
+.limitless-adaptive-grid.cols-1 {
+  grid-template-columns: 1fr;
+}
+
+.limitless-adaptive-grid.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.limitless-adaptive-grid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.limitless-adaptive-grid.cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.limitless-adaptive-grid.cols-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.limitless-adaptive-grid.cols-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+/* Responsive adjustments for different screen sizes */
+@media (min-width: 320px) and (max-width: 767px) {
+  /* Mobile devices */
+  .limitless-adaptive-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem;
+  }
+  
+  .limitless-adaptive-grid.mobile-cols-2 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .limitless-adaptive-grid.mobile-cols-3 {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Tablets */
+  .limitless-adaptive-grid.tablet-cols-1 {
+    grid-template-columns: 1fr;
+  }
+  
+  .limitless-adaptive-grid.tablet-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .limitless-adaptive-grid.tablet-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .limitless-adaptive-grid.tablet-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Desktop and larger */
+  .limitless-adaptive-grid.desktop-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .limitless-adaptive-grid.desktop-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .limitless-adaptive-grid.desktop-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .limitless-adaptive-grid.desktop-cols-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  
+  .limitless-adaptive-grid.desktop-cols-6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* Foldable device support */
+@media screen and (max-width: 768px) and (min-height: 768px) and (orientation: landscape) {
+  .limitless-adaptive-grid.foldable-layout {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Ultra-wide monitor support */
+@media screen and (min-width: 1800px) {
+  .limitless-adaptive-grid.ultra-wide-layout {
+    grid-template-columns: repeat(6, 1fr);
+    max-width: 80%;
+    margin: 0 auto;
+  }
+}
+
+/* Container query support (where available) */
+@supports not (container-type: inline-size) {
+  /* Fallback for browsers that don't support container queries */
+  .limitless-adaptive-grid.fallback-layout {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+/* Royal Gold theme */
+.limitless-adaptive-grid.royal-gold-theme .limitless-adaptive-grid-item {
+  border: 2px solid #d4af37; /* Royal Gold */
+}
+
+.limitless-adaptive-grid.royal-gold-theme .limitless-adaptive-grid-item:hover {
+  box-shadow: 0 10px 15px -3px rgba(212, 175, 55, 0.2), 0 4px 6px -2px rgba(212, 175, 55, 0.15);
+}
+
+/* Accessibility improvements */
+.limitless-adaptive-grid-item:focus-within {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .limitless-adaptive-grid-item {
+    transition: none;
+  }
+  
+  .limitless-adaptive-grid-item:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .limitless-adaptive-grid-item {
+    border: 2px solid;
+  }
+}
+
+/* Print styles */
+@media print {
+  .limitless-adaptive-grid {
+    display: block;
+  }
+  
+  .limitless-adaptive-grid-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Ensure aspect ratio is maintained across browsers */
+.limitless-aspect-ratio-box::before {
+  content: '';
+  display: block;
+  padding-bottom: calc(100% / var(--aspect-ratio, 1));
+}
+
+.limitless-aspect-ratio-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Image container within aspect ratio box */
+.limitless-aspect-ratio-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Content alignment options */
+.limitless-adaptive-grid-item.align-top {
+  align-items: flex-start;
+}
+
+.limitless-adaptive-grid-item.align-center {
+  align-items: center;
+}
+
+.limitless-adaptive-grid-item.align-bottom {
+  align-items: flex-end;
+}
+
+.limitless-adaptive-grid-item.justify-start {
+  justify-content: flex-start;
+}
+
+.limitless-adaptive-grid-item.justify-center {
+  justify-content: center;
+}
+
+.limitless-adaptive-grid-item.justify-end {
+  justify-content: flex-end;
+}

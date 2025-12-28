@@ -20,6 +20,7 @@ import {
   HiTrendingUp,
   HiLockClosed
 } from 'react-icons/hi';
+import Navbar from '../components/Navbar';
 
 const ClientPortal = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -415,43 +416,9 @@ const ClientPortal = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-dark-900 dark:to-dark-800">
-      {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white">
-        <div className="container-custom px-4 md:px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex items-center justify-between mb-8">
-              <div>
-                <h1 className="text-3xl md:text-4xl font-display font-bold mb-2">
-                  Client Portal
-                </h1>
-                <p className="text-blue-100">
-                  Manage your projects, invoices, and documents in one place
-                </p>
-              </div>
-              <div className="flex items-center space-x-4">
-                <div className="relative">
-                  <button className="p-3 bg-white/20 rounded-full hover:bg-white/30 transition-colors">
-                    <HiBell className="w-6 h-6" />
-                    {notifications.filter(n => !n.read).length > 0 && (
-                      <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
-                        {notifications.filter(n => !n.read).length}
-                      </span>
-                    )}
-                  </button>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                    <HiUser className="w-6 h-6" />
-                  </div>
-                  <span className="font-medium">{user.name}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Navbar isTransparent={true} />
 
-      <section className="section-padding">
+      <section className="pt-32 pb-16">
         <div className="container-custom">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Sidebar */}
@@ -509,61 +476,21 @@ const ClientPortal = () => {
 
             {/* Main Content */}
             <div className="lg:w-3/4">
+              <div className="mb-8">
+                <h1 className="text-3xl md:text-4xl font-display font-bold mb-2 text-gray-900 dark:text-white">
+                  Client Portal
+                </h1>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Manage your projects, invoices, and documents in one place
+                </p>
+              </div>
               {renderTabContent()}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Role-Based Features */}
-      {userRole === 'admin' && (
-        <section className="section-padding bg-gray-50 dark:bg-dark-800">
-          <div className="container-custom">
-            <div className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700">
-              <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Admin Features</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-6 rounded-xl border border-purple-200 dark:border-purple-800">
-                  <HiUserGroup className="w-8 h-8 text-purple-600 dark:text-purple-400 mb-3" />
-                  <h3 className="font-bold mb-2 text-gray-900 dark:text-white">User Management</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Manage team members and their access permissions</p>
-                </div>
-                <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 p-6 rounded-xl border border-blue-200 dark:border-blue-800">
-                  <HiCog className="w-8 h-8 text-blue-600 dark:text-blue-400 mb-3" />
-                  <h3 className="font-bold mb-2 text-gray-900 dark:text-white">System Settings</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Configure system-wide settings and preferences</p>
-                </div>
-                <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-6 rounded-xl border border-green-200 dark:border-green-800">
-                  <HiChartBar className="w-8 h-8 text-green-600 dark:text-green-400 mb-3" />
-                  <h3 className="font-bold mb-2 text-gray-900 dark:text-white">Analytics</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">View detailed analytics and usage reports</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
 
-      {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-br from-blue-600 to-indigo-600 text-white">
-        <div className="container-custom">
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Need Help?
-            </h2>
-            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Our support team is available 24/7 to assist you with any questions
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="/contact" className="btn-primary bg-white text-blue-600 hover:bg-gray-100">
-                Contact Support
-              </a>
-              <a href="/docs" className="btn-outline border-white text-white hover:bg-white hover:text-blue-600">
-                View Documentation
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };

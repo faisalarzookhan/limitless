@@ -1,0 +1,470 @@
+/* 
+ * Touch Optimization Styles
+ * Implementation of -webkit-tap-highlight-color and standardized touch targets (min 44x44px) 
+ * for a native-app feel on mobile browsers as per "Limitless UI/UX Library Standards".
+ */
+
+/* Global touch optimization settings */
+* {
+  /* Remove default tap highlight on webkit browsers */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: auto;
+  -webkit-user-select: auto;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* Alternative tap highlight for accessibility */
+*[data-tap-highlight="true"] {
+  -webkit-tap-highlight-color: rgba(31, 41, 55, 0.1); /* Light gray for tap feedback */
+}
+
+/* Standardized touch targets - minimum 44x44px as per WCAG guidelines */
+.touch-target,
+button,
+a,
+input,
+select,
+textarea,
+label,
+[role="button"],
+[role="link"],
+[role="tab"],
+[role="option"],
+[role="menuitem"],
+[role="menuitemcheckbox"],
+[role="menuitemradio"],
+.clickable,
+.interactive {
+  min-width: 44px;
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+/* Specific touch target sizes for common elements */
+.btn,
+.button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 12px 16px;
+  box-sizing: border-box;
+}
+
+.btn-sm,
+.button-sm {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 12px;
+}
+
+.btn-lg,
+.button-lg {
+  min-width: 56px;
+  min-height: 56px;
+  padding: 16px 24px;
+}
+
+/* Link touch targets */
+a {
+  padding: 8px;
+  margin: -8px; /* Expand clickable area without affecting layout */
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* Form element touch targets */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+input[type="search"],
+select,
+textarea {
+  min-height: 44px;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+/* Checkbox and radio button touch targets */
+input[type="checkbox"],
+input[type="radio"] {
+  min-width: 44px;
+  min-height: 44px;
+  position: relative;
+}
+
+input[type="checkbox"]::before,
+input[type="radio"]::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+}
+
+/* Icon touch targets */
+.icon,
+.lucide-icon,
+.material-icon {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.icon:hover,
+.lucide-icon:hover,
+.material-icon:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Navigation touch targets */
+.nav-link,
+.menu-item,
+.tab {
+  min-height: 44px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card touch targets */
+.card,
+.tile,
+.item {
+  min-height: 44px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* Mobile-friendly focus styles */
+.touch-target:focus,
+button:focus,
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Enhanced touch feedback */
+.touch-target:active,
+button:active,
+a:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* Touch-friendly dropdowns */
+.dropdown,
+.select-menu {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.dropdown-toggle,
+.select-button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 12px 40px 12px 16px; /* Extra space for dropdown arrow */
+  position: relative;
+}
+
+.dropdown-toggle::after,
+.select-button::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid currentColor;
+}
+
+/* Touch-friendly slider controls */
+.slider,
+.range-input {
+  min-height: 44px;
+  padding: 20px 0;
+}
+
+.slider::-webkit-slider-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+/* Touch-friendly toggle switches */
+.toggle,
+.switch {
+  min-width: 60px;
+  min-height: 44px;
+  position: relative;
+}
+
+.toggle input,
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle label,
+.switch label {
+  display: block;
+  width: 60px;
+  height: 44px;
+  border-radius: 22px;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.toggle label::after,
+.switch label::after {
+  content: '';
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: white;
+  top: 4px;
+  left: 4px;
+  transition: transform 0.3s ease;
+}
+
+/* Touch-friendly modal and overlay */
+.modal,
+.overlay,
+.drawer {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.modal-close,
+.overlay-close,
+.drawer-close {
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Touch-friendly list items */
+.list-item,
+.list-element {
+  min-height: 44px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+}
+
+/* Touch-friendly grid items */
+.grid-item,
+.tile-item {
+  min-height: 44px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* Responsive touch targets */
+@media (max-width: 768px) {
+  .touch-target,
+  button,
+  a,
+  input,
+  select,
+  textarea,
+  label {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  /* Increase touch target size on mobile */
+  .btn,
+  .button {
+    min-height: 48px;
+    padding: 14px 20px;
+  }
+  
+  .btn-sm,
+  .button-sm {
+    min-height: 48px;
+    padding: 10px 16px;
+  }
+  
+  .btn-lg,
+  .button-lg {
+    min-height: 56px;
+    padding: 18px 28px;
+  }
+}
+
+/* Touch-friendly navigation */
+.nav-item,
+.nav-link {
+  padding: 12px 16px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Touch-friendly footer links */
+.footer-link,
+.footer-item {
+  min-height: 44px;
+  padding: 12px 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Custom tap highlight for important elements */
+.tap-highlight {
+  -webkit-tap-highlight-color: rgba(212, 175, 55, 0.3) !important; /* Royal Gold */
+  position: relative;
+}
+
+.tap-highlight::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(212, 175, 55, 0.1);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.tap-highlight:active::after {
+  opacity: 1;
+}
+
+/* Touch-friendly table elements */
+.table th,
+.table td {
+  min-height: 44px;
+  padding: 12px;
+}
+
+/* Touch-friendly pagination */
+.pagination button,
+.pagination a {
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+/* Touch-friendly accordion */
+.accordion-header,
+.accordion-trigger {
+  min-height: 44px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+}
+
+/* Touch-friendly tooltip trigger */
+.tooltip-trigger {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Touch-friendly progress bar */
+.progress-bar {
+  min-height: 44px;
+  padding: 20px 0;
+}
+
+/* Ensure accessibility for screen readers while optimizing for touch */
+.sr-only-touch {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Touch-friendly calendar elements */
+.calendar-day,
+.date-picker-cell {
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Touch-friendly rating stars */
+.rating-star {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+
+/* Touch-friendly search elements */
+.search-input {
+  min-height: 44px;
+  padding: 12px 48px 12px 16px; /* Extra space for search icon */
+}
+
+.search-button {
+  min-width: 44px;
+  min-height: 44px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Touch-friendly avatar */
+.avatar,
+.user-icon {
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
