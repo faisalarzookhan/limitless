@@ -2,10 +2,7 @@ import { forwardRef, HTMLAttributes } from 'react';
 import { ProgressProps } from '../../../types';
 import { generateId } from '../../../utils/accessibility';
 
-const Progress = forwardRef<
-  HTMLDivElement,
-  ProgressProps & HTMLAttributes<HTMLDivElement>
->(
+const Progress = forwardRef<HTMLDivElement, ProgressProps & HTMLAttributes<HTMLDivElement>>(
   (
     {
       value,
