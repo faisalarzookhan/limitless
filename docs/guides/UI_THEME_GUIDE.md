@@ -62,17 +62,17 @@ Tailwind's `class` dark mode is used:
 Used for main branding, CTAs, links, and primary actions.
 
 ```css
-primary-50:  #f0f9ff  /* Lightest - backgrounds */
-primary-100: #e0f2fe  /* Very light - hover states */
-primary-200: #bae6fd  /* Light - borders */
-primary-300: #7dd3fc  /* Medium light */
-primary-400: #38bdf8  /* Medium */
-primary-500: #0ea5e9  /* MAIN BRAND COLOR */
-primary-600: #0284c7  /* Dark - hover states */
-primary-700: #0369a1  /* Darker - active states */
-primary-800: #075985  /* Very dark */
-primary-900: #0c4a6e  /* Darkest */
-primary-950: #082f49  /* Ultra dark */
+primary-50:  #dbeafe  /* Lightest - backgrounds */
+primary-100: #bfdbfe  /* Very light - hover states */
+primary-200: #93c5fd  /* Light - borders */
+primary-300: #60a5fa  /* Medium light */
+primary-400: #3b82f6  /* Medium */
+primary-500: #2563eb  /* MAIN BRAND COLOR */
+primary-600: #1d4ed8  /* Dark - hover states */
+primary-700: #1e40af  /* Darker - active states */
+primary-800: #1e3a8a  /* Very dark */
+primary-900: #172554  /* Darkest */
+primary-950: #0c1a3d  /* Ultra dark */
 ```
 
 **Usage:**
@@ -85,17 +85,17 @@ primary-950: #082f49  /* Ultra dark */
 Used for accents, badges, and secondary actions.
 
 ```css
-secondary-50:  #faf5ff
-secondary-100: #f3e8ff
-secondary-200: #e9d5ff
-secondary-300: #d8b4fe
-secondary-400: #c084fc
-secondary-500: #a855f7  /* Main secondary */
-secondary-600: #9333ea  /* Hover */
-secondary-700: #7e22ce  /* Active */
-secondary-800: #6b21a8
-secondary-900: #581c87
-secondary-950: #3b0764
+secondary-50:  #fff9e6
+secondary-100: #fff3cc
+secondary-200: #ffe799
+secondary-300: #ffd766
+secondary-400: #ffcc4d
+secondary-500: #ffc957  /* Main secondary */
+secondary-600: #ffbd3a  /* Hover */
+secondary-700: #ffad1c  /* Active */
+secondary-800: #f29e0d
+secondary-900: #d98507
+secondary-950: #a66305
 ```
 
 **Usage:**
@@ -107,17 +107,17 @@ secondary-950: #3b0764
 Used for highlights, special features, and warnings.
 
 ```css
-accent-50:  #fff7ed
-accent-100: #ffedd5
-accent-200: #fed7aa
-accent-300: #fdba74
-accent-400: #fb923c
-accent-500: #f97316  /* Main accent */
-accent-600: #ea580c  /* Hover */
-accent-700: #c2410c  /* Active */
-accent-800: #9a3412
-accent-900: #7c2d12
-accent-950: #431407
+accent-50:  #fafafa
+accent-100: #f5f5f5
+accent-200: #f0f0f0
+accent-300: #e0e0e0
+accent-400: #d0d0d0
+accent-500: #0a0b0d  /* Main accent */
+accent-600: #1a1a1a  /* Hover */
+accent-700: #2a2a2a  /* Active */
+accent-800: #1a1a1a
+accent-900: #0f0f0f
+accent-950: #050505
 ```
 
 **Usage:**

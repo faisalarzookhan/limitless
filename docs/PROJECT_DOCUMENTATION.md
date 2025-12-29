@@ -614,8 +614,8 @@ primary-100: #e0f2fe
 primary-200: #bae6fd
 primary-300: #7dd3fc
 primary-400: #38bdf8
-primary-500: #0ea5e9  /* Main brand color */
-primary-600: #0284c7
+primary-500: #2563eb  /* Main brand color */
+primary-600: #1d4ed8
 primary-700: #0369a1
 primary-800: #075985
 primary-900: #0c4a6e
@@ -631,8 +631,8 @@ secondary-700: #7e22ce
 
 #### Accent Colors (Orange)
 ```css
-accent-500: #f97316    /* Highlight color */
-accent-600: #ea580c
+accent-500: #0a0b0d    /* Highlight color */
+accent-600: #1a1a1a
 ```
 
 #### Dark Mode Colors

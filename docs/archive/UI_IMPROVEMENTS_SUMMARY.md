@@ -400,7 +400,7 @@
 ## 🎨 Design System
 
 ### Colors (Maintained)
-- Primary: Blue (#0ea5e9)
+- Primary: Blue (#2563eb)
 - Secondary: Amber (#f59e0b)
 - Dark: Dark grays
 - Success: Green

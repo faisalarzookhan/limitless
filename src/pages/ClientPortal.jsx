@@ -22,7 +22,7 @@ import {
 } from 'react-icons/hi';
 import Navbar from '../components/Navbar';
 
-const ClientPortal = () => {
+const ClientPortal = (props) => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [userRole, setUserRole] = useState('admin'); // admin, manager, user
   const [notifications, setNotifications] = useState([]);

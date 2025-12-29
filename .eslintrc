@@ -152,7 +152,6 @@
     "prefer-arrow-callback": "error",
     "arrow-spacing": "error",
     "no-confusing-arrow": "error",
-    "no-duplicate-imports": "error",
     "no-useless-computed-key": "error",
     "no-useless-rename": "error",
     "rest-spread-spacing": "error",

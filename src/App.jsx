@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n/i18n';
 import { RTLProvider } from './components/RTLProvider';
@@ -41,7 +41,14 @@ import NaturalLanguageQueryPage from "./pages/NaturalLanguageQueryPage";
 import ProgressiveProfilingPage from "./pages/ProgressiveProfilingPage";
 import WhatsAppIntegrationPage from "./pages/WhatsAppIntegrationPage";
 import JobApplication from "./pages/JobApplication";
+import AuralisAIPage from './pages/AuralisAIPage';
+import DigitalHealthAuditorPage from './pages/DigitalHealthAuditorPage';
+import PredictiveAnalyticsPage from './pages/PredictiveAnalyticsPage';
+import LeadGenerationFormsPage from './pages/LeadGenerationFormsPage';
+import AnalyticsDashboardPage from './pages/AnalyticsDashboardPage';
+import AuralisPersonalizationDemoPage from './pages/AuralisPersonalizationDemoPage';
 import { BackToTop } from "./components/ui";
+import AnalyticsTracker from "./components/AnalyticsTracker";
 
 function AppContent() {
   return (
@@ -50,47 +57,10 @@ function AppContent() {
     <Router>
       <ScrollToTop />
       <div className="min-h-screen flex flex-col bg-white dark:bg-dark-900">
-        <Navbar />
+        <NavbarWithLocation />
 
-        <main 
-          className="flex-grow pt-28 pb-16"
-          id="main-content"
-          tabIndex={-1}
-          role="main"
-        >
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/portfolio/:id" element={<PortfolioDetail />} />
-            <Route path="/testimonials" element={<Testimonials />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/get-started" element={<ClientForm />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogDetail />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/events/:slug" element={<EventDetail />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-of-service" element={<TermsOfService />} />
-            <Route path="/cookie-policy" element={<CookiePolicy />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/careers" element={<Careers />} />
-            <Route path="/compliance" element={<Compliance />} />
-            <Route path="/innovation-lab" element={<InnovationLab />} />
-            <Route path="/api-documentation" element={<ApiDocumentation />} />
-            <Route path="/roi-calculator" element={<ROICalculator />} />
-            <Route path="/client-portal" element={<ClientPortal />} />
-            <Route path="/knowledge-base" element={<KnowledgeBase />} />
-            <Route path="/ai-features" element={<AIFeatures />} />
-            <Route path="/natural-language-query" element={<NaturalLanguageQueryPage />} />
-            <Route path="/progressive-profiling" element={<ProgressiveProfilingPage />} />
-            <Route path="/careers/apply/:jobId" element={<JobApplication />} />
-            <Route path="/whatsapp-integration" element={<WhatsAppIntegrationPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
+        <AnalyticsTracker />
+        <MainWithLocation />
 
         <Footer />
         <Toast />
@@ -110,6 +80,70 @@ function App() {
         <AppContent />
       </NotificationProvider>
     </AppProvider>
+  );
+}
+
+function NavbarWithLocation() {
+  const location = useLocation();
+  
+  // Determine if navbar should be transparent based on current route
+  const isTransparent = (location.pathname === '/ClientPortal' || location.pathname === '/ClientPortal/');
+  
+  return <Navbar isTransparent={false} />;
+}
+
+function MainWithLocation() {
+  const location = useLocation();
+  
+  // Determine if main content should have different padding based on current route
+  const paddingTop = (location.pathname === '/ClientPortal') ? 'pt-32' : 'pt-28';
+  
+  return (
+    <main 
+      className={`flex-grow ${paddingTop} pb-16`}
+      id="main-content"
+      tabIndex={-1}
+      role="main"
+    >
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/portfolio/:id" element={<PortfolioDetail />} />
+        <Route path="/testimonials" element={<Testimonials />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/get-started" element={<ClientForm />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogDetail />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/events/:slug" element={<EventDetail />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
+        <Route path="/cookie-policy" element={<CookiePolicy />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/careers" element={<Careers />} />
+        <Route path="/compliance" element={<Compliance />} />
+        <Route path="/innovation-lab" element={<InnovationLab />} />
+        <Route path="/api-documentation" element={<ApiDocumentation />} />
+        <Route path="/roi-calculator" element={<ROICalculator />} />
+        <Route path="/ClientPortal" element={<ClientPortal />} />
+        <Route path="/KnowledgeBase" element={<KnowledgeBase />} />
+        <Route path="/ai-features" element={<AIFeatures />} />
+        <Route path="/AIFeatures" element={<AIFeatures />} />
+        <Route path="/NaturalLanguageQueryPage" element={<NaturalLanguageQueryPage />} />
+        <Route path="/Careers/Apply/:JobId" element={<JobApplication />} />
+        <Route path="/WhatsAppIntegrationPage" element={<WhatsAppIntegrationPage />} />
+        <Route path="/AuralisAIPage" element={<AuralisAIPage />} />
+        <Route path="/DigitalHealthAuditorPage" element={<DigitalHealthAuditorPage />} />
+        <Route path="/PredictiveAnalyticsPage" element={<PredictiveAnalyticsPage />} />
+        <Route path="/LeadGenerationFormsPage" element={<LeadGenerationFormsPage />} />
+        <Route path="/AnalyticsDashboardPage" element={<AnalyticsDashboardPage />} />
+        <Route path="/AuralisPersonalizationDemoPage" element={<AuralisPersonalizationDemoPage />} />
+        <Route path="/NotFound" element={<NotFound />} />
+      </Routes>
+    </main>
   );
 }
 

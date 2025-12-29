@@ -474,9 +474,9 @@ Redesigned/
 
 ### Color Palette
 **Primary Colors:**
-- Primary: Blue shades (#0ea5e9)
-- Secondary: Purple shades (#a855f7)
-- Accent: Orange shades (#f97316)
+- Primary: Blue shades (#2563eb)
+- Secondary: Amber shades (#ffc957)
+- Accent: Dark shades (#0a0b0d)
 
 **Neutral Colors:**
 - Light mode: White, Gray shades

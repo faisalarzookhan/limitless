@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { HiOutlineGlobeAlt, HiOutlineLightningBolt, HiOutlineShieldCheck, HiOutlineChartBar } from 'react-icons/hi';
+import { HiOutlineGlobeAlt, HiOutlineLightningBolt, HiOutlineShieldCheck, HiOutlineChartBar, HiOutlineDocumentReport, HiOutlineMail, HiOutlineDownload, HiOutlineShare } from 'react-icons/hi';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import LimitlessScore from './LimitlessScore';
 import securityScanService from '../services/securityScanService';
 import lighthouseService from '../services/lighthouseService';
+import { generateTechnicalAuditReport, downloadPDF } from '../services/pdfGenerationService';
+import { sendLeadGenerationNotification } from '../services/notificationService';
 
 const DigitalHealthAuditor = ({ onAuditComplete, onSandboxRequest }) => {
   const [url, setUrl] = useState('');
@@ -229,12 +231,105 @@ const DigitalHealthAuditor = ({ onAuditComplete, onSandboxRequest }) => {
                 </div>
                 
                 <div className="mt-4 md:mt-0">
-                  <button
-                    onClick={resetAudit}
-                    className="bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg font-medium transition"
-                  >
-                    New Audit
-                  </button>
+                  <div className="flex flex-wrap gap-3">
+                    <button
+                      onClick={resetAudit}
+                      className="bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg font-medium transition"
+                    >
+                      New Audit
+                    </button>
+                                  
+                    <button
+                      onClick={async () => {
+                        if (scanResults) {
+                          try {
+                            const pdfBlob = await generateTechnicalAuditReport({
+                              lcp: scanResults.performance.lcp,
+                              fid: scanResults.performance.fid,
+                              cls: scanResults.performance.cls,
+                              fcp: scanResults.performance.fcp,
+                              tti: scanResults.performance.si,
+                              sslStatus: scanResults.security.sslValid ? 'Valid' : 'Invalid',
+                              hstsStatus: scanResults.security.hsts ? 'Configured' : 'Not Configured',
+                              mixedContent: scanResults.security.sslIssues && scanResults.security.sslIssues.length > 0 ? 'Issues Found' : 'None',
+                              securityHeaders: scanResults.security.headerIssues && scanResults.security.headerIssues.length > 0 ? 'Issues Found' : 'Properly Configured',
+                              vulnerabilities: 'Scan Required',
+                              metaTitle: 'Check Required',
+                              metaDescription: 'Check Required',
+                              headerStructure: 'Check Required',
+                              imageAltText: 'Check Required',
+                              pageSpeed: `${scanResults.speed.loadTime.toFixed(1)}s`,
+                            });
+                            downloadPDF(pdfBlob, `Technical-Audit-Report-${new Date().toISOString().split('T')[0]}.pdf`);
+                                          
+                            // Send notification about PDF download
+                            await sendLeadGenerationNotification({
+                              formType: 'technical-audit-pdf',
+                              email,
+                              url,
+                              timestamp: new Date().toISOString(),
+                              page: window.location.pathname,
+                              userAgent: navigator.userAgent
+                            });
+                          } catch (error) {
+                            console.error('Error generating PDF:', error);
+                            alert('Error generating PDF report. Please try again.');
+                          }
+                        }
+                      }}
+                      className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition flex items-center"
+                    >
+                      <HiOutlineDownload className="w-4 h-4 mr-2" />
+                      Download PDF
+                    </button>
+                                  
+                    <button
+                      onClick={async () => {
+                        if (scanResults && email) {
+                          try {
+                            const pdfBlob = await generateTechnicalAuditReport({
+                              lcp: scanResults.performance.lcp,
+                              fid: scanResults.performance.fid,
+                              cls: scanResults.performance.cls,
+                              fcp: scanResults.performance.fcp,
+                              tti: scanResults.performance.si,
+                              sslStatus: scanResults.security.sslValid ? 'Valid' : 'Invalid',
+                              hstsStatus: scanResults.security.hsts ? 'Configured' : 'Not Configured',
+                              mixedContent: scanResults.security.sslIssues && scanResults.security.sslIssues.length > 0 ? 'Issues Found' : 'None',
+                              securityHeaders: scanResults.security.headerIssues && scanResults.security.headerIssues.length > 0 ? 'Issues Found' : 'Properly Configured',
+                              vulnerabilities: 'Scan Required',
+                              metaTitle: 'Check Required',
+                              metaDescription: 'Check Required',
+                              headerStructure: 'Check Required',
+                              imageAltText: 'Check Required',
+                              pageSpeed: `${scanResults.speed.loadTime.toFixed(1)}s`,
+                            });
+                                          
+                            // In a real implementation, we would send the PDF via email
+                            // For now, we'll just send a notification that an email should be sent
+                            await sendLeadGenerationNotification({
+                              formType: 'technical-audit-email',
+                              email,
+                              url,
+                              subject: 'Your Technical Audit Report',
+                              timestamp: new Date().toISOString(),
+                              page: window.location.pathname,
+                              userAgent: navigator.userAgent
+                            });
+                                          
+                            alert(`Report will be sent to ${email}. In a production environment, this would trigger an email with the PDF attachment.`);
+                          } catch (error) {
+                            console.error('Error preparing email:', error);
+                            alert('Error preparing email. Please try again.');
+                          }
+                        }
+                      }}
+                      className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-medium transition flex items-center"
+                    >
+                      <HiOutlineMail className="w-4 h-4 mr-2" />
+                      Email Report
+                    </button>
+                  </div>
                 </div>
               </div>
               

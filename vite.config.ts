@@ -4,6 +4,7 @@ import { visualizer } from "rollup-plugin-visualizer";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: './', // Use relative paths for production deployment
   plugins: [react(),
     // Bundle visualizer for production builds
     process.env.NODE_ENV === "production" && visualizer({
@@ -42,7 +43,7 @@ export default defineConfig({
             }
             // Group smaller packages into a common vendor chunk to avoid empty chunks
             const nodeModule = id.toString().split("node_modules/")[1].split("/")[0];
-            const smallPackages = ['cookie', 'set-cookie-parser', 'path-to-regexp', 'tiny-invariant', 'tiny-warning', 'loose-envify', 'scheduler'];
+            const smallPackages = ['cookie', 'set-cookie-parser', 'path-to-regexp', 'tiny-invariant', 'tiny-warning', 'loose-envify', 'scheduler', 'html-parse-stringify', 'void-elements'];
             
             if (smallPackages.includes(nodeModule)) {
               return 'vendor-common';

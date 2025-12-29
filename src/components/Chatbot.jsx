@@ -11,12 +11,16 @@ import {
   HiInformationCircle,
   HiLightBulb,
   HiQuestionMarkCircle,
+  HiCalendar,
+  HiMail,
 } from "react-icons/hi";
 import { sendUserInteractionNotification } from '../services/notificationService';
+import CalendarIntegration from './CalendarIntegration';
 
 const Chatbot = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
   const [messages, setMessages] = useState([
     {
       type: "bot",
@@ -248,13 +252,13 @@ const Chatbot = () => {
         "Our CRM and Business Management solutions help you:\n\n• Manage Customer Relationships\n• Track Sales & Leads\n• Automate Tasks\n• Generate Reports & Analytics\n• Integrate with Existing Systems\n\nWant to learn more about our custom CRM solutions?",
       ],
     },
-    pricing: {
+    pricing2: {
       keywords: ["price", "pricing", "cost", "how much", "budget", "quote"],
       responses: [
         "Our pricing is tailored to each project based on:\n\n• Project Scope & Complexity\n• Timeline Requirements\n• Technology Stack\n• Features & Functionality\n\nI recommend filling out our client form to get a detailed quote. Would you like me to direct you there?",
       ],
     },
-    contact: {
+    contact2: {
       keywords: [
         "contact",
         "reach",
@@ -268,7 +272,7 @@ const Chatbot = () => {
         "You can reach us at:\n\n📧 Email: Info@limitlessinfotech.com\n📱 Phone: +917710909492\n📍 Location: Mumbai, Maharashtra, IN\n\nWould you like to schedule a consultation?",
       ],
     },
-    timeline: {
+    timeline2: {
       keywords: [
         "timeline",
         "how long",
@@ -281,7 +285,7 @@ const Chatbot = () => {
         "Project timelines vary based on complexity:\n\n• Simple Website: 2-4 weeks\n• Complex Web App: 2-4 months\n• Mobile App: 3-6 months\n• Custom Software: 3-12 months\n\nWe provide detailed timelines during project planning. Want to discuss your project?",
       ],
     },
-    technology: {
+    technology2: {
       keywords: [
         "technology",
         "tech stack",
@@ -293,13 +297,13 @@ const Chatbot = () => {
         "We work with cutting-edge technologies:\n\n• Frontend: React, Vue, Angular, Next.js\n• Backend: Node.js, Python, PHP, .NET\n• Mobile: React Native, Flutter\n• Database: MongoDB, PostgreSQL, MySQL\n• Cloud: AWS, Azure, Google Cloud\n\nWhat technology are you interested in?",
       ],
     },
-    support: {
+    support2: {
       keywords: ["support", "maintenance", "help", "assistance", "update"],
       responses: [
         "We provide comprehensive support:\n\n• 24/7 Technical Support\n• Regular Updates & Maintenance\n• Bug Fixes & Security Patches\n• Performance Monitoring\n• Training & Documentation\n\nNeed support for an existing project?",
       ],
     },
-    portfolio: {
+    portfolio2: {
       keywords: [
         "portfolio",
         "projects",
@@ -312,7 +316,7 @@ const Chatbot = () => {
         "We have successfully delivered projects across various industries. You can view our portfolio with detailed case studies showing:\n\n• Project Challenges\n• Our Solutions\n• Technologies Used\n• Results & Impact\n\nWould you like to see our portfolio?",
       ],
     },
-    start: {
+    start2: {
       keywords: [
         "start",
         "begin",
@@ -325,7 +329,7 @@ const Chatbot = () => {
         "Great! Let's get started:\n\n1. Fill out our Client Requirements Form\n2. Schedule a consultation call\n3. Receive a detailed proposal\n4. Start development\n\nShall I direct you to our client form?",
       ],
     },
-    security: {
+    security2: {
       keywords: [
         "security",
         "secure",
@@ -337,13 +341,13 @@ const Chatbot = () => {
         "Security is our top priority:\n\n• Enterprise-grade Encryption\n• Secure Coding Practices\n• Regular Security Audits\n• Data Protection Compliance\n• Backup & Disaster Recovery\n\nYour data and systems are completely secure with us.",
       ],
     },
-    team: {
+    team2: {
       keywords: ["team", "who", "founder", "about", "company"],
       responses: [
         "Limitless Infotech Solution is led by Faisal Khan and a talented team of developers, designers, and engineers. We are passionate about creating innovative solutions that transform businesses.\n\nWould you like to learn more about our company?",
       ],
     },
-    thanks: {
+    thanks2: {
       keywords: ["thank", "thanks", "appreciate", "grateful"],
       responses: [
         "You're welcome! 😊 Is there anything else I can help you with?",
@@ -356,6 +360,12 @@ const Chatbot = () => {
   const findBestResponse = (message) => {
     const lowerMessage = message.toLowerCase();
 
+    // Check for calendar scheduling keywords
+    if (lowerMessage.includes("schedule") || lowerMessage.includes("meeting") || lowerMessage.includes("book") || lowerMessage.includes("appointment") || lowerMessage.includes("calendar")) {
+      setShowCalendar(true);
+      return "I'd be happy to schedule a meeting with you. Please select a date and time that works for you.";
+    }
+    
     // Check for page redirection keywords
     if (lowerMessage.includes("service") || lowerMessage.includes("services")) {
       setTimeout(() => {
@@ -475,6 +485,17 @@ const Chatbot = () => {
       timestamp: new Date(),
     };
     setMessages((prev) => [...prev, agentMessage]);
+  };
+  
+  const handleScheduleMeeting = (scheduleData) => {
+    const scheduleMessage = {
+      type: "bot",
+      text: `Thank you for scheduling your meeting! I've created an appointment for ${scheduleData.date.toDateString()} at ${scheduleData.time}. You'll receive a calendar invite shortly.\n\nLooking forward to our discussion about your project needs!`,
+      timestamp: new Date(),
+    };
+    
+    setMessages((prev) => [...prev, scheduleMessage]);
+    setShowCalendar(false);
   };
 
   return (
@@ -624,14 +645,25 @@ const Chatbot = () => {
               </button>
             </div>
             <div className="flex flex-col gap-2 mt-2">
-              <button
-                onClick={connectToAgent}
-                className="w-full py-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors duration-200 flex items-center justify-center"
-                aria-label="Connect with a human agent"
-              >
-                <HiUser className="w-4 h-4 mr-2" />
-                Need to speak with a human?
-              </button>
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={connectToAgent}
+                  className="w-full py-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors duration-200 flex items-center justify-center"
+                  aria-label="Connect with a human agent"
+                >
+                  <HiUser className="w-4 h-4 mr-2" />
+                  Need to speak with a human?
+                </button>
+                
+                <button
+                  onClick={() => setShowCalendar(true)}
+                  className="w-full py-2 text-sm font-medium text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg transition-colors duration-200 flex items-center justify-center"
+                  aria-label="Schedule a meeting with Auralis"
+                >
+                  <HiCalendar className="w-4 h-4 mr-2" />
+                  Schedule a meeting
+                </button>
+              </div>
               <div className="text-xs text-gray-500 dark:text-gray-400 text-center mt-1">
                 <HiInformationCircle className="w-3 h-3 inline mr-1" />
                 Your conversation is secure and private
@@ -639,6 +671,15 @@ const Chatbot = () => {
             </div>
           </div>
         </div>
+      )}
+      
+      {/* Calendar Integration Modal */}
+      {showCalendar && (
+        <CalendarIntegration 
+          onSchedule={handleScheduleMeeting}
+          onClose={() => setShowCalendar(false)}
+          userName="Auralis User"
+        />
       )}
     </div>
   );
