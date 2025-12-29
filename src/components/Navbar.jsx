@@ -238,10 +238,10 @@ const Navbar = ({ isTransparent = false }) => {
                 >
                   <Link
                     to={item.path}
-                    className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+                    className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                       isActive(item.path)
-                        ? "bg-gradient-primary text-white shadow-lg shadow-primary-500/30"
-                        : "text-gray-700 dark:text-gray-300 hover:bg-white/60 dark:hover:bg-dark-800/60 hover:shadow-md"
+                        ? "bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg shadow-blue-500/30"
+                        : "text-blue-900 dark:text-blue-100 hover:bg-blue-50 dark:hover:bg-blue-800/60 hover:shadow-md"
                     }`}
                     aria-current={isActive(item.path) ? "page" : undefined}
                   >
@@ -259,17 +259,17 @@ const Navbar = ({ isTransparent = false }) => {
                   {/* Dropdown Menu */}
                   {item.hasDropdown && activeDropdown === item.name && (
                     <div 
-                      className="absolute top-full left-0 mt-2 w-max min-w-[300px] md:min-w-[500px] bg-white/95 dark:bg-dark-800/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200/50 dark:border-dark-700/50 overflow-hidden animate-fade-in"
+                      className="absolute top-full left-0 mt-2 w-max min-w-[300px] md:min-w-[500px] bg-white/95 dark:bg-blue-800/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-blue-200/50 dark:border-blue-700/50 overflow-hidden animate-fade-in"
                       role="menu"
                       aria-label={`${item.name} submenu`}
                     >
                       {item.dropdownType === "products" && (
                         <div className="p-5 md:p-6">
-                          <div className="mb-4 pb-4 border-b border-gray-200 dark:border-dark-700">
-                            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
+                          <div className="mb-4 pb-4 border-b border-blue-200 dark:border-blue-700">
+                            <h3 className="text-lg font-bold text-blue-900 dark:text-white mb-1">
                               Our Products
                             </h3>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">
+                            <p className="text-sm text-blue-600 dark:text-blue-400">
                               Enterprise SaaS solutions for modern businesses
                             </p>
                           </div>
@@ -327,11 +327,11 @@ const Navbar = ({ isTransparent = false }) => {
 
                       {item.dropdownType === "services" && (
                         <div className="p-5 md:p-6">
-                          <div className="mb-4 pb-4 border-b border-gray-200 dark:border-dark-700">
-                            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
+                          <div className="mb-4 pb-4 border-b border-blue-200 dark:border-blue-700">
+                            <h3 className="text-lg font-bold text-blue-900 dark:text-white mb-1">
                               Our Services
                             </h3>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">
+                            <p className="text-sm text-blue-600 dark:text-blue-400">
                               Comprehensive technology solutions
                             </p>
                           </div>
@@ -368,11 +368,11 @@ const Navbar = ({ isTransparent = false }) => {
 
                       {item.dropdownType === "enterprise" && (
                         <div className="p-5 md:p-6">
-                          <div className="mb-4 pb-4 border-b border-gray-200 dark:border-dark-700">
-                            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
+                          <div className="mb-4 pb-4 border-b border-blue-200 dark:border-blue-700">
+                            <h3 className="text-lg font-bold text-blue-900 dark:text-white mb-1">
                               Enterprise Solutions
                             </h3>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">
+                            <p className="text-sm text-blue-600 dark:text-blue-400">
                               Enterprise-grade tools and compliance
                             </p>
                           </div>
@@ -451,7 +451,7 @@ const Navbar = ({ isTransparent = false }) => {
               {/* CTA Button */}
               <Link
                 to="/get-started"
-                className="ml-2 md:ml-4 btn-primary flex items-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                className="ml-2 md:ml-4 mission-critical-button flex items-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 aria-label="Get started with our services"
               >
                 <span>Get Started</span>
@@ -463,7 +463,7 @@ const Navbar = ({ isTransparent = false }) => {
             <div className="lg:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-2 rounded-lg bg-white/80 dark:bg-dark-800/80 text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-dark-700/80 transition-all duration-300 border border-gray-200/50 dark:border-dark-700/50 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="p-2 rounded-lg bg-white/80 dark:bg-blue-800/80 text-blue-900 dark:text-blue-100 hover:bg-white dark:hover:bg-blue-700/80 transition-all duration-300 border border-blue-200/50 dark:border-blue-700/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 aria-label={isOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isOpen}
                 aria-controls="mobile-menu"
@@ -498,16 +498,16 @@ const Navbar = ({ isTransparent = false }) => {
 
         {/* Menu Content */}
         <div
-          className={`absolute top-0 right-0 bottom-0 w-full max-w-sm bg-white/95 dark:bg-dark-900/95 backdrop-blur-xl shadow-2xl transform transition-transform duration-300 ${
+          className={`absolute top-0 right-0 bottom-0 w-full max-w-sm bg-white/95 dark:bg-blue-900/95 backdrop-blur-xl shadow-2xl transform transition-transform duration-300 ${
             isOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
           <div className="flex flex-col h-full">
             {/* Mobile Menu Header */}
-            <div className="flex items-center justify-between px-6 py-5 border-b border-gray-200 dark:border-dark-700">
+            <div className="flex items-center justify-between px-6 py-5 border-b border-blue-200 dark:border-blue-700">
               <Link
                 to="/"
-                className="flex items-center focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg"
+                className="flex items-center focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
                 onClick={() => setIsOpen(false)}
                 aria-label="Limitless Infotech Solution homepage"
               >
@@ -522,7 +522,7 @@ const Navbar = ({ isTransparent = false }) => {
               </Link>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-2 rounded-lg bg-gray-100 dark:bg-dark-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-dark-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="p-2 rounded-lg bg-blue-100 dark:bg-blue-800 text-blue-900 dark:text-blue-100 hover:bg-blue-200 dark:hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
                 aria-label="Close menu"
               >
                 <HiX className="w-7 h-7" aria-hidden="true" />
@@ -538,10 +538,10 @@ const Navbar = ({ isTransparent = false }) => {
                       <Link
                         to={item.path}
                         onClick={() => !item.hasDropdown && setIsOpen(false)}
-                        className={`flex-1 flex items-center space-x-3 px-5 py-4 rounded-xl font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+                        className={`flex-1 flex items-center space-x-3 px-5 py-4 rounded-xl font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                           isActive(item.path)
-                            ? "bg-gradient-primary text-white shadow-lg"
-                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-800"
+                            ? "bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg"
+                            : "text-blue-900 dark:text-blue-100 hover:bg-blue-50 dark:hover:bg-blue-800"
                         }`}
                         aria-current={isActive(item.path) ? "page" : undefined}
                       >
@@ -550,7 +550,7 @@ const Navbar = ({ isTransparent = false }) => {
                       {item.hasDropdown && (
                         <button
                           onClick={() => toggleMobileSubmenu(item.name)}
-                          className="p-4 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-800 rounded-xl transition-colors ml-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                          className="p-4 text-blue-900 dark:text-blue-100 hover:bg-blue-50 dark:hover:bg-blue-800 rounded-xl transition-colors ml-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                           aria-expanded={isMobileSubmenuOpen === item.name}
                           aria-controls={`submenu-${item.name}`}
                           aria-label={`Toggle ${item.name} submenu`}
@@ -571,7 +571,7 @@ const Navbar = ({ isTransparent = false }) => {
                     {item.hasDropdown && isMobileSubmenuOpen === item.name && (
                       <div 
                         id={`submenu-${item.name}`}
-                        className="mt-2 ml-4 pl-6 border-l-2 border-gray-200 dark:border-dark-700 space-y-2 animate-fade-in"
+                        className="mt-2 ml-4 pl-6 border-l-2 border-blue-200 dark:border-blue-700 space-y-2 animate-fade-in"
                         role="menu"
                       >
                         {item.dropdownType === "products" &&
@@ -580,7 +580,7 @@ const Navbar = ({ isTransparent = false }) => {
                               key={product.id}
                               to={`/products#${product.id}`}
                               onClick={() => setIsOpen(false)}
-                              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-dark-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-blue-800 dark:text-blue-200 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-blue-50 dark:hover:bg-blue-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             >
                               <product.icon
                                 className={`w-4 h-4 ${product.color}`}
@@ -588,7 +588,7 @@ const Navbar = ({ isTransparent = false }) => {
                               />
                               <span className="text-sm">{product.name}</span>
                               {product.popular && (
-                                <span className="px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 text-xs font-semibold rounded-full">
+                                <span className="px-2 py-0.5 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-xs font-semibold rounded-full">
                                   Popular
                                 </span>
                               )}
@@ -601,7 +601,7 @@ const Navbar = ({ isTransparent = false }) => {
                               key={index}
                               to={service.path}
                               onClick={() => setIsOpen(false)}
-                              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-dark-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-blue-800 dark:text-blue-200 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-blue-50 dark:hover:bg-blue-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             >
                               <service.icon className="w-4 h-4" aria-hidden="true" />
                               <span className="text-sm">{service.name}</span>
@@ -613,7 +613,7 @@ const Navbar = ({ isTransparent = false }) => {
                             <Link
                               to="/compliance"
                               onClick={() => setIsOpen(false)}
-                              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-dark-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-blue-800 dark:text-blue-200 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-blue-50 dark:hover:bg-blue-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             >
                               <HiShieldCheck className="w-4 h-4" aria-hidden="true" />
                               <span className="text-sm">Compliance & Security</span>
@@ -621,7 +621,7 @@ const Navbar = ({ isTransparent = false }) => {
                             <Link
                               to="/innovation-lab"
                               onClick={() => setIsOpen(false)}
-                              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-dark-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-blue-800 dark:text-blue-200 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-blue-50 dark:hover:bg-blue-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             >
                               <HiLightningBolt className="w-4 h-4" aria-hidden="true" />
                               <span className="text-sm">Innovation Lab</span>
@@ -629,7 +629,7 @@ const Navbar = ({ isTransparent = false }) => {
                             <Link
                               to="/api-documentation"
                               onClick={() => setIsOpen(false)}
-                              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-dark-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-blue-800 dark:text-blue-200 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-blue-50 dark:hover:bg-blue-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             >
                               <HiCode className="w-4 h-4" aria-hidden="true" />
                               <span className="text-sm">API Documentation</span>
@@ -637,7 +637,7 @@ const Navbar = ({ isTransparent = false }) => {
                             <Link
                               to="/roi-calculator"
                               onClick={() => setIsOpen(false)}
-                              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-dark-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-blue-800 dark:text-blue-200 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-blue-50 dark:hover:bg-blue-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             >
                               <HiCurrencyDollar className="w-4 h-4" aria-hidden="true" />
                               <span className="text-sm">ROI Calculator</span>
@@ -652,11 +652,11 @@ const Navbar = ({ isTransparent = false }) => {
 
               
               {/* Mobile CTA */}
-              <div className="mt-4 pt-4 border-t border-gray-200 dark:border-dark-700">
+              <div className="mt-4 pt-4 border-t border-blue-200 dark:border-blue-700">
                 <Link
                   to="/get-started"
                   onClick={() => setIsOpen(false)}
-                  className="btn-primary w-full flex items-center justify-center space-x-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                  className="mission-critical-button w-full flex items-center justify-center space-x-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                   aria-label="Get started with our services"
                 >
                   <span>Get Started</span>
@@ -666,8 +666,8 @@ const Navbar = ({ isTransparent = false }) => {
             </div>
 
             {/* Mobile Footer Info */}
-            <div className="px-6 py-5 bg-gray-50/50 dark:bg-dark-800/50 border-t border-gray-200 dark:border-dark-700">
-              <p className="text-xs text-center text-gray-500 dark:text-gray-400">
+            <div className="px-6 py-5 bg-blue-50/50 dark:bg-blue-800/50 border-t border-blue-200 dark:border-blue-700">
+              <p className="text-xs text-center text-blue-600 dark:text-blue-400">
                 © {new Date().getFullYear()} Limitless Infotech Solution
                 <br />
                 Where Innovation Meets Execution

@@ -390,8 +390,16 @@ const Home = () => {
       </section>
 
       {/* Foundation/About Section - Asymmetrical */}
-      <section className="section-padding bg-white dark:bg-blue-900/50">
-        <div className="container-custom px-4 md:px-6 lg:px-8">
+      <section className="section-padding bg-white dark:bg-blue-900/50 relative overflow-hidden">
+        {/* Architectural background elements */}
+        <div className="absolute inset-0" aria-hidden="true">
+          <div className="absolute top-1/4 left-10 w-20 h-20 border-2 border-blue-300 opacity-30"></div>
+          <div className="absolute bottom-1/3 right-20 w-16 h-16 border-2 border-amber-400 opacity-30"></div>
+          <div className="absolute top-1/2 right-1/4 w-2 h-32 bg-gradient-to-b from-blue-500/20 to-transparent"></div>
+          <div className="absolute bottom-1/4 left-1/3 w-32 h-2 bg-gradient-to-r from-amber-500/20 to-transparent"></div>
+        </div>
+        
+        <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-5">
               <div className="relative">
@@ -420,10 +428,18 @@ const Home = () => {
 
       {/* Core Services Section - Asymmetrical Grid */}
       <section 
-        className="section-padding bg-blue-50 dark:bg-blue-900/30"
+        className="section-padding bg-blue-50 dark:bg-blue-900/30 relative overflow-hidden"
         aria-labelledby="core-services-heading"
       >
-        <div className="container-custom px-4 md:px-6 lg:px-8">
+        {/* Architectural geometric elements */}
+        <div className="absolute inset-0" aria-hidden="true">
+          <div className="absolute top-1/4 left-1/4 w-32 h-32 border-2 border-blue-400/30 rotate-45"></div>
+          <div className="absolute top-1/3 right-1/4 w-24 h-24 border-2 border-amber-400/30 rounded-full"></div>
+          <div className="absolute bottom-1/4 left-1/3 w-40 h-2 bg-gradient-to-r from-blue-500/20 to-amber-500/20"></div>
+          <div className="absolute bottom-1/3 right-1/3 w-2 h-40 bg-gradient-to-b from-amber-500/20 to-blue-500/20"></div>
+        </div>
+        
+        <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
             <h2 
               id="core-services-heading"
@@ -486,10 +502,18 @@ const Home = () => {
 
       {/* Why Limitless Section - Editorial Layout */}
       <section 
-        className="section-padding bg-white dark:bg-blue-900"
+        className="section-padding bg-white dark:bg-blue-900 relative overflow-hidden"
         aria-labelledby="why-limitless-heading"
       >
-        <div className="container-custom px-4 md:px-6 lg:px-8">
+        {/* Architectural geometric elements */}
+        <div className="absolute inset-0" aria-hidden="true">
+          <div className="absolute top-1/5 left-1/5 w-24 h-24 border-t-2 border-l-2 border-blue-400/30 rotate-12"></div>
+          <div className="absolute top-1/4 right-1/5 w-16 h-16 border-b-2 border-r-2 border-amber-400/30 -rotate-12"></div>
+          <div className="absolute bottom-1/5 left-1/4 w-32 h-2 bg-gradient-to-r from-blue-500/15 to-transparent"></div>
+          <div className="absolute bottom-1/4 right-1/3 w-2 h-24 bg-gradient-to-b from-amber-500/15 to-transparent"></div>
+        </div>
+        
+        <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
             <div className="lg:col-span-5">
               <h2 
@@ -505,7 +529,7 @@ const Home = () => {
             <div className="lg:col-span-7">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {whyLimitless.slice(0, 6).map((item, index) => (
-                  <div key={index} className="p-6 rounded-xl bg-blue-50 dark:bg-blue-800/30 border border-blue-200 dark:border-blue-700">
+                  <div key={index} className="p-6 rounded-xl bg-blue-50 dark:bg-blue-800/30 border border-blue-200 dark:border-blue-700 relative overflow-hidden">
                     <div className="w-12 h-12 bg-blue-100 dark:bg-blue-700 rounded-lg flex items-center justify-center mb-4">
                       <DuoToneIcon 
                         icon={item.icon} 
@@ -529,8 +553,16 @@ const Home = () => {
       </section>
 
       {/* Trusted By Section - Asymmetrical Logo Grid */}
-      <section className="section-padding bg-blue-50 dark:bg-blue-900/30">
-        <div className="container-custom px-4 md:px-6 lg:px-8">
+      <section className="section-padding bg-blue-50 dark:bg-blue-900/30 relative overflow-hidden">
+        {/* Architectural geometric elements */}
+        <div className="absolute inset-0" aria-hidden="true">
+          <div className="absolute top-1/4 left-1/6 w-20 h-20 border-2 border-blue-400/20 rounded-full"></div>
+          <div className="absolute top-1/3 right-1/6 w-16 h-16 border-2 border-amber-400/20 rotate-45"></div>
+          <div className="absolute bottom-1/4 left-1/4 w-36 h-2 bg-gradient-to-r from-blue-500/10 to-amber-500/10"></div>
+          <div className="absolute bottom-1/3 right-1/4 w-2 h-32 bg-gradient-to-b from-amber-500/10 to-blue-500/10"></div>
+        </div>
+        
+        <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-blue-900 dark:text-white">
               Trusted By <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">Industry Leaders</span>
@@ -544,7 +576,7 @@ const Home = () => {
             {clientLogos.map((client, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center text-center group"
+                className="flex flex-col items-center text-center group relative"
               >
                 <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-amber-500 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
                   <span className="text-white font-bold text-lg">
@@ -576,8 +608,16 @@ const Home = () => {
       </section>
 
       {/* Featured Products Section - Asymmetrical Layout */}
-      <section className="section-padding bg-white dark:bg-blue-900 border-t border-blue-200 dark:border-blue-800">
-        <div className="container-custom px-4 md:px-6 lg:px-8">
+      <section className="section-padding bg-white dark:bg-blue-900 border-t border-blue-200 dark:border-blue-800 relative overflow-hidden">
+        {/* Architectural geometric elements */}
+        <div className="absolute inset-0" aria-hidden="true">
+          <div className="absolute top-1/5 left-1/4 w-28 h-28 border-2 border-blue-400/25 rotate-12"></div>
+          <div className="absolute top-1/4 right-1/4 w-20 h-20 border-2 border-amber-400/25 -rotate-12"></div>
+          <div className="absolute bottom-1/5 left-1/3 w-40 h-2 bg-gradient-to-r from-blue-500/15 to-transparent"></div>
+          <div className="absolute bottom-1/4 right-1/3 w-2 h-36 bg-gradient-to-b from-amber-500/15 to-transparent"></div>
+        </div>
+        
+        <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-blue-900 dark:text-white">
               Our <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">Enterprise Products</span>
@@ -591,7 +631,7 @@ const Home = () => {
             {featuredProducts.map((product, index) => (
               <div
                 key={product.id}
-                className={`lg:col-span-3 rounded-2xl p-6 border-2 border-blue-200 dark:border-blue-700 bg-white dark:bg-blue-800/30 ${
+                className={`lg:col-span-3 rounded-2xl p-6 border-2 border-blue-200 dark:border-blue-700 bg-white dark:bg-blue-800/30 relative overflow-hidden ${
                   index === 1 ? 'lg:col-start-3 lg:row-start-1' : ''
                 }`}
               >
