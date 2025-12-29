@@ -347,6 +347,11 @@ const SUBDOMAIN_CONFIG = {
 const SubdomainHelper = {
   // Get subdomain from current URL
   getCurrentSubdomain: () => {
+    // Check if running in browser environment
+    if (typeof window === 'undefined' || typeof window.location === 'undefined') {
+      return null;
+    }
+    
     const hostname = window.location.hostname;
     const parts = hostname.split('.');
 
@@ -359,12 +364,22 @@ const SubdomainHelper = {
 
   // Get configuration for current subdomain
   getCurrentSubdomainConfig: () => {
+    // Check if running in browser environment
+    if (typeof window === 'undefined' || typeof window.location === 'undefined') {
+      return null;
+    }
+    
     const subdomain = SubdomainHelper.getCurrentSubdomain();
     return subdomain ? SUBDOMAIN_CONFIG.subdomains[subdomain] : null;
   },
 
   // Check if current domain matches a specific subdomain
   isSubdomain: expectedSubdomain => {
+    // Check if running in browser environment
+    if (typeof window === 'undefined' || typeof window.location === 'undefined') {
+      return false;
+    }
+    
     return SubdomainHelper.getCurrentSubdomain() === expectedSubdomain;
   },
 
