@@ -6,8 +6,12 @@ import { BrowserRouter } from 'react-router-dom';
 import App from '../App';
 
 // Mock the components that might cause issues in testing
-jest.mock('../components/Navbar', () => () => <div data-testid="navbar">Navbar</div>);
-jest.mock('../components/Footer', () => () => <div data-testid="footer">Footer</div>);
+jest.mock('../components/Navbar', () => () => (
+  <div data-testid="navbar">Navbar</div>
+));
+jest.mock('../components/Footer', () => () => (
+  <div data-testid="footer">Footer</div>
+));
 
 describe('App Component', () => {
   beforeEach(() => {
@@ -21,7 +25,7 @@ describe('App Component', () => {
         <App />
       </BrowserRouter>
     );
-    
+
     // Check if basic elements are present
     expect(screen.getByTestId('navbar')).toBeInTheDocument();
     expect(screen.getByTestId('footer')).toBeInTheDocument();
@@ -83,11 +87,11 @@ describe('Utility Functions', () => {
   });
 
   test('formats date correctly', () => {
-    const formatDate = (date) => {
+    const formatDate = date => {
       return new Date(date).toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'long',
-        day: 'numeric'
+        day: 'numeric',
       });
     };
 
@@ -101,32 +105,35 @@ describe('Service Functions', () => {
   test('notification service sends notifications', async () => {
     // Mock notification service
     const notificationService = {
-      send: jest.fn().mockResolvedValue({ success: true, id: '123' })
+      send: jest.fn().mockResolvedValue({ success: true, id: '123' }),
     };
 
     const result = await notificationService.send('Test message', 'info');
-    
-    expect(notificationService.send).toHaveBeenCalledWith('Test message', 'info');
+
+    expect(notificationService.send).toHaveBeenCalledWith(
+      'Test message',
+      'info'
+    );
     expect(result).toEqual({ success: true, id: '123' });
   });
 
   test('data sync service processes data correctly', async () => {
     // Mock data sync service
     const dataSyncService = {
-      sync: jest.fn().mockResolvedValue({ 
-        recordsProcessed: 10, 
+      sync: jest.fn().mockResolvedValue({
+        recordsProcessed: 10,
         success: true,
-        duration: 1000
-      })
+        duration: 1000,
+      }),
     };
 
     const result = await dataSyncService.sync('source', 'destination');
-    
+
     expect(dataSyncService.sync).toHaveBeenCalledWith('source', 'destination');
-    expect(result).toEqual({ 
-      recordsProcessed: 10, 
+    expect(result).toEqual({
+      recordsProcessed: 10,
       success: true,
-      duration: 1000
+      duration: 1000,
     });
   });
 });

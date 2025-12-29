@@ -56,7 +56,11 @@ const Products = () => {
         'Custom Fields & Tags',
         'Multi-location Support',
       ],
-      targetUsers: ['IT Departments', 'System Administrators', 'Asset Managers'],
+      targetUsers: [
+        'IT Departments',
+        'System Administrators',
+        'Asset Managers',
+      ],
       useCases: [
         'Track all IT assets across multiple locations',
         'Manage software licenses and renewals',
@@ -94,7 +98,11 @@ const Products = () => {
         'Mobile App Support',
         'Notification System',
       ],
-      targetUsers: ['Operations Managers', 'Process Engineers', 'Business Analysts'],
+      targetUsers: [
+        'Operations Managers',
+        'Process Engineers',
+        'Business Analysts',
+      ],
       useCases: [
         'Monitor production floor activities',
         'Automate repetitive workflows',
@@ -189,8 +197,7 @@ const Products = () => {
       name: 'IT-TMS',
       tagline: 'Support Made Simple',
       category: 'management',
-      description:
-        'Comprehensive IT helpdesk and ticket management system',
+      description: 'Comprehensive IT helpdesk and ticket management system',
       longDescription:
         'IT-TMS is your complete IT service management solution that helps you deliver exceptional support. Manage tickets, track SLAs, and keep your users happy.',
       icon: HiTicket,
@@ -227,8 +234,7 @@ const Products = () => {
       name: 'MailTO',
       tagline: 'Email Management, Perfected',
       category: 'communication',
-      description:
-        'Intelligent email management and automation platform',
+      description: 'Intelligent email management and automation platform',
       longDescription:
         'MailTO helps you take control of your inbox with smart automation, team collaboration, and powerful analytics. Perfect for sales teams, support teams, and agencies.',
       icon: HiMail,
@@ -286,7 +292,11 @@ const Products = () => {
         'GraphQL Support',
         'Developer Tools',
       ],
-      targetUsers: ['Developers', 'Database Administrators', 'System Architects'],
+      targetUsers: [
+        'Developers',
+        'Database Administrators',
+        'System Architects',
+      ],
       useCases: [
         'Rapid API prototyping',
         'Database migration projects',
@@ -304,9 +314,9 @@ const Products = () => {
   const filteredProducts =
     selectedCategory === 'all'
       ? products
-      : products.filter((p) => p.category === selectedCategory);
+      : products.filter(p => p.category === selectedCategory);
 
-  const getColorClasses = (color) => {
+  const getColorClasses = color => {
     const colors = {
       blue: 'from-blue-600 to-blue-400',
       green: 'from-green-600 to-green-400',
@@ -319,7 +329,7 @@ const Products = () => {
     return colors[color] || colors.blue;
   };
 
-  const formatPrice = (price) => {
+  const formatPrice = price => {
     if (price === 0) return 'Free';
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
@@ -333,7 +343,10 @@ const Products = () => {
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary-600/10 to-secondary-600/10"></div>
-        <div className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8" aria-hidden="true">
+        <div
+          className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8"
+          aria-hidden="true"
+        >
           <div className="absolute inset-0 bg-pattern-grid opacity-10"></div>
         </div>
 
@@ -350,11 +363,16 @@ const Products = () => {
             </h1>
 
             <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              Ready-to-deploy SaaS solutions that accelerate your business. Choose from our suite of 7 production-ready products or request a custom solution.
+              Ready-to-deploy SaaS solutions that accelerate your business.
+              Choose from our suite of 7 production-ready products or request a
+              custom solution.
             </p>
 
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/get-started?product=all-products" className="btn-primary">
+              <Link
+                to="/get-started?product=all-products"
+                className="btn-primary"
+              >
                 Request Demo
                 <HiPlay className="w-5 h-5 ml-2 inline" />
               </Link>
@@ -370,7 +388,7 @@ const Products = () => {
       <section className="py-8 border-y border-dark-800">
         <div className="container-custom">
           <div className="flex flex-wrap justify-center gap-4">
-            {categories.map((category) => (
+            {categories.map(category => (
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
@@ -431,9 +449,15 @@ const Products = () => {
                     </div>
 
                     {/* Product Name & Tagline */}
-                    <h3 className="text-2xl font-bold text-white mb-2">{product.name}</h3>
-                    <p className="text-sm text-primary-400 mb-4">{product.tagline}</p>
-                    <p className="text-gray-400 mb-6 line-clamp-2">{product.description}</p>
+                    <h3 className="text-2xl font-bold text-white mb-2">
+                      {product.name}
+                    </h3>
+                    <p className="text-sm text-primary-400 mb-4">
+                      {product.tagline}
+                    </p>
+                    <p className="text-gray-400 mb-6 line-clamp-2">
+                      {product.description}
+                    </p>
 
                     {/* Price */}
                     <div className="mb-6">
@@ -446,7 +470,9 @@ const Products = () => {
                         )}
                       </div>
                       {product.monthlyPrice === 0 && (
-                        <p className="text-sm text-green-400 mt-2">Currently in Beta - Free Access</p>
+                        <p className="text-sm text-green-400 mt-2">
+                          Currently in Beta - Free Access
+                        </p>
                       )}
                     </div>
 
@@ -465,8 +491,12 @@ const Products = () => {
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         {Object.entries(product.metrics).map(([key, value]) => (
                           <div key={key}>
-                            <div className="text-primary-400 font-semibold">{value}</div>
-                            <div className="text-gray-500 text-xs capitalize">{key}</div>
+                            <div className="text-primary-400 font-semibold">
+                              {value}
+                            </div>
+                            <div className="text-gray-500 text-xs capitalize">
+                              {key}
+                            </div>
                           </div>
                         ))}
                       </div>
@@ -504,7 +534,7 @@ const Products = () => {
         >
           <div
             className="bg-dark-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-dark-700"
-            onClick={(e) => e.stopPropagation()}
+            onClick={e => e.stopPropagation()}
           >
             <div className="p-8">
               {/* Header */}
@@ -518,8 +548,12 @@ const Products = () => {
                     <selectedProduct.icon className="w-8 h-8 text-white" />
                   </div>
                   <div>
-                    <h2 className="text-3xl font-bold text-white">{selectedProduct.name}</h2>
-                    <p className="text-primary-400">{selectedProduct.tagline}</p>
+                    <h2 className="text-3xl font-bold text-white">
+                      {selectedProduct.name}
+                    </h2>
+                    <p className="text-primary-400">
+                      {selectedProduct.tagline}
+                    </p>
                   </div>
                 </div>
                 <button
@@ -537,7 +571,9 @@ const Products = () => {
 
               {/* All Features */}
               <div className="mb-8">
-                <h3 className="text-xl font-bold text-white mb-4">Complete Features</h3>
+                <h3 className="text-xl font-bold text-white mb-4">
+                  Complete Features
+                </h3>
                 <div className="grid md:grid-cols-2 gap-3">
                   {selectedProduct.features.map((feature, idx) => (
                     <div key={idx} className="flex items-start">
@@ -550,7 +586,9 @@ const Products = () => {
 
               {/* Target Users */}
               <div className="mb-8">
-                <h3 className="text-xl font-bold text-white mb-4">Perfect For</h3>
+                <h3 className="text-xl font-bold text-white mb-4">
+                  Perfect For
+                </h3>
                 <div className="flex flex-wrap gap-3">
                   {selectedProduct.targetUsers.map((user, idx) => (
                     <span
@@ -565,7 +603,9 @@ const Products = () => {
 
               {/* Use Cases */}
               <div className="mb-8">
-                <h3 className="text-xl font-bold text-white mb-4">Common Use Cases</h3>
+                <h3 className="text-xl font-bold text-white mb-4">
+                  Common Use Cases
+                </h3>
                 <ul className="space-y-3">
                   {selectedProduct.useCases.map((useCase, idx) => (
                     <li key={idx} className="flex items-start">
@@ -578,7 +618,10 @@ const Products = () => {
 
               {/* CTAs */}
               <div className="flex flex-wrap gap-4">
-                <Link to={`/get-started?product=${selectedProduct.name.replace(/\s+/g, '-').toLowerCase()}`} className="btn-primary">
+                <Link
+                  to={`/get-started?product=${selectedProduct.name.replace(/\s+/g, '-').toLowerCase()}`}
+                  className="btn-primary"
+                >
                   Request Demo
                   <HiPlay className="w-5 h-5 ml-2 inline" />
                 </Link>
@@ -603,7 +646,8 @@ const Products = () => {
                 Why Choose Our Products?
               </h2>
               <p className="text-gray-400 max-w-2xl mx-auto">
-                Built with enterprise-grade technology and backed by exceptional support
+                Built with enterprise-grade technology and backed by exceptional
+                support
               </p>
             </div>
 
@@ -635,7 +679,9 @@ const Products = () => {
                   <div className="w-12 h-12 bg-primary-600/20 rounded-lg flex items-center justify-center mb-4">
                     <benefit.icon className="w-6 h-6 text-primary-400" />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-2">{benefit.title}</h3>
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    {benefit.title}
+                  </h3>
                   <p className="text-gray-400">{benefit.description}</p>
                 </div>
               ))}
@@ -658,11 +704,15 @@ const Products = () => {
               Ready to Transform Your Business?
             </h2>
             <p className="text-xl text-gray-300 mb-8">
-              Start with a free demo and see how our products can accelerate your growth
+              Start with a free demo and see how our products can accelerate
+              your growth
             </p>
 
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/get-started?product=all-products" className="btn-primary">
+              <Link
+                to="/get-started?product=all-products"
+                className="btn-primary"
+              >
                 Request Demo
               </Link>
               <Link to="/contact" className="btn-secondary">
@@ -699,7 +749,9 @@ const Products = () => {
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div>
-                <div className="text-3xl font-bold text-white mb-2">10,000+</div>
+                <div className="text-3xl font-bold text-white mb-2">
+                  10,000+
+                </div>
                 <div className="text-gray-400 text-sm">Active Users</div>
               </div>
               <div>

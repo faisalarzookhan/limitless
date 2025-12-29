@@ -15,8 +15,8 @@ class HealthCheckService {
       name,
       checkFunction,
       interval: options.interval || 30000, // 30 seconds default
-      timeout: options.timeout || 5000,    // 5 seconds default
-      enabled: options.enabled !== false
+      timeout: options.timeout || 5000, // 5 seconds default
+      enabled: options.enabled !== false,
     });
   }
 
@@ -36,7 +36,7 @@ class HealthCheckService {
           name: check.name,
           status: 'error',
           error: error.message,
-          timestamp: Date.now()
+          timestamp: Date.now(),
         });
       }
     }
@@ -44,16 +44,16 @@ class HealthCheckService {
     this.lastCheck = {
       timestamp: Date.now(),
       duration: Date.now() - startTime,
-      results
+      results,
     };
 
     this.status = this.calculateOverallStatus(results);
-    
+
     return {
       status: this.status,
       timestamp: Date.now(),
       checks: results,
-      duration: Date.now() - startTime
+      duration: Date.now() - startTime,
     };
   }
 
@@ -71,7 +71,7 @@ class HealthCheckService {
             name: check.name,
             status: result.status || 'ok',
             details: result.details || {},
-            timestamp: Date.now()
+            timestamp: Date.now(),
           });
         })
         .catch(error => {
@@ -104,8 +104,8 @@ class HealthCheckService {
       details: {
         totalChecks: this.checks.length,
         enabledChecks: this.checks.filter(c => c.enabled).length,
-        lastCheck: this.lastCheck
-      }
+        lastCheck: this.lastCheck,
+      },
     };
   }
 
@@ -123,23 +123,24 @@ class HealthCheckService {
         name: check.name,
         enabled: check.enabled,
         interval: check.interval,
-        timeout: check.timeout
+        timeout: check.timeout,
       })),
-      metrics: this.getFrontendMetrics()
+      metrics: this.getFrontendMetrics(),
     };
   }
 
   // Get frontend-specific metrics
   getFrontendMetrics() {
     const performanceMetrics = {};
-    
+
     if ('performance' in window) {
       const perfData = performance.getEntriesByType('navigation')[0];
       if (perfData) {
         performanceMetrics.navigation = {
           loadTime: perfData.loadEventEnd - perfData.fetchStart,
-          domContentLoaded: perfData.domContentLoadedEventEnd - perfData.fetchStart,
-          firstByte: perfData.responseStart - perfData.requestStart
+          domContentLoaded:
+            perfData.domContentLoadedEventEnd - perfData.fetchStart,
+          firstByte: perfData.responseStart - perfData.requestStart,
         };
       }
     }
@@ -162,8 +163,8 @@ class HealthCheckService {
         availWidth: screen.availWidth,
         availHeight: screen.availHeight,
         colorDepth: screen.colorDepth,
-        pixelDepth: screen.pixelDepth
-      }
+        pixelDepth: screen.pixelDepth,
+      },
     };
   }
 
@@ -172,10 +173,9 @@ class HealthCheckService {
     this.checks.forEach(check => {
       if (check.enabled) {
         setInterval(() => {
-          this.executeCheck(check)
-            .catch(error => {
-              console.error(`Health check ${check.name} failed:`, error);
-            });
+          this.executeCheck(check).catch(error => {
+            console.error(`Health check ${check.name} failed:`, error);
+          });
         }, check.interval);
       }
     });
@@ -184,55 +184,76 @@ class HealthCheckService {
   // Add default health checks
   setupDefaultChecks() {
     // Check network connectivity
-    this.registerCheck('network', async () => {
-      try {
-        const response = await fetch('/health', { method: 'HEAD', cache: 'no-cache' });
-        return {
-          status: response.ok ? 'ok' : 'error',
-          details: { statusCode: response.status }
-        };
-      } catch (error) {
-        return {
-          status: 'error',
-          details: { error: error.message }
-        };
-      }
-    }, { interval: 15000 }); // Every 15 seconds
+    this.registerCheck(
+      'network',
+      async () => {
+        try {
+          const response = await fetch('/health', {
+            method: 'HEAD',
+            cache: 'no-cache',
+          });
+          return {
+            status: response.ok ? 'ok' : 'error',
+            details: { statusCode: response.status },
+          };
+        } catch (error) {
+          return {
+            status: 'error',
+            details: { error: error.message },
+          };
+        }
+      },
+      { interval: 15000 }
+    ); // Every 15 seconds
 
     // Check API availability
-    this.registerCheck('api', async () => {
-      try {
-        const response = await fetch('/api/health', { method: 'GET', cache: 'no-cache' });
-        const data = await response.json();
-        return {
-          status: data.status === 'healthy' ? 'ok' : 'error',
-          details: data
-        };
-      } catch (error) {
-        return {
-          status: 'error',
-          details: { error: error.message }
-        };
-      }
-    }, { interval: 30000 }); // Every 30 seconds
+    this.registerCheck(
+      'api',
+      async () => {
+        try {
+          const response = await fetch('/api/health', {
+            method: 'GET',
+            cache: 'no-cache',
+          });
+          const data = await response.json();
+          return {
+            status: data.status === 'healthy' ? 'ok' : 'error',
+            details: data,
+          };
+        } catch (error) {
+          return {
+            status: 'error',
+            details: { error: error.message },
+          };
+        }
+      },
+      { interval: 30000 }
+    ); // Every 30 seconds
 
     // Check database connection (mock)
-    this.registerCheck('database', async () => {
-      try {
-        // In a real app, this would check actual database connection
-        // For frontend, we'll just check if we can reach our backend
-        const response = await fetch('/api/db-health', { method: 'GET', cache: 'no-cache' });
-        return {
-          status: response.ok ? 'ok' : 'error',
-          details: { statusCode: response.status }
-        };
-      } catch (error) {
-        return {
-          status: 'error',
-          details: { error: error.message }
-        };
-      }
-    }, { interval: 60000 }); // Every minute
+    this.registerCheck(
+      'database',
+      async () => {
+        try {
+          // In a real app, this would check actual database connection
+          // For frontend, we'll just check if we can reach our backend
+          const response = await fetch('/api/db-health', {
+            method: 'GET',
+            cache: 'no-cache',
+          });
+          return {
+            status: response.ok ? 'ok' : 'error',
+            details: { statusCode: response.status },
+          };
+        } catch (error) {
+          return {
+            status: 'error',
+            details: { error: error.message },
+          };
+        }
+      },
+      { interval: 60000 }
+    ); // Every minute
   }
 }
 

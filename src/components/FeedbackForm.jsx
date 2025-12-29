@@ -13,16 +13,16 @@ const FeedbackForm = ({ variant = 'default' }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleStarClick = (rating) => {
+  const handleStarClick = rating => {
     setFormData(prev => ({ ...prev, rating }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -34,15 +34,21 @@ const FeedbackForm = ({ variant = 'default' }) => {
       feedback: formData.feedback,
       category: formData.category,
       timestamp: new Date().toISOString(),
-      page: window.location.pathname
+      page: window.location.pathname,
     });
 
     // Simulate API call
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitSuccess(true);
-      setFormData({ name: '', email: '', rating: 0, feedback: '', category: '' });
-      
+      setFormData({
+        name: '',
+        email: '',
+        rating: 0,
+        feedback: '',
+        category: '',
+      });
+
       // Reset success message after 5 seconds
       setTimeout(() => setSubmitSuccess(false), 5000);
     }, 1500);
@@ -54,7 +60,9 @@ const FeedbackForm = ({ variant = 'default' }) => {
         <div className="flex items-center justify-center mb-3">
           <HiCheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
         </div>
-        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">Feedback Received!</h3>
+        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">
+          Feedback Received!
+        </h3>
         <p className="text-green-700 dark:text-green-400 text-sm">
           Thank you for your valuable feedback.
         </p>
@@ -66,7 +74,10 @@ const FeedbackForm = ({ variant = 'default' }) => {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Name
           </label>
           <div className="relative">
@@ -85,7 +96,10 @@ const FeedbackForm = ({ variant = 'default' }) => {
           </div>
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Email
           </label>
           <input
@@ -104,7 +118,7 @@ const FeedbackForm = ({ variant = 'default' }) => {
           Rating
         </label>
         <div className="flex space-x-1">
-          {[1, 2, 3, 4, 5].map((star) => (
+          {[1, 2, 3, 4, 5].map(star => (
             <button
               key={star}
               type="button"
@@ -117,11 +131,16 @@ const FeedbackForm = ({ variant = 'default' }) => {
           ))}
         </div>
         <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-          {formData.rating > 0 ? `${formData.rating} star${formData.rating !== 1 ? 's' : ''} rated` : 'Select your rating'}
+          {formData.rating > 0
+            ? `${formData.rating} star${formData.rating !== 1 ? 's' : ''} rated`
+            : 'Select your rating'}
         </div>
       </div>
       <div>
-        <label htmlFor="category" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="category"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Category
         </label>
         <select
@@ -141,7 +160,10 @@ const FeedbackForm = ({ variant = 'default' }) => {
         </select>
       </div>
       <div>
-        <label htmlFor="feedback" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="feedback"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Your Feedback
         </label>
         <textarea

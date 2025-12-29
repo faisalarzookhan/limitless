@@ -12,7 +12,7 @@ const Modal: React.FC<ModalProps> = ({
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const titleId = generateId('modal-title');
-  
+
   // Size classes
   const sizeClasses = {
     sm: 'max-w-lg',
@@ -34,7 +34,7 @@ const Modal: React.FC<ModalProps> = ({
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden';
-      
+
       // Trap focus within the modal
       if (modalRef.current) {
         // Wait a tick to ensure DOM is ready
@@ -44,7 +44,7 @@ const Modal: React.FC<ModalProps> = ({
           const firstFocusable = modalRef.current!.querySelector(
             'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
           ) as HTMLElement;
-          
+
           if (firstFocusable) {
             firstFocusable.focus();
           } else {
@@ -60,9 +60,11 @@ const Modal: React.FC<ModalProps> = ({
       if (cleanupFocusTrap) {
         cleanupFocusTrap();
       }
-      
+
       // Return focus to the element that opened the modal
-      const triggerElement = document.querySelector(`[data-modal-trigger]`) as HTMLElement;
+      const triggerElement = document.querySelector(
+        `[data-modal-trigger]`
+      ) as HTMLElement;
       if (triggerElement) {
         triggerElement.focus();
       }
@@ -78,7 +80,7 @@ const Modal: React.FC<ModalProps> = ({
   };
 
   return (
-    <div 
+    <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
       onClick={handleBackdropClick}
       role="dialog"
@@ -86,7 +88,7 @@ const Modal: React.FC<ModalProps> = ({
       aria-labelledby={title ? titleId : undefined}
       aria-describedby={`${titleId}-description`}
     >
-      <div 
+      <div
         ref={modalRef}
         className={`bg-white dark:bg-dark-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-dark-700 w-full ${sizeClasses[size]} max-h-[90vh] overflow-y-auto focus:outline-none`}
         tabIndex={-1}
@@ -94,7 +96,7 @@ const Modal: React.FC<ModalProps> = ({
       >
         <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-dark-700">
           {title && (
-            <h3 
+            <h3
               id={titleId}
               className="text-xl font-bold text-gray-900 dark:text-white"
             >

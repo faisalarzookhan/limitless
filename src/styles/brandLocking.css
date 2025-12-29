@@ -18,7 +18,7 @@
   --primary-blue-800: #1e3a8a;
   --primary-blue-900: #172554;
   --primary-blue-950: #0c1a3d;
-  
+
   /* Corporate Amber colors */
   --corporate-amber-50: #fff9e6;
   --corporate-amber-100: #fff3cc;
@@ -31,7 +31,7 @@
   --corporate-amber-800: #f29e0d;
   --corporate-amber-900: #d98507;
   --corporate-amber-950: #a66305;
-  
+
   /* Enterprise Dark colors */
   --enterprise-dark-50: #fafafa;
   --enterprise-dark-100: #f5f5f5;
@@ -44,14 +44,14 @@
   --enterprise-dark-800: #1a1a1a;
   --enterprise-dark-900: #0f0f0f;
   --enterprise-dark-950: #050505;
-  
+
   /* Supporting colors */
   --white: #ffffff;
   --light-gray: #f9fafb;
   --medium-gray: #f3f4f6;
   --dark-gray: #1f2937;
   --black: #111827;
-  
+
   /* Brand-specific accent colors */
   --brand-accent: var(--corporate-amber-500);
   --brand-primary: var(--primary-blue-500);
@@ -64,15 +64,16 @@
 }
 
 /* Prevent browser dark mode from overriding styles */
-html, body {
+html,
+body {
   color-scheme: light !important;
   background-color: var(--white) !important;
   color: var(--dark-gray) !important;
 }
 
 /* Override any forced dark mode settings */
-html[data-theme="dark"],
-body[data-theme="dark"],
+html[data-theme='dark'],
+body[data-theme='dark'],
 html.dark,
 body.dark {
   color-scheme: light !important;

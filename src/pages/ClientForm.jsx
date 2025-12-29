@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   HiCheckCircle,
   HiArrowRight,
@@ -22,8 +22,8 @@ import {
   HiServer,
   HiShoppingCart,
   HiAcademicCap,
-} from "react-icons/hi";
-import { sendLeadGenerationNotification } from "../services/notificationService";
+} from 'react-icons/hi';
+import { sendLeadGenerationNotification } from '../services/notificationService';
 
 const ClientForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -32,84 +32,84 @@ const ClientForm = () => {
 
   const [formData, setFormData] = useState({
     // Step 1: Personal Information
-    fullName: "",
-    email: "",
-    phone: "",
-    company: "",
-    website: "",
-    role: "",
+    fullName: '',
+    email: '',
+    phone: '',
+    company: '',
+    website: '',
+    role: '',
 
     // Step 2: Project Information
     projectType: [],
-    projectTitle: "",
-    projectDescription: "",
-    industry: "",
-    targetAudience: "",
+    projectTitle: '',
+    projectDescription: '',
+    industry: '',
+    targetAudience: '',
 
     // Step 3: Requirements & Features
     specificFeatures: [],
-    customFeatures: "",
+    customFeatures: '',
     platforms: [],
-    integrations: "",
+    integrations: '',
 
     // Step 4: Budget & Timeline
-    budget: "",
-    customBudget: "",
-    timeline: "",
-    startDate: "",
-    priority: "",
+    budget: '',
+    customBudget: '',
+    timeline: '',
+    startDate: '',
+    priority: '',
 
     // Step 5: Additional Information
-    existingSystems: "",
-    designPreferences: "",
-    competitors: "",
-    successMetrics: "",
-    additionalNotes: "",
+    existingSystems: '',
+    designPreferences: '',
+    competitors: '',
+    successMetrics: '',
+    additionalNotes: '',
 
     // Step 6: How Did You Hear
-    referralSource: "",
+    referralSource: '',
     consent: false,
   });
 
   const totalSteps = 6;
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value, type, checked } = e.target;
 
-    if (type === "checkbox" && name !== "consent") {
-      setFormData((prev) => {
+    if (type === 'checkbox' && name !== 'consent') {
+      setFormData(prev => {
         const currentArray = prev[name] || [];
         if (checked) {
           return { ...prev, [name]: [...currentArray, value] };
         } else {
           return {
             ...prev,
-            [name]: currentArray.filter((item) => item !== value),
+            [name]: currentArray.filter(item => item !== value),
           };
         }
       });
-    } else if (type === "checkbox") {
-      setFormData((prev) => ({ ...prev, [name]: checked }));
+    } else if (type === 'checkbox') {
+      setFormData(prev => ({ ...prev, [name]: checked }));
     } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      setFormData(prev => ({ ...prev, [name]: value }));
     }
   };
 
   const handleNext = () => {
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const handlePrevious = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -120,7 +120,7 @@ const ClientForm = () => {
         formType: 'client-inquiry',
         timestamp: new Date().toISOString(),
         userAgent: navigator.userAgent,
-        url: window.location.href
+        url: window.location.href,
       });
     } catch (error) {
       console.error('Error sending lead notification:', error);
@@ -130,76 +130,76 @@ const ClientForm = () => {
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitSuccess(true);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 2000);
   };
 
   const projectTypes = [
-    { value: "web", label: "Web Development", icon: HiCode },
-    { value: "mobile", label: "Mobile App Development", icon: HiDeviceMobile },
-    { value: "software", label: "Custom Software", icon: HiCube },
-    { value: "crm", label: "CRM System", icon: HiChartBar },
+    { value: 'web', label: 'Web Development', icon: HiCode },
+    { value: 'mobile', label: 'Mobile App Development', icon: HiDeviceMobile },
+    { value: 'software', label: 'Custom Software', icon: HiCube },
+    { value: 'crm', label: 'CRM System', icon: HiChartBar },
     {
-      value: "automation",
-      label: "Business Automation",
+      value: 'automation',
+      label: 'Business Automation',
       icon: HiLightningBolt,
     },
-    { value: "ecommerce", label: "E-commerce Platform", icon: HiShoppingCart },
-    { value: "lms", label: "Learning Management System", icon: HiAcademicCap },
-    { value: "iot", label: "IoT Solutions", icon: HiChip },
-    { value: "other", label: "Other", icon: HiCube },
+    { value: 'ecommerce', label: 'E-commerce Platform', icon: HiShoppingCart },
+    { value: 'lms', label: 'Learning Management System', icon: HiAcademicCap },
+    { value: 'iot', label: 'IoT Solutions', icon: HiChip },
+    { value: 'other', label: 'Other', icon: HiCube },
   ];
 
   const features = [
-    "User Authentication & Authorization",
-    "Dashboard & Analytics",
-    "Payment Integration",
-    "Email Notifications",
-    "Push Notifications",
-    "Real-time Chat",
-    "File Upload & Management",
-    "Search Functionality",
-    "API Development",
-    "Third-party Integrations",
-    "Multi-language Support",
-    "Responsive Design",
-    "Admin Panel",
-    "Reporting System",
-    "Data Export/Import",
-    "Social Media Integration",
+    'User Authentication & Authorization',
+    'Dashboard & Analytics',
+    'Payment Integration',
+    'Email Notifications',
+    'Push Notifications',
+    'Real-time Chat',
+    'File Upload & Management',
+    'Search Functionality',
+    'API Development',
+    'Third-party Integrations',
+    'Multi-language Support',
+    'Responsive Design',
+    'Admin Panel',
+    'Reporting System',
+    'Data Export/Import',
+    'Social Media Integration',
   ];
 
   const platforms = [
-    { value: "web", label: "Web Application" },
-    { value: "ios", label: "iOS App" },
-    { value: "android", label: "Android App" },
-    { value: "desktop", label: "Desktop Application" },
-    { value: "api", label: "API/Backend Only" },
+    { value: 'web', label: 'Web Application' },
+    { value: 'ios', label: 'iOS App' },
+    { value: 'android', label: 'Android App' },
+    { value: 'desktop', label: 'Desktop Application' },
+    { value: 'api', label: 'API/Backend Only' },
   ];
 
   const budgetRanges = [
-    { value: "5k-10k", label: "$5,000 - $10,000" },
-    { value: "10k-25k", label: "$10,000 - $25,000" },
-    { value: "25k-50k", label: "$25,000 - $50,000" },
-    { value: "50k-100k", label: "$50,000 - $100,000" },
-    { value: "100k+", label: "$100,000+" },
-    { value: "custom", label: "Custom Budget" },
+    { value: '5k-10k', label: '$5,000 - $10,000' },
+    { value: '10k-25k', label: '$10,000 - $25,000' },
+    { value: '25k-50k', label: '$25,000 - $50,000' },
+    { value: '50k-100k', label: '$50,000 - $100,000' },
+    { value: '100k+', label: '$100,000+' },
+    { value: 'custom', label: 'Custom Budget' },
   ];
 
   const timelines = [
-    { value: "1-2months", label: "1-2 Months" },
-    { value: "3-4months", label: "3-4 Months" },
-    { value: "5-6months", label: "5-6 Months" },
-    { value: "6-12months", label: "6-12 Months" },
-    { value: "12months+", label: "12+ Months" },
-    { value: "flexible", label: "Flexible" },
+    { value: '1-2months', label: '1-2 Months' },
+    { value: '3-4months', label: '3-4 Months' },
+    { value: '5-6months', label: '5-6 Months' },
+    { value: '6-12months', label: '6-12 Months' },
+    { value: '12months+', label: '12+ Months' },
+    { value: 'flexible', label: 'Flexible' },
   ];
 
   const priorities = [
-    { value: "quality", label: "Quality (Best possible solution)" },
-    { value: "speed", label: "Speed (Quick delivery)" },
-    { value: "budget", label: "Budget (Cost-effective)" },
-    { value: "balanced", label: "Balanced (Mix of all)" },
+    { value: 'quality', label: 'Quality (Best possible solution)' },
+    { value: 'speed', label: 'Speed (Quick delivery)' },
+    { value: 'budget', label: 'Budget (Cost-effective)' },
+    { value: 'balanced', label: 'Balanced (Mix of all)' },
   ];
 
   if (submitSuccess) {
@@ -455,13 +455,13 @@ const ClientForm = () => {
                         Project Type * (Select all that apply)
                       </label>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-2">
-                        {projectTypes.map((type) => (
+                        {projectTypes.map(type => (
                           <label
                             key={type.value}
                             className={`flex items-center space-x-3 p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
                               formData.projectType.includes(type.value)
-                                ? "border-primary-600 bg-primary-50 dark:bg-primary-900/20"
-                                : "border-gray-200 dark:border-dark-700 hover:border-primary-300"
+                                ? 'border-primary-600 bg-primary-50 dark:bg-primary-900/20'
+                                : 'border-gray-200 dark:border-dark-700 hover:border-primary-300'
                             }`}
                           >
                             <input
@@ -469,7 +469,7 @@ const ClientForm = () => {
                               name="projectType"
                               value={type.value}
                               checked={formData.projectType.includes(
-                                type.value,
+                                type.value
                               )}
                               onChange={handleChange}
                               className="checkbox-field"
@@ -589,7 +589,7 @@ const ClientForm = () => {
                         Required Features (Select all that apply)
                       </label>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
-                        {features.map((feature) => (
+                        {features.map(feature => (
                           <label
                             key={feature}
                             className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200 dark:border-dark-700 hover:bg-gray-50 dark:hover:bg-dark-700 cursor-pointer transition-colors duration-200"
@@ -599,7 +599,7 @@ const ClientForm = () => {
                               name="specificFeatures"
                               value={feature}
                               checked={formData.specificFeatures.includes(
-                                feature,
+                                feature
                               )}
                               onChange={handleChange}
                               className="checkbox-field"
@@ -632,13 +632,13 @@ const ClientForm = () => {
                         Target Platforms * (Select all that apply)
                       </label>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                        {platforms.map((platform) => (
+                        {platforms.map(platform => (
                           <label
                             key={platform.value}
                             className={`flex items-center space-x-3 p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
                               formData.platforms.includes(platform.value)
-                                ? "border-primary-600 bg-primary-50 dark:bg-primary-900/20"
-                                : "border-gray-200 dark:border-dark-700 hover:border-primary-300"
+                                ? 'border-primary-600 bg-primary-50 dark:bg-primary-900/20'
+                                : 'border-gray-200 dark:border-dark-700 hover:border-primary-300'
                             }`}
                           >
                             <input
@@ -646,7 +646,7 @@ const ClientForm = () => {
                               name="platforms"
                               value={platform.value}
                               checked={formData.platforms.includes(
-                                platform.value,
+                                platform.value
                               )}
                               onChange={handleChange}
                               className="checkbox-field"
@@ -708,7 +708,7 @@ const ClientForm = () => {
                         className="select-field"
                       >
                         <option value="">Select budget range</option>
-                        {budgetRanges.map((range) => (
+                        {budgetRanges.map(range => (
                           <option key={range.value} value={range.value}>
                             {range.label}
                           </option>
@@ -716,7 +716,7 @@ const ClientForm = () => {
                       </select>
                     </div>
 
-                    {formData.budget === "custom" && (
+                    {formData.budget === 'custom' && (
                       <div>
                         <label htmlFor="customBudget" className="label-text">
                           Specify Your Budget
@@ -746,7 +746,7 @@ const ClientForm = () => {
                         className="select-field"
                       >
                         <option value="">Select timeline</option>
-                        {timelines.map((time) => (
+                        {timelines.map(time => (
                           <option key={time.value} value={time.value}>
                             {time.label}
                           </option>
@@ -766,7 +766,7 @@ const ClientForm = () => {
                         onChange={handleChange}
                         required
                         className="input-field"
-                        min={new Date().toISOString().split("T")[0]}
+                        min={new Date().toISOString().split('T')[0]}
                       />
                     </div>
 
@@ -775,13 +775,13 @@ const ClientForm = () => {
                         Project Priority *
                       </label>
                       <div className="space-y-3 mt-2">
-                        {priorities.map((prio) => (
+                        {priorities.map(prio => (
                           <label
                             key={prio.value}
                             className={`flex items-start space-x-3 p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
                               formData.priority === prio.value
-                                ? "border-primary-600 bg-primary-50 dark:bg-primary-900/20"
-                                : "border-gray-200 dark:border-dark-700 hover:border-primary-300"
+                                ? 'border-primary-600 bg-primary-50 dark:bg-primary-900/20'
+                                : 'border-gray-200 dark:border-dark-700 hover:border-primary-300'
                             }`}
                           >
                             <input
@@ -969,7 +969,7 @@ const ClientForm = () => {
                             Project Type:
                           </span>
                           <span className="ml-2 font-semibold text-gray-900 dark:text-white">
-                            {formData.projectType.join(", ") || "Not specified"}
+                            {formData.projectType.join(', ') || 'Not specified'}
                           </span>
                         </div>
                         <div>
@@ -985,9 +985,8 @@ const ClientForm = () => {
                             Budget:
                           </span>
                           <span className="ml-2 font-semibold text-gray-900 dark:text-white">
-                            {budgetRanges.find(
-                              (b) => b.value === formData.budget,
-                            )?.label || "Not specified"}
+                            {budgetRanges.find(b => b.value === formData.budget)
+                              ?.label || 'Not specified'}
                           </span>
                         </div>
                         <div>
@@ -995,9 +994,8 @@ const ClientForm = () => {
                             Timeline:
                           </span>
                           <span className="ml-2 font-semibold text-gray-900 dark:text-white">
-                            {timelines.find(
-                              (t) => t.value === formData.timeline,
-                            )?.label || "Not specified"}
+                            {timelines.find(t => t.value === formData.timeline)
+                              ?.label || 'Not specified'}
                           </span>
                         </div>
                       </div>
@@ -1037,14 +1035,14 @@ const ClientForm = () => {
                           className="checkbox-field mt-1"
                         />
                         <span className="text-sm text-gray-700 dark:text-gray-300">
-                          I agree to the{" "}
+                          I agree to the{' '}
                           <Link
                             to="/terms-of-service"
                             className="text-primary-600 dark:text-primary-400 hover:underline"
                           >
                             Terms of Service
-                          </Link>{" "}
-                          and{" "}
+                          </Link>{' '}
+                          and{' '}
                           <Link
                             to="/privacy-policy"
                             className="text-primary-600 dark:text-primary-400 hover:underline"

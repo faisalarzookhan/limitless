@@ -11,6 +11,7 @@ You've received a beautiful geometric logo for Limitless Infotech Solution! Here
 3. **Place it in**: `Redesigned/public/` folder
 
 Your file structure should look like:
+
 ```
 Redesigned/
 └── public/
@@ -22,23 +23,27 @@ Redesigned/
 The code has already been updated to use the logo in the following places:
 
 ### ✅ Navbar
+
 - **File**: `src/components/Navbar.jsx`
 - **Line**: ~167
 - **Display**: Top-left corner of every page
 - **Effect**: Scales up on hover
 
 ### ✅ Footer
+
 - **File**: `src/components/Footer.jsx`
 - **Line**: ~64
 - **Display**: Bottom of every page
 - **Effect**: Static display
 
 ### ✅ Social Media Sharing
+
 - **File**: `index.html`
 - **Lines**: 19, 25
 - **Display**: When sharing links on Facebook, Twitter, LinkedIn, etc.
 
 ### ✅ Favicon
+
 - **File**: `index.html`
 - **Line**: 5
 - **Display**: Browser tab icon
@@ -46,6 +51,7 @@ The code has already been updated to use the logo in the following places:
 ## Step 3: Test It Out
 
 1. **Start your development server**:
+
    ```bash
    npm run dev
    ```
@@ -62,14 +68,16 @@ The code has already been updated to use the logo in the following places:
 
 For best results across all devices, create these additional sizes:
 
-| File Name | Size | Purpose |
-|-----------|------|---------|
-| `favicon-16x16.png` | 16×16px | Small browser tabs |
-| `favicon-32x32.png` | 32×32px | Standard browser tabs |
-| `apple-touch-icon.png` | 180×180px | iOS home screen |
+| File Name              | Size      | Purpose               |
+| ---------------------- | --------- | --------------------- |
+| `favicon-16x16.png`    | 16×16px   | Small browser tabs    |
+| `favicon-32x32.png`    | 32×32px   | Standard browser tabs |
+| `apple-touch-icon.png` | 180×180px | iOS home screen       |
 
 ### Easy Way to Generate:
+
 Use an online favicon generator:
+
 1. Go to: https://realfavicongenerator.net/
 2. Upload your `logo.png`
 3. Download the generated files
@@ -78,19 +86,25 @@ Use an online favicon generator:
 ## Troubleshooting
 
 ### Problem: Logo doesn't appear
-**Solution**: 
+
+**Solution**:
+
 - Make sure the file is named exactly `logo.png` (case-sensitive on some systems)
 - Make sure it's in the `public/` folder, not `src/` or `images/`
 - Clear your browser cache (Ctrl+Shift+R or Cmd+Shift+R)
 
 ### Problem: Logo looks blurry
+
 **Solution**:
+
 - Use a high-resolution PNG (at least 96×96 pixels for a 48×48 display)
 - Make sure it's PNG format, not JPEG
 - Ensure the logo has a transparent background
 
 ### Problem: Favicon doesn't update
+
 **Solution**:
+
 - Hard refresh your browser (Ctrl+Shift+R or Cmd+Shift+R)
 - Clear browser cache completely
 - Close and reopen your browser
@@ -115,6 +129,7 @@ All the necessary code changes have been made:
 ## Logo Specifications
 
 Your logo features:
+
 - **Design**: Hexagonal link with geometric facets
 - **Colors**: Blue (trust, technology) and Gold (excellence, value)
 - **Style**: Modern, 3D, crystalline effect
@@ -123,6 +138,7 @@ Your logo features:
 ## Need Help?
 
 If you encounter any issues:
+
 1. Check that `logo.png` is in the correct location
 2. Verify the file isn't corrupted
 3. Make sure your dev server is running

@@ -25,11 +25,14 @@ export const AppProvider = ({ children }) => {
     applyTheme(savedTheme);
   }, []);
 
-  const applyTheme = (selectedTheme) => {
+  const applyTheme = selectedTheme => {
     const root = window.document.documentElement;
 
     if (selectedTheme === 'system') {
-      const systemPreference = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      const systemPreference = window.matchMedia('(prefers-color-scheme: dark)')
+        .matches
+        ? 'dark'
+        : 'light';
       root.classList.remove('light', 'dark');
       root.classList.add(systemPreference);
     } else {
@@ -38,14 +41,14 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  const changeTheme = (newTheme) => {
+  const changeTheme = newTheme => {
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
     applyTheme(newTheme);
   };
 
   // Notification Management
-  const addNotification = (notification) => {
+  const addNotification = notification => {
     const id = Date.now();
     const newNotification = {
       id,
@@ -63,7 +66,7 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  const removeNotification = (id) => {
+  const removeNotification = id => {
     setNotifications(prev => prev.filter(n => n.id !== id));
   };
 
@@ -84,14 +87,12 @@ export const AppProvider = ({ children }) => {
   };
 
   // Cart Management
-  const addToCart = (item) => {
+  const addToCart = item => {
     setCart(prev => {
       const existing = prev.find(i => i.id === item.id);
       if (existing) {
         return prev.map(i =>
-          i.id === item.id
-            ? { ...i, quantity: i.quantity + 1 }
-            : i
+          i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
         );
       }
       return [...prev, { ...item, quantity: 1 }];
@@ -99,7 +100,7 @@ export const AppProvider = ({ children }) => {
     showSuccess('Added to cart');
   };
 
-  const removeFromCart = (itemId) => {
+  const removeFromCart = itemId => {
     setCart(prev => prev.filter(i => i.id !== itemId));
     showSuccess('Removed from cart');
   };
@@ -109,13 +110,7 @@ export const AppProvider = ({ children }) => {
       removeFromCart(itemId);
       return;
     }
-    setCart(prev =>
-      prev.map(i =>
-        i.id === itemId
-          ? { ...i, quantity }
-          : i
-      )
-    );
+    setCart(prev => prev.map(i => (i.id === itemId ? { ...i, quantity } : i)));
   };
 
   const clearCart = () => {
@@ -123,11 +118,14 @@ export const AppProvider = ({ children }) => {
     showSuccess('Cart cleared');
   };
 
-  const cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const cartTotal = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
   const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   // Wishlist Management
-  const addToWishlist = (item) => {
+  const addToWishlist = item => {
     setWishlist(prev => {
       if (prev.find(i => i.id === item.id)) {
         showWarning('Already in wishlist');
@@ -138,17 +136,17 @@ export const AppProvider = ({ children }) => {
     });
   };
 
-  const removeFromWishlist = (itemId) => {
+  const removeFromWishlist = itemId => {
     setWishlist(prev => prev.filter(i => i.id !== itemId));
     showSuccess('Removed from wishlist');
   };
 
-  const isInWishlist = (itemId) => {
+  const isInWishlist = itemId => {
     return wishlist.some(i => i.id === itemId);
   };
 
   // User Management (for future authentication)
-  const login = (userData) => {
+  const login = userData => {
     setUser(userData);
     localStorage.setItem('user', JSON.stringify(userData));
     showSuccess(`Welcome back, ${userData.name}!`);
@@ -161,7 +159,7 @@ export const AppProvider = ({ children }) => {
     showInfo('Logged out successfully');
   };
 
-  const updateUser = (updates) => {
+  const updateUser = updates => {
     const updatedUser = { ...user, ...updates };
     setUser(updatedUser);
     localStorage.setItem('user', JSON.stringify(updatedUser));

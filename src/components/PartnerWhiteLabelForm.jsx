@@ -1,5 +1,13 @@
 import { useState } from 'react';
-import { HiOutlineUser, HiOutlineMail, HiOutlineBriefcase, HiOutlineGlobe, HiOutlineCurrencyDollar, HiOutlineLightBulb, HiCheckCircle } from 'react-icons/hi';
+import {
+  HiOutlineUser,
+  HiOutlineMail,
+  HiOutlineBriefcase,
+  HiOutlineGlobe,
+  HiOutlineCurrencyDollar,
+  HiOutlineLightBulb,
+  HiCheckCircle,
+} from 'react-icons/hi';
 import { sendLeadGenerationNotification } from '../services/notificationService';
 
 const PartnerWhiteLabelForm = ({ variant = 'default', onSubmitSuccess }) => {
@@ -13,17 +21,17 @@ const PartnerWhiteLabelForm = ({ variant = 'default', onSubmitSuccess }) => {
     partnershipType: '',
     businessModel: '',
     existingClients: '',
-    specialization: ''
+    specialization: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -34,24 +42,24 @@ const PartnerWhiteLabelForm = ({ variant = 'default', onSubmitSuccess }) => {
         formType: 'partner-whitelabel',
         timestamp: new Date().toISOString(),
         page: window.location.pathname,
-        userAgent: navigator.userAgent
+        userAgent: navigator.userAgent,
       });
 
       // Reset form
-      setFormData({ 
-        fullName: '', 
-        email: '', 
-        companyName: '', 
-        companySize: '', 
-        region: '', 
-        annualTurnover: '', 
+      setFormData({
+        fullName: '',
+        email: '',
+        companyName: '',
+        companySize: '',
+        region: '',
+        annualTurnover: '',
         partnershipType: '',
         businessModel: '',
         existingClients: '',
-        specialization: '' 
+        specialization: '',
       });
       setSubmitSuccess(true);
-      
+
       // Call success callback if provided
       if (onSubmitSuccess) {
         onSubmitSuccess();
@@ -72,9 +80,12 @@ const PartnerWhiteLabelForm = ({ variant = 'default', onSubmitSuccess }) => {
         <div className="flex items-center justify-center mb-3">
           <HiCheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
         </div>
-        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">Partnership Application Submitted!</h3>
+        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">
+          Partnership Application Submitted!
+        </h3>
         <p className="text-green-700 dark:text-green-400 text-sm">
-          Thank you for your interest in our partnership program. We'll review your application and contact you shortly.
+          Thank you for your interest in our partnership program. We'll review
+          your application and contact you shortly.
         </p>
       </div>
     );
@@ -84,7 +95,10 @@ const PartnerWhiteLabelForm = ({ variant = 'default', onSubmitSuccess }) => {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="fullName"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Full Name *
           </label>
           <div className="relative">
@@ -103,9 +117,12 @@ const PartnerWhiteLabelForm = ({ variant = 'default', onSubmitSuccess }) => {
             />
           </div>
         </div>
-        
+
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Work Email *
           </label>
           <div className="relative">
@@ -125,9 +142,12 @@ const PartnerWhiteLabelForm = ({ variant = 'default', onSubmitSuccess }) => {
           </div>
         </div>
       </div>
-      
+
       <div>
-        <label htmlFor="companyName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="companyName"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Company Name *
         </label>
         <div className="relative">
@@ -146,10 +166,13 @@ const PartnerWhiteLabelForm = ({ variant = 'default', onSubmitSuccess }) => {
           />
         </div>
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="companySize" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="companySize"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Company Size *
           </label>
           <div className="relative">
@@ -173,9 +196,12 @@ const PartnerWhiteLabelForm = ({ variant = 'default', onSubmitSuccess }) => {
             </select>
           </div>
         </div>
-        
+
         <div>
-          <label htmlFor="region" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="region"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Primary Region *
           </label>
           <div className="relative">
@@ -201,9 +227,12 @@ const PartnerWhiteLabelForm = ({ variant = 'default', onSubmitSuccess }) => {
           </div>
         </div>
       </div>
-      
+
       <div>
-        <label htmlFor="annualTurnover" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="annualTurnover"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Annual Turnover *
         </label>
         <div className="relative">
@@ -228,10 +257,13 @@ const PartnerWhiteLabelForm = ({ variant = 'default', onSubmitSuccess }) => {
           </select>
         </div>
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="partnershipType" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="partnershipType"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Partnership Type *
           </label>
           <div className="relative">
@@ -256,9 +288,12 @@ const PartnerWhiteLabelForm = ({ variant = 'default', onSubmitSuccess }) => {
             </select>
           </div>
         </div>
-        
+
         <div>
-          <label htmlFor="businessModel" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="businessModel"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Business Model *
           </label>
           <div className="relative">
@@ -284,9 +319,12 @@ const PartnerWhiteLabelForm = ({ variant = 'default', onSubmitSuccess }) => {
           </div>
         </div>
       </div>
-      
+
       <div>
-        <label htmlFor="specialization" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="specialization"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Specialization / Industry Focus
         </label>
         <div className="relative">
@@ -304,9 +342,12 @@ const PartnerWhiteLabelForm = ({ variant = 'default', onSubmitSuccess }) => {
           />
         </div>
       </div>
-      
+
       <div>
-        <label htmlFor="existingClients" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="existingClients"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Brief Description of Existing Client Base
         </label>
         <div className="relative">
@@ -324,7 +365,7 @@ const PartnerWhiteLabelForm = ({ variant = 'default', onSubmitSuccess }) => {
           ></textarea>
         </div>
       </div>
-      
+
       <button
         type="submit"
         disabled={isSubmitting}
@@ -339,9 +380,10 @@ const PartnerWhiteLabelForm = ({ variant = 'default', onSubmitSuccess }) => {
           'Apply for Partnership'
         )}
       </button>
-      
+
       <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-2">
-        We'll review your partnership application and contact you within 48 hours to discuss potential collaboration opportunities.
+        We'll review your partnership application and contact you within 48
+        hours to discuss potential collaboration opportunities.
       </p>
     </form>
   );

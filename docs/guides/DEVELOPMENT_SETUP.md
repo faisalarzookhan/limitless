@@ -11,14 +11,16 @@ This guide will help you set up the development environment for Limitless Infote
 Before you begin, ensure you have the following installed:
 
 ### Required Software
+
 - **Node.js** (v16.0.0 or higher)
 - **npm** (v8.0.0 or higher) or **yarn**
 - **Git** (latest version)
 - **Code Editor** (VS Code recommended)
 
 ### Check Installed Versions
+
 ```bash
-node --version    # Should be v16+ 
+node --version    # Should be v16+
 npm --version     # Should be v8+
 git --version     # Any recent version
 ```
@@ -28,6 +30,7 @@ git --version     # Any recent version
 ## 🛠️ Installation Steps
 
 ### Step 1: Clone the Repository
+
 ```bash
 # Clone the project
 git clone <repository-url>
@@ -37,6 +40,7 @@ cd Redesigned
 ```
 
 ### Step 2: Install Dependencies
+
 ```bash
 # Install all npm packages
 npm install
@@ -55,6 +59,7 @@ npm install
 **Installation time:** ~2-3 minutes (depending on internet speed)
 
 ### Step 3: Verify Installation
+
 ```bash
 # Check if node_modules folder exists
 ls node_modules
@@ -68,11 +73,13 @@ cat package.json
 ## 🏃 Running the Development Server
 
 ### Start Development Mode
+
 ```bash
 npm run dev
 ```
 
 **Expected Output:**
+
 ```
 VITE v5.0.8  ready in 450 ms
 
@@ -82,11 +89,14 @@ VITE v5.0.8  ready in 450 ms
 ```
 
 ### Access the Application
+
 Open your browser and navigate to:
+
 - **Local:** http://localhost:5173
 - **Network:** http://192.168.x.x:5173 (if --host flag used)
 
 ### Development Server Features
+
 - ⚡ **Hot Module Replacement (HMR)** - Instant updates without refresh
 - 🔄 **Auto-reload** - Changes reflect immediately
 - 🐛 **Error overlay** - Clear error messages in browser
@@ -97,11 +107,13 @@ Open your browser and navigate to:
 ## 🏗️ Building for Production
 
 ### Create Production Build
+
 ```bash
 npm run build
 ```
 
 **What happens:**
+
 1. Vite compiles and bundles all files
 2. Tailwind purges unused CSS
 3. Assets are optimized and minified
@@ -109,6 +121,7 @@ npm run build
 5. Output is saved to `dist/` folder
 
 **Expected Output:**
+
 ```
 vite v5.0.8 building for production...
 ✓ 1234 modules transformed.
@@ -119,6 +132,7 @@ dist/assets/index-xyz789.js     234.56 kB │ gzip: 78.90 kB
 ```
 
 ### Preview Production Build
+
 ```bash
 npm run preview
 ```
@@ -156,7 +170,6 @@ Redesigned/
 
 1. **ES7+ React/Redux/React-Native snippets**
    - Snippet shortcuts for React
-   
 2. **Tailwind CSS IntelliSense**
    - Autocomplete for Tailwind classes
    - Color previews
@@ -181,7 +194,9 @@ Redesigned/
    - Display package size
 
 ### VS Code Settings (Recommended)
+
 Create `.vscode/settings.json`:
+
 ```json
 {
   "editor.formatOnSave": true,
@@ -200,24 +215,28 @@ Create `.vscode/settings.json`:
 ## 🔧 Configuration Files
 
 ### vite.config.js
+
 ```javascript
 // Vite configuration for React
 // Handles dev server, build optimization, plugins
 ```
 
 ### tailwind.config.js
+
 ```javascript
 // Tailwind CSS configuration
 // Custom colors, fonts, spacing, animations
 ```
 
 ### postcss.config.js
+
 ```javascript
 // PostCSS configuration
 // Tailwind CSS and Autoprefixer
 ```
 
 ### package.json
+
 ```javascript
 // Project dependencies and scripts
 // npm run dev, build, preview, lint
@@ -228,12 +247,14 @@ Create `.vscode/settings.json`:
 ## 🌐 Environment Variables
 
 ### Create .env File (Optional)
+
 ```bash
 # Create .env in root directory
 touch .env
 ```
 
 ### Example .env
+
 ```env
 # API Configuration
 VITE_API_URL=https://api.example.com
@@ -252,12 +273,14 @@ VITE_ENABLE_BLOG=true
 ```
 
 ### Accessing Environment Variables
+
 ```javascript
 const apiUrl = import.meta.env.VITE_API_URL;
 const contactEmail = import.meta.env.VITE_CONTACT_EMAIL;
 ```
 
-**Important:** 
+**Important:**
+
 - Prefix all variables with `VITE_`
 - Add `.env` to `.gitignore`
 - Never commit sensitive data
@@ -267,17 +290,20 @@ const contactEmail = import.meta.env.VITE_CONTACT_EMAIL;
 ## 🎯 Development Workflow
 
 ### 1. Create Feature Branch
+
 ```bash
 git checkout -b feature/your-feature-name
 ```
 
 ### 2. Make Changes
+
 - Edit files in `src/`
 - Test in browser (http://localhost:5173)
 - Check console for errors
 - Verify responsive design
 
 ### 3. Test Your Changes
+
 ```bash
 # Run development server
 npm run dev
@@ -291,6 +317,7 @@ npm run dev
 ```
 
 ### 4. Code Quality Check
+
 ```bash
 # Run linter
 npm run lint
@@ -300,6 +327,7 @@ npm run lint -- --fix
 ```
 
 ### 5. Build Test
+
 ```bash
 # Create production build
 npm run build
@@ -311,6 +339,7 @@ npm run preview
 ```
 
 ### 6. Commit Changes
+
 ```bash
 # Stage changes
 git add .
@@ -329,9 +358,11 @@ git push origin feature/your-feature-name
 ### Common Issues
 
 #### Issue 1: Port Already in Use
+
 **Error:** `Port 5173 is already in use`
 
 **Solution:**
+
 ```bash
 # Kill process on port 5173
 npx kill-port 5173
@@ -341,9 +372,11 @@ npm run dev -- --port 3000
 ```
 
 #### Issue 2: Module Not Found
+
 **Error:** `Cannot find module 'package-name'`
 
 **Solution:**
+
 ```bash
 # Delete node_modules and reinstall
 rm -rf node_modules package-lock.json
@@ -351,21 +384,26 @@ npm install
 ```
 
 #### Issue 3: Tailwind Styles Not Working
+
 **Error:** Styles not applying
 
 **Solution:**
+
 1. Check `tailwind.config.js` content paths
 2. Ensure `@tailwind` directives in `index.css`
 3. Restart dev server
+
 ```bash
 # Stop server (Ctrl+C)
 npm run dev
 ```
 
 #### Issue 4: Build Fails
+
 **Error:** Build errors
 
 **Solution:**
+
 ```bash
 # Clear cache
 rm -rf node_modules/.vite
@@ -373,9 +411,11 @@ npm run dev
 ```
 
 #### Issue 5: Git Issues
+
 **Error:** Git conflicts
 
 **Solution:**
+
 ```bash
 # Stash changes
 git stash
@@ -394,6 +434,7 @@ git stash pop
 ## 📚 Useful Commands
 
 ### npm Commands
+
 ```bash
 npm run dev          # Start development server
 npm run build        # Build for production
@@ -407,6 +448,7 @@ npm audit fix        # Fix security issues
 ```
 
 ### Git Commands
+
 ```bash
 git status                        # Check status
 git branch                        # List branches
@@ -420,6 +462,7 @@ git log --oneline                 # View commit history
 ```
 
 ### Vite Commands
+
 ```bash
 npm run dev -- --port 3000        # Custom port
 npm run dev -- --host             # Expose to network
@@ -434,6 +477,7 @@ npm run build -- --mode staging   # Custom build mode
 Before committing changes, verify:
 
 ### Functionality
+
 - [ ] All features work as expected
 - [ ] No console errors
 - [ ] Forms validate correctly
@@ -441,12 +485,14 @@ Before committing changes, verify:
 - [ ] Buttons trigger correct actions
 
 ### Responsive Design
+
 - [ ] Mobile (320px - 767px)
 - [ ] Tablet (768px - 1023px)
 - [ ] Desktop (1024px+)
 - [ ] Large screens (1920px+)
 
 ### Browser Testing
+
 - [ ] Chrome
 - [ ] Firefox
 - [ ] Safari
@@ -454,12 +500,14 @@ Before committing changes, verify:
 - [ ] Mobile browsers
 
 ### Dark Mode
+
 - [ ] Switches correctly
 - [ ] No white flashes
 - [ ] All colors readable
 - [ ] Images display properly
 
 ### Performance
+
 - [ ] Page loads quickly
 - [ ] No unnecessary re-renders
 - [ ] Images optimized
@@ -499,15 +547,18 @@ After setup is complete:
 ## 📞 Getting Help
 
 ### Resources
+
 - **Documentation:** `/docs/` folder
 - **Code Comments:** Throughout the codebase
 - **README.md:** Project overview
 
 ### Contact
+
 - **Email:** Info@limitlessinfotech.com
 - **Phone:** +91 77109 09492
 
 ### Community
+
 - GitHub Issues: Report bugs
 - GitHub Discussions: Ask questions
 - Pull Requests: Contribute code
@@ -519,6 +570,7 @@ After setup is complete:
 You're now ready to start developing! 🎉
 
 Run this to get started:
+
 ```bash
 npm run dev
 ```

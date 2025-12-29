@@ -1,5 +1,16 @@
 import { useState } from 'react';
-import { HiLightningBolt, HiChartBar, HiUserGroup, HiClock, HiAcademicCap, HiSparkles, HiTrendingUp, HiTrendingDown, HiCode, HiDatabase } from 'react-icons/hi';
+import {
+  HiLightningBolt,
+  HiChartBar,
+  HiUserGroup,
+  HiClock,
+  HiAcademicCap,
+  HiSparkles,
+  HiTrendingUp,
+  HiTrendingDown,
+  HiCode,
+  HiDatabase,
+} from 'react-icons/hi';
 import PredictiveAnalyticsDashboard from '../components/PredictiveAnalyticsDashboard';
 
 const AIFeatures = () => {
@@ -7,87 +18,106 @@ const AIFeatures = () => {
   const [activeFeature, setActiveFeature] = useState('predictive-analytics');
 
   const products = [
-    { id: 'hr-ims', name: 'HR-IMS', description: 'HR Information Management System' },
-    { id: 'trackit', name: 'TrackIT', description: 'Project Tracking Solution' }
+    {
+      id: 'hr-ims',
+      name: 'HR-IMS',
+      description: 'HR Information Management System',
+    },
+    {
+      id: 'trackit',
+      name: 'TrackIT',
+      description: 'Project Tracking Solution',
+    },
   ];
 
   const features = [
-    { id: 'predictive-analytics', name: 'Predictive Analytics', icon: HiChartBar },
-    { id: 'automated-insights', name: 'Automated Insights', icon: HiLightningBolt },
+    {
+      id: 'predictive-analytics',
+      name: 'Predictive Analytics',
+      icon: HiChartBar,
+    },
+    {
+      id: 'automated-insights',
+      name: 'Automated Insights',
+      icon: HiLightningBolt,
+    },
     { id: 'ai-recommendations', name: 'AI Recommendations', icon: HiSparkles },
-    { id: 'smart-automation', name: 'Smart Automation', icon: HiLightningBolt }
+    { id: 'smart-automation', name: 'Smart Automation', icon: HiLightningBolt },
   ];
 
   const aiCapabilities = [
     {
-      title: "Predictive Modeling",
-      description: "Forecast trends and outcomes using machine learning algorithms",
+      title: 'Predictive Modeling',
+      description:
+        'Forecast trends and outcomes using machine learning algorithms',
       benefits: [
-        "95% accuracy in predictions",
-        "Real-time model updates",
-        "Customizable prediction parameters"
+        '95% accuracy in predictions',
+        'Real-time model updates',
+        'Customizable prediction parameters',
       ],
       icon: HiTrendingUp,
-      color: "from-blue-500 to-cyan-500"
+      color: 'from-blue-500 to-cyan-500',
     },
     {
-      title: "Natural Language Processing",
-      description: "Understand and process human language for better insights",
+      title: 'Natural Language Processing',
+      description: 'Understand and process human language for better insights',
       benefits: [
-        "Multi-language support",
-        "Sentiment analysis",
-        "Automated categorization"
+        'Multi-language support',
+        'Sentiment analysis',
+        'Automated categorization',
       ],
       icon: HiAcademicCap,
-      color: "from-purple-500 to-pink-500"
+      color: 'from-purple-500 to-pink-500',
     },
     {
-      title: "Automated Decision Making",
-      description: "AI-powered decisions that improve over time",
+      title: 'Automated Decision Making',
+      description: 'AI-powered decisions that improve over time',
       benefits: [
-        "Reduced manual intervention",
-        "Faster decision cycles",
-        "Continuous learning algorithms"
+        'Reduced manual intervention',
+        'Faster decision cycles',
+        'Continuous learning algorithms',
       ],
       icon: HiLightningBolt,
-      color: "from-green-500 to-emerald-500"
+      color: 'from-green-500 to-emerald-500',
     },
     {
-      title: "Anomaly Detection",
-      description: "Identify unusual patterns and potential issues",
+      title: 'Anomaly Detection',
+      description: 'Identify unusual patterns and potential issues',
       benefits: [
-        "Real-time alerts",
-        "Proactive issue resolution",
-        "Customizable thresholds"
+        'Real-time alerts',
+        'Proactive issue resolution',
+        'Customizable thresholds',
       ],
       icon: HiLightningBolt,
-      color: "from-yellow-500 to-amber-500"
-    }
+      color: 'from-yellow-500 to-amber-500',
+    },
   ];
 
   const useCases = [
     {
-      title: "HR-IMS: Employee Attrition Prediction",
-      description: "Predict which employees are at risk of leaving and take proactive measures",
+      title: 'HR-IMS: Employee Attrition Prediction',
+      description:
+        'Predict which employees are at risk of leaving and take proactive measures',
       metrics: [
-        { label: "Accuracy", value: "92%" },
-        { label: "Time Saved", value: "15h/week" },
-        { label: "Retention Rate", value: "+18%" }
+        { label: 'Accuracy', value: '92%' },
+        { label: 'Time Saved', value: '15h/week' },
+        { label: 'Retention Rate', value: '+18%' },
       ],
       icon: HiUserGroup,
-      color: "from-blue-500 to-indigo-500"
+      color: 'from-blue-500 to-indigo-500',
     },
     {
-      title: "TrackIT: Project Success Forecasting",
-      description: "Predict project outcomes and identify potential delays before they happen",
+      title: 'TrackIT: Project Success Forecasting',
+      description:
+        'Predict project outcomes and identify potential delays before they happen',
       metrics: [
-        { label: "Accuracy", value: "88%" },
-        { label: "On-time Delivery", value: "+22%" },
-        { label: "Budget Adherence", value: "+15%" }
+        { label: 'Accuracy', value: '88%' },
+        { label: 'On-time Delivery', value: '+22%' },
+        { label: 'Budget Adherence', value: '+15%' },
       ],
       icon: HiClock,
-      color: "from-green-500 to-emerald-500"
-    }
+      color: 'from-green-500 to-emerald-500',
+    },
   ];
 
   return (
@@ -106,13 +136,20 @@ const AIFeatures = () => {
               Features
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8">
-              Experience the future of business automation with our AI-powered solutions
+              Experience the future of business automation with our AI-powered
+              solutions
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="/contact" className="btn-primary bg-white text-indigo-600 hover:bg-gray-100">
+              <a
+                href="/contact"
+                className="btn-primary bg-white text-indigo-600 hover:bg-gray-100"
+              >
                 Request Demo
               </a>
-              <a href="/innovation-lab" className="btn-outline border-white text-white hover:bg-white hover:text-indigo-600">
+              <a
+                href="/innovation-lab"
+                className="btn-outline border-white text-white hover:bg-white hover:text-indigo-600"
+              >
                 See Innovation Lab
               </a>
             </div>
@@ -136,7 +173,7 @@ const AIFeatures = () => {
             {/* Product Selector */}
             <div className="flex justify-center mb-8">
               <div className="inline-flex bg-gray-100 dark:bg-dark-800 rounded-xl p-1">
-                {products.map((product) => (
+                {products.map(product => (
                   <button
                     key={product.id}
                     onClick={() => setActiveProduct(product.id)}
@@ -155,7 +192,7 @@ const AIFeatures = () => {
             {/* Feature Selector */}
             <div className="flex justify-center mb-12">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {features.map((feature) => {
+                {features.map(feature => {
                   const Icon = feature.icon;
                   return (
                     <button
@@ -168,7 +205,9 @@ const AIFeatures = () => {
                       }`}
                     >
                       <Icon className="w-6 h-6 mb-2" />
-                      <span className="text-sm font-medium">{feature.name}</span>
+                      <span className="text-sm font-medium">
+                        {feature.name}
+                      </span>
                     </button>
                   );
                 })}
@@ -191,7 +230,8 @@ const AIFeatures = () => {
               AI <span className="text-gradient">Capabilities</span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Our advanced AI technologies that power intelligent business solutions
+              Our advanced AI technologies that power intelligent business
+              solutions
             </p>
           </div>
 
@@ -199,24 +239,31 @@ const AIFeatures = () => {
             {aiCapabilities.map((capability, index) => {
               const Icon = capability.icon;
               return (
-                <div key={index} className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700">
-                  <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${capability.color} rounded-2xl mb-6`}>
+                <div
+                  key={index}
+                  className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700"
+                >
+                  <div
+                    className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${capability.color} rounded-2xl mb-6`}
+                  >
                     <Icon className="w-8 h-8 text-white" />
                   </div>
-                  
+
                   <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
                     {capability.title}
                   </h3>
-                  
+
                   <p className="text-gray-600 dark:text-gray-400 mb-6">
                     {capability.description}
                   </p>
-                  
+
                   <ul className="space-y-3">
                     {capability.benefits.map((benefit, idx) => (
                       <li key={idx} className="flex items-center space-x-3">
                         <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
-                        <span className="text-gray-700 dark:text-gray-300">{benefit}</span>
+                        <span className="text-gray-700 dark:text-gray-300">
+                          {benefit}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -243,9 +290,14 @@ const AIFeatures = () => {
             {useCases.map((useCase, index) => {
               const Icon = useCase.icon;
               return (
-                <div key={index} className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700">
+                <div
+                  key={index}
+                  className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700"
+                >
                   <div className="flex items-start mb-6">
-                    <div className={`w-12 h-12 bg-gradient-to-br ${useCase.color} rounded-lg flex items-center justify-center mr-4`}>
+                    <div
+                      className={`w-12 h-12 bg-gradient-to-br ${useCase.color} rounded-lg flex items-center justify-center mr-4`}
+                    >
                       <Icon className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1">
@@ -257,7 +309,7 @@ const AIFeatures = () => {
                       </p>
                     </div>
                   </div>
-                  
+
                   <div className="grid grid-cols-3 gap-4 mb-6">
                     {useCase.metrics.map((metric, idx) => (
                       <div key={idx} className="text-center">
@@ -270,14 +322,15 @@ const AIFeatures = () => {
                       </div>
                     ))}
                   </div>
-                  
+
                   <div className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-dark-700 dark:to-dark-600 rounded-xl p-4">
-                    <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">Impact:</h4>
+                    <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">
+                      Impact:
+                    </h4>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
                       {useCase.title.includes('HR-IMS')
-                        ? "This capability helped reduce employee turnover by 18% and saved an estimated $2.3M in recruitment costs."
-                        : "This capability improved project success rates by 22% and reduced delivery delays by 35%."
-                      }
+                        ? 'This capability helped reduce employee turnover by 18% and saved an estimated $2.3M in recruitment costs.'
+                        : 'This capability improved project success rates by 22% and reduced delivery delays by 35%.'}
                     </p>
                   </div>
                 </div>
@@ -304,11 +357,23 @@ const AIFeatures = () => {
               { name: 'TensorFlow', icon: HiCode, description: 'ML Framework' },
               { name: 'Python', icon: HiCode, description: 'Development' },
               { name: 'PyTorch', icon: HiCode, description: 'Deep Learning' },
-              { name: 'Scikit-learn', icon: HiDatabase, description: 'ML Library' },
+              {
+                name: 'Scikit-learn',
+                icon: HiDatabase,
+                description: 'ML Library',
+              },
               { name: 'Keras', icon: HiCode, description: 'NN Framework' },
-              { name: 'OpenAI API', icon: HiSparkles, description: 'NLP Models' },
-              { name: 'AWS SageMaker', icon: HiChartBar, description: 'ML Platform' },
-              { name: 'Azure ML', icon: HiChartBar, description: 'Cloud AI' }
+              {
+                name: 'OpenAI API',
+                icon: HiSparkles,
+                description: 'NLP Models',
+              },
+              {
+                name: 'AWS SageMaker',
+                icon: HiChartBar,
+                description: 'ML Platform',
+              },
+              { name: 'Azure ML', icon: HiChartBar, description: 'Cloud AI' },
             ].map((tech, index) => {
               const Icon = tech.icon;
               return (
@@ -316,8 +381,12 @@ const AIFeatures = () => {
                   <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
                     <Icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="font-bold mb-1 text-gray-900 dark:text-white">{tech.name}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{tech.description}</p>
+                  <h3 className="font-bold mb-1 text-gray-900 dark:text-white">
+                    {tech.name}
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    {tech.description}
+                  </p>
                 </div>
               );
             })}
@@ -336,10 +405,16 @@ const AIFeatures = () => {
               Transform your business with our AI-powered solutions
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="/contact" className="btn-primary bg-white text-indigo-600 hover:bg-gray-100">
+              <a
+                href="/contact"
+                className="btn-primary bg-white text-indigo-600 hover:bg-gray-100"
+              >
                 Start Free Trial
               </a>
-              <a href="/ai-features" className="btn-outline border-white text-white hover:bg-white hover:text-indigo-600">
+              <a
+                href="/ai-features"
+                className="btn-outline border-white text-white hover:bg-white hover:text-indigo-600"
+              >
                 View All Features
               </a>
             </div>

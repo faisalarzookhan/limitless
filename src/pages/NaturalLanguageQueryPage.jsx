@@ -1,5 +1,15 @@
 import { useState } from 'react';
-import { HiChatAlt, HiLightBulb, HiAcademicCap, HiSparkles, HiCode, HiUserGroup, HiChartBar, HiDocumentText, HiDatabase } from 'react-icons/hi';
+import {
+  HiChatAlt,
+  HiLightBulb,
+  HiAcademicCap,
+  HiSparkles,
+  HiCode,
+  HiUserGroup,
+  HiChartBar,
+  HiDocumentText,
+  HiDatabase,
+} from 'react-icons/hi';
 import NaturalLanguageQuery from '../components/NaturalLanguageQuery';
 
 const NaturalLanguageQueryPage = () => {
@@ -7,71 +17,78 @@ const NaturalLanguageQueryPage = () => {
 
   const features = [
     {
-      title: "Natural Language Understanding",
-      description: "Understand complex queries expressed in plain English",
+      title: 'Natural Language Understanding',
+      description: 'Understand complex queries expressed in plain English',
       icon: HiAcademicCap,
-      color: "from-blue-500 to-cyan-500"
+      color: 'from-blue-500 to-cyan-500',
     },
     {
-      title: "Contextual Responses",
-      description: "Provide relevant answers based on your specific context",
+      title: 'Contextual Responses',
+      description: 'Provide relevant answers based on your specific context',
       icon: HiChatAlt,
-      color: "from-purple-500 to-pink-500"
+      color: 'from-purple-500 to-pink-500',
     },
     {
-      title: "Multi-Modal Queries",
-      description: "Handle different types of questions and data formats",
+      title: 'Multi-Modal Queries',
+      description: 'Handle different types of questions and data formats',
       icon: HiSparkles,
-      color: "from-green-500 to-emerald-500"
+      color: 'from-green-500 to-emerald-500',
     },
     {
-      title: "Real-Time Processing",
-      description: "Get instant responses to your questions",
+      title: 'Real-Time Processing',
+      description: 'Get instant responses to your questions',
       icon: HiLightBulb,
-      color: "from-yellow-500 to-amber-500"
-    }
+      color: 'from-yellow-500 to-amber-500',
+    },
   ];
 
   const useCases = [
     {
       question: "What's the cost for developing a mobile app?",
-      answer: "Our mobile app development starts at $25,000 for basic apps and goes up to $150,000+ for complex enterprise solutions. We offer native iOS/Android and cross-platform solutions using React Native or Flutter."
+      answer:
+        'Our mobile app development starts at $25,000 for basic apps and goes up to $150,000+ for complex enterprise solutions. We offer native iOS/Android and cross-platform solutions using React Native or Flutter.',
     },
     {
-      question: "How secure is your HR-IMS solution?",
-      answer: "Our HR-IMS solution is SOC 2 Type II certified with GDPR compliance, end-to-end encryption, and multi-factor authentication. We undergo quarterly security audits and penetration testing."
+      question: 'How secure is your HR-IMS solution?',
+      answer:
+        'Our HR-IMS solution is SOC 2 Type II certified with GDPR compliance, end-to-end encryption, and multi-factor authentication. We undergo quarterly security audits and penetration testing.',
     },
     {
-      question: "Can you integrate with our existing systems?",
-      answer: "Yes, we provide comprehensive API integration services supporting RESTful APIs, GraphQL, and custom integration solutions. We've successfully integrated with Salesforce, SAP, Oracle, and many other enterprise systems."
+      question: 'Can you integrate with our existing systems?',
+      answer:
+        "Yes, we provide comprehensive API integration services supporting RESTful APIs, GraphQL, and custom integration solutions. We've successfully integrated with Salesforce, SAP, Oracle, and many other enterprise systems.",
     },
     {
       question: "What's your timeline for a custom web application?",
-      answer: "Custom web applications typically take 8-16 weeks depending on complexity. Basic websites: 4-8 weeks, complex applications: 12-20 weeks. We follow agile methodology with regular milestone deliveries."
-    }
+      answer:
+        'Custom web applications typically take 8-16 weeks depending on complexity. Basic websites: 4-8 weeks, complex applications: 12-20 weeks. We follow agile methodology with regular milestone deliveries.',
+    },
   ];
 
   const benefits = [
     {
-      title: "Reduced Support Tickets",
-      description: "Self-service reduces support requests by up to 60%",
-      metric: "60% decrease"
+      title: 'Reduced Support Tickets',
+      description: 'Self-service reduces support requests by up to 60%',
+      metric: '60% decrease',
     },
     {
-      title: "Faster Resolution",
-      description: "Instant answers reduce resolution time from hours to seconds",
-      metric: "80% faster"
+      title: 'Faster Resolution',
+      description:
+        'Instant answers reduce resolution time from hours to seconds',
+      metric: '80% faster',
     },
     {
-      title: "Improved Satisfaction",
-      description: "Users appreciate the convenience and speed of natural language queries",
-      metric: "90% satisfaction"
+      title: 'Improved Satisfaction',
+      description:
+        'Users appreciate the convenience and speed of natural language queries',
+      metric: '90% satisfaction',
     },
     {
-      title: "24/7 Availability",
-      description: "AI assistant available around the clock to answer questions",
-      metric: "Always on"
-    }
+      title: '24/7 Availability',
+      description:
+        'AI assistant available around the clock to answer questions',
+      metric: 'Always on',
+    },
   ];
 
   return (
@@ -82,7 +99,9 @@ const NaturalLanguageQueryPage = () => {
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8">
               <HiAcademicCap className="w-5 h-5" />
-              <span className="text-sm font-semibold">Natural Language Query</span>
+              <span className="text-sm font-semibold">
+                Natural Language Query
+              </span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
               Ask in Plain
@@ -90,10 +109,11 @@ const NaturalLanguageQueryPage = () => {
               English
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8">
-              Get instant answers to your questions using natural language processing
+              Get instant answers to your questions using natural language
+              processing
             </p>
-            <a 
-              href="#query" 
+            <a
+              href="#query"
               className="btn-primary bg-white text-blue-600 hover:bg-gray-100"
             >
               Try It Now
@@ -110,7 +130,8 @@ const NaturalLanguageQueryPage = () => {
               Powerful <span className="text-gradient">Features</span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Our natural language query system understands context and provides relevant answers
+              Our natural language query system understands context and provides
+              relevant answers
             </p>
           </div>
 
@@ -119,7 +140,9 @@ const NaturalLanguageQueryPage = () => {
               const Icon = feature.icon;
               return (
                 <div key={index} className="text-center">
-                  <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mx-auto mb-6`}>
+                  <div
+                    className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mx-auto mb-6`}
+                  >
                     <Icon className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
@@ -136,7 +159,10 @@ const NaturalLanguageQueryPage = () => {
       </section>
 
       {/* Interactive Demo */}
-      <section id="query" className="section-padding bg-gray-50 dark:bg-dark-800">
+      <section
+        id="query"
+        className="section-padding bg-gray-50 dark:bg-dark-800"
+      >
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
@@ -144,7 +170,8 @@ const NaturalLanguageQueryPage = () => {
                 Try Our Natural Language Query
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-400">
-                Ask any question about our services, pricing, or technical capabilities
+                Ask any question about our services, pricing, or technical
+                capabilities
               </p>
             </div>
 
@@ -154,7 +181,9 @@ const NaturalLanguageQueryPage = () => {
                   <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center">
                     <HiAcademicCap className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="font-bold text-gray-900 dark:text-white">AI Assistant</h3>
+                  <h3 className="font-bold text-gray-900 dark:text-white">
+                    AI Assistant
+                  </h3>
                   <div className="flex-1 flex justify-end">
                     <div className="flex space-x-2">
                       <button
@@ -187,10 +216,15 @@ const NaturalLanguageQueryPage = () => {
                   <NaturalLanguageQuery />
                 ) : (
                   <div className="space-y-6">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-4">Example Queries</h4>
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-4">
+                      Example Queries
+                    </h4>
                     <div className="space-y-4">
                       {useCases.map((useCase, index) => (
-                        <div key={index} className="bg-gray-50 dark:bg-dark-700 rounded-xl p-4">
+                        <div
+                          key={index}
+                          className="bg-gray-50 dark:bg-dark-700 rounded-xl p-4"
+                        >
                           <div className="flex items-start space-x-3">
                             <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center flex-shrink-0">
                               <HiChatAlt className="w-4 h-4 text-white" />
@@ -223,13 +257,17 @@ const NaturalLanguageQueryPage = () => {
               Business <span className="text-gradient">Benefits</span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Natural language querying transforms how users interact with your systems
+              Natural language querying transforms how users interact with your
+              systems
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {benefits.map((benefit, index) => (
-              <div key={index} className="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-dark-700 text-center">
+              <div
+                key={index}
+                className="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-dark-700 text-center"
+              >
                 <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <HiLightBulb className="w-6 h-6 text-white" />
                 </div>
@@ -262,14 +300,30 @@ const NaturalLanguageQueryPage = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { name: 'OpenAI GPT', icon: HiAcademicCap, description: 'Language Understanding' },
+              {
+                name: 'OpenAI GPT',
+                icon: HiAcademicCap,
+                description: 'Language Understanding',
+              },
               { name: 'TensorFlow', icon: HiCode, description: 'ML Framework' },
-              { name: 'Python', icon: HiCode, description: 'Backend Processing' },
+              {
+                name: 'Python',
+                icon: HiCode,
+                description: 'Backend Processing',
+              },
               { name: 'React', icon: HiCode, description: 'Frontend UI' },
-              { name: 'PostgreSQL', icon: HiDatabase, description: 'Data Storage' },
+              {
+                name: 'PostgreSQL',
+                icon: HiDatabase,
+                description: 'Data Storage',
+              },
               { name: 'Redis', icon: HiSparkles, description: 'Caching' },
               { name: 'Docker', icon: HiCode, description: 'Containerization' },
-              { name: 'Kubernetes', icon: HiChartBar, description: 'Orchestration' }
+              {
+                name: 'Kubernetes',
+                icon: HiChartBar,
+                description: 'Orchestration',
+              },
             ].map((tech, index) => {
               const Icon = tech.icon;
               return (
@@ -277,8 +331,12 @@ const NaturalLanguageQueryPage = () => {
                   <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
                     <Icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="font-bold mb-1 text-gray-900 dark:text-white">{tech.name}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{tech.description}</p>
+                  <h3 className="font-bold mb-1 text-gray-900 dark:text-white">
+                    {tech.name}
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    {tech.description}
+                  </p>
                 </div>
               );
             })}
@@ -307,7 +365,8 @@ const NaturalLanguageQueryPage = () => {
                 API Integration
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-6">
-                Integrate our natural language query API into your existing applications and systems.
+                Integrate our natural language query API into your existing
+                applications and systems.
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center space-x-2">
@@ -359,7 +418,8 @@ const NaturalLanguageQueryPage = () => {
                 Custom Solutions
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-6">
-                Tailored natural language solutions for your specific business needs.
+                Tailored natural language solutions for your specific business
+                needs.
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center space-x-2">
@@ -391,10 +451,16 @@ const NaturalLanguageQueryPage = () => {
               Transform how users interact with your systems
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="/contact" className="btn-primary bg-white text-blue-600 hover:bg-gray-100">
+              <a
+                href="/contact"
+                className="btn-primary bg-white text-blue-600 hover:bg-gray-100"
+              >
                 Get Started
               </a>
-              <a href="/ai-features" className="btn-outline border-white text-white hover:bg-white hover:text-blue-600">
+              <a
+                href="/ai-features"
+                className="btn-outline border-white text-white hover:bg-white hover:text-blue-600"
+              >
                 Explore AI Features
               </a>
             </div>

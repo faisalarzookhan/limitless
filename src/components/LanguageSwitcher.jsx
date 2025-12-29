@@ -7,20 +7,36 @@ import PropTypes from 'prop-types';
  * Language Switcher Component
  * Provides language selection functionality using react-i18next
  */
-const LanguageSwitcher = ({ 
-  showFlags = false, 
-  compact = false, 
+const LanguageSwitcher = ({
+  showFlags = false,
+  compact = false,
   className = '',
-  buttonClassName = '' 
+  buttonClassName = '',
 }) => {
   const { i18n, t } = useTranslation();
   const [currentLanguage, setCurrentLanguage] = useState(i18n.language || 'en');
 
   const languages = [
-    { code: 'en', name: t('common.english', { defaultValue: 'English' }), flag: '🇺🇸' },
-    { code: 'hi', name: t('common.hindi', { defaultValue: 'Hindi' }), flag: '🇮🇳' },
-    { code: 'ar', name: t('common.arabic', { defaultValue: 'Arabic' }), flag: '🇸🇦' },
-    { code: 'es', name: t('common.spanish', { defaultValue: 'Spanish' }), flag: '🇪🇸' }
+    {
+      code: 'en',
+      name: t('common.english', { defaultValue: 'English' }),
+      flag: '🇺🇸',
+    },
+    {
+      code: 'hi',
+      name: t('common.hindi', { defaultValue: 'Hindi' }),
+      flag: '🇮🇳',
+    },
+    {
+      code: 'ar',
+      name: t('common.arabic', { defaultValue: 'Arabic' }),
+      flag: '🇸🇦',
+    },
+    {
+      code: 'es',
+      name: t('common.spanish', { defaultValue: 'Spanish' }),
+      flag: '🇪🇸',
+    },
   ];
 
   useEffect(() => {
@@ -30,29 +46,32 @@ const LanguageSwitcher = ({
     };
 
     i18n.on('languageChanged', handleLanguageChange);
-    
+
     return () => {
       i18n.off('languageChanged', handleLanguageChange);
     };
   }, [i18n]);
 
-  const changeLanguage = (langCode) => {
+  const changeLanguage = langCode => {
     i18n.changeLanguage(langCode);
     setCurrentLanguage(langCode);
   };
 
-  const currentLangInfo = languages.find(lang => lang.code === currentLanguage) || languages[0];
+  const currentLangInfo =
+    languages.find(lang => lang.code === currentLanguage) || languages[0];
 
   if (compact) {
     return (
       <div className={`language-switcher-compact ${className}`}>
         <select
           value={currentLanguage}
-          onChange={(e) => changeLanguage(e.target.value)}
+          onChange={e => changeLanguage(e.target.value)}
           className={`lang-select ${buttonClassName}`}
-          aria-label={t('common.selectLanguage', { defaultValue: 'Select Language' })}
+          aria-label={t('common.selectLanguage', {
+            defaultValue: 'Select Language',
+          })}
         >
-          {languages.map((lang) => (
+          {languages.map(lang => (
             <option key={lang.code} value={lang.code}>
               {showFlags && lang.flag} {lang.name}
             </option>
@@ -65,24 +84,28 @@ const LanguageSwitcher = ({
   return (
     <div className={`language-switcher ${className}`}>
       <div className="dropdown">
-        <button 
+        <button
           className={`lang-button ${buttonClassName}`}
           aria-haspopup="true"
           aria-expanded="false"
-          title={t('common.changeLanguage', { defaultValue: 'Change Language' })}
+          title={t('common.changeLanguage', {
+            defaultValue: 'Change Language',
+          })}
         >
           <Globe size={18} />
-          {showFlags && <span className="lang-flag">{currentLangInfo.flag}</span>}
+          {showFlags && (
+            <span className="lang-flag">{currentLangInfo.flag}</span>
+          )}
           <span className="lang-name">{currentLangInfo.name}</span>
         </button>
-        
+
         <div className="dropdown-menu">
           <div className="dropdown-header">
             <Languages size={16} />
             <span>{t('common.languages', { defaultValue: 'Languages' })}</span>
           </div>
-          
-          {languages.map((lang) => (
+
+          {languages.map(lang => (
             <button
               key={lang.code}
               className={`dropdown-item ${currentLanguage === lang.code ? 'active' : ''}`}
@@ -106,17 +129,11 @@ const LanguageSwitcher = ({
  * withTranslation Higher-Order Component
  * Wraps components with translation functionality
  */
-const withTranslation = (WrappedComponent) => {
-  return (props) => {
+const withTranslation = WrappedComponent => {
+  return props => {
     const { t, i18n } = useTranslation();
-    
-    return (
-      <WrappedComponent
-        {...props}
-        t={t}
-        i18n={i18n}
-      />
-    );
+
+    return <WrappedComponent {...props} t={t} i18n={i18n} />;
   };
 };
 
@@ -124,26 +141,22 @@ const withTranslation = (WrappedComponent) => {
  * TranslatedText Component
  * Renders translated text with support for dynamic values
  */
-const TranslatedText = ({ 
-  i18nKey, 
+const TranslatedText = ({
+  i18nKey,
   ns,
   values = {},
   children,
   fallback,
-  ...props 
+  ...props
 }) => {
   const { t } = useTranslation(ns);
-  
-  const translatedText = t(i18nKey, { 
+
+  const translatedText = t(i18nKey, {
     ...values,
-    defaultValue: fallback || i18nKey
+    defaultValue: fallback || i18nKey,
   });
-  
-  return (
-    <span {...props}>
-      {children || translatedText}
-    </span>
-  );
+
+  return <span {...props}>{children || translatedText}</span>;
 };
 
 /**
@@ -152,13 +165,12 @@ const TranslatedText = ({
  */
 const MultilingualProvider = ({ children }) => {
   const { t, i18n } = useTranslation();
-  
+
   return (
     <div data-language={i18n.language}>
-      {typeof children === 'function' 
+      {typeof children === 'function'
         ? children({ t, i18n, currentLanguage: i18n.language })
-        : children
-      }
+        : children}
     </div>
   );
 };
@@ -171,7 +183,7 @@ LanguageSwitcher.propTypes = {
   /** Additional CSS classes */
   className: PropTypes.string,
   /** Additional button CSS classes */
-  buttonClassName: PropTypes.string
+  buttonClassName: PropTypes.string,
 };
 
 TranslatedText.propTypes = {
@@ -184,22 +196,19 @@ TranslatedText.propTypes = {
   /** Fallback text */
   fallback: PropTypes.string,
   /** Child elements */
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 MultilingualProvider.propTypes = {
   /** Child elements or render function */
-  children: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.func
-  ]).isRequired
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
 };
 
-export { 
-  LanguageSwitcher, 
-  TranslatedText, 
-  MultilingualProvider, 
+export {
+  LanguageSwitcher,
+  TranslatedText,
+  MultilingualProvider,
   withTranslation,
-  useTranslation 
+  useTranslation,
 };
 export default LanguageSwitcher;

@@ -1,12 +1,22 @@
 import { useState } from 'react';
-import { HiUser, HiBriefcase, HiLightBulb, HiSparkles, HiChartBar, HiShieldCheck, HiClock, HiUserGroup, HiCheckCircle } from 'react-icons/hi';
+import {
+  HiUser,
+  HiBriefcase,
+  HiLightBulb,
+  HiSparkles,
+  HiChartBar,
+  HiShieldCheck,
+  HiClock,
+  HiUserGroup,
+  HiCheckCircle,
+} from 'react-icons/hi';
 import ProgressiveProfiling from '../components/ProgressiveProfiling';
 
 const ProgressiveProfilingPage = () => {
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [onboardingData, setOnboardingData] = useState(null);
 
-  const handleOnboardingComplete = (data) => {
+  const handleOnboardingComplete = data => {
     setOnboardingData(data);
     setShowOnboarding(false);
     // In a real app, you would save this data to your backend
@@ -19,63 +29,64 @@ const ProgressiveProfilingPage = () => {
 
   const benefits = [
     {
-      title: "Reduced Friction",
-      description: "Collect information gradually without overwhelming users",
+      title: 'Reduced Friction',
+      description: 'Collect information gradually without overwhelming users',
       icon: HiClock,
-      color: "from-blue-500 to-cyan-500"
+      color: 'from-blue-500 to-cyan-500',
     },
     {
-      title: "Higher Completion",
-      description: "Users are more likely to complete profile information",
+      title: 'Higher Completion',
+      description: 'Users are more likely to complete profile information',
       icon: HiChartBar,
-      color: "from-green-500 to-emerald-500"
+      color: 'from-green-500 to-emerald-500',
     },
     {
-      title: "Personalized Experience",
-      description: "Tailor the experience based on user preferences",
+      title: 'Personalized Experience',
+      description: 'Tailor the experience based on user preferences',
       icon: HiUser,
-      color: "from-purple-500 to-pink-500"
+      color: 'from-purple-500 to-pink-500',
     },
     {
-      title: "Better Data Quality",
-      description: "Collect more accurate information over time",
+      title: 'Better Data Quality',
+      description: 'Collect more accurate information over time',
       icon: HiShieldCheck,
-      color: "from-yellow-500 to-amber-500"
-    }
+      color: 'from-yellow-500 to-amber-500',
+    },
   ];
 
   const features = [
     {
-      title: "Smart Field Prioritization",
-      description: "Show the most important fields first based on user behavior"
+      title: 'Smart Field Prioritization',
+      description:
+        'Show the most important fields first based on user behavior',
     },
     {
-      title: "Context-Aware Suggestions",
-      description: "Provide intelligent suggestions based on previous answers"
+      title: 'Context-Aware Suggestions',
+      description: 'Provide intelligent suggestions based on previous answers',
     },
     {
-      title: "Cross-Device Sync",
-      description: "Continue where you left off on any device"
+      title: 'Cross-Device Sync',
+      description: 'Continue where you left off on any device',
     },
     {
-      title: "Privacy-First Approach",
-      description: "Only collect what's necessary for personalization"
+      title: 'Privacy-First Approach',
+      description: "Only collect what's necessary for personalization",
     },
     {
-      title: "A/B Testing Capabilities",
-      description: "Optimize the onboarding flow based on conversion rates"
+      title: 'A/B Testing Capabilities',
+      description: 'Optimize the onboarding flow based on conversion rates',
     },
     {
-      title: "Integration Ready",
-      description: "Seamlessly integrate with your existing systems"
-    }
+      title: 'Integration Ready',
+      description: 'Seamlessly integrate with your existing systems',
+    },
   ];
 
   const stats = [
     { label: 'Completion Rate', value: '78%', change: '+32%' },
     { label: 'User Engagement', value: '2.4x', change: '+45%' },
     { label: 'Data Quality', value: '94%', change: '+28%' },
-    { label: 'Drop-off Rate', value: '12%', change: '-41%' }
+    { label: 'Drop-off Rate', value: '12%', change: '-41%' },
   ];
 
   return (
@@ -86,7 +97,9 @@ const ProgressiveProfilingPage = () => {
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8">
               <HiSparkles className="w-5 h-5" />
-              <span className="text-sm font-semibold">Progressive Profiling</span>
+              <span className="text-sm font-semibold">
+                Progressive Profiling
+              </span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
               Progressive
@@ -114,7 +127,8 @@ const ProgressiveProfilingPage = () => {
               Why <span className="text-gradient">Progressive Profiling</span>?
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Transform your user onboarding experience with smart, gradual information collection
+              Transform your user onboarding experience with smart, gradual
+              information collection
             </p>
           </div>
 
@@ -123,7 +137,9 @@ const ProgressiveProfilingPage = () => {
               const Icon = benefit.icon;
               return (
                 <div key={index} className="text-center">
-                  <div className={`w-16 h-16 bg-gradient-to-br ${benefit.color} rounded-2xl flex items-center justify-center mx-auto mb-6`}>
+                  <div
+                    className={`w-16 h-16 bg-gradient-to-br ${benefit.color} rounded-2xl flex items-center justify-center mx-auto mb-6`}
+                  >
                     <Icon className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
@@ -153,12 +169,23 @@ const ProgressiveProfilingPage = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat, index) => (
-              <div key={index} className="bg-white dark:bg-dark-800 rounded-xl p-6 shadow-soft border border-gray-100 dark:border-dark-700 text-center">
-                <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{stat.value}</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">{stat.label}</div>
-                <div className={`text-sm font-medium ${
-                  stat.change.startsWith('+') ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
-                }`}>
+              <div
+                key={index}
+                className="bg-white dark:bg-dark-800 rounded-xl p-6 shadow-soft border border-gray-100 dark:border-dark-700 text-center"
+              >
+                <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                  {stat.value}
+                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                  {stat.label}
+                </div>
+                <div
+                  className={`text-sm font-medium ${
+                    stat.change.startsWith('+')
+                      ? 'text-green-600 dark:text-green-400'
+                      : 'text-red-600 dark:text-red-400'
+                  }`}
+                >
                   {stat.change}
                 </div>
               </div>
@@ -181,7 +208,10 @@ const ProgressiveProfilingPage = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {features.map((feature, index) => (
-              <div key={index} className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700">
+              <div
+                key={index}
+                className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700"
+              >
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center flex-shrink-0">
                     <HiUserGroup className="w-6 h-6 text-white" />
@@ -223,10 +253,13 @@ const ProgressiveProfilingPage = () => {
                   Onboarding Complete!
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  Thank you for completing the progressive profiling onboarding. Your profile has been updated.
+                  Thank you for completing the progressive profiling onboarding.
+                  Your profile has been updated.
                 </p>
                 <div className="bg-gray-50 dark:bg-dark-700 rounded-xl p-4 text-left">
-                  <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">Your Information:</h4>
+                  <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">
+                    Your Information:
+                  </h4>
                   <pre className="text-sm text-gray-600 dark:text-gray-400 overflow-x-auto">
                     {JSON.stringify(onboardingData, null, 2)}
                   </pre>
@@ -255,8 +288,9 @@ const ProgressiveProfilingPage = () => {
                   Progressive Profiling Demo
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
-                  Click the button below to experience our progressive profiling onboarding flow. 
-                  We'll gradually collect information to personalize your experience.
+                  Click the button below to experience our progressive profiling
+                  onboarding flow. We'll gradually collect information to
+                  personalize your experience.
                 </p>
                 <button
                   onClick={() => setShowOnboarding(true)}
@@ -291,7 +325,8 @@ const ProgressiveProfilingPage = () => {
                 API Integration
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Simple API endpoints to track and manage user profile completion.
+                Simple API endpoints to track and manage user profile
+                completion.
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center space-x-2">
@@ -317,7 +352,8 @@ const ProgressiveProfilingPage = () => {
                 Customizable Flows
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Tailor the onboarding experience based on user behavior and preferences.
+                Tailor the onboarding experience based on user behavior and
+                preferences.
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center space-x-2">
@@ -343,7 +379,8 @@ const ProgressiveProfilingPage = () => {
                 Privacy & Security
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Built with privacy-first principles and enterprise-grade security.
+                Built with privacy-first principles and enterprise-grade
+                security.
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center space-x-2">
@@ -372,13 +409,20 @@ const ProgressiveProfilingPage = () => {
               Ready to Improve Your Onboarding?
             </h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Implement progressive profiling to reduce friction and increase completion rates
+              Implement progressive profiling to reduce friction and increase
+              completion rates
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="/contact" className="btn-primary bg-white text-indigo-600 hover:bg-gray-100">
+              <a
+                href="/contact"
+                className="btn-primary bg-white text-indigo-600 hover:bg-gray-100"
+              >
                 Get Started
               </a>
-              <a href="/services" className="btn-outline border-white text-white hover:bg-white hover:text-indigo-600">
+              <a
+                href="/services"
+                className="btn-outline border-white text-white hover:bg-white hover:text-indigo-600"
+              >
                 Explore Services
               </a>
             </div>

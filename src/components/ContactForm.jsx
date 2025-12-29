@@ -1,5 +1,12 @@
 import { useState } from 'react';
-import { HiMail, HiUser, HiQuestionMarkCircle, HiCheckCircle, HiPhone, HiDocumentText } from 'react-icons/hi';
+import {
+  HiMail,
+  HiUser,
+  HiQuestionMarkCircle,
+  HiCheckCircle,
+  HiPhone,
+  HiDocumentText,
+} from 'react-icons/hi';
 import { sendContactNotification } from '../services/notificationService';
 
 const ContactForm = ({ variant = 'default' }) => {
@@ -13,12 +20,12 @@ const ContactForm = ({ variant = 'default' }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -30,7 +37,7 @@ const ContactForm = ({ variant = 'default' }) => {
       subject: formData.subject,
       message: formData.message,
       timestamp: new Date().toISOString(),
-      page: window.location.pathname
+      page: window.location.pathname,
     });
 
     // Simulate API call
@@ -38,7 +45,7 @@ const ContactForm = ({ variant = 'default' }) => {
       setIsSubmitting(false);
       setSubmitSuccess(true);
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-      
+
       // Reset success message after 5 seconds
       setTimeout(() => setSubmitSuccess(false), 5000);
     }, 1500);
@@ -50,7 +57,9 @@ const ContactForm = ({ variant = 'default' }) => {
         <div className="flex items-center justify-center mb-3">
           <HiCheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
         </div>
-        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">Message Sent!</h3>
+        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">
+          Message Sent!
+        </h3>
         <p className="text-green-700 dark:text-green-400 text-sm">
           Thank you for contacting us. We'll get back to you soon.
         </p>
@@ -62,7 +71,10 @@ const ContactForm = ({ variant = 'default' }) => {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Full Name *
           </label>
           <div className="relative">
@@ -82,7 +94,10 @@ const ContactForm = ({ variant = 'default' }) => {
           </div>
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Email Address *
           </label>
           <div className="relative">
@@ -104,7 +119,10 @@ const ContactForm = ({ variant = 'default' }) => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="phone"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Phone Number
           </label>
           <input
@@ -118,7 +136,10 @@ const ContactForm = ({ variant = 'default' }) => {
           />
         </div>
         <div>
-          <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="subject"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Subject *
           </label>
           <div className="relative">
@@ -145,7 +166,10 @@ const ContactForm = ({ variant = 'default' }) => {
         </div>
       </div>
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="message"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Your Message *
         </label>
         <div className="relative">

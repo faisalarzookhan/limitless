@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   HiCode,
   HiDeviceMobile,
@@ -18,26 +18,26 @@ import {
   HiSearch,
   HiExclamation,
   HiRefresh,
-} from "react-icons/hi";
-import { api } from "../services/api";
-import { useApp } from "../context/AppContext";
+} from 'react-icons/hi';
+import { api } from '../services/api';
+import { useApp } from '../context/AppContext';
 
 const Portfolio = () => {
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
   const [portfolioProjects, setPortfolioProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   const { showError } = useApp();
 
   const categories = [
-    { id: "all", name: "All Projects", icon: HiCube },
-    { id: "web", name: "Web Development", icon: HiCode },
-    { id: "mobile", name: "Mobile Apps", icon: HiDeviceMobile },
-    { id: "crm", name: "CRM & Business", icon: HiChartBar },
-    { id: "ecommerce", name: "E-commerce", icon: HiShoppingCart },
-    { id: "automation", name: "Automation & AI", icon: HiLightningBolt },
+    { id: 'all', name: 'All Projects', icon: HiCube },
+    { id: 'web', name: 'Web Development', icon: HiCode },
+    { id: 'mobile', name: 'Mobile Apps', icon: HiDeviceMobile },
+    { id: 'crm', name: 'CRM & Business', icon: HiChartBar },
+    { id: 'ecommerce', name: 'E-commerce', icon: HiShoppingCart },
+    { id: 'automation', name: 'Automation & AI', icon: HiLightningBolt },
   ];
 
   // Fetch portfolio projects from API
@@ -51,335 +51,337 @@ const Portfolio = () => {
       } catch (err) {
         console.error('Error fetching portfolio projects:', err);
         setError(err.message || 'Failed to fetch portfolio projects');
-        
+
         // Show error to user
-        showError('Failed to load portfolio projects. Showing sample projects instead.');
-        
+        showError(
+          'Failed to load portfolio projects. Showing sample projects instead.'
+        );
+
         // Fallback to hardcoded data
         setPortfolioProjects([
           {
             id: 101,
-            title: "IVOLEX - Enterprise Resource Planning System",
-            category: "crm",
-            client: "Enterprise Client (Confidential)",
-            industry: "Enterprise Software",
+            title: 'IVOLEX - Enterprise Resource Planning System',
+            category: 'crm',
+            client: 'Enterprise Client (Confidential)',
+            industry: 'Enterprise Software',
             description:
-              "Custom ERP solution with multi-location support, real-time analytics, and comprehensive business management capabilities.",
+              'Custom ERP solution with multi-location support, real-time analytics, and comprehensive business management capabilities.',
             image: null,
-            tags: ["ERP", "React", "Node.js", "MongoDB", "React Native"],
+            tags: ['ERP', 'React', 'Node.js', 'MongoDB', 'React Native'],
             results: {
-              efficiency: "+60%",
-              automation: "80%",
-              locations: "15",
-              users: "500+",
+              efficiency: '+60%',
+              automation: '80%',
+              locations: '15',
+              users: '500+',
             },
-            year: "2023",
-            duration: "8 months",
+            year: '2023',
+            duration: '8 months',
             icon: HiOfficeBuilding,
-            color: "from-blue-600 to-purple-600",
+            color: 'from-blue-600 to-purple-600',
             featured: true,
             testimonial: {
-              text: "Limitless Infotech transformed our operations with IVOLEX. The system integrated all 15 locations seamlessly, automated 80% of our manual processes, and improved overall efficiency by 60%. Their team was professional, responsive, and delivered beyond expectations.",
-              author: "Operations Director",
-              company: "Enterprise Client",
+              text: 'Limitless Infotech transformed our operations with IVOLEX. The system integrated all 15 locations seamlessly, automated 80% of our manual processes, and improved overall efficiency by 60%. Their team was professional, responsive, and delivered beyond expectations.',
+              author: 'Operations Director',
+              company: 'Enterprise Client',
             },
             fullDescription:
-              "IVOLEX is a comprehensive enterprise resource planning system built from ground up to handle complex multi-location operations. The platform includes custom workflow engine, real-time analytics dashboard, mobile applications for iOS and Android, multi-location inventory management, role-based access control, and extensive integration APIs. The system successfully handles 500+ daily active users across 15 locations with 99.9% uptime.",
+              'IVOLEX is a comprehensive enterprise resource planning system built from ground up to handle complex multi-location operations. The platform includes custom workflow engine, real-time analytics dashboard, mobile applications for iOS and Android, multi-location inventory management, role-based access control, and extensive integration APIs. The system successfully handles 500+ daily active users across 15 locations with 99.9% uptime.',
             features: [
-              "Custom workflow engine tailored to business needs",
-              "Real-time analytics and reporting dashboard",
-              "Native mobile apps for iOS and Android",
-              "Multi-location inventory synchronization",
-              "Role-based access control with granular permissions",
-              "Integration APIs for third-party systems",
-              "Automated approval workflows",
-              "Document management system",
-              "Advanced search and filtering",
-              "Audit trails and compliance reporting",
+              'Custom workflow engine tailored to business needs',
+              'Real-time analytics and reporting dashboard',
+              'Native mobile apps for iOS and Android',
+              'Multi-location inventory synchronization',
+              'Role-based access control with granular permissions',
+              'Integration APIs for third-party systems',
+              'Automated approval workflows',
+              'Document management system',
+              'Advanced search and filtering',
+              'Audit trails and compliance reporting',
             ],
           },
           {
             id: 102,
-            title: "Wakilni - Legal Services Platform",
-            category: "mobile",
-            client: "Legal Industry Startup",
-            industry: "Legal Technology",
+            title: 'Wakilni - Legal Services Platform',
+            category: 'mobile',
+            client: 'Legal Industry Startup',
+            industry: 'Legal Technology',
             description:
-              "Comprehensive platform connecting 500+ lawyers with 10,000+ clients, featuring case management, document handling, and multi-language support.",
+              'Comprehensive platform connecting 500+ lawyers with 10,000+ clients, featuring case management, document handling, and multi-language support.',
             image: null,
-            tags: ["LegalTech", "React", "Django", "PostgreSQL", "Flutter"],
+            tags: ['LegalTech', 'React', 'Django', 'PostgreSQL', 'Flutter'],
             results: {
-              lawyers: "500+",
-              clients: "10,000+",
-              resolution: "-80%",
-              satisfaction: "95%",
+              lawyers: '500+',
+              clients: '10,000+',
+              resolution: '-80%',
+              satisfaction: '95%',
             },
-            year: "2024",
-            duration: "10 months",
+            year: '2024',
+            duration: '10 months',
             icon: HiAcademicCap,
-            color: "from-amber-600 to-orange-600",
+            color: 'from-amber-600 to-orange-600',
             featured: true,
             testimonial: {
-              text: "Wakilni has revolutionized how we connect legal professionals with clients. The platform is intuitive, scalable, and has helped us build a thriving community of lawyers and clients. Limitless Infotech delivered a world-class solution that exceeded all our expectations.",
-              author: "Founder & CEO",
-              company: "Wakilni Platform",
+              text: 'Wakilni has revolutionized how we connect legal professionals with clients. The platform is intuitive, scalable, and has helped us build a thriving community of lawyers and clients. Limitless Infotech delivered a world-class solution that exceeded all our expectations.',
+              author: 'Founder & CEO',
+              company: 'Wakilni Platform',
             },
             fullDescription:
-              "Wakilni is a cutting-edge legal services platform that bridges the gap between legal professionals and clients seeking legal assistance. The platform features a comprehensive lawyer directory with detailed profiles, advanced case management system, secure document management, appointment scheduling with calendar integration, integrated payment processing, review and rating system, and full multi-language support in Arabic and English. The platform has successfully onboarded 500+ verified lawyers and serves over 10,000 active clients.",
+              'Wakilni is a cutting-edge legal services platform that bridges the gap between legal professionals and clients seeking legal assistance. The platform features a comprehensive lawyer directory with detailed profiles, advanced case management system, secure document management, appointment scheduling with calendar integration, integrated payment processing, review and rating system, and full multi-language support in Arabic and English. The platform has successfully onboarded 500+ verified lawyers and serves over 10,000 active clients.',
             features: [
-              "Comprehensive lawyer directory with verified profiles",
-              "Advanced case management system",
-              "Secure document storage and sharing",
-              "Appointment scheduling with reminders",
-              "Integrated payment gateway",
-              "Review and rating system",
-              "Multi-language support (Arabic/English)",
-              "In-app messaging and notifications",
-              "Mobile apps for lawyers and clients",
-              "Analytics dashboard for lawyers",
-              "Admin panel for platform management",
-              "Automated matching algorithm",
+              'Comprehensive lawyer directory with verified profiles',
+              'Advanced case management system',
+              'Secure document storage and sharing',
+              'Appointment scheduling with reminders',
+              'Integrated payment gateway',
+              'Review and rating system',
+              'Multi-language support (Arabic/English)',
+              'In-app messaging and notifications',
+              'Mobile apps for lawyers and clients',
+              'Analytics dashboard for lawyers',
+              'Admin panel for platform management',
+              'Automated matching algorithm',
             ],
           },
           {
             id: 1,
-            title: "TechVision CRM System",
-            category: "crm",
-            client: "TechVision Solutions",
-            industry: "Technology",
+            title: 'TechVision CRM System',
+            category: 'crm',
+            client: 'TechVision Solutions',
+            industry: 'Technology',
             description:
-              "A comprehensive customer relationship management system with advanced analytics and automation.",
+              'A comprehensive customer relationship management system with advanced analytics and automation.',
             image: null,
-            tags: ["CRM", "React", "Node.js", "PostgreSQL"],
+            tags: ['CRM', 'React', 'Node.js', 'PostgreSQL'],
             results: {
-              productivity: "+40%",
-              efficiency: "+35%",
-              satisfaction: "+50%",
+              productivity: '+40%',
+              efficiency: '+35%',
+              satisfaction: '+50%',
             },
-            year: "2023",
-            duration: "4 months",
+            year: '2023',
+            duration: '4 months',
             icon: HiChartBar,
-            color: "from-green-500 to-emerald-500",
+            color: 'from-green-500 to-emerald-500',
           },
           {
             id: 2,
-            title: "StyleHub E-commerce Platform",
-            category: "ecommerce",
-            client: "StyleHub Fashion",
-            industry: "Retail & Fashion",
+            title: 'StyleHub E-commerce Platform',
+            category: 'ecommerce',
+            client: 'StyleHub Fashion',
+            industry: 'Retail & Fashion',
             description:
-              "Modern e-commerce platform with AI-powered recommendations and seamless checkout experience.",
+              'Modern e-commerce platform with AI-powered recommendations and seamless checkout experience.',
             image: null,
-            tags: ["E-commerce", "Next.js", "Stripe", "AI"],
+            tags: ['E-commerce', 'Next.js', 'Stripe', 'AI'],
             results: {
-              sales: "+300%",
-              conversion: "+85%",
-              traffic: "+250%",
+              sales: '+300%',
+              conversion: '+85%',
+              traffic: '+250%',
             },
-            year: "2023",
-            duration: "5 months",
+            year: '2023',
+            duration: '5 months',
             icon: HiShoppingCart,
-            color: "from-pink-500 to-rose-500",
+            color: 'from-pink-500 to-rose-500',
           },
           {
             id: 3,
-            title: "LogiTrack Mobile App",
-            category: "mobile",
-            client: "LogiTrack Logistics",
-            industry: "Logistics & Transportation",
+            title: 'LogiTrack Mobile App',
+            category: 'mobile',
+            client: 'LogiTrack Logistics',
+            industry: 'Logistics & Transportation',
             description:
-              "Real-time logistics tracking mobile application with route optimization and delivery management.",
+              'Real-time logistics tracking mobile application with route optimization and delivery management.',
             image: null,
-            tags: ["Mobile App", "React Native", "GPS", "Real-time"],
+            tags: ['Mobile App', 'React Native', 'GPS', 'Real-time'],
             results: {
-              efficiency: "+60%",
-              accuracy: "+95%",
-              cost: "-30%",
+              efficiency: '+60%',
+              accuracy: '+95%',
+              cost: '-30%',
             },
-            year: "2023",
-            duration: "6 months",
+            year: '2023',
+            duration: '6 months',
             icon: HiTruck,
-            color: "from-blue-500 to-cyan-500",
+            color: 'from-blue-500 to-cyan-500',
           },
           {
             id: 4,
-            title: "EduLearn LMS Platform",
-            category: "web",
-            client: "EduLearn Academy",
-            industry: "Education",
+            title: 'EduLearn LMS Platform',
+            category: 'web',
+            client: 'EduLearn Academy',
+            industry: 'Education',
             description:
-              "Complete learning management system with video streaming, assessments, and progress tracking.",
+              'Complete learning management system with video streaming, assessments, and progress tracking.',
             image: null,
-            tags: ["LMS", "React", "Video Streaming", "MongoDB"],
+            tags: ['LMS', 'React', 'Video Streaming', 'MongoDB'],
             results: {
-              engagement: "+120%",
-              completion: "+80%",
-              satisfaction: "+90%",
+              engagement: '+120%',
+              completion: '+80%',
+              satisfaction: '+90%',
             },
-            year: "2023",
-            duration: "7 months",
+            year: '2023',
+            duration: '7 months',
             icon: HiAcademicCap,
-            color: "from-purple-500 to-indigo-500",
+            color: 'from-purple-500 to-indigo-500',
           },
           {
             id: 5,
-            title: "HealthCare Patient Portal",
-            category: "web",
-            client: "HealthCare Plus",
-            industry: "Healthcare",
+            title: 'HealthCare Patient Portal',
+            category: 'web',
+            client: 'HealthCare Plus',
+            industry: 'Healthcare',
             description:
-              "Secure patient portal with appointment scheduling, medical records, and telemedicine integration.",
+              'Secure patient portal with appointment scheduling, medical records, and telemedicine integration.',
             image: null,
-            tags: ["Healthcare", "HIPAA", "Vue.js", "Telemedicine"],
+            tags: ['Healthcare', 'HIPAA', 'Vue.js', 'Telemedicine'],
             results: {
-              appointments: "+150%",
-              paperwork: "-70%",
-              satisfaction: "+85%",
+              appointments: '+150%',
+              paperwork: '-70%',
+              satisfaction: '+85%',
             },
-            year: "2023",
-            duration: "8 months",
+            year: '2023',
+            duration: '8 months',
             icon: HiHeart,
-            color: "from-red-500 to-pink-500",
+            color: 'from-red-500 to-pink-500',
           },
           {
             id: 6,
-            title: "FinTech Payment Gateway",
-            category: "web",
-            client: "SecurePay Financial",
-            industry: "Financial Services",
+            title: 'FinTech Payment Gateway',
+            category: 'web',
+            client: 'SecurePay Financial',
+            industry: 'Financial Services',
             description:
-              "Enterprise payment gateway with multi-currency support and fraud detection.",
+              'Enterprise payment gateway with multi-currency support and fraud detection.',
             image: null,
-            tags: ["FinTech", "Payment", "Security", "Node.js"],
+            tags: ['FinTech', 'Payment', 'Security', 'Node.js'],
             results: {
-              transactions: "+500%",
-              security: "99.9%",
-              uptime: "99.99%",
+              transactions: '+500%',
+              security: '99.9%',
+              uptime: '99.99%',
             },
-            year: "2022",
-            duration: "10 months",
+            year: '2022',
+            duration: '10 months',
             icon: HiCash,
-            color: "from-yellow-500 to-amber-500",
+            color: 'from-yellow-500 to-amber-500',
           },
           {
             id: 7,
-            title: "Smart Office Automation",
-            category: "automation",
-            client: "Corporate Offices Ltd",
-            industry: "Corporate",
+            title: 'Smart Office Automation',
+            category: 'automation',
+            client: 'Corporate Offices Ltd',
+            industry: 'Corporate',
             description:
-              "IoT-based office automation system with AI-powered resource management and energy optimization.",
+              'IoT-based office automation system with AI-powered resource management and energy optimization.',
             image: null,
-            tags: ["IoT", "AI", "Automation", "Python"],
+            tags: ['IoT', 'AI', 'Automation', 'Python'],
             results: {
-              energy: "-40%",
-              efficiency: "+55%",
-              cost: "-35%",
+              energy: '-40%',
+              efficiency: '+55%',
+              cost: '-35%',
             },
-            year: "2023",
-            duration: "5 months",
+            year: '2023',
+            duration: '5 months',
             icon: HiOfficeBuilding,
-            color: "from-orange-500 to-red-500",
+            color: 'from-orange-500 to-red-500',
           },
           {
             id: 8,
-            title: "RestaurantPro Management",
-            category: "mobile",
-            client: "Restaurant Chain Group",
-            industry: "Food & Beverage",
+            title: 'RestaurantPro Management',
+            category: 'mobile',
+            client: 'Restaurant Chain Group',
+            industry: 'Food & Beverage',
             description:
-              "Complete restaurant management system with POS, inventory, and customer loyalty program.",
+              'Complete restaurant management system with POS, inventory, and customer loyalty program.',
             image: null,
-            tags: ["Mobile", "POS", "Inventory", "Flutter"],
+            tags: ['Mobile', 'POS', 'Inventory', 'Flutter'],
             results: {
-              orders: "+180%",
-              accuracy: "+98%",
-              waste: "-45%",
+              orders: '+180%',
+              accuracy: '+98%',
+              waste: '-45%',
             },
-            year: "2023",
-            duration: "4 months",
+            year: '2023',
+            duration: '4 months',
             icon: HiShoppingCart,
-            color: "from-green-500 to-teal-500",
+            color: 'from-green-500 to-teal-500',
           },
           {
             id: 9,
-            title: "PropertyHub Real Estate Platform",
-            category: "web",
-            client: "PropertyHub Realty",
-            industry: "Real Estate",
+            title: 'PropertyHub Real Estate Platform',
+            category: 'web',
+            client: 'PropertyHub Realty',
+            industry: 'Real Estate',
             description:
-              "Modern real estate platform with virtual tours, mortgage calculator, and agent matching.",
+              'Modern real estate platform with virtual tours, mortgage calculator, and agent matching.',
             image: null,
-            tags: ["Real Estate", "React", "3D Tours", "Maps"],
+            tags: ['Real Estate', 'React', '3D Tours', 'Maps'],
             results: {
-              listings: "+400%",
-              leads: "+220%",
-              conversion: "+95%",
+              listings: '+400%',
+              leads: '+220%',
+              conversion: '+95%',
             },
-            year: "2022",
-            duration: "6 months",
+            year: '2022',
+            duration: '6 months',
             icon: HiOfficeBuilding,
-            color: "from-blue-500 to-indigo-500",
+            color: 'from-blue-500 to-indigo-500',
           },
           {
             id: 10,
-            title: "AI Chatbot for Customer Service",
-            category: "automation",
-            client: "CustomerFirst Inc",
-            industry: "Customer Service",
+            title: 'AI Chatbot for Customer Service',
+            category: 'automation',
+            client: 'CustomerFirst Inc',
+            industry: 'Customer Service',
             description:
-              "Intelligent AI chatbot with natural language processing and multi-language support.",
+              'Intelligent AI chatbot with natural language processing and multi-language support.',
             image: null,
-            tags: ["AI", "NLP", "Chatbot", "Machine Learning"],
+            tags: ['AI', 'NLP', 'Chatbot', 'Machine Learning'],
             results: {
-              response: "-90%",
-              satisfaction: "+75%",
-              cost: "-60%",
+              response: '-90%',
+              satisfaction: '+75%',
+              cost: '-60%',
             },
-            year: "2023",
-            duration: "3 months",
+            year: '2023',
+            duration: '3 months',
             icon: HiLightningBolt,
-            color: "from-purple-500 to-pink-500",
+            color: 'from-purple-500 to-pink-500',
           },
           {
             id: 11,
-            title: "FitLife Fitness App",
-            category: "mobile",
-            client: "FitLife Wellness",
-            industry: "Health & Fitness",
+            title: 'FitLife Fitness App',
+            category: 'mobile',
+            client: 'FitLife Wellness',
+            industry: 'Health & Fitness',
             description:
-              "Comprehensive fitness app with workout tracking, meal planning, and social features.",
+              'Comprehensive fitness app with workout tracking, meal planning, and social features.',
             image: null,
-            tags: ["Mobile", "Health", "React Native", "Firebase"],
+            tags: ['Mobile', 'Health', 'React Native', 'Firebase'],
             results: {
-              users: "+1000%",
-              engagement: "+150%",
-              retention: "+85%",
+              users: '+1000%',
+              engagement: '+150%',
+              retention: '+85%',
             },
-            year: "2023",
-            duration: "5 months",
+            year: '2023',
+            duration: '5 months',
             icon: HiHeart,
-            color: "from-red-500 to-orange-500",
+            color: 'from-red-500 to-orange-500',
           },
           {
             id: 12,
-            title: "Enterprise ERP System",
-            category: "crm",
-            client: "Manufacturing Corp",
-            industry: "Manufacturing",
+            title: 'Enterprise ERP System',
+            category: 'crm',
+            client: 'Manufacturing Corp',
+            industry: 'Manufacturing',
             description:
-              "Custom ERP system integrating inventory, production, sales, and finance departments.",
+              'Custom ERP system integrating inventory, production, sales, and finance departments.',
             image: null,
-            tags: ["ERP", "Enterprise", ".NET", "SQL Server"],
+            tags: ['ERP', 'Enterprise', '.NET', 'SQL Server'],
             results: {
-              integration: "+100%",
-              errors: "-85%",
-              productivity: "+65%",
+              integration: '+100%',
+              errors: '-85%',
+              productivity: '+65%',
             },
-            year: "2022",
-            duration: "12 months",
+            year: '2022',
+            duration: '12 months',
             icon: HiChartBar,
-            color: "from-indigo-500 to-purple-500",
+            color: 'from-indigo-500 to-purple-500',
           },
         ]);
       } finally {
@@ -390,31 +392,34 @@ const Portfolio = () => {
     fetchPortfolioProjects();
   }, []);
 
-  const filteredProjects = portfolioProjects.filter((project) => {
+  const filteredProjects = portfolioProjects.filter(project => {
     const matchesCategory =
-      selectedCategory === "all" || project.category === selectedCategory;
+      selectedCategory === 'all' || project.category === selectedCategory;
     const matchesSearch =
       project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.client.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.industry.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.tags.some((tag) =>
-        tag.toLowerCase().includes(searchQuery.toLowerCase()),
+      project.tags.some(tag =>
+        tag.toLowerCase().includes(searchQuery.toLowerCase())
       );
     return matchesCategory && matchesSearch;
   });
 
   const stats = [
-    { number: "100+", label: "Projects Delivered" },
-    { number: "50+", label: "Happy Clients" },
-    { number: "15+", label: "Industries Served" },
-    { number: "99%", label: "Client Satisfaction" },
+    { number: '100+', label: 'Projects Delivered' },
+    { number: '50+', label: 'Happy Clients' },
+    { number: '15+', label: 'Industries Served' },
+    { number: '99%', label: 'Client Satisfaction' },
   ];
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative py-20 md:py-32 bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 text-white overflow-hidden">
-        <div className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8" aria-hidden="true">
+        <div
+          className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8"
+          aria-hidden="true"
+        >
           <div className="absolute inset-0 bg-pattern-grid opacity-10"></div>
         </div>
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
@@ -428,7 +433,7 @@ const Portfolio = () => {
             </h1>
             <p
               className="text-xl md:text-2xl text-white/90 mb-8 animate-fade-in-up"
-              style={{ animationDelay: "0.2s" }}
+              style={{ animationDelay: '0.2s' }}
             >
               Explore our showcase of successful projects that have transformed
               businesses across industries
@@ -478,9 +483,7 @@ const Portfolio = () => {
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                 Unable to Load Projects
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
-                {error}
-              </p>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">{error}</p>
               <button
                 onClick={() => window.location.reload()}
                 className="inline-flex items-center space-x-2 px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-300"
@@ -500,7 +503,7 @@ const Portfolio = () => {
                   type="text"
                   placeholder="Search projects by name, client, industry, or technology..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={e => setSearchQuery(e.target.value)}
                   className="w-full pl-12 pr-4 py-4 bg-gray-50 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-900 dark:text-white"
                 />
               </div>
@@ -513,14 +516,14 @@ const Portfolio = () => {
               <div className="inline-flex items-center space-x-2 bg-gray-50 dark:bg-dark-800 p-2 rounded-xl border border-gray-200 dark:border-dark-700">
                 <HiFilter className="w-5 h-5 text-gray-500 dark:text-gray-400 ml-2" />
                 <div className="flex flex-wrap gap-2">
-                  {categories.map((category) => (
+                  {categories.map(category => (
                     <button
                       key={category.id}
                       onClick={() => setSelectedCategory(category.id)}
                       className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center space-x-2 ${
                         selectedCategory === category.id
-                          ? "bg-primary-600 text-white shadow-lg"
-                          : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-dark-700"
+                          ? 'bg-primary-600 text-white shadow-lg'
+                          : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-dark-700'
                       }`}
                     >
                       <category.icon className="w-4 h-4" />
@@ -536,11 +539,11 @@ const Portfolio = () => {
           {!loading && !error && (
             <div className="text-center mb-8">
               <p className="text-gray-600 dark:text-gray-400">
-                Showing{" "}
+                Showing{' '}
                 <span className="font-semibold text-primary-600 dark:text-primary-400">
                   {filteredProjects.length}
-                </span>{" "}
-                project{filteredProjects.length !== 1 ? "s" : ""}
+                </span>{' '}
+                project{filteredProjects.length !== 1 ? 's' : ''}
               </p>
             </div>
           )}

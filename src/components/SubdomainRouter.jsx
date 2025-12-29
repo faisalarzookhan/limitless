@@ -39,25 +39,25 @@ const SubdomainRouter = ({ children }) => {
   }
 
   return (
-    <div className={`subdomain-router ${currentSubdomain ? `subdomain-${currentSubdomain}` : 'main-domain'}`}>
+    <div
+      className={`subdomain-router ${currentSubdomain ? `subdomain-${currentSubdomain}` : 'main-domain'}`}
+    >
       {/* Subdomain-specific header */}
       {currentSubdomain && (
-        <SubdomainHeader 
-          currentSubdomain={currentSubdomain} 
-          config={getSubdomainConfig()} 
+        <SubdomainHeader
+          currentSubdomain={currentSubdomain}
+          config={getSubdomainConfig()}
         />
       )}
-      
+
       {/* Main content */}
-      <main className="subdomain-main-content">
-        {children}
-      </main>
-      
+      <main className="subdomain-main-content">{children}</main>
+
       {/* Subdomain-specific footer */}
       {currentSubdomain && (
-        <SubdomainFooter 
-          currentSubdomain={currentSubdomain} 
-          config={getSubdomainConfig()} 
+        <SubdomainFooter
+          currentSubdomain={currentSubdomain}
+          config={getSubdomainConfig()}
         />
       )}
     </div>
@@ -77,7 +77,7 @@ const SubdomainHeader = ({ currentSubdomain, config }) => {
   // Get all available subdomains for navigation
   const availableSubdomains = SubdomainHelper.getAvailableSubdomains();
 
-  const handleSubdomainChange = (subdomain) => {
+  const handleSubdomainChange = subdomain => {
     const newUrl = SubdomainHelper.getSubdomainUrl(subdomain);
     if (newUrl) {
       window.location.href = newUrl;
@@ -89,18 +89,25 @@ const SubdomainHeader = ({ currentSubdomain, config }) => {
       <div className="subdomain-header-container">
         {/* Logo with subdomain-specific branding */}
         <div className="subdomain-logo">
-          <button 
+          <button
             className="logo-button"
             onClick={() => navigate('/')}
             style={{
-              color: SUBDOMAIN_CONFIG.branding[currentSubdomain]?.primaryColor || '#1e3a8a'
+              color:
+                SUBDOMAIN_CONFIG.branding[currentSubdomain]?.primaryColor ||
+                '#1e3a8a',
             }}
           >
             <h1>
-              {currentSubdomain.charAt(0).toUpperCase() + currentSubdomain.slice(1)}
-              <span 
+              {currentSubdomain.charAt(0).toUpperCase() +
+                currentSubdomain.slice(1)}
+              <span
                 className="logo-accent"
-                style={{ color: SUBDOMAIN_CONFIG.branding[currentSubdomain]?.secondaryColor || '#d4af37' }}
+                style={{
+                  color:
+                    SUBDOMAIN_CONFIG.branding[currentSubdomain]
+                      ?.secondaryColor || '#d4af37',
+                }}
               >
                 .limitlessinfotech.com
               </span>
@@ -110,22 +117,24 @@ const SubdomainHeader = ({ currentSubdomain, config }) => {
 
         {/* Navigation menu */}
         <nav className="subdomain-navigation">
-          <button 
+          <button
             className="mobile-menu-toggle"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle navigation menu"
           >
             ☰
           </button>
-          
+
           <ul className={`nav-menu ${isMenuOpen ? 'menu-open' : ''}`}>
             {config.routes.slice(0, 5).map((route, index) => (
               <li key={index} className="nav-item">
-                <a 
-                  href={route} 
+                <a
+                  href={route}
                   className="nav-link"
                   style={{
-                    color: SUBDOMAIN_CONFIG.branding[currentSubdomain]?.primaryColor || '#1e3a8a'
+                    color:
+                      SUBDOMAIN_CONFIG.branding[currentSubdomain]
+                        ?.primaryColor || '#1e3a8a',
                   }}
                 >
                   {route.split('/').pop() || 'Home'}
@@ -137,16 +146,18 @@ const SubdomainHeader = ({ currentSubdomain, config }) => {
 
         {/* Subdomain switcher */}
         <div className="subdomain-switcher">
-          <select 
-            value={currentSubdomain} 
-            onChange={(e) => handleSubdomainChange(e.target.value)}
+          <select
+            value={currentSubdomain}
+            onChange={e => handleSubdomainChange(e.target.value)}
             className="subdomain-selector"
             style={{
-              backgroundColor: SUBDOMAIN_CONFIG.branding[currentSubdomain]?.primaryColor || '#1e3a8a',
-              color: 'white'
+              backgroundColor:
+                SUBDOMAIN_CONFIG.branding[currentSubdomain]?.primaryColor ||
+                '#1e3a8a',
+              color: 'white',
             }}
           >
-            {availableSubdomains.map((subdomain) => (
+            {availableSubdomains.map(subdomain => (
               <option key={subdomain} value={subdomain}>
                 {subdomain.charAt(0).toUpperCase() + subdomain.slice(1)}
               </option>
@@ -173,7 +184,7 @@ const SubdomainFooter = ({ currentSubdomain, config }) => {
             <h3>{config.title}</h3>
             <p>{config.description}</p>
           </div>
-          
+
           <div className="footer-section">
             <h4>Quick Links</h4>
             <ul>
@@ -184,7 +195,7 @@ const SubdomainFooter = ({ currentSubdomain, config }) => {
               ))}
             </ul>
           </div>
-          
+
           <div className="footer-section">
             <h4>Contact</h4>
             <p>For {currentSubdomain} inquiries:</p>
@@ -193,9 +204,12 @@ const SubdomainFooter = ({ currentSubdomain, config }) => {
             </a>
           </div>
         </div>
-        
+
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} {config.title}. All rights reserved.</p>
+          <p>
+            &copy; {new Date().getFullYear()} {config.title}. All rights
+            reserved.
+          </p>
         </div>
       </div>
     </footer>
@@ -206,26 +220,27 @@ const SubdomainFooter = ({ currentSubdomain, config }) => {
  * Subdomain Link Component
  * Handles navigation between subdomains
  */
-const SubdomainLink = ({ 
-  to, 
-  subdomain = null, 
-  children, 
-  className = '', 
+const SubdomainLink = ({
+  to,
+  subdomain = null,
+  children,
+  className = '',
   onClick,
-  ...props 
+  ...props
 }) => {
   const currentSubdomain = SubdomainHelper.getCurrentSubdomain();
-  const targetSubdomain = subdomain || SubdomainHelper.getSubdomainByPath(to) || currentSubdomain;
-  
-  const handleClick = (e) => {
+  const targetSubdomain =
+    subdomain || SubdomainHelper.getSubdomainByPath(to) || currentSubdomain;
+
+  const handleClick = e => {
     e.preventDefault();
-    
+
     if (targetSubdomain === currentSubdomain) {
       // Same subdomain, use normal navigation
       if (onClick) onClick(e);
       return;
     }
-    
+
     // Different subdomain, redirect to new subdomain
     const url = SubdomainHelper.getSubdomainUrl(targetSubdomain, to);
     if (url) {
@@ -234,7 +249,7 @@ const SubdomainLink = ({
   };
 
   return (
-    <a 
+    <a
       href={SubdomainHelper.getSubdomainUrl(targetSubdomain, to) || to}
       onClick={handleClick}
       className={className}
@@ -266,21 +281,21 @@ const SubdomainRedirect = ({ to, subdomain }) => {
 
 SubdomainRouter.propTypes = {
   /** Children components to render within the subdomain router */
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 SubdomainHeader.propTypes = {
   /** Current subdomain identifier */
   currentSubdomain: PropTypes.string.isRequired,
   /** Configuration for the current subdomain */
-  config: PropTypes.object
+  config: PropTypes.object,
 };
 
 SubdomainFooter.propTypes = {
   /** Current subdomain identifier */
   currentSubdomain: PropTypes.string.isRequired,
   /** Configuration for the current subdomain */
-  config: PropTypes.object
+  config: PropTypes.object,
 };
 
 SubdomainLink.propTypes = {
@@ -293,14 +308,14 @@ SubdomainLink.propTypes = {
   /** Additional CSS classes */
   className: PropTypes.string,
   /** Click handler */
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 };
 
 SubdomainRedirect.propTypes = {
   /** Target path */
   to: PropTypes.string.isRequired,
   /** Target subdomain */
-  subdomain: PropTypes.string.isRequired
+  subdomain: PropTypes.string.isRequired,
 };
 
 export { SubdomainRouter, SubdomainLink, SubdomainRedirect, SubdomainHelper };

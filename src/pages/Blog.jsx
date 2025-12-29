@@ -15,8 +15,8 @@ import {
   HiExclamation,
   HiRefresh,
 } from 'react-icons/hi';
-import { api } from "../services/api";
-import { useApp } from "../context/AppContext";
+import { api } from '../services/api';
+import { useApp } from '../context/AppContext';
 
 const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -25,7 +25,7 @@ const Blog = () => {
   const [blogPosts, setBlogPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   const { showError } = useApp();
 
   const categories = [
@@ -49,23 +49,26 @@ const Blog = () => {
       } catch (err) {
         console.error('Error fetching blog posts:', err);
         setError(err.message || 'Failed to fetch blog posts');
-        
+
         // Show error to user
-        showError('Failed to load blog posts. Showing sample articles instead.');
-        
+        showError(
+          'Failed to load blog posts. Showing sample articles instead.'
+        );
+
         // Fallback to hardcoded data
         setBlogPosts([
           {
             id: 1,
             title: 'The Future of Web Development: Trends to Watch in 2024',
             slug: 'future-web-development-2024',
-            excerpt: 'Explore the emerging trends and technologies that will shape web development in 2024, from AI integration to progressive web apps.',
+            excerpt:
+              'Explore the emerging trends and technologies that will shape web development in 2024, from AI integration to progressive web apps.',
             content: '',
             category: 'web-development',
             author: {
               name: 'Faisal Khan',
               avatar: null,
-              role: 'CEO & Founder'
+              role: 'CEO & Founder',
             },
             publishedAt: '2024-01-15',
             readTime: '8 min read',
@@ -80,13 +83,14 @@ const Blog = () => {
             id: 2,
             title: 'Building Scalable Mobile Apps: Best Practices and Patterns',
             slug: 'scalable-mobile-apps-best-practices',
-            excerpt: 'Learn the architectural patterns and best practices for building mobile applications that can scale with your business growth.',
+            excerpt:
+              'Learn the architectural patterns and best practices for building mobile applications that can scale with your business growth.',
             content: '',
             category: 'mobile-apps',
             author: {
               name: 'Sarah Johnson',
               avatar: null,
-              role: 'Mobile Lead Developer'
+              role: 'Mobile Lead Developer',
             },
             publishedAt: '2024-01-10',
             readTime: '12 min read',
@@ -101,13 +105,14 @@ const Blog = () => {
             id: 3,
             title: 'How AI is Transforming Customer Service Automation',
             slug: 'ai-customer-service-automation',
-            excerpt: 'Discover how artificial intelligence and machine learning are revolutionizing customer service with intelligent chatbots and automation.',
+            excerpt:
+              'Discover how artificial intelligence and machine learning are revolutionizing customer service with intelligent chatbots and automation.',
             content: '',
             category: 'ai-ml',
             author: {
               name: 'Michael Chen',
               avatar: null,
-              role: 'AI Specialist'
+              role: 'AI Specialist',
             },
             publishedAt: '2024-01-08',
             readTime: '10 min read',
@@ -122,13 +127,14 @@ const Blog = () => {
             id: 4,
             title: 'Complete Guide to React Hooks: From Basics to Advanced',
             slug: 'complete-guide-react-hooks',
-            excerpt: 'A comprehensive tutorial covering all React hooks with practical examples and real-world use cases for modern web development.',
+            excerpt:
+              'A comprehensive tutorial covering all React hooks with practical examples and real-world use cases for modern web development.',
             content: '',
             category: 'tutorials',
             author: {
               name: 'Emma Davis',
               avatar: null,
-              role: 'Senior Frontend Developer'
+              role: 'Senior Frontend Developer',
             },
             publishedAt: '2024-01-05',
             readTime: '15 min read',
@@ -141,15 +147,17 @@ const Blog = () => {
           },
           {
             id: 5,
-            title: 'Case Study: E-commerce Platform That Increased Sales by 300%',
+            title:
+              'Case Study: E-commerce Platform That Increased Sales by 300%',
             slug: 'ecommerce-platform-case-study',
-            excerpt: 'An in-depth look at how we helped a fashion retailer transform their online presence and triple their sales in just 6 months.',
+            excerpt:
+              'An in-depth look at how we helped a fashion retailer transform their online presence and triple their sales in just 6 months.',
             content: '',
             category: 'case-studies',
             author: {
               name: 'Faisal Khan',
               avatar: null,
-              role: 'CEO & Founder'
+              role: 'CEO & Founder',
             },
             publishedAt: '2024-01-03',
             readTime: '6 min read',
@@ -164,13 +172,14 @@ const Blog = () => {
             id: 6,
             title: 'Top 10 Security Best Practices for Modern Web Applications',
             slug: 'security-best-practices-web-apps',
-            excerpt: 'Essential security practices every developer should implement to protect web applications from common vulnerabilities and attacks.',
+            excerpt:
+              'Essential security practices every developer should implement to protect web applications from common vulnerabilities and attacks.',
             content: '',
             category: 'web-development',
             author: {
               name: 'David Martinez',
               avatar: null,
-              role: 'Security Engineer'
+              role: 'Security Engineer',
             },
             publishedAt: '2024-01-01',
             readTime: '11 min read',
@@ -183,15 +192,17 @@ const Blog = () => {
           },
           {
             id: 7,
-            title: 'The Rise of Progressive Web Apps: Why Your Business Needs One',
+            title:
+              'The Rise of Progressive Web Apps: Why Your Business Needs One',
             slug: 'progressive-web-apps-business-benefits',
-            excerpt: 'Explore the benefits of Progressive Web Apps and why they are becoming the preferred choice for businesses worldwide.',
+            excerpt:
+              'Explore the benefits of Progressive Web Apps and why they are becoming the preferred choice for businesses worldwide.',
             content: '',
             category: 'industry-news',
             author: {
               name: 'Lisa Thompson',
               avatar: null,
-              role: 'Product Manager'
+              role: 'Product Manager',
             },
             publishedAt: '2023-12-28',
             readTime: '7 min read',
@@ -204,15 +215,17 @@ const Blog = () => {
           },
           {
             id: 8,
-            title: 'Microservices Architecture: A Practical Implementation Guide',
+            title:
+              'Microservices Architecture: A Practical Implementation Guide',
             slug: 'microservices-architecture-guide',
-            excerpt: 'Learn how to design and implement microservices architecture for scalable and maintainable enterprise applications.',
+            excerpt:
+              'Learn how to design and implement microservices architecture for scalable and maintainable enterprise applications.',
             content: '',
             category: 'web-development',
             author: {
               name: 'Robert Anderson',
               avatar: null,
-              role: 'Backend Architect'
+              role: 'Backend Architect',
             },
             publishedAt: '2023-12-25',
             readTime: '14 min read',
@@ -233,22 +246,25 @@ const Blog = () => {
   }, []);
 
   const filteredPosts = blogPosts.filter(post => {
-    const matchesCategory = selectedCategory === 'all' || post.category === selectedCategory;
+    const matchesCategory =
+      selectedCategory === 'all' || post.category === selectedCategory;
     const matchesSearch =
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+      post.tags.some(tag =>
+        tag.toLowerCase().includes(searchQuery.toLowerCase())
+      );
     return matchesCategory && matchesSearch;
   });
 
   const featuredPosts = blogPosts.filter(post => post.featured);
 
-  const formatDate = (dateString) => {
+  const formatDate = dateString => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
-      day: 'numeric'
+      day: 'numeric',
     });
   };
 
@@ -256,7 +272,10 @@ const Blog = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative py-20 md:py-32 bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 text-white overflow-hidden">
-        <div className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8" aria-hidden="true">
+        <div
+          className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8"
+          aria-hidden="true"
+        >
           <div className="absolute inset-0 bg-pattern-grid opacity-10"></div>
         </div>
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
@@ -268,8 +287,12 @@ const Blog = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 animate-fade-in-up">
               Insights, Tutorials & Industry News
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-              Stay updated with the latest trends, tutorials, and insights from the world of technology
+            <p
+              className="text-xl md:text-2xl text-white/90 mb-8 animate-fade-in-up"
+              style={{ animationDelay: '0.2s' }}
+            >
+              Stay updated with the latest trends, tutorials, and insights from
+              the world of technology
             </p>
           </div>
         </div>
@@ -301,9 +324,7 @@ const Blog = () => {
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                   Unable to Load Articles
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  {error}
-                </p>
+                <p className="text-gray-600 dark:text-gray-400 mb-6">{error}</p>
                 <button
                   onClick={() => window.location.reload()}
                   className="inline-flex items-center space-x-2 px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-300"
@@ -323,7 +344,7 @@ const Blog = () => {
                     type="text"
                     placeholder="Search articles by title, content, or tags..."
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={e => setSearchQuery(e.target.value)}
                     className="w-full pl-12 pr-4 py-4 bg-gray-50 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-900 dark:text-white"
                   />
                 </div>
@@ -335,7 +356,7 @@ const Blog = () => {
               <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
                 <div className="flex items-center space-x-2 flex-wrap gap-2">
                   <HiFilter className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                  {categories.map((category) => (
+                  {categories.map(category => (
                     <button
                       key={category.id}
                       onClick={() => setSelectedCategory(category.id)}
@@ -346,7 +367,9 @@ const Blog = () => {
                       }`}
                     >
                       {category.name}
-                      <span className="ml-2 text-xs opacity-75">({category.count})</span>
+                      <span className="ml-2 text-xs opacity-75">
+                        ({category.count})
+                      </span>
                     </button>
                   ))}
                 </div>
@@ -357,7 +380,11 @@ const Blog = () => {
             {!loading && !error && (
               <div className="text-center mb-8">
                 <p className="text-gray-600 dark:text-gray-400">
-                  Showing <span className="font-semibold text-primary-600 dark:text-primary-400">{filteredPosts.length}</span> article{filteredPosts.length !== 1 ? 's' : ''}
+                  Showing{' '}
+                  <span className="font-semibold text-primary-600 dark:text-primary-400">
+                    {filteredPosts.length}
+                  </span>{' '}
+                  article{filteredPosts.length !== 1 ? 's' : ''}
                 </p>
               </div>
             )}
@@ -366,88 +393,97 @@ const Blog = () => {
       </section>
 
       {/* Featured Posts */}
-      {!loading && !error && featuredPosts.length > 0 && selectedCategory === 'all' && !searchQuery && (
-        <section className="section-padding bg-gray-50 dark:bg-dark-800">
-          <div className="container-custom">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-12 text-center">
-              Featured <span className="text-gradient">Articles</span>
-            </h2>
+      {!loading &&
+        !error &&
+        featuredPosts.length > 0 &&
+        selectedCategory === 'all' &&
+        !searchQuery && (
+          <section className="section-padding bg-gray-50 dark:bg-dark-800">
+            <div className="container-custom">
+              <h2 className="text-3xl md:text-4xl font-display font-bold mb-12 text-center">
+                Featured <span className="text-gradient">Articles</span>
+              </h2>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              {featuredPosts.slice(0, 2).map((post, index) => (
-                <Link
-                  key={post.id}
-                  to={`/blog/${post.slug}`}
-                  className="group bg-white dark:bg-dark-900 rounded-2xl overflow-hidden shadow-soft hover:shadow-xl transition-all duration-300 animate-fade-in-up"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  {/* Image */}
-                  <div className="relative h-64 bg-gradient-to-br from-primary-500 to-secondary-500 overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <HiBookmark className="w-24 h-24 text-white opacity-20" />
-                    </div>
-                    <div className="absolute top-4 right-4">
-                      <span className="badge badge-accent text-white bg-accent-600">Featured</span>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-6">
-                    <div className="flex items-center space-x-4 mb-3 text-sm">
-                      <span className="flex items-center text-gray-500 dark:text-gray-400">
-                        <HiUser className="w-4 h-4 mr-1" />
-                        {post.author.name}
-                      </span>
-                      <span className="flex items-center text-gray-500 dark:text-gray-400">
-                        <HiClock className="w-4 h-4 mr-1" />
-                        {post.readTime}
-                      </span>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                {featuredPosts.slice(0, 2).map((post, index) => (
+                  <Link
+                    key={post.id}
+                    to={`/blog/${post.slug}`}
+                    className="group bg-white dark:bg-dark-900 rounded-2xl overflow-hidden shadow-soft hover:shadow-xl transition-all duration-300 animate-fade-in-up"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    {/* Image */}
+                    <div className="relative h-64 bg-gradient-to-br from-primary-500 to-secondary-500 overflow-hidden">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <HiBookmark className="w-24 h-24 text-white opacity-20" />
+                      </div>
+                      <div className="absolute top-4 right-4">
+                        <span className="badge badge-accent text-white bg-accent-600">
+                          Featured
+                        </span>
+                      </div>
                     </div>
 
-                    <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
-                      {post.title}
-                    </h3>
-
-                    <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
-                      {post.excerpt}
-                    </p>
-
-                    <div className="flex items-center justify-between">
-                      <div className="flex flex-wrap gap-2">
-                        {post.tags.slice(0, 2).map((tag, i) => (
-                          <span key={i} className="badge badge-primary text-xs">
-                            {tag}
-                          </span>
-                        ))}
+                    {/* Content */}
+                    <div className="p-6">
+                      <div className="flex items-center space-x-4 mb-3 text-sm">
+                        <span className="flex items-center text-gray-500 dark:text-gray-400">
+                          <HiUser className="w-4 h-4 mr-1" />
+                          {post.author.name}
+                        </span>
+                        <span className="flex items-center text-gray-500 dark:text-gray-400">
+                          <HiClock className="w-4 h-4 mr-1" />
+                          {post.readTime}
+                        </span>
                       </div>
 
-                      <span className="text-primary-600 dark:text-primary-400 font-semibold flex items-center">
-                        Read More
-                        <HiArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
-                      </span>
-                    </div>
+                      <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
+                        {post.title}
+                      </h3>
 
-                    <div className="flex items-center space-x-4 mt-4 pt-4 border-t border-gray-200 dark:border-dark-700 text-sm text-gray-500 dark:text-gray-400">
-                      <span className="flex items-center">
-                        <HiEye className="w-4 h-4 mr-1" />
-                        {post.views}
-                      </span>
-                      <span className="flex items-center">
-                        <HiHeart className="w-4 h-4 mr-1" />
-                        {post.likes}
-                      </span>
-                      <span className="flex items-center">
-                        <HiChat className="w-4 h-4 mr-1" />
-                        {post.comments}
-                      </span>
+                      <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
+                        {post.excerpt}
+                      </p>
+
+                      <div className="flex items-center justify-between">
+                        <div className="flex flex-wrap gap-2">
+                          {post.tags.slice(0, 2).map((tag, i) => (
+                            <span
+                              key={i}
+                              className="badge badge-primary text-xs"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+
+                        <span className="text-primary-600 dark:text-primary-400 font-semibold flex items-center">
+                          Read More
+                          <HiArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
+                        </span>
+                      </div>
+
+                      <div className="flex items-center space-x-4 mt-4 pt-4 border-t border-gray-200 dark:border-dark-700 text-sm text-gray-500 dark:text-gray-400">
+                        <span className="flex items-center">
+                          <HiEye className="w-4 h-4 mr-1" />
+                          {post.views}
+                        </span>
+                        <span className="flex items-center">
+                          <HiHeart className="w-4 h-4 mr-1" />
+                          {post.likes}
+                        </span>
+                        <span className="flex items-center">
+                          <HiChat className="w-4 h-4 mr-1" />
+                          {post.comments}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
-      )}
+          </section>
+        )}
 
       {/* All Posts */}
       <section className="section-padding bg-white dark:bg-dark-900">
@@ -469,7 +505,9 @@ const Blog = () => {
                       </div>
                       {post.featured && (
                         <div className="absolute top-3 right-3">
-                          <span className="badge badge-accent text-xs">Featured</span>
+                          <span className="badge badge-accent text-xs">
+                            Featured
+                          </span>
                         </div>
                       )}
                     </div>
@@ -562,7 +600,8 @@ const Blog = () => {
             Subscribe to Our Newsletter
           </h2>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Get the latest articles, tutorials, and industry insights delivered to your inbox
+            Get the latest articles, tutorials, and industry insights delivered
+            to your inbox
           </p>
           <div className="max-w-md mx-auto">
             <div className="flex gap-3">

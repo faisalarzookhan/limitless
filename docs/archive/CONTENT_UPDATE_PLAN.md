@@ -15,6 +15,7 @@ This document outlines specific file changes needed to integrate all Limitless I
 ## ✅ COMPLETED
 
 ### Chatbot (Auralis AI)
+
 - [x] Renamed to "Auralis AI"
 - [x] Updated branding (Cyan-Orange gradient avatar)
 - [x] Enhanced knowledge base with all products
@@ -30,14 +31,17 @@ This document outlines specific file changes needed to integrate all Limitless I
 ### 1. Homepage (`src/pages/Home.jsx`)
 
 **Section: Hero**
+
 - Update tagline to include product mention
 - Add "Explore Our Products" CTA alongside "Get Started"
 
 **Section: Core Services**
+
 - Add 7th service card: "Enterprise Products"
 - Link to new Products page
 
 **Section: Products Showcase (NEW)**
+
 - Add after Core Services
 - Feature 4 hero products:
   - TrackIT (IT Asset Management)
@@ -47,11 +51,13 @@ This document outlines specific file changes needed to integrate all Limitless I
 - Include icons, descriptions, and "Learn More" links
 
 **Section: Client Success Stories**
+
 - Add IVOLEX case study card
 - Add Wakilni case study card
 - Include metrics and testimonials
 
 **Section: Why Limitless**
+
 - Add point: "7+ Production-Ready Products"
 - Update stats: "50+ Products & Solutions Delivered"
 
@@ -63,6 +69,7 @@ This document outlines specific file changes needed to integrate all Limitless I
 Position: After main services, before CTA
 
 **Content:**
+
 ```javascript
 {
   title: "Enterprise Products by Limitless Infotech",
@@ -83,6 +90,7 @@ Position: After main services, before CTA
 ```
 
 **Add Section: "Custom Solutions"**
+
 - Highlight IVOLEX and Wakilni
 - "Like IVOLEX and Wakilni, we build custom enterprise solutions tailored to your industry"
 
@@ -93,6 +101,7 @@ Position: After main services, before CTA
 **Add Projects:**
 
 **IVOLEX:**
+
 ```javascript
 {
   id: 101,
@@ -129,6 +138,7 @@ Position: After main services, before CTA
 ```
 
 **Wakilni:**
+
 ```javascript
 {
   id: 102,
@@ -169,13 +179,17 @@ Position: After main services, before CTA
 ### 4. About Page (`src/pages/About.jsx`)
 
 **Section: Company Overview**
+
 - Update description to mention "7 production-ready SaaS products"
 - Add "product-driven company" to positioning
 
 **Section: What We Do (Add subsection)**
+
 ```markdown
 ### Our Product Ecosystem
+
 In addition to custom development, we've built a suite of enterprise products:
+
 - **TrackIT** - IT Asset Management
 - **TrackO** - Operations Tracking
 - **HR-IMS** - Human Resources Management
@@ -188,11 +202,13 @@ These products are available as standalone SaaS solutions or can be white-labele
 ```
 
 **Section: Innovation**
+
 - Mention Auralis AI Solutions
 - Reference co-brands: Aguva, Khan & Co | Family Ties
 
 **Section: Stats**
 Update numbers:
+
 - "50+ Projects & Products Delivered"
 - "7 Production-Ready SaaS Products"
 - "10,000+ Product Users"
@@ -204,6 +220,7 @@ Update numbers:
 **Add New Blog Posts:**
 
 **Post 1:** "Introducing Our Product Suite: 7 Solutions to Transform Your Business"
+
 ```javascript
 {
   title: "Introducing Our Product Suite: 7 Solutions to Transform Your Business",
@@ -221,6 +238,7 @@ Update numbers:
 ```
 
 **Post 2:** "Case Study: How We Built IVOLEX - A Custom ERP Success Story"
+
 ```javascript
 {
   title: "Case Study: How We Built IVOLEX - A Custom ERP Success Story",
@@ -232,6 +250,7 @@ Update numbers:
 ```
 
 **Post 3:** "Wakilni: Connecting Legal Professionals with Technology"
+
 ```javascript
 {
   title: "Wakilni: Connecting Legal Professionals with Technology",
@@ -242,6 +261,7 @@ Update numbers:
 ```
 
 **Post 4:** "Meet Auralis: Our AI Assistant Powered by Limitless Innovation"
+
 ```javascript
 {
   title: "Meet Auralis: Our AI Assistant Powered by Limitless Innovation",
@@ -260,6 +280,7 @@ Update numbers:
 **Route:** `/products`
 
 **Sections:**
+
 1. Hero - "Enterprise Products by Limitless Infotech"
 2. Product Grid - All 7 products with cards
 3. Comparison Table - Feature comparison
@@ -268,6 +289,7 @@ Update numbers:
 6. CTA - "Request Demo" or "Start Free Trial"
 
 **Individual Product Pages:**
+
 - `/products/trackit`
 - `/products/tracko`
 - `/products/hr-ims`
@@ -287,31 +309,31 @@ Position: Before Development Packages
 ```javascript
 const saasProducts = [
   {
-    name: "TrackIT",
-    category: "IT Management",
+    name: 'TrackIT',
+    category: 'IT Management',
     monthlyPrice: 9999,
     yearlyPrice: 99999,
     features: [
-      "Up to 100 assets",
-      "License management",
-      "Audit reports",
-      "QR code integration",
-      "Email support"
-    ]
+      'Up to 100 assets',
+      'License management',
+      'Audit reports',
+      'QR code integration',
+      'Email support',
+    ],
   },
   {
-    name: "HR-IMS",
-    category: "HR Management",
+    name: 'HR-IMS',
+    category: 'HR Management',
     monthlyPrice: 19999,
     yearlyPrice: 199999,
     popular: true,
     features: [
-      "Up to 50 employees",
-      "Payroll processing",
-      "Leave management",
-      "Performance reviews",
-      "Priority support"
-    ]
+      'Up to 50 employees',
+      'Payroll processing',
+      'Leave management',
+      'Performance reviews',
+      'Priority support',
+    ],
   },
   // ... all 7 products
 ];
@@ -336,6 +358,7 @@ const products = [
 ```
 
 **Update Services section:**
+
 - Add link to Products page
 
 ---
@@ -367,16 +390,31 @@ Position: Between "Services" and "Portfolio"
 **Update:** `index.html` and page-level meta tags
 
 **Homepage:**
+
 ```html
-<title>Limitless Infotech Solution | Custom Software & Enterprise Products</title>
-<meta name="description" content="Custom software development and 7 production-ready SaaS products including TrackIT, HR-IMS, WorkTrack. Build Limitless | Manage Limitless | Grow Limitless" />
-<meta name="keywords" content="software development, SaaS products, TrackIT, HR-IMS, IVOLEX, Wakilni, custom software, Mumbai" />
+<title>
+  Limitless Infotech Solution | Custom Software & Enterprise Products
+</title>
+<meta
+  name="description"
+  content="Custom software development and 7 production-ready SaaS products including TrackIT, HR-IMS, WorkTrack. Build Limitless | Manage Limitless | Grow Limitless"
+/>
+<meta
+  name="keywords"
+  content="software development, SaaS products, TrackIT, HR-IMS, IVOLEX, Wakilni, custom software, Mumbai"
+/>
 ```
 
 **Products Page:**
+
 ```html
-<title>Enterprise Products | TrackIT, HR-IMS, WorkTrack | Limitless Infotech</title>
-<meta name="description" content="Discover our suite of 7 enterprise SaaS products: IT asset management, HR management, workforce tracking, and more." />
+<title>
+  Enterprise Products | TrackIT, HR-IMS, WorkTrack | Limitless Infotech
+</title>
+<meta
+  name="description"
+  content="Discover our suite of 7 enterprise SaaS products: IT asset management, HR management, workforce tracking, and more."
+/>
 ```
 
 ---
@@ -384,6 +422,7 @@ Position: Between "Services" and "Portfolio"
 ## 📸 IMAGE REQUIREMENTS
 
 ### Product Logos/Icons
+
 - TrackIT logo/icon (400x400px)
 - TrackO logo/icon
 - HR-IMS logo/icon
@@ -393,17 +432,20 @@ Position: Between "Services" and "Portfolio"
 - Baseless logo/icon
 
 ### Case Study Images
+
 - IVOLEX screenshots (1920x1080px)
 - IVOLEX mobile app screenshots (1125x2436px)
 - Wakilni screenshots (1920x1080px)
 - Wakilni mobile app screenshots
 
 ### Auralis AI
+
 - Auralis logo (high-res)
 - Auralis brand assets
 - AI-themed graphics
 
 ### Homepage
+
 - Product showcase illustrations
 - Hero background with products
 - Client success story images
@@ -416,36 +458,36 @@ Position: Between "Services" and "Portfolio"
 
 ```css
 /* TrackIT - Blue */
---trackit-primary: #3B82F6;
---trackit-secondary: #1E40AF;
+--trackit-primary: #3b82f6;
+--trackit-secondary: #1e40af;
 
 /* TrackO - Green */
---tracko-primary: #10B981;
+--tracko-primary: #10b981;
 --tracko-secondary: #047857;
 
 /* HR-IMS - Purple */
---hrims-primary: #8B5CF6;
---hrims-secondary: #6D28D9;
+--hrims-primary: #8b5cf6;
+--hrims-secondary: #6d28d9;
 
 /* WorkTrack - Orange */
---worktrack-primary: #F59E0B;
---worktrack-secondary: #D97706;
+--worktrack-primary: #f59e0b;
+--worktrack-secondary: #d97706;
 
 /* IT-TMS - Red */
---ittms-primary: #EF4444;
---ittms-secondary: #DC2626;
+--ittms-primary: #ef4444;
+--ittms-secondary: #dc2626;
 
 /* MailTO - Cyan */
---mailto-primary: #06B6D4;
---mailto-secondary: #0891B2;
+--mailto-primary: #06b6d4;
+--mailto-secondary: #0891b2;
 
 /* Baseless - Indigo */
---baseless-primary: #6366F1;
---baseless-secondary: #4F46E5;
+--baseless-primary: #6366f1;
+--baseless-secondary: #4f46e5;
 
 /* Auralis AI - Gradient */
---auralis-from: #22D3EE;
---auralis-to: #F97316;
+--auralis-from: #22d3ee;
+--auralis-to: #f97316;
 ```
 
 ---
@@ -453,12 +495,14 @@ Position: Between "Services" and "Portfolio"
 ## 📝 COPYWRITING GUIDELINES
 
 ### Product Descriptions
+
 - Keep under 150 characters for cards
 - Focus on benefits, not features
 - Use action verbs
 - Include target audience
 
 ### Case Studies
+
 - Start with the problem
 - Explain the solution
 - Highlight metrics/results
@@ -466,6 +510,7 @@ Position: Between "Services" and "Portfolio"
 - End with CTA
 
 ### Taglines
+
 - **Limitless Infotech:** "Build Limitless | Manage Limitless | Grow Limitless"
 - **Auralis AI:** "Intelligent Solutions, Limitless Possibilities"
 - **TrackIT:** "Track Everything, Manage Anything"
@@ -477,6 +522,7 @@ Position: Between "Services" and "Portfolio"
 ## 🔗 INTERNAL LINKING STRATEGY
 
 ### Homepage Links To:
+
 - Products overview page
 - Individual product pages
 - IVOLEX case study
@@ -484,17 +530,20 @@ Position: Between "Services" and "Portfolio"
 - Get Started form
 
 ### Services Page Links To:
+
 - Products page
 - Case studies
 - Pricing (both custom & products)
 
 ### Products Page Links To:
+
 - Individual product pages
 - Pricing
 - Demo request
 - Case studies showing product usage
 
 ### Blog Links To:
+
 - Product pages
 - Case studies
 - Get Started
@@ -504,6 +553,7 @@ Position: Between "Services" and "Portfolio"
 ## ✅ PRIORITY CHECKLIST
 
 ### Week 1 (Immediate)
+
 - [ ] Update chatbot (Auralis) ✅ DONE
 - [ ] Create Products overview page
 - [ ] Add product showcase to homepage
@@ -513,6 +563,7 @@ Position: Between "Services" and "Portfolio"
 - [ ] Add Products link to navbar
 
 ### Week 2 (High Priority)
+
 - [ ] Create 4 new blog posts
 - [ ] Add individual product pages (7 pages)
 - [ ] Update pricing with SaaS products
@@ -520,6 +571,7 @@ Position: Between "Services" and "Portfolio"
 - [ ] Add product images/screenshots
 
 ### Week 3 (Medium Priority)
+
 - [ ] Create product demo videos
 - [ ] Add product comparison tool
 - [ ] Implement "Request Demo" forms
@@ -527,6 +579,7 @@ Position: Between "Services" and "Portfolio"
 - [ ] SEO optimization for product pages
 
 ### Week 4 (Enhancement)
+
 - [ ] Define Aguva brand strategy
 - [ ] Define Khan & Co strategy
 - [ ] Create co-brand pages
@@ -538,6 +591,7 @@ Position: Between "Services" and "Portfolio"
 ## 📊 SUCCESS METRICS
 
 ### Track These KPIs:
+
 - Product page views
 - Demo requests per product
 - Trial signups
@@ -547,6 +601,7 @@ Position: Between "Services" and "Portfolio"
 - Case study engagement
 
 ### Goals (30 Days):
+
 - 1,000+ product page views
 - 50+ demo requests
 - 20+ trial signups
@@ -557,6 +612,7 @@ Position: Between "Services" and "Portfolio"
 ## 🚀 DEPLOYMENT NOTES
 
 ### Before Going Live:
+
 1. Test all new routes
 2. Verify all product links work
 3. Check responsive design on all new pages
@@ -566,6 +622,7 @@ Position: Between "Services" and "Portfolio"
 7. Test product filtering/comparison
 
 ### Staging Checklist:
+
 - [ ] Deploy to staging environment
 - [ ] Full QA testing
 - [ ] Stakeholder review
@@ -578,14 +635,17 @@ Position: Between "Services" and "Portfolio"
 ## 📞 CONTACTS FOR CONTENT
 
 ### Product Details:
+
 - Product Manager: [Name]
 - Technical Lead: [Name]
 
 ### Case Studies:
+
 - IVOLEX Contact: [Confidential]
 - Wakilni Contact: [Contact Person]
 
 ### Marketing:
+
 - Content Writer: [Name]
 - Designer: [Name]
 - SEO Specialist: [Name]
@@ -605,12 +665,14 @@ Position: Between "Services" and "Portfolio"
 ## 💡 NOTES
 
 ### Domain Strategy:
+
 - **Main site:** limitlessinfotech.com (showcase all)
 - **Products subdomain:** products.limitlessinfotech.com (future)
 - **Docs subdomain:** docs.limitlessinfotech.com (future)
 - **API docs:** api.limitlessinfotech.com (future)
 
 ### Future Enhancements:
+
 - Product marketplace
 - Partner portal
 - Reseller program
@@ -620,7 +682,7 @@ Position: Between "Services" and "Portfolio"
 
 ---
 
-*Created: January 2025*  
-*Owner: Marketing & Development Team*  
-*Status: Ready for Implementation*  
-*Priority: HIGH*
+_Created: January 2025_  
+_Owner: Marketing & Development Team_  
+_Status: Ready for Implementation_  
+_Priority: HIGH_

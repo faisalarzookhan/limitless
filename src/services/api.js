@@ -1,7 +1,8 @@
 // API Service Layer for Limitless Infotech Solution
 // This provides a centralized way to handle all API calls
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const API_TIMEOUT = 30000; // 30 seconds
 
 // API Client Configuration
@@ -123,7 +124,7 @@ class ApiClient {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
 
-      xhr.upload.addEventListener('progress', (e) => {
+      xhr.upload.addEventListener('progress', e => {
         if (e.lengthComputable && onProgress) {
           const percentComplete = (e.loaded / e.total) * 100;
           onProgress(percentComplete);
@@ -167,107 +168,111 @@ export const api = {
   // ============= Contact & Inquiries =============
   contact: {
     // Submit contact form
-    submitContactForm: (data) => apiClient.post('/contact/submit', data),
+    submitContactForm: data => apiClient.post('/contact/submit', data),
 
     // Submit client requirements form
-    submitClientForm: (data) => apiClient.post('/contact/client-form', data),
+    submitClientForm: data => apiClient.post('/contact/client-form', data),
 
     // Schedule consultation
-    scheduleConsultation: (data) => apiClient.post('/contact/consultation', data),
+    scheduleConsultation: data => apiClient.post('/contact/consultation', data),
 
     // Request demo
-    requestDemo: (data) => apiClient.post('/contact/demo', data),
+    requestDemo: data => apiClient.post('/contact/demo', data),
 
     // Subscribe to newsletter
-    subscribe: (email) => apiClient.post('/contact/subscribe', { email }),
+    subscribe: email => apiClient.post('/contact/subscribe', { email }),
   },
 
   // ============= Portfolio =============
   portfolio: {
     // Get all projects
-    getAll: (params) => apiClient.get('/portfolio', params),
+    getAll: params => apiClient.get('/portfolio', params),
 
     // Get project by ID
-    getById: (id) => apiClient.get(`/portfolio/${id}`),
+    getById: id => apiClient.get(`/portfolio/${id}`),
 
     // Get featured projects
     getFeatured: () => apiClient.get('/portfolio/featured'),
 
     // Filter projects
-    filter: (filters) => apiClient.post('/portfolio/filter', filters),
+    filter: filters => apiClient.post('/portfolio/filter', filters),
 
     // Search projects
-    search: (query) => apiClient.get('/portfolio/search', { q: query }),
+    search: query => apiClient.get('/portfolio/search', { q: query }),
   },
 
   // ============= Testimonials =============
   testimonials: {
     // Get all testimonials
-    getAll: (params) => apiClient.get('/testimonials', params),
+    getAll: params => apiClient.get('/testimonials', params),
 
     // Get testimonial by ID
-    getById: (id) => apiClient.get(`/testimonials/${id}`),
+    getById: id => apiClient.get(`/testimonials/${id}`),
 
     // Submit testimonial
-    submit: (data) => apiClient.post('/testimonials/submit', data),
+    submit: data => apiClient.post('/testimonials/submit', data),
 
     // Rate a project
     rateProject: (projectId, rating) =>
       apiClient.post(`/testimonials/rate/${projectId}`, { rating }),
 
     // Filter testimonials
-    filter: (filters) => apiClient.post('/testimonials/filter', filters),
+    filter: filters => apiClient.post('/testimonials/filter', filters),
   },
 
   // ============= Blog/News =============
   blog: {
     // Get all posts
-    getAll: (params) => apiClient.get('/blog', params),
+    getAll: params => apiClient.get('/blog', params),
 
     // Get post by slug
-    getBySlug: (slug) => apiClient.get(`/blog/${slug}`),
+    getBySlug: slug => apiClient.get(`/blog/${slug}`),
 
     // Get categories
     getCategories: () => apiClient.get('/blog/categories'),
 
     // Get posts by category
-    getByCategory: (category) => apiClient.get(`/blog/category/${category}`),
+    getByCategory: category => apiClient.get(`/blog/category/${category}`),
 
     // Search posts
-    search: (query) => apiClient.get('/blog/search', { q: query }),
+    search: query => apiClient.get('/blog/search', { q: query }),
 
     // Get featured posts
     getFeatured: () => apiClient.get('/blog/featured'),
 
     // Add comment
-    addComment: (postId, data) => apiClient.post(`/blog/${postId}/comments`, data),
+    addComment: (postId, data) =>
+      apiClient.post(`/blog/${postId}/comments`, data),
 
     // Like post
-    likePost: (postId) => apiClient.post(`/blog/${postId}/like`),
+    likePost: postId => apiClient.post(`/blog/${postId}/like`),
   },
 
   // ============= Events =============
   events: {
     // Get all events
-    getAll: (params) => apiClient.get('/events', params),
+    getAll: params => apiClient.get('/events', params),
 
     // Get event by ID
-    getById: (id) => apiClient.get(`/events/${id}`),
+    getById: id => apiClient.get(`/events/${id}`),
 
     // Get upcoming events
     getUpcoming: () => apiClient.get('/events/upcoming'),
 
     // Register for event
-    register: (eventId, data) => apiClient.post(`/events/${eventId}/register`, data),
+    register: (eventId, data) =>
+      apiClient.post(`/events/${eventId}/register`, data),
 
     // Add comment to event
-    addComment: (eventId, data) => apiClient.post(`/events/${eventId}/comments`, data),
+    addComment: (eventId, data) =>
+      apiClient.post(`/events/${eventId}/comments`, data),
 
     // Get event comments
-    getComments: (eventId) => apiClient.get(`/events/${eventId}/comments`),
+    getComments: eventId => apiClient.get(`/events/${eventId}/comments`),
 
     // RSVP to event
-    rsvp: (eventId, status) => apiClient.post(`/events/${eventId}/rsvp`, { status }),
+    rsvp: (eventId, status) =>
+      apiClient.post(`/events/${eventId}/rsvp`, { status }),
   },
 
   // ============= Services =============
@@ -276,16 +281,16 @@ export const api = {
     getAll: () => apiClient.get('/services'),
 
     // Get service by ID
-    getById: (id) => apiClient.get(`/services/${id}`),
+    getById: id => apiClient.get(`/services/${id}`),
 
     // Get add-on services
     getAddOns: () => apiClient.get('/services/add-ons'),
 
     // Get service pricing
-    getPricing: (serviceId) => apiClient.get(`/services/${serviceId}/pricing`),
+    getPricing: serviceId => apiClient.get(`/services/${serviceId}/pricing`),
 
     // Request service quote
-    requestQuote: (data) => apiClient.post('/services/quote', data),
+    requestQuote: data => apiClient.post('/services/quote', data),
   },
 
   // ============= Pricing =============
@@ -294,35 +299,35 @@ export const api = {
     getPlans: () => apiClient.get('/pricing'),
 
     // Get plan by ID
-    getPlanById: (id) => apiClient.get(`/pricing/${id}`),
+    getPlanById: id => apiClient.get(`/pricing/${id}`),
 
     // Calculate custom quote
-    calculateQuote: (data) => apiClient.post('/pricing/calculate', data),
+    calculateQuote: data => apiClient.post('/pricing/calculate', data),
 
     // Compare plans
-    comparePlans: (planIds) => apiClient.post('/pricing/compare', { planIds }),
+    comparePlans: planIds => apiClient.post('/pricing/compare', { planIds }),
   },
 
   // ============= Authentication (Future) =============
   auth: {
     // Login
-    login: (credentials) => apiClient.post('/auth/login', credentials),
+    login: credentials => apiClient.post('/auth/login', credentials),
 
     // Register
-    register: (userData) => apiClient.post('/auth/register', userData),
+    register: userData => apiClient.post('/auth/register', userData),
 
     // Logout
     logout: () => apiClient.post('/auth/logout'),
 
     // Forgot password
-    forgotPassword: (email) => apiClient.post('/auth/forgot-password', { email }),
+    forgotPassword: email => apiClient.post('/auth/forgot-password', { email }),
 
     // Reset password
     resetPassword: (token, password) =>
       apiClient.post('/auth/reset-password', { token, password }),
 
     // Verify email
-    verifyEmail: (token) => apiClient.post('/auth/verify-email', { token }),
+    verifyEmail: token => apiClient.post('/auth/verify-email', { token }),
 
     // Refresh token
     refreshToken: () => apiClient.post('/auth/refresh-token'),
@@ -331,10 +336,10 @@ export const api = {
     getCurrentUser: () => apiClient.get('/auth/me'),
 
     // Update profile
-    updateProfile: (data) => apiClient.put('/auth/profile', data),
+    updateProfile: data => apiClient.put('/auth/profile', data),
 
     // Change password
-    changePassword: (data) => apiClient.post('/auth/change-password', data),
+    changePassword: data => apiClient.post('/auth/change-password', data),
   },
 
   // ============= Files/Media =============
@@ -349,27 +354,30 @@ export const api = {
     // Upload multiple files
     uploadMultiple: (files, onProgress) => {
       const formData = new FormData();
-      files.forEach((file) => formData.append('files', file));
+      files.forEach(file => formData.append('files', file));
       return apiClient.upload('/files/upload-multiple', formData, onProgress);
     },
 
     // Delete file
-    delete: (fileId) => apiClient.delete(`/files/${fileId}`),
+    delete: fileId => apiClient.delete(`/files/${fileId}`),
   },
 
   // ============= Analytics =============
   analytics: {
     // Track page view
-    trackPageView: (page) => apiClient.post('/analytics/pageview', { page }),
+    trackPageView: page => apiClient.post('/analytics/pageview', { page }),
 
     // Track event
-    trackEvent: (event, data) => apiClient.post('/analytics/event', { event, data }),
+    trackEvent: (event, data) =>
+      apiClient.post('/analytics/event', { event, data }),
 
     // Get notification stats
-    getNotificationStats: (notificationId) => apiClient.get(`/analytics/notifications/${notificationId}/stats`),
+    getNotificationStats: notificationId =>
+      apiClient.get(`/analytics/notifications/${notificationId}/stats`),
 
     // Get notification performance metrics
-    getNotificationPerformance: (params) => apiClient.post('/analytics/notifications/performance', params),
+    getNotificationPerformance: params =>
+      apiClient.post('/analytics/notifications/performance', params),
 
     // Get site statistics
     getStats: () => apiClient.get('/analytics/stats'),
@@ -378,19 +386,19 @@ export const api = {
   // ============= Reviews & Ratings =============
   reviews: {
     // Submit review
-    submit: (data) => apiClient.post('/reviews/submit', data),
+    submit: data => apiClient.post('/reviews/submit', data),
 
     // Get reviews for project
-    getByProject: (projectId) => apiClient.get(`/reviews/project/${projectId}`),
+    getByProject: projectId => apiClient.get(`/reviews/project/${projectId}`),
 
     // Update review
     update: (reviewId, data) => apiClient.put(`/reviews/${reviewId}`, data),
 
     // Delete review
-    delete: (reviewId) => apiClient.delete(`/reviews/${reviewId}`),
+    delete: reviewId => apiClient.delete(`/reviews/${reviewId}`),
 
     // Like review
-    like: (reviewId) => apiClient.post(`/reviews/${reviewId}/like`),
+    like: reviewId => apiClient.post(`/reviews/${reviewId}/like`),
 
     // Report review
     report: (reviewId, reason) =>
@@ -403,53 +411,57 @@ export const api = {
     getAll: () => apiClient.get('/notifications'),
 
     // Mark as read
-    markAsRead: (notificationId) =>
+    markAsRead: notificationId =>
       apiClient.patch(`/notifications/${notificationId}/read`),
 
     // Mark all as read
     markAllAsRead: () => apiClient.post('/notifications/read-all'),
 
     // Delete notification
-    delete: (notificationId) => apiClient.delete(`/notifications/${notificationId}`),
+    delete: notificationId =>
+      apiClient.delete(`/notifications/${notificationId}`),
 
     // Get notification by ID
-    getById: (id) => apiClient.get(`/notifications/${id}`),
+    getById: id => apiClient.get(`/notifications/${id}`),
 
     // Update notification status
-    updateStatus: (id, data) => apiClient.put(`/notifications/${id}/status`, data),
+    updateStatus: (id, data) =>
+      apiClient.put(`/notifications/${id}/status`, data),
 
     // Get unread count
     getUnreadCount: () => apiClient.get('/notifications/unread-count'),
 
     // Get user preferences
-    getUserPreferences: (userId) => apiClient.get(`/notifications/preferences/${userId}`),
+    getUserPreferences: userId =>
+      apiClient.get(`/notifications/preferences/${userId}`),
 
     // Set user preferences
-    setUserPreferences: (userId, data) => apiClient.post(`/notifications/preferences/${userId}`, data),
+    setUserPreferences: (userId, data) =>
+      apiClient.post(`/notifications/preferences/${userId}`, data),
 
     // Send notification
-    send: (data) => apiClient.post('/notifications', data),
+    send: data => apiClient.post('/notifications', data),
 
     // Send email notification
-    sendEmail: (data) => apiClient.post('/notifications/email', data),
+    sendEmail: data => apiClient.post('/notifications/email', data),
 
     // Send WhatsApp notification
-    sendWhatsApp: (data) => apiClient.post('/notifications/whatsapp', data),
+    sendWhatsApp: data => apiClient.post('/notifications/whatsapp', data),
 
     // Send multiple notifications
-    sendMultiple: (data) => apiClient.post('/notifications/multiple', data),
+    sendMultiple: data => apiClient.post('/notifications/multiple', data),
   },
 
   // ============= Search =============
   search: {
     // Global search
-    global: (query) => apiClient.get('/search', { q: query }),
+    global: query => apiClient.get('/search', { q: query }),
 
     // Search with filters
-    advanced: (params) => apiClient.post('/search/advanced', params),
+    advanced: params => apiClient.post('/search/advanced', params),
 
     // Get search suggestions
-    suggestions: (query) => apiClient.get('/search/suggestions', { q: query }),
+    suggestions: query => apiClient.get('/search/suggestions', { q: query }),
   },
 
   // ============= Settings =============
@@ -461,18 +473,18 @@ export const api = {
     getUser: () => apiClient.get('/settings/user'),
 
     // Update user settings
-    updateUser: (data) => apiClient.put('/settings/user', data),
+    updateUser: data => apiClient.put('/settings/user', data),
 
     // Get privacy settings
     getPrivacy: () => apiClient.get('/settings/privacy'),
 
     // Update privacy settings
-    updatePrivacy: (data) => apiClient.put('/settings/privacy', data),
+    updatePrivacy: data => apiClient.put('/settings/privacy', data),
   },
 };
 
 // Set auth token helper
-export const setAuthToken = (token) => {
+export const setAuthToken = token => {
   apiClient.setAuthToken(token);
 };
 

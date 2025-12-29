@@ -5,11 +5,13 @@
 The blank screen issue occurring in production while the application works in development was caused by multiple factors:
 
 ### 1. Empty Chunks in Build Process
+
 - The build was generating empty chunks: "vendor-html-parse-stringify" and "vendor-void-elements"
 - These were dependencies of react-i18next but were being separated into their own chunks
 - Empty chunks can cause runtime errors in production environments
 
 ### 2. Asset Path Configuration
+
 - The application was using absolute paths (`/assets/`) instead of relative paths (`./assets/`)
 - This causes issues when the application is deployed to subdirectories or CDN environments
 - The base URL configuration was not properly set for production deployment
@@ -17,16 +19,28 @@ The blank screen issue occurring in production while the application works in de
 ## Implemented Solutions
 
 ### 1. Fixed Empty Chunks Issue
+
 Updated `vite.config.ts` to properly group small packages:
 
 ```javascript
 // Added 'html-parse-stringify' and 'void-elements' to the small packages list
-const smallPackages = ['cookie', 'set-cookie-parser', 'path-to-regexp', 'tiny-invariant', 'tiny-warning', 'loose-envify', 'scheduler', 'html-parse-stringify', 'void-elements'];
+const smallPackages = [
+  'cookie',
+  'set-cookie-parser',
+  'path-to-regexp',
+  'tiny-invariant',
+  'tiny-warning',
+  'loose-envify',
+  'scheduler',
+  'html-parse-stringify',
+  'void-elements',
+];
 ```
 
 This ensures that these small packages are grouped into the `vendor-common` chunk instead of creating empty chunks.
 
 ### 2. Fixed Asset Path Configuration
+
 Added base configuration to `vite.config.ts`:
 
 ```javascript
@@ -37,7 +51,7 @@ This changes all asset paths from absolute (`/assets/`) to relative (`./assets/`
 
 ## Verification Steps
 
-1. **Build Verification**: 
+1. **Build Verification**:
    - Ran `npm run build` and confirmed no empty chunks are generated
    - Verified all assets use relative paths in the output index.html
 
@@ -48,6 +62,7 @@ This changes all asset paths from absolute (`/assets/`) to relative (`./assets/`
 ## Additional Potential Issues Addressed
 
 ### 1. Error Boundaries
+
 Consider adding error boundaries to catch and display errors gracefully:
 
 ```jsx
@@ -79,17 +94,18 @@ class ErrorBoundary extends React.Component {
 ```
 
 ### 2. Runtime Error Detection
+
 Add global error handling to catch unhandled errors:
 
 ```javascript
 // Add to main.jsx or App.jsx for production error tracking
 if (process.env.NODE_ENV === 'production') {
-  window.addEventListener('error', (event) => {
+  window.addEventListener('error', event => {
     console.error('Global Error:', event.error);
     // Optionally send to error tracking service
   });
 
-  window.addEventListener('unhandledrejection', (event) => {
+  window.addEventListener('unhandledrejection', event => {
     console.error('Unhandled Promise Rejection:', event.reason);
     // Optionally send to error tracking service
   });
@@ -99,14 +115,18 @@ if (process.env.NODE_ENV === 'production') {
 ## Deployment Considerations
 
 ### 1. Server Configuration
+
 Ensure the production server is configured to:
+
 - Serve index.html for all routes (SPA fallback)
 - Set proper MIME types for JavaScript and CSS files
 - Enable gzip compression for assets
 - Set appropriate cache headers for static assets
 
 ### 2. Environment-Specific Configuration
+
 Verify that all environment variables are properly configured in production:
+
 - API endpoints
 - Feature flags
 - Third-party service credentials
@@ -126,6 +146,7 @@ Before deploying to production:
 ## Summary
 
 The blank screen issue has been resolved by:
+
 1. Eliminating empty chunks in the build process
 2. Configuring relative paths for asset loading
 3. Ensuring the application can be deployed to any subdirectory

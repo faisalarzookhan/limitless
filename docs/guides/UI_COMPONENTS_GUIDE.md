@@ -35,20 +35,20 @@ Breadcrumbs provide a way to navigate up the hierarchy of pages or sections.
 
 #### Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| children | React.ReactNode | - | Breadcrumb items |
-| className | string | '' | Additional CSS classes |
+| Prop      | Type            | Default      | Description              |
+| --------- | --------------- | ------------ | ------------------------ |
+| children  | React.ReactNode | -            | Breadcrumb items         |
+| className | string          | ''           | Additional CSS classes   |
 | separator | React.ReactNode | Chevron icon | Custom separator element |
 
 #### BreadcrumbItem Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| children | React.ReactNode | - | Item content |
-| href | string | - | Link destination |
-| isCurrent | boolean | false | Indicates current page |
-| className | string | '' | Additional CSS classes |
+| Prop      | Type            | Default | Description            |
+| --------- | --------------- | ------- | ---------------------- |
+| children  | React.ReactNode | -       | Item content           |
+| href      | string          | -       | Link destination       |
+| isCurrent | boolean         | false   | Indicates current page |
+| className | string          | ''      | Additional CSS classes |
 
 #### Usage Example
 
@@ -61,13 +61,9 @@ import { HiHome } from 'react-icons/hi';
     <HiHome className="w-4 h-4 mr-1" />
     Home
   </BreadcrumbItem>
-  <BreadcrumbItem href="/products">
-    Products
-  </BreadcrumbItem>
-  <BreadcrumbItem isCurrent>
-    TrackIT
-  </BreadcrumbItem>
-</Breadcrumb>
+  <BreadcrumbItem href="/products">Products</BreadcrumbItem>
+  <BreadcrumbItem isCurrent>TrackIT</BreadcrumbItem>
+</Breadcrumb>;
 ```
 
 ### Pagination
@@ -76,14 +72,14 @@ Pagination allows users to navigate through large sets of data across multiple p
 
 #### Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| currentPage | number | - | Current page number |
-| totalPages | number | - | Total number of pages |
-| onPageChange | (page: number) => void | - | Callback when page changes |
-| className | string | '' | Additional CSS classes |
-| siblingCount | number | 1 | Number of pages to show on each side of current |
-| showFirstLast | boolean | true | Show first/last page buttons |
+| Prop          | Type                   | Default | Description                                     |
+| ------------- | ---------------------- | ------- | ----------------------------------------------- |
+| currentPage   | number                 | -       | Current page number                             |
+| totalPages    | number                 | -       | Total number of pages                           |
+| onPageChange  | (page: number) => void | -       | Callback when page changes                      |
+| className     | string                 | ''      | Additional CSS classes                          |
+| siblingCount  | number                 | 1       | Number of pages to show on each side of current |
+| showFirstLast | boolean                | true    | Show first/last page buttons                    |
 
 #### Usage Example
 
@@ -97,7 +93,7 @@ const totalPages = 10;
   currentPage={currentPage}
   totalPages={totalPages}
   onPageChange={setCurrentPage}
-/>
+/>;
 ```
 
 ### BackToTop
@@ -106,12 +102,12 @@ BackToTop provides a convenient way for users to scroll back to the top of a pag
 
 #### Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| threshold | number | 300 | Scroll distance before showing button |
-| smooth | boolean | true | Enable smooth scrolling |
-| className | string | '' | Additional CSS classes |
-| children | React.ReactNode | ArrowUp icon | Custom content |
+| Prop      | Type            | Default      | Description                           |
+| --------- | --------------- | ------------ | ------------------------------------- |
+| threshold | number          | 300          | Scroll distance before showing button |
+| smooth    | boolean         | true         | Enable smooth scrolling               |
+| className | string          | ''           | Additional CSS classes                |
+| children  | React.ReactNode | ArrowUp icon | Custom content                        |
 
 #### Usage Example
 
@@ -133,18 +129,18 @@ Search provides a styled input field for search functionality with clear and sub
 
 #### Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| placeholder | string | 'Search...' | Placeholder text |
-| value | string | - | Controlled input value |
-| onChange | (e: React.ChangeEvent<HTMLInputElement>) => void | - | Change handler |
-| onClear | () => void | - | Clear button handler |
-| onSubmit | (value: string) => void | - | Form submit handler |
-| className | string | '' | Additional CSS classes |
-| variant | 'default' \| 'filled' \| 'outlined' | 'default' | Input style variant |
-| size | 'sm' \| 'md' \| 'lg' | 'md' | Input size |
-| disabled | boolean | false | Disable input |
-| autoFocus | boolean | false | Auto focus on mount |
+| Prop        | Type                                             | Default     | Description            |
+| ----------- | ------------------------------------------------ | ----------- | ---------------------- |
+| placeholder | string                                           | 'Search...' | Placeholder text       |
+| value       | string                                           | -           | Controlled input value |
+| onChange    | (e: React.ChangeEvent<HTMLInputElement>) => void | -           | Change handler         |
+| onClear     | () => void                                       | -           | Clear button handler   |
+| onSubmit    | (value: string) => void                          | -           | Form submit handler    |
+| className   | string                                           | ''          | Additional CSS classes |
+| variant     | 'default' \| 'filled' \| 'outlined'              | 'default'   | Input style variant    |
+| size        | 'sm' \| 'md' \| 'lg'                             | 'md'        | Input size             |
+| disabled    | boolean                                          | false       | Disable input          |
+| autoFocus   | boolean                                          | false       | Auto focus on mount    |
 
 #### Usage Example
 
@@ -156,12 +152,12 @@ const [searchValue, setSearchValue] = useState('');
 <Search
   placeholder="Search products..."
   value={searchValue}
-  onChange={(e) => setSearchValue(e.target.value)}
+  onChange={e => setSearchValue(e.target.value)}
   onClear={() => setSearchValue('')}
-  onSubmit={(value) => console.log('Searching for:', value)}
+  onSubmit={value => console.log('Searching for:', value)}
   variant="filled"
   size="lg"
-/>
+/>;
 ```
 
 ## Implementation Examples
@@ -181,11 +177,9 @@ const ProductsPage = () => {
           <HiHome className="w-4 h-4 mr-1" />
           Home
         </BreadcrumbItem>
-        <BreadcrumbItem isCurrent>
-          Products
-        </BreadcrumbItem>
+        <BreadcrumbItem isCurrent>Products</BreadcrumbItem>
       </Breadcrumb>
-      
+
       {/* Rest of page content */}
     </div>
   );
@@ -202,11 +196,11 @@ import { useState } from 'react';
 const BlogList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 15;
-  
+
   return (
     <div>
       {/* Blog posts */}
-      
+
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
@@ -227,18 +221,18 @@ import { useState } from 'react';
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  
-  const handleSearch = (query) => {
+
+  const handleSearch = query => {
     // Implement search logic
     console.log('Searching for:', query);
   };
-  
+
   return (
     <header>
       <Search
         placeholder="Search our services..."
         value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        onChange={e => setSearchQuery(e.target.value)}
         onSubmit={handleSearch}
         variant="filled"
       />

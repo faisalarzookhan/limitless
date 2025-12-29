@@ -11,7 +11,7 @@ import {
   HiUser,
   HiOfficeBuilding,
   HiChat,
-  HiCalendar
+  HiCalendar,
 } from 'react-icons/hi';
 import ContactForm from '../components/ContactForm';
 import {
@@ -20,12 +20,10 @@ import {
   FaLinkedinIn,
   FaInstagram,
   FaGithub,
-  FaWhatsapp
+  FaWhatsapp,
 } from 'react-icons/fa';
 
 const Contact = () => {
-
-
   const contactInfo = [
     {
       icon: HiMail,
@@ -62,12 +60,42 @@ const Contact = () => {
   ];
 
   const socialLinks = [
-    { icon: FaFacebookF, url: 'https://facebook.com', label: 'Facebook', color: 'hover:bg-blue-600' },
-    { icon: FaTwitter, url: 'https://twitter.com', label: 'Twitter', color: 'hover:bg-sky-500' },
-    { icon: FaLinkedinIn, url: 'https://linkedin.com', label: 'LinkedIn', color: 'hover:bg-blue-700' },
-    { icon: FaInstagram, url: 'https://instagram.com', label: 'Instagram', color: 'hover:bg-pink-600' },
-    { icon: FaGithub, url: 'https://github.com', label: 'GitHub', color: 'hover:bg-gray-800' },
-    { icon: FaWhatsapp, url: 'https://wa.me/917710909492', label: 'WhatsApp', color: 'hover:bg-green-600' },
+    {
+      icon: FaFacebookF,
+      url: 'https://facebook.com',
+      label: 'Facebook',
+      color: 'hover:bg-blue-600',
+    },
+    {
+      icon: FaTwitter,
+      url: 'https://twitter.com',
+      label: 'Twitter',
+      color: 'hover:bg-sky-500',
+    },
+    {
+      icon: FaLinkedinIn,
+      url: 'https://linkedin.com',
+      label: 'LinkedIn',
+      color: 'hover:bg-blue-700',
+    },
+    {
+      icon: FaInstagram,
+      url: 'https://instagram.com',
+      label: 'Instagram',
+      color: 'hover:bg-pink-600',
+    },
+    {
+      icon: FaGithub,
+      url: 'https://github.com',
+      label: 'GitHub',
+      color: 'hover:bg-gray-800',
+    },
+    {
+      icon: FaWhatsapp,
+      url: 'https://wa.me/917710909492',
+      label: 'WhatsApp',
+      color: 'hover:bg-green-600',
+    },
   ];
 
   const quickActions = [
@@ -97,15 +125,18 @@ const Contact = () => {
   const faqs = [
     {
       question: 'What is your response time?',
-      answer: 'We typically respond to all inquiries within 24 hours during business days.',
+      answer:
+        'We typically respond to all inquiries within 24 hours during business days.',
     },
     {
       question: 'Do you offer free consultations?',
-      answer: 'Yes! We offer a free 30-minute consultation to discuss your project requirements.',
+      answer:
+        'Yes! We offer a free 30-minute consultation to discuss your project requirements.',
     },
     {
       question: 'What information should I include in my inquiry?',
-      answer: 'Please include your project goals, timeline, budget range, and any specific requirements you have.',
+      answer:
+        'Please include your project goals, timeline, budget range, and any specific requirements you have.',
     },
   ];
 
@@ -113,7 +144,10 @@ const Contact = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative py-20 md:py-32 bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 text-white overflow-hidden">
-        <div className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8" aria-hidden="true">
+        <div
+          className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8"
+          aria-hidden="true"
+        >
           <div className="absolute inset-0 bg-pattern-grid opacity-10"></div>
         </div>
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
@@ -125,8 +159,12 @@ const Contact = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 animate-fade-in-up">
               Let's Build Something Amazing Together
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-              Have a project in mind? We'd love to hear from you. Get in touch and let's discuss how we can help transform your business.
+            <p
+              className="text-xl md:text-2xl text-white/90 mb-8 animate-fade-in-up"
+              style={{ animationDelay: '0.2s' }}
+            >
+              Have a project in mind? We'd love to hear from you. Get in touch
+              and let's discuss how we can help transform your business.
             </p>
           </div>
         </div>
@@ -141,7 +179,9 @@ const Contact = () => {
                 key={index}
                 className="group bg-gradient-to-br from-white to-gray-50 dark:from-dark-800 dark:to-dark-900 rounded-2xl p-6 shadow-soft hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-dark-700"
               >
-                <div className={`w-14 h-14 bg-gradient-to-br ${info.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                <div
+                  className={`w-14 h-14 bg-gradient-to-br ${info.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}
+                >
                   <info.icon className="w-7 h-7 text-white" />
                 </div>
                 <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white">
@@ -151,7 +191,9 @@ const Contact = () => {
                   <a
                     href={info.link}
                     target={info.link.startsWith('http') ? '_blank' : '_self'}
-                    rel={info.link.startsWith('http') ? 'noopener noreferrer' : ''}
+                    rel={
+                      info.link.startsWith('http') ? 'noopener noreferrer' : ''
+                    }
                     className="text-primary-600 dark:text-primary-400 font-semibold hover:underline block mb-2"
                   >
                     {info.value}
@@ -177,7 +219,8 @@ const Contact = () => {
                   Send Us a Message
                 </h2>
                 <p className="text-gray-600 dark:text-gray-400 mb-8">
-                  Fill out the form below and we'll get back to you within 24 hours
+                  Fill out the form below and we'll get back to you within 24
+                  hours
                 </p>
 
                 <ContactForm />
@@ -306,7 +349,10 @@ const Contact = () => {
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
             Let's discuss your requirements and create a detailed project plan
           </p>
-          <Link to="/get-started" className="btn-primary bg-white text-primary-600 hover:bg-gray-100">
+          <Link
+            to="/get-started"
+            className="btn-primary bg-white text-primary-600 hover:bg-gray-100"
+          >
             Get Started with Your Project
             <HiArrowRight className="inline-block ml-2 w-5 h-5" />
           </Link>

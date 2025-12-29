@@ -17,7 +17,7 @@ const {
   sessionMiddleware,
   parsingMiddleware,
   compressionMiddleware,
-  errorHandler
+  errorHandler,
 } = require('./etc/middleware/middleware.config');
 
 // Import health endpoints
@@ -48,48 +48,50 @@ app.use('/api', healthRoutes);
 app.post('/api/contact/submit', (req, res) => {
   // Simulate processing contact form
   const { name, email, message, phone } = req.body;
-  
+
   // Validation
   if (!name || !email || !message) {
     return res.status(400).json({
-      error: 'Name, email, and message are required'
+      error: 'Name, email, and message are required',
     });
   }
-  
+
   // In a real application, you would save this to a database and send an email
   console.log(`Contact form received: ${name} (${email}): ${message}`);
-  
+
   res.status(200).json({
     success: true,
-    message: 'Thank you for your message. We will contact you soon.'
+    message: 'Thank you for your message. We will contact you soon.',
   });
 });
 
 // Client form submission
 app.post('/api/contact/client-form', (req, res) => {
-  const { 
-    businessName, 
-    contactPerson, 
-    email, 
-    phone, 
+  const {
+    businessName,
+    contactPerson,
+    email,
+    phone,
     requirements,
     budget,
-    timeline
+    timeline,
   } = req.body;
-  
+
   // Validation
   if (!businessName || !contactPerson || !email || !requirements) {
     return res.status(400).json({
-      error: 'Business name, contact person, email, and requirements are required'
+      error:
+        'Business name, contact person, email, and requirements are required',
     });
   }
-  
+
   // In a real application, you would save this to a database
   console.log(`Client form received: ${businessName} - ${requirements}`);
-  
+
   res.status(200).json({
     success: true,
-    message: 'Your requirements have been submitted. Our team will contact you within 24 hours.'
+    message:
+      'Your requirements have been submitted. Our team will contact you within 24 hours.',
   });
 });
 
@@ -106,31 +108,32 @@ app.get('/api/portfolio', (req, res) => {
       image: '/images/portfolio/ecommerce.jpg',
       client: 'Retail Corp',
       year: 2023,
-      featured: true
+      featured: true,
     },
     {
       id: 2,
       title: 'Mobile Banking App',
-      description: 'Secure mobile banking application with biometric authentication',
+      description:
+        'Secure mobile banking application with biometric authentication',
       category: 'mobile-apps',
       technologies: ['React Native', 'Node.js', 'PostgreSQL'],
       image: '/images/portfolio/banking.jpg',
       client: 'Finance Inc',
       year: 2024,
-      featured: true
-    }
+      featured: true,
+    },
   ];
-  
+
   res.json({
     success: true,
     data: portfolioData,
-    total: portfolioData.length
+    total: portfolioData.length,
   });
 });
 
 app.get('/api/portfolio/:id', (req, res) => {
   const { id } = req.params;
-  
+
   // In a real application, you would fetch from a database
   const project = {
     id: parseInt(id),
@@ -142,15 +145,18 @@ app.get('/api/portfolio/:id', (req, res) => {
     client: 'Sample Client',
     year: 2024,
     details: 'Project details here...',
-    screenshots: ['/images/portfolio/screenshot1.jpg', '/images/portfolio/screenshot2.jpg'],
+    screenshots: [
+      '/images/portfolio/screenshot1.jpg',
+      '/images/portfolio/screenshot2.jpg',
+    ],
     features: ['Feature 1', 'Feature 2', 'Feature 3'],
     challenges: ['Challenge 1', 'Challenge 2'],
-    solutions: ['Solution 1', 'Solution 2']
+    solutions: ['Solution 1', 'Solution 2'],
   };
-  
+
   res.json({
     success: true,
-    data: project
+    data: project,
   });
 });
 
@@ -162,10 +168,11 @@ app.get('/api/testimonials', (req, res) => {
       name: 'John Doe',
       position: 'CTO, Tech Solutions',
       company: 'Tech Solutions Inc.',
-      content: 'Limitless Infotech delivered exceptional results for our project.',
+      content:
+        'Limitless Infotech delivered exceptional results for our project.',
       rating: 5,
       date: '2024-01-15',
-      featured: true
+      featured: true,
     },
     {
       id: 2,
@@ -175,14 +182,14 @@ app.get('/api/testimonials', (req, res) => {
       content: 'Professional, timely, and innovative solutions.',
       rating: 5,
       date: '2024-02-20',
-      featured: true
-    }
+      featured: true,
+    },
   ];
-  
+
   res.json({
     success: true,
     data: testimonials,
-    total: testimonials.length
+    total: testimonials.length,
   });
 });
 
@@ -201,14 +208,14 @@ app.get('/api/blog', (req, res) => {
       tags: ['web-development', 'trends', 'innovation'],
       image: '/images/blog/web-dev.jpg',
       readTime: '5 min read',
-      featured: true
-    }
+      featured: true,
+    },
   ];
-  
+
   res.json({
     success: true,
     data: blogPosts,
-    total: blogPosts.length
+    total: blogPosts.length,
   });
 });
 
@@ -221,7 +228,7 @@ app.get('/api/services', (req, res) => {
       description: 'Custom web applications and solutions',
       icon: 'web',
       features: ['Responsive Design', 'Modern Frameworks', 'SEO Optimized'],
-      price: 'Starting at $5000'
+      price: 'Starting at $5000',
     },
     {
       id: 2,
@@ -229,33 +236,33 @@ app.get('/api/services', (req, res) => {
       description: 'Cross-platform mobile applications',
       icon: 'mobile',
       features: ['iOS & Android', 'Native Performance', 'App Store Deployment'],
-      price: 'Starting at $7000'
-    }
+      price: 'Starting at $7000',
+    },
   ];
-  
+
   res.json({
     success: true,
     data: services,
-    total: services.length
+    total: services.length,
   });
 });
 
 // Newsletter subscription
 app.post('/api/contact/subscribe', (req, res) => {
   const { email } = req.body;
-  
+
   if (!email || !email.includes('@')) {
     return res.status(400).json({
-      error: 'Valid email address is required'
+      error: 'Valid email address is required',
     });
   }
-  
+
   // In a real application, you would add to a newsletter service
   console.log(`Newsletter subscription: ${email}`);
-  
+
   res.status(200).json({
     success: true,
-    message: 'Thank you for subscribing to our newsletter!'
+    message: 'Thank you for subscribing to our newsletter!',
   });
 });
 
@@ -266,7 +273,7 @@ app.get('/health', (req, res) => {
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
     version: process.env.npm_package_version || '1.0.0',
-    environment: process.env.NODE_ENV || 'development'
+    environment: process.env.NODE_ENV || 'development',
   });
 });
 
@@ -274,7 +281,7 @@ app.get('/health', (req, res) => {
 if (process.env.NODE_ENV === 'production') {
   // Serve static files
   app.use(express.static(path.join(__dirname, 'dist')));
-  
+
   // Serve index.html for all other routes (for SPA routing)
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
@@ -291,16 +298,20 @@ if (process.env.NODE_ENV === 'production' && process.env.USE_HTTPS === 'true') {
   // HTTPS server configuration
   const options = {
     key: fs.readFileSync(process.env.SSL_KEY_PATH || './ssl/key.pem'),
-    cert: fs.readFileSync(process.env.SSL_CERT_PATH || './ssl/cert.pem')
+    cert: fs.readFileSync(process.env.SSL_CERT_PATH || './ssl/cert.pem'),
   };
-  
+
   https.createServer(options, app).listen(PORT, () => {
-    console.log(`HTTPS Server running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
+    console.log(
+      `HTTPS Server running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`
+    );
   });
 } else {
   // HTTP server
   app.listen(PORT, () => {
-    console.log(`HTTP Server running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
+    console.log(
+      `HTTP Server running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`
+    );
   });
 }
 

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import {
   FaFacebookF,
   FaTwitter,
@@ -8,7 +8,7 @@ import {
   FaEnvelope,
   FaPhone,
   FaMapMarkerAlt,
-} from "react-icons/fa";
+} from 'react-icons/fa';
 import {
   HiCode,
   HiDeviceMobile,
@@ -18,60 +18,80 @@ import {
   HiSun,
   HiMoon,
   HiSparkles,
-} from "react-icons/hi";
-import { useApp } from "../context/AppContext";
-import { Image } from "./ui";
-import NewsletterForm from "./NewsletterForm";
+} from 'react-icons/hi';
+import { useApp } from '../context/AppContext';
+import { Image } from './ui';
+import NewsletterForm from './NewsletterForm';
 
 const Footer = () => {
   const { theme, changeTheme } = useApp();
   const currentYear = new Date().getFullYear();
 
   const toggleTheme = () => {
-    const themes = ["light", "dark", "system"];
+    const themes = ['light', 'dark', 'system'];
     const currentIndex = themes.indexOf(theme);
     const nextIndex = (currentIndex + 1) % themes.length;
     changeTheme(themes[nextIndex]);
   };
 
   const getThemeIcon = () => {
-    if (theme === "dark") return <HiMoon className="w-5 h-5" />;
-    if (theme === "light") return <HiSun className="w-5 h-5" />;
+    if (theme === 'dark') return <HiMoon className="w-5 h-5" />;
+    if (theme === 'light') return <HiSun className="w-5 h-5" />;
     return <HiSparkles className="w-5 h-5" />;
   };
 
   const quickLinks = [
-    { name: "Home", path: "/" },
-    { name: "About Us", path: "/about" },
-    { name: "Services", path: "/services" },
-    { name: "Products", path: "/products" },
-    { name: "Portfolio", path: "/portfolio" },
-    { name: "Testimonials", path: "/testimonials" },
-    { name: "Contact Us", path: "/contact" },
+    { name: 'Home', path: '/' },
+    { name: 'About Us', path: '/about' },
+    { name: 'Services', path: '/services' },
+    { name: 'Products', path: '/products' },
+    { name: 'Portfolio', path: '/portfolio' },
+    { name: 'Testimonials', path: '/testimonials' },
+    { name: 'Contact Us', path: '/contact' },
   ];
 
   const services = [
-    { name: "Web Development", path: "/services#web", icon: HiCode },
+    { name: 'Web Development', path: '/services#web', icon: HiCode },
     {
-      name: "Mobile App Development",
-      path: "/services#mobile",
+      name: 'Mobile App Development',
+      path: '/services#mobile',
       icon: HiDeviceMobile,
     },
-    { name: "Custom Software", path: "/services#software", icon: HiCube },
-    { name: "CRM Solutions", path: "/services#crm", icon: HiChartBar },
+    { name: 'Custom Software', path: '/services#software', icon: HiCube },
+    { name: 'CRM Solutions', path: '/services#crm', icon: HiChartBar },
     {
-      name: "Business Automation",
-      path: "/services#automation",
+      name: 'Business Automation',
+      path: '/services#automation',
       icon: HiLightningBolt,
     },
   ];
 
   const socialLinks = [
-    { icon: FaFacebookF, url: "https://facebook.com/limitlessinfotech", label: "Facebook" },
-    { icon: FaTwitter, url: "https://twitter.com/limitlessinfotech", label: "Twitter" },
-    { icon: FaLinkedinIn, url: "https://linkedin.com/in/limitlessinfotech", label: "LinkedIn" },
-    { icon: FaInstagram, url: "https://instagram.com/limitless.infotech", label: "Instagram" },
-    { icon: FaGithub, url: "https://github.com/limitlessinfotechsolution", label: "GitHub" },
+    {
+      icon: FaFacebookF,
+      url: 'https://facebook.com/limitlessinfotech',
+      label: 'Facebook',
+    },
+    {
+      icon: FaTwitter,
+      url: 'https://twitter.com/limitlessinfotech',
+      label: 'Twitter',
+    },
+    {
+      icon: FaLinkedinIn,
+      url: 'https://linkedin.com/in/limitlessinfotech',
+      label: 'LinkedIn',
+    },
+    {
+      icon: FaInstagram,
+      url: 'https://instagram.com/limitless.infotech',
+      label: 'Instagram',
+    },
+    {
+      icon: FaGithub,
+      url: 'https://github.com/limitlessinfotechsolution',
+      label: 'GitHub',
+    },
   ];
 
   return (
@@ -128,7 +148,10 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-6" id="quick-links">
+            <h3
+              className="text-lg font-semibold text-white mb-6"
+              id="quick-links"
+            >
               Quick Links
             </h3>
             <ul className="space-y-3" aria-labelledby="quick-links">
@@ -148,7 +171,10 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-6" id="our-services">
+            <h3
+              className="text-lg font-semibold text-white mb-6"
+              id="our-services"
+            >
               Our Services
             </h3>
             <ul className="space-y-3" aria-labelledby="our-services">
@@ -168,7 +194,10 @@ const Footer = () => {
 
           {/* Blog & Events */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-6" id="blog-events">
+            <h3
+              className="text-lg font-semibold text-white mb-6"
+              id="blog-events"
+            >
               Blog & Events
             </h3>
             <ul className="space-y-3" aria-labelledby="blog-events">
@@ -213,7 +242,10 @@ const Footer = () => {
 
           {/* Career & Resources */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-6" id="career-resources">
+            <h3
+              className="text-lg font-semibold text-white mb-6"
+              id="career-resources"
+            >
               Career & Resources
             </h3>
             <ul className="space-y-3" aria-labelledby="career-resources">
@@ -269,8 +301,8 @@ const Footer = () => {
               Build Limitless | Manage Limitless | Grow Limitless with our
               innovative solutions
             </p>
-            <Link 
-              to="/get-started" 
+            <Link
+              to="/get-started"
               className="btn-primary inline-block focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
               aria-label="Get started with our services today"
             >
@@ -285,7 +317,10 @@ const Footer = () => {
         <div className="container-custom px-4 md:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-              <h3 className="text-lg font-semibold text-white mb-6" id="contact-info">
+              <h3
+                className="text-lg font-semibold text-white mb-6"
+                id="contact-info"
+              >
                 Contact Us
               </h3>
               <ul className="space-y-4" aria-labelledby="contact-info">
@@ -324,7 +359,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            
+
             <div>
               <h3 className="text-lg font-semibold text-white mb-6">
                 Stay Updated
@@ -334,13 +369,14 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Bottom Bar */}
       <div className="border-t border-dark-800">
         <div className="container-custom px-4 md:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm text-gray-500">
-              © {currentYear} Limitless Infotech Solution Pvt Ltd. All rights reserved.
+              © {currentYear} Limitless Infotech Solution Pvt Ltd. All rights
+              reserved.
             </p>
 
             <div className="flex flex-wrap justify-center gap-6 text-sm">
@@ -365,7 +401,8 @@ const Footer = () => {
             </div>
 
             <p className="text-sm text-gray-500">
-              Crafted with <span className="text-red-500">♥</span> by Limitless Infotech Solution Pvt Ltd.
+              Crafted with <span className="text-red-500">♥</span> by Limitless
+              Infotech Solution Pvt Ltd.
             </p>
           </div>
         </div>

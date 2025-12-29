@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import { HiOutlineUser, HiOutlineMail, HiOutlineLockClosed, HiOutlineEye, HiOutlineEyeOff } from 'react-icons/hi';
+import {
+  HiOutlineUser,
+  HiOutlineMail,
+  HiOutlineLockClosed,
+  HiOutlineEye,
+  HiOutlineEyeOff,
+} from 'react-icons/hi';
 import InputField from './InputField';
 import { sendRegistrationNotification } from '../../services/notificationService';
 
@@ -10,7 +16,7 @@ const RegisterForm = ({ onRegisterSuccess, variant = 'default' }) => {
     email: '',
     password: '',
     confirmPassword: '',
-    agreeToTerms: false
+    agreeToTerms: false,
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -18,13 +24,13 @@ const RegisterForm = ({ onRegisterSuccess, variant = 'default' }) => {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === 'checkbox' ? checked : value,
     }));
-    
+
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
@@ -33,48 +39,48 @@ const RegisterForm = ({ onRegisterSuccess, variant = 'default' }) => {
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!formData.firstName) {
       newErrors.firstName = 'First name is required';
     }
-    
+
     if (!formData.lastName) {
       newErrors.lastName = 'Last name is required';
     }
-    
+
     if (!formData.email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Email is invalid';
     }
-    
+
     if (!formData.password) {
       newErrors.password = 'Password is required';
     } else if (formData.password.length < 6) {
       newErrors.password = 'Password must be at least 6 characters';
     }
-    
+
     if (!formData.confirmPassword) {
       newErrors.confirmPassword = 'Please confirm your password';
     } else if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = 'Passwords do not match';
     }
-    
+
     if (!formData.agreeToTerms) {
       newErrors.agreeToTerms = 'You must agree to the terms and conditions';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
-    
+
     setIsSubmitting(true);
 
     try {
@@ -86,19 +92,19 @@ const RegisterForm = ({ onRegisterSuccess, variant = 'default' }) => {
         agreeToTerms: formData.agreeToTerms,
         timestamp: new Date().toISOString(),
         page: window.location.pathname,
-        userAgent: navigator.userAgent
+        userAgent: navigator.userAgent,
       });
 
       // Simulate API call
       setTimeout(() => {
         setIsSubmitting(false);
         setSubmitSuccess(true);
-        
+
         // Call success callback if provided
         if (onRegisterSuccess) {
           onRegisterSuccess();
         }
-        
+
         // Reset success message after 5 seconds
         setTimeout(() => setSubmitSuccess(false), 5000);
       }, 1500);
@@ -112,11 +118,24 @@ const RegisterForm = ({ onRegisterSuccess, variant = 'default' }) => {
     return (
       <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 text-center">
         <div className="flex items-center justify-center mb-3">
-          <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+          <svg
+            className="w-8 h-8 text-green-600 dark:text-green-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M5 13l4 4L19 7"
+            ></path>
           </svg>
         </div>
-        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">Registration Successful!</h3>
+        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">
+          Registration Successful!
+        </h3>
         <p className="text-green-700 dark:text-green-400 text-sm">
           Welcome! Your account has been created successfully.
         </p>
@@ -139,7 +158,7 @@ const RegisterForm = ({ onRegisterSuccess, variant = 'default' }) => {
           error={errors.firstName}
           icon={HiOutlineUser}
         />
-        
+
         <InputField
           id="lastName"
           name="lastName"
@@ -172,7 +191,7 @@ const RegisterForm = ({ onRegisterSuccess, variant = 'default' }) => {
           id="password"
           name="password"
           label="Password"
-          type={showPassword ? "text" : "password"}
+          type={showPassword ? 'text' : 'password'}
           value={formData.password}
           onChange={handleChange}
           placeholder="Create a password"
@@ -194,7 +213,7 @@ const RegisterForm = ({ onRegisterSuccess, variant = 'default' }) => {
           id="confirmPassword"
           name="confirmPassword"
           label="Confirm Password"
-          type={showConfirmPassword ? "text" : "password"}
+          type={showConfirmPassword ? 'text' : 'password'}
           value={formData.confirmPassword}
           onChange={handleChange}
           placeholder="Confirm your password"
@@ -223,11 +242,29 @@ const RegisterForm = ({ onRegisterSuccess, variant = 'default' }) => {
           />
         </div>
         <div className="ml-3 text-sm">
-          <label htmlFor="agreeToTerms" className="text-gray-700 dark:text-gray-300">
-            I agree to the <a href="/terms" className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">Terms and Conditions</a> and <a href="/privacy" className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">Privacy Policy</a>
+          <label
+            htmlFor="agreeToTerms"
+            className="text-gray-700 dark:text-gray-300"
+          >
+            I agree to the{' '}
+            <a
+              href="/terms"
+              className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
+            >
+              Terms and Conditions
+            </a>{' '}
+            and{' '}
+            <a
+              href="/privacy"
+              className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
+            >
+              Privacy Policy
+            </a>
           </label>
           {errors.agreeToTerms && (
-            <p className="text-red-600 dark:text-red-400 text-sm mt-1">{errors.agreeToTerms}</p>
+            <p className="text-red-600 dark:text-red-400 text-sm mt-1">
+              {errors.agreeToTerms}
+            </p>
           )}
         </div>
       </div>
@@ -249,7 +286,10 @@ const RegisterForm = ({ onRegisterSuccess, variant = 'default' }) => {
 
       <div className="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
         Already have an account?{' '}
-        <a href="/login" className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+        <a
+          href="/login"
+          className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
+        >
           Sign in
         </a>
       </div>

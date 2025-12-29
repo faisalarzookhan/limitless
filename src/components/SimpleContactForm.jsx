@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { HiMail, HiUser, HiQuestionMarkCircle, HiCheckCircle } from 'react-icons/hi';
+import {
+  HiMail,
+  HiUser,
+  HiQuestionMarkCircle,
+  HiCheckCircle,
+} from 'react-icons/hi';
 import { sendContactNotification } from '../services/notificationService';
 
 const SimpleContactForm = ({ variant = 'default' }) => {
@@ -12,12 +17,12 @@ const SimpleContactForm = ({ variant = 'default' }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -29,7 +34,7 @@ const SimpleContactForm = ({ variant = 'default' }) => {
         subject: formData.subject,
         message: formData.message,
         timestamp: new Date().toISOString(),
-        page: window.location.pathname
+        page: window.location.pathname,
       });
     } catch (error) {
       console.error('Error sending contact notification:', error);
@@ -40,7 +45,7 @@ const SimpleContactForm = ({ variant = 'default' }) => {
       setIsSubmitting(false);
       setSubmitSuccess(true);
       setFormData({ name: '', email: '', subject: '', message: '' });
-      
+
       // Reset success message after 5 seconds
       setTimeout(() => setSubmitSuccess(false), 5000);
     }, 1500);
@@ -52,7 +57,9 @@ const SimpleContactForm = ({ variant = 'default' }) => {
         <div className="flex items-center justify-center mb-3">
           <HiCheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
         </div>
-        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">Message Sent!</h3>
+        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">
+          Message Sent!
+        </h3>
         <p className="text-green-700 dark:text-green-400 text-sm">
           We'll get back to you soon.
         </p>
@@ -64,7 +71,10 @@ const SimpleContactForm = ({ variant = 'default' }) => {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Name *
           </label>
           <div className="relative">
@@ -84,7 +94,10 @@ const SimpleContactForm = ({ variant = 'default' }) => {
           </div>
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Email *
           </label>
           <div className="relative">
@@ -105,7 +118,10 @@ const SimpleContactForm = ({ variant = 'default' }) => {
         </div>
       </div>
       <div>
-        <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="subject"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Subject *
         </label>
         <div className="relative">
@@ -130,7 +146,10 @@ const SimpleContactForm = ({ variant = 'default' }) => {
         </div>
       </div>
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="message"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Message *
         </label>
         <textarea

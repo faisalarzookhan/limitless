@@ -19,7 +19,7 @@ class NotificationService {
         url: window.location.href,
         referrer: document.referrer,
         source: 'frontend',
-        priority: 'normal'
+        priority: 'normal',
       };
 
       // Try to send notification to backend
@@ -28,24 +28,28 @@ class NotificationService {
         return response;
       } catch (apiError) {
         console.error('API notification failed:', apiError);
-        
+
         // Fallback 1: Try to send via email if primary method fails
         try {
           const fallbackResponse = await api.notifications.sendEmail({
             ...notificationData,
-            type: `${type}-fallback`
+            type: `${type}-fallback`,
           });
           return { ...fallbackResponse, fallback: true };
         } catch (fallbackError) {
           console.error('Fallback notification failed:', fallbackError);
-          
+
           // Fallback 2: Store in local storage for later retry
           this.queueNotificationForRetry(notificationData);
-          
+
           // Fallback 3: Log to console
           console.log(`Notification failed: ${type}`, data);
-          
-          return { success: false, error: apiError.message, queuedForRetry: true };
+
+          return {
+            success: false,
+            error: apiError.message,
+            queuedForRetry: true,
+          };
         }
       }
     } catch (error) {
@@ -58,7 +62,7 @@ class NotificationService {
   async sendLeadNotification(leadData) {
     return this.sendNotification('lead', {
       ...leadData,
-      category: 'lead-generation'
+      category: 'lead-generation',
     });
   }
 
@@ -66,7 +70,7 @@ class NotificationService {
   async sendChatNotification(messageData) {
     return this.sendNotification('chat', {
       ...messageData,
-      category: 'chat-conversation'
+      category: 'chat-conversation',
     });
   }
 
@@ -74,7 +78,7 @@ class NotificationService {
   async sendFeedbackNotification(feedbackData) {
     return this.sendNotification('feedback', {
       ...feedbackData,
-      category: 'feedback'
+      category: 'feedback',
     });
   }
 
@@ -82,7 +86,7 @@ class NotificationService {
   async sendContactNotification(contactData) {
     return this.sendNotification('contact', {
       ...contactData,
-      category: 'contact-form'
+      category: 'contact-form',
     });
   }
 
@@ -90,7 +94,7 @@ class NotificationService {
   async sendJobApplicationNotification(applicationData) {
     return this.sendNotification('job-application', {
       ...applicationData,
-      category: 'job-application'
+      category: 'job-application',
     });
   }
 
@@ -98,7 +102,7 @@ class NotificationService {
   async sendNewsletterNotification(subscriptionData) {
     return this.sendNotification('newsletter', {
       ...subscriptionData,
-      category: 'newsletter-signup'
+      category: 'newsletter-signup',
     });
   }
 
@@ -106,7 +110,7 @@ class NotificationService {
   async sendEngagementNotification(engagementData) {
     return this.sendNotification('engagement', {
       ...engagementData,
-      category: 'user-engagement'
+      category: 'user-engagement',
     });
   }
 
@@ -115,7 +119,7 @@ class NotificationService {
     return this.sendNotification('lead-generation', {
       ...leadData,
       category: 'lead-generation',
-      action: 'lead-inquiry'
+      action: 'lead-inquiry',
     });
   }
 
@@ -123,7 +127,7 @@ class NotificationService {
   async sendQuestionNotification(questionData) {
     return this.sendNotification('question', {
       ...questionData,
-      category: 'user-question'
+      category: 'user-question',
     });
   }
 
@@ -131,23 +135,23 @@ class NotificationService {
   async sendUserInteractionNotification(interactionData) {
     return this.sendNotification('user-interaction', {
       ...interactionData,
-      category: 'user-interaction'
+      category: 'user-interaction',
     });
   }
-
-
 
   // Queue notification for retry when connection is available
   queueNotificationForRetry(notificationData) {
     try {
-      const queue = JSON.parse(localStorage.getItem('notificationQueue') || '[]');
+      const queue = JSON.parse(
+        localStorage.getItem('notificationQueue') || '[]'
+      );
       queue.push({
         ...notificationData,
         queuedAt: new Date().toISOString(),
-        retryCount: 0
+        retryCount: 0,
       });
       localStorage.setItem('notificationQueue', JSON.stringify(queue));
-      
+
       // Check for connection and retry if available
       this.setupRetryMechanism();
     } catch (error) {
@@ -175,24 +179,31 @@ class NotificationService {
   // Retry queued notifications
   async retryQueuedNotifications() {
     try {
-      const queue = JSON.parse(localStorage.getItem('notificationQueue') || '[]');
-      
+      const queue = JSON.parse(
+        localStorage.getItem('notificationQueue') || '[]'
+      );
+
       for (const notification of queue) {
         try {
           // Limit retry attempts
           if (notification.retryCount >= 3) {
             continue; // Skip if already retried 3 times
           }
-          
+
           const response = await api.notifications.send({
             ...notification,
-            retryCount: notification.retryCount + 1
+            retryCount: notification.retryCount + 1,
           });
-          
+
           if (response.success) {
             // Remove successful notification from queue
-            const updatedQueue = queue.filter(n => n.queuedAt !== notification.queuedAt);
-            localStorage.setItem('notificationQueue', JSON.stringify(updatedQueue));
+            const updatedQueue = queue.filter(
+              n => n.queuedAt !== notification.queuedAt
+            );
+            localStorage.setItem(
+              'notificationQueue',
+              JSON.stringify(updatedQueue)
+            );
           }
         } catch (error) {
           console.error('Failed to retry notification:', error);
@@ -220,7 +231,7 @@ class NotificationService {
       const response = await api.notifications.updateStatus(notificationId, {
         status,
         details,
-        updatedAt: new Date().toISOString()
+        updatedAt: new Date().toISOString(),
       });
       return response;
     } catch (error) {
@@ -240,7 +251,7 @@ class NotificationService {
         url: window.location.href,
         referrer: document.referrer,
         source: 'frontend',
-        priority: 'normal'
+        priority: 'normal',
       };
 
       try {
@@ -248,7 +259,7 @@ class NotificationService {
         return response;
       } catch (apiError) {
         console.error('Email notification failed:', apiError);
-        
+
         // Fallback: log to console if API fails
         console.log('Email notification failed:', emailData);
         return { success: false, error: apiError.message };
@@ -270,7 +281,7 @@ class NotificationService {
         url: window.location.href,
         referrer: document.referrer,
         source: 'frontend',
-        priority: 'normal'
+        priority: 'normal',
       };
 
       try {
@@ -278,7 +289,7 @@ class NotificationService {
         return response;
       } catch (apiError) {
         console.error('WhatsApp notification failed:', apiError);
-        
+
         // Fallback: log to console if API fails
         console.log('WhatsApp notification failed:', whatsappData);
         return { success: false, error: apiError.message };
@@ -299,7 +310,7 @@ class NotificationService {
         url: window.location.href,
         referrer: document.referrer,
         source: 'frontend',
-        priority: 'normal'
+        priority: 'normal',
       };
 
       try {
@@ -307,7 +318,7 @@ class NotificationService {
         return response;
       } catch (apiError) {
         console.error('Multiple notifications failed:', apiError);
-        
+
         // Fallback: log to console if API fails
         console.log('Multiple notifications failed:', notificationData);
         return { success: false, error: apiError.message };
@@ -327,13 +338,15 @@ class NotificationService {
         return response;
       } catch (apiError) {
         console.error('API preferences fetch failed:', apiError);
-        
+
         // Fallback to localStorage
-        const preferences = localStorage.getItem(`notificationPreferences_${userId}`);
+        const preferences = localStorage.getItem(
+          `notificationPreferences_${userId}`
+        );
         if (preferences) {
           return JSON.parse(preferences);
         }
-        
+
         // Default preferences if none found
         return {
           email: true,
@@ -349,8 +362,8 @@ class NotificationService {
             newsletter: true,
             engagement: true,
             question: true,
-            userInteraction: true
-          }
+            userInteraction: true,
+          },
         };
       }
     } catch (error) {
@@ -364,18 +377,27 @@ class NotificationService {
     try {
       // Update in backend API
       try {
-        const response = await api.notifications.setUserPreferences(userId, preferences);
-        
+        const response = await api.notifications.setUserPreferences(
+          userId,
+          preferences
+        );
+
         // Update in localStorage as well for offline access
-        localStorage.setItem(`notificationPreferences_${userId}`, JSON.stringify(preferences));
-        
+        localStorage.setItem(
+          `notificationPreferences_${userId}`,
+          JSON.stringify(preferences)
+        );
+
         return response;
       } catch (apiError) {
         console.error('API preferences update failed:', apiError);
-        
+
         // Fallback to localStorage only
-        localStorage.setItem(`notificationPreferences_${userId}`, JSON.stringify(preferences));
-        
+        localStorage.setItem(
+          `notificationPreferences_${userId}`,
+          JSON.stringify(preferences)
+        );
+
         return { success: true, savedLocally: true };
       }
     } catch (error) {
@@ -388,17 +410,20 @@ class NotificationService {
   async isNotificationEnabled(userId, notificationType) {
     try {
       const preferences = await this.getUserPreferences(userId || 'anonymous');
-      
+
       if (preferences.error) {
         // If there's an error getting preferences, default to enabled
         return true;
       }
-      
+
       // Check if specific notification type is enabled
-      if (preferences.notificationTypes && preferences.notificationTypes[notificationType]) {
+      if (
+        preferences.notificationTypes &&
+        preferences.notificationTypes[notificationType]
+      ) {
         return preferences.notificationTypes[notificationType];
       }
-      
+
       // If notification type not specifically set, check general channel preferences
       return true; // Default to enabled if not specified
     } catch (error) {
@@ -414,34 +439,40 @@ class NotificationService {
       try {
         const response = await api.notifications.getAll({
           userId,
-          ...filters
+          ...filters,
         });
         return response;
       } catch (apiError) {
         console.error('API notification history fetch failed:', apiError);
-        
+
         // Fallback: get from localStorage
         const history = localStorage.getItem(`notificationHistory_${userId}`);
         if (history) {
           let parsedHistory = JSON.parse(history);
-          
+
           // Apply filters locally if provided
           if (filters.type) {
             parsedHistory = parsedHistory.filter(n => n.type === filters.type);
           }
           if (filters.status) {
-            parsedHistory = parsedHistory.filter(n => n.status === filters.status);
+            parsedHistory = parsedHistory.filter(
+              n => n.status === filters.status
+            );
           }
           if (filters.dateFrom) {
-            parsedHistory = parsedHistory.filter(n => new Date(n.timestamp) >= new Date(filters.dateFrom));
+            parsedHistory = parsedHistory.filter(
+              n => new Date(n.timestamp) >= new Date(filters.dateFrom)
+            );
           }
           if (filters.dateTo) {
-            parsedHistory = parsedHistory.filter(n => new Date(n.timestamp) <= new Date(filters.dateTo));
+            parsedHistory = parsedHistory.filter(
+              n => new Date(n.timestamp) <= new Date(filters.dateTo)
+            );
           }
-          
+
           return { notifications: parsedHistory };
         }
-        
+
         return { notifications: [] };
       }
     } catch (error) {
@@ -454,17 +485,17 @@ class NotificationService {
   async markNotificationAsRead(notificationId) {
     try {
       const response = await api.notifications.markAsRead(notificationId);
-      
+
       // Update in localStorage as well
       this.updateLocalNotificationStatus(notificationId, 'read');
-      
+
       return response;
     } catch (error) {
       console.error('Error marking notification as read:', error);
-      
+
       // Update in localStorage as fallback
       this.updateLocalNotificationStatus(notificationId, 'read');
-      
+
       return { success: true, savedLocally: true };
     }
   }
@@ -473,17 +504,17 @@ class NotificationService {
   async markAllNotificationsAsRead(userId) {
     try {
       const response = await api.notifications.markAllAsRead({ userId });
-      
+
       // Update in localStorage as well
       this.updateAllLocalNotificationsStatus(userId, 'read');
-      
+
       return response;
     } catch (error) {
       console.error('Error marking all notifications as read:', error);
-      
+
       // Update in localStorage as fallback
       this.updateAllLocalNotificationsStatus(userId, 'read');
-      
+
       return { success: true, savedLocally: true };
     }
   }
@@ -492,17 +523,17 @@ class NotificationService {
   async deleteNotification(notificationId) {
     try {
       const response = await api.notifications.delete(notificationId);
-      
+
       // Remove from localStorage as well
       this.removeLocalNotification(notificationId);
-      
+
       return response;
     } catch (error) {
       console.error('Error deleting notification:', error);
-      
+
       // Remove from localStorage as fallback
       this.removeLocalNotification(notificationId);
-      
+
       return { success: true, deletedLocally: true };
     }
   }
@@ -510,13 +541,18 @@ class NotificationService {
   // Update notification status in localStorage
   updateLocalNotificationStatus(notificationId, status) {
     try {
-      const history = JSON.parse(localStorage.getItem('notificationHistory') || '[]');
-      const updatedHistory = history.map(notification => 
-        notification.id === notificationId 
-          ? { ...notification, status, updatedAt: new Date().toISOString() } 
+      const history = JSON.parse(
+        localStorage.getItem('notificationHistory') || '[]'
+      );
+      const updatedHistory = history.map(notification =>
+        notification.id === notificationId
+          ? { ...notification, status, updatedAt: new Date().toISOString() }
           : notification
       );
-      localStorage.setItem('notificationHistory', JSON.stringify(updatedHistory));
+      localStorage.setItem(
+        'notificationHistory',
+        JSON.stringify(updatedHistory)
+      );
     } catch (error) {
       console.error('Error updating local notification status:', error);
     }
@@ -525,13 +561,18 @@ class NotificationService {
   // Update all notification statuses in localStorage
   updateAllLocalNotificationsStatus(userId, status) {
     try {
-      const history = JSON.parse(localStorage.getItem('notificationHistory') || '[]');
-      const updatedHistory = history.map(notification => 
-        notification.userId === userId 
-          ? { ...notification, status, updatedAt: new Date().toISOString() } 
+      const history = JSON.parse(
+        localStorage.getItem('notificationHistory') || '[]'
+      );
+      const updatedHistory = history.map(notification =>
+        notification.userId === userId
+          ? { ...notification, status, updatedAt: new Date().toISOString() }
           : notification
       );
-      localStorage.setItem('notificationHistory', JSON.stringify(updatedHistory));
+      localStorage.setItem(
+        'notificationHistory',
+        JSON.stringify(updatedHistory)
+      );
     } catch (error) {
       console.error('Error updating all local notification statuses:', error);
     }
@@ -540,9 +581,16 @@ class NotificationService {
   // Remove notification from localStorage
   removeLocalNotification(notificationId) {
     try {
-      const history = JSON.parse(localStorage.getItem('notificationHistory') || '[]');
-      const updatedHistory = history.filter(notification => notification.id !== notificationId);
-      localStorage.setItem('notificationHistory', JSON.stringify(updatedHistory));
+      const history = JSON.parse(
+        localStorage.getItem('notificationHistory') || '[]'
+      );
+      const updatedHistory = history.filter(
+        notification => notification.id !== notificationId
+      );
+      localStorage.setItem(
+        'notificationHistory',
+        JSON.stringify(updatedHistory)
+      );
     } catch (error) {
       console.error('Error removing local notification:', error);
     }
@@ -557,19 +605,22 @@ class NotificationService {
         metadata,
         timestamp: new Date().toISOString(),
         userAgent: navigator.userAgent,
-        url: window.location.href
+        url: window.location.href,
       };
-      
+
       // Send to analytics API
       try {
-        const response = await api.analytics.trackEvent('notification-event', analyticsData);
+        const response = await api.analytics.trackEvent(
+          'notification-event',
+          analyticsData
+        );
         return response;
       } catch (apiError) {
         console.error('Analytics tracking failed:', apiError);
-        
+
         // Fallback: store in localStorage for later sending
         this.queueAnalyticsEvent(analyticsData);
-        
+
         return { success: true, queued: true };
       }
     } catch (error) {
@@ -584,10 +635,10 @@ class NotificationService {
       const queue = JSON.parse(localStorage.getItem('analyticsQueue') || '[]');
       queue.push({
         ...eventData,
-        queuedAt: new Date().toISOString()
+        queuedAt: new Date().toISOString(),
       });
       localStorage.setItem('analyticsQueue', JSON.stringify(queue));
-      
+
       // Retry when online
       if (!navigator.onLine) {
         window.addEventListener('online', () => {
@@ -606,11 +657,11 @@ class NotificationService {
   async sendQueuedAnalytics() {
     try {
       const queue = JSON.parse(localStorage.getItem('analyticsQueue') || '[]');
-      
+
       for (const event of queue) {
         try {
           await api.analytics.trackEvent('notification-event', event);
-          
+
           // Remove successful event from queue
           const updatedQueue = queue.filter(e => e.queuedAt !== event.queuedAt);
           localStorage.setItem('analyticsQueue', JSON.stringify(updatedQueue));
@@ -647,40 +698,46 @@ class NotificationService {
   }
 
   // Rate limiting for notifications
-  async checkRateLimit(userId, notificationType, limit = 5, windowMs = 60000) { // Default: 5 notifications per minute
+  async checkRateLimit(userId, notificationType, limit = 5, windowMs = 60000) {
+    // Default: 5 notifications per minute
     try {
       const key = `rateLimit_${userId}_${notificationType}`;
       const now = Date.now();
-      
+
       // Get existing rate limit data
-      const rateLimitData = JSON.parse(localStorage.getItem(key) || '{"count": 0, "windowStart": null}');
-      
+      const rateLimitData = JSON.parse(
+        localStorage.getItem(key) || '{"count": 0, "windowStart": null}'
+      );
+
       // Reset window if it's expired
-      if (!rateLimitData.windowStart || (now - rateLimitData.windowStart) > windowMs) {
+      if (
+        !rateLimitData.windowStart ||
+        now - rateLimitData.windowStart > windowMs
+      ) {
         rateLimitData.count = 1;
         rateLimitData.windowStart = now;
         localStorage.setItem(key, JSON.stringify(rateLimitData));
         return { allowed: true, remaining: limit - 1 };
       }
-      
+
       // Check if limit exceeded
       if (rateLimitData.count >= limit) {
         const timeToReset = windowMs - (now - rateLimitData.windowStart);
-        return { 
-          allowed: false, 
-          remaining: 0, 
+        return {
+          allowed: false,
+          remaining: 0,
           resetTime: new Date(rateLimitData.windowStart + windowMs),
-          timeToReset 
+          timeToReset,
         };
       }
-      
+
       // Increment count and save
       rateLimitData.count++;
       localStorage.setItem(key, JSON.stringify(rateLimitData));
-      
-      return { 
-        allowed: true, 
-        remaining: limit - rateLimitData.count 
+
+      return {
+        allowed: true,
+        remaining: limit - rateLimitData.count,
       };
     } catch (error) {
       console.error('Error checking rate limit:', error);
@@ -726,7 +783,7 @@ First Name: {{firstName}}
 
 Subscribed on: {{timestamp}}`,
       },
-      'feedback': {
+      feedback: {
         subject: 'New Feedback Received',
         body: `A user has submitted feedback:
 
@@ -795,27 +852,33 @@ Sender: {{sender}}
 Page: {{page}}
 
 Sent on: {{timestamp}}`,
-      }
+      },
     };
-    
+
     const template = templates[templateName];
     if (!template) {
       return null;
     }
-    
+
     // Replace variables in the template
     let processedSubject = template.subject;
     let processedBody = template.body;
-    
+
     for (const [key, value] of Object.entries(variables)) {
       const placeholder = `{{${key}}}`;
-      processedSubject = processedSubject.replace(new RegExp(placeholder, 'g'), value || 'N/A');
-      processedBody = processedBody.replace(new RegExp(placeholder, 'g'), value || 'N/A');
+      processedSubject = processedSubject.replace(
+        new RegExp(placeholder, 'g'),
+        value || 'N/A'
+      );
+      processedBody = processedBody.replace(
+        new RegExp(placeholder, 'g'),
+        value || 'N/A'
+      );
     }
-    
+
     return {
       subject: processedSubject,
-      body: processedBody
+      body: processedBody,
     };
   }
 
@@ -825,18 +888,18 @@ Sent on: {{timestamp}}`,
       // Send to both email and WhatsApp
       const emailResult = await this.sendEmailNotification({
         ...notificationData,
-        type: `${notificationType}-email`
+        type: `${notificationType}-email`,
       });
-      
+
       const whatsappResult = await this.sendWhatsAppNotification({
         ...notificationData,
-        type: `${notificationType}-whatsapp`
+        type: `${notificationType}-whatsapp`,
       });
-      
+
       return {
         email: emailResult,
         whatsapp: whatsappResult,
-        success: emailResult.success || whatsappResult.success // At least one succeeded
+        success: emailResult.success || whatsappResult.success, // At least one succeeded
       };
     } catch (error) {
       console.error('Comprehensive notification failed:', error);
@@ -864,7 +927,7 @@ export const {
   sendEmailNotification,
   sendWhatsAppNotification,
   sendMultipleNotifications,
-  sendComprehensiveNotification
+  sendComprehensiveNotification,
 } = notificationService;
 
 export default notificationService;

@@ -2,11 +2,11 @@ name: Dependency Audit
 
 on:
   push:
-    branches: [ main, develop, staging ]
+    branches: [main, develop, staging]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   schedule:
-    - cron: '0 3 * * *'  # Daily dependency audits at 3 AM
+    - cron: '0 3 * * *' # Daily dependency audits at 3 AM
 
 env:
   NODE_VERSION: '20.x'
@@ -15,94 +15,94 @@ jobs:
   dependency-audit:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
-        
-    - name: Install dependencies
-      run: npm ci
-      
-    - name: Run npm audit
-      run: |
-        echo "Running dependency audit..."
-        npm audit --audit-level moderate --json > audit-report.json
-        cat audit-report.json
-        echo "Audit completed"
-        
-    - name: Upload audit report
-      uses: actions/upload-artifact@v4
-      with:
-        name: dependency-audit-report
-        path: audit-report.json
-        retention-days: 30
-        
-    - name: Check for critical vulnerabilities
-      run: |
-        CRITICAL_COUNT=$(npm audit --audit-level critical --json | jq '.metadata.vulnerabilities.critical')
-        if [ $CRITICAL_COUNT -gt 0 ]; then
-          echo "Critical vulnerabilities found: $CRITICAL_COUNT"
-          exit 1
-        else
-          echo "No critical vulnerabilities found"
-        fi
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        run: |
+          echo "Running dependency audit..."
+          npm audit --audit-level moderate --json > audit-report.json
+          cat audit-report.json
+          echo "Audit completed"
+
+      - name: Upload audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-audit-report
+          path: audit-report.json
+          retention-days: 30
+
+      - name: Check for critical vulnerabilities
+        run: |
+          CRITICAL_COUNT=$(npm audit --audit-level critical --json | jq '.metadata.vulnerabilities.critical')
+          if [ $CRITICAL_COUNT -gt 0 ]; then
+            echo "Critical vulnerabilities found: $CRITICAL_COUNT"
+            exit 1
+          else
+            echo "No critical vulnerabilities found"
+          fi
 
   outdated-check:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
-        
-    - name: Install dependencies
-      run: npm ci
-      
-    - name: Check for outdated packages
-      run: |
-        echo "Checking for outdated packages..."
-        npm outdated
-        
-    - name: Generate outdated report
-      run: |
-        npm outdated --json > outdated-report.json
-        cat outdated-report.json
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check for outdated packages
+        run: |
+          echo "Checking for outdated packages..."
+          npm outdated
+
+      - name: Generate outdated report
+        run: |
+          npm outdated --json > outdated-report.json
+          cat outdated-report.json
 
   license-compliance:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
-        
-    - name: Install dependencies
-      run: npm ci
-      
-    - name: Check license compliance
-      run: |
-        # Install license checker
-        npm install -g license-checker
-        
-        # Generate license report
-        license-checker --json > license-report.json
-        cat license-report.json
-        
-    - name: Upload license report
-      uses: actions/upload-artifact@v4
-      with:
-        name: license-compliance-report
-        path: license-report.json
-        retention-days: 30
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check license compliance
+        run: |
+          # Install license checker
+          npm install -g license-checker
+
+          # Generate license report
+          license-checker --json > license-report.json
+          cat license-report.json
+
+      - name: Upload license report
+        uses: actions/upload-artifact@v4
+        with:
+          name: license-compliance-report
+          path: license-report.json
+          retention-days: 30

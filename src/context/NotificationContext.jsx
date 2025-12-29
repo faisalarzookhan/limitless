@@ -1,12 +1,12 @@
 import { createContext, useContext, useReducer } from 'react';
-import { 
+import {
   sendComprehensiveNotification,
   sendLeadGenerationNotification,
   sendChatNotification,
   sendContactNotification,
   sendJobApplicationNotification,
   sendNewsletterNotification,
-  sendFeedbackNotification
+  sendFeedbackNotification,
 } from '../services/notificationService';
 
 const NotificationContext = createContext();
@@ -16,24 +16,24 @@ const notificationReducer = (state, action) => {
     case 'ADD_NOTIFICATION':
       return {
         ...state,
-        notifications: [action.payload, ...state.notifications]
+        notifications: [action.payload, ...state.notifications],
       };
     case 'REMOVE_NOTIFICATION':
       return {
         ...state,
-        notifications: state.notifications.filter(n => n.id !== action.payload)
+        notifications: state.notifications.filter(n => n.id !== action.payload),
       };
     case 'CLEAR_NOTIFICATIONS':
       return {
         ...state,
-        notifications: []
+        notifications: [],
       };
     case 'MARK_AS_READ':
       return {
         ...state,
         notifications: state.notifications.map(n =>
           n.id === action.payload ? { ...n, read: true } : n
-        )
+        ),
       };
     default:
       return state;
@@ -42,16 +42,16 @@ const notificationReducer = (state, action) => {
 
 export const NotificationProvider = ({ children }) => {
   const [state, dispatch] = useReducer(notificationReducer, {
-    notifications: []
+    notifications: [],
   });
 
   // Function to send comprehensive notifications for user interactions
   const sendUserInteractionNotification = async (interactionType, data) => {
     try {
       let notificationResult;
-      
+
       // Route to specific notification based on interaction type
-      switch(interactionType) {
+      switch (interactionType) {
         case 'lead-generation':
           notificationResult = await sendLeadGenerationNotification(data);
           break;
@@ -72,7 +72,10 @@ export const NotificationProvider = ({ children }) => {
           break;
         case 'general':
         default:
-          notificationResult = await sendComprehensiveNotification(interactionType, data);
+          notificationResult = await sendComprehensiveNotification(
+            interactionType,
+            data
+          );
           break;
       }
 
@@ -85,8 +88,8 @@ export const NotificationProvider = ({ children }) => {
           data,
           timestamp: new Date().toISOString(),
           read: false,
-          success: notificationResult?.success || false
-        }
+          success: notificationResult?.success || false,
+        },
       });
 
       return notificationResult;
@@ -99,9 +102,10 @@ export const NotificationProvider = ({ children }) => {
   const value = {
     notifications: state.notifications,
     sendUserInteractionNotification,
-    markAsRead: (id) => dispatch({ type: 'MARK_AS_READ', payload: id }),
-    removeNotification: (id) => dispatch({ type: 'REMOVE_NOTIFICATION', payload: id }),
-    clearNotifications: () => dispatch({ type: 'CLEAR_NOTIFICATIONS' })
+    markAsRead: id => dispatch({ type: 'MARK_AS_READ', payload: id }),
+    removeNotification: id =>
+      dispatch({ type: 'REMOVE_NOTIFICATION', payload: id }),
+    clearNotifications: () => dispatch({ type: 'CLEAR_NOTIFICATIONS' }),
   };
 
   return (
@@ -114,7 +118,9 @@ export const NotificationProvider = ({ children }) => {
 export const useNotification = () => {
   const context = useContext(NotificationContext);
   if (!context) {
-    throw new Error('useNotification must be used within a NotificationProvider');
+    throw new Error(
+      'useNotification must be used within a NotificationProvider'
+    );
   }
   return context;
 };

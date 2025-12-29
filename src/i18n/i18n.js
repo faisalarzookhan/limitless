@@ -11,17 +11,17 @@ import es from './locales/es/translation.json';
 // Configuration for i18n
 const resources = {
   en: {
-    translation: en
+    translation: en,
   },
   hi: {
-    translation: hi
+    translation: hi,
   },
   ar: {
-    translation: ar
+    translation: ar,
   },
   es: {
-    translation: es
-  }
+    translation: es,
+  },
 };
 
 i18n
@@ -31,22 +31,31 @@ i18n
     resources,
     fallbackLng: 'en', // Default language
     debug: process.env.NODE_ENV === 'development',
-    
+
     interpolation: {
-      escapeValue: false // React already safes from xss
+      escapeValue: false, // React already safes from xss
     },
-    
+
     detection: {
-      order: ['queryString', 'cookie', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
-      caches: ['localStorage', 'cookie']
+      order: [
+        'queryString',
+        'cookie',
+        'localStorage',
+        'sessionStorage',
+        'navigator',
+        'htmlTag',
+        'path',
+        'subdomain',
+      ],
+      caches: ['localStorage', 'cookie'],
     },
-    
+
     // Special options for RTL languages
     react: {
       useSuspense: false,
       transSupportBasicHtmlNodes: true,
-      transKeepBasicHtmlNodesFor: ['br', 'strong', 'i', 'p']
-    }
+      transKeepBasicHtmlNodesFor: ['br', 'strong', 'i', 'p'],
+    },
   });
 
 export default i18n;

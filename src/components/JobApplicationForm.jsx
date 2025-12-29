@@ -1,5 +1,13 @@
 import { useState } from 'react';
-import { HiMail, HiUser, HiBriefcase, HiAcademicCap, HiDocumentText, HiCheckCircle, HiLink } from 'react-icons/hi';
+import {
+  HiMail,
+  HiUser,
+  HiBriefcase,
+  HiAcademicCap,
+  HiDocumentText,
+  HiCheckCircle,
+  HiLink,
+} from 'react-icons/hi';
 import { sendJobApplicationNotification } from '../services/notificationService';
 
 const JobApplicationForm = () => {
@@ -20,16 +28,16 @@ const JobApplicationForm = () => {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [resume, setResume] = useState(null);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleFileChange = (e) => {
+  const handleFileChange = e => {
     setResume(e.target.files[0]);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -47,7 +55,7 @@ const JobApplicationForm = () => {
       salaryExpectation: formData.salaryExpectation,
       linkedin: formData.linkedin,
       timestamp: new Date().toISOString(),
-      page: window.location.pathname
+      page: window.location.pathname,
     });
 
     // Simulate API call
@@ -68,7 +76,7 @@ const JobApplicationForm = () => {
         linkedin: '',
       });
       setResume(null);
-      
+
       // Reset success message after 5 seconds
       setTimeout(() => setSubmitSuccess(false), 5000);
     }, 2000);
@@ -80,9 +88,12 @@ const JobApplicationForm = () => {
         <div className="flex items-center justify-center mb-3">
           <HiCheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
         </div>
-        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">Application Submitted!</h3>
+        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">
+          Application Submitted!
+        </h3>
         <p className="text-green-700 dark:text-green-400 text-sm">
-          Thank you for applying. We'll review your application and get back to you soon.
+          Thank you for applying. We'll review your application and get back to
+          you soon.
         </p>
       </div>
     );
@@ -92,7 +103,10 @@ const JobApplicationForm = () => {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="fullName"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Full Name *
           </label>
           <div className="relative">
@@ -112,7 +126,10 @@ const JobApplicationForm = () => {
           </div>
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Email Address *
           </label>
           <div className="relative">
@@ -132,10 +149,13 @@ const JobApplicationForm = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="phone"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Phone Number *
           </label>
           <input
@@ -150,7 +170,10 @@ const JobApplicationForm = () => {
           />
         </div>
         <div>
-          <label htmlFor="position" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="position"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Position Applying For *
           </label>
           <select
@@ -174,10 +197,13 @@ const JobApplicationForm = () => {
           </select>
         </div>
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="experience" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="experience"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Years of Experience *
           </label>
           <select
@@ -197,7 +223,10 @@ const JobApplicationForm = () => {
           </select>
         </div>
         <div>
-          <label htmlFor="education" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="education"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Education Level *
           </label>
           <select
@@ -217,9 +246,12 @@ const JobApplicationForm = () => {
           </select>
         </div>
       </div>
-      
+
       <div>
-        <label htmlFor="linkedin" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="linkedin"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           LinkedIn Profile (Optional)
         </label>
         <div className="relative">
@@ -237,9 +269,12 @@ const JobApplicationForm = () => {
           />
         </div>
       </div>
-      
+
       <div>
-        <label htmlFor="portfolio" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="portfolio"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Portfolio URL (Optional)
         </label>
         <input
@@ -252,10 +287,13 @@ const JobApplicationForm = () => {
           placeholder="https://yourportfolio.com"
         />
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="availability" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="availability"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Availability *
           </label>
           <select
@@ -274,7 +312,10 @@ const JobApplicationForm = () => {
           </select>
         </div>
         <div>
-          <label htmlFor="salaryExpectation" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="salaryExpectation"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Expected Salary (INR) *
           </label>
           <select
@@ -294,9 +335,12 @@ const JobApplicationForm = () => {
           </select>
         </div>
       </div>
-      
+
       <div>
-        <label htmlFor="resume" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="resume"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Resume *
         </label>
         <input
@@ -308,11 +352,16 @@ const JobApplicationForm = () => {
           required
           className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
         />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Upload your resume (PDF, DOC, DOCX)</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          Upload your resume (PDF, DOC, DOCX)
+        </p>
       </div>
-      
+
       <div>
-        <label htmlFor="coverLetter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="coverLetter"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Cover Letter *
         </label>
         <textarea
@@ -326,7 +375,7 @@ const JobApplicationForm = () => {
           placeholder="Tell us why you're interested in this position and what makes you a great fit..."
         ></textarea>
       </div>
-      
+
       <button
         type="submit"
         disabled={isSubmitting}

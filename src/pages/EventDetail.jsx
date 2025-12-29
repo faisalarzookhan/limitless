@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
   HiCalendar,
   HiClock,
@@ -18,7 +18,7 @@ import {
   HiGlobe,
   HiChevronDown,
   HiChevronUp,
-} from "react-icons/hi";
+} from 'react-icons/hi';
 import {
   FaFacebookF,
   FaTwitter,
@@ -26,7 +26,7 @@ import {
   FaWhatsapp,
   FaLink,
   FaCalendarPlus,
-} from "react-icons/fa";
+} from 'react-icons/fa';
 import { sendUserInteractionNotification } from '../services/notificationService';
 
 const EventDetail = () => {
@@ -34,24 +34,24 @@ const EventDetail = () => {
   const navigate = useNavigate();
   const [registered, setRegistered] = useState(false);
   const [liked, setLiked] = useState(false);
-  const [expandedSection, setExpandedSection] = useState("agenda");
+  const [expandedSection, setExpandedSection] = useState('agenda');
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    phone: "",
+    name: '',
+    email: '',
+    company: '',
+    phone: '',
   });
 
   // Sample events data (in real app, fetch from API)
   const events = [
     {
       id: 1,
-      title: "Launch: AI-Powered CRM System 2.0",
-      slug: "ai-crm-system-launch",
-      type: "Product Launch",
-      category: "product",
+      title: 'Launch: AI-Powered CRM System 2.0',
+      slug: 'ai-crm-system-launch',
+      type: 'Product Launch',
+      category: 'product',
       description:
-        "Introducing the next generation of our CRM system with advanced AI capabilities, intelligent automation, and predictive analytics.",
+        'Introducing the next generation of our CRM system with advanced AI capabilities, intelligent automation, and predictive analytics.',
       fullDescription: `
         <p>We're thrilled to announce the launch of our revolutionary AI-Powered CRM System 2.0! This next-generation platform combines cutting-edge artificial intelligence with intuitive design to transform how businesses manage customer relationships.</p>
 
@@ -77,120 +77,120 @@ const EventDetail = () => {
         <h3>What to Expect</h3>
         <p>During this 2-hour virtual event, you'll get an exclusive first look at our new platform, witness live demonstrations, and have the opportunity to ask questions to our product team. Plus, attendees will receive special launch pricing and early beta access!</p>
       `,
-      date: "2024-02-15",
-      time: "10:00 AM IST",
-      endTime: "12:00 PM IST",
-      duration: "2 hours",
-      location: "Virtual Event",
-      venue: "Zoom Webinar",
-      registrationLink: "#",
+      date: '2024-02-15',
+      time: '10:00 AM IST',
+      endTime: '12:00 PM IST',
+      duration: '2 hours',
+      location: 'Virtual Event',
+      venue: 'Zoom Webinar',
+      registrationLink: '#',
       maxAttendees: 500,
       currentAttendees: 287,
-      status: "upcoming",
+      status: 'upcoming',
       featured: true,
       image: null,
       highlights: [
-        "Live product demonstration",
-        "Q&A with product team",
-        "Early bird special pricing",
-        "Exclusive beta access",
-        "Networking opportunity",
-        "Certificate of attendance",
+        'Live product demonstration',
+        'Q&A with product team',
+        'Early bird special pricing',
+        'Exclusive beta access',
+        'Networking opportunity',
+        'Certificate of attendance',
       ],
       agenda: [
         {
-          time: "10:00 AM",
-          title: "Welcome & Introduction",
-          duration: "10 min",
-          speaker: "Faisal Khan",
+          time: '10:00 AM',
+          title: 'Welcome & Introduction',
+          duration: '10 min',
+          speaker: 'Faisal Khan',
         },
         {
-          time: "10:10 AM",
-          title: "Product Overview & Vision",
-          duration: "20 min",
-          speaker: "Faisal Khan",
+          time: '10:10 AM',
+          title: 'Product Overview & Vision',
+          duration: '20 min',
+          speaker: 'Faisal Khan',
         },
         {
-          time: "10:30 AM",
-          title: "Live Demo: Core Features",
-          duration: "30 min",
-          speaker: "Sarah Johnson",
+          time: '10:30 AM',
+          title: 'Live Demo: Core Features',
+          duration: '30 min',
+          speaker: 'Sarah Johnson',
         },
         {
-          time: "11:00 AM",
-          title: "AI Capabilities Deep Dive",
-          duration: "25 min",
-          speaker: "Dr. Michael Chen",
+          time: '11:00 AM',
+          title: 'AI Capabilities Deep Dive',
+          duration: '25 min',
+          speaker: 'Dr. Michael Chen',
         },
         {
-          time: "11:25 AM",
-          title: "Pricing & Special Offers",
-          duration: "15 min",
-          speaker: "Sarah Johnson",
+          time: '11:25 AM',
+          title: 'Pricing & Special Offers',
+          duration: '15 min',
+          speaker: 'Sarah Johnson',
         },
         {
-          time: "11:40 AM",
-          title: "Q&A Session",
-          duration: "15 min",
-          speaker: "All Speakers",
+          time: '11:40 AM',
+          title: 'Q&A Session',
+          duration: '15 min',
+          speaker: 'All Speakers',
         },
         {
-          time: "11:55 AM",
-          title: "Closing Remarks",
-          duration: "5 min",
-          speaker: "Faisal Khan",
+          time: '11:55 AM',
+          title: 'Closing Remarks',
+          duration: '5 min',
+          speaker: 'Faisal Khan',
         },
       ],
       speakers: [
         {
-          name: "Faisal Khan",
-          role: "CEO & Founder",
-          bio: "Passionate technologist and entrepreneur with over 10 years of experience in software development.",
+          name: 'Faisal Khan',
+          role: 'CEO & Founder',
+          bio: 'Passionate technologist and entrepreneur with over 10 years of experience in software development.',
           avatar: null,
-          linkedin: "#",
-          twitter: "#",
+          linkedin: '#',
+          twitter: '#',
         },
         {
-          name: "Sarah Johnson",
-          role: "Product Manager",
-          bio: "Product strategy expert specializing in CRM solutions and customer success.",
+          name: 'Sarah Johnson',
+          role: 'Product Manager',
+          bio: 'Product strategy expert specializing in CRM solutions and customer success.',
           avatar: null,
-          linkedin: "#",
-          twitter: "#",
+          linkedin: '#',
+          twitter: '#',
         },
         {
-          name: "Dr. Michael Chen",
-          role: "AI Research Lead",
-          bio: "AI researcher and engineer with expertise in machine learning and natural language processing.",
+          name: 'Dr. Michael Chen',
+          role: 'AI Research Lead',
+          bio: 'AI researcher and engineer with expertise in machine learning and natural language processing.',
           avatar: null,
-          linkedin: "#",
-          twitter: "#",
+          linkedin: '#',
+          twitter: '#',
         },
       ],
-      tags: ["Product Launch", "AI", "CRM", "Automation"],
+      tags: ['Product Launch', 'AI', 'CRM', 'Automation'],
       requirements: [
-        "Stable internet connection (minimum 5 Mbps)",
-        "Zoom client installed (desktop or mobile)",
-        "Headphones recommended for better audio",
-        "Webcam optional but encouraged for networking",
+        'Stable internet connection (minimum 5 Mbps)',
+        'Zoom client installed (desktop or mobile)',
+        'Headphones recommended for better audio',
+        'Webcam optional but encouraged for networking',
       ],
       benefits: [
-        "Early bird pricing (40% off)",
-        "Exclusive beta access",
-        "Free 1-month trial",
-        "Priority support for 3 months",
-        "Certificate of attendance",
-        "Access to recording for 30 days",
+        'Early bird pricing (40% off)',
+        'Exclusive beta access',
+        'Free 1-month trial',
+        'Priority support for 3 months',
+        'Certificate of attendance',
+        'Access to recording for 30 days',
       ],
     },
     {
       id: 2,
-      title: "Webinar: Building Scalable Web Applications",
-      slug: "scalable-web-apps-webinar",
-      type: "Webinar",
-      category: "education",
+      title: 'Webinar: Building Scalable Web Applications',
+      slug: 'scalable-web-apps-webinar',
+      type: 'Webinar',
+      category: 'education',
       description:
-        "Join our expert developers as they share insights on building scalable, high-performance web applications using modern technologies.",
+        'Join our expert developers as they share insights on building scalable, high-performance web applications using modern technologies.',
       fullDescription: `
         <p>Learn from industry experts about the best practices, patterns, and technologies for building web applications that can scale from hundreds to millions of users.</p>
 
@@ -203,98 +203,98 @@ const EventDetail = () => {
           <li>Performance monitoring and optimization</li>
         </ul>
       `,
-      date: "2024-02-20",
-      time: "3:00 PM IST",
-      endTime: "4:30 PM IST",
-      duration: "1.5 hours",
-      location: "Online",
-      venue: "YouTube Live",
-      registrationLink: "#",
+      date: '2024-02-20',
+      time: '3:00 PM IST',
+      endTime: '4:30 PM IST',
+      duration: '1.5 hours',
+      location: 'Online',
+      venue: 'YouTube Live',
+      registrationLink: '#',
       maxAttendees: 300,
       currentAttendees: 156,
-      status: "upcoming",
+      status: 'upcoming',
       featured: false,
       image: null,
       highlights: [
-        "Architecture best practices",
-        "Performance optimization",
-        "Cloud deployment strategies",
-        "Real-world case studies",
-        "Code examples and demos",
+        'Architecture best practices',
+        'Performance optimization',
+        'Cloud deployment strategies',
+        'Real-world case studies',
+        'Code examples and demos',
       ],
       agenda: [
         {
-          time: "3:00 PM",
-          title: "Introduction to Scalability",
-          duration: "15 min",
-          speaker: "Michael Chen",
+          time: '3:00 PM',
+          title: 'Introduction to Scalability',
+          duration: '15 min',
+          speaker: 'Michael Chen',
         },
         {
-          time: "3:15 PM",
-          title: "Architecture Patterns",
-          duration: "25 min",
-          speaker: "Michael Chen",
+          time: '3:15 PM',
+          title: 'Architecture Patterns',
+          duration: '25 min',
+          speaker: 'Michael Chen',
         },
         {
-          time: "3:40 PM",
-          title: "Database Optimization",
-          duration: "20 min",
-          speaker: "Emma Davis",
+          time: '3:40 PM',
+          title: 'Database Optimization',
+          duration: '20 min',
+          speaker: 'Emma Davis',
         },
         {
-          time: "4:00 PM",
-          title: "Case Study Walkthrough",
-          duration: "15 min",
-          speaker: "Both",
+          time: '4:00 PM',
+          title: 'Case Study Walkthrough',
+          duration: '15 min',
+          speaker: 'Both',
         },
-        { time: "4:15 PM", title: "Q&A", duration: "15 min", speaker: "All" },
+        { time: '4:15 PM', title: 'Q&A', duration: '15 min', speaker: 'All' },
       ],
       speakers: [
         {
-          name: "Michael Chen",
-          role: "Senior Architect",
-          bio: "Cloud architecture specialist with experience building systems for millions of users.",
+          name: 'Michael Chen',
+          role: 'Senior Architect',
+          bio: 'Cloud architecture specialist with experience building systems for millions of users.',
           avatar: null,
-          linkedin: "#",
-          twitter: "#",
+          linkedin: '#',
+          twitter: '#',
         },
         {
-          name: "Emma Davis",
-          role: "Frontend Lead",
-          bio: "Expert in modern frontend technologies and performance optimization.",
+          name: 'Emma Davis',
+          role: 'Frontend Lead',
+          bio: 'Expert in modern frontend technologies and performance optimization.',
           avatar: null,
-          linkedin: "#",
-          twitter: "#",
+          linkedin: '#',
+          twitter: '#',
         },
       ],
-      tags: ["Webinar", "Web Development", "Architecture", "Best Practices"],
+      tags: ['Webinar', 'Web Development', 'Architecture', 'Best Practices'],
       requirements: [
-        "Basic understanding of web development",
-        "No special software required",
-        "Notebook for taking notes recommended",
+        'Basic understanding of web development',
+        'No special software required',
+        'Notebook for taking notes recommended',
       ],
       benefits: [
-        "Certificate of completion",
-        "Downloadable resources",
-        "Access to recording",
-        "30-day community access",
+        'Certificate of completion',
+        'Downloadable resources',
+        'Access to recording',
+        '30-day community access',
       ],
     },
   ];
 
   // Find the current event
-  const event = events.find((e) => e.slug === slug);
+  const event = events.find(e => e.slug === slug);
 
   // Get related events
   const relatedEvents = event
     ? events
-        .filter((e) => e.category === event.category && e.id !== event.id)
+        .filter(e => e.category === event.category && e.id !== event.id)
         .slice(0, 2)
     : [];
 
   useEffect(() => {
     if (!event) {
-      navigate("/events");
+      navigate('/events');
       return;
     }
     window.scrollTo(0, 0);
@@ -304,9 +304,9 @@ const EventDetail = () => {
     return null;
   }
 
-  const handleRegistration = async (e) => {
+  const handleRegistration = async e => {
     e.preventDefault();
-    
+
     // Send notification about the event registration
     try {
       await sendUserInteractionNotification('event-registration', {
@@ -314,19 +314,19 @@ const EventDetail = () => {
         eventSlug: event.slug,
         ...formData,
         timestamp: new Date().toISOString(),
-        page: window.location.pathname
+        page: window.location.pathname,
       });
     } catch (error) {
       console.error('Error sending registration notification:', error);
     }
-    
+
     // In real app, send to API
-    console.log("Registration submitted:", formData);
+    console.log('Registration submitted:', formData);
     setRegistered(true);
-    alert("Registration successful! Check your email for confirmation.");
+    alert('Registration successful! Check your email for confirmation.');
   };
 
-  const handleShare = (platform) => {
+  const handleShare = platform => {
     const url = window.location.href;
     const text = event.title;
 
@@ -337,45 +337,45 @@ const EventDetail = () => {
       whatsapp: `https://wa.me/?text=${text} ${url}`,
     };
 
-    if (platform === "copy") {
+    if (platform === 'copy') {
       navigator.clipboard.writeText(url);
-      alert("Link copied to clipboard!");
+      alert('Link copied to clipboard!');
     } else {
-      window.open(shareUrls[platform], "_blank", "width=600,height=400");
+      window.open(shareUrls[platform], '_blank', 'width=600,height=400');
     }
   };
 
   const handleAddToCalendar = () => {
     // Generate .ics file
-    const eventDate = new Date(event.date + " " + event.time);
+    const eventDate = new Date(event.date + ' ' + event.time);
     const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 BEGIN:VEVENT
-DTSTART:${eventDate.toISOString().replace(/[-:]/g, "").split(".")[0]}Z
+DTSTART:${eventDate.toISOString().replace(/[-:]/g, '').split('.')[0]}Z
 SUMMARY:${event.title}
 DESCRIPTION:${event.description}
 LOCATION:${event.location}
 END:VEVENT
 END:VCALENDAR`;
 
-    const blob = new Blob([icsContent], { type: "text/calendar" });
-    const link = document.createElement("a");
+    const blob = new Blob([icsContent], { type: 'text/calendar' });
+    const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
     link.download = `${event.slug}.ics`;
     link.click();
   };
 
-  const formatDate = (dateString) => {
+  const formatDate = dateString => {
     const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
     });
   };
 
-  const toggleSection = (section) => {
+  const toggleSection = section => {
     setExpandedSection(expandedSection === section ? null : section);
   };
 
@@ -501,18 +501,18 @@ END:VCALENDAR`;
               {/* Agenda */}
               <div className="mb-8">
                 <button
-                  onClick={() => toggleSection("agenda")}
+                  onClick={() => toggleSection('agenda')}
                   className="w-full flex items-center justify-between bg-dark-800/50 p-6 rounded-2xl border border-dark-700 hover:border-primary-600/50 transition-all"
                 >
                   <h3 className="text-xl font-bold text-white">Event Agenda</h3>
-                  {expandedSection === "agenda" ? (
+                  {expandedSection === 'agenda' ? (
                     <HiChevronUp className="w-6 h-6 text-primary-400" />
                   ) : (
                     <HiChevronDown className="w-6 h-6 text-gray-400" />
                   )}
                 </button>
 
-                {expandedSection === "agenda" && (
+                {expandedSection === 'agenda' && (
                   <div className="mt-4 bg-dark-800/30 rounded-2xl p-6 border border-dark-700">
                     <div className="space-y-4">
                       {event.agenda.map((item, index) => (
@@ -602,7 +602,7 @@ END:VCALENDAR`;
                       key={index}
                       className="px-3 py-1 bg-dark-800 text-gray-300 rounded-full text-sm"
                     >
-                      #{tag.replace(/\s+/g, "")}
+                      #{tag.replace(/\s+/g, '')}
                     </span>
                   ))}
                 </div>
@@ -643,7 +643,7 @@ END:VCALENDAR`;
                           placeholder="Full Name *"
                           required
                           value={formData.name}
-                          onChange={(e) =>
+                          onChange={e =>
                             setFormData({ ...formData, name: e.target.value })
                           }
                           className="w-full px-4 py-3 bg-dark-900 border border-dark-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary-600"
@@ -655,7 +655,7 @@ END:VCALENDAR`;
                           placeholder="Email Address *"
                           required
                           value={formData.email}
-                          onChange={(e) =>
+                          onChange={e =>
                             setFormData({ ...formData, email: e.target.value })
                           }
                           className="w-full px-4 py-3 bg-dark-900 border border-dark-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary-600"
@@ -666,7 +666,7 @@ END:VCALENDAR`;
                           type="text"
                           placeholder="Company"
                           value={formData.company}
-                          onChange={(e) =>
+                          onChange={e =>
                             setFormData({
                               ...formData,
                               company: e.target.value,
@@ -680,7 +680,7 @@ END:VCALENDAR`;
                           type="tel"
                           placeholder="Phone Number"
                           value={formData.phone}
-                          onChange={(e) =>
+                          onChange={e =>
                             setFormData({ ...formData, phone: e.target.value })
                           }
                           className="w-full px-4 py-3 bg-dark-900 border border-dark-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary-600"
@@ -739,25 +739,25 @@ END:VCALENDAR`;
                   </h4>
                   <div className="flex gap-2">
                     <button
-                      onClick={() => handleShare("facebook")}
+                      onClick={() => handleShare('facebook')}
                       className="flex-1 h-10 bg-blue-600 hover:bg-blue-700 rounded-lg flex items-center justify-center transition-colors"
                     >
                       <FaFacebookF className="w-4 h-4" />
                     </button>
                     <button
-                      onClick={() => handleShare("twitter")}
+                      onClick={() => handleShare('twitter')}
                       className="flex-1 h-10 bg-sky-500 hover:bg-sky-600 rounded-lg flex items-center justify-center transition-colors"
                     >
                       <FaTwitter className="w-4 h-4" />
                     </button>
                     <button
-                      onClick={() => handleShare("linkedin")}
+                      onClick={() => handleShare('linkedin')}
                       className="flex-1 h-10 bg-blue-700 hover:bg-blue-800 rounded-lg flex items-center justify-center transition-colors"
                     >
                       <FaLinkedinIn className="w-4 h-4" />
                     </button>
                     <button
-                      onClick={() => handleShare("copy")}
+                      onClick={() => handleShare('copy')}
                       className="flex-1 h-10 bg-dark-700 hover:bg-primary-600 rounded-lg flex items-center justify-center transition-colors"
                     >
                       <FaLink className="w-4 h-4" />
@@ -803,7 +803,7 @@ END:VCALENDAR`;
               </h2>
 
               <div className="grid md:grid-cols-2 gap-8">
-                {relatedEvents.map((relatedEvent) => (
+                {relatedEvents.map(relatedEvent => (
                   <Link
                     key={relatedEvent.id}
                     to={`/events/${relatedEvent.slug}`}

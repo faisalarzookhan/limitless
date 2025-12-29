@@ -13,14 +13,20 @@
   background-color: #ffffff;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
   position: relative;
 }
 
 .limitless-adaptive-grid-item:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .limitless-aspect-ratio-box {
@@ -82,11 +88,11 @@
     grid-template-columns: 1fr !important;
     gap: 0.75rem;
   }
-  
+
   .limitless-adaptive-grid.mobile-cols-2 {
     grid-template-columns: repeat(2, 1fr) !important;
   }
-  
+
   .limitless-adaptive-grid.mobile-cols-3 {
     grid-template-columns: repeat(3, 1fr) !important;
   }
@@ -97,15 +103,15 @@
   .limitless-adaptive-grid.tablet-cols-1 {
     grid-template-columns: 1fr;
   }
-  
+
   .limitless-adaptive-grid.tablet-cols-2 {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .limitless-adaptive-grid.tablet-cols-3 {
     grid-template-columns: repeat(3, 1fr);
   }
-  
+
   .limitless-adaptive-grid.tablet-cols-4 {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -116,19 +122,19 @@
   .limitless-adaptive-grid.desktop-cols-2 {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .limitless-adaptive-grid.desktop-cols-3 {
     grid-template-columns: repeat(3, 1fr);
   }
-  
+
   .limitless-adaptive-grid.desktop-cols-4 {
     grid-template-columns: repeat(4, 1fr);
   }
-  
+
   .limitless-adaptive-grid.desktop-cols-5 {
     grid-template-columns: repeat(5, 1fr);
   }
-  
+
   .limitless-adaptive-grid.desktop-cols-6 {
     grid-template-columns: repeat(6, 1fr);
   }
@@ -164,7 +170,9 @@
 }
 
 .limitless-adaptive-grid.royal-gold-theme .limitless-adaptive-grid-item:hover {
-  box-shadow: 0 10px 15px -3px rgba(212, 175, 55, 0.2), 0 4px 6px -2px rgba(212, 175, 55, 0.15);
+  box-shadow:
+    0 10px 15px -3px rgba(212, 175, 55, 0.2),
+    0 4px 6px -2px rgba(212, 175, 55, 0.15);
 }
 
 /* Accessibility improvements */
@@ -178,7 +186,7 @@
   .limitless-adaptive-grid-item {
     transition: none;
   }
-  
+
   .limitless-adaptive-grid-item:hover {
     transform: none;
   }
@@ -196,7 +204,7 @@
   .limitless-adaptive-grid {
     display: block;
   }
-  
+
   .limitless-adaptive-grid-item {
     break-inside: avoid;
     page-break-inside: avoid;

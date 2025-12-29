@@ -7,7 +7,7 @@ import {
   HiUserCircle,
   HiFilter,
   HiChevronDown,
-  HiChevronUp
+  HiChevronUp,
 } from 'react-icons/hi';
 
 const Testimonials = () => {
@@ -28,7 +28,8 @@ const Testimonials = () => {
       project: 'Custom CRM System',
       image: null,
       verified: true,
-      longReview: 'Working with Limitless Infotech Solution has been an absolute game-changer for our company. From the initial consultation to the final deployment, every step was handled with utmost professionalism. The CRM system they built is not just a tool; it\'s a complete transformation of how we manage customer relationships. The team took the time to understand our unique challenges and delivered a solution that exceeded our expectations. Our sales team loves the intuitive interface, and the automated workflows have saved us countless hours. I highly recommend Limitless to any business looking for a technology partner that truly cares about your success.'
+      longReview:
+        "Working with Limitless Infotech Solution has been an absolute game-changer for our company. From the initial consultation to the final deployment, every step was handled with utmost professionalism. The CRM system they built is not just a tool; it's a complete transformation of how we manage customer relationships. The team took the time to understand our unique challenges and delivered a solution that exceeded our expectations. Our sales team loves the intuitive interface, and the automated workflows have saved us countless hours. I highly recommend Limitless to any business looking for a technology partner that truly cares about your success.",
     },
     {
       id: 2,
@@ -42,7 +43,8 @@ const Testimonials = () => {
       project: 'E-commerce Platform',
       image: null,
       verified: true,
-      longReview: 'I cannot express enough how thrilled we are with our new e-commerce platform. Limitless not only delivered a beautiful website but also integrated cutting-edge features like AI-powered product recommendations that have significantly boosted our average order value. The mobile experience is flawless, and our customers love how easy it is to shop on their phones. The team was incredibly patient with our requests and always found solutions to our challenges. Since launching, we\'ve seen a 300% increase in online sales. This investment has paid for itself many times over.'
+      longReview:
+        "I cannot express enough how thrilled we are with our new e-commerce platform. Limitless not only delivered a beautiful website but also integrated cutting-edge features like AI-powered product recommendations that have significantly boosted our average order value. The mobile experience is flawless, and our customers love how easy it is to shop on their phones. The team was incredibly patient with our requests and always found solutions to our challenges. Since launching, we've seen a 300% increase in online sales. This investment has paid for itself many times over.",
     },
     {
       id: 3,
@@ -52,11 +54,12 @@ const Testimonials = () => {
       industry: 'Logistics',
       rating: 5,
       date: 'September 2023',
-      text: 'Outstanding mobile app development! The app is intuitive, fast, and our clients love it. The team\'s expertise in automation saved us countless hours. Real-time tracking has revolutionized our operations.',
+      text: "Outstanding mobile app development! The app is intuitive, fast, and our clients love it. The team's expertise in automation saved us countless hours. Real-time tracking has revolutionized our operations.",
       project: 'Logistics Mobile App',
       image: null,
       verified: true,
-      longReview: 'The mobile app developed by Limitless has transformed our logistics operations completely. Our drivers find it easy to use, even those who aren\'t tech-savvy. The real-time GPS tracking gives our customers peace of mind, and the route optimization feature has reduced our fuel costs by 30%. The offline functionality ensures that deliveries continue smoothly even in areas with poor network coverage. The support team has been fantastic, always available to help with any questions. This app has given us a competitive edge in the market.'
+      longReview:
+        "The mobile app developed by Limitless has transformed our logistics operations completely. Our drivers find it easy to use, even those who aren't tech-savvy. The real-time GPS tracking gives our customers peace of mind, and the route optimization feature has reduced our fuel costs by 30%. The offline functionality ensures that deliveries continue smoothly even in areas with poor network coverage. The support team has been fantastic, always available to help with any questions. This app has given us a competitive edge in the market.",
     },
     {
       id: 4,
@@ -70,7 +73,8 @@ const Testimonials = () => {
       project: 'Learning Management System',
       image: null,
       verified: true,
-      longReview: 'As an educational institution, we needed a platform that could handle video streaming, assessments, progress tracking, and student engagement. Limitless delivered all of this and more. The LMS they built is robust, scalable, and incredibly user-friendly. Both our teachers and students have adapted to it quickly. The analytics dashboard provides valuable insights into student performance, helping us improve our teaching methods. The system handles thousands of concurrent users without any performance issues. We\'re extremely satisfied with the results.'
+      longReview:
+        "As an educational institution, we needed a platform that could handle video streaming, assessments, progress tracking, and student engagement. Limitless delivered all of this and more. The LMS they built is robust, scalable, and incredibly user-friendly. Both our teachers and students have adapted to it quickly. The analytics dashboard provides valuable insights into student performance, helping us improve our teaching methods. The system handles thousands of concurrent users without any performance issues. We're extremely satisfied with the results.",
     },
     {
       id: 5,
@@ -80,11 +84,12 @@ const Testimonials = () => {
       industry: 'Finance',
       rating: 5,
       date: 'July 2023',
-      text: 'Exceptional work on our payment gateway! Security was paramount, and they delivered a solution that meets all compliance requirements. The system is fast, reliable, and secure. Couldn\'t ask for better.',
+      text: "Exceptional work on our payment gateway! Security was paramount, and they delivered a solution that meets all compliance requirements. The system is fast, reliable, and secure. Couldn't ask for better.",
       project: 'Payment Gateway',
       image: null,
       verified: true,
-      longReview: 'In the financial sector, security and reliability are non-negotiable. Limitless understood this from day one and built a payment gateway that not only meets but exceeds industry standards. The system handles thousands of transactions per second with 99.99% uptime. The fraud detection mechanisms are sophisticated, and the multi-currency support has enabled us to expand internationally. The code quality is exceptional, and the documentation is comprehensive. This is the kind of partner you want for mission-critical systems.'
+      longReview:
+        'In the financial sector, security and reliability are non-negotiable. Limitless understood this from day one and built a payment gateway that not only meets but exceeds industry standards. The system handles thousands of transactions per second with 99.99% uptime. The fraud detection mechanisms are sophisticated, and the multi-currency support has enabled us to expand internationally. The code quality is exceptional, and the documentation is comprehensive. This is the kind of partner you want for mission-critical systems.',
     },
     {
       id: 6,
@@ -98,7 +103,8 @@ const Testimonials = () => {
       project: 'Patient Portal',
       image: null,
       verified: true,
-      longReview: 'Limitless built us a patient portal that has revolutionized how we interact with our patients. The telemedicine integration was implemented flawlessly, which proved invaluable during the pandemic. The system is fully HIPAA compliant, giving us and our patients peace of mind about data security. Appointment bookings have increased by 150%, and our administrative staff now has more time to focus on patient care rather than paperwork. The mobile app is particularly popular with our younger patients. Highly recommended!'
+      longReview:
+        'Limitless built us a patient portal that has revolutionized how we interact with our patients. The telemedicine integration was implemented flawlessly, which proved invaluable during the pandemic. The system is fully HIPAA compliant, giving us and our patients peace of mind about data security. Appointment bookings have increased by 150%, and our administrative staff now has more time to focus on patient care rather than paperwork. The mobile app is particularly popular with our younger patients. Highly recommended!',
     },
     {
       id: 7,
@@ -112,7 +118,8 @@ const Testimonials = () => {
       project: 'Restaurant Management System',
       image: null,
       verified: true,
-      longReview: 'Managing multiple restaurant locations was a nightmare before Limitless came into the picture. Their management system has centralized everything - from inventory across all locations to customer loyalty programs. The POS integration is seamless, and the real-time reporting helps us make quick decisions. We\'ve reduced food waste by 45% thanks to the intelligent inventory tracking. The customer-facing mobile app has increased repeat business through our loyalty program. The ROI on this investment was achieved within six months.'
+      longReview:
+        "Managing multiple restaurant locations was a nightmare before Limitless came into the picture. Their management system has centralized everything - from inventory across all locations to customer loyalty programs. The POS integration is seamless, and the real-time reporting helps us make quick decisions. We've reduced food waste by 45% thanks to the intelligent inventory tracking. The customer-facing mobile app has increased repeat business through our loyalty program. The ROI on this investment was achieved within six months.",
     },
     {
       id: 8,
@@ -126,7 +133,8 @@ const Testimonials = () => {
       project: 'Real Estate Platform',
       image: null,
       verified: true,
-      longReview: 'The real estate platform created by Limitless has given us a significant competitive advantage. The 3D virtual tours are incredibly immersive, allowing potential buyers to explore properties from anywhere in the world. The mortgage calculator and agent matching features have improved our lead quality substantially. The admin panel makes managing hundreds of listings effortless. Our agents love the mobile app, which allows them to update listings on the go. Since launch, our lead conversion rate has increased by 95%. Absolutely worth every penny.'
+      longReview:
+        'The real estate platform created by Limitless has given us a significant competitive advantage. The 3D virtual tours are incredibly immersive, allowing potential buyers to explore properties from anywhere in the world. The mortgage calculator and agent matching features have improved our lead quality substantially. The admin panel makes managing hundreds of listings effortless. Our agents love the mobile app, which allows them to update listings on the go. Since launch, our lead conversion rate has increased by 95%. Absolutely worth every penny.',
     },
     {
       id: 9,
@@ -140,7 +148,8 @@ const Testimonials = () => {
       project: 'Enterprise ERP System',
       image: null,
       verified: true,
-      longReview: 'Implementing an ERP system is no small feat, especially for a manufacturing company with complex processes. Limitless approached this challenge methodically, taking the time to understand each department\'s workflow. The result is a system that has brought all our operations under one roof - from procurement to production to sales. The real-time dashboards provide visibility we never had before. Integration with our existing machinery and systems was handled expertly. The training provided to our staff was comprehensive. This system has transformed how we operate.'
+      longReview:
+        "Implementing an ERP system is no small feat, especially for a manufacturing company with complex processes. Limitless approached this challenge methodically, taking the time to understand each department's workflow. The result is a system that has brought all our operations under one roof - from procurement to production to sales. The real-time dashboards provide visibility we never had before. Integration with our existing machinery and systems was handled expertly. The training provided to our staff was comprehensive. This system has transformed how we operate.",
     },
     {
       id: 10,
@@ -154,7 +163,8 @@ const Testimonials = () => {
       project: 'Fitness Mobile App',
       image: null,
       verified: true,
-      longReview: 'We had a vision for a fitness app that would truly engage users and help them achieve their health goals. Limitless not only understood our vision but enhanced it with their technical expertise. The app is beautifully designed, incredibly smooth, and packed with features. The workout tracking with video demonstrations, personalized meal plans, and social community features have created an addictive user experience. Our retention rate is 85%, which is exceptional in the fitness app market. The backend analytics help us continuously improve the user experience. Limitless is an outstanding partner.'
+      longReview:
+        'We had a vision for a fitness app that would truly engage users and help them achieve their health goals. Limitless not only understood our vision but enhanced it with their technical expertise. The app is beautifully designed, incredibly smooth, and packed with features. The workout tracking with video demonstrations, personalized meal plans, and social community features have created an addictive user experience. Our retention rate is 85%, which is exceptional in the fitness app market. The backend analytics help us continuously improve the user experience. Limitless is an outstanding partner.',
     },
     {
       id: 11,
@@ -168,7 +178,8 @@ const Testimonials = () => {
       project: 'Trade Automation System',
       image: null,
       verified: true,
-      longReview: 'International trade involves complex documentation and compliance requirements. Limitless built us an automation system that has eliminated manual errors and drastically reduced processing time. The system automatically generates customs documents, tracks shipments across multiple carriers, and ensures compliance with international regulations. The integration with our accounting system has streamlined our entire operation. Our team can now handle 3x the volume with the same headcount. The support team at Limitless is always responsive and helpful. Highly recommended for any business dealing with international trade.'
+      longReview:
+        'International trade involves complex documentation and compliance requirements. Limitless built us an automation system that has eliminated manual errors and drastically reduced processing time. The system automatically generates customs documents, tracks shipments across multiple carriers, and ensures compliance with international regulations. The integration with our accounting system has streamlined our entire operation. Our team can now handle 3x the volume with the same headcount. The support team at Limitless is always responsive and helpful. Highly recommended for any business dealing with international trade.',
     },
     {
       id: 12,
@@ -182,23 +193,43 @@ const Testimonials = () => {
       project: 'AI Customer Support System',
       image: null,
       verified: true,
-      longReview: 'Implementing an AI chatbot was crucial for scaling our customer support. Limitless created an intelligent system that understands natural language, learns from interactions, and provides accurate responses. The seamless escalation to human agents ensures customers always get the help they need. The multi-language support has enabled us to serve international customers better. The analytics dashboard shows us exactly where customers need help, allowing us to improve our products and documentation. Our support costs have decreased while customer satisfaction has increased - a true win-win. Limitless delivered beyond our expectations.'
-    }
+      longReview:
+        'Implementing an AI chatbot was crucial for scaling our customer support. Limitless created an intelligent system that understands natural language, learns from interactions, and provides accurate responses. The seamless escalation to human agents ensures customers always get the help they need. The multi-language support has enabled us to serve international customers better. The analytics dashboard shows us exactly where customers need help, allowing us to improve our products and documentation. Our support costs have decreased while customer satisfaction has increased - a true win-win. Limitless delivered beyond our expectations.',
+    },
   ];
 
-  const industries = ['all', 'Technology', 'Retail', 'Logistics', 'Education', 'Finance', 'Healthcare', 'Food & Beverage', 'Real Estate', 'Manufacturing', 'Health & Fitness', 'Import/Export', 'Customer Service'];
+  const industries = [
+    'all',
+    'Technology',
+    'Retail',
+    'Logistics',
+    'Education',
+    'Finance',
+    'Healthcare',
+    'Food & Beverage',
+    'Real Estate',
+    'Manufacturing',
+    'Health & Fitness',
+    'Import/Export',
+    'Customer Service',
+  ];
   const ratings = ['all', '5', '4', '3'];
 
   const filteredTestimonials = testimonials.filter(testimonial => {
-    const matchesRating = selectedRating === 'all' || testimonial.rating.toString() === selectedRating;
-    const matchesIndustry = selectedIndustry === 'all' || testimonial.industry === selectedIndustry;
+    const matchesRating =
+      selectedRating === 'all' ||
+      testimonial.rating.toString() === selectedRating;
+    const matchesIndustry =
+      selectedIndustry === 'all' || testimonial.industry === selectedIndustry;
     return matchesRating && matchesIndustry;
   });
 
-  const averageRating = (testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length).toFixed(1);
+  const averageRating = (
+    testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length
+  ).toFixed(1);
   const totalReviews = testimonials.length;
 
-  const toggleExpanded = (id) => {
+  const toggleExpanded = id => {
     setExpandedReview(expandedReview === id ? null : id);
   };
 
@@ -206,24 +237,36 @@ const Testimonials = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative py-20 md:py-32 bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 text-white overflow-hidden">
-        <div className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8" aria-hidden="true">
+        <div
+          className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8"
+          aria-hidden="true"
+        >
           <div className="absolute inset-0 bg-pattern-grid opacity-10"></div>
         </div>
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8 animate-fade-in-down">
               <HiSparkles className="w-5 h-5" />
-              <span className="text-sm font-semibold">Client Success Stories</span>
+              <span className="text-sm font-semibold">
+                Client Success Stories
+              </span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 animate-fade-in-up">
               What Our Clients Say
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-              Real feedback from real clients who have transformed their businesses with Limitless
+            <p
+              className="text-xl md:text-2xl text-white/90 mb-8 animate-fade-in-up"
+              style={{ animationDelay: '0.2s' }}
+            >
+              Real feedback from real clients who have transformed their
+              businesses with Limitless
             </p>
 
             {/* Overall Rating */}
-            <div className="flex items-center justify-center space-x-8 mt-12 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+            <div
+              className="flex items-center justify-center space-x-8 mt-12 animate-fade-in-up"
+              style={{ animationDelay: '0.4s' }}
+            >
               <div className="text-center">
                 <div className="text-5xl font-bold mb-2">{averageRating}</div>
                 <div className="flex items-center justify-center mb-2">
@@ -255,13 +298,15 @@ const Testimonials = () => {
             {/* Industry Filter */}
             <div className="flex items-center space-x-3">
               <HiFilter className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Industry:</span>
+              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                Industry:
+              </span>
               <select
                 value={selectedIndustry}
-                onChange={(e) => setSelectedIndustry(e.target.value)}
+                onChange={e => setSelectedIndustry(e.target.value)}
                 className="select-field py-2 px-4 text-sm"
               >
-                {industries.map((industry) => (
+                {industries.map(industry => (
                   <option key={industry} value={industry}>
                     {industry === 'all' ? 'All Industries' : industry}
                   </option>
@@ -272,13 +317,15 @@ const Testimonials = () => {
             {/* Rating Filter */}
             <div className="flex items-center space-x-3">
               <HiStar className="w-5 h-5 text-yellow-500" />
-              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Rating:</span>
+              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                Rating:
+              </span>
               <select
                 value={selectedRating}
-                onChange={(e) => setSelectedRating(e.target.value)}
+                onChange={e => setSelectedRating(e.target.value)}
                 className="select-field py-2 px-4 text-sm"
               >
-                {ratings.map((rating) => (
+                {ratings.map(rating => (
                   <option key={rating} value={rating}>
                     {rating === 'all' ? 'All Ratings' : `${rating} Stars`}
                   </option>
@@ -288,7 +335,11 @@ const Testimonials = () => {
 
             {/* Results Count */}
             <div className="text-sm text-gray-600 dark:text-gray-400">
-              Showing <span className="font-semibold text-primary-600 dark:text-primary-400">{filteredTestimonials.length}</span> review{filteredTestimonials.length !== 1 ? 's' : ''}
+              Showing{' '}
+              <span className="font-semibold text-primary-600 dark:text-primary-400">
+                {filteredTestimonials.length}
+              </span>{' '}
+              review{filteredTestimonials.length !== 1 ? 's' : ''}
             </div>
           </div>
 
@@ -314,7 +365,10 @@ const Testimonials = () => {
                           {testimonial.name}
                         </h3>
                         {testimonial.verified && (
-                          <HiCheckCircle className="w-5 h-5 text-green-500" title="Verified Client" />
+                          <HiCheckCircle
+                            className="w-5 h-5 text-green-500"
+                            title="Verified Client"
+                          />
                         )}
                       </div>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -341,7 +395,11 @@ const Testimonials = () => {
                 {/* Review Text */}
                 <div className="mb-4">
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                    "{expandedReview === testimonial.id ? testimonial.longReview : testimonial.text}"
+                    "
+                    {expandedReview === testimonial.id
+                      ? testimonial.longReview
+                      : testimonial.text}
+                    "
                   </p>
                 </div>
 
@@ -351,7 +409,11 @@ const Testimonials = () => {
                     onClick={() => toggleExpanded(testimonial.id)}
                     className="flex items-center space-x-2 text-primary-600 dark:text-primary-400 font-semibold hover:underline text-sm"
                   >
-                    <span>{expandedReview === testimonial.id ? 'Read Less' : 'Read Full Review'}</span>
+                    <span>
+                      {expandedReview === testimonial.id
+                        ? 'Read Less'
+                        : 'Read Full Review'}
+                    </span>
                     {expandedReview === testimonial.id ? (
                       <HiChevronUp className="w-4 h-4" />
                     ) : (
@@ -429,10 +491,16 @@ const Testimonials = () => {
             Let's create a project that you'll be excited to review
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/get-started" className="btn-primary bg-white text-primary-600 hover:bg-gray-100">
+            <Link
+              to="/get-started"
+              className="btn-primary bg-white text-primary-600 hover:bg-gray-100"
+            >
               Start Your Project
             </Link>
-            <Link to="/portfolio" className="btn-outline border-white text-white hover:bg-white hover:text-primary-600">
+            <Link
+              to="/portfolio"
+              className="btn-outline border-white text-white hover:bg-white hover:text-primary-600"
+            >
               View Our Work
             </Link>
           </div>

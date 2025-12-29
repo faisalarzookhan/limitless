@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   HiX,
   HiChatAlt2,
@@ -13,7 +13,7 @@ import {
   HiQuestionMarkCircle,
   HiCalendar,
   HiMail,
-} from "react-icons/hi";
+} from 'react-icons/hi';
 import { sendUserInteractionNotification } from '../services/notificationService';
 import CalendarIntegration from './CalendarIntegration';
 
@@ -23,18 +23,18 @@ const Chatbot = () => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [messages, setMessages] = useState([
     {
-      type: "bot",
+      type: 'bot',
       text: "Hello! 👋 I'm your Auralis Live Agent from Limitless Infotech Solution. How can I assist you today?",
       timestamp: new Date(),
     },
   ]);
-  const [inputMessage, setInputMessage] = useState("");
+  const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -45,33 +45,33 @@ const Chatbot = () => {
   const knowledgeBase = {
     greeting: {
       keywords: [
-        "hello",
-        "hi",
-        "hey",
-        "good morning",
-        "good afternoon",
-        "good evening",
-        "auralis",
-        "who are you",
-        "what can you do",
-        "what are you",
-        "what do you do",
-        "what is your purpose",
-        "what is your role",
-        "what is your function",
-        "what is your responsibility",
-        "what is your mission",
-        "what is your vision",
-        "what are your goals",
-        "what do you offer",
-        "what can you provide",
-        "what value do you bring",
-        "what problem do you solve",
-        "what is your role in the company",
-        "what is your role in Limitless Infotech Solution",
-        "who is faisal khan",
-        "what is your role in the organization",
-        "founder of limitless infotech"
+        'hello',
+        'hi',
+        'hey',
+        'good morning',
+        'good afternoon',
+        'good evening',
+        'auralis',
+        'who are you',
+        'what can you do',
+        'what are you',
+        'what do you do',
+        'what is your purpose',
+        'what is your role',
+        'what is your function',
+        'what is your responsibility',
+        'what is your mission',
+        'what is your vision',
+        'what are your goals',
+        'what do you offer',
+        'what can you provide',
+        'what value do you bring',
+        'what problem do you solve',
+        'what is your role in the company',
+        'what is your role in Limitless Infotech Solution',
+        'who is faisal khan',
+        'what is your role in the organization',
+        'founder of limitless infotech',
       ],
       responses: [
         "Hello! I'm your Live Agent. How can I help you today?",
@@ -82,87 +82,103 @@ const Chatbot = () => {
         "Good evening! I'm your Live Agent. How can I help you today?",
         "I'm your Live Agent. How can I assist you today?",
         "Welcome! I'm your Live Agent. How can I assist you today?",
-        "Faisal Khan is the founder of Limitless Infotech Solution.",
-        "I am here to assist you with any questions you may have.",
-        "I am here to assist you with any questions you may have about Limitless Infotech Solution.",
+        'Faisal Khan is the founder of Limitless Infotech Solution.',
+        'I am here to assist you with any questions you may have.',
+        'I am here to assist you with any questions you may have about Limitless Infotech Solution.',
       ],
     },
     contact: {
       keywords: [
-        "contact",
-        "reach",
-        "email",
-        "phone",
-        "call",
-        "location",
-        "address",
-        "support",
-        "help",
+        'contact',
+        'reach',
+        'email',
+        'phone',
+        'call',
+        'location',
+        'address',
+        'support',
+        'help',
       ],
       responses: [
-        "You can reach us at:\n\n📧 Email: Info@limitlessinfotech.com\n📱 Phone: +917710909492\n📍 Location: Mumbai, Maharashtra, IN\n\nWould you like me to connect you with our support team?",
+        'You can reach us at:\n\n📧 Email: Info@limitlessinfotech.com\n📱 Phone: +917710909492\n📍 Location: Mumbai, Maharashtra, IN\n\nWould you like me to connect you with our support team?',
       ],
     },
     pricing: {
-      keywords: ["price", "pricing", "cost", "how much", "budget", "quote", "estimate"],
+      keywords: [
+        'price',
+        'pricing',
+        'cost',
+        'how much',
+        'budget',
+        'quote',
+        'estimate',
+      ],
       responses: [
-        "Our pricing is tailored to each project based on:\n\n• Project Scope & Complexity\n• Timeline Requirements\n• Technology Stack\n• Features & Functionality\n\nI recommend filling out our client form to get a detailed quote. Would you like me to direct you there?",
+        'Our pricing is tailored to each project based on:\n\n• Project Scope & Complexity\n• Timeline Requirements\n• Technology Stack\n• Features & Functionality\n\nI recommend filling out our client form to get a detailed quote. Would you like me to direct you there?',
       ],
     },
     timeline: {
       keywords: [
-        "timeline",
-        "how long",
-        "duration",
-        "time",
-        "delivery",
-        "deadline",
-        "when",
+        'timeline',
+        'how long',
+        'duration',
+        'time',
+        'delivery',
+        'deadline',
+        'when',
       ],
       responses: [
-        "Project timelines vary based on complexity:\n\n• Simple Website: 2-4 weeks\n• Complex Web App: 2-4 months\n• Mobile App: 3-6 months\n• Custom Software: 3-12 months\n\nWe provide detailed timelines during project planning. Want to discuss your project?",
+        'Project timelines vary based on complexity:\n\n• Simple Website: 2-4 weeks\n• Complex Web App: 2-4 months\n• Mobile App: 3-6 months\n• Custom Software: 3-12 months\n\nWe provide detailed timelines during project planning. Want to discuss your project?',
       ],
     },
     technology: {
       keywords: [
-        "technology",
-        "tech stack",
-        "technologies",
-        "framework",
-        "language",
-        "platform",
+        'technology',
+        'tech stack',
+        'technologies',
+        'framework',
+        'language',
+        'platform',
       ],
       responses: [
-        "We work with cutting-edge technologies:\n\n• Frontend: React, Vue, Angular, Next.js\n• Backend: Node.js, Python, PHP, .NET\n• Mobile: React Native, Flutter\n• Database: MongoDB, PostgreSQL, MySQL\n• Cloud: AWS, Azure, Google Cloud\n\nWhat technology are you interested in?",
+        'We work with cutting-edge technologies:\n\n• Frontend: React, Vue, Angular, Next.js\n• Backend: Node.js, Python, PHP, .NET\n• Mobile: React Native, Flutter\n• Database: MongoDB, PostgreSQL, MySQL\n• Cloud: AWS, Azure, Google Cloud\n\nWhat technology are you interested in?',
       ],
     },
     support: {
-      keywords: ["support", "maintenance", "help", "assistance", "update", "bug", "issue"],
+      keywords: [
+        'support',
+        'maintenance',
+        'help',
+        'assistance',
+        'update',
+        'bug',
+        'issue',
+      ],
       responses: [
-        "We provide comprehensive support:\n\n• 24/7 Technical Support\n• Regular Updates & Maintenance\n• Bug Fixes & Security Patches\n• Performance Monitoring\n• Training & Documentation\n\nNeed support for an existing project?",
+        'We provide comprehensive support:\n\n• 24/7 Technical Support\n• Regular Updates & Maintenance\n• Bug Fixes & Security Patches\n• Performance Monitoring\n• Training & Documentation\n\nNeed support for an existing project?',
       ],
     },
     portfolio: {
       keywords: [
-        "portfolio",
-        "projects",
-        "work",
-        "examples",
-        "case studies",
-        "previous work",
+        'portfolio',
+        'projects',
+        'work',
+        'examples',
+        'case studies',
+        'previous work',
       ],
       responses: [
-        "We have successfully delivered projects across various industries. You can view our portfolio with detailed case studies showing:\n\n• Project Challenges\n• Our Solutions\n• Technologies Used\n• Results & Impact\n\nWould you like to see our portfolio?",
+        'We have successfully delivered projects across various industries. You can view our portfolio with detailed case studies showing:\n\n• Project Challenges\n• Our Solutions\n• Technologies Used\n• Results & Impact\n\nWould you like to see our portfolio?',
       ],
     },
     start: {
       keywords: [
-        "start",
-        "begin",
-        "get started",
-        "new project",
-        "hire",
-        "work with you",
+        'start',
+        'begin',
+        'get started',
+        'new project',
+        'hire',
+        'work with you',
       ],
       responses: [
         "Great! Let's get started:\n\n1. Fill out our Client Requirements Form\n2. Schedule a consultation call\n3. Receive a detailed proposal\n4. Start development\n\nShall I direct you to our client form?",
@@ -170,160 +186,174 @@ const Chatbot = () => {
     },
     security: {
       keywords: [
-        "security",
-        "secure",
-        "safety",
-        "data protection",
-        "encryption",
-        "privacy",
+        'security',
+        'secure',
+        'safety',
+        'data protection',
+        'encryption',
+        'privacy',
       ],
       responses: [
-        "Security is our top priority:\n\n• Enterprise-grade Encryption\n• Secure Coding Practices\n• Regular Security Audits\n• Data Protection Compliance\n• Backup & Disaster Recovery\n\nYour data and systems are completely secure with us.",
+        'Security is our top priority:\n\n• Enterprise-grade Encryption\n• Secure Coding Practices\n• Regular Security Audits\n• Data Protection Compliance\n• Backup & Disaster Recovery\n\nYour data and systems are completely secure with us.',
       ],
     },
     team: {
-      keywords: ["team", "who", "founder", "about", "company", "employees"],
+      keywords: ['team', 'who', 'founder', 'about', 'company', 'employees'],
       responses: [
-        "Limitless Infotech Solution is led by Faisal Khan and a talented team of developers, designers, and engineers. We are passionate about creating innovative solutions that transform businesses.\n\nWould you like to learn more about our company?",
+        'Limitless Infotech Solution is led by Faisal Khan and a talented team of developers, designers, and engineers. We are passionate about creating innovative solutions that transform businesses.\n\nWould you like to learn more about our company?',
       ],
     },
     thanks: {
-      keywords: ["thank", "thanks", "appreciate", "grateful"],
+      keywords: ['thank', 'thanks', 'appreciate', 'grateful'],
       responses: [
         "You're welcome! 😊 Is there anything else I can help you with?",
-        "Happy to help! Feel free to ask if you have more questions.",
-        "My pleasure! Let me know if you need anything else.",
+        'Happy to help! Feel free to ask if you have more questions.',
+        'My pleasure! Let me know if you need anything else.',
       ],
     },
     integration: {
-      keywords: ["integration", "api", "connect", "system", "third-party", "connectivity"],
+      keywords: [
+        'integration',
+        'api',
+        'connect',
+        'system',
+        'third-party',
+        'connectivity',
+      ],
       responses: [
-        "We specialize in system integrations:\n\n• API Development & Integration\n• Third-party Service Integration\n• CRM & ERP Integration\n• Payment Gateway Integration\n• Cloud Service Integration\n\nWhat systems would you like to integrate?",
+        'We specialize in system integrations:\n\n• API Development & Integration\n• Third-party Service Integration\n• CRM & ERP Integration\n• Payment Gateway Integration\n• Cloud Service Integration\n\nWhat systems would you like to integrate?',
       ],
     },
     ai: {
-      keywords: ["ai", "artificial intelligence", "machine learning", "ml", "automation", "intelligent"],
+      keywords: [
+        'ai',
+        'artificial intelligence',
+        'machine learning',
+        'ml',
+        'automation',
+        'intelligent',
+      ],
       responses: [
-        "We offer comprehensive AI solutions:\n\n• Custom Machine Learning Models\n• Natural Language Processing\n• Computer Vision\n• Predictive Analytics\n• Intelligent Automation\n\nWould you like to know how AI can benefit your business?",
+        'We offer comprehensive AI solutions:\n\n• Custom Machine Learning Models\n• Natural Language Processing\n• Computer Vision\n• Predictive Analytics\n• Intelligent Automation\n\nWould you like to know how AI can benefit your business?',
       ],
     },
     services: {
       keywords: [
-        "service",
-        "services",
-        "what do you do",
-        "offerings",
-        "solutions",
-        "products",
+        'service',
+        'services',
+        'what do you do',
+        'offerings',
+        'solutions',
+        'products',
       ],
       responses: [
-        "We offer comprehensive solutions:\n\n🌐 Development Services:\n• Web Development\n• Mobile App Development\n• Custom Software & Systems\n• CRM & Task Management Apps\n• Business Automation & AI Integration\n\n📦 Our Products:\n• TrackIT - IT Asset Management\n• TrackO - Operations Tracking\n• HR-IMS - HR Management System\n• WorkTrack - Workforce Management\n• IT-TMS - IT Ticket Management\n• MailTO - Email Management\n• Baseless - Database Solutions\n\n🤝 Client Solutions:\n• IVOLEX - Custom Solution\n• Wakilni - Legal Platform\n\nWhich interests you?",
+        'We offer comprehensive solutions:\n\n🌐 Development Services:\n• Web Development\n• Mobile App Development\n• Custom Software & Systems\n• CRM & Task Management Apps\n• Business Automation & AI Integration\n\n📦 Our Products:\n• TrackIT - IT Asset Management\n• TrackO - Operations Tracking\n• HR-IMS - HR Management System\n• WorkTrack - Workforce Management\n• IT-TMS - IT Ticket Management\n• MailTO - Email Management\n• Baseless - Database Solutions\n\n🤝 Client Solutions:\n• IVOLEX - Custom Solution\n• Wakilni - Legal Platform\n\nWhich interests you?',
       ],
     },
     web: {
-      keywords: ["web", "website", "web development", "web design", "webapp"],
+      keywords: ['web', 'website', 'web development', 'web design', 'webapp'],
       responses: [
-        "Our Web Development services include:\n\n• Responsive Design (Mobile + Desktop)\n• SEO Optimization\n• Custom Web Applications\n• E-commerce Solutions\n• Progressive Web Apps (PWA)\n• Performance Optimization\n• CMS Integration\n\n💡 Check our pricing at limitlessinfotech.com/pricing\n\nWould you like to discuss your web project?",
+        'Our Web Development services include:\n\n• Responsive Design (Mobile + Desktop)\n• SEO Optimization\n• Custom Web Applications\n• E-commerce Solutions\n• Progressive Web Apps (PWA)\n• Performance Optimization\n• CMS Integration\n\n💡 Check our pricing at limitlessinfotech.com/pricing\n\nWould you like to discuss your web project?',
       ],
     },
     mobile: {
       keywords: [
-        "mobile",
-        "app",
-        "mobile app",
-        "android",
-        "ios",
-        "application",
-        "react native",
-        "flutter",
+        'mobile',
+        'app',
+        'mobile app',
+        'android',
+        'ios',
+        'application',
+        'react native',
+        'flutter',
       ],
       responses: [
-        "We create powerful mobile applications:\n\n• Native iOS & Android Apps\n• Cross-Platform Development (React Native, Flutter)\n• UI/UX Design\n• App Maintenance & Support\n• App Store Optimization\n\n📱 Example: We built IVOLEX and Wakilni mobile solutions.\n\nWhat type of mobile app do you need?",
+        'We create powerful mobile applications:\n\n• Native iOS & Android Apps\n• Cross-Platform Development (React Native, Flutter)\n• UI/UX Design\n• App Maintenance & Support\n• App Store Optimization\n\n📱 Example: We built IVOLEX and Wakilni mobile solutions.\n\nWhat type of mobile app do you need?',
       ],
     },
     crm: {
       keywords: [
-        "crm",
-        "customer management",
-        "task management",
-        "business management",
+        'crm',
+        'customer management',
+        'task management',
+        'business management',
       ],
       responses: [
-        "Our CRM and Business Management solutions help you:\n\n• Manage Customer Relationships\n• Track Sales & Leads\n• Automate Tasks\n• Generate Reports & Analytics\n• Integrate with Existing Systems\n\nWant to learn more about our custom CRM solutions?",
+        'Our CRM and Business Management solutions help you:\n\n• Manage Customer Relationships\n• Track Sales & Leads\n• Automate Tasks\n• Generate Reports & Analytics\n• Integrate with Existing Systems\n\nWant to learn more about our custom CRM solutions?',
       ],
     },
     pricing2: {
-      keywords: ["price", "pricing", "cost", "how much", "budget", "quote"],
+      keywords: ['price', 'pricing', 'cost', 'how much', 'budget', 'quote'],
       responses: [
-        "Our pricing is tailored to each project based on:\n\n• Project Scope & Complexity\n• Timeline Requirements\n• Technology Stack\n• Features & Functionality\n\nI recommend filling out our client form to get a detailed quote. Would you like me to direct you there?",
+        'Our pricing is tailored to each project based on:\n\n• Project Scope & Complexity\n• Timeline Requirements\n• Technology Stack\n• Features & Functionality\n\nI recommend filling out our client form to get a detailed quote. Would you like me to direct you there?',
       ],
     },
     contact2: {
       keywords: [
-        "contact",
-        "reach",
-        "email",
-        "phone",
-        "call",
-        "location",
-        "address",
+        'contact',
+        'reach',
+        'email',
+        'phone',
+        'call',
+        'location',
+        'address',
       ],
       responses: [
-        "You can reach us at:\n\n📧 Email: Info@limitlessinfotech.com\n📱 Phone: +917710909492\n📍 Location: Mumbai, Maharashtra, IN\n\nWould you like to schedule a consultation?",
+        'You can reach us at:\n\n📧 Email: Info@limitlessinfotech.com\n📱 Phone: +917710909492\n📍 Location: Mumbai, Maharashtra, IN\n\nWould you like to schedule a consultation?',
       ],
     },
     timeline2: {
       keywords: [
-        "timeline",
-        "how long",
-        "duration",
-        "time",
-        "delivery",
-        "deadline",
+        'timeline',
+        'how long',
+        'duration',
+        'time',
+        'delivery',
+        'deadline',
       ],
       responses: [
-        "Project timelines vary based on complexity:\n\n• Simple Website: 2-4 weeks\n• Complex Web App: 2-4 months\n• Mobile App: 3-6 months\n• Custom Software: 3-12 months\n\nWe provide detailed timelines during project planning. Want to discuss your project?",
+        'Project timelines vary based on complexity:\n\n• Simple Website: 2-4 weeks\n• Complex Web App: 2-4 months\n• Mobile App: 3-6 months\n• Custom Software: 3-12 months\n\nWe provide detailed timelines during project planning. Want to discuss your project?',
       ],
     },
     technology2: {
       keywords: [
-        "technology",
-        "tech stack",
-        "technologies",
-        "framework",
-        "language",
+        'technology',
+        'tech stack',
+        'technologies',
+        'framework',
+        'language',
       ],
       responses: [
-        "We work with cutting-edge technologies:\n\n• Frontend: React, Vue, Angular, Next.js\n• Backend: Node.js, Python, PHP, .NET\n• Mobile: React Native, Flutter\n• Database: MongoDB, PostgreSQL, MySQL\n• Cloud: AWS, Azure, Google Cloud\n\nWhat technology are you interested in?",
+        'We work with cutting-edge technologies:\n\n• Frontend: React, Vue, Angular, Next.js\n• Backend: Node.js, Python, PHP, .NET\n• Mobile: React Native, Flutter\n• Database: MongoDB, PostgreSQL, MySQL\n• Cloud: AWS, Azure, Google Cloud\n\nWhat technology are you interested in?',
       ],
     },
     support2: {
-      keywords: ["support", "maintenance", "help", "assistance", "update"],
+      keywords: ['support', 'maintenance', 'help', 'assistance', 'update'],
       responses: [
-        "We provide comprehensive support:\n\n• 24/7 Technical Support\n• Regular Updates & Maintenance\n• Bug Fixes & Security Patches\n• Performance Monitoring\n• Training & Documentation\n\nNeed support for an existing project?",
+        'We provide comprehensive support:\n\n• 24/7 Technical Support\n• Regular Updates & Maintenance\n• Bug Fixes & Security Patches\n• Performance Monitoring\n• Training & Documentation\n\nNeed support for an existing project?',
       ],
     },
     portfolio2: {
       keywords: [
-        "portfolio",
-        "projects",
-        "work",
-        "examples",
-        "case studies",
-        "previous work",
+        'portfolio',
+        'projects',
+        'work',
+        'examples',
+        'case studies',
+        'previous work',
       ],
       responses: [
-        "We have successfully delivered projects across various industries. You can view our portfolio with detailed case studies showing:\n\n• Project Challenges\n• Our Solutions\n• Technologies Used\n• Results & Impact\n\nWould you like to see our portfolio?",
+        'We have successfully delivered projects across various industries. You can view our portfolio with detailed case studies showing:\n\n• Project Challenges\n• Our Solutions\n• Technologies Used\n• Results & Impact\n\nWould you like to see our portfolio?',
       ],
     },
     start2: {
       keywords: [
-        "start",
-        "begin",
-        "get started",
-        "new project",
-        "hire",
-        "work with you",
+        'start',
+        'begin',
+        'get started',
+        'new project',
+        'hire',
+        'work with you',
       ],
       responses: [
         "Great! Let's get started:\n\n1. Fill out our Client Requirements Form\n2. Schedule a consultation call\n3. Receive a detailed proposal\n4. Start development\n\nShall I direct you to our client form?",
@@ -331,68 +361,92 @@ const Chatbot = () => {
     },
     security2: {
       keywords: [
-        "security",
-        "secure",
-        "safety",
-        "data protection",
-        "encryption",
+        'security',
+        'secure',
+        'safety',
+        'data protection',
+        'encryption',
       ],
       responses: [
-        "Security is our top priority:\n\n• Enterprise-grade Encryption\n• Secure Coding Practices\n• Regular Security Audits\n• Data Protection Compliance\n• Backup & Disaster Recovery\n\nYour data and systems are completely secure with us.",
+        'Security is our top priority:\n\n• Enterprise-grade Encryption\n• Secure Coding Practices\n• Regular Security Audits\n• Data Protection Compliance\n• Backup & Disaster Recovery\n\nYour data and systems are completely secure with us.',
       ],
     },
     team2: {
-      keywords: ["team", "who", "founder", "about", "company"],
+      keywords: ['team', 'who', 'founder', 'about', 'company'],
       responses: [
-        "Limitless Infotech Solution is led by Faisal Khan and a talented team of developers, designers, and engineers. We are passionate about creating innovative solutions that transform businesses.\n\nWould you like to learn more about our company?",
+        'Limitless Infotech Solution is led by Faisal Khan and a talented team of developers, designers, and engineers. We are passionate about creating innovative solutions that transform businesses.\n\nWould you like to learn more about our company?',
       ],
     },
     thanks2: {
-      keywords: ["thank", "thanks", "appreciate", "grateful"],
+      keywords: ['thank', 'thanks', 'appreciate', 'grateful'],
       responses: [
         "You're welcome! 😊 Is there anything else I can help you with?",
-        "Happy to help! Feel free to ask if you have more questions.",
-        "My pleasure! Let me know if you need anything else.",
+        'Happy to help! Feel free to ask if you have more questions.',
+        'My pleasure! Let me know if you need anything else.',
       ],
     },
   };
 
-  const findBestResponse = (message) => {
+  const findBestResponse = message => {
     const lowerMessage = message.toLowerCase();
 
     // Check for calendar scheduling keywords
-    if (lowerMessage.includes("schedule") || lowerMessage.includes("meeting") || lowerMessage.includes("book") || lowerMessage.includes("appointment") || lowerMessage.includes("calendar")) {
+    if (
+      lowerMessage.includes('schedule') ||
+      lowerMessage.includes('meeting') ||
+      lowerMessage.includes('book') ||
+      lowerMessage.includes('appointment') ||
+      lowerMessage.includes('calendar')
+    ) {
       setShowCalendar(true);
       return "I'd be happy to schedule a meeting with you. Please select a date and time that works for you.";
     }
-    
+
     // Check for page redirection keywords
-    if (lowerMessage.includes("service") || lowerMessage.includes("services")) {
+    if (lowerMessage.includes('service') || lowerMessage.includes('services')) {
       setTimeout(() => {
         navigate('/services');
       }, 1000);
       return "I'm redirecting you to our services page where you can explore all our offerings. Just a moment...";
-    } else if (lowerMessage.includes("portfolio") || lowerMessage.includes("project") || lowerMessage.includes("work")) {
+    } else if (
+      lowerMessage.includes('portfolio') ||
+      lowerMessage.includes('project') ||
+      lowerMessage.includes('work')
+    ) {
       setTimeout(() => {
         navigate('/portfolio');
       }, 1000);
       return "I'm redirecting you to our portfolio page where you can see our completed projects and case studies. Just a moment...";
-    } else if (lowerMessage.includes("product") || lowerMessage.includes("products")) {
+    } else if (
+      lowerMessage.includes('product') ||
+      lowerMessage.includes('products')
+    ) {
       setTimeout(() => {
         navigate('/products');
       }, 1000);
       return "I'm redirecting you to our products page where you can explore our SaaS solutions. Just a moment...";
-    } else if (lowerMessage.includes("about") || lowerMessage.includes("company")) {
+    } else if (
+      lowerMessage.includes('about') ||
+      lowerMessage.includes('company')
+    ) {
       setTimeout(() => {
         navigate('/about');
       }, 1000);
       return "I'm redirecting you to our about page where you can learn more about Limitless Infotech Solution. Just a moment...";
-    } else if (lowerMessage.includes("contact") || lowerMessage.includes("reach") || lowerMessage.includes("get in touch")) {
+    } else if (
+      lowerMessage.includes('contact') ||
+      lowerMessage.includes('reach') ||
+      lowerMessage.includes('get in touch')
+    ) {
       setTimeout(() => {
         navigate('/contact');
       }, 1000);
       return "I'm redirecting you to our contact page where you can get in touch with our team. Just a moment...";
-    } else if (lowerMessage.includes("pricing") || lowerMessage.includes("price") || lowerMessage.includes("cost")) {
+    } else if (
+      lowerMessage.includes('pricing') ||
+      lowerMessage.includes('price') ||
+      lowerMessage.includes('cost')
+    ) {
       setTimeout(() => {
         navigate('/pricing');
       }, 1000);
@@ -401,7 +455,7 @@ const Chatbot = () => {
 
     // Check each category in knowledge base
     for (const [category, data] of Object.entries(knowledgeBase)) {
-      if (data.keywords.some((keyword) => lowerMessage.includes(keyword))) {
+      if (data.keywords.some(keyword => lowerMessage.includes(keyword))) {
         const responses = data.responses;
         return responses[Math.floor(Math.random() * responses.length)];
       }
@@ -416,16 +470,16 @@ const Chatbot = () => {
 
     // Set loading state
     setIsLoading(true);
-    
+
     // Add user message
     const userMessage = {
-      type: "user",
+      type: 'user',
       text: inputMessage,
       timestamp: new Date(),
     };
 
-    setMessages((prev) => [...prev, userMessage]);
-    setInputMessage("");
+    setMessages(prev => [...prev, userMessage]);
+    setInputMessage('');
     setIsTyping(true);
 
     // Send notification about the user's message
@@ -435,7 +489,7 @@ const Chatbot = () => {
         message: inputMessage,
         timestamp: new Date().toISOString(),
         page: window.location.pathname,
-        userAgent: navigator.userAgent
+        userAgent: navigator.userAgent,
       });
     } catch (error) {
       console.error('Error sending chat notification:', error);
@@ -446,55 +500,55 @@ const Chatbot = () => {
       () => {
         const botResponse = findBestResponse(inputMessage);
         const botMessage = {
-          type: "bot",
+          type: 'bot',
           text: botResponse,
           timestamp: new Date(),
         };
 
-        setMessages((prev) => [...prev, botMessage]);
+        setMessages(prev => [...prev, botMessage]);
         setIsTyping(false);
         setIsLoading(false);
       },
-      1000 + Math.random() * 1000,
+      1000 + Math.random() * 1000
     ); // Random delay between 1-2 seconds
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
+  const handleKeyPress = e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
     }
   };
 
   const quickActions = [
-    { label: "Our Services", message: "What services do you offer?" },
-    { label: "Get a Quote", message: "How can I get a price quote?" },
-    { label: "View Portfolio", message: "Can I see your portfolio?" },
-    { label: "Contact Info", message: "How can I contact you?" },
+    { label: 'Our Services', message: 'What services do you offer?' },
+    { label: 'Get a Quote', message: 'How can I get a price quote?' },
+    { label: 'View Portfolio', message: 'Can I see your portfolio?' },
+    { label: 'Contact Info', message: 'How can I contact you?' },
   ];
 
-  const handleQuickAction = (message) => {
+  const handleQuickAction = message => {
     setInputMessage(message);
     setTimeout(() => handleSendMessage(), 100);
   };
 
   const connectToAgent = () => {
     const agentMessage = {
-      type: "bot",
+      type: 'bot',
       text: "I'm connecting you with one of our specialists. In the meantime, you can also:\n\n• Call us: +917710909492\n• Email us: Info@limitlessinfotech.com\n• Fill out our contact form for a detailed response",
       timestamp: new Date(),
     };
-    setMessages((prev) => [...prev, agentMessage]);
+    setMessages(prev => [...prev, agentMessage]);
   };
-  
-  const handleScheduleMeeting = (scheduleData) => {
+
+  const handleScheduleMeeting = scheduleData => {
     const scheduleMessage = {
-      type: "bot",
+      type: 'bot',
       text: `Thank you for scheduling your meeting! I've created an appointment for ${scheduleData.date.toDateString()} at ${scheduleData.time}. You'll receive a calendar invite shortly.\n\nLooking forward to our discussion about your project needs!`,
       timestamp: new Date(),
     };
-    
-    setMessages((prev) => [...prev, scheduleMessage]);
+
+    setMessages(prev => [...prev, scheduleMessage]);
     setShowCalendar(false);
   };
 
@@ -520,7 +574,7 @@ const Chatbot = () => {
         <div className="chatbot-window animate-scale-up">
           {/* Header */}
           <div className="chatbot-header">
-                    <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
                 <HiSupport className="w-6 h-6 text-white" />
               </div>
@@ -545,7 +599,7 @@ const Chatbot = () => {
             {messages.map((message, index) => (
               <div key={index} className={`chatbot-message ${message.type}`}>
                 <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-gray-200 dark:bg-dark-700">
-                  {message.type === "bot" ? (
+                  {message.type === 'bot' ? (
                     <HiSupport className="w-5 h-5 text-blue-600" />
                   ) : (
                     <HiUserCircle className="w-5 h-5 text-gray-600 dark:text-gray-400" />
@@ -555,8 +609,8 @@ const Chatbot = () => {
                   <p className="text-sm whitespace-pre-line">{message.text}</p>
                   <span className="text-xs opacity-70 mt-1 block">
                     {message.timestamp.toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
+                      hour: '2-digit',
+                      minute: '2-digit',
                     })}
                   </span>
                 </div>
@@ -572,15 +626,15 @@ const Chatbot = () => {
                   <div className="flex space-x-2">
                     <div
                       className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                      style={{ animationDelay: "0ms" }}
+                      style={{ animationDelay: '0ms' }}
                     ></div>
                     <div
                       className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                      style={{ animationDelay: "150ms" }}
+                      style={{ animationDelay: '150ms' }}
                     ></div>
                     <div
                       className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                      style={{ animationDelay: "300ms" }}
+                      style={{ animationDelay: '300ms' }}
                     ></div>
                   </div>
                 </div>
@@ -622,7 +676,7 @@ const Chatbot = () => {
                 <input
                   type="text"
                   value={inputMessage}
-                  onChange={(e) => setInputMessage(e.target.value)}
+                  onChange={e => setInputMessage(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="Type your message to our Live Agent..."
                   className="w-full px-4 py-3 pl-10 bg-gray-100 dark:bg-dark-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
@@ -654,7 +708,7 @@ const Chatbot = () => {
                   <HiUser className="w-4 h-4 mr-2" />
                   Need to speak with a human?
                 </button>
-                
+
                 <button
                   onClick={() => setShowCalendar(true)}
                   className="w-full py-2 text-sm font-medium text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg transition-colors duration-200 flex items-center justify-center"
@@ -672,10 +726,10 @@ const Chatbot = () => {
           </div>
         </div>
       )}
-      
+
       {/* Calendar Integration Modal */}
       {showCalendar && (
-        <CalendarIntegration 
+        <CalendarIntegration
           onSchedule={handleScheduleMeeting}
           onClose={() => setShowCalendar(false)}
           userName="Auralis User"

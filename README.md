@@ -7,23 +7,27 @@ This repository contains the comprehensive automated CI/CD pipeline and automati
 ## Features
 
 ### 1. CI/CD Pipeline
+
 - Automated build, test, and deployment processes
 - GitHub Actions workflows for CI/CD
 - Multi-environment deployments (development, staging, production)
 
 ### 2. Automated Testing
+
 - Unit testing with Jest
 - Integration testing
 - End-to-end testing with Playwright
 - Code coverage reporting
 
 ### 3. Code Quality & Linting
+
 - ESLint configuration with React best practices
 - Prettier for code formatting
 - Import ordering and unused import detection
 - Accessibility linting with jsx-a11y
 
 ### 4. Security Scanning
+
 - Dependency vulnerability scanning
 - Security audit with npm audit
 - Snyk integration
@@ -31,48 +35,56 @@ This repository contains the comprehensive automated CI/CD pipeline and automati
 - Secret scanning
 
 ### 5. Performance Monitoring
+
 - Core Web Vitals tracking
 - Error monitoring
 - Resource loading metrics
 - Memory and CPU usage tracking
 
 ### 6. Health Checks
+
 - System health monitoring
 - API availability checks
 - Database connection monitoring
 - External service checks
 
 ### 7. Automated Reporting
+
 - Daily, weekly, and monthly reports
 - Deployment success/failure reports
 - Performance metrics reports
 - System change documentation
 
 ### 8. Email Notifications
+
 - Deployment notifications
 - System failure alerts
 - Automated report distribution
 - Security vulnerability alerts
 
 ### 9. Data Synchronization
+
 - Automated data sync between systems
 - Scheduled data fetching from external APIs
 - Retry mechanisms for failed syncs
 - Data consistency validation
 
 ### 10. Backup & Recovery
+
 - Automated backup procedures
 - Multiple backup location support (local, S3, FTP)
 - Recovery procedures
 - Backup verification
 
 ### 11. Auto Scaling
+
 - CPU-based scaling
 - Memory-based scaling
 - Request-based scaling
 - Response time-based scaling
 
 ### 12. Automated Cleanup
+
 - Temporary file cleanup
 - Log file management
 - Browser storage cleanup
@@ -114,17 +126,20 @@ This repository contains the comprehensive automated CI/CD pipeline and automati
 ## Setup & Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd limitless-infotech-solution
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Set up environment variables:
+
 ```bash
 # Copy the example environment file
 cp .env.example .env
@@ -133,6 +148,7 @@ cp .env.example .env
 ```
 
 4. Run development server:
+
 ```bash
 npm run dev
 ```
@@ -168,42 +184,49 @@ The project includes several GitHub Actions workflows:
 ## Services
 
 ### Monitoring Service
+
 - Tracks Core Web Vitals (LCP, FCP, CLS, FID)
 - Monitors error rates
 - Captures performance metrics
 - Reports to monitoring backend
 
 ### Health Check Service
+
 - System health monitoring
 - API availability checks
 - Database connection validation
 - Frontend metrics collection
 
 ### Reporting Service
+
 - Generates daily, weekly, monthly reports
 - Creates deployment reports
 - Tracks performance trends
 - Provides recommendations
 
 ### Email Notification Service
+
 - Sends deployment notifications
 - Alerts on system failures
 - Distributes automated reports
 - Notifies about security issues
 
 ### Data Sync Service
+
 - Synchronizes data between systems
 - Fetches from external APIs
 - Handles retry logic
 - Ensures data consistency
 
 ### Backup Service
+
 - Automated backup procedures
 - Multiple storage locations
 - Recovery capabilities
 - Backup verification
 
 ### Cleanup Service
+
 - Removes temporary files
 - Manages log files
 - Cleans browser storage

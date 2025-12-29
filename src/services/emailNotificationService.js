@@ -9,13 +9,13 @@ class EmailNotificationService {
       smtpUser: process.env.SMTP_USER || 'no-reply@limitlessinfotech.com',
       smtpPass: process.env.SMTP_PASS || 'P@ssw0rd',
       fromEmail: process.env.FROM_EMAIL || 'no-reply@limitlessinfotech.com',
-      enabled: process.env.EMAIL_NOTIFICATIONS_ENABLED !== 'false'
+      enabled: process.env.EMAIL_NOTIFICATIONS_ENABLED !== 'false',
     };
-    
+
     this.templates = new Map();
     this.queue = [];
     this.isProcessing = false;
-    
+
     this.setupDefaultTemplates();
   }
 
@@ -48,7 +48,7 @@ class EmailNotificationService {
           </ul>
           {{/if}}
         </div>
-      `
+      `,
     });
 
     this.templates.set('system-alert', {
@@ -67,7 +67,7 @@ class EmailNotificationService {
           <pre style="background-color: #f5f5f5; padding: 10px; border-radius: 4px;">{{details}}</pre>
           {{/if}}
         </div>
-      `
+      `,
     });
 
     this.templates.set('security-alert', {
@@ -88,7 +88,7 @@ class EmailNotificationService {
             {{/each}}
           </ul>
         </div>
-      `
+      `,
     });
 
     this.templates.set('report-summary', {
@@ -119,7 +119,7 @@ class EmailNotificationService {
           </ul>
           {{/if}}
         </div>
-      `
+      `,
     });
   }
 
@@ -131,8 +131,10 @@ class EmailNotificationService {
       return false;
     }
 
-    const subject = template.subject
-      .replace('{{status}}', deploymentInfo.success ? 'SUCCESS' : 'FAILED');
+    const subject = template.subject.replace(
+      '{{status}}',
+      deploymentInfo.success ? 'SUCCESS' : 'FAILED'
+    );
 
     const html = template.html
       .replace('{{deploymentId}}', deploymentInfo.id || 'Unknown')
@@ -141,10 +143,24 @@ class EmailNotificationService {
       .replace('{{environment}}', deploymentInfo.environment || 'Unknown')
       .replace('{{timestamp}}', new Date().toLocaleString())
       .replace('{{duration}}', deploymentInfo.duration || 'N/A')
-      .replace('{{changes}}', deploymentInfo.changes && deploymentInfo.changes.length > 0 ? 
-        '<h3>Changes:</h3><ul>' + deploymentInfo.changes.map(c => `<li>${c}</li>`).join('') + '</ul>' : '')
-      .replace('{{errors}}', deploymentInfo.errors && deploymentInfo.errors.length > 0 ? 
-        '<h3>Errors:</h3><ul>' + deploymentInfo.errors.map(e => `<li style="color: red;">${e}</li>`).join('') + '</ul>' : '');
+      .replace(
+        '{{changes}}',
+        deploymentInfo.changes && deploymentInfo.changes.length > 0
+          ? '<h3>Changes:</h3><ul>' +
+              deploymentInfo.changes.map(c => `<li>${c}</li>`).join('') +
+              '</ul>'
+          : ''
+      )
+      .replace(
+        '{{errors}}',
+        deploymentInfo.errors && deploymentInfo.errors.length > 0
+          ? '<h3>Errors:</h3><ul>' +
+              deploymentInfo.errors
+                .map(e => `<li style="color: red;">${e}</li>`)
+                .join('') +
+              '</ul>'
+          : ''
+      );
 
     const recipients = this.getNotificationRecipients('deployment');
     return await this.sendEmail(recipients, subject, html);
@@ -162,7 +178,7 @@ class EmailNotificationService {
       critical: 'red',
       high: 'orange',
       medium: 'yellow',
-      low: 'blue'
+      low: 'blue',
     };
 
     const subject = template.subject
@@ -173,10 +189,22 @@ class EmailNotificationService {
       .replace('{{title}}', alertInfo.title)
       .replace('{{severity}}', alertInfo.severity.toUpperCase())
       .replace('{{alertColor}}', severityColors[alertInfo.severity] || 'black')
-      .replace('{{timestamp}}', new Date(alertInfo.timestamp || Date.now()).toLocaleString())
-      .replace('{{environment}}', alertInfo.environment || process.env.NODE_ENV || 'production')
-      .replace('{{description}}', alertInfo.description || 'No description provided')
-      .replace('{{details}}', alertInfo.details ? JSON.stringify(alertInfo.details, null, 2) : '');
+      .replace(
+        '{{timestamp}}',
+        new Date(alertInfo.timestamp || Date.now()).toLocaleString()
+      )
+      .replace(
+        '{{environment}}',
+        alertInfo.environment || process.env.NODE_ENV || 'production'
+      )
+      .replace(
+        '{{description}}',
+        alertInfo.description || 'No description provided'
+      )
+      .replace(
+        '{{details}}',
+        alertInfo.details ? JSON.stringify(alertInfo.details, null, 2) : ''
+      );
 
     const recipients = this.getNotificationRecipients('system-alert');
     return await this.sendEmail(recipients, subject, html);
@@ -190,19 +218,26 @@ class EmailNotificationService {
       return false;
     }
 
-    const subject = template.subject
-      .replace('{{type}}', alertInfo.type);
+    const subject = template.subject.replace('{{type}}', alertInfo.type);
 
-    const actionsList = alertInfo.recommendedActions 
-      ? alertInfo.recommendedActions.map(action => `<li>${action}</li>`).join('')
+    const actionsList = alertInfo.recommendedActions
+      ? alertInfo.recommendedActions
+          .map(action => `<li>${action}</li>`)
+          .join('')
       : '';
 
     const html = template.html
       .replace('{{type}}', alertInfo.type)
       .replace('{{severity}}', alertInfo.severity.toUpperCase())
-      .replace('{{timestamp}}', new Date(alertInfo.timestamp || Date.now()).toLocaleString())
+      .replace(
+        '{{timestamp}}',
+        new Date(alertInfo.timestamp || Date.now()).toLocaleString()
+      )
       .replace('{{system}}', alertInfo.system || 'Unknown')
-      .replace('{{description}}', alertInfo.description || 'No description provided')
+      .replace(
+        '{{description}}',
+        alertInfo.description || 'No description provided'
+      )
       .replace('{{recommendedActions}}', actionsList);
 
     const recipients = this.getNotificationRecipients('security-alert');
@@ -253,8 +288,16 @@ class EmailNotificationService {
 
     const html = template.html
       .replace('{{reportType}}', reportInfo.type)
-      .replace('{{period}}', reportInfo.period ? `${reportInfo.period.start} to ${reportInfo.period.end}` : 'N/A')
-      .replace('{{timestamp}}', new Date(reportInfo.generatedAt || Date.now()).toLocaleString())
+      .replace(
+        '{{period}}',
+        reportInfo.period
+          ? `${reportInfo.period.start} to ${reportInfo.period.end}`
+          : 'N/A'
+      )
+      .replace(
+        '{{timestamp}}',
+        new Date(reportInfo.generatedAt || Date.now()).toLocaleString()
+      )
       .replace('{{summary}}', summaryHtml)
       .replace('{{metrics}}', metricsHtml)
       .replace('{{recommendations}}', recommendationsHtml);
@@ -268,10 +311,10 @@ class EmailNotificationService {
     // In a real implementation, this would fetch from a configuration
     // For now, return mock recipients based on type
     const recipients = {
-      'deployment': ['dev-team@yourapp.com', 'ops@yourapp.com'],
+      deployment: ['dev-team@yourapp.com', 'ops@yourapp.com'],
       'system-alert': ['ops@yourapp.com', 'admin@yourapp.com'],
       'security-alert': ['security@yourapp.com', 'admin@yourapp.com'],
-      'report-summary': ['management@yourapp.com', 'ops@yourapp.com']
+      'report-summary': ['management@yourapp.com', 'ops@yourapp.com'],
     };
 
     return recipients[notificationType] || ['admin@yourapp.com'];
@@ -298,7 +341,7 @@ class EmailNotificationService {
       // For now, we'll simulate the email sending
       console.log(`Sending email to: ${recipients.join(', ')}`);
       console.log(`Subject: ${subject}`);
-      
+
       // Add to queue for processing
       const emailData = {
         to: recipients,
@@ -306,11 +349,11 @@ class EmailNotificationService {
         html,
         text,
         timestamp: Date.now(),
-        id: `email-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+        id: `email-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       };
 
       this.queue.push(emailData);
-      
+
       // Process the queue if not already processing
       if (!this.isProcessing) {
         this.processQueue();
@@ -333,15 +376,17 @@ class EmailNotificationService {
 
     while (this.queue.length > 0) {
       const email = this.queue.shift();
-      
+
       try {
         // In a real implementation, this would send the actual email
         // For now, we'll just log it
-        console.log(`Processing email: ${email.subject} to ${email.to.join(', ')}`);
-        
+        console.log(
+          `Processing email: ${email.subject} to ${email.to.join(', ')}`
+        );
+
         // Simulate email sending delay
         await new Promise(resolve => setTimeout(resolve, 100));
-        
+
         console.log(`Email sent successfully: ${email.id}`);
       } catch (error) {
         console.error(`Failed to send email ${email.id}:`, error);
@@ -357,7 +402,7 @@ class EmailNotificationService {
     if (!name || !template || !template.subject || !template.html) {
       throw new Error('Template must have name, subject, and html');
     }
-    
+
     this.templates.set(name, template);
   }
 
@@ -366,7 +411,7 @@ class EmailNotificationService {
     return Array.from(this.templates.entries()).map(([name, template]) => ({
       name,
       subject: template.subject,
-      html: template.html
+      html: template.html,
     }));
   }
 
@@ -398,8 +443,8 @@ class EmailNotificationService {
       config: {
         enabled: this.config.enabled,
         smtpHost: this.config.smtpHost,
-        smtpPort: this.config.smtpPort
-      }
+        smtpPort: this.config.smtpPort,
+      },
     };
   }
 
@@ -408,20 +453,20 @@ class EmailNotificationService {
     try {
       // In a real implementation, this would test the actual SMTP connection
       console.log('Testing email configuration...');
-      
+
       // Simulate connection test
       await new Promise(resolve => setTimeout(resolve, 500));
-      
+
       console.log('Email configuration test passed');
       return {
         success: true,
-        message: 'Email configuration is valid'
+        message: 'Email configuration is valid',
       };
     } catch (error) {
       console.error('Email configuration test failed:', error);
       return {
         success: false,
-        message: error.message
+        message: error.message,
       };
     }
   }

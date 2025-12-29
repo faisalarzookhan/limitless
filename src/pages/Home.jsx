@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   HiCode,
   HiDeviceMobile,
@@ -19,9 +19,9 @@ import {
   HiArrowRight,
   HiArrowSmLeft,
   HiArrowSmRight,
-} from "react-icons/hi";
+} from 'react-icons/hi';
 
-import { AnimatedElement, DuoToneIcon } from "../components/ui";
+import { AnimatedElement, DuoToneIcon } from '../components/ui';
 
 const Home = () => {
   const [openFaq, setOpenFaq] = useState(null);
@@ -29,251 +29,251 @@ const Home = () => {
   const coreServices = [
     {
       icon: HiCode,
-      title: "Web Development",
+      title: 'Web Development',
       description:
-        "Responsive, scalable, and SEO-optimized websites built with cutting-edge technologies.",
-      color: "from-blue-600 to-blue-800",
+        'Responsive, scalable, and SEO-optimized websites built with cutting-edge technologies.',
+      color: 'from-blue-600 to-blue-800',
     },
     {
       icon: HiDeviceMobile,
-      title: "Mobile App Development",
+      title: 'Mobile App Development',
       description:
-        "Native and cross-platform mobile applications that deliver exceptional user experiences.",
-      color: "from-blue-700 to-blue-900",
+        'Native and cross-platform mobile applications that deliver exceptional user experiences.',
+      color: 'from-blue-700 to-blue-900',
     },
     {
       icon: HiCube,
-      title: "Custom Software & Systems",
+      title: 'Custom Software & Systems',
       description:
-        "Tailored software solutions designed to meet your unique business requirements.",
-      color: "from-blue-800 to-blue-950",
+        'Tailored software solutions designed to meet your unique business requirements.',
+      color: 'from-blue-800 to-blue-950',
     },
     {
       icon: HiChartBar,
-      title: "CRM & Task Management",
+      title: 'CRM & Task Management',
       description:
-        "Powerful systems to manage customer relationships and streamline business operations.",
-      color: "from-blue-600 to-blue-700",
+        'Powerful systems to manage customer relationships and streamline business operations.',
+      color: 'from-blue-600 to-blue-700',
     },
     {
       icon: HiLightningBolt,
-      title: "Business Automation & AI",
+      title: 'Business Automation & AI',
       description:
-        "Intelligent automation solutions that transform operations and boost productivity.",
-      color: "from-blue-700 to-blue-800",
+        'Intelligent automation solutions that transform operations and boost productivity.',
+      color: 'from-blue-700 to-blue-800',
     },
     {
       icon: HiServer,
-      title: "Enterprise SaaS Products",
+      title: 'Enterprise SaaS Products',
       description:
-        "Production-ready software solutions including TrackIT, HR-IMS, WorkTrack, and more.",
-      color: "from-blue-800 to-blue-900",
+        'Production-ready software solutions including TrackIT, HR-IMS, WorkTrack, and more.',
+      color: 'from-blue-800 to-blue-900',
     },
   ];
 
   const featuredProducts = [
     {
-      id: "trackit",
-      name: "TrackIT",
-      description: "IT Asset Management System",
+      id: 'trackit',
+      name: 'TrackIT',
+      description: 'IT Asset Management System',
       icon: HiServer,
-      color: "from-blue-600 to-blue-800",
-      users: "500+",
-      link: "/products",
+      color: 'from-blue-600 to-blue-800',
+      users: '500+',
+      link: '/products',
     },
     {
-      id: "hrims",
-      name: "HR-IMS",
-      description: "HR Management System",
+      id: 'hrims',
+      name: 'HR-IMS',
+      description: 'HR Management System',
       icon: HiUserGroup,
-      color: "from-amber-500 to-amber-600",
-      users: "2,000+",
-      link: "/products",
+      color: 'from-amber-500 to-amber-600',
+      users: '2,000+',
+      link: '/products',
       popular: true,
     },
     {
-      id: "worktrack",
-      name: "WorkTrack",
-      description: "Workforce Management",
+      id: 'worktrack',
+      name: 'WorkTrack',
+      description: 'Workforce Management',
       icon: HiClock,
-      color: "from-blue-700 to-blue-900",
-      users: "1,500+",
-      link: "/products",
+      color: 'from-blue-700 to-blue-900',
+      users: '1,500+',
+      link: '/products',
     },
     {
-      id: "ittms",
-      name: "IT-TMS",
-      description: "IT Ticket Management",
+      id: 'ittms',
+      name: 'IT-TMS',
+      description: 'IT Ticket Management',
       icon: HiChartBar,
-      color: "from-blue-600 to-blue-700",
-      users: "800+",
-      link: "/products",
+      color: 'from-blue-600 to-blue-700',
+      users: '800+',
+      link: '/products',
     },
   ];
 
   const successStories = [
     {
-      id: "ivolex",
-      title: "IVOLEX",
-      subtitle: "Enterprise ERP System",
+      id: 'ivolex',
+      title: 'IVOLEX',
+      subtitle: 'Enterprise ERP System',
       description:
-        "Custom enterprise resource planning system that improved efficiency by 60% across 15 locations.",
+        'Custom enterprise resource planning system that improved efficiency by 60% across 15 locations.',
       results: [
-        { label: "Efficiency", value: "+60%" },
-        { label: "Automation", value: "80%" },
-        { label: "Users", value: "500+" },
+        { label: 'Efficiency', value: '+60%' },
+        { label: 'Automation', value: '80%' },
+        { label: 'Users', value: '500+' },
       ],
-      link: "/portfolio/101",
-      color: "from-blue-600 to-blue-800",
+      link: '/portfolio/101',
+      color: 'from-blue-600 to-blue-800',
     },
     {
-      id: "wakilni",
-      title: "Wakilni",
-      subtitle: "Legal Services Platform",
+      id: 'wakilni',
+      title: 'Wakilni',
+      subtitle: 'Legal Services Platform',
       description:
-        "Comprehensive platform connecting 500+ lawyers with 10,000+ clients across the region.",
+        'Comprehensive platform connecting 500+ lawyers with 10,000+ clients across the region.',
       results: [
-        { label: "Lawyers", value: "500+" },
-        { label: "Clients", value: "10K+" },
-        { label: "Satisfaction", value: "95%" },
+        { label: 'Lawyers', value: '500+' },
+        { label: 'Clients', value: '10K+' },
+        { label: 'Satisfaction', value: '95%' },
       ],
-      link: "/portfolio/102",
-      color: "from-amber-500 to-amber-600",
+      link: '/portfolio/102',
+      color: 'from-amber-500 to-amber-600',
     },
   ];
 
   const whyLimitless = [
     {
       icon: HiShieldCheck,
-      title: "Total Security",
+      title: 'Total Security',
       description:
-        "Enterprise-grade security protocols with bank-level encryption and SOC2 compliance standards.",
+        'Enterprise-grade security protocols with bank-level encryption and SOC2 compliance standards.',
     },
     {
       icon: HiCube,
-      title: "7+ Production-Ready Products",
+      title: '7+ Production-Ready Products',
       description:
-        "Complete suite of SaaS products serving 10,000+ users worldwide, from IT management to HR systems.",
+        'Complete suite of SaaS products serving 10,000+ users worldwide, from IT management to HR systems.',
     },
     {
       icon: HiSparkles,
-      title: "True Uniqueness",
+      title: 'True Uniqueness',
       description:
-        "Every solution is custom-crafted to reflect your brand identity and meet your specific business needs.",
+        'Every solution is custom-crafted to reflect your brand identity and meet your specific business needs.',
     },
     {
       icon: HiServer,
-      title: "Reliability & Scalability",
+      title: 'Reliability & Scalability',
       description:
-        "Built to grow with your business, our solutions handle increased demand without compromising performance.",
+        'Built to grow with your business, our solutions handle increased demand without compromising performance.',
     },
     {
       icon: HiTrendingUp,
-      title: "Speed + Performance",
+      title: 'Speed + Performance',
       description:
-        "Lightning-fast applications optimized for peak performance, delivering exceptional user experiences.",
+        'Lightning-fast applications optimized for peak performance, delivering exceptional user experiences.',
     },
     {
       icon: HiClock,
-      title: "Smart & Future-Ready",
+      title: 'Smart & Future-Ready',
       description:
-        "Forward-thinking solutions leveraging AI and emerging technologies to keep you ahead of the curve.",
+        'Forward-thinking solutions leveraging AI and emerging technologies to keep you ahead of the curve.',
     },
     {
       icon: HiUserGroup,
-      title: "Royal Client Experience",
+      title: 'Royal Client Experience',
       description:
-        "White-glove service with dedicated support, ensuring your success is our top priority at every step.",
+        'White-glove service with dedicated support, ensuring your success is our top priority at every step.',
     },
   ];
 
   const clientLogos = [
-    { name: "IVOLEX", logo: null, category: "Enterprise" },
-    { name: "Wakilni", logo: null, category: "LegalTech" },
-    { name: "TechVision", logo: null, category: "Technology" },
-    { name: "StyleHub", logo: null, category: "E-commerce" },
-    { name: "LogiTrack", logo: null, category: "Logistics" },
-    { name: "EduLearn", logo: null, category: "Education" },
-    { name: "HealthCare Plus", logo: null, category: "Healthcare" },
-    { name: "SecurePay", logo: null, category: "FinTech" },
+    { name: 'IVOLEX', logo: null, category: 'Enterprise' },
+    { name: 'Wakilni', logo: null, category: 'LegalTech' },
+    { name: 'TechVision', logo: null, category: 'Technology' },
+    { name: 'StyleHub', logo: null, category: 'E-commerce' },
+    { name: 'LogiTrack', logo: null, category: 'Logistics' },
+    { name: 'EduLearn', logo: null, category: 'Education' },
+    { name: 'HealthCare Plus', logo: null, category: 'Healthcare' },
+    { name: 'SecurePay', logo: null, category: 'FinTech' },
   ];
 
   const testimonials = [
     {
-      name: "Rajesh Kumar",
-      role: "CEO, TechVision Solutions",
+      name: 'Rajesh Kumar',
+      role: 'CEO, TechVision Solutions',
       image: null,
       rating: 5,
-      text: "Limitless transformed our business with a custom CRM system. The team was professional, responsive, and delivered beyond our expectations. Our productivity increased by 40%!",
+      text: 'Limitless transformed our business with a custom CRM system. The team was professional, responsive, and delivered beyond our expectations. Our productivity increased by 40%!',
     },
     {
-      name: "Priya Sharma",
-      role: "Founder, StyleHub Fashion",
+      name: 'Priya Sharma',
+      role: 'Founder, StyleHub Fashion',
       image: null,
       rating: 5,
-      text: "The e-commerce platform they built for us is stunning and incredibly efficient. Sales have tripled since launch. Highly recommend their services!",
+      text: 'The e-commerce platform they built for us is stunning and incredibly efficient. Sales have tripled since launch. Highly recommend their services!',
     },
     {
-      name: "Ahmed Ali",
-      role: "Operations Manager, LogiTrack",
+      name: 'Ahmed Ali',
+      role: 'Operations Manager, LogiTrack',
       image: null,
       rating: 5,
       text: "Outstanding mobile app development! The app is intuitive, fast, and our clients love it. The team's expertise in automation saved us countless hours.",
     },
     {
-      name: "Sneha Patel",
-      role: "Director, EduLearn Academy",
+      name: 'Sneha Patel',
+      role: 'Director, EduLearn Academy',
       image: null,
       rating: 5,
-      text: "Working with Limitless was a game-changer. They built a complete learning management system that exceeded all our requirements. True professionals!",
+      text: 'Working with Limitless was a game-changer. They built a complete learning management system that exceeded all our requirements. True professionals!',
     },
   ];
 
   const faqs = [
     {
-      question: "What services does Limitless Infotech Solution offer?",
+      question: 'What services does Limitless Infotech Solution offer?',
       answer:
-        "We offer comprehensive technology solutions including Web Development, Mobile App Development, Custom Software & Systems, CRM & Task Management Apps, Business Automation & AI Integration, IoT Solutions, Network Installation, and Server Setup. Each service is tailored to meet your specific business needs.",
+        'We offer comprehensive technology solutions including Web Development, Mobile App Development, Custom Software & Systems, CRM & Task Management Apps, Business Automation & AI Integration, IoT Solutions, Network Installation, and Server Setup. Each service is tailored to meet your specific business needs.',
     },
     {
-      question: "How long does it take to complete a project?",
+      question: 'How long does it take to complete a project?',
       answer:
-        "Project timelines vary based on complexity and scope. A simple website typically takes 2-4 weeks, while complex web applications may take 2-4 months. Mobile apps generally require 3-6 months, and custom enterprise software can take 3-12 months. We provide detailed timelines during the planning phase and keep you updated throughout development.",
+        'Project timelines vary based on complexity and scope. A simple website typically takes 2-4 weeks, while complex web applications may take 2-4 months. Mobile apps generally require 3-6 months, and custom enterprise software can take 3-12 months. We provide detailed timelines during the planning phase and keep you updated throughout development.',
     },
     {
-      question: "What technologies do you use?",
+      question: 'What technologies do you use?',
       answer:
-        "We work with cutting-edge technologies including React, Vue, Angular, Next.js for frontend; Node.js, Python, PHP, .NET for backend; React Native and Flutter for mobile apps; MongoDB, PostgreSQL, MySQL for databases; and AWS, Azure, Google Cloud for cloud infrastructure. We choose the best technology stack for each project based on your specific requirements.",
+        'We work with cutting-edge technologies including React, Vue, Angular, Next.js for frontend; Node.js, Python, PHP, .NET for backend; React Native and Flutter for mobile apps; MongoDB, PostgreSQL, MySQL for databases; and AWS, Azure, Google Cloud for cloud infrastructure. We choose the best technology stack for each project based on your specific requirements.',
     },
     {
-      question: "Do you provide post-launch support and maintenance?",
+      question: 'Do you provide post-launch support and maintenance?',
       answer:
-        "Yes! We offer comprehensive post-launch support including 24/7 technical assistance, regular updates and maintenance, bug fixes, security patches, performance monitoring, and training. We ensure your systems continue to operate flawlessly and stay up-to-date with the latest technologies.",
+        'Yes! We offer comprehensive post-launch support including 24/7 technical assistance, regular updates and maintenance, bug fixes, security patches, performance monitoring, and training. We ensure your systems continue to operate flawlessly and stay up-to-date with the latest technologies.',
     },
     {
-      question: "How much does a project cost?",
+      question: 'How much does a project cost?',
       answer:
-        "Project costs vary based on scope, complexity, timeline, and required features. We believe in transparent pricing and provide detailed quotes after understanding your requirements. Fill out our client requirements form or contact us directly for a personalized quote tailored to your budget and needs.",
+        'Project costs vary based on scope, complexity, timeline, and required features. We believe in transparent pricing and provide detailed quotes after understanding your requirements. Fill out our client requirements form or contact us directly for a personalized quote tailored to your budget and needs.',
     },
     {
-      question: "Can you work with our existing systems?",
+      question: 'Can you work with our existing systems?',
       answer:
-        "Absolutely! We specialize in integrating with existing systems and can enhance, upgrade, or build upon your current infrastructure. Whether you need to modernize legacy systems or add new features, our team has the expertise to ensure seamless integration.",
+        'Absolutely! We specialize in integrating with existing systems and can enhance, upgrade, or build upon your current infrastructure. Whether you need to modernize legacy systems or add new features, our team has the expertise to ensure seamless integration.',
     },
     {
       question:
-        "What makes Limitless different from other development companies?",
+        'What makes Limitless different from other development companies?',
       answer:
         "Our commitment to Total Security, True Uniqueness, and Royal Client Experience sets us apart. We don't just build software – we create transformative solutions that are secure, scalable, and truly unique to your business. Our dedicated team provides white-glove service, ensuring your success at every step.",
     },
     {
-      question: "Do you offer custom CRM solutions?",
+      question: 'Do you offer custom CRM solutions?',
       answer:
-        "Yes! We specialize in custom CRM development tailored to your business processes. Our CRM solutions include customer management, sales tracking, lead management, automated workflows, reporting and analytics, and seamless integration with your existing tools. We build systems that adapt to your needs, not the other way around.",
+        'Yes! We specialize in custom CRM development tailored to your business processes. Our CRM solutions include customer management, sales tracking, lead management, automated workflows, reporting and analytics, and seamless integration with your existing tools. We build systems that adapt to your needs, not the other way around.',
     },
   ];
 
-  const toggleFaq = (index) => {
+  const toggleFaq = index => {
     setOpenFaq(openFaq === index ? null : index);
   };
 
@@ -284,13 +284,13 @@ const Home = () => {
         {/* Asymmetrical background elements */}
         <div className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-blue-600/5 to-transparent"></div>
         <div className="absolute top-1/4 right-0 w-2/5 h-2/3 bg-gradient-to-l from-amber-500/10 to-transparent"></div>
-        
+
         {/* Geometric pattern derived from logo architecture */}
         <div className="absolute inset-0" aria-hidden="true">
           <div className="absolute top-20 left-10 w-16 h-16 border-l-4 border-b-4 border-blue-500 rotate-45"></div>
           <div className="absolute top-40 right-20 w-24 h-24 border-r-4 border-t-4 border-amber-500 rotate-12"></div>
           <div className="absolute bottom-40 left-20 w-20 h-20 border-t-4 border-r-4 border-blue-600 -rotate-12"></div>
-          
+
           {/* Additional architectural elements */}
           <div className="absolute top-1/3 right-1/4 w-32 h-1 bg-gradient-to-r from-blue-500 to-amber-500"></div>
           <div className="absolute bottom-1/4 left-1/4 w-24 h-24 border-2 border-blue-400 rounded-full opacity-30"></div>
@@ -311,12 +311,12 @@ const Home = () => {
 
               {/* Main Heading */}
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 text-blue-900 dark:text-white leading-tight">
-                Architecting{" "}
+                Architecting{' '}
                 <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">
                   Enterprise
                 </span>
                 <br />
-                Digital{" "}
+                Digital{' '}
                 <span className="bg-gradient-to-r from-blue-700 to-blue-900 bg-clip-text text-transparent">
                   Excellence
                 </span>
@@ -324,7 +324,9 @@ const Home = () => {
 
               {/* Subheading */}
               <p className="text-lg md:text-xl text-blue-800 dark:text-blue-200 mb-12 max-w-lg leading-relaxed">
-                Transform your business with architectural-grade digital solutions. We are the architects of transformation, building tomorrow's technology today.
+                Transform your business with architectural-grade digital
+                solutions. We are the architects of transformation, building
+                tomorrow's technology today.
               </p>
 
               {/* CTA Buttons */}
@@ -333,7 +335,10 @@ const Home = () => {
                   Begin Strategic Initiative
                   <HiArrowRight className="inline-block ml-2 w-5 h-5" />
                 </Link>
-                <Link to="/products" className="px-8 py-4 rounded-xl font-bold text-base tracking-wide border-2 border-blue-600 text-blue-700 dark:text-blue-200 bg-transparent hover:bg-blue-50 dark:hover:bg-blue-800/50 transition-all duration-300">
+                <Link
+                  to="/products"
+                  className="px-8 py-4 rounded-xl font-bold text-base tracking-wide border-2 border-blue-600 text-blue-700 dark:text-blue-200 bg-transparent hover:bg-blue-50 dark:hover:bg-blue-800/50 transition-all duration-300"
+                >
                   Explore Enterprise Solutions
                 </Link>
               </div>
@@ -341,12 +346,15 @@ const Home = () => {
               {/* Stats - Asymmetrical grid */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {[
-                  { number: "50+", label: "Enterprise Solutions" },
-                  { number: "7", label: "SaaS Products" },
-                  { number: "10K+", label: "Users" },
-                  { number: "24/7", label: "Support" },
+                  { number: '50+', label: 'Enterprise Solutions' },
+                  { number: '7', label: 'SaaS Products' },
+                  { number: '10K+', label: 'Users' },
+                  { number: '24/7', label: 'Support' },
                 ].map((stat, index) => (
-                  <div key={index} className="text-center p-4 bg-white/50 dark:bg-blue-900/30 rounded-xl border border-blue-200 dark:border-blue-700">
+                  <div
+                    key={index}
+                    className="text-center p-4 bg-white/50 dark:bg-blue-900/30 rounded-xl border border-blue-200 dark:border-blue-700"
+                  >
                     <div className="text-2xl md:text-3xl font-bold text-blue-700 dark:text-blue-300 mb-2">
                       {stat.number}
                     </div>
@@ -357,7 +365,7 @@ const Home = () => {
                 ))}
               </div>
             </div>
-            
+
             {/* Visual element - right side */}
             <div className="hidden lg:block">
               <div className="relative">
@@ -398,28 +406,47 @@ const Home = () => {
           <div className="absolute top-1/2 right-1/4 w-2 h-32 bg-gradient-to-b from-blue-500/20 to-transparent"></div>
           <div className="absolute bottom-1/4 left-1/3 w-32 h-2 bg-gradient-to-r from-amber-500/20 to-transparent"></div>
         </div>
-        
+
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-5">
               <div className="relative">
                 <div className="absolute -top-6 -left-6 w-full h-full bg-gradient-to-br from-blue-100 to-amber-100 dark:from-blue-800/50 dark:to-amber-800/20 rounded-3xl -rotate-3"></div>
                 <div className="relative bg-blue-600 text-white p-8 rounded-3xl">
-                  <div className="text-6xl font-bold text-amber-400 mb-4">15+</div>
-                  <div className="text-lg font-semibold">Years of Excellence</div>
-                  <div className="text-sm opacity-80 mt-2">Enterprise Architecture Experience</div>
+                  <div className="text-6xl font-bold text-amber-400 mb-4">
+                    15+
+                  </div>
+                  <div className="text-lg font-semibold">
+                    Years of Excellence
+                  </div>
+                  <div className="text-sm opacity-80 mt-2">
+                    Enterprise Architecture Experience
+                  </div>
                 </div>
               </div>
             </div>
             <div className="lg:col-span-7">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6 text-blue-900 dark:text-white">
-                Our <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">Architectural</span> Foundation
+                Our{' '}
+                <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">
+                  Architectural
+                </span>{' '}
+                Foundation
               </h2>
               <p className="text-lg text-blue-800 dark:text-blue-200 leading-relaxed mb-6">
-                At Limitless Infotech Solution, we are more than developers – we are <span className="font-semibold text-amber-600 dark:text-amber-400">architects of transformation</span>. We believe that technology should empower, not complicate. Every line of code we write, every system we build, is crafted with precision, security, and your success in mind.
+                At Limitless Infotech Solution, we are more than developers – we
+                are{' '}
+                <span className="font-semibold text-amber-600 dark:text-amber-400">
+                  architects of transformation
+                </span>
+                . We believe that technology should empower, not complicate.
+                Every line of code we write, every system we build, is crafted
+                with precision, security, and your success in mind.
               </p>
               <p className="text-lg text-blue-800 dark:text-blue-200 leading-relaxed">
-                Our vision is to lead the world into the next era of intelligent business systems, where innovation meets execution, and where your business potential becomes truly limitless.
+                Our vision is to lead the world into the next era of intelligent
+                business systems, where innovation meets execution, and where
+                your business potential becomes truly limitless.
               </p>
             </div>
           </div>
@@ -427,7 +454,7 @@ const Home = () => {
       </section>
 
       {/* Core Services Section - Asymmetrical Grid */}
-      <section 
+      <section
         className="section-padding bg-blue-50 dark:bg-blue-900/30 relative overflow-hidden"
         aria-labelledby="core-services-heading"
       >
@@ -438,17 +465,21 @@ const Home = () => {
           <div className="absolute bottom-1/4 left-1/3 w-40 h-2 bg-gradient-to-r from-blue-500/20 to-amber-500/20"></div>
           <div className="absolute bottom-1/3 right-1/3 w-2 h-40 bg-gradient-to-b from-amber-500/20 to-blue-500/20"></div>
         </div>
-        
+
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <h2 
+            <h2
               id="core-services-heading"
               className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-blue-900 dark:text-white"
             >
-              Our <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">Core Services</span>
+              Our{' '}
+              <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">
+                Core Services
+              </span>
             </h2>
             <p className="text-lg text-blue-700 dark:text-blue-300 max-w-2xl mx-auto">
-              Comprehensive technology solutions designed to transform your business
+              Comprehensive technology solutions designed to transform your
+              business
             </p>
           </div>
 
@@ -465,11 +496,11 @@ const Home = () => {
                   className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-xl flex items-center justify-center mb-6 self-start`}
                   aria-hidden="true"
                 >
-                  <DuoToneIcon 
-                    icon={service.icon} 
-                    size="xl" 
-                    primaryColor="text-white" 
-                    secondaryColor="text-white/30" 
+                  <DuoToneIcon
+                    icon={service.icon}
+                    size="xl"
+                    primaryColor="text-white"
+                    secondaryColor="text-white/30"
                   />
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-blue-900 dark:text-white">
@@ -490,10 +521,7 @@ const Home = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Link 
-              to="/services" 
-              className="mission-critical-button"
-            >
+            <Link to="/services" className="mission-critical-button">
               View All Services
             </Link>
           </div>
@@ -501,7 +529,7 @@ const Home = () => {
       </section>
 
       {/* Why Limitless Section - Editorial Layout */}
-      <section 
+      <section
         className="section-padding bg-white dark:bg-blue-900 relative overflow-hidden"
         aria-labelledby="why-limitless-heading"
       >
@@ -512,15 +540,18 @@ const Home = () => {
           <div className="absolute bottom-1/5 left-1/4 w-32 h-2 bg-gradient-to-r from-blue-500/15 to-transparent"></div>
           <div className="absolute bottom-1/4 right-1/3 w-2 h-24 bg-gradient-to-b from-amber-500/15 to-transparent"></div>
         </div>
-        
+
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
             <div className="lg:col-span-5">
-              <h2 
+              <h2
                 id="why-limitless-heading"
                 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-blue-900 dark:text-white"
               >
-                Why Choose <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">Limitless</span>
+                Why Choose{' '}
+                <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">
+                  Limitless
+                </span>
               </h2>
               <p className="text-lg text-blue-700 dark:text-blue-300">
                 Our core qualities and competitive advantages that set us apart
@@ -529,13 +560,16 @@ const Home = () => {
             <div className="lg:col-span-7">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {whyLimitless.slice(0, 6).map((item, index) => (
-                  <div key={index} className="p-6 rounded-xl bg-blue-50 dark:bg-blue-800/30 border border-blue-200 dark:border-blue-700 relative overflow-hidden">
+                  <div
+                    key={index}
+                    className="p-6 rounded-xl bg-blue-50 dark:bg-blue-800/30 border border-blue-200 dark:border-blue-700 relative overflow-hidden"
+                  >
                     <div className="w-12 h-12 bg-blue-100 dark:bg-blue-700 rounded-lg flex items-center justify-center mb-4">
-                      <DuoToneIcon 
-                        icon={item.icon} 
-                        size="lg" 
-                        primaryColor="text-blue-600 dark:text-blue-400" 
-                        secondaryColor="text-blue-600/30 dark:text-blue-400/30" 
+                      <DuoToneIcon
+                        icon={item.icon}
+                        size="lg"
+                        primaryColor="text-blue-600 dark:text-blue-400"
+                        secondaryColor="text-blue-600/30 dark:text-blue-400/30"
                       />
                     </div>
                     <h3 className="text-lg font-bold mb-2 text-blue-900 dark:text-white">
@@ -561,14 +595,18 @@ const Home = () => {
           <div className="absolute bottom-1/4 left-1/4 w-36 h-2 bg-gradient-to-r from-blue-500/10 to-amber-500/10"></div>
           <div className="absolute bottom-1/3 right-1/4 w-2 h-32 bg-gradient-to-b from-amber-500/10 to-blue-500/10"></div>
         </div>
-        
+
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-blue-900 dark:text-white">
-              Trusted By <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">Industry Leaders</span>
+              Trusted By{' '}
+              <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">
+                Industry Leaders
+              </span>
             </h2>
             <p className="text-lg text-blue-700 dark:text-blue-300 max-w-2xl mx-auto">
-              Join thousands of satisfied clients who have transformed their businesses with our solutions
+              Join thousands of satisfied clients who have transformed their
+              businesses with our solutions
             </p>
           </div>
 
@@ -616,11 +654,14 @@ const Home = () => {
           <div className="absolute bottom-1/5 left-1/3 w-40 h-2 bg-gradient-to-r from-blue-500/15 to-transparent"></div>
           <div className="absolute bottom-1/4 right-1/3 w-2 h-36 bg-gradient-to-b from-amber-500/15 to-transparent"></div>
         </div>
-        
+
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-blue-900 dark:text-white">
-              Our <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">Enterprise Products</span>
+              Our{' '}
+              <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">
+                Enterprise Products
+              </span>
             </h2>
             <p className="text-lg text-blue-700 dark:text-blue-300 max-w-2xl mx-auto">
               Production-ready SaaS solutions serving 10,000+ users worldwide
@@ -647,11 +688,11 @@ const Home = () => {
                   <div
                     className={`w-14 h-14 bg-gradient-to-br ${product.color} rounded-xl flex items-center justify-center mb-4 self-start`}
                   >
-                    <DuoToneIcon 
-                      icon={product.icon} 
-                      size="lg" 
-                      primaryColor="text-white" 
-                      secondaryColor="text-white/30" 
+                    <DuoToneIcon
+                      icon={product.icon}
+                      size="lg"
+                      primaryColor="text-white"
+                      secondaryColor="text-white/30"
                     />
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-blue-900 dark:text-white">
@@ -685,7 +726,10 @@ const Home = () => {
         <div className="container-custom px-4 md:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-blue-900 dark:text-white">
-              Client <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">Success Stories</span>
+              Client{' '}
+              <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">
+                Success Stories
+              </span>
             </h2>
             <p className="text-lg text-blue-700 dark:text-blue-300 max-w-2xl mx-auto">
               Transforming businesses with innovative custom solutions
@@ -745,8 +789,10 @@ const Home = () => {
         <div className="container-custom px-4 md:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-blue-900 dark:text-white">
-              What Clients Say About{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">Limitless</span>
+              What Clients Say About{' '}
+              <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">
+                Limitless
+              </span>
             </h2>
             <p className="text-lg text-blue-800 dark:text-blue-200 max-w-2xl mx-auto">
               Real experiences from businesses we've helped transform
@@ -790,7 +836,10 @@ const Home = () => {
           </div>
 
           <div className="text-center">
-            <Link to="/testimonials" className="mission-critical-button-secondary">
+            <Link
+              to="/testimonials"
+              className="mission-critical-button-secondary"
+            >
               View All Testimonials
             </Link>
           </div>
@@ -802,7 +851,10 @@ const Home = () => {
         <div className="container-custom max-w-4xl px-4 md:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-blue-900 dark:text-white">
-              Frequently Asked <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">Questions</span>
+              Frequently Asked{' '}
+              <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">
+                Questions
+              </span>
             </h2>
             <p className="text-lg text-blue-700 dark:text-blue-300">
               Find answers to common questions about our services
@@ -850,10 +902,14 @@ const Home = () => {
               <h2 className="text-2xl md:text-4xl lg:text-5xl font-display font-bold mb-6">
                 Ready to Transform Your Business?
                 <br />
-                <span className="text-amber-400">Architectural Excellence</span> Awaits
+                <span className="text-amber-400">
+                  Architectural Excellence
+                </span>{' '}
+                Awaits
               </h2>
               <p className="text-xl mb-8 opacity-90 max-w-2xl">
-                Let's discuss how we can help you achieve your goals with innovative technology solutions
+                Let's discuss how we can help you achieve your goals with
+                innovative technology solutions
               </p>
               <div className="flex flex-col sm:flex-row items-start gap-4">
                 <Link
@@ -880,13 +936,17 @@ const Home = () => {
                     </div>
                     <div>
                       <div className="font-bold">Strategic Planning</div>
-                      <div className="text-sm opacity-80">Enterprise-Grade Solutions</div>
+                      <div className="text-sm opacity-80">
+                        Enterprise-Grade Solutions
+                      </div>
                     </div>
                   </div>
                   <div className="space-y-3">
                     <div className="flex items-center space-x-2">
                       <HiCheckCircle className="w-4 h-4 text-amber-400" />
-                      <span className="text-sm">Mission-Critical Architecture</span>
+                      <span className="text-sm">
+                        Mission-Critical Architecture
+                      </span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <HiCheckCircle className="w-4 h-4 text-amber-400" />

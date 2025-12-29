@@ -24,14 +24,17 @@ Performance is critical to user experience and business success. Our application
 Our application targets the following Core Web Vitals metrics:
 
 ### Largest Contentful Paint (LCP)
+
 - **Target**: < 2.5 seconds
 - **Current Status**: Optimized with image lazy loading and efficient resource loading
 
 ### First Input Delay (FID)
+
 - **Target**: < 100 milliseconds
 - **Current Status**: Minimized through code splitting and efficient JavaScript
 
 ### Cumulative Layout Shift (CLS)
+
 - **Target**: < 0.1
 - **Current Status**: Controlled with explicit dimensions and font loading strategies
 
@@ -50,21 +53,18 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
           ui: ['@headlessui/react', '@heroicons/react'],
-        }
-      }
+        },
+      },
     },
     terserOptions: {
       compress: {
         drop_console: true,
-        drop_debugger: true
-      }
-    }
+        drop_debugger: true,
+      },
+    },
   },
-  plugins: [
-    react(),
-    viteCompression()
-  ]
-})
+  plugins: [react(), viteCompression()],
+});
 ```
 
 ### React Optimizations
@@ -129,17 +129,23 @@ const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 
 <Routes>
-  <Route path="/" element={
-    <Suspense fallback={<Loading />}>
-      <Home />
-    </Suspense>
-  } />
-  <Route path="/about" element={
-    <Suspense fallback={<Loading />}>
-      <About />
-    </Suspense>
-  } />
-</Routes>
+  <Route
+    path="/"
+    element={
+      <Suspense fallback={<Loading />}>
+        <Home />
+      </Suspense>
+    }
+  />
+  <Route
+    path="/about"
+    element={
+      <Suspense fallback={<Loading />}>
+        <About />
+      </Suspense>
+    }
+  />
+</Routes>;
 ```
 
 ### Component-Based Splitting
@@ -149,11 +155,13 @@ Large components are dynamically imported:
 ```tsx
 const HeavyComponent = lazy(() => import('./components/HeavyComponent'));
 
-{showHeavyComponent && (
-  <Suspense fallback={<Skeleton />}>
-    <HeavyComponent />
-  </Suspense>
-)}
+{
+  showHeavyComponent && (
+    <Suspense fallback={<Skeleton />}>
+      <HeavyComponent />
+    </Suspense>
+  );
+}
 ```
 
 ## Lazy Loading
@@ -186,9 +194,7 @@ useEffect(() => {
   return () => observer.disconnect();
 }, []);
 
-<div ref={ref}>
-  {isVisible && <ExpensiveComponent />}
-</div>
+<div ref={ref}>{isVisible && <ExpensiveComponent />}</div>;
 ```
 
 ### Dynamic Imports
@@ -224,10 +230,13 @@ self.addEventListener('fetch', event => {
     event.respondWith(
       caches.open('images').then(cache => {
         return cache.match(event.request).then(response => {
-          return response || fetch(event.request).then(fetchResponse => {
-            cache.put(event.request, fetchResponse.clone());
-            return fetchResponse;
-          });
+          return (
+            response ||
+            fetch(event.request).then(fetchResponse => {
+              cache.put(event.request, fetchResponse.clone());
+              return fetchResponse;
+            })
+          );
         });
       })
     );
@@ -309,12 +318,7 @@ For large lists:
 import { FixedSizeList as List } from 'react-window';
 
 const VirtualizedList = ({ items }) => (
-  <List
-    height={600}
-    itemCount={items.length}
-    itemSize={50}
-    itemData={items}
-  >
+  <List height={600} itemCount={items.length} itemSize={50} itemData={items}>
     {Row}
   </List>
 );
@@ -325,7 +329,7 @@ const VirtualizedList = ({ items }) => (
 For grids and complex layouts:
 
 ```tsx
-import {FixedSizeGrid as Grid} from 'react-window';
+import { FixedSizeGrid as Grid } from 'react-window';
 
 const VirtualizedGrid = ({ items, columnCount }) => (
   <Grid
@@ -385,7 +389,7 @@ Collecting performance data from actual users:
 
 ```tsx
 useEffect(() => {
-  const sendMetrics = (metrics) => {
+  const sendMetrics = metrics => {
     // Send to analytics service
     analytics.track('performance_metrics', metrics);
   };

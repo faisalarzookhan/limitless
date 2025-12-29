@@ -7,6 +7,7 @@ This directory contains SSL certificates for HTTPS configuration. For security r
 To set up SSL certificates for the production environment:
 
 1. **Generate SSL Certificate (for testing only)**:
+
 ```bash
 # Generate a private key
 openssl genrsa -out key.pem 2048
@@ -23,6 +24,7 @@ openssl x509 -req -days 365 -in csr.pem -signkey key.pem -out cert.pem
    - Place the certificate files in this directory before deployment
 
 3. **Let's Encrypt with Certbot (Recommended for Production)**:
+
 ```bash
 # Install certbot
 sudo apt-get install certbot
@@ -38,6 +40,7 @@ sudo cp /etc/letsencrypt/live/yourdomain.com/privkey.pem key.pem
 ## Docker Configuration
 
 The docker-compose.yml file expects the following files:
+
 - `cert.pem` - SSL certificate
 - `key.pem` - SSL private key
 

@@ -5,7 +5,7 @@ export const useTheme = () => {
   const [theme, setTheme] = useState<Theme>('system');
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as Theme || 'system';
+    const savedTheme = (localStorage.getItem('theme') as Theme) || 'system';
     setTheme(savedTheme);
     applyTheme(savedTheme);
   }, []);
@@ -14,7 +14,10 @@ export const useTheme = () => {
     const root = window.document.documentElement;
 
     if (selectedTheme === 'system') {
-      const systemPreference = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      const systemPreference = window.matchMedia('(prefers-color-scheme: dark)')
+        .matches
+        ? 'dark'
+        : 'light';
       root.classList.remove('light', 'dark');
       root.classList.add(systemPreference);
     } else {

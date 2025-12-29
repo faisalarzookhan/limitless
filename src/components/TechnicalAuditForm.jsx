@@ -1,22 +1,27 @@
 import { useState } from 'react';
-import { HiOutlineGlobeAlt, HiOutlineCode, HiOutlineLightBulb, HiCheckCircle } from 'react-icons/hi';
+import {
+  HiOutlineGlobeAlt,
+  HiOutlineCode,
+  HiOutlineLightBulb,
+  HiCheckCircle,
+} from 'react-icons/hi';
 import { sendLeadGenerationNotification } from '../services/notificationService';
 
 const TechnicalAuditForm = ({ variant = 'default', onSubmitSuccess }) => {
   const [formData, setFormData] = useState({
     url: '',
     currentStack: '',
-    performancePainPoints: ''
+    performancePainPoints: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -27,13 +32,13 @@ const TechnicalAuditForm = ({ variant = 'default', onSubmitSuccess }) => {
         formType: 'technical-audit',
         timestamp: new Date().toISOString(),
         page: window.location.pathname,
-        userAgent: navigator.userAgent
+        userAgent: navigator.userAgent,
       });
 
       // Reset form
       setFormData({ url: '', currentStack: '', performancePainPoints: '' });
       setSubmitSuccess(true);
-      
+
       // Call success callback if provided
       if (onSubmitSuccess) {
         onSubmitSuccess();
@@ -54,9 +59,12 @@ const TechnicalAuditForm = ({ variant = 'default', onSubmitSuccess }) => {
         <div className="flex items-center justify-center mb-3">
           <HiCheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
         </div>
-        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">Audit Requested!</h3>
+        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">
+          Audit Requested!
+        </h3>
         <p className="text-green-700 dark:text-green-400 text-sm">
-          We'll perform a comprehensive technical audit of your site and contact you with results.
+          We'll perform a comprehensive technical audit of your site and contact
+          you with results.
         </p>
       </div>
     );
@@ -65,7 +73,10 @@ const TechnicalAuditForm = ({ variant = 'default', onSubmitSuccess }) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="url" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="url"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Website URL *
         </label>
         <div className="relative">
@@ -84,9 +95,12 @@ const TechnicalAuditForm = ({ variant = 'default', onSubmitSuccess }) => {
           />
         </div>
       </div>
-      
+
       <div>
-        <label htmlFor="currentStack" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="currentStack"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Current Tech Stack
         </label>
         <div className="relative">
@@ -104,9 +118,12 @@ const TechnicalAuditForm = ({ variant = 'default', onSubmitSuccess }) => {
           />
         </div>
       </div>
-      
+
       <div>
-        <label htmlFor="performancePainPoints" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="performancePainPoints"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Performance Pain Points *
         </label>
         <div className="relative">
@@ -125,7 +142,7 @@ const TechnicalAuditForm = ({ variant = 'default', onSubmitSuccess }) => {
           ></textarea>
         </div>
       </div>
-      
+
       <button
         type="submit"
         disabled={isSubmitting}
@@ -140,9 +157,10 @@ const TechnicalAuditForm = ({ variant = 'default', onSubmitSuccess }) => {
           'Request Technical Audit'
         )}
       </button>
-      
+
       <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-2">
-        We'll analyze your site and provide a comprehensive report with recommendations.
+        We'll analyze your site and provide a comprehensive report with
+        recommendations.
       </p>
     </form>
   );

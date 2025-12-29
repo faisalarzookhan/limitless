@@ -9,16 +9,17 @@ import crypto from 'crypto';
 class EncryptionService {
   constructor() {
     // Use environment variable for the master key or generate a default one (not recommended for production)
-    this.masterKey = process.env.REACT_APP_ENCRYPTION_KEY || this.generateRandomKey();
+    this.masterKey =
+      process.env.REACT_APP_ENCRYPTION_KEY || this.generateRandomKey();
     this.algorithm = 'aes-256-gcm'; // AES-256 with Galois/Counter Mode
     this.ivLength = 16; // Initialization vector length for GCM
     this.authTagLength = 16; // Authentication tag length for GCM
-    
+
     // Validate key length (must be 32 bytes for AES-256)
     if (this.masterKey.length !== 32) {
       throw new Error('Encryption key must be 32 bytes for AES-256');
     }
-    
+
     console.log('Encryption service initialized with AES-256-GCM algorithm');
   }
 
@@ -27,7 +28,9 @@ class EncryptionService {
    * @returns {Buffer} Random 32-byte key
    */
   generateRandomKey() {
-    console.warn('Generating temporary encryption key. Use REACT_APP_ENCRYPTION_KEY environment variable in production.');
+    console.warn(
+      'Generating temporary encryption key. Use REACT_APP_ENCRYPTION_KEY environment variable in production.'
+    );
     return crypto.randomBytes(32);
   }
 
@@ -39,29 +42,31 @@ class EncryptionService {
   encrypt(data) {
     try {
       // Convert data to buffer if it's a string
-      const dataBuffer = Buffer.isBuffer(data) ? data : Buffer.from(data, 'utf8');
-      
+      const dataBuffer = Buffer.isBuffer(data)
+        ? data
+        : Buffer.from(data, 'utf8');
+
       // Generate a random initialization vector
       const iv = crypto.randomBytes(this.ivLength);
-      
+
       // Create cipher
       const cipher = crypto.createCipher(this.algorithm, this.masterKey);
-      
+
       // Update cipher with data
       let encrypted = cipher.update(dataBuffer);
-      
+
       // Finalize encryption
       encrypted = Buffer.concat([encrypted, cipher.final()]);
-      
+
       // Get the authentication tag (for GCM mode)
       const authTag = cipher.getAuthTag();
-      
+
       // Return encrypted data with IV and auth tag
       return {
         encryptedData: encrypted.toString('hex'),
         iv: iv.toString('hex'),
         authTag: authTag.toString('hex'),
-        algorithm: this.algorithm
+        algorithm: this.algorithm,
       };
     } catch (error) {
       console.error('Encryption failed:', error);
@@ -78,33 +83,33 @@ class EncryptionService {
     try {
       // Extract components
       const { encryptedData, iv, authTag, algorithm } = encryptedDataObj;
-      
+
       // Validate input
       if (!encryptedData || !iv || !authTag) {
         throw new Error('Missing required encryption components');
       }
-      
+
       if (algorithm !== this.algorithm) {
         throw new Error(`Unsupported algorithm: ${algorithm}`);
       }
-      
+
       // Convert hex strings back to buffers
       const encryptedBuffer = Buffer.from(encryptedData, 'hex');
       const ivBuffer = Buffer.from(iv, 'hex');
       const authTagBuffer = Buffer.from(authTag, 'hex');
-      
+
       // Create decipher
       const decipher = crypto.createDecipher(this.algorithm, this.masterKey);
-      
+
       // Set the authentication tag
       decipher.setAuthTag(authTagBuffer);
-      
+
       // Update decipher with encrypted data
       let decrypted = decipher.update(encryptedBuffer);
-      
+
       // Finalize decryption
       decrypted = Buffer.concat([decrypted, decipher.final()]);
-      
+
       // Return as UTF-8 string
       return decrypted.toString('utf8');
     } catch (error) {
@@ -123,7 +128,7 @@ class EncryptionService {
     return {
       ...encryptionResult,
       fileSize: fileBuffer.length,
-      encryptedFileSize: encryptionResult.encryptedData.length
+      encryptedFileSize: encryptionResult.encryptedData.length,
     };
   }
 
@@ -164,8 +169,14 @@ class EncryptionService {
    */
   verifyHmac(data, expectedHmac) {
     const dataBuffer = Buffer.isBuffer(data) ? data : Buffer.from(data, 'utf8');
-    const hmac = crypto.createHmac('sha256', this.masterKey).update(dataBuffer).digest('hex');
-    return crypto.timingSafeEqual(Buffer.from(hmac, 'hex'), Buffer.from(expectedHmac, 'hex'));
+    const hmac = crypto
+      .createHmac('sha256', this.masterKey)
+      .update(dataBuffer)
+      .digest('hex');
+    return crypto.timingSafeEqual(
+      Buffer.from(hmac, 'hex'),
+      Buffer.from(expectedHmac, 'hex')
+    );
   }
 
   /**
@@ -175,7 +186,10 @@ class EncryptionService {
    */
   createHmac(data) {
     const dataBuffer = Buffer.isBuffer(data) ? data : Buffer.from(data, 'utf8');
-    return crypto.createHmac('sha256', this.masterKey).update(dataBuffer).digest('hex');
+    return crypto
+      .createHmac('sha256', this.masterKey)
+      .update(dataBuffer)
+      .digest('hex');
   }
 
   /**
@@ -208,17 +222,17 @@ class EncryptionService {
   encryptWithPassword(data, password) {
     const salt = this.generateSalt();
     const derivedKey = this.deriveKeyFromPassword(password, salt);
-    
+
     // Create a temporary encryption service with the derived key
     const tempService = new EncryptionService();
     tempService.masterKey = derivedKey;
-    
+
     const encrypted = tempService.encrypt(data);
-    
+
     return {
       ...encrypted,
       salt: salt.toString('hex'),
-      iterations: 100000 // Default iterations used
+      iterations: 100000, // Default iterations used
     };
   }
 
@@ -230,18 +244,22 @@ class EncryptionService {
    */
   decryptWithPassword(encryptedDataObj, password) {
     const { salt, iterations = 100000, ...encryptedData } = encryptedDataObj;
-    
+
     if (!salt) {
       throw new Error('Salt not found in encrypted data object');
     }
-    
+
     const saltBuffer = Buffer.from(salt, 'hex');
-    const derivedKey = this.deriveKeyFromPassword(password, saltBuffer, iterations);
-    
+    const derivedKey = this.deriveKeyFromPassword(
+      password,
+      saltBuffer,
+      iterations
+    );
+
     // Create a temporary encryption service with the derived key
     const tempService = new EncryptionService();
     tempService.masterKey = derivedKey;
-    
+
     return tempService.decrypt(encryptedData);
   }
 
@@ -268,13 +286,14 @@ class EncryptionService {
       ciphers: [
         'TLS_AES_256_GCM_SHA384',
         'TLS_CHACHA20_POLY1305_SHA256',
-        'TLS_AES_128_GCM_SHA256'
+        'TLS_AES_128_GCM_SHA256',
       ].join(':'),
       honorCipherOrder: true,
-      secureOptions: crypto.constants.SSL_OP_NO_SSLv2 | 
-                    crypto.constants.SSL_OP_NO_SSLv3 | 
-                    crypto.constants.SSL_OP_NO_TLSv1 | 
-                    crypto.constants.SSL_OP_NO_TLSv1_1
+      secureOptions:
+        crypto.constants.SSL_OP_NO_SSLv2 |
+        crypto.constants.SSL_OP_NO_SSLv3 |
+        crypto.constants.SSL_OP_NO_TLSv1 |
+        crypto.constants.SSL_OP_NO_TLSv1_1,
     };
   }
 
@@ -287,12 +306,14 @@ class EncryptionService {
       isValid: true,
       keyLength: this.masterKey.length,
       algorithm: this.algorithm,
-      isRecommended: this.masterKey.length === 32 && this.algorithm.startsWith('aes-256')
+      isRecommended:
+        this.masterKey.length === 32 && this.algorithm.startsWith('aes-256'),
     };
 
     if (this.masterKey.length !== 32) {
       result.isValid = false;
-      result.error = 'Key length is not 32 bytes (256 bits) as required for AES-256';
+      result.error =
+        'Key length is not 32 bytes (256 bits) as required for AES-256';
     }
 
     return result;
@@ -331,7 +352,7 @@ class EncryptionService {
   restoreKey(backup, password) {
     const keyHex = this.decryptWithPassword(backup, password);
     const newKey = Buffer.from(keyHex, 'hex');
-    
+
     if (newKey.length !== 32) {
       throw new Error('Restored key is not 32 bytes');
     }
@@ -352,7 +373,7 @@ class EncryptionService {
       keyHash: this.getKeyHash(),
       isTls13Supported: this.isTls13Supported(),
       tlsConfig: this.getTlsConfig(),
-      keyStrengthValid: this.validateKeyStrength().isRecommended
+      keyStrengthValid: this.validateKeyStrength().isRecommended,
     };
   }
 }
@@ -363,7 +384,9 @@ const encryptionService = new EncryptionService();
 // For environments where crypto module is not available (browser), we provide a mock
 // In a real implementation, we would use Web Crypto API for browser environments
 if (typeof window !== 'undefined') {
-  console.warn('Encryption service initialized in browser environment. Use Node.js for production encryption.');
+  console.warn(
+    'Encryption service initialized in browser environment. Use Node.js for production encryption.'
+  );
 }
 
 export default encryptionService;

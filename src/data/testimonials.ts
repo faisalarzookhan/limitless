@@ -20,7 +20,7 @@ export const testimonials: Testimonial[] = [
     role: 'Operations Manager, LogiTrack',
     image: null,
     rating: 5,
-    text: 'Outstanding mobile app development! The app is intuitive, fast, and our clients love it. The team\'s expertise in automation saved us countless hours.',
+    text: "Outstanding mobile app development! The app is intuitive, fast, and our clients love it. The team's expertise in automation saved us countless hours.",
   },
   {
     name: 'Sneha Patel',

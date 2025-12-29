@@ -52,7 +52,7 @@ import {
   Github,
   Mail as MailIcon,
   Twitter,
-  Youtube
+  Youtube,
 } from 'lucide-react';
 import PropTypes from 'prop-types';
 
@@ -60,14 +60,14 @@ import PropTypes from 'prop-types';
  * Limitless Icon Component
  * Uses Lucide-React icons with Royal Gold and Deep Blue theme
  */
-const LimitlessIcon = ({ 
-  icon = 'Circle', 
-  size = 24, 
+const LimitlessIcon = ({
+  icon = 'Circle',
+  size = 24,
   color = '#1e3a8a', // Deep blue as default
   strokeWidth = 2,
   className = '',
   fill = 'none',
-  ...props 
+  ...props
 }) => {
   // Map icon names to Lucide components
   const iconComponents = {
@@ -121,27 +121,24 @@ const LimitlessIcon = ({
     github: Github,
     mailIcon: MailIcon,
     twitter: Twitter,
-    youtube: Youtube
+    youtube: Youtube,
   };
 
   const SelectedIcon = iconComponents[icon.toLowerCase()] || Circle;
-  
+
   // Royal Gold color options
   const royalGoldColors = {
     gold: '#d4af37',
     deepBlue: '#1e3a8a',
     lightBlue: '#3b82f6',
     dark: '#1f2937',
-    light: '#f9fafb'
+    light: '#f9fafb',
   };
 
   // Allow color customization or use theme colors
   const iconColor = royalGoldColors[color] || color;
 
-  const iconClasses = [
-    'limitless-icon',
-    className
-  ].filter(Boolean).join(' ');
+  const iconClasses = ['limitless-icon', className].filter(Boolean).join(' ');
 
   return (
     <SelectedIcon
@@ -171,7 +168,7 @@ const RoyalGoldIconSet = ({ size = 24, className = '' }) => {
     { name: 'lock', color: deepBlueColor },
     { name: 'zap', color: royalGoldColor },
     { name: 'trendingUp', color: royalGoldColor },
-    { name: 'barChart', color: deepBlueColor }
+    { name: 'barChart', color: deepBlueColor },
   ];
 
   return (
@@ -208,15 +205,17 @@ const IconButton = ({
     'limitless-icon-button',
     `icon-button-${variant}`,
     disabled ? 'icon-button-disabled' : '',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const royalGoldColors = {
     gold: '#d4af37',
     deepBlue: '#1e3a8a',
     lightBlue: '#3b82f6',
     dark: '#1f2937',
-    light: '#f9fafb'
+    light: '#f9fafb',
   };
 
   const iconColor = royalGoldColors[color] || color;
@@ -234,10 +233,12 @@ const IconButton = ({
         borderRadius: '4px',
         cursor: disabled ? 'not-allowed' : 'pointer',
         opacity: disabled ? 0.5 : 1,
-        transition: 'all 0.2s ease'
+        transition: 'all 0.2s ease',
       }}
-      onMouseEnter={(e) => !disabled && (e.target.style.backgroundColor = 'rgba(0, 0, 0, 0.05)')}
-      onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+      onMouseEnter={e =>
+        !disabled && (e.target.style.backgroundColor = 'rgba(0, 0, 0, 0.05)')
+      }
+      onMouseLeave={e => (e.target.style.backgroundColor = 'transparent')}
       {...props}
     >
       <LimitlessIcon
@@ -262,14 +263,14 @@ LimitlessIcon.propTypes = {
   /** Additional CSS classes */
   className: PropTypes.string,
   /** Fill color (if any) */
-  fill: PropTypes.string
+  fill: PropTypes.string,
 };
 
 RoyalGoldIconSet.propTypes = {
   /** Size of the icons */
   size: PropTypes.number,
   /** Additional CSS classes */
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 IconButton.propTypes = {
@@ -288,7 +289,7 @@ IconButton.propTypes = {
   /** Additional CSS classes */
   className: PropTypes.string,
   /** Title attribute for accessibility */
-  title: PropTypes.string
+  title: PropTypes.string,
 };
 
 export { LimitlessIcon, RoyalGoldIconSet, IconButton };

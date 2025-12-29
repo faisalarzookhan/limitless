@@ -1,5 +1,10 @@
 import { Link } from 'react-router-dom';
-import { HiHome, HiArrowLeft, HiSearch, HiQuestionMarkCircle } from 'react-icons/hi';
+import {
+  HiHome,
+  HiArrowLeft,
+  HiSearch,
+  HiQuestionMarkCircle,
+} from 'react-icons/hi';
 
 const NotFound = () => {
   const quickLinks = [
@@ -26,18 +31,24 @@ const NotFound = () => {
         <h1 className="text-3xl md:text-5xl font-display font-bold mb-4 text-gray-900 dark:text-white animate-fade-in-up">
           Page Not Found
         </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-400 mb-8 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+        <p
+          className="text-xl text-gray-600 dark:text-gray-400 mb-8 animate-fade-in-up"
+          style={{ animationDelay: '0.1s' }}
+        >
           Oops! The page you're looking for doesn't exist or has been moved.
         </p>
 
         {/* Search Bar */}
-        <div className="max-w-md mx-auto mb-12 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+        <div
+          className="max-w-md mx-auto mb-12 animate-fade-in-up"
+          style={{ animationDelay: '0.2s' }}
+        >
           <div className="relative">
             <input
               type="text"
               placeholder="Search our website..."
               className="w-full px-6 py-4 rounded-full border-2 border-gray-200 dark:border-dark-700 bg-white dark:bg-dark-800 text-gray-900 dark:text-white focus:outline-none focus:border-primary-500 transition-colors duration-300"
-              onKeyPress={(e) => {
+              onKeyPress={e => {
                 if (e.key === 'Enter') {
                   // Implement search functionality
                   console.log('Search:', e.target.value);
@@ -51,7 +62,10 @@ const NotFound = () => {
         </div>
 
         {/* Quick Links */}
-        <div className="mb-12 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+        <div
+          className="mb-12 animate-fade-in-up"
+          style={{ animationDelay: '0.3s' }}
+        >
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
             Try these popular pages instead:
           </h2>
@@ -72,7 +86,10 @@ const NotFound = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+        <div
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up"
+          style={{ animationDelay: '0.4s' }}
+        >
           <button
             onClick={() => window.history.back()}
             className="btn-outline flex items-center"
@@ -87,9 +104,15 @@ const NotFound = () => {
         </div>
 
         {/* Help Text */}
-        <p className="mt-12 text-sm text-gray-500 dark:text-gray-500 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+        <p
+          className="mt-12 text-sm text-gray-500 dark:text-gray-500 animate-fade-in-up"
+          style={{ animationDelay: '0.5s' }}
+        >
           If you believe this is an error, please{' '}
-          <Link to="/contact" className="text-primary-600 dark:text-primary-400 hover:underline">
+          <Link
+            to="/contact"
+            className="text-primary-600 dark:text-primary-400 hover:underline"
+          >
             contact us
           </Link>
           .

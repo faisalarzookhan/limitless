@@ -3,6 +3,7 @@
 ## Pre-Deployment Checklist
 
 ### ✅ Code Quality
+
 - [ ] All TypeScript/ESLint errors resolved
 - [ ] No console.log statements in production code
 - [ ] Code formatted consistently
@@ -11,6 +12,7 @@
 - [ ] Dead code eliminated
 
 ### ✅ Testing
+
 - [ ] All pages load correctly
 - [ ] Navigation works on all pages
 - [ ] Forms submit successfully
@@ -21,6 +23,7 @@
 - [ ] Theme switching functions properly
 
 ### ✅ Content Review
+
 - [ ] All text content reviewed for typos
 - [ ] Contact information correct
   - Email: Info@limitlessinfotech.com
@@ -33,6 +36,7 @@
 - [ ] SEO meta tags complete
 
 ### ✅ Performance
+
 - [ ] Build succeeds without errors
 - [ ] Bundle size optimized
 - [ ] Images optimized
@@ -41,6 +45,7 @@
 - [ ] Lighthouse score > 90
 
 ### ✅ Security
+
 - [ ] No sensitive data in code
 - [ ] Environment variables set up
 - [ ] API keys secured
@@ -49,6 +54,7 @@
 - [ ] Input sanitization in place
 
 ### ✅ Browser Testing
+
 - [ ] Chrome (latest)
 - [ ] Firefox (latest)
 - [ ] Safari (latest)
@@ -59,6 +65,7 @@
 ### ✅ Features Testing
 
 #### Navigation & Layout
+
 - [ ] Navbar appears on all pages
 - [ ] Logo links to home
 - [ ] Mobile menu works
@@ -67,6 +74,7 @@
 - [ ] Scroll to top functions
 
 #### Pages Testing
+
 - [ ] **Home Page**
   - [ ] Hero section loads
   - [ ] Services section displays
@@ -144,6 +152,7 @@
   - [ ] Go back works
 
 #### Interactive Features
+
 - [ ] **Chatbot**
   - [ ] Opens/closes correctly
   - [ ] Responses work
@@ -167,7 +176,9 @@
 ## Environment Setup
 
 ### Development Environment Variables
+
 Create `.env.development`:
+
 ```env
 VITE_API_URL=http://localhost:5000/api
 VITE_APP_ENV=development
@@ -175,7 +186,9 @@ VITE_ENABLE_ANALYTICS=false
 ```
 
 ### Production Environment Variables
+
 Create `.env.production`:
+
 ```env
 VITE_API_URL=https://api.limitlessinfotech.com/api
 VITE_APP_ENV=production
@@ -188,11 +201,13 @@ VITE_GA_TRACKING_ID=UA-XXXXX-XX
 ## Build Process
 
 ### 1. Install Dependencies
+
 ```bash
 npm install
 ```
 
 ### 2. Test Development Build
+
 ```bash
 npm run dev
 # Visit http://localhost:3000
@@ -200,17 +215,20 @@ npm run dev
 ```
 
 ### 3. Create Production Build
+
 ```bash
 npm run build
 ```
 
 ### 4. Preview Production Build
+
 ```bash
 npm run preview
 # Test production build locally
 ```
 
 ### 5. Verify Build Output
+
 - [ ] `dist` folder created
 - [ ] All assets compiled
 - [ ] No build errors
@@ -223,6 +241,7 @@ npm run preview
 ### Option 1: Vercel (Recommended)
 
 #### Initial Deployment
+
 ```bash
 npm install -g vercel
 vercel login
@@ -230,11 +249,13 @@ vercel
 ```
 
 #### Production Deployment
+
 ```bash
 vercel --prod
 ```
 
 #### Configure Project
+
 - [ ] Set environment variables in Vercel dashboard
 - [ ] Configure custom domain
 - [ ] Enable HTTPS
@@ -243,6 +264,7 @@ vercel --prod
 ### Option 2: Netlify
 
 #### Using Netlify CLI
+
 ```bash
 npm install -g netlify-cli
 netlify login
@@ -251,6 +273,7 @@ netlify deploy --prod --dir=dist
 ```
 
 #### Configure Project
+
 - [ ] Set build command: `npm run build`
 - [ ] Set publish directory: `dist`
 - [ ] Add environment variables
@@ -260,12 +283,14 @@ netlify deploy --prod --dir=dist
 ### Option 3: GitHub Pages
 
 #### Build and Deploy
+
 ```bash
 npm run build
 # Use gh-pages package or manual upload
 ```
 
 #### Configuration
+
 - [ ] Update `vite.config.js` with base URL
 - [ ] Configure CNAME for custom domain
 - [ ] Enable HTTPS in settings
@@ -273,6 +298,7 @@ npm run build
 ### Option 4: Traditional Hosting (cPanel, etc.)
 
 #### Steps
+
 1. Run `npm run build`
 2. Upload contents of `dist` folder to server
 3. Configure server for SPA routing
@@ -280,7 +306,9 @@ npm run build
 5. Configure domain
 
 #### Server Configuration
+
 Create `.htaccess` for Apache:
+
 ```apache
 <IfModule mod_rewrite.c>
   RewriteEngine On
@@ -297,6 +325,7 @@ Create `.htaccess` for Apache:
 ## Post-Deployment Checklist
 
 ### ✅ Immediate Checks
+
 - [ ] Website loads on production URL
 - [ ] SSL certificate active
 - [ ] All pages accessible
@@ -306,6 +335,7 @@ Create `.htaccess` for Apache:
 - [ ] Analytics tracking (if enabled)
 
 ### ✅ SEO Verification
+
 - [ ] robots.txt accessible
 - [ ] sitemap.xml created and accessible
 - [ ] Meta tags present on all pages
@@ -314,6 +344,7 @@ Create `.htaccess` for Apache:
 - [ ] Schema markup added (future)
 
 ### ✅ Performance Testing
+
 - [ ] Run Lighthouse audit
   - Performance > 90
   - Accessibility > 90
@@ -324,12 +355,14 @@ Create `.htaccess` for Apache:
 - [ ] Verify mobile performance
 
 ### ✅ Analytics Setup
+
 - [ ] Google Analytics installed (if desired)
 - [ ] Google Search Console verified
 - [ ] Facebook Pixel installed (if desired)
 - [ ] Conversion tracking set up
 
 ### ✅ Monitoring Setup
+
 - [ ] Uptime monitoring (UptimeRobot, Pingdom)
 - [ ] Error tracking (Sentry) - optional
 - [ ] Performance monitoring
@@ -340,17 +373,20 @@ Create `.htaccess` for Apache:
 ## Ongoing Maintenance
 
 ### Daily
+
 - [ ] Check uptime status
 - [ ] Monitor error logs
 - [ ] Review contact form submissions
 
 ### Weekly
+
 - [ ] Check website performance
 - [ ] Review analytics
 - [ ] Test critical user flows
 - [ ] Backup database (when backend added)
 
 ### Monthly
+
 - [ ] Update dependencies
 - [ ] Security audit
 - [ ] Content updates
@@ -358,6 +394,7 @@ Create `.htaccess` for Apache:
 - [ ] SEO review
 
 ### Quarterly
+
 - [ ] Major feature updates
 - [ ] Design refresh evaluation
 - [ ] User feedback implementation
@@ -368,11 +405,13 @@ Create `.htaccess` for Apache:
 ## Rollback Plan
 
 ### If Issues Occur
+
 1. **Immediate Rollback**
+
    ```bash
    # Vercel
    vercel rollback
-   
+
    # Netlify
    # Use dashboard to rollback to previous deploy
    ```
@@ -392,31 +431,41 @@ Create `.htaccess` for Apache:
 ## Common Issues & Solutions
 
 ### Issue: Build Fails
+
 **Solution:**
+
 - Clear node_modules: `rm -rf node_modules package-lock.json`
 - Reinstall: `npm install`
 - Check Node version: Should be v16+
 
 ### Issue: Environment Variables Not Working
+
 **Solution:**
+
 - Ensure variables start with `VITE_`
 - Restart dev server after changes
 - Check deployment platform settings
 
 ### Issue: 404 on Page Refresh
+
 **Solution:**
+
 - Configure server for SPA routing
 - Add redirect rules
 - Check base URL in vite.config.js
 
 ### Issue: Images Not Loading
+
 **Solution:**
+
 - Check image paths (use relative paths)
 - Verify images in public folder
 - Check build output
 
 ### Issue: Styles Not Applied
+
 **Solution:**
+
 - Check Tailwind configuration
 - Verify PostCSS setup
 - Clear browser cache
@@ -426,6 +475,7 @@ Create `.htaccess` for Apache:
 ## Performance Optimization
 
 ### Before Launch
+
 - [ ] Compress images (use WebP format)
 - [ ] Enable Gzip/Brotli compression
 - [ ] Implement lazy loading
@@ -434,6 +484,7 @@ Create `.htaccess` for Apache:
 - [ ] Minimize bundle size
 
 ### CDN Configuration
+
 - [ ] Set up CloudFlare or similar
 - [ ] Configure caching rules
 - [ ] Enable image optimization
@@ -444,7 +495,9 @@ Create `.htaccess` for Apache:
 ## Security Hardening
 
 ### Headers Configuration
+
 Add security headers (via hosting platform or server):
+
 ```
 X-Frame-Options: SAMEORIGIN
 X-Content-Type-Options: nosniff
@@ -454,6 +507,7 @@ Permissions-Policy: geolocation=(), microphone=(), camera=()
 ```
 
 ### Content Security Policy
+
 ```
 Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:;
 ```
@@ -463,6 +517,7 @@ Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; 
 ## Backup Strategy
 
 ### What to Backup
+
 - [ ] Source code (in Git)
 - [ ] Environment variables (documented)
 - [ ] Configuration files
@@ -470,6 +525,7 @@ Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; 
 - [ ] Media files
 
 ### Backup Frequency
+
 - Code: Automatic via Git
 - Environment: Weekly documentation
 - Content: Daily (when backend added)
@@ -480,6 +536,7 @@ Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; 
 ## Contact for Support
 
 **Limitless Infotech Solution**
+
 - Email: Info@limitlessinfotech.com
 - Phone: +91 77109 09492
 - Location: Mumbai, Maharashtra, India
@@ -489,6 +546,7 @@ Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; 
 ## Version Control
 
 ### Git Workflow
+
 ```bash
 # Before deployment
 git status
@@ -506,6 +564,7 @@ git push origin v2.0.0
 ## Final Pre-Launch Checklist
 
 ### Critical Items
+
 - [ ] All features tested
 - [ ] All content reviewed
 - [ ] Contact information correct
@@ -519,6 +578,7 @@ git push origin v2.0.0
 - [ ] Stakeholders informed
 
 ### Launch Day
+
 - [ ] Deploy to production
 - [ ] Verify deployment successful
 - [ ] Test all critical paths
@@ -528,6 +588,7 @@ git push origin v2.0.0
 - [ ] Monitor analytics
 
 ### Post-Launch (First 24 Hours)
+
 - [ ] Monitor uptime
 - [ ] Check for errors
 - [ ] Review analytics data
@@ -539,6 +600,6 @@ git push origin v2.0.0
 
 **Deployment completed successfully! 🎉**
 
-*Built with ❤️ by Limitless Infotech Solution*
+_Built with ❤️ by Limitless Infotech Solution_
 
-*Where Innovation Meets Execution*
+_Where Innovation Meets Execution_

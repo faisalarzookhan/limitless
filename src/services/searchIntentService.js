@@ -13,10 +13,10 @@ class SearchIntentService {
       search: 0.4,
       click: 0.3,
       view: 0.2,
-      timeOnPage: 0.1
+      timeOnPage: 0.1,
     };
     this.maxStoredIntents = 50; // Maximum intents to store
-    
+
     // Initialize the service
     this.initialize();
   }
@@ -29,13 +29,16 @@ class SearchIntentService {
     if (!localStorage.getItem(this.storageKey)) {
       localStorage.setItem(this.storageKey, JSON.stringify([]));
     }
-    
+
     // Create session storage if it doesn't exist
     if (!sessionStorage.getItem(this.sessionKey)) {
-      sessionStorage.setItem(this.sessionKey, JSON.stringify({
-        intents: {},
-        startTime: Date.now()
-      }));
+      sessionStorage.setItem(
+        this.sessionKey,
+        JSON.stringify({
+          intents: {},
+          startTime: Date.now(),
+        })
+      );
     }
   }
 
@@ -51,7 +54,7 @@ class SearchIntentService {
       timestamp: Date.now(),
       context: context,
       pageUrl: window.location.href,
-      sessionId: this.getSessionId()
+      sessionId: this.getSessionId(),
     };
 
     this.saveIntent(intent);
@@ -72,7 +75,7 @@ class SearchIntentService {
       timestamp: Date.now(),
       context: context,
       pageUrl: window.location.href,
-      sessionId: this.getSessionId()
+      sessionId: this.getSessionId(),
     };
 
     this.saveIntent(intent);
@@ -92,7 +95,7 @@ class SearchIntentService {
       pageUrl: pageUrl,
       timestamp: Date.now(),
       context: context,
-      sessionId: this.getSessionId()
+      sessionId: this.getSessionId(),
     };
 
     this.saveIntent(intent);
@@ -112,7 +115,7 @@ class SearchIntentService {
       pageUrl: pageUrl,
       timeSpent: timeSpent,
       timestamp: Date.now(),
-      sessionId: this.getSessionId()
+      sessionId: this.getSessionId(),
     };
 
     this.saveIntent(intent);
@@ -126,18 +129,20 @@ class SearchIntentService {
   saveIntent(intent) {
     try {
       // Save to local storage
-      const storedIntents = JSON.parse(localStorage.getItem(this.storageKey) || '[]');
-      
+      const storedIntents = JSON.parse(
+        localStorage.getItem(this.storageKey) || '[]'
+      );
+
       // Add new intent
       storedIntents.push(intent);
-      
+
       // Keep only the most recent intents
       if (storedIntents.length > this.maxStoredIntents) {
         storedIntents.splice(0, storedIntents.length - this.maxStoredIntents);
       }
-      
+
       localStorage.setItem(this.storageKey, JSON.stringify(storedIntents));
-      
+
       // Save to session storage as well
       const sessionData = JSON.parse(sessionStorage.getItem(this.sessionKey));
       if (!sessionData.intents[intent.searchTerm]) {
@@ -145,7 +150,6 @@ class SearchIntentService {
       }
       sessionData.intents[intent.searchTerm].push(intent);
       sessionStorage.setItem(this.sessionKey, JSON.stringify(sessionData));
-      
     } catch (error) {
       console.error('Error saving intent:', error);
     }
@@ -157,24 +161,27 @@ class SearchIntentService {
    */
   updateIntentScore(intent) {
     try {
-      const scores = JSON.parse(localStorage.getItem(`${this.storageKey}_scores`) || '{}');
-      
+      const scores = JSON.parse(
+        localStorage.getItem(`${this.storageKey}_scores`) || '{}'
+      );
+
       if (!scores[intent.searchTerm]) {
         scores[intent.searchTerm] = {
           search: 0,
           click: 0,
           view: 0,
           timeOnPage: 0,
-          total: 0
+          total: 0,
         };
       }
-      
+
       // Update the appropriate score based on intent type
-      scores[intent.searchTerm][intent.type] += this.rankingWeight[intent.type] || 0.1;
+      scores[intent.searchTerm][intent.type] +=
+        this.rankingWeight[intent.type] || 0.1;
       scores[intent.searchTerm].total = Object.values(scores[intent.searchTerm])
         .filter((_, key) => key !== 'total')
         .reduce((sum, val) => sum + val, 0);
-      
+
       localStorage.setItem(`${this.storageKey}_scores`, JSON.stringify(scores));
     } catch (error) {
       console.error('Error updating intent score:', error);
@@ -213,7 +220,9 @@ class SearchIntentService {
    */
   getIntentScores() {
     try {
-      return JSON.parse(localStorage.getItem(`${this.storageKey}_scores`) || '{}');
+      return JSON.parse(
+        localStorage.getItem(`${this.storageKey}_scores`) || '{}'
+      );
     } catch (error) {
       console.error('Error retrieving intent scores:', error);
       return {};
@@ -230,7 +239,10 @@ class SearchIntentService {
     let highestScore = 0;
 
     for (const [searchTerm, scoreData] of Object.entries(scores)) {
-      if (scoreData.total > highestScore && scoreData.total >= this.intentThreshold) {
+      if (
+        scoreData.total > highestScore &&
+        scoreData.total >= this.intentThreshold
+      ) {
         highestScore = scoreData.total;
         primaryIntent = searchTerm;
       }
@@ -247,7 +259,7 @@ class SearchIntentService {
   getRankedContent(contentItems) {
     const scores = this.getIntentScores();
     const primaryIntent = this.getPrimaryIntent();
-    
+
     if (!primaryIntent || Object.keys(scores).length === 0) {
       // No clear intent, return original order
       return contentItems;
@@ -256,39 +268,42 @@ class SearchIntentService {
     // Create a copy of content items with relevance scores
     const rankedItems = contentItems.map(item => {
       let relevanceScore = 0;
-      
+
       // Score based on how well the content matches user intents
       for (const [searchTerm, scoreData] of Object.entries(scores)) {
         // Check if content matches search terms
         if (item.title && item.title.toLowerCase().includes(searchTerm)) {
           relevanceScore += scoreData.total * 2; // Higher weight for title matches
         }
-        
-        if (item.description && item.description.toLowerCase().includes(searchTerm)) {
+
+        if (
+          item.description &&
+          item.description.toLowerCase().includes(searchTerm)
+        ) {
           relevanceScore += scoreData.total * 1.5; // Medium weight for description matches
         }
-        
+
         if (item.tags && Array.isArray(item.tags)) {
-          const tagMatches = item.tags.filter(tag => 
+          const tagMatches = item.tags.filter(tag =>
             tag.toLowerCase().includes(searchTerm)
           ).length;
           relevanceScore += tagMatches * scoreData.total;
         }
-        
+
         if (item.category && item.category.toLowerCase().includes(searchTerm)) {
           relevanceScore += scoreData.total * 1.2; // Category matches
         }
       }
-      
+
       return {
         ...item,
-        relevanceScore
+        relevanceScore,
       };
     });
-    
+
     // Sort by relevance score (descending)
     rankedItems.sort((a, b) => b.relevanceScore - a.relevanceScore);
-    
+
     // Return just the items without scores
     return rankedItems.map(item => ({ ...item, relevanceScore: undefined }));
   }
@@ -301,25 +316,28 @@ class SearchIntentService {
   getRelatedSearchTerms(searchTerm) {
     const intents = this.getIntents();
     const relatedTerms = new Map();
-    
+
     // Find other search terms that occurred in similar contexts
     const currentTerm = searchTerm.toLowerCase();
-    
+
     for (const intent of intents) {
       if (intent.searchTerm !== currentTerm && intent.type === 'search') {
         // Check if they occurred in similar sessions or contexts
         const timeDiff = Math.abs(intent.timestamp - Date.now());
-        const timeWeight = Math.max(0, 1 - (timeDiff / (7 * 24 * 60 * 60 * 1000))); // Weight decreases over time
-        
+        const timeWeight = Math.max(
+          0,
+          1 - timeDiff / (7 * 24 * 60 * 60 * 1000)
+        ); // Weight decreases over time
+
         if (timeWeight > 0) {
           relatedTerms.set(
-            intent.searchTerm, 
+            intent.searchTerm,
             (relatedTerms.get(intent.searchTerm) || 0) + timeWeight
           );
         }
       }
     }
-    
+
     // Sort by weight and return top 5
     return Array.from(relatedTerms.entries())
       .sort((a, b) => b[1] - a[1])
@@ -353,17 +371,18 @@ class SearchIntentService {
     const intents = this.getIntents();
     const scores = this.getIntentScores();
     const primaryIntent = this.getPrimaryIntent();
-    
+
     const summary = {
       totalIntents: intents.length,
-      uniqueSearchTerms: [...new Set(intents.map(intent => intent.searchTerm))].length,
+      uniqueSearchTerms: [...new Set(intents.map(intent => intent.searchTerm))]
+        .length,
       primaryIntent: primaryIntent,
       intentScores: scores,
       mostSearchedTerm: this.getMostSearchedTerm(),
       mostClickedTerm: this.getMostClickedTerm(),
-      recentIntents: intents.slice(-5) // Last 5 intents
+      recentIntents: intents.slice(-5), // Last 5 intents
     };
-    
+
     return summary;
   }
 
@@ -374,20 +393,19 @@ class SearchIntentService {
   getMostSearchedTerm() {
     const intents = this.getIntents();
     const searchCounts = new Map();
-    
+
     for (const intent of intents) {
       if (intent.type === 'search') {
         searchCounts.set(
-          intent.searchTerm, 
+          intent.searchTerm,
           (searchCounts.get(intent.searchTerm) || 0) + 1
         );
       }
     }
-    
+
     if (searchCounts.size === 0) return null;
-    
-    return Array.from(searchCounts.entries())
-      .sort((a, b) => b[1] - a[1])[0][0];
+
+    return Array.from(searchCounts.entries()).sort((a, b) => b[1] - a[1])[0][0];
   }
 
   /**
@@ -397,20 +415,19 @@ class SearchIntentService {
   getMostClickedTerm() {
     const intents = this.getIntents();
     const clickCounts = new Map();
-    
+
     for (const intent of intents) {
       if (intent.type === 'click') {
         clickCounts.set(
-          intent.searchTerm, 
+          intent.searchTerm,
           (clickCounts.get(intent.searchTerm) || 0) + 1
         );
       }
     }
-    
+
     if (clickCounts.size === 0) return null;
-    
-    return Array.from(clickCounts.entries())
-      .sort((a, b) => b[1] - a[1])[0][0];
+
+    return Array.from(clickCounts.entries()).sort((a, b) => b[1] - a[1])[0][0];
   }
 }
 
@@ -420,32 +437,41 @@ const searchIntentService = new SearchIntentService();
 // Add event listeners to track user behavior automatically
 if (typeof window !== 'undefined') {
   // Track search form submissions
-  document.addEventListener('submit', (e) => {
+  document.addEventListener('submit', e => {
     if (e.target.method && e.target.method.toLowerCase() === 'get') {
-      const searchInput = e.target.querySelector('input[type="search"], input[name="q"], input[name="search"]');
+      const searchInput = e.target.querySelector(
+        'input[type="search"], input[name="q"], input[name="search"]'
+      );
       if (searchInput && searchInput.value) {
         searchIntentService.trackSearch(searchInput.value, {
           formAction: e.target.action,
-          pageUrl: window.location.href
+          pageUrl: window.location.href,
         });
       }
     }
   });
 
   // Track clicks on search results
-  document.addEventListener('click', (e) => {
+  document.addEventListener('click', e => {
     // Look for search result items or links
-    const searchResult = e.target.closest('[data-search-term], .search-result, .result-item');
+    const searchResult = e.target.closest(
+      '[data-search-term], .search-result, .result-item'
+    );
     if (searchResult) {
-      const searchTerm = searchResult.getAttribute('data-search-term') || 
-                        searchResult.getAttribute('data-original-search') ||
-                        localStorage.getItem('lastSearchTerm');
-      
+      const searchTerm =
+        searchResult.getAttribute('data-search-term') ||
+        searchResult.getAttribute('data-original-search') ||
+        localStorage.getItem('lastSearchTerm');
+
       if (searchTerm) {
-        searchIntentService.trackClick(searchTerm, e.target.textContent || e.target.innerText, {
-          element: e.target.tagName,
-          pageUrl: window.location.href
-        });
+        searchIntentService.trackClick(
+          searchTerm,
+          e.target.textContent || e.target.innerText,
+          {
+            element: e.target.tagName,
+            pageUrl: window.location.href,
+          }
+        );
       }
     }
   });

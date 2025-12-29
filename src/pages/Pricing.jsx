@@ -13,7 +13,7 @@ import {
   HiChartBar,
   HiCog,
   HiSupport,
-  HiArrowRight
+  HiArrowRight,
 } from 'react-icons/hi';
 
 const Pricing = () => {
@@ -24,7 +24,7 @@ const Pricing = () => {
     { id: 'all', name: 'All Services' },
     { id: 'development', name: 'Development' },
     { id: 'support', name: 'Support & Maintenance' },
-    { id: 'consulting', name: 'Consulting' }
+    { id: 'consulting', name: 'Consulting' },
   ];
 
   const pricingPlans = [
@@ -48,10 +48,10 @@ const Pricing = () => {
         { name: 'Content Management System', included: false },
         { name: 'E-commerce Functionality', included: false },
         { name: 'Custom API Integration', included: false },
-        { name: 'Advanced Analytics', included: false }
+        { name: 'Advanced Analytics', included: false },
       ],
       deliveryTime: '2-3 weeks',
-      revisions: '3 revisions included'
+      revisions: '3 revisions included',
     },
     {
       id: 'professional',
@@ -74,10 +74,10 @@ const Pricing = () => {
         { name: 'Performance Optimization', included: true },
         { name: 'E-commerce Functionality', included: true },
         { name: 'Custom API Integration', included: false },
-        { name: 'Advanced Analytics Dashboard', included: false }
+        { name: 'Advanced Analytics Dashboard', included: false },
       ],
       deliveryTime: '4-6 weeks',
-      revisions: '5 revisions included'
+      revisions: '5 revisions included',
     },
     {
       id: 'enterprise',
@@ -100,11 +100,11 @@ const Pricing = () => {
         { name: 'Advanced Analytics Dashboard', included: true },
         { name: 'Multi-language Support', included: true },
         { name: 'Dedicated Project Manager', included: true },
-        { name: 'Priority Support (24/7)', included: true }
+        { name: 'Priority Support (24/7)', included: true },
       ],
       deliveryTime: '8-12 weeks',
-      revisions: 'Unlimited revisions'
-    }
+      revisions: 'Unlimited revisions',
+    },
   ];
 
   const supportPlans = [
@@ -125,8 +125,8 @@ const Pricing = () => {
         { name: 'Email Support (48-hour response)', included: true },
         { name: 'Performance Monitoring', included: false },
         { name: 'Priority Support', included: false },
-        { name: 'New Feature Development', included: false }
-      ]
+        { name: 'New Feature Development', included: false },
+      ],
     },
     {
       id: 'premium-support',
@@ -146,8 +146,8 @@ const Pricing = () => {
         { name: 'Priority Email Support (24-hour response)', included: true },
         { name: 'Performance Monitoring & Optimization', included: true },
         { name: 'Monthly Performance Reports', included: true },
-        { name: 'Minor Feature Updates', included: true }
-      ]
+        { name: 'Minor Feature Updates', included: true },
+      ],
     },
     {
       id: 'enterprise-support',
@@ -166,10 +166,13 @@ const Pricing = () => {
         { name: '24/7 Priority Support', included: true },
         { name: 'Performance Optimization', included: true },
         { name: 'Weekly Performance Reports', included: true },
-        { name: 'New Feature Development (up to 20 hours/month)', included: true },
-        { name: 'Dedicated Account Manager', included: true }
-      ]
-    }
+        {
+          name: 'New Feature Development (up to 20 hours/month)',
+          included: true,
+        },
+        { name: 'Dedicated Account Manager', included: true },
+      ],
+    },
   ];
 
   const addOns = [
@@ -177,79 +180,82 @@ const Pricing = () => {
       name: 'Logo Design',
       price: 14999,
       icon: HiCode,
-      description: 'Professional logo with 3 concepts and unlimited revisions'
+      description: 'Professional logo with 3 concepts and unlimited revisions',
     },
     {
       name: 'Brand Identity Package',
       price: 34999,
       icon: HiStar,
-      description: 'Complete branding including logo, colors, typography, and guidelines'
+      description:
+        'Complete branding including logo, colors, typography, and guidelines',
     },
     {
       name: 'UI/UX Design',
       price: 24999,
       icon: HiCube,
-      description: 'Custom interface design with user experience optimization'
+      description: 'Custom interface design with user experience optimization',
     },
     {
       name: 'Mobile App Development',
       price: 149999,
       icon: HiDeviceMobile,
-      description: 'Native iOS and Android app or cross-platform solution'
+      description: 'Native iOS and Android app or cross-platform solution',
     },
     {
       name: 'SEO Optimization',
       price: 19999,
       icon: HiChartBar,
-      description: 'Comprehensive SEO audit and 3-month optimization campaign'
+      description: 'Comprehensive SEO audit and 3-month optimization campaign',
     },
     {
       name: 'Content Writing',
       price: 9999,
       icon: HiCode,
-      description: 'Professional copywriting for up to 10 pages'
+      description: 'Professional copywriting for up to 10 pages',
     },
     {
       name: 'Social Media Setup',
       price: 14999,
       icon: HiLightningBolt,
-      description: 'Complete social media profiles setup and integration'
+      description: 'Complete social media profiles setup and integration',
     },
     {
       name: 'Training Session',
       price: 7999,
       icon: HiSupport,
-      description: '2-hour training on managing your website/application'
-    }
+      description: '2-hour training on managing your website/application',
+    },
   ];
 
-  const getColorClasses = (color) => {
+  const getColorClasses = color => {
     const colors = {
       blue: 'from-blue-600 to-blue-400',
       primary: 'from-primary-600 to-secondary-400',
       purple: 'from-purple-600 to-purple-400',
       green: 'from-green-600 to-green-400',
       orange: 'from-orange-600 to-orange-400',
-      red: 'from-red-600 to-red-400'
+      red: 'from-red-600 to-red-400',
     };
     return colors[color] || colors.primary;
   };
 
-  const formatPrice = (price) => {
+  const formatPrice = price => {
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
       currency: 'INR',
-      maximumFractionDigits: 0
+      maximumFractionDigits: 0,
     }).format(price);
   };
 
-  const filteredDevelopmentPlans = selectedCategory === 'all' || selectedCategory === 'development'
-    ? pricingPlans
-    : [];
+  const filteredDevelopmentPlans =
+    selectedCategory === 'all' || selectedCategory === 'development'
+      ? pricingPlans
+      : [];
 
-  const filteredSupportPlans = selectedCategory === 'all' || selectedCategory === 'support'
-    ? supportPlans
-    : [];
+  const filteredSupportPlans =
+    selectedCategory === 'all' || selectedCategory === 'support'
+      ? supportPlans
+      : [];
 
   return (
     <div className="min-h-screen bg-gradient-dark text-white">
@@ -270,7 +276,8 @@ const Pricing = () => {
             </h1>
 
             <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              Choose the perfect plan for your business. All plans include our commitment to quality, security, and exceptional support.
+              Choose the perfect plan for your business. All plans include our
+              commitment to quality, security, and exceptional support.
             </p>
 
             {/* Billing Toggle */}
@@ -307,7 +314,7 @@ const Pricing = () => {
       <section className="py-8 border-y border-dark-800">
         <div className="container-custom">
           <div className="flex flex-wrap justify-center gap-4">
-            {categories.map((category) => (
+            {categories.map(category => (
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
@@ -340,7 +347,10 @@ const Pricing = () => {
             <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
               {pricingPlans.map((plan, index) => {
                 const Icon = plan.icon;
-                const price = billingCycle === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice;
+                const price =
+                  billingCycle === 'monthly'
+                    ? plan.monthlyPrice
+                    : plan.yearlyPrice;
                 const colorClasses = getColorClasses(plan.color);
 
                 return (
@@ -363,25 +373,35 @@ const Pricing = () => {
 
                     <div className="p-8">
                       {/* Icon */}
-                      <div className={`w-16 h-16 bg-gradient-to-br ${colorClasses} rounded-2xl flex items-center justify-center mb-6`}>
+                      <div
+                        className={`w-16 h-16 bg-gradient-to-br ${colorClasses} rounded-2xl flex items-center justify-center mb-6`}
+                      >
                         <Icon className="w-8 h-8 text-white" />
                       </div>
 
                       {/* Plan Name */}
-                      <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
+                      <h3 className="text-2xl font-bold text-white mb-2">
+                        {plan.name}
+                      </h3>
                       <p className="text-gray-400 mb-6">{plan.description}</p>
 
                       {/* Price */}
                       <div className="mb-6">
                         <div className="flex items-baseline">
-                          <span className="text-4xl font-bold text-white">{formatPrice(price)}</span>
+                          <span className="text-4xl font-bold text-white">
+                            {formatPrice(price)}
+                          </span>
                           <span className="text-gray-400 ml-2">
                             / {billingCycle === 'monthly' ? 'project' : 'year'}
                           </span>
                         </div>
                         {billingCycle === 'yearly' && (
                           <p className="text-sm text-green-400 mt-2">
-                            Save {formatPrice(plan.monthlyPrice * 12 - plan.yearlyPrice)} per year
+                            Save{' '}
+                            {formatPrice(
+                              plan.monthlyPrice * 12 - plan.yearlyPrice
+                            )}{' '}
+                            per year
                           </p>
                         )}
                       </div>
@@ -390,11 +410,15 @@ const Pricing = () => {
                       <div className="mb-6 p-4 bg-dark-900/50 rounded-lg border border-dark-700">
                         <div className="flex items-center justify-between text-sm mb-2">
                           <span className="text-gray-400">Delivery Time:</span>
-                          <span className="text-white font-medium">{plan.deliveryTime}</span>
+                          <span className="text-white font-medium">
+                            {plan.deliveryTime}
+                          </span>
                         </div>
                         <div className="flex items-center justify-between text-sm">
                           <span className="text-gray-400">Revisions:</span>
-                          <span className="text-white font-medium">{plan.revisions}</span>
+                          <span className="text-white font-medium">
+                            {plan.revisions}
+                          </span>
                         </div>
                       </div>
 
@@ -407,7 +431,13 @@ const Pricing = () => {
                             ) : (
                               <HiX className="w-5 h-5 text-gray-600 mr-3 flex-shrink-0 mt-0.5" />
                             )}
-                            <span className={feature.included ? 'text-gray-300' : 'text-gray-600'}>
+                            <span
+                              className={
+                                feature.included
+                                  ? 'text-gray-300'
+                                  : 'text-gray-600'
+                              }
+                            >
                               {feature.name}
                             </span>
                           </li>
@@ -442,34 +472,46 @@ const Pricing = () => {
                 Support & Maintenance Plans
               </h2>
               <p className="text-gray-400 max-w-2xl mx-auto">
-                Keep your digital assets secure, updated, and performing at their best
+                Keep your digital assets secure, updated, and performing at
+                their best
               </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
               {supportPlans.map((plan, index) => {
                 const Icon = plan.icon;
-                const price = billingCycle === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice;
+                const price =
+                  billingCycle === 'monthly'
+                    ? plan.monthlyPrice
+                    : plan.yearlyPrice;
                 const colorClasses = getColorClasses(plan.color);
 
                 return (
                   <div
                     key={plan.id}
                     className={`bg-dark-800 rounded-2xl border ${
-                      plan.popular ? 'border-primary-600 shadow-lg' : 'border-dark-700'
+                      plan.popular
+                        ? 'border-primary-600 shadow-lg'
+                        : 'border-dark-700'
                     } transition-all duration-300 hover:border-primary-600/50`}
                   >
                     <div className="p-8">
-                      <div className={`w-16 h-16 bg-gradient-to-br ${colorClasses} rounded-2xl flex items-center justify-center mb-6`}>
+                      <div
+                        className={`w-16 h-16 bg-gradient-to-br ${colorClasses} rounded-2xl flex items-center justify-center mb-6`}
+                      >
                         <Icon className="w-8 h-8 text-white" />
                       </div>
 
-                      <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
+                      <h3 className="text-2xl font-bold text-white mb-2">
+                        {plan.name}
+                      </h3>
                       <p className="text-gray-400 mb-6">{plan.description}</p>
 
                       <div className="mb-6">
                         <div className="flex items-baseline">
-                          <span className="text-4xl font-bold text-white">{formatPrice(price)}</span>
+                          <span className="text-4xl font-bold text-white">
+                            {formatPrice(price)}
+                          </span>
                           <span className="text-gray-400 ml-2">
                             / {billingCycle === 'monthly' ? 'month' : 'year'}
                           </span>
@@ -484,7 +526,13 @@ const Pricing = () => {
                             ) : (
                               <HiX className="w-5 h-5 text-gray-600 mr-3 flex-shrink-0 mt-0.5" />
                             )}
-                            <span className={feature.included ? 'text-gray-300' : 'text-gray-600'}>
+                            <span
+                              className={
+                                feature.included
+                                  ? 'text-gray-300'
+                                  : 'text-gray-600'
+                              }
+                            >
                               {feature.name}
                             </span>
                           </li>
@@ -516,7 +564,8 @@ const Pricing = () => {
                 Add-on Services
               </h2>
               <p className="text-gray-400 max-w-2xl mx-auto">
-                Enhance your package with additional services tailored to your needs
+                Enhance your package with additional services tailored to your
+                needs
               </p>
             </div>
 
@@ -537,7 +586,9 @@ const Pricing = () => {
                         {formatPrice(addon.price)}
                       </span>
                     </div>
-                    <h3 className="text-lg font-semibold text-white mb-2">{addon.name}</h3>
+                    <h3 className="text-lg font-semibold text-white mb-2">
+                      {addon.name}
+                    </h3>
                     <p className="text-sm text-gray-400">{addon.description}</p>
                   </div>
                 );
@@ -563,10 +614,14 @@ const Pricing = () => {
             <table className="w-full max-w-6xl mx-auto">
               <thead>
                 <tr className="border-b border-dark-700">
-                  <th className="text-left py-4 px-4 text-gray-400 font-semibold">Features</th>
-                  {pricingPlans.map((plan) => (
+                  <th className="text-left py-4 px-4 text-gray-400 font-semibold">
+                    Features
+                  </th>
+                  {pricingPlans.map(plan => (
                     <th key={plan.id} className="text-center py-4 px-4">
-                      <div className="text-white font-semibold">{plan.name}</div>
+                      <div className="text-white font-semibold">
+                        {plan.name}
+                      </div>
                     </th>
                   ))}
                 </tr>
@@ -575,7 +630,7 @@ const Pricing = () => {
                 {pricingPlans[0].features.map((feature, idx) => (
                   <tr key={idx} className="border-b border-dark-800">
                     <td className="py-4 px-4 text-gray-300">{feature.name}</td>
-                    {pricingPlans.map((plan) => (
+                    {pricingPlans.map(plan => (
                       <td key={plan.id} className="text-center py-4 px-4">
                         {plan.features[idx].included ? (
                           <HiCheckCircle className="w-6 h-6 text-green-400 mx-auto" />
@@ -606,34 +661,42 @@ const Pricing = () => {
               {[
                 {
                   question: 'Can I switch plans later?',
-                  answer: 'Yes! You can upgrade or downgrade your plan at any time. For development packages, you can add features mid-project. For support plans, changes take effect from the next billing cycle.'
+                  answer:
+                    'Yes! You can upgrade or downgrade your plan at any time. For development packages, you can add features mid-project. For support plans, changes take effect from the next billing cycle.',
                 },
                 {
                   question: 'What payment methods do you accept?',
-                  answer: 'We accept bank transfers, UPI, credit/debit cards, and international payment methods like PayPal. For enterprise clients, we offer flexible payment terms.'
+                  answer:
+                    'We accept bank transfers, UPI, credit/debit cards, and international payment methods like PayPal. For enterprise clients, we offer flexible payment terms.',
                 },
                 {
                   question: 'Is there a setup fee?',
-                  answer: 'No setup fees! The prices shown include everything needed to get your project started and delivered.'
+                  answer:
+                    'No setup fees! The prices shown include everything needed to get your project started and delivered.',
                 },
                 {
                   question: 'What if I need custom requirements?',
-                  answer: 'We offer fully customized solutions! Use our "Get Started" form to describe your needs, and we\'ll provide a tailored quote within 24 hours.'
+                  answer:
+                    'We offer fully customized solutions! Use our "Get Started" form to describe your needs, and we\'ll provide a tailored quote within 24 hours.',
                 },
                 {
                   question: 'Do you offer refunds?',
-                  answer: 'We offer refunds on a case-by-case basis. If you\'re not satisfied with our work during the first milestone, we\'ll work to make it right or provide a refund for the remaining work.'
+                  answer:
+                    "We offer refunds on a case-by-case basis. If you're not satisfied with our work during the first milestone, we'll work to make it right or provide a refund for the remaining work.",
                 },
                 {
                   question: 'What technologies do you use?',
-                  answer: 'We use modern, industry-standard technologies including React, Node.js, Python, React Native, Flutter, and more. We choose the best tech stack for your specific needs.'
-                }
+                  answer:
+                    'We use modern, industry-standard technologies including React, Node.js, Python, React Native, Flutter, and more. We choose the best tech stack for your specific needs.',
+                },
               ].map((faq, index) => (
                 <div
                   key={index}
                   className="bg-dark-800 rounded-xl p-6 border border-dark-700"
                 >
-                  <h3 className="text-lg font-semibold text-white mb-3">{faq.question}</h3>
+                  <h3 className="text-lg font-semibold text-white mb-3">
+                    {faq.question}
+                  </h3>
                   <p className="text-gray-400">{faq.answer}</p>
                 </div>
               ))}
@@ -656,7 +719,8 @@ const Pricing = () => {
               Need a Custom Solution?
             </h2>
             <p className="text-xl text-gray-300 mb-8">
-              Every business is unique. Let's discuss your specific requirements and create a tailored solution that fits your needs and budget.
+              Every business is unique. Let's discuss your specific requirements
+              and create a tailored solution that fits your needs and budget.
             </p>
 
             <div className="flex flex-wrap justify-center gap-4">
@@ -670,11 +734,17 @@ const Pricing = () => {
 
             <p className="text-gray-500 mt-8 text-sm">
               💬 Have questions? Contact us at{' '}
-              <a href="mailto:Info@limitlessinfotech.com" className="text-primary-400 hover:underline">
+              <a
+                href="mailto:Info@limitlessinfotech.com"
+                className="text-primary-400 hover:underline"
+              >
                 Info@limitlessinfotech.com
-              </a>
-              {' '}or call{' '}
-              <a href="tel:+917710909492" className="text-primary-400 hover:underline">
+              </a>{' '}
+              or call{' '}
+              <a
+                href="tel:+917710909492"
+                className="text-primary-400 hover:underline"
+              >
                 +91 77109 09492
               </a>
             </p>

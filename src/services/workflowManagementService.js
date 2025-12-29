@@ -6,7 +6,7 @@ class WorkflowManagementService {
     this.templates = new Map();
     this.automationRules = new Map();
     this.emailQueue = [];
-    
+
     // Initialize default templates
     this.initializeDefaultTemplates();
   }
@@ -14,7 +14,7 @@ class WorkflowManagementService {
   // Initialize default email templates
   initializeDefaultTemplates() {
     const defaultTemplates = {
-      'inquiry_confirmation': {
+      inquiry_confirmation: {
         id: 'inquiry_confirmation',
         name: 'Inquiry Confirmation',
         subject: 'Thank You for Your Inquiry',
@@ -29,9 +29,9 @@ class WorkflowManagementService {
           The Limitless Infotech Team</p>
         `,
         type: 'no-reply',
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
       },
-      'new_lead_alert': {
+      new_lead_alert: {
         id: 'new_lead_alert',
         name: 'New Lead Alert',
         subject: 'New Lead: {{company}} - {{email}}',
@@ -50,9 +50,9 @@ class WorkflowManagementService {
           <p>Please follow up within 2 hours.</p>
         `,
         type: 'internal',
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
       },
-      'demo_scheduling': {
+      demo_scheduling: {
         id: 'demo_scheduling',
         name: 'Demo Scheduling',
         subject: 'Schedule Your Personalized Demo',
@@ -71,8 +71,8 @@ class WorkflowManagementService {
           The Limitless Infotech Team</p>
         `,
         type: 'follow-up',
-        createdAt: new Date().toISOString()
-      }
+        createdAt: new Date().toISOString(),
+      },
     };
 
     defaultTemplates.forEach((template, key) => {
@@ -83,7 +83,7 @@ class WorkflowManagementService {
   // Create a new inquiry
   async createInquiry(inquiryData) {
     const inquiryId = this.generateId();
-    
+
     const inquiry = {
       id: inquiryId,
       name: inquiryData.name,
@@ -105,8 +105,8 @@ class WorkflowManagementService {
         utm: inquiryData.utm || {},
         pageViews: inquiryData.pageViews || 0,
         timeOnSite: inquiryData.timeOnSite || 0,
-        consentGiven: inquiryData.consentGiven || false
-      }
+        consentGiven: inquiryData.consentGiven || false,
+      },
     };
 
     // Store the inquiry
@@ -139,7 +139,13 @@ class WorkflowManagementService {
     }
 
     // Higher priority for specific interest areas
-    const highPriorityInterests = ['Enterprise', 'Custom Development', 'Migration', 'Security', 'Audit'];
+    const highPriorityInterests = [
+      'Enterprise',
+      'Custom Development',
+      'Migration',
+      'Security',
+      'Audit',
+    ];
     if (highPriorityInterests.includes(inquiryData.interest)) {
       priority += 2;
     }
@@ -158,10 +164,16 @@ class WorkflowManagementService {
   // Check if email is from a corporate domain
   isCorporateEmail(email) {
     const personalDomains = [
-      'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 
-      'icloud.com', 'aol.com', 'protonmail.com', 'tutanota.com'
+      'gmail.com',
+      'yahoo.com',
+      'hotmail.com',
+      'outlook.com',
+      'icloud.com',
+      'aol.com',
+      'protonmail.com',
+      'tutanota.com',
     ];
-    
+
     const domain = email.split('@')[1]?.toLowerCase();
     return domain && !personalDomains.includes(domain);
   }
@@ -180,11 +192,14 @@ class WorkflowManagementService {
     inquiry.statusHistory.push({
       status,
       timestamp: new Date().toISOString(),
-      notes
+      notes,
     });
 
     // Trigger workflow based on status change
-    await this.triggerWorkflow(`status_change_${oldStatus}_to_${status}`, inquiry);
+    await this.triggerWorkflow(
+      `status_change_${oldStatus}_to_${status}`,
+      inquiry
+    );
 
     return inquiry;
   }
@@ -202,13 +217,13 @@ class WorkflowManagementService {
     inquiry.assignmentHistory.push({
       assigneeId,
       timestamp: new Date().toISOString(),
-      notes
+      notes,
     });
 
     // Send assignment notification
     await this.sendEmailTemplate('new_assignment', {
       ...inquiry,
-      assigneeId
+      assigneeId,
     });
 
     return inquiry;
@@ -217,7 +232,7 @@ class WorkflowManagementService {
   // Create a workflow
   createWorkflow(workflowData) {
     const workflowId = this.generateId();
-    
+
     const workflow = {
       id: workflowId,
       name: workflowData.name,
@@ -227,7 +242,7 @@ class WorkflowManagementService {
       actions: workflowData.actions || [],
       active: workflowData.active !== false,
       createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+      updatedAt: new Date().toISOString(),
     };
 
     this.workflows.set(workflowId, workflow);
@@ -236,12 +251,12 @@ class WorkflowManagementService {
 
   // Trigger a workflow
   async triggerWorkflow(triggerName, payload) {
-    const applicableWorkflows = Array.from(this.workflows.values())
-      .filter(workflow => 
-        workflow.active && 
+    const applicableWorkflows = Array.from(this.workflows.values()).filter(
+      workflow =>
+        workflow.active &&
         workflow.trigger === triggerName &&
         this.evaluateConditions(workflow.conditions, payload)
-      );
+    );
 
     for (const workflow of applicableWorkflows) {
       await this.executeWorkflowActions(workflow, payload);
@@ -256,7 +271,7 @@ class WorkflowManagementService {
 
     return conditions.every(condition => {
       const value = this.getNestedValue(payload, condition.field);
-      
+
       switch (condition.operator) {
         case 'equals':
           return value === condition.value;
@@ -320,7 +335,7 @@ class WorkflowManagementService {
         to: action.to || payload.email,
         subject: action.subject,
         body: action.body,
-        type: action.type || 'custom'
+        type: action.type || 'custom',
       });
     }
   }
@@ -341,7 +356,7 @@ class WorkflowManagementService {
       to: data.email,
       subject,
       body,
-      type: template.type
+      type: template.type,
     });
   }
 
@@ -356,13 +371,13 @@ class WorkflowManagementService {
   async sendEmail(emailData) {
     // In a real implementation, this would use SendGrid, AWS SES, or similar
     console.log('Sending email:', emailData);
-    
+
     // Add to email queue for processing
     this.emailQueue.push({
       ...emailData,
       id: this.generateId(),
       sentAt: new Date().toISOString(),
-      status: 'sent'
+      status: 'sent',
     });
   }
 
@@ -370,7 +385,7 @@ class WorkflowManagementService {
   async createTaskFromInquiry(inquiry, action) {
     // This would create a task in the system
     console.log('Creating task from inquiry:', inquiry.id, action);
-    
+
     // In a real implementation, this would create a task in the task management system
     return {
       id: this.generateId(),
@@ -380,7 +395,7 @@ class WorkflowManagementService {
       assignedTo: action.assigneeId,
       dueDate: action.dueDate,
       priority: inquiry.priority,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     };
   }
 
@@ -396,7 +411,7 @@ class WorkflowManagementService {
       id: this.generateId(),
       content: note,
       author: 'system',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
 
     inquiry.updatedAt = new Date().toISOString();
@@ -412,25 +427,35 @@ class WorkflowManagementService {
     let inquiries = Array.from(this.inquiries.values());
 
     if (filters.status) {
-      inquiries = inquiries.filter(inquiry => inquiry.status === filters.status);
+      inquiries = inquiries.filter(
+        inquiry => inquiry.status === filters.status
+      );
     }
 
     if (filters.priority) {
-      inquiries = inquiries.filter(inquiry => inquiry.priority === filters.priority);
+      inquiries = inquiries.filter(
+        inquiry => inquiry.priority === filters.priority
+      );
     }
 
     if (filters.assignedTo) {
-      inquiries = inquiries.filter(inquiry => inquiry.assignedTo === filters.assignedTo);
+      inquiries = inquiries.filter(
+        inquiry => inquiry.assignedTo === filters.assignedTo
+      );
     }
 
     if (filters.dateFrom) {
       const dateFrom = new Date(filters.dateFrom);
-      inquiries = inquiries.filter(inquiry => new Date(inquiry.createdAt) >= dateFrom);
+      inquiries = inquiries.filter(
+        inquiry => new Date(inquiry.createdAt) >= dateFrom
+      );
     }
 
     if (filters.dateTo) {
       const dateTo = new Date(filters.dateTo);
-      inquiries = inquiries.filter(inquiry => new Date(inquiry.createdAt) <= dateTo);
+      inquiries = inquiries.filter(
+        inquiry => new Date(inquiry.createdAt) <= dateTo
+      );
     }
 
     // Sort by creation date (newest first)
@@ -442,7 +467,7 @@ class WorkflowManagementService {
   // Create automation rule
   createAutomationRule(ruleData) {
     const ruleId = this.generateId();
-    
+
     const rule = {
       id: ruleId,
       name: ruleData.name,
@@ -451,7 +476,7 @@ class WorkflowManagementService {
       actions: ruleData.actions,
       active: ruleData.active !== false,
       createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+      updatedAt: new Date().toISOString(),
     };
 
     this.automationRules.set(ruleId, rule);
@@ -460,11 +485,9 @@ class WorkflowManagementService {
 
   // Process automation rules for an inquiry
   async processAutomationRules(inquiry) {
-    const applicableRules = Array.from(this.automationRules.values())
-      .filter(rule => 
-        rule.active && 
-        this.evaluateConditions(rule.conditions, inquiry)
-      );
+    const applicableRules = Array.from(this.automationRules.values()).filter(
+      rule => rule.active && this.evaluateConditions(rule.conditions, inquiry)
+    );
 
     for (const rule of applicableRules) {
       await this.executeWorkflowActions(rule, inquiry);
@@ -473,21 +496,25 @@ class WorkflowManagementService {
 
   // Generate unique ID
   generateId() {
-    return Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
+    return (
+      Math.random().toString(36).substring(2, 15) + Date.now().toString(36)
+    );
   }
 
   // Get workflow statistics
   getWorkflowStats() {
     const inquiries = Array.from(this.inquiries.values());
-    
+
     return {
       totalInquiries: inquiries.length,
       newInquiries: inquiries.filter(i => i.status === 'new').length,
-      inProgressInquiries: inquiries.filter(i => i.status === 'in-progress').length,
+      inProgressInquiries: inquiries.filter(i => i.status === 'in-progress')
+        .length,
       resolvedInquiries: inquiries.filter(i => i.status === 'resolved').length,
-      highPriorityInquiries: inquiries.filter(i => i.priority === 'high').length,
+      highPriorityInquiries: inquiries.filter(i => i.priority === 'high')
+        .length,
       averageResponseTime: this.calculateAverageResponseTime(inquiries),
-      conversionRate: this.calculateConversionRate(inquiries)
+      conversionRate: this.calculateConversionRate(inquiries),
     };
   }
 
@@ -506,13 +533,22 @@ class WorkflowManagementService {
   // Export inquiries to CSV
   exportInquiriesToCSV(filters = {}) {
     const inquiries = this.getInquiries(filters);
-    
+
     // CSV headers
     const headers = [
-      'ID', 'Name', 'Email', 'Company', 'Phone', 'Interest', 
-      'Message', 'Status', 'Priority', 'Assigned To', 'Created At'
+      'ID',
+      'Name',
+      'Email',
+      'Company',
+      'Phone',
+      'Interest',
+      'Message',
+      'Status',
+      'Priority',
+      'Assigned To',
+      'Created At',
     ];
-    
+
     // CSV rows
     const rows = inquiries.map(inquiry => [
       inquiry.id,
@@ -525,15 +561,15 @@ class WorkflowManagementService {
       inquiry.status,
       inquiry.priority,
       inquiry.assignedTo || 'Unassigned',
-      inquiry.createdAt
+      inquiry.createdAt,
     ]);
-    
+
     // Combine headers and rows
     const csvContent = [
       headers.join(','),
-      ...rows.map(row => row.map(field => `"${field}"`).join(','))
+      ...rows.map(row => row.map(field => `"${field}"`).join(',')),
     ].join('\n');
-    
+
     return csvContent;
   }
 }

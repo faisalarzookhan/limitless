@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import {
   HiMenu,
   HiX,
@@ -20,9 +20,9 @@ import {
   HiMoon,
   HiShieldCheck,
   HiCurrencyDollar,
-} from "react-icons/hi";
-import { useApp } from "../context/AppContext";
-import { Image } from "./ui";
+} from 'react-icons/hi';
+import { useApp } from '../context/AppContext';
+import { Image } from './ui';
 
 const Navbar = ({ isTransparent = false }) => {
   const { theme, changeTheme } = useApp();
@@ -33,101 +33,110 @@ const Navbar = ({ isTransparent = false }) => {
   const location = useLocation();
 
   // Memoize navigation data to prevent unnecessary re-renders
-  const memoizedProducts = useMemo(() => [
-    {
-      id: "trackit",
-      name: "TrackIT",
-      description: "IT Asset Management",
-      icon: HiServer,
-      color: "text-blue-600",
-      popular: false,
-    },
-    {
-      id: "hrims",
-      name: "HR-IMS",
-      description: "HR Management System",
-      icon: HiUsers,
-      color: "text-purple-600",
-      popular: true,
-    },
-    {
-      id: "worktrack",
-      name: "WorkTrack",
-      description: "Workforce Management",
-      icon: HiClock,
-      color: "text-orange-600",
-      popular: false,
-    },
-    {
-      id: "ittms",
-      name: "IT-TMS",
-      description: "Ticket Management",
-      icon: HiTicket,
-      color: "text-red-600",
-      popular: false,
-    },
-    {
-      id: "tracko",
-      name: "TrackO",
-      description: "Operations Tracking",
-      icon: HiChartBar,
-      color: "text-green-600",
-      popular: false,
-    },
-    {
-      id: "mailto",
-      name: "MailTO",
-      description: "Email Management",
-      icon: HiMail,
-      color: "text-cyan-600",
-      popular: false,
-    },
-    {
-      id: "baseless",
-      name: "Baseless",
-      description: "Database Solutions",
-      icon: HiDatabase,
-      color: "text-indigo-600",
-      badge: "New",
-    },
-  ], []);
+  const memoizedProducts = useMemo(
+    () => [
+      {
+        id: 'trackit',
+        name: 'TrackIT',
+        description: 'IT Asset Management',
+        icon: HiServer,
+        color: 'text-blue-600',
+        popular: false,
+      },
+      {
+        id: 'hrims',
+        name: 'HR-IMS',
+        description: 'HR Management System',
+        icon: HiUsers,
+        color: 'text-purple-600',
+        popular: true,
+      },
+      {
+        id: 'worktrack',
+        name: 'WorkTrack',
+        description: 'Workforce Management',
+        icon: HiClock,
+        color: 'text-orange-600',
+        popular: false,
+      },
+      {
+        id: 'ittms',
+        name: 'IT-TMS',
+        description: 'Ticket Management',
+        icon: HiTicket,
+        color: 'text-red-600',
+        popular: false,
+      },
+      {
+        id: 'tracko',
+        name: 'TrackO',
+        description: 'Operations Tracking',
+        icon: HiChartBar,
+        color: 'text-green-600',
+        popular: false,
+      },
+      {
+        id: 'mailto',
+        name: 'MailTO',
+        description: 'Email Management',
+        icon: HiMail,
+        color: 'text-cyan-600',
+        popular: false,
+      },
+      {
+        id: 'baseless',
+        name: 'Baseless',
+        description: 'Database Solutions',
+        icon: HiDatabase,
+        color: 'text-indigo-600',
+        badge: 'New',
+      },
+    ],
+    []
+  );
 
-  const memoizedServices = useMemo(() => [
-    { name: "Web Development", icon: HiCode, path: "/services#web" },
-    { name: "Mobile Apps", icon: HiDeviceMobile, path: "/services#mobile" },
-    { name: "Custom Software", icon: HiCube, path: "/services#software" },
-    { name: "CRM Solutions", icon: HiChartBar, path: "/services#crm" },
-    {
-      name: "Business Automation",
-      icon: HiLightningBolt,
-      path: "/services#automation",
-    },
-  ], []);
+  const memoizedServices = useMemo(
+    () => [
+      { name: 'Web Development', icon: HiCode, path: '/services#web' },
+      { name: 'Mobile Apps', icon: HiDeviceMobile, path: '/services#mobile' },
+      { name: 'Custom Software', icon: HiCube, path: '/services#software' },
+      { name: 'CRM Solutions', icon: HiChartBar, path: '/services#crm' },
+      {
+        name: 'Business Automation',
+        icon: HiLightningBolt,
+        path: '/services#automation',
+      },
+    ],
+    []
+  );
 
-  const memoizedNavItems = useMemo(() => [
-    { name: "Home", path: "/" },
-    {
-      name: "Products",
-      path: "/products",
-      hasDropdown: true,
-      dropdownType: "products",
-    },
-    {
-      name: "Services",
-      path: "/services",
-      hasDropdown: true,
-      dropdownType: "services",
-    },
-    {
-      name: "Enterprise",
-      path: "/compliance",
-      hasDropdown: true,
-      dropdownType: "enterprise",
-    },
-    { name: "Portfolio", path: "/portfolio" },
-    { name: "About", path: "/about" },
-    { name: "Contact", path: "/contact" },
-  ], []);
+  const memoizedNavItems = useMemo(
+    () => [
+      { name: 'Home', path: '/' },
+      {
+        name: 'Products',
+        path: '/products',
+        hasDropdown: true,
+        dropdownType: 'products',
+      },
+      {
+        name: 'Services',
+        path: '/services',
+        hasDropdown: true,
+        dropdownType: 'services',
+      },
+      {
+        name: 'Enterprise',
+        path: '/compliance',
+        hasDropdown: true,
+        dropdownType: 'enterprise',
+      },
+      { name: 'Portfolio', path: '/portfolio' },
+      { name: 'About', path: '/about' },
+      { name: 'Contact', path: '/contact' },
+    ],
+    []
+  );
 
   // Optimize scroll handler with useCallback
   const handleScroll = useCallback(() => {
@@ -135,8 +144,8 @@ const Navbar = ({ isTransparent = false }) => {
   }, []);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
 
   useEffect(() => {
@@ -145,11 +154,14 @@ const Navbar = ({ isTransparent = false }) => {
     setIsMobileSubmenuOpen(null);
   }, [location]);
 
-  const isActive = useCallback((path) => {
-    return location.pathname === path;
-  }, [location.pathname]);
+  const isActive = useCallback(
+    path => {
+      return location.pathname === path;
+    },
+    [location.pathname]
+  );
 
-  const handleDropdownEnter = useCallback((itemName) => {
+  const handleDropdownEnter = useCallback(itemName => {
     setActiveDropdown(itemName);
   }, []);
 
@@ -157,13 +169,18 @@ const Navbar = ({ isTransparent = false }) => {
     setActiveDropdown(null);
   }, []);
 
-  const toggleMobileSubmenu = useCallback((itemName) => {
-    setIsMobileSubmenuOpen(isMobileSubmenuOpen === itemName ? null : itemName);
-  }, [isMobileSubmenuOpen]);
+  const toggleMobileSubmenu = useCallback(
+    itemName => {
+      setIsMobileSubmenuOpen(
+        isMobileSubmenuOpen === itemName ? null : itemName
+      );
+    },
+    [isMobileSubmenuOpen]
+  );
 
   // Close mobile menu when pressing Escape key
   useEffect(() => {
-    const handleEscape = (event) => {
+    const handleEscape = event => {
       if (event.key === 'Escape') {
         setIsOpen(false);
         setActiveDropdown(null);
@@ -193,10 +210,10 @@ const Navbar = ({ isTransparent = false }) => {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isTransparent
-            ? "py-5 bg-transparent backdrop-blur-none"
+            ? 'py-5 bg-transparent backdrop-blur-none'
             : isScrolled
-              ? "py-3 bg-white/90 dark:bg-dark-900/90 backdrop-blur-xl shadow-lg border-b border-gray-200/30 dark:border-dark-700/30"
-              : "py-5 bg-white/70 dark:bg-dark-900/70 backdrop-blur-lg"
+              ? 'py-3 bg-white/90 dark:bg-dark-900/90 backdrop-blur-xl shadow-lg border-b border-gray-200/30 dark:border-dark-700/30'
+              : 'py-5 bg-white/70 dark:bg-dark-900/70 backdrop-blur-lg'
         }`}
         aria-label="Main navigation"
       >
@@ -223,7 +240,7 @@ const Navbar = ({ isTransparent = false }) => {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-1 xl:space-x-2 flex-1 justify-center">
-              {memoizedNavItems.map((item) => (
+              {memoizedNavItems.map(item => (
                 <div
                   key={item.path}
                   className="relative"
@@ -240,16 +257,16 @@ const Navbar = ({ isTransparent = false }) => {
                     to={item.path}
                     className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                       isActive(item.path)
-                        ? "bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg shadow-blue-500/30"
-                        : "text-blue-900 dark:text-blue-100 hover:bg-blue-50 dark:hover:bg-blue-800/60 hover:shadow-md"
+                        ? 'bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg shadow-blue-500/30'
+                        : 'text-blue-900 dark:text-blue-100 hover:bg-blue-50 dark:hover:bg-blue-800/60 hover:shadow-md'
                     }`}
-                    aria-current={isActive(item.path) ? "page" : undefined}
+                    aria-current={isActive(item.path) ? 'page' : undefined}
                   >
                     <span>{item.name}</span>
                     {item.hasDropdown && (
                       <HiChevronDown
                         className={`w-4 h-4 transition-transform duration-300 ${
-                          activeDropdown === item.name ? "rotate-180" : ""
+                          activeDropdown === item.name ? 'rotate-180' : ''
                         }`}
                         aria-hidden="true"
                       />
@@ -258,12 +275,12 @@ const Navbar = ({ isTransparent = false }) => {
 
                   {/* Dropdown Menu */}
                   {item.hasDropdown && activeDropdown === item.name && (
-                    <div 
+                    <div
                       className="absolute top-full left-0 mt-2 w-max min-w-[300px] md:min-w-[500px] bg-white/95 dark:bg-blue-800/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-blue-200/50 dark:border-blue-700/50 overflow-hidden animate-fade-in"
                       role="menu"
                       aria-label={`${item.name} submenu`}
                     >
-                      {item.dropdownType === "products" && (
+                      {item.dropdownType === 'products' && (
                         <div className="p-5 md:p-6">
                           <div className="mb-4 pb-4 border-b border-blue-200 dark:border-blue-700">
                             <h3 className="text-lg font-bold text-blue-900 dark:text-white mb-1">
@@ -275,7 +292,7 @@ const Navbar = ({ isTransparent = false }) => {
                           </div>
 
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 mb-4">
-                            {memoizedProducts.map((product) => (
+                            {memoizedProducts.map(product => (
                               <Link
                                 key={product.id}
                                 to={`/products#${product.id}`}
@@ -320,12 +337,15 @@ const Navbar = ({ isTransparent = false }) => {
                             onClick={() => setActiveDropdown(null)}
                           >
                             <span>View All Products</span>
-                            <HiArrowRight className="w-4 h-4" aria-hidden="true" />
+                            <HiArrowRight
+                              className="w-4 h-4"
+                              aria-hidden="true"
+                            />
                           </Link>
                         </div>
                       )}
 
-                      {item.dropdownType === "services" && (
+                      {item.dropdownType === 'services' && (
                         <div className="p-5 md:p-6">
                           <div className="mb-4 pb-4 border-b border-blue-200 dark:border-blue-700">
                             <h3 className="text-lg font-bold text-blue-900 dark:text-white mb-1">
@@ -345,12 +365,18 @@ const Navbar = ({ isTransparent = false }) => {
                                 onClick={() => setActiveDropdown(null)}
                               >
                                 <div className="flex-shrink-0 w-10 h-10 bg-gradient-primary opacity-10 rounded-lg flex items-center justify-center group-hover:opacity-100 transition-opacity duration-300">
-                                  <service.icon className="w-5 h-5 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors" aria-hidden="true" />
+                                  <service.icon
+                                    className="w-5 h-5 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors"
+                                    aria-hidden="true"
+                                  />
                                 </div>
                                 <span className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                                   {service.name}
                                 </span>
-                                <HiArrowRight className="w-4 h-4 ml-auto text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" aria-hidden="true" />
+                                <HiArrowRight
+                                  className="w-4 h-4 ml-auto text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors"
+                                  aria-hidden="true"
+                                />
                               </Link>
                             ))}
                           </div>
@@ -361,12 +387,15 @@ const Navbar = ({ isTransparent = false }) => {
                             onClick={() => setActiveDropdown(null)}
                           >
                             <span>View All Services</span>
-                            <HiArrowRight className="w-4 h-4" aria-hidden="true" />
+                            <HiArrowRight
+                              className="w-4 h-4"
+                              aria-hidden="true"
+                            />
                           </Link>
                         </div>
                       )}
 
-                      {item.dropdownType === "enterprise" && (
+                      {item.dropdownType === 'enterprise' && (
                         <div className="p-5 md:p-6">
                           <div className="mb-4 pb-4 border-b border-blue-200 dark:border-blue-700">
                             <h3 className="text-lg font-bold text-blue-900 dark:text-white mb-1">
@@ -384,12 +413,18 @@ const Navbar = ({ isTransparent = false }) => {
                               onClick={() => setActiveDropdown(null)}
                             >
                               <div className="flex-shrink-0 w-10 h-10 bg-gradient-primary opacity-10 rounded-lg flex items-center justify-center group-hover:opacity-100 transition-opacity duration-300">
-                                <HiShieldCheck className="w-5 h-5 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors" aria-hidden="true" />
+                                <HiShieldCheck
+                                  className="w-5 h-5 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors"
+                                  aria-hidden="true"
+                                />
                               </div>
                               <span className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                                 Compliance & Security
                               </span>
-                              <HiArrowRight className="w-4 h-4 ml-auto text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" aria-hidden="true" />
+                              <HiArrowRight
+                                className="w-4 h-4 ml-auto text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors"
+                                aria-hidden="true"
+                              />
                             </Link>
                             <Link
                               to="/innovation-lab"
@@ -397,12 +432,18 @@ const Navbar = ({ isTransparent = false }) => {
                               onClick={() => setActiveDropdown(null)}
                             >
                               <div className="flex-shrink-0 w-10 h-10 bg-gradient-primary opacity-10 rounded-lg flex items-center justify-center group-hover:opacity-100 transition-opacity duration-300">
-                                <HiLightningBolt className="w-5 h-5 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors" aria-hidden="true" />
+                                <HiLightningBolt
+                                  className="w-5 h-5 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors"
+                                  aria-hidden="true"
+                                />
                               </div>
                               <span className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                                 Innovation Lab
                               </span>
-                              <HiArrowRight className="w-4 h-4 ml-auto text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" aria-hidden="true" />
+                              <HiArrowRight
+                                className="w-4 h-4 ml-auto text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors"
+                                aria-hidden="true"
+                              />
                             </Link>
                             <Link
                               to="/api-documentation"
@@ -410,12 +451,18 @@ const Navbar = ({ isTransparent = false }) => {
                               onClick={() => setActiveDropdown(null)}
                             >
                               <div className="flex-shrink-0 w-10 h-10 bg-gradient-primary opacity-10 rounded-lg flex items-center justify-center group-hover:opacity-100 transition-opacity duration-300">
-                                <HiCode className="w-5 h-5 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors" aria-hidden="true" />
+                                <HiCode
+                                  className="w-5 h-5 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors"
+                                  aria-hidden="true"
+                                />
                               </div>
                               <span className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                                 API Documentation
                               </span>
-                              <HiArrowRight className="w-4 h-4 ml-auto text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" aria-hidden="true" />
+                              <HiArrowRight
+                                className="w-4 h-4 ml-auto text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors"
+                                aria-hidden="true"
+                              />
                             </Link>
                             <Link
                               to="/roi-calculator"
@@ -423,12 +470,18 @@ const Navbar = ({ isTransparent = false }) => {
                               onClick={() => setActiveDropdown(null)}
                             >
                               <div className="flex-shrink-0 w-10 h-10 bg-gradient-primary opacity-10 rounded-lg flex items-center justify-center group-hover:opacity-100 transition-opacity duration-300">
-                                <HiCurrencyDollar className="w-5 h-5 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors" aria-hidden="true" />
+                                <HiCurrencyDollar
+                                  className="w-5 h-5 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors"
+                                  aria-hidden="true"
+                                />
                               </div>
                               <span className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                                 ROI Calculator
                               </span>
-                              <HiArrowRight className="w-4 h-4 ml-auto text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" aria-hidden="true" />
+                              <HiArrowRight
+                                className="w-4 h-4 ml-auto text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors"
+                                aria-hidden="true"
+                              />
                             </Link>
                           </div>
 
@@ -438,7 +491,10 @@ const Navbar = ({ isTransparent = false }) => {
                             onClick={() => setActiveDropdown(null)}
                           >
                             <span>Enterprise Hub</span>
-                            <HiArrowRight className="w-4 h-4" aria-hidden="true" />
+                            <HiArrowRight
+                              className="w-4 h-4"
+                              aria-hidden="true"
+                            />
                           </Link>
                         </div>
                       )}
@@ -447,7 +503,6 @@ const Navbar = ({ isTransparent = false }) => {
                 </div>
               ))}
 
-              
               {/* CTA Button */}
               <Link
                 to="/get-started"
@@ -464,7 +519,7 @@ const Navbar = ({ isTransparent = false }) => {
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="p-2 rounded-lg bg-white/80 dark:bg-blue-800/80 text-blue-900 dark:text-blue-100 hover:bg-white dark:hover:bg-blue-700/80 transition-all duration-300 border border-blue-200/50 dark:border-blue-700/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                aria-label={isOpen ? "Close menu" : "Open menu"}
+                aria-label={isOpen ? 'Close menu' : 'Open menu'}
                 aria-expanded={isOpen}
                 aria-controls="mobile-menu"
               >
@@ -483,7 +538,9 @@ const Navbar = ({ isTransparent = false }) => {
       <div
         id="mobile-menu"
         className={`fixed inset-0 z-40 lg:hidden transition-all duration-300 ${
-          isOpen ? "visible opacity-100" : "invisible opacity-0 pointer-events-none"
+          isOpen
+            ? 'visible opacity-100'
+            : 'invisible opacity-0 pointer-events-none'
         }`}
         role="dialog"
         aria-modal="true"
@@ -499,7 +556,7 @@ const Navbar = ({ isTransparent = false }) => {
         {/* Menu Content */}
         <div
           className={`absolute top-0 right-0 bottom-0 w-full max-w-sm bg-white/95 dark:bg-blue-900/95 backdrop-blur-xl shadow-2xl transform transition-transform duration-300 ${
-            isOpen ? "translate-x-0" : "translate-x-full"
+            isOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
           <div className="flex flex-col h-full">
@@ -532,7 +589,7 @@ const Navbar = ({ isTransparent = false }) => {
             {/* Mobile Menu Items */}
             <div className="flex-1 overflow-y-auto px-6 py-8">
               <nav className="space-y-2" role="menubar">
-                {memoizedNavItems.map((item) => (
+                {memoizedNavItems.map(item => (
                   <div key={item.path}>
                     <div className="flex items-center justify-between">
                       <Link
@@ -540,10 +597,10 @@ const Navbar = ({ isTransparent = false }) => {
                         onClick={() => !item.hasDropdown && setIsOpen(false)}
                         className={`flex-1 flex items-center space-x-3 px-5 py-4 rounded-xl font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                           isActive(item.path)
-                            ? "bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg"
-                            : "text-blue-900 dark:text-blue-100 hover:bg-blue-50 dark:hover:bg-blue-800"
+                            ? 'bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg'
+                            : 'text-blue-900 dark:text-blue-100 hover:bg-blue-50 dark:hover:bg-blue-800'
                         }`}
-                        aria-current={isActive(item.path) ? "page" : undefined}
+                        aria-current={isActive(item.path) ? 'page' : undefined}
                       >
                         <span>{item.name}</span>
                       </Link>
@@ -558,8 +615,8 @@ const Navbar = ({ isTransparent = false }) => {
                           <HiChevronDown
                             className={`w-5 h-5 transition-transform duration-300 ${
                               isMobileSubmenuOpen === item.name
-                                ? "rotate-180"
-                                : ""
+                                ? 'rotate-180'
+                                : ''
                             }`}
                             aria-hidden="true"
                           />
@@ -569,13 +626,13 @@ const Navbar = ({ isTransparent = false }) => {
 
                     {/* Mobile Submenu */}
                     {item.hasDropdown && isMobileSubmenuOpen === item.name && (
-                      <div 
+                      <div
                         id={`submenu-${item.name}`}
                         className="mt-2 ml-4 pl-6 border-l-2 border-blue-200 dark:border-blue-700 space-y-2 animate-fade-in"
                         role="menu"
                       >
-                        {item.dropdownType === "products" &&
-                          memoizedProducts.map((product) => (
+                        {item.dropdownType === 'products' &&
+                          memoizedProducts.map(product => (
                             <Link
                               key={product.id}
                               to={`/products#${product.id}`}
@@ -595,7 +652,7 @@ const Navbar = ({ isTransparent = false }) => {
                             </Link>
                           ))}
 
-                        {item.dropdownType === "services" &&
+                        {item.dropdownType === 'services' &&
                           memoizedServices.map((service, index) => (
                             <Link
                               key={index}
@@ -603,27 +660,38 @@ const Navbar = ({ isTransparent = false }) => {
                               onClick={() => setIsOpen(false)}
                               className="flex items-center space-x-3 px-4 py-3 rounded-lg text-blue-800 dark:text-blue-200 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-blue-50 dark:hover:bg-blue-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             >
-                              <service.icon className="w-4 h-4" aria-hidden="true" />
+                              <service.icon
+                                className="w-4 h-4"
+                                aria-hidden="true"
+                              />
                               <span className="text-sm">{service.name}</span>
                             </Link>
                           ))}
 
-                        {item.dropdownType === "enterprise" && (
+                        {item.dropdownType === 'enterprise' && (
                           <>
                             <Link
                               to="/compliance"
                               onClick={() => setIsOpen(false)}
                               className="flex items-center space-x-3 px-4 py-3 rounded-lg text-blue-800 dark:text-blue-200 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-blue-50 dark:hover:bg-blue-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             >
-                              <HiShieldCheck className="w-4 h-4" aria-hidden="true" />
-                              <span className="text-sm">Compliance & Security</span>
+                              <HiShieldCheck
+                                className="w-4 h-4"
+                                aria-hidden="true"
+                              />
+                              <span className="text-sm">
+                                Compliance & Security
+                              </span>
                             </Link>
                             <Link
                               to="/innovation-lab"
                               onClick={() => setIsOpen(false)}
                               className="flex items-center space-x-3 px-4 py-3 rounded-lg text-blue-800 dark:text-blue-200 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-blue-50 dark:hover:bg-blue-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             >
-                              <HiLightningBolt className="w-4 h-4" aria-hidden="true" />
+                              <HiLightningBolt
+                                className="w-4 h-4"
+                                aria-hidden="true"
+                              />
                               <span className="text-sm">Innovation Lab</span>
                             </Link>
                             <Link
@@ -639,7 +707,10 @@ const Navbar = ({ isTransparent = false }) => {
                               onClick={() => setIsOpen(false)}
                               className="flex items-center space-x-3 px-4 py-3 rounded-lg text-blue-800 dark:text-blue-200 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-blue-50 dark:hover:bg-blue-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             >
-                              <HiCurrencyDollar className="w-4 h-4" aria-hidden="true" />
+                              <HiCurrencyDollar
+                                className="w-4 h-4"
+                                aria-hidden="true"
+                              />
                               <span className="text-sm">ROI Calculator</span>
                             </Link>
                           </>
@@ -650,7 +721,6 @@ const Navbar = ({ isTransparent = false }) => {
                 ))}
               </nav>
 
-              
               {/* Mobile CTA */}
               <div className="mt-4 pt-4 border-t border-blue-200 dark:border-blue-700">
                 <Link

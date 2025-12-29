@@ -23,16 +23,21 @@ This guide covers all UI components, theme system, design patterns, and styling 
 ## 🌓 Theme System
 
 ### Overview
+
 The website supports three theme modes:
+
 - **Light Mode** - Default bright theme
 - **Dark Mode** - Dark theme for low-light environments
 - **System** - Follows OS preference
 
 ### Implementation
+
 Theme is managed via Context API (`AppContext.jsx`) and persisted in localStorage.
 
 ### Theme Toggle
+
 Located in Navbar component with three options:
+
 ```jsx
 <button onClick={() => setTheme('light')}>Light</button>
 <button onClick={() => setTheme('dark')}>Dark</button>
@@ -40,13 +45,16 @@ Located in Navbar component with three options:
 ```
 
 ### Theme Classes
+
 Tailwind's `class` dark mode is used:
+
 ```jsx
 // Add 'dark' class to <html> element for dark mode
 <html class="dark">
 ```
 
 ### Using Theme in Components
+
 ```jsx
 // Light and dark variants
 <div className="bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
@@ -59,6 +67,7 @@ Tailwind's `class` dark mode is used:
 ## 🎨 Color System
 
 ### Primary Colors (Brand Blue)
+
 Used for main branding, CTAs, links, and primary actions.
 
 ```css
@@ -76,12 +85,14 @@ primary-950: #0c1a3d  /* Ultra dark */
 ```
 
 **Usage:**
+
 - Buttons: `bg-primary-600 hover:bg-primary-700`
 - Links: `text-primary-600 dark:text-primary-400`
 - Borders: `border-primary-500`
 - Backgrounds: `bg-primary-50 dark:bg-primary-900/20`
 
 ### Secondary Colors (Purple)
+
 Used for accents, badges, and secondary actions.
 
 ```css
@@ -99,11 +110,13 @@ secondary-950: #a66305
 ```
 
 **Usage:**
+
 - Secondary buttons: `bg-secondary-600`
 - Badges: `bg-secondary-100 text-secondary-700`
 - Gradients: `from-secondary-500 to-purple-600`
 
 ### Accent Colors (Orange)
+
 Used for highlights, special features, and warnings.
 
 ```css
@@ -121,11 +134,13 @@ accent-950: #050505
 ```
 
 **Usage:**
+
 - Highlights: `bg-accent-100 text-accent-700`
 - Warning badges: `bg-accent-50 border-accent-500`
 - Special CTAs: `bg-accent-600 hover:bg-accent-700`
 
 ### Dark Mode Colors (Slate/Gray)
+
 Used for dark mode backgrounds and neutral elements.
 
 ```css
@@ -143,6 +158,7 @@ dark-950: #020617  /* Darkest */
 ```
 
 **Usage:**
+
 - Dark backgrounds: `dark:bg-dark-900`
 - Dark cards: `dark:bg-dark-800`
 - Dark borders: `dark:border-dark-700`
@@ -151,24 +167,28 @@ dark-950: #020617  /* Darkest */
 ### Semantic Colors
 
 #### Success (Green)
+
 ```css
 bg-green-100 text-green-700   /* Light mode */
 dark:bg-green-900/30 dark:text-green-300  /* Dark mode */
 ```
 
 #### Error (Red)
+
 ```css
 bg-red-100 text-red-700       /* Light mode */
 dark:bg-red-900/30 dark:text-red-300  /* Dark mode */
 ```
 
 #### Warning (Yellow)
+
 ```css
 bg-yellow-100 text-yellow-700 /* Light mode */
 dark:bg-yellow-900/30 dark:text-yellow-300  /* Dark mode */
 ```
 
 #### Info (Blue)
+
 ```css
 bg-blue-100 text-blue-700     /* Light mode */
 dark:bg-blue-900/30 dark:text-blue-300  /* Dark mode */
@@ -177,6 +197,7 @@ dark:bg-blue-900/30 dark:text-blue-300  /* Dark mode */
 ### Gradient System
 
 #### Text Gradients
+
 ```jsx
 // Multi-color gradient
 <h1 className="text-gradient">
@@ -190,6 +211,7 @@ dark:bg-blue-900/30 dark:text-blue-300  /* Dark mode */
 ```
 
 #### Background Gradients
+
 ```jsx
 // Primary
 <div className="bg-gradient-primary">
@@ -211,28 +233,37 @@ dark:bg-blue-900/30 dark:text-blue-300  /* Dark mode */
 ### Font Families
 
 #### Sans Serif (Body Text)
+
 ```css
-font-sans: 'Inter', system-ui, sans-serif
+font-sans: 'Figtree', system-ui, sans-serif;
 ```
+
 **Usage:** Paragraphs, body text, UI elements
+
 ```jsx
 <p className="font-sans">Body text</p>
 ```
 
 #### Display (Headings)
+
 ```css
-font-display: 'Poppins', system-ui, sans-serif
+font-display: 'Outfit', system-ui, sans-serif;
 ```
+
 **Usage:** Headings, hero text, important titles
+
 ```jsx
 <h1 className="font-display">Main Heading</h1>
 ```
 
 #### Monospace (Code)
+
 ```css
-font-mono: 'JetBrains Mono', monospace
+font-mono: 'Fira Code', monospace;
 ```
+
 **Usage:** Code snippets, technical text
+
 ```jsx
 <code className="font-mono">const x = 10;</code>
 ```
@@ -258,6 +289,7 @@ text-9xl:  8rem (128px)     /* Massive hero */
 ### Heading Hierarchy
 
 #### H1 (Page Title)
+
 ```jsx
 <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-900 dark:text-white">
   Main Page Title
@@ -265,6 +297,7 @@ text-9xl:  8rem (128px)     /* Massive hero */
 ```
 
 #### H2 (Section Title)
+
 ```jsx
 <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-gray-900 dark:text-white mb-4">
   Section Title
@@ -272,6 +305,7 @@ text-9xl:  8rem (128px)     /* Massive hero */
 ```
 
 #### H3 (Subsection)
+
 ```jsx
 <h3 className="text-2xl md:text-3xl font-display font-semibold text-gray-900 dark:text-white mb-3">
   Subsection Title
@@ -279,6 +313,7 @@ text-9xl:  8rem (128px)     /* Massive hero */
 ```
 
 #### H4 (Card Title)
+
 ```jsx
 <h4 className="text-xl md:text-2xl font-semibold text-gray-900 dark:text-white mb-2">
   Card Title
@@ -286,6 +321,7 @@ text-9xl:  8rem (128px)     /* Massive hero */
 ```
 
 #### Body Text
+
 ```jsx
 <p className="text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
   Body paragraph text with good readability.
@@ -293,6 +329,7 @@ text-9xl:  8rem (128px)     /* Massive hero */
 ```
 
 ### Font Weights
+
 ```css
 font-thin:       100
 font-extralight: 200
@@ -306,6 +343,7 @@ font-black:      900
 ```
 
 ### Line Heights
+
 ```css
 leading-none:    1
 leading-tight:   1.25   /* Headings */
@@ -320,6 +358,7 @@ leading-loose:   2
 ## 📏 Spacing & Layout
 
 ### Spacing Scale
+
 ```css
 0:   0px
 0.5: 2px
@@ -342,13 +381,13 @@ leading-loose:   2
 ### Common Spacing Patterns
 
 #### Card Padding
+
 ```jsx
-<div className="p-6 md:p-8 lg:p-10">
-  Card content
-</div>
+<div className="p-6 md:p-8 lg:p-10">Card content</div>
 ```
 
 #### Section Padding
+
 ```jsx
 <section className="py-16 md:py-20 lg:py-24 px-6 md:px-10 lg:px-16">
   Section content
@@ -356,6 +395,7 @@ leading-loose:   2
 ```
 
 #### Content Spacing
+
 ```jsx
 <div className="space-y-6 md:space-y-8 lg:space-y-12">
   <div>Item 1</div>
@@ -364,13 +404,13 @@ leading-loose:   2
 ```
 
 #### Grid Gaps
+
 ```jsx
-<div className="grid gap-6 md:gap-8 lg:gap-10">
-  Grid items
-</div>
+<div className="grid gap-6 md:gap-8 lg:gap-10">Grid items</div>
 ```
 
 ### Container Widths
+
 ```jsx
 // Max-width container
 <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
@@ -389,6 +429,7 @@ leading-loose:   2
 ```
 
 ### Border Radius
+
 ```css
 rounded-none:  0px
 rounded-sm:    2px
@@ -408,6 +449,7 @@ rounded-full:  9999px  /* Circles, pills */
 ### Buttons
 
 #### Primary Button
+
 ```jsx
 <button className="btn-primary">
   Click Me
@@ -420,27 +462,25 @@ rounded-full:  9999px  /* Circles, pills */
 ```
 
 #### Secondary Button
+
 ```jsx
-<button className="btn-secondary">
-  Click Me
-</button>
+<button className="btn-secondary">Click Me</button>
 ```
 
 #### Outline Button
+
 ```jsx
-<button className="btn-outline">
-  Click Me
-</button>
+<button className="btn-outline">Click Me</button>
 ```
 
 #### Ghost Button
+
 ```jsx
-<button className="btn-ghost">
-  Click Me
-</button>
+<button className="btn-ghost">Click Me</button>
 ```
 
 #### Icon Button
+
 ```jsx
 <button className="w-10 h-10 rounded-lg bg-primary-600 text-white flex items-center justify-center hover:bg-primary-700 transition-colors">
   <HiHome className="w-5 h-5" />
@@ -450,6 +490,7 @@ rounded-full:  9999px  /* Circles, pills */
 ### Cards
 
 #### Basic Card
+
 ```jsx
 <div className="bg-white dark:bg-dark-800 rounded-2xl p-6 md:p-8 shadow-soft border border-gray-100 dark:border-dark-700">
   Card content
@@ -457,6 +498,7 @@ rounded-full:  9999px  /* Circles, pills */
 ```
 
 #### Service Card
+
 ```jsx
 <div className="service-card card-hover">
   <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center mb-6">
@@ -468,6 +510,7 @@ rounded-full:  9999px  /* Circles, pills */
 ```
 
 #### Portfolio Card
+
 ```jsx
 <div className="portfolio-card group">
   <img src="project.jpg" alt="Project" className="w-full h-64 object-cover" />
@@ -481,6 +524,7 @@ rounded-full:  9999px  /* Circles, pills */
 ```
 
 #### Testimonial Card
+
 ```jsx
 <div className="testimonial-card">
   <div className="flex items-center gap-1 mb-4">
@@ -488,9 +532,7 @@ rounded-full:  9999px  /* Circles, pills */
       <HiStar key={i} className="w-5 h-5 text-yellow-400 fill-current" />
     ))}
   </div>
-  <p className="text-gray-700 dark:text-gray-300 mb-6">
-    "Testimonial text..."
-  </p>
+  <p className="text-gray-700 dark:text-gray-300 mb-6">"Testimonial text..."</p>
   <div className="flex items-center gap-4">
     <img src="avatar.jpg" className="w-12 h-12 rounded-full" />
     <div>
@@ -504,22 +546,20 @@ rounded-full:  9999px  /* Circles, pills */
 ### Forms
 
 #### Text Input
+
 ```jsx
 <div>
   <label className="label-text">Name</label>
-  <input 
-    type="text"
-    className="input-field"
-    placeholder="Enter your name"
-  />
+  <input type="text" className="input-field" placeholder="Enter your name" />
 </div>
 ```
 
 #### Textarea
+
 ```jsx
 <div>
   <label className="label-text">Message</label>
-  <textarea 
+  <textarea
     className="textarea-field"
     rows="5"
     placeholder="Enter your message"
@@ -528,6 +568,7 @@ rounded-full:  9999px  /* Circles, pills */
 ```
 
 #### Select Dropdown
+
 ```jsx
 <div>
   <label className="label-text">Service</label>
@@ -540,6 +581,7 @@ rounded-full:  9999px  /* Circles, pills */
 ```
 
 #### Checkbox
+
 ```jsx
 <label className="flex items-center gap-2 cursor-pointer">
   <input type="checkbox" className="checkbox-field" />
@@ -548,14 +590,20 @@ rounded-full:  9999px  /* Circles, pills */
 ```
 
 #### Radio Button
+
 ```jsx
 <label className="flex items-center gap-2 cursor-pointer">
-  <input type="radio" name="option" className="w-5 h-5 text-primary-600 focus:ring-primary-500" />
+  <input
+    type="radio"
+    name="option"
+    className="w-5 h-5 text-primary-600 focus:ring-primary-500"
+  />
   <span className="text-gray-700 dark:text-gray-300">Option 1</span>
 </label>
 ```
 
 #### Form Validation Error
+
 ```jsx
 <div>
   <input className="input-field border-red-500" />
@@ -566,21 +614,25 @@ rounded-full:  9999px  /* Circles, pills */
 ### Badges
 
 #### Primary Badge
+
 ```jsx
 <span className="badge badge-primary">New</span>
 ```
 
 #### Secondary Badge
+
 ```jsx
 <span className="badge badge-secondary">Popular</span>
 ```
 
 #### Success Badge
+
 ```jsx
 <span className="badge badge-success">Active</span>
 ```
 
 #### Custom Badge
+
 ```jsx
 <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
   Custom Badge
@@ -590,19 +642,25 @@ rounded-full:  9999px  /* Circles, pills */
 ### Alerts
 
 #### Success Alert
+
 ```jsx
 <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
   <div className="flex items-start gap-3">
     <HiCheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
     <div>
-      <h4 className="font-semibold text-green-900 dark:text-green-300">Success!</h4>
-      <p className="text-green-700 dark:text-green-400">Operation completed successfully.</p>
+      <h4 className="font-semibold text-green-900 dark:text-green-300">
+        Success!
+      </h4>
+      <p className="text-green-700 dark:text-green-400">
+        Operation completed successfully.
+      </p>
     </div>
   </div>
 </div>
 ```
 
 #### Error Alert
+
 ```jsx
 <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
   <div className="flex items-start gap-3">
@@ -620,6 +678,7 @@ rounded-full:  9999px  /* Circles, pills */
 ## 📱 Responsive Design
 
 ### Breakpoints
+
 ```css
 sm:  640px   /* Small tablets */
 md:  768px   /* Tablets */
@@ -629,6 +688,7 @@ xl:  1280px  /* Large desktop */
 ```
 
 ### Mobile-First Approach
+
 Always design for mobile first, then add larger breakpoints:
 
 ```jsx
@@ -642,6 +702,7 @@ Always design for mobile first, then add larger breakpoints:
 ### Responsive Patterns
 
 #### Typography
+
 ```jsx
 <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
   Responsive Heading
@@ -653,6 +714,7 @@ Always design for mobile first, then add larger breakpoints:
 ```
 
 #### Spacing
+
 ```jsx
 <section className="py-12 md:py-16 lg:py-20 px-4 md:px-6 lg:px-8">
   Content
@@ -660,6 +722,7 @@ Always design for mobile first, then add larger breakpoints:
 ```
 
 #### Grid Layouts
+
 ```jsx
 // 1 column mobile, 2 tablet, 3 desktop
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
@@ -669,6 +732,7 @@ Always design for mobile first, then add larger breakpoints:
 ```
 
 #### Flex Layouts
+
 ```jsx
 <div className="flex flex-col md:flex-row gap-6">
   <div className="w-full md:w-1/2">Column 1</div>
@@ -677,6 +741,7 @@ Always design for mobile first, then add larger breakpoints:
 ```
 
 #### Visibility
+
 ```jsx
 // Hide on mobile, show on desktop
 <div className="hidden lg:block">Desktop only</div>
@@ -692,12 +757,17 @@ Always design for mobile first, then add larger breakpoints:
 ### Implementation
 
 #### Toggle Dark Mode
+
 ```jsx
 // In AppContext
 const [theme, setTheme] = useState('system');
 
 useEffect(() => {
-  if (theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  if (
+    theme === 'dark' ||
+    (theme === 'system' &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches)
+  ) {
     document.documentElement.classList.add('dark');
   } else {
     document.documentElement.classList.remove('dark');
@@ -706,6 +776,7 @@ useEffect(() => {
 ```
 
 #### Component Dark Mode Styling
+
 ```jsx
 <div className="bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
   <h1 className="text-gray-900 dark:text-white">Title</h1>
@@ -719,6 +790,7 @@ useEffect(() => {
 ### Dark Mode Checklist
 
 #### ✅ Always Include Dark Mode Variants For:
+
 - Backgrounds: `bg-white dark:bg-dark-900`
 - Text colors: `text-gray-900 dark:text-white`
 - Borders: `border-gray-200 dark:border-dark-700`
@@ -730,16 +802,19 @@ useEffect(() => {
 ### Common Dark Mode Patterns
 
 #### Card
+
 ```jsx
 <div className="bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-gray-900 dark:text-gray-100">
 ```
 
 #### Input
+
 ```jsx
 <input className="bg-white dark:bg-dark-800 border-gray-300 dark:border-dark-600 text-gray-900 dark:text-gray-100" />
 ```
 
 #### Button
+
 ```jsx
 <button className="bg-primary-600 dark:bg-primary-500 hover:bg-primary-700 dark:hover:bg-primary-600 text-white">
 ```
@@ -749,6 +824,7 @@ useEffect(() => {
 ## ✨ Animations
 
 ### Tailwind Transitions
+
 ```jsx
 // Basic transition
 <div className="transition-all duration-300">
@@ -762,6 +838,7 @@ useEffect(() => {
 ### Hover Effects
 
 #### Scale
+
 ```jsx
 <button className="transform hover:scale-105 transition-transform">
   Scale on hover
@@ -769,6 +846,7 @@ useEffect(() => {
 ```
 
 #### Translate
+
 ```jsx
 <div className="transform hover:-translate-y-2 transition-transform">
   Move up on hover
@@ -776,6 +854,7 @@ useEffect(() => {
 ```
 
 #### Opacity
+
 ```jsx
 <div className="opacity-0 hover:opacity-100 transition-opacity">
   Fade in on hover
@@ -783,6 +862,7 @@ useEffect(() => {
 ```
 
 ### Built-in Animations
+
 ```jsx
 // Fade in
 <div className="animate-fade-in">
@@ -804,6 +884,7 @@ useEffect(() => {
 ```
 
 ### Framer Motion (Advanced)
+
 ```jsx
 import { motion } from 'framer-motion';
 
@@ -813,7 +894,7 @@ import { motion } from 'framer-motion';
   transition={{ duration: 0.5 }}
 >
   Animated content
-</motion.div>
+</motion.div>;
 ```
 
 ---
@@ -821,12 +902,14 @@ import { motion } from 'framer-motion';
 ## ✅ Best Practices
 
 ### 1. Consistency
+
 - Use design tokens (colors, spacing) consistently
 - Follow established patterns
 - Maintain component hierarchy
 - Use same spacing scale everywhere
 
 ### 2. Accessibility
+
 ```jsx
 // Use semantic HTML
 <button> instead of <div onClick>
@@ -845,6 +928,7 @@ import { motion } from 'framer-motion';
 ```
 
 ### 3. Performance
+
 - Lazy load images
 - Use proper image sizes
 - Minimize animations
@@ -852,18 +936,21 @@ import { motion } from 'framer-motion';
 - Optimize bundle size
 
 ### 4. Responsive Design
+
 - Always test on multiple screen sizes
 - Use mobile-first approach
 - Test touch interactions on mobile
 - Ensure readable text sizes (min 16px)
 
 ### 5. Dark Mode
+
 - Always include dark mode variants
 - Test in both modes
 - Ensure proper contrast
 - Use semantic colors
 
 ### 6. Component Reusability
+
 ```jsx
 // ❌ Bad - Hardcoded styles
 <button className="px-8 py-3 bg-blue-600 text-white rounded-lg">
@@ -873,6 +960,7 @@ import { motion } from 'framer-motion';
 ```
 
 ### 7. Code Organization
+
 ```jsx
 // Group related classes
 className="
@@ -890,6 +978,7 @@ className="
 ```
 
 ### 8. Naming Conventions
+
 - Use descriptive class names
 - Follow BEM for custom classes
 - Keep component names clear
@@ -900,6 +989,7 @@ className="
 ## 🎯 Common Patterns
 
 ### Hero Section
+
 ```jsx
 <section className="py-20 md:py-28 lg:py-32 px-6 bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-dark-900 dark:to-dark-800">
   <div className="max-w-7xl mx-auto text-center">
@@ -918,6 +1008,7 @@ className="
 ```
 
 ### Feature Section
+
 ```jsx
 <section className="py-16 md:py-20 lg:py-24 px-6">
   <div className="max-w-7xl mx-auto">
@@ -929,7 +1020,7 @@ className="
         Feature description
       </p>
     </div>
-    
+
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {/* Feature cards */}
     </div>
@@ -938,6 +1029,7 @@ className="
 ```
 
 ### CTA Section
+
 ```jsx
 <section className="py-16 md:py-20 bg-gradient-primary text-white">
   <div className="max-w-4xl mx-auto text-center px-6">
@@ -947,9 +1039,7 @@ className="
     <p className="text-lg mb-8 opacity-90">
       Let's build something amazing together
     </p>
-    <button className="btn-secondary">
-      Start Your Project
-    </button>
+    <button className="btn-secondary">Start Your Project</button>
   </div>
 </section>
 ```
@@ -959,16 +1049,19 @@ className="
 ## 📚 Resources
 
 ### Design Tools
+
 - Figma - Design mockups
 - Adobe Color - Color palette creation
 - Coolors - Color scheme generator
 
 ### Development Tools
+
 - Tailwind CSS IntelliSense (VS Code)
 - Chrome DevTools
 - Responsively App - Responsive testing
 
 ### Inspiration
+
 - Dribbble
 - Behance
 - Awwwards
@@ -979,18 +1072,21 @@ className="
 ## 🔍 Troubleshooting
 
 ### Dark Mode Not Working
+
 1. Check if 'dark' class is on `<html>` element
 2. Verify dark: variants are included
 3. Check Tailwind config: `darkMode: 'class'`
 4. Ensure theme context is working
 
 ### Styles Not Applying
+
 1. Check Tailwind purge/content config
 2. Restart dev server
 3. Clear browser cache
 4. Verify class names are correct
 
 ### Responsive Issues
+
 1. Test in actual devices, not just browser resize
 2. Check breakpoint syntax
 3. Verify mobile-first approach

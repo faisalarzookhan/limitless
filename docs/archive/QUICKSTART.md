@@ -1,21 +1,25 @@
 # 🚀 Quick Start Guide - Limitless Infotech Solution Website
 
 ## Overview
+
 This is a professional, modern website built with **React**, **Vite**, and **Tailwind CSS** for Limitless Infotech Solution.
 
 ## ⚡ Quick Setup (3 Steps)
 
 ### 1. Install Dependencies
+
 ```bash
 npm install
 ```
 
 ### 2. Start Development Server
+
 ```bash
 npm run dev
 ```
 
 ### 3. Open Browser
+
 Navigate to: `http://localhost:3000`
 
 That's it! Your website is now running! 🎉
@@ -25,6 +29,7 @@ That's it! Your website is now running! 🎉
 ## 📱 What You'll See
 
 ### Pages Available
+
 1. **Home** (`/`) - Hero, services, testimonials, FAQs
 2. **Services** (`/services`) - Detailed service information
 3. **Portfolio** (`/portfolio`) - Project showcase with case studies
@@ -34,6 +39,7 @@ That's it! Your website is now running! 🎉
 7. **Get Started** (`/get-started`) - Advanced client requirements form
 
 ### Key Features
+
 - ✅ Responsive design (mobile, tablet, desktop)
 - ✅ Dark mode support (System/Light/Dark)
 - ✅ AI-powered chatbot (bottom right corner)
@@ -47,7 +53,9 @@ That's it! Your website is now running! 🎉
 ## 🎨 Customization Quick Tips
 
 ### Change Colors
+
 Edit `tailwind.config.js`:
+
 ```javascript
 colors: {
   primary: { /* Your primary color */ },
@@ -56,13 +64,16 @@ colors: {
 ```
 
 ### Update Content
+
 - **Home Page**: `src/pages/Home.jsx`
 - **Services**: `src/pages/Services.jsx`
 - **Portfolio**: `src/pages/Portfolio.jsx`
 - **Contact Info**: `src/pages/Contact.jsx`
 
 ### Update Company Info
+
 Search and replace:
+
 - Email: `Info@limitlessinfotech.com`
 - Phone: `+91 77109 09492`
 - Location: `Mumbai, Maharashtra, IN`
@@ -86,18 +97,21 @@ The build output will be in the `dist` folder.
 ## 🌐 Deploy
 
 ### Vercel (Recommended)
+
 ```bash
 npm install -g vercel
 vercel
 ```
 
 ### Netlify
+
 ```bash
 npm install -g netlify-cli
 netlify deploy --prod --dir=dist
 ```
 
 ### Manual Deployment
+
 1. Run `npm run build`
 2. Upload contents of `dist` folder to your server
 
@@ -106,23 +120,30 @@ netlify deploy --prod --dir=dist
 ## 🛠️ Common Tasks
 
 ### Add a New Page
+
 1. Create file in `src/pages/NewPage.jsx`
 2. Add route in `src/App.jsx`:
+
 ```javascript
 <Route path="/new-page" element={<NewPage />} />
 ```
+
 3. Add link in `src/components/Navbar.jsx`
 
 ### Modify Navigation
+
 Edit `src/components/Navbar.jsx` - update the `navLinks` array
 
 ### Change Theme
+
 Click the theme icon (sun/moon/computer) in the navigation bar
 
 ### Test Chatbot
+
 Click the chat icon in the bottom-right corner
 
 ### Submit Test Form
+
 Go to `/get-started` and fill out the multi-step form
 
 ---
@@ -130,6 +151,7 @@ Go to `/get-started` and fill out the multi-step form
 ## 📞 Contact Information
 
 **Limitless Infotech Solution**
+
 - 📧 Email: Info@limitlessinfotech.com
 - 📱 Phone: +91 77109 09492
 - 📍 Location: Mumbai, Maharashtra, India
@@ -141,6 +163,7 @@ Go to `/get-started` and fill out the multi-step form
 ## 🐛 Troubleshooting
 
 ### Port Already in Use
+
 ```bash
 # Kill process on port 3000 (Windows)
 netstat -ano | findstr :3000
@@ -151,6 +174,7 @@ npm run dev -- --port 3001
 ```
 
 ### Dependencies Error
+
 ```bash
 # Clear node_modules and reinstall
 rm -rf node_modules package-lock.json
@@ -158,6 +182,7 @@ npm install
 ```
 
 ### Build Error
+
 ```bash
 # Clear cache and rebuild
 npm run build -- --force
@@ -179,6 +204,7 @@ npm run build -- --force
 ## ✨ Features Checklist
 
 ### Implemented ✅
+
 - [x] Responsive design
 - [x] Dark mode
 - [x] All main pages
@@ -191,6 +217,7 @@ npm run build -- --force
 - [x] Smooth animations
 
 ### To Implement (Future) 📋
+
 - [ ] Backend API integration
 - [ ] Database connection
 - [ ] User authentication
@@ -224,4 +251,4 @@ npm run build -- --force
 
 **Built with ❤️ by Limitless Infotech Solution**
 
-*Where Innovation Meets Execution*
+_Where Innovation Meets Execution_

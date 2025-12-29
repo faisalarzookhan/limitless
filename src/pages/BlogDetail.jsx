@@ -11,14 +11,14 @@ import {
   HiShare,
   HiArrowLeft,
   HiArrowRight,
-  HiCheckCircle
+  HiCheckCircle,
 } from 'react-icons/hi';
 import {
   FaFacebookF,
   FaTwitter,
   FaLinkedinIn,
   FaWhatsapp,
-  FaLink
+  FaLink,
 } from 'react-icons/fa';
 import { sendUserInteractionNotification } from '../services/notificationService';
 
@@ -37,7 +37,8 @@ const BlogDetail = () => {
       id: 1,
       title: 'The Future of Web Development: Trends to Watch in 2024',
       slug: 'future-web-development-2024',
-      excerpt: 'Explore the emerging trends and technologies that will shape web development in 2024, from AI integration to progressive web apps.',
+      excerpt:
+        'Explore the emerging trends and technologies that will shape web development in 2024, from AI integration to progressive web apps.',
       content: `
         <p>The web development landscape is continuously evolving, and 2024 promises to bring exciting new trends and technologies that will reshape how we build and interact with web applications. In this comprehensive guide, we'll explore the most significant trends that every developer should be aware of.</p>
 
@@ -74,7 +75,7 @@ const BlogDetail = () => {
         name: 'Faisal Khan',
         avatar: null,
         role: 'CEO & Founder',
-        bio: 'Passionate technologist and entrepreneur with over 10 years of experience in software development. Founder of Limitless Infotech Solution, dedicated to helping businesses transform through technology.'
+        bio: 'Passionate technologist and entrepreneur with over 10 years of experience in software development. Founder of Limitless Infotech Solution, dedicated to helping businesses transform through technology.',
       },
       publishedAt: '2024-01-15',
       readTime: '8 min read',
@@ -89,7 +90,8 @@ const BlogDetail = () => {
       id: 2,
       title: 'Building Scalable Mobile Apps: Best Practices and Patterns',
       slug: 'scalable-mobile-apps-best-practices',
-      excerpt: 'Learn the architectural patterns and best practices for building mobile applications that can scale with your business growth.',
+      excerpt:
+        'Learn the architectural patterns and best practices for building mobile applications that can scale with your business growth.',
       content: `
         <p>Building mobile applications that can scale with your business is crucial for long-term success. In this article, we'll explore the architectural patterns and best practices that will help you create robust, scalable mobile applications.</p>
 
@@ -120,12 +122,17 @@ const BlogDetail = () => {
         name: 'Sarah Johnson',
         avatar: null,
         role: 'Mobile Lead Developer',
-        bio: 'Expert mobile developer specializing in React Native and Flutter. Passionate about creating beautiful, performant mobile experiences.'
+        bio: 'Expert mobile developer specializing in React Native and Flutter. Passionate about creating beautiful, performant mobile experiences.',
       },
       publishedAt: '2024-01-10',
       readTime: '12 min read',
       image: null,
-      tags: ['Mobile Development', 'Architecture', 'React Native', 'Best Practices'],
+      tags: [
+        'Mobile Development',
+        'Architecture',
+        'React Native',
+        'Best Practices',
+      ],
       views: 980,
       likes: 67,
       comments: 18,
@@ -135,7 +142,8 @@ const BlogDetail = () => {
       id: 3,
       title: 'AI Integration in Business: A Practical Guide',
       slug: 'ai-integration-business-guide',
-      excerpt: 'Discover how to successfully integrate AI technologies into your business operations for improved efficiency and innovation.',
+      excerpt:
+        'Discover how to successfully integrate AI technologies into your business operations for improved efficiency and innovation.',
       content: `
         <p>Artificial Intelligence is transforming how businesses operate, making processes more efficient and enabling new capabilities. This guide will help you understand how to integrate AI into your business effectively.</p>
 
@@ -165,7 +173,7 @@ const BlogDetail = () => {
         name: 'Faisal Khan',
         avatar: null,
         role: 'CEO & Founder',
-        bio: 'Passionate technologist and entrepreneur with over 10 years of experience in software development. Founder of Limitless Infotech Solution, dedicated to helping businesses transform through technology.'
+        bio: 'Passionate technologist and entrepreneur with over 10 years of experience in software development. Founder of Limitless Infotech Solution, dedicated to helping businesses transform through technology.',
       },
       publishedAt: '2024-01-08',
       readTime: '10 min read',
@@ -175,7 +183,7 @@ const BlogDetail = () => {
       likes: 95,
       comments: 31,
       featured: true,
-    }
+    },
   ];
 
   // Find the current post
@@ -183,13 +191,16 @@ const BlogDetail = () => {
 
   // Get related posts (same category, different article)
   const relatedPosts = post
-    ? blogPosts.filter(p => p.category === post.category && p.id !== post.id).slice(0, 3)
+    ? blogPosts
+        .filter(p => p.category === post.category && p.id !== post.id)
+        .slice(0, 3)
     : [];
 
   // Get prev/next posts
   const currentIndex = blogPosts.findIndex(p => p.slug === slug);
   const prevPost = currentIndex > 0 ? blogPosts[currentIndex - 1] : null;
-  const nextPost = currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
+  const nextPost =
+    currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
 
   useEffect(() => {
     if (!post) {
@@ -204,7 +215,8 @@ const BlogDetail = () => {
     const handleScroll = () => {
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
       const progress = (scrollTop / (documentHeight - windowHeight)) * 100;
       setReadingProgress(Math.min(progress, 100));
     };
@@ -222,16 +234,17 @@ const BlogDetail = () => {
         avatar: null,
         comment: 'Great article! Very insightful and well-written.',
         date: '2024-01-16',
-        likes: 5
+        likes: 5,
       },
       {
         id: 2,
         author: 'Emily Davis',
         avatar: null,
-        comment: 'Thanks for sharing these trends. Looking forward to implementing some of these in our projects.',
+        comment:
+          'Thanks for sharing these trends. Looking forward to implementing some of these in our projects.',
         date: '2024-01-16',
-        likes: 3
-      }
+        likes: 3,
+      },
     ]);
   }, []);
 
@@ -243,7 +256,7 @@ const BlogDetail = () => {
     setLiked(!liked);
   };
 
-  const handleShare = (platform) => {
+  const handleShare = platform => {
     const url = window.location.href;
     const text = post.title;
 
@@ -251,7 +264,7 @@ const BlogDetail = () => {
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
       twitter: `https://twitter.com/intent/tweet?url=${url}&text=${text}`,
       linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
-      whatsapp: `https://wa.me/?text=${text} ${url}`
+      whatsapp: `https://wa.me/?text=${text} ${url}`,
     };
 
     if (platform === 'copy') {
@@ -262,7 +275,7 @@ const BlogDetail = () => {
     }
   };
 
-  const handleCommentSubmit = async (e) => {
+  const handleCommentSubmit = async e => {
     e.preventDefault();
     if (comment.trim()) {
       // Send notification about the comment
@@ -273,7 +286,7 @@ const BlogDetail = () => {
           comment: comment,
           author: 'You', // In a real app, this would be the actual user
           timestamp: new Date().toISOString(),
-          page: window.location.pathname
+          page: window.location.pathname,
         });
       } catch (error) {
         console.error('Error sending comment notification:', error);
@@ -285,19 +298,19 @@ const BlogDetail = () => {
         avatar: null,
         comment: comment,
         date: new Date().toISOString().split('T')[0],
-        likes: 0
+        likes: 0,
       };
       setComments([...comments, newComment]);
       setComment('');
     }
   };
 
-  const formatDate = (dateString) => {
+  const formatDate = dateString => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
-      day: 'numeric'
+      day: 'numeric',
     });
   };
 
@@ -328,7 +341,10 @@ const BlogDetail = () => {
           {/* Category Badge */}
           <div className="mb-6">
             <span className="inline-block px-4 py-2 bg-primary-600/20 text-primary-400 rounded-full text-sm font-medium">
-              {post.category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+              {post.category
+                .split('-')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ')}
             </span>
           </div>
 
@@ -403,7 +419,9 @@ const BlogDetail = () => {
                       : 'bg-dark-800 text-gray-400 hover:bg-red-500/20 hover:text-red-400'
                   }`}
                 >
-                  <HiHeart className={`w-5 h-5 ${liked ? 'fill-current' : ''}`} />
+                  <HiHeart
+                    className={`w-5 h-5 ${liked ? 'fill-current' : ''}`}
+                  />
                   <span>{liked ? post.likes + 1 : post.likes}</span>
                 </button>
 
@@ -456,7 +474,9 @@ const BlogDetail = () => {
 
           {/* Author Bio */}
           <div className="mb-12 bg-dark-800/50 rounded-2xl p-8 border border-dark-700">
-            <h3 className="text-xl font-bold text-white mb-4">About the Author</h3>
+            <h3 className="text-xl font-bold text-white mb-4">
+              About the Author
+            </h3>
             <div className="flex items-start space-x-4">
               <div className="flex-shrink-0">
                 <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center">
@@ -466,9 +486,15 @@ const BlogDetail = () => {
                 </div>
               </div>
               <div>
-                <h4 className="text-lg font-semibold text-white mb-1">{post.author.name}</h4>
-                <p className="text-primary-400 text-sm mb-3">{post.author.role}</p>
-                <p className="text-gray-400 leading-relaxed">{post.author.bio}</p>
+                <h4 className="text-lg font-semibold text-white mb-1">
+                  {post.author.name}
+                </h4>
+                <p className="text-primary-400 text-sm mb-3">
+                  {post.author.role}
+                </p>
+                <p className="text-gray-400 leading-relaxed">
+                  {post.author.bio}
+                </p>
               </div>
             </div>
           </div>
@@ -483,7 +509,7 @@ const BlogDetail = () => {
             <form onSubmit={handleCommentSubmit} className="mb-8">
               <textarea
                 value={comment}
-                onChange={(e) => setComment(e.target.value)}
+                onChange={e => setComment(e.target.value)}
                 placeholder="Share your thoughts..."
                 className="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary-600 mb-4"
                 rows="4"
@@ -499,8 +525,11 @@ const BlogDetail = () => {
 
             {/* Comments List */}
             <div className="space-y-6">
-              {comments.map((c) => (
-                <div key={c.id} className="bg-dark-800/30 rounded-xl p-6 border border-dark-700">
+              {comments.map(c => (
+                <div
+                  key={c.id}
+                  className="bg-dark-800/30 rounded-xl p-6 border border-dark-700"
+                >
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
                       <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
@@ -512,7 +541,9 @@ const BlogDetail = () => {
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
                         <h4 className="font-semibold text-white">{c.author}</h4>
-                        <span className="text-sm text-gray-500">{formatDate(c.date)}</span>
+                        <span className="text-sm text-gray-500">
+                          {formatDate(c.date)}
+                        </span>
                       </div>
                       <p className="text-gray-300 mb-3">{c.comment}</p>
                       <button className="text-sm text-gray-400 hover:text-primary-400 transition-colors">
@@ -571,7 +602,7 @@ const BlogDetail = () => {
               </h2>
 
               <div className="grid md:grid-cols-3 gap-8">
-                {relatedPosts.map((relatedPost) => (
+                {relatedPosts.map(relatedPost => (
                   <Link
                     key={relatedPost.id}
                     to={`/blog/${relatedPost.slug}`}
@@ -616,7 +647,8 @@ const BlogDetail = () => {
               Ready to Transform Your Business?
             </h2>
             <p className="text-gray-300 mb-8">
-              Let's discuss how we can help you leverage the latest technologies to achieve your business goals.
+              Let's discuss how we can help you leverage the latest technologies
+              to achieve your business goals.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/get-started" className="btn-primary">

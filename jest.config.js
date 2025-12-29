@@ -22,7 +22,10 @@ module.exports = {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['@babel/preset-react'] }],
+    '^.+\\.(js|jsx|ts|tsx)$': [
+      'babel-jest',
+      { presets: ['@babel/preset-react'] },
+    ],
   },
   transformIgnorePatterns: [
     '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$',
@@ -50,7 +53,7 @@ module.exports = {
   ],
   globals: {
     crypto: {
-      getRandomValues: (arr) => require('crypto').randomBytes(arr.length)
-    }
-  }
+      getRandomValues: arr => require('crypto').randomBytes(arr.length),
+    },
+  },
 };

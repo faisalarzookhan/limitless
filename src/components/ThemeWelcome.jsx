@@ -27,12 +27,12 @@ const ThemeWelcome = () => {
     localStorage.setItem('themeWelcomeShown', 'true');
   };
 
-  const handleThemeSelect = (selectedTheme) => {
+  const handleThemeSelect = selectedTheme => {
     changeTheme(selectedTheme);
     handleClose();
   };
 
-  const getThemeIcon = (themeName) => {
+  const getThemeIcon = themeName => {
     if (themeName === 'dark') return <HiMoon className="w-6 h-6" />;
     if (themeName === 'light') return <HiSun className="w-6 h-6" />;
     return <HiSparkles className="w-6 h-6" />;
@@ -67,7 +67,9 @@ const ThemeWelcome = () => {
               </div>
               <div>
                 <h2 className="text-2xl font-bold">Welcome!</h2>
-                <p className="text-sm text-white/90">Limitless Infotech Solution</p>
+                <p className="text-sm text-white/90">
+                  Limitless Infotech Solution
+                </p>
               </div>
             </div>
           </div>
@@ -78,7 +80,8 @@ const ThemeWelcome = () => {
               Choose Your Preferred Theme
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
-              Select a theme that suits your preference. You can change it anytime from the navigation bar.
+              Select a theme that suits your preference. You can change it
+              anytime from the navigation bar.
             </p>
 
             {/* Theme Options */}
@@ -92,21 +95,35 @@ const ThemeWelcome = () => {
                     : 'border-gray-200 dark:border-dark-700 hover:border-primary-300 dark:hover:border-primary-600 bg-white dark:bg-dark-700'
                 }`}
               >
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                  theme === 'light'
-                    ? 'bg-yellow-100 text-yellow-600'
-                    : 'bg-gray-100 dark:bg-dark-600 text-gray-600 dark:text-gray-400'
-                }`}>
+                <div
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                    theme === 'light'
+                      ? 'bg-yellow-100 text-yellow-600'
+                      : 'bg-gray-100 dark:bg-dark-600 text-gray-600 dark:text-gray-400'
+                  }`}
+                >
                   <HiSun className="w-6 h-6" />
                 </div>
                 <div className="flex-1 text-left">
-                  <p className="font-semibold text-gray-900 dark:text-white">Light Mode</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Bright and clean interface</p>
+                  <p className="font-semibold text-gray-900 dark:text-white">
+                    Light Mode
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    Bright and clean interface
+                  </p>
                 </div>
                 {theme === 'light' && (
                   <div className="w-5 h-5 bg-primary-500 rounded-full flex items-center justify-center">
-                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <svg
+                      className="w-3 h-3 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                   </div>
                 )}
@@ -121,21 +138,35 @@ const ThemeWelcome = () => {
                     : 'border-gray-200 dark:border-dark-700 hover:border-primary-300 dark:hover:border-primary-600 bg-white dark:bg-dark-700'
                 }`}
               >
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                  theme === 'dark'
-                    ? 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400'
-                    : 'bg-gray-100 dark:bg-dark-600 text-gray-600 dark:text-gray-400'
-                }`}>
+                <div
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                    theme === 'dark'
+                      ? 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400'
+                      : 'bg-gray-100 dark:bg-dark-600 text-gray-600 dark:text-gray-400'
+                  }`}
+                >
                   <HiMoon className="w-6 h-6" />
                 </div>
                 <div className="flex-1 text-left">
-                  <p className="font-semibold text-gray-900 dark:text-white">Dark Mode</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Easy on the eyes</p>
+                  <p className="font-semibold text-gray-900 dark:text-white">
+                    Dark Mode
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    Easy on the eyes
+                  </p>
                 </div>
                 {theme === 'dark' && (
                   <div className="w-5 h-5 bg-primary-500 rounded-full flex items-center justify-center">
-                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <svg
+                      className="w-3 h-3 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                   </div>
                 )}
@@ -150,21 +181,35 @@ const ThemeWelcome = () => {
                     : 'border-gray-200 dark:border-dark-700 hover:border-primary-300 dark:hover:border-primary-600 bg-white dark:bg-dark-700'
                 }`}
               >
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                  theme === 'system'
-                    ? 'bg-gradient-to-br from-primary-100 to-secondary-100 text-primary-600 dark:from-primary-900/30 dark:to-secondary-900/30 dark:text-primary-400'
-                    : 'bg-gray-100 dark:bg-dark-600 text-gray-600 dark:text-gray-400'
-                }`}>
+                <div
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                    theme === 'system'
+                      ? 'bg-gradient-to-br from-primary-100 to-secondary-100 text-primary-600 dark:from-primary-900/30 dark:to-secondary-900/30 dark:text-primary-400'
+                      : 'bg-gray-100 dark:bg-dark-600 text-gray-600 dark:text-gray-400'
+                  }`}
+                >
                   <HiSparkles className="w-6 h-6" />
                 </div>
                 <div className="flex-1 text-left">
-                  <p className="font-semibold text-gray-900 dark:text-white">System Default</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Matches your device settings</p>
+                  <p className="font-semibold text-gray-900 dark:text-white">
+                    System Default
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    Matches your device settings
+                  </p>
                 </div>
                 {theme === 'system' && (
                   <div className="w-5 h-5 bg-primary-500 rounded-full flex items-center justify-center">
-                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <svg
+                      className="w-3 h-3 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                   </div>
                 )}

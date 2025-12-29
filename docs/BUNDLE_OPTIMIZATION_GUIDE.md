@@ -9,26 +9,31 @@ The project implements code splitting and chunking to optimize the bundle size a
 ## Chunking Strategy
 
 ### React and Core Dependencies
+
 - `react.js` - Contains React and ReactDOM
 - `react-vendor.js` - Contains React Router DOM and React Scroll
 - `scheduler.js` - React's scheduler dependency
 
 ### UI and Animation Libraries
+
 - `animation.js` - Contains Framer Motion for animations
 - `swiper.js` - Contains Swiper library for carousels
 - `icons.js` - Contains React Icons
 
 ### Vendor Libraries
+
 - Other dependencies are chunked by package name (e.g., `vendor-framer-motion.js`)
 
 ## Performance Improvements
 
 ### Before Optimization
+
 - Single large chunks exceeding 500 kB
 - Slower initial load times
 - Less efficient caching
 
 ### After Optimization
+
 - Chunks are now properly separated
 - Better caching strategy (framework code separated from app code)
 - Improved loading performance

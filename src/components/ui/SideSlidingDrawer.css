@@ -4,7 +4,9 @@
  */
 
 .limitless-drawer {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: #333;
   box-sizing: border-box;
 }
@@ -176,20 +178,20 @@
     width: 100% !important;
     max-width: 100vw !important;
   }
-  
+
   .drawer-top,
   .drawer-bottom {
     height: 50vh !important;
   }
-  
+
   .drawer-header {
     padding: 0.75rem 1rem;
   }
-  
+
   .drawer-title {
     font-size: 1.1rem;
   }
-  
+
   .drawer-content {
     padding: 1rem;
   }
@@ -200,7 +202,7 @@
   .limitless-drawer {
     border: 2px solid;
   }
-  
+
   .drawer-header {
     border-bottom-width: 2px;
   }

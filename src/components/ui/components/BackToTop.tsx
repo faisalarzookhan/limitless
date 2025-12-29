@@ -8,10 +8,10 @@ interface BackToTopProps {
   children?: React.ReactNode;
 }
 
-const BackToTop: React.FC<BackToTopProps> = ({ 
-  threshold = 300, 
+const BackToTop: React.FC<BackToTopProps> = ({
+  threshold = 300,
   className = 'scroll-to-top',
-  children 
+  children,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -31,7 +31,7 @@ const BackToTop: React.FC<BackToTopProps> = ({
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   };
 

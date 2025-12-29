@@ -6,7 +6,7 @@ class ScalingConfig {
     this.policies = new Map();
     this.metrics = new Map();
     this.scalingHistory = [];
-    
+
     this.setupDefaultPolicies();
   }
 
@@ -24,13 +24,13 @@ class ScalingConfig {
       scaleUp: {
         threshold: 75,
         adjustment: '+2',
-        gracePeriod: 120
+        gracePeriod: 120,
       },
       scaleDown: {
         threshold: 25,
         adjustment: '-1',
-        gracePeriod: 300
-      }
+        gracePeriod: 300,
+      },
     });
 
     // Memory-based scaling policy
@@ -45,13 +45,13 @@ class ScalingConfig {
       scaleUp: {
         threshold: 80,
         adjustment: '+1',
-        gracePeriod: 180
+        gracePeriod: 180,
       },
       scaleDown: {
         threshold: 30,
         adjustment: '-1',
-        gracePeriod: 450
-      }
+        gracePeriod: 450,
+      },
     });
 
     // Request-based scaling policy
@@ -66,13 +66,13 @@ class ScalingConfig {
       scaleUp: {
         threshold: 100,
         adjustment: '+3',
-        gracePeriod: 60
+        gracePeriod: 60,
       },
       scaleDown: {
         threshold: 20,
         adjustment: '-1',
-        gracePeriod: 240
-      }
+        gracePeriod: 240,
+      },
     });
 
     // Response time-based scaling policy
@@ -87,13 +87,13 @@ class ScalingConfig {
       scaleUp: {
         threshold: 2000,
         adjustment: '+2',
-        gracePeriod: 90
+        gracePeriod: 90,
       },
       scaleDown: {
         threshold: 500,
         adjustment: '-1',
-        gracePeriod: 300
-      }
+        gracePeriod: 300,
+      },
     });
   }
 
@@ -104,14 +104,16 @@ class ScalingConfig {
       ...config,
       lastValue: null,
       lastUpdate: null,
-      status: 'registered'
+      status: 'registered',
     });
   }
 
   // Create a scaling policy
   createScalingPolicy(policyConfig) {
     const policy = {
-      id: policyConfig.id || `scaling-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      id:
+        policyConfig.id ||
+        `scaling-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       name: policyConfig.name,
       description: policyConfig.description,
       metric: policyConfig.metric,
@@ -123,7 +125,7 @@ class ScalingConfig {
       scaleDown: policyConfig.scaleDown,
       enabled: policyConfig.enabled !== false,
       lastAction: null,
-      status: 'created'
+      status: 'created',
     };
 
     this.policies.set(policy.id, policy);
@@ -143,8 +145,10 @@ class ScalingConfig {
     }
 
     // Check cooldown period
-    if (policy.lastAction && 
-        Date.now() - policy.lastAction.timestamp < policy.cooldown * 1000) {
+    if (
+      policy.lastAction &&
+      Date.now() - policy.lastAction.timestamp < policy.cooldown * 1000
+    ) {
       return { action: 'none', reason: 'Cooldown period active' };
     }
 
@@ -153,13 +157,13 @@ class ScalingConfig {
       return {
         action: 'scale-up',
         adjustment: policy.scaleUp.adjustment,
-        reason: `Metric ${metric.name} (${metric.lastValue}) exceeds scale-up threshold (${policy.scaleUp.threshold})`
+        reason: `Metric ${metric.name} (${metric.lastValue}) exceeds scale-up threshold (${policy.scaleUp.threshold})`,
       };
     } else if (metric.lastValue < policy.scaleDown.threshold) {
       return {
         action: 'scale-down',
         adjustment: policy.scaleDown.adjustment,
-        reason: `Metric ${metric.name} (${metric.lastValue}) below scale-down threshold (${policy.scaleDown.threshold})`
+        reason: `Metric ${metric.name} (${metric.lastValue}) below scale-down threshold (${policy.scaleDown.threshold})`,
       };
     }
 
@@ -173,7 +177,9 @@ class ScalingConfig {
       throw new Error(`Scaling policy not found: ${policyId}`);
     }
 
-    console.log(`Applying scaling action: ${action.action} for policy ${policy.name}`);
+    console.log(
+      `Applying scaling action: ${action.action} for policy ${policy.name}`
+    );
 
     // In a real implementation, this would call cloud provider APIs
     // For now, we'll simulate the action
@@ -187,7 +193,7 @@ class ScalingConfig {
       adjustment: action.adjustment,
       reason: action.reason,
       timestamp: new Date(),
-      status: 'completed'
+      status: 'completed',
     };
 
     this.scalingHistory.push(scalingRecord);
@@ -199,11 +205,13 @@ class ScalingConfig {
   // Simulate scaling action (for demonstration)
   async simulateScalingAction(action, policy) {
     console.log(`Simulating ${action.action} action: ${action.adjustment}`);
-    
+
     // Simulate scaling operation
     await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    console.log(`${action.action} operation completed for policy: ${policy.name}`);
+
+    console.log(
+      `${action.action} operation completed for policy: ${policy.name}`
+    );
   }
 
   // Update metric value
@@ -227,10 +235,12 @@ class ScalingConfig {
       if (policy.enabled) {
         const action = this.evaluateScalingAction(policyId);
         if (action.action !== 'none') {
-          this.applyScalingAction(policyId, action)
-            .catch(error => {
-              console.error(`Failed to apply scaling action for policy ${policyId}:`, error);
-            });
+          this.applyScalingAction(policyId, action).catch(error => {
+            console.error(
+              `Failed to apply scaling action for policy ${policyId}:`,
+              error
+            );
+          });
         }
       }
     }
@@ -255,14 +265,18 @@ class ScalingConfig {
   getScalingStatus() {
     return {
       totalPolicies: this.policies.size,
-      activePolicies: Array.from(this.policies.values()).filter(p => p.enabled).length,
+      activePolicies: Array.from(this.policies.values()).filter(p => p.enabled)
+        .length,
       metrics: Array.from(this.metrics.values()).map(m => ({
         name: m.name,
         lastValue: m.lastValue,
         lastUpdate: m.lastUpdate,
-        status: m.status
+        status: m.status,
       })),
-      lastScalingAction: this.scalingHistory.length > 0 ? this.scalingHistory[this.scalingHistory.length - 1] : null
+      lastScalingAction:
+        this.scalingHistory.length > 0
+          ? this.scalingHistory[this.scalingHistory.length - 1]
+          : null,
     };
   }
 
@@ -272,7 +286,7 @@ class ScalingConfig {
     if (!policy) {
       throw new Error(`Policy not found: ${policyId}`);
     }
-    
+
     policy.enabled = enabled;
     return policy;
   }
@@ -285,46 +299,56 @@ class ScalingConfig {
   // Get recommended instance count based on all active policies
   getRecommendedInstanceCount() {
     const recommendations = [];
-    
+
     for (const [policyId, policy] of this.policies) {
       if (!policy.enabled) continue;
-      
+
       const metric = this.metrics.get(policy.metric);
       if (!metric || metric.lastValue === null) continue;
-      
+
       let recommended = policy.minInstances;
-      
+
       if (metric.lastValue > policy.scaleUp.threshold) {
         // Scale up based on the adjustment
-        const adjustment = parseInt(policy.scaleUp.adjustment.replace(/[^\d-+]/g, ''));
-        recommended = Math.min(policy.maxInstances, policy.minInstances + adjustment);
+        const adjustment = parseInt(
+          policy.scaleUp.adjustment.replace(/[^\d-+]/g, '')
+        );
+        recommended = Math.min(
+          policy.maxInstances,
+          policy.minInstances + adjustment
+        );
       } else if (metric.lastValue < policy.scaleDown.threshold) {
         // Scale down based on the adjustment
-        const adjustment = parseInt(policy.scaleDown.adjustment.replace(/[^\d-+]/g, ''));
-        recommended = Math.max(policy.minInstances, policy.minInstances + adjustment);
+        const adjustment = parseInt(
+          policy.scaleDown.adjustment.replace(/[^\d-+]/g, '')
+        );
+        recommended = Math.max(
+          policy.minInstances,
+          policy.minInstances + adjustment
+        );
       } else {
         // Keep current level
         recommended = policy.minInstances;
       }
-      
+
       recommendations.push({
         policy: policy.name,
         recommended: recommended,
         current: metric.lastValue,
-        threshold: policy.threshold
+        threshold: policy.threshold,
       });
     }
-    
+
     // Return the maximum recommended count from all policies
     if (recommendations.length === 0) {
       return { recommended: 1, recommendations: [] };
     }
-    
+
     const maxRecommended = Math.max(...recommendations.map(r => r.recommended));
-    
+
     return {
       recommended: maxRecommended,
-      recommendations
+      recommendations,
     };
   }
 
@@ -334,25 +358,25 @@ class ScalingConfig {
     this.registerMetric('cpu_utilization', {
       description: 'CPU utilization percentage',
       unit: 'percentage',
-      range: [0, 100]
+      range: [0, 100],
     });
 
     this.registerMetric('memory_utilization', {
       description: 'Memory utilization percentage',
       unit: 'percentage',
-      range: [0, 100]
+      range: [0, 100],
     });
 
     this.registerMetric('requests_per_second', {
       description: 'Requests per second',
       unit: 'rps',
-      range: [0, Infinity]
+      range: [0, Infinity],
     });
 
     this.registerMetric('avg_response_time', {
       description: 'Average response time in milliseconds',
       unit: 'ms',
-      range: [0, Infinity]
+      range: [0, Infinity],
     });
 
     // Create additional custom policies
@@ -367,13 +391,13 @@ class ScalingConfig {
       scaleUp: {
         threshold: 50,
         adjustment: '+2',
-        gracePeriod: 120
+        gracePeriod: 120,
       },
       scaleDown: {
         threshold: 10,
         adjustment: '-1',
-        gracePeriod: 300
-      }
+        gracePeriod: 300,
+      },
     });
   }
 

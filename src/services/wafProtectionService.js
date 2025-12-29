@@ -1,6 +1,6 @@
 /**
  * WAF (Web Application Firewall) Protection Service
- * Deployment of Cloudflare/AWS WAF to protect sub-domains from SQL injection, 
+ * Deployment of Cloudflare/AWS WAF to protect sub-domains from SQL injection,
  * DDoS attacks, and cross-site scripting (XSS).
  */
 
@@ -14,10 +14,10 @@ class WAFProtectionService {
     this.attackLogs = [];
     this.maxLogs = 1000; // Keep only the most recent logs
     this.monitoringInterval = null;
-    
+
     // Initialize WAF rules
     this.initializeDefaultRules();
-    
+
     // Start monitoring for suspicious activities
     this.startMonitoring();
   }
@@ -29,19 +29,21 @@ class WAFProtectionService {
     // SQL Injection patterns
     this.rules.set('sql_injection', {
       id: 'sql_injection',
-      pattern: /(\b(union|select|insert|delete|update|drop|create|alter|exec|execute|script)\b.*\b(from|where|table|database)\b)|('|--|;|--\s*\w)/gi,
+      pattern:
+        /(\b(union|select|insert|delete|update|drop|create|alter|exec|execute|script)\b.*\b(from|where|table|database)\b)|('|--|;|--\s*\w)/gi,
       severity: 'high',
       action: 'block',
-      description: 'SQL Injection attempts'
+      description: 'SQL Injection attempts',
     });
 
     // XSS patterns
     this.rules.set('xss', {
       id: 'xss',
-      pattern: /(<script|javascript:|on\w+\s*=|<iframe|<object|<embed|data:text\/)/gi,
+      pattern:
+        /(<script|javascript:|on\w+\s*=|<iframe|<object|<embed|data:text\/)/gi,
       severity: 'high',
       action: 'block',
-      description: 'Cross-Site Scripting attempts'
+      description: 'Cross-Site Scripting attempts',
     });
 
     // Path traversal patterns
@@ -50,7 +52,7 @@ class WAFProtectionService {
       pattern: /(\.\.\/|\.\.\\|%2e%2e%2f|%2e%2e%5c|\.\.\%2f)/gi,
       severity: 'high',
       action: 'block',
-      description: 'Path traversal attempts'
+      description: 'Path traversal attempts',
     });
 
     // Command injection patterns
@@ -59,7 +61,7 @@ class WAFProtectionService {
       pattern: /(;|\||`|\\\$|\n|\r|\0|\x00)/gi,
       severity: 'high',
       action: 'block',
-      description: 'Command injection attempts'
+      description: 'Command injection attempts',
     });
 
     // DDoS protection rules
@@ -68,7 +70,7 @@ class WAFProtectionService {
       pattern: null, // DDoS is handled by rate limiting
       severity: 'medium',
       action: 'rate_limit',
-      description: 'DDoS protection through rate limiting'
+      description: 'DDoS protection through rate limiting',
     });
 
     // Add more security rules as needed
@@ -79,9 +81,12 @@ class WAFProtectionService {
    */
   startMonitoring() {
     // Clean up old logs periodically
-    this.monitoringInterval = setInterval(() => {
-      this.cleanupOldLogs();
-    }, 5 * 60 * 1000); // Every 5 minutes
+    this.monitoringInterval = setInterval(
+      () => {
+        this.cleanupOldLogs();
+      },
+      5 * 60 * 1000
+    ); // Every 5 minutes
   }
 
   /**
@@ -130,7 +135,7 @@ class WAFProtectionService {
       allowed: true,
       violations: [],
       action: 'allow',
-      matchedRules: []
+      matchedRules: [],
     };
 
     // Check if IP is blacklisted
@@ -141,7 +146,7 @@ class WAFProtectionService {
       result.violations.push({
         ruleId: 'ip_blacklist',
         severity: 'high',
-        message: `IP ${clientIP} is blacklisted`
+        message: `IP ${clientIP} is blacklisted`,
       });
       return result;
     }
@@ -161,7 +166,9 @@ class WAFProtectionService {
 
     // Check request body for malicious patterns
     if (request.body) {
-      const bodyViolations = this.checkForViolations(JSON.stringify(request.body));
+      const bodyViolations = this.checkForViolations(
+        JSON.stringify(request.body)
+      );
       result.violations.push(...bodyViolations);
       if (bodyViolations.length > 0) {
         result.allowed = false;
@@ -171,7 +178,9 @@ class WAFProtectionService {
 
     // Check query parameters for malicious patterns
     if (request.query) {
-      const queryViolations = this.checkForViolations(JSON.stringify(request.query));
+      const queryViolations = this.checkForViolations(
+        JSON.stringify(request.query)
+      );
       result.violations.push(...queryViolations);
       if (queryViolations.length > 0) {
         result.allowed = false;
@@ -181,7 +190,9 @@ class WAFProtectionService {
 
     // Check headers for malicious patterns
     if (request.headers) {
-      const headerViolations = this.checkForViolations(JSON.stringify(request.headers));
+      const headerViolations = this.checkForViolations(
+        JSON.stringify(request.headers)
+      );
       result.violations.push(...headerViolations);
       if (headerViolations.length > 0) {
         result.allowed = false;
@@ -226,7 +237,7 @@ class WAFProtectionService {
         violations.push({
           ruleId,
           severity: rule.severity,
-          message: `Matched ${rule.description}: ${data.substring(0, 100)}...`
+          message: `Matched ${rule.description}: ${data.substring(0, 100)}...`,
         });
       }
     }
@@ -244,14 +255,14 @@ class WAFProtectionService {
     const result = {
       allowed: true,
       action: 'allow',
-      violation: null
+      violation: null,
     };
 
     // Get or create rate limiting record for this IP
     if (!this.rateLimiting.has(ip)) {
       this.rateLimiting.set(ip, {
         requests: [],
-        lastReset: Date.now()
+        lastReset: Date.now(),
       });
     }
 
@@ -260,33 +271,38 @@ class WAFProtectionService {
     const windowMs = 60 * 1000; // 1 minute window
 
     // Clean up old requests outside the window
-    ipRecord.requests = ipRecord.requests.filter(req => now - req.timestamp < windowMs);
+    ipRecord.requests = ipRecord.requests.filter(
+      req => now - req.timestamp < windowMs
+    );
 
     // Add current request
     ipRecord.requests.push({
       timestamp: now,
       url: request.url,
-      method: request.method
+      method: request.method,
     });
 
     // Define rate limits based on request type
     const maxRequests = this.getMaxRequestsForEndpoint(request.url);
-    
+
     if (ipRecord.requests.length > maxRequests) {
       result.allowed = false;
       result.action = 'rate_limit';
       result.violation = {
         ruleId: 'rate_limiting',
         severity: 'medium',
-        message: `Rate limit exceeded: ${ipRecord.requests.length} requests in ${windowMs/1000} seconds (max: ${maxRequests})`
+        message: `Rate limit exceeded: ${ipRecord.requests.length} requests in ${windowMs / 1000} seconds (max: ${maxRequests})`,
       };
 
       // Temporarily block the IP for 5 minutes
       this.addToBlacklist(ip);
-      setTimeout(() => {
-        this.blockedIPs.delete(ip);
-        console.log(`IP ${ip} removed from temporary block`);
-      }, 5 * 60 * 1000); // 5 minutes
+      setTimeout(
+        () => {
+          this.blockedIPs.delete(ip);
+          console.log(`IP ${ip} removed from temporary block`);
+        },
+        5 * 60 * 1000
+      ); // 5 minutes
     }
 
     return result;
@@ -315,13 +331,15 @@ class WAFProtectionService {
    */
   getClientIP(request) {
     // Try to get IP from various headers (in case of proxies/load balancers)
-    return request.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
-           request.headers['x-real-ip']?.split(',')[0]?.trim() ||
-           request.connection?.remoteAddress ||
-           request.socket?.remoteAddress ||
-           request.connection?.socket?.remoteAddress ||
-           request.ip ||
-           'unknown';
+    return (
+      request.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
+      request.headers['x-real-ip']?.split(',')[0]?.trim() ||
+      request.connection?.remoteAddress ||
+      request.socket?.remoteAddress ||
+      request.connection?.socket?.remoteAddress ||
+      request.ip ||
+      'unknown'
+    );
   }
 
   /**
@@ -338,7 +356,7 @@ class WAFProtectionService {
       method: request.method,
       userAgent: request.headers?.['user-agent'],
       violations: result.violations,
-      matchedRules: result.matchedRules
+      matchedRules: result.matchedRules,
     };
 
     this.attackLogs.push(attackLog);
@@ -365,7 +383,10 @@ class WAFProtectionService {
     const cleanupThreshold = 60 * 60 * 1000; // 1 hour
 
     for (const [ip, record] of this.rateLimiting) {
-      if (now - record.lastReset > cleanupThreshold && record.requests.length === 0) {
+      if (
+        now - record.lastReset > cleanupThreshold &&
+        record.requests.length === 0
+      ) {
         this.rateLimiting.delete(ip);
       }
     }
@@ -382,12 +403,12 @@ class WAFProtectionService {
       bySeverity: {
         high: 0,
         medium: 0,
-        low: 0
+        low: 0,
       },
       byRule: {},
       topAttackingIPs: {},
       totalWhitelisted: this.whitelistedIPs.size,
-      totalBlacklisted: this.blockedIPs.size
+      totalBlacklisted: this.blockedIPs.size,
     };
 
     // Count by severity
@@ -415,7 +436,7 @@ class WAFProtectionService {
     const sortedIPs = Object.entries(stats.topAttackingIPs)
       .sort((a, b) => b[1] - a[1])
       .slice(0, 10); // Top 10
-    
+
     stats.topAttackingIPs = Object.fromEntries(sortedIPs);
 
     return stats;
@@ -432,7 +453,7 @@ class WAFProtectionService {
       blacklistedIPs: Array.from(this.blockedIPs),
       protectedEndpoints: Array.from(this.protectedEndpoints),
       rateLimitingEnabled: true,
-      monitoringActive: !!this.monitoringInterval
+      monitoringActive: !!this.monitoringInterval,
     };
   }
 
@@ -447,7 +468,7 @@ class WAFProtectionService {
       pattern: rule.pattern,
       severity: rule.severity || 'medium',
       action: rule.action || 'block',
-      description: rule.description || 'Custom rule'
+      description: rule.description || 'Custom rule',
     });
   }
 
@@ -481,18 +502,20 @@ class WAFProtectionService {
         query: req.query,
         connection: req.connection,
         socket: req.socket,
-        ip: req.ip
+        ip: req.ip,
       });
 
       if (!validationResult.allowed) {
         // Log the blocked request
-        console.log(`WAF BLOCKED REQUEST: ${validationResult.violations.map(v => v.message).join(', ')}`);
+        console.log(
+          `WAF BLOCKED REQUEST: ${validationResult.violations.map(v => v.message).join(', ')}`
+        );
 
         // Return 403 Forbidden for blocked requests
         return res.status(403).json({
           error: 'Request blocked by WAF',
           violations: validationResult.violations,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
       }
 
@@ -508,7 +531,7 @@ class WAFProtectionService {
     if (this.monitoringInterval) {
       clearInterval(this.monitoringInterval);
     }
-    
+
     console.log('WAF Protection service shut down gracefully');
   }
 }

@@ -1,19 +1,19 @@
 import React from 'react';
 
-const FormFieldWrapper = ({ 
-  label, 
-  id, 
-  required = false, 
-  error, 
-  children, 
+const FormFieldWrapper = ({
+  label,
+  id,
+  required = false,
+  error,
+  children,
   description,
-  className = "" 
+  className = '',
 }) => {
   return (
     <div className={`space-y-2 ${className}`}>
       {label && (
-        <label 
-          htmlFor={id} 
+        <label
+          htmlFor={id}
           className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
         >
           {label} {required && <span className="text-red-500">*</span>}
@@ -26,7 +26,10 @@ const FormFieldWrapper = ({
         </p>
       )}
       {error && (
-        <p className="text-sm text-red-600 dark:text-red-400 mt-1" id={`${id}-error`}>
+        <p
+          className="text-sm text-red-600 dark:text-red-400 mt-1"
+          id={`${id}-error`}
+        >
           {error}
         </p>
       )}

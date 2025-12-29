@@ -1,5 +1,16 @@
 import { useState } from 'react';
-import { HiChat, HiPhone, HiGlobe, HiUserGroup, HiLightBulb, HiSparkles, HiChartBar, HiShieldCheck, HiClock, HiCheckCircle } from 'react-icons/hi';
+import {
+  HiChat,
+  HiPhone,
+  HiGlobe,
+  HiUserGroup,
+  HiLightBulb,
+  HiSparkles,
+  HiChartBar,
+  HiShieldCheck,
+  HiClock,
+  HiCheckCircle,
+} from 'react-icons/hi';
 import WhatsAppBusinessIntegration from '../components/WhatsAppBusinessIntegration';
 
 const WhatsAppIntegrationPage = () => {
@@ -7,88 +18,100 @@ const WhatsAppIntegrationPage = () => {
 
   const features = [
     {
-      title: "24/7 Availability",
-      description: "Always-on support through WhatsApp Business API",
+      title: '24/7 Availability',
+      description: 'Always-on support through WhatsApp Business API',
       icon: HiClock,
-      color: "from-green-500 to-emerald-500"
+      color: 'from-green-500 to-emerald-500',
     },
     {
-      title: "Quick Responses",
-      description: "Instant replies to common customer queries",
+      title: 'Quick Responses',
+      description: 'Instant replies to common customer queries',
       icon: HiChat,
-      color: "from-blue-500 to-cyan-500"
+      color: 'from-blue-500 to-cyan-500',
     },
     {
-      title: "Multilingual Support",
-      description: "Support in multiple languages for global reach",
+      title: 'Multilingual Support',
+      description: 'Support in multiple languages for global reach',
       icon: HiGlobe,
-      color: "from-purple-500 to-pink-500"
+      color: 'from-purple-500 to-pink-500',
     },
     {
-      title: "Seamless Integration",
-      description: "Connect with existing CRM and support systems",
+      title: 'Seamless Integration',
+      description: 'Connect with existing CRM and support systems',
       icon: HiUserGroup,
-      color: "from-yellow-500 to-amber-500"
-    }
+      color: 'from-yellow-500 to-amber-500',
+    },
   ];
 
   const benefits = [
     {
-      title: "Faster Response Times",
-      description: "Reduce average response time from hours to minutes",
-      metric: "75% faster"
+      title: 'Faster Response Times',
+      description: 'Reduce average response time from hours to minutes',
+      metric: '75% faster',
     },
     {
-      title: "Higher Engagement",
-      description: "WhatsApp has 98% message open rate vs 20% for email",
-      metric: "4.9x more"
+      title: 'Higher Engagement',
+      description: 'WhatsApp has 98% message open rate vs 20% for email',
+      metric: '4.9x more',
     },
     {
-      title: "Cost Efficiency",
-      description: "Reduce support costs by automating common queries",
-      metric: "60% less"
+      title: 'Cost Efficiency',
+      description: 'Reduce support costs by automating common queries',
+      metric: '60% less',
     },
     {
-      title: "Better Customer Satisfaction",
-      description: "Instant, convenient support increases satisfaction",
-      metric: "85% rated"
-    }
+      title: 'Better Customer Satisfaction',
+      description: 'Instant, convenient support increases satisfaction',
+      metric: '85% rated',
+    },
   ];
 
   const useCases = [
     {
-      title: "Lead Generation",
-      description: "Capture leads directly through WhatsApp conversations"
+      title: 'Lead Generation',
+      description: 'Capture leads directly through WhatsApp conversations',
     },
     {
-      title: "Customer Support",
-      description: "Provide instant support and resolve issues quickly"
+      title: 'Customer Support',
+      description: 'Provide instant support and resolve issues quickly',
     },
     {
-      title: "Appointment Scheduling",
-      description: "Schedule meetings and demos via WhatsApp"
+      title: 'Appointment Scheduling',
+      description: 'Schedule meetings and demos via WhatsApp',
     },
     {
-      title: "Order Tracking",
-      description: "Send order updates and delivery notifications"
+      title: 'Order Tracking',
+      description: 'Send order updates and delivery notifications',
     },
     {
-      title: "Marketing Campaigns",
-      description: "Send personalized marketing messages to customers"
+      title: 'Marketing Campaigns',
+      description: 'Send personalized marketing messages to customers',
     },
     {
-      title: "Feedback Collection",
-      description: "Collect customer feedback and reviews"
-    }
+      title: 'Feedback Collection',
+      description: 'Collect customer feedback and reviews',
+    },
   ];
 
   const integrations = [
-    { name: 'WhatsApp Business API', description: 'Official WhatsApp integration' },
-    { name: 'Facebook Business', description: 'Connect with Facebook Messenger' },
-    { name: 'CRM Systems', description: 'Integrate with Salesforce, HubSpot, etc.' },
-    { name: 'Helpdesk Software', description: 'Connect with Zendesk, Freshdesk' },
+    {
+      name: 'WhatsApp Business API',
+      description: 'Official WhatsApp integration',
+    },
+    {
+      name: 'Facebook Business',
+      description: 'Connect with Facebook Messenger',
+    },
+    {
+      name: 'CRM Systems',
+      description: 'Integrate with Salesforce, HubSpot, etc.',
+    },
+    {
+      name: 'Helpdesk Software',
+      description: 'Connect with Zendesk, Freshdesk',
+    },
     { name: 'Marketing Tools', description: 'Sync with Mailchimp, Klaviyo' },
-    { name: 'Analytics', description: 'Track performance and engagement' }
+    { name: 'Analytics', description: 'Track performance and engagement' },
   ];
 
   return (
@@ -107,7 +130,8 @@ const WhatsAppIntegrationPage = () => {
               Business Integration
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8">
-              Connect with customers on the world's most popular messaging platform
+              Connect with customers on the world's most popular messaging
+              platform
             </p>
             <button
               onClick={() => setShowDemo(true)}
@@ -136,7 +160,9 @@ const WhatsAppIntegrationPage = () => {
               const Icon = feature.icon;
               return (
                 <div key={index} className="text-center">
-                  <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mx-auto mb-6`}>
+                  <div
+                    className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mx-auto mb-6`}
+                  >
                     <Icon className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
@@ -166,7 +192,10 @@ const WhatsAppIntegrationPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {benefits.map((benefit, index) => (
-              <div key={index} className="bg-white dark:bg-dark-800 rounded-xl p-6 shadow-soft border border-gray-100 dark:border-dark-700 text-center">
+              <div
+                key={index}
+                className="bg-white dark:bg-dark-800 rounded-xl p-6 shadow-soft border border-gray-100 dark:border-dark-700 text-center"
+              >
                 <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <HiChartBar className="w-6 h-6 text-white" />
                 </div>
@@ -199,7 +228,10 @@ const WhatsAppIntegrationPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {useCases.map((useCase, index) => (
-              <div key={index} className="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-dark-700">
+              <div
+                key={index}
+                className="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-dark-700"
+              >
                 <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center mb-4">
                   <HiLightBulb className="w-6 h-6 text-white" />
                 </div>
@@ -229,7 +261,10 @@ const WhatsAppIntegrationPage = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {integrations.map((integration, index) => (
-              <div key={index} className="bg-white dark:bg-dark-800 rounded-xl p-6 shadow-soft border border-gray-100 dark:border-dark-700 text-center">
+              <div
+                key={index}
+                className="bg-white dark:bg-dark-800 rounded-xl p-6 shadow-soft border border-gray-100 dark:border-dark-700 text-center"
+              >
                 <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <HiSparkles className="w-6 h-6 text-white" />
                 </div>
@@ -265,11 +300,15 @@ const WhatsAppIntegrationPage = () => {
                     <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
                       <HiChat className="w-5 h-5 text-white" />
                     </div>
-                    <h3 className="font-bold text-gray-900 dark:text-white">WhatsApp Business Demo</h3>
+                    <h3 className="font-bold text-gray-900 dark:text-white">
+                      WhatsApp Business Demo
+                    </h3>
                   </div>
                   <div className="flex items-center space-x-2">
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    <span className="text-sm text-gray-600 dark:text-gray-400">Online</span>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      Online
+                    </span>
                   </div>
                 </div>
               </div>
@@ -278,9 +317,12 @@ const WhatsAppIntegrationPage = () => {
                   <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
                     <HiChat className="w-8 h-8 text-white" />
                   </div>
-                  <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Try Our WhatsApp Integration</h4>
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
+                    Try Our WhatsApp Integration
+                  </h4>
                   <p className="text-gray-600 dark:text-gray-400 mb-6">
-                    Click the button below to open the WhatsApp chat widget and experience our integration.
+                    Click the button below to open the WhatsApp chat widget and
+                    experience our integration.
                   </p>
                   <button
                     onClick={() => setShowDemo(true)}
@@ -316,7 +358,8 @@ const WhatsAppIntegrationPage = () => {
                 End-to-End Encryption
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                All messages are encrypted between sender and receiver, ensuring privacy and security.
+                All messages are encrypted between sender and receiver, ensuring
+                privacy and security.
               </p>
             </div>
 
@@ -328,7 +371,8 @@ const WhatsAppIntegrationPage = () => {
                 GDPR Compliant
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Full compliance with GDPR and other data protection regulations for global operations.
+                Full compliance with GDPR and other data protection regulations
+                for global operations.
               </p>
             </div>
 
@@ -340,7 +384,8 @@ const WhatsAppIntegrationPage = () => {
                 Access Controls
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Role-based access controls ensure only authorized personnel can access customer data.
+                Role-based access controls ensure only authorized personnel can
+                access customer data.
               </p>
             </div>
           </div>
@@ -355,13 +400,20 @@ const WhatsAppIntegrationPage = () => {
               Ready to Connect with Customers on WhatsApp?
             </h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Implement WhatsApp Business integration to enhance customer engagement
+              Implement WhatsApp Business integration to enhance customer
+              engagement
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="/contact" className="btn-primary bg-white text-green-600 hover:bg-gray-100">
+              <a
+                href="/contact"
+                className="btn-primary bg-white text-green-600 hover:bg-gray-100"
+              >
                 Get Started
               </a>
-              <a href="/services" className="btn-outline border-white text-white hover:bg-white hover:text-green-600">
+              <a
+                href="/services"
+                className="btn-outline border-white text-white hover:bg-white hover:text-green-600"
+              >
                 Explore Services
               </a>
             </div>

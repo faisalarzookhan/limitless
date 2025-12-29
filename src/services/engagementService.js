@@ -15,12 +15,12 @@ class EngagementService {
       userData,
       auditResults,
       engagementScore: this.calculateEngagementScore(auditResults),
-      nextAction: this.determineNextAction(auditResults)
+      nextAction: this.determineNextAction(auditResults),
     };
 
     this.userInteractions.set(userData.email, interaction);
     this.scheduleFollowUp(interaction);
-    
+
     return interaction;
   }
 
@@ -33,25 +33,25 @@ class EngagementService {
       sandboxId,
       usageData,
       engagementScore: this.calculateSandboxEngagement(usageData),
-      nextAction: this.determineSandboxNextAction(usageData)
+      nextAction: this.determineSandboxNextAction(usageData),
     };
 
     // Update existing user interaction or create new one
     const existing = Array.from(this.userInteractions.values()).find(
       i => i.sandboxId === sandboxId
     );
-    
+
     if (existing) {
       this.userInteractions.set(existing.userData?.email || existing.id, {
         ...existing,
-        ...interaction
+        ...interaction,
       });
     } else {
       this.userInteractions.set(sandboxId, interaction);
     }
-    
+
     this.scheduleFollowUp(interaction);
-    
+
     return interaction;
   }
 
@@ -60,13 +60,16 @@ class EngagementService {
     // Higher scores for users with more issues (they need our solution more)
     const performanceIssues = auditResults.performance.lcp > 2500 ? 1 : 0;
     const seoIssues = auditResults.seo.issues.length;
-    const securityIssues = auditResults.security.sslIssues.length + (auditResults.security.headerIssues.length);
+    const securityIssues =
+      auditResults.security.sslIssues.length +
+      auditResults.security.headerIssues.length;
     const speedIssues = auditResults.speed.issues.length;
-    
+
     // Calculate engagement score (0-100)
-    const totalIssues = performanceIssues + seoIssues + securityIssues + speedIssues;
+    const totalIssues =
+      performanceIssues + seoIssues + securityIssues + speedIssues;
     const maxIssues = 15; // Maximum possible issues
-    
+
     return Math.min(100, Math.round((totalIssues / maxIssues) * 100));
   }
 
@@ -76,7 +79,7 @@ class EngagementService {
     const tourScore = tourCompleted ? 40 : 0;
     const taskScore = Math.min(30, tasksCompleted * 2); // 2 points per task
     const featureScore = Math.min(30, featuresExplored * 6); // 6 points per feature
-    
+
     return Math.min(100, tourScore + taskScore + featureScore);
   }
 
@@ -86,19 +89,19 @@ class EngagementService {
       return {
         type: 'high_priority_followup',
         message: 'User has significant performance issues - send premium offer',
-        delay: 24 * 60 * 60 * 1000 // 24 hours
+        delay: 24 * 60 * 60 * 1000, // 24 hours
       };
     } else if (auditResults.limitlessScore < 80) {
       return {
         type: 'medium_priority_followup',
         message: 'User has moderate issues - send case study',
-        delay: 48 * 60 * 60 * 1000 // 48 hours
+        delay: 48 * 60 * 60 * 1000, // 48 hours
       };
     } else {
       return {
         type: 'low_priority_followup',
         message: 'User has good performance - send newsletter',
-        delay: 7 * 24 * 60 * 60 * 1000 // 1 week
+        delay: 7 * 24 * 60 * 60 * 1000, // 1 week
       };
     }
   }
@@ -106,24 +109,24 @@ class EngagementService {
   // Determine next action based on sandbox usage
   determineSandboxNextAction(usageData) {
     const { tourCompleted, tasksCompleted, featuresExplored } = usageData;
-    
+
     if (tourCompleted && tasksCompleted > 5) {
       return {
         type: 'conversion_attempt',
         message: 'Highly engaged user - offer trial extension or purchase',
-        delay: 1 * 60 * 60 * 1000 // 1 hour
+        delay: 1 * 60 * 60 * 1000, // 1 hour
       };
     } else if (tourCompleted && featuresExplored > 3) {
       return {
         type: 'engagement_boost',
         message: 'Moderately engaged user - send additional resources',
-        delay: 6 * 60 * 60 * 1000 // 6 hours
+        delay: 6 * 60 * 60 * 1000, // 6 hours
       };
     } else {
       return {
         type: 're-engagement',
         message: 'Low engagement - send reminder and support',
-        delay: 24 * 60 * 60 * 1000 // 24 hours
+        delay: 24 * 60 * 60 * 1000, // 24 hours
       };
     }
   }
@@ -133,26 +136,28 @@ class EngagementService {
     const followUp = {
       id: this.generateId(),
       interactionId: interaction.id,
-      scheduledTime: new Date(Date.now() + interaction.nextAction.delay).toISOString(),
+      scheduledTime: new Date(
+        Date.now() + interaction.nextAction.delay
+      ).toISOString(),
       actionType: interaction.nextAction.type,
       message: interaction.nextAction.message,
-      status: 'scheduled'
+      status: 'scheduled',
     };
 
     this.followUpQueue.push(followUp);
-    
+
     // Set timeout for follow-up action
     setTimeout(() => {
       this.executeFollowUp(followUp);
     }, interaction.nextAction.delay);
-    
+
     return followUp;
   }
 
   // Execute follow-up action
   executeFollowUp(followUp) {
     followUp.status = 'executed';
-    
+
     // Based on action type, execute appropriate follow-up
     switch (followUp.actionType) {
       case 'high_priority_followup':
@@ -180,26 +185,34 @@ class EngagementService {
 
   // Send high priority follow-up (premium offer)
   sendHighPriorityFollowUp(followUp) {
-    console.log(`Sending high priority follow-up to user: ${followUp.interactionId}`);
+    console.log(
+      `Sending high priority follow-up to user: ${followUp.interactionId}`
+    );
     // In a real implementation, this would send an email with a premium offer
     // and potentially trigger a sales call
   }
 
   // Send medium priority follow-up (case study)
   sendMediumPriorityFollowUp(followUp) {
-    console.log(`Sending medium priority follow-up to user: ${followUp.interactionId}`);
+    console.log(
+      `Sending medium priority follow-up to user: ${followUp.interactionId}`
+    );
     // In a real implementation, this would send a relevant case study
   }
 
   // Send low priority follow-up (newsletter)
   sendLowPriorityFollowUp(followUp) {
-    console.log(`Sending low priority follow-up to user: ${followUp.interactionId}`);
+    console.log(
+      `Sending low priority follow-up to user: ${followUp.interactionId}`
+    );
     // In a real implementation, this would send a newsletter
   }
 
   // Send conversion attempt
   sendConversionAttempt(followUp) {
-    console.log(`Sending conversion attempt to user: ${followUp.interactionId}`);
+    console.log(
+      `Sending conversion attempt to user: ${followUp.interactionId}`
+    );
     // In a real implementation, this would send a special offer to convert
     // the sandbox user to a paying customer
   }
@@ -225,9 +238,9 @@ class EngagementService {
   getUserFollowUps(email) {
     const userInteraction = this.userInteractions.get(email);
     if (!userInteraction) return [];
-    
-    return this.followUpQueue.filter(followUp => 
-      followUp.interactionId === userInteraction.id
+
+    return this.followUpQueue.filter(
+      followUp => followUp.interactionId === userInteraction.id
     );
   }
 
@@ -239,12 +252,12 @@ class EngagementService {
       eventType,
       eventData,
       timestamp: new Date().toISOString(),
-      targetAudience: this.determineRetargetingAudience(eventData)
+      targetAudience: this.determineRetargetingAudience(eventData),
     };
 
     // In a real implementation, this would send data to ad platforms
     console.log('Retargeting event:', retargetingEvent);
-    
+
     return retargetingEvent;
   }
 
@@ -252,7 +265,10 @@ class EngagementService {
   determineRetargetingAudience(eventData) {
     if (eventData.auditResults && eventData.auditResults.limitlessScore < 60) {
       return 'performance_issues';
-    } else if (eventData.auditResults && eventData.auditResults.limitlessScore < 80) {
+    } else if (
+      eventData.auditResults &&
+      eventData.auditResults.limitlessScore < 80
+    ) {
       return 'moderate_issues';
     } else if (eventData.sandboxUsage && eventData.sandboxUsage.tourCompleted) {
       return 'sandbox_active';
@@ -263,21 +279,26 @@ class EngagementService {
 
   // Generate unique ID
   generateId() {
-    return Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
+    return (
+      Math.random().toString(36).substring(2, 15) + Date.now().toString(36)
+    );
   }
 
   // Get engagement analytics
   getEngagementAnalytics() {
     const interactions = Array.from(this.userInteractions.values());
     const followUps = this.followUpQueue;
-    
+
     return {
       totalInteractions: interactions.length,
       totalFollowUps: followUps.length,
       executedFollowUps: followUps.filter(f => f.status === 'executed').length,
-      scheduledFollowUps: followUps.filter(f => f.status === 'scheduled').length,
-      avgEngagementScore: interactions.reduce((sum, i) => sum + (i.engagementScore || 0), 0) / interactions.length || 0,
-      conversionRate: this.calculateConversionRate(interactions)
+      scheduledFollowUps: followUps.filter(f => f.status === 'scheduled')
+        .length,
+      avgEngagementScore:
+        interactions.reduce((sum, i) => sum + (i.engagementScore || 0), 0) /
+          interactions.length || 0,
+      conversionRate: this.calculateConversionRate(interactions),
     };
   }
 

@@ -9,15 +9,16 @@
 
 const SUBDOMAIN_CONFIG = {
   // Main domain
-  mainDomain: 'limitlessinfotech.com',
-  
+  mainDomain: 'https://limitlessinfotech.com',
+
   // Sub-domain configurations
   subdomains: {
     product: {
       name: 'product',
       path: '/product',
       title: 'Product Hub | Limitless Infotech',
-      description: 'High-performance hub for SaaS offerings and product-led growth',
+      description:
+        'High-performance hub for SaaS offerings and product-led growth',
       routes: [
         '/product',
         '/product/trackit',
@@ -25,102 +26,120 @@ const SUBDOMAIN_CONFIG = {
         '/product/solutions',
         '/product/features',
         '/product/pricing',
-        '/product/demo'
+        '/product/demo',
       ],
       features: [
         'SaaS offerings',
         'Product-led growth',
         'Interactive demos',
-        'Feature showcases'
-      ]
+        'Feature showcases',
+      ],
     },
     services: {
       name: 'services',
       path: '/services',
       title: 'Services | Limitless Infotech',
-      description: 'Dedicated catalog for custom development, cloud migration, and digital transformation',
+      description:
+        'Dedicated catalog for custom development, cloud migration, and digital transformation',
       routes: [
         '/services',
         '/services/custom-development',
         '/services/cloud-migration',
         '/services/digital-transformation',
         '/services/consulting',
-        '/services/support'
+        '/services/support',
       ],
       features: [
         'Custom development',
         'Cloud migration',
         'Digital transformation',
         'Consulting services',
-        'Technical support'
-      ]
+        'Technical support',
+      ],
     },
     enterprises: {
       name: 'enterprises',
       path: '/enterprises',
       title: 'Enterprise Solutions | Limitless Infotech',
-      description: 'Secure portal for high-ticket corporate case studies, partner perks, and white-label documentation',
+      description:
+        'Secure portal for high-ticket corporate case studies, partner perks, and white-label documentation',
       routes: [
         '/enterprises',
         '/enterprises/case-studies',
         '/enterprises/partner-program',
         '/enterprises/white-label',
         '/enterprises/security',
-        '/enterprises/compliance'
+        '/enterprises/compliance',
       ],
       features: [
         'Corporate case studies',
         'Partner program',
         'White-label solutions',
         'Enterprise security',
-        'Compliance tools'
-      ]
+        'Compliance tools',
+      ],
     },
     about: {
       name: 'about',
       path: '/about',
       title: 'About | Limitless Infotech',
-      description: 'Centralized node for company mission, i18n support, and the "Limitless" career ecosystem',
+      description:
+        'Centralized node for company mission, i18n support, and the "Limitless" career ecosystem',
       routes: [
         '/about',
         '/about/company',
         '/about/team',
         '/about/careers',
         '/about/mission',
-        '/about/i18n'
+        '/about/i18n',
       ],
       features: [
         'Company information',
         'Team profiles',
         'Career opportunities',
         'Company mission',
-        'Internationalization'
-      ]
-    }
+        'Internationalization',
+      ],
+    },
   },
 
   // Redirect configurations
   redirects: {
     // Redirect from main domain to appropriate subdomain based on path
-    '/products/*': 'product.limitlessinfotech.com',
-    '/solutions/*': 'product.limitlessinfotech.com',
-    '/services/*': 'services.limitlessinfotech.com',
-    '/enterprise/*': 'enterprises.limitlessinfotech.com',
-    '/business/*': 'enterprises.limitlessinfotech.com',
-    '/careers/*': 'about.limitlessinfotech.com',
-    '/company/*': 'about.limitlessinfotech.com',
-    '/about/*': 'about.limitlessinfotech.com'
+    '/products/*': 'https://product.limitlessinfotech.com',
+    '/solutions/*': 'https://product.limitlessinfotech.com',
+    '/services/*': 'https://services.limitlessinfotech.com',
+    '/enterprise/*': 'https://enterprises.limitlessinfotech.com',
+    '/business/*': 'https://enterprises.limitlessinfotech.com',
+    '/careers/*': 'https://about.limitlessinfotech.com',
+    '/company/*': 'https://about.limitlessinfotech.com',
+    '/about/*': 'https://about.limitlessinfotech.com',
+    '/contact/*': 'https://contact.limitlessinfotech.com',
+    '/contact/*': 'https://contact.limitlessinfotech.com',
+    '/blog/*': 'https://blog.limitlessinfotech.com',
+    '/portfolio/*': 'https://portfolio.limitlessinfotech.com',
+    '/faq/*': 'https://faq.limitlessinfotech.com',
+    '/pricing/*': 'https://pricing.limitlessinfotech.com',
+    '/technology/*': 'https://technology.limitlessinfotech.com',
+    '/careers/*': 'https://careers.limitlessinfotech.com',
+    '/news/*': 'https://news.limitlessinfotech.com',
+    '/technical/*': 'https://technical.limitlessinfotech.com',
+    '/investors/*': 'https://investors.limitlessinfotech.com',
   },
 
   // Security configurations for each subdomain
   security: {
     product: {
       cors: {
-        origins: ['https://limitlessinfotech.com', 'https://www.limitlessinfotech.com']
+        origins: [
+          'https://limitlessinfotech.com',
+          'https://www.limitlessinfotech.com',
+          'https://product.limitlessinfotech.com',
+        ],
       },
       rateLimiting: {
         windowMs: 15 * 60 * 1000, // 15 minutes
-        max: 100 // limit each IP to 100 requests per windowMs
+        max: 100, // limit each IP to 100 requests per windowMs
       },
       hsts: true,
       contentSecurityPolicy: {
@@ -129,17 +148,21 @@ const SUBDOMAIN_CONFIG = {
           styleSrc: ["'self'", "'unsafe-inline'"],
           scriptSrc: ["'self'"],
           imgSrc: ["'self'", 'data:', 'https:'],
-          connectSrc: ["'self'", 'https://api.limitlessinfotech.com']
-        }
-      }
+          connectSrc: ["'self'", 'https://api.limitlessinfotech.com'],
+        },
+      },
     },
     services: {
       cors: {
-        origins: ['https://limitlessinfotech.com', 'https://www.limitlessinfotech.com']
+        origins: [
+          'https://limitlessinfotech.com',
+          'https://www.limitlessinfotech.com',
+          'https://services.limitlessinfotech.com',
+        ],
       },
       rateLimiting: {
         windowMs: 15 * 60 * 1000,
-        max: 50
+        max: 50,
       },
       hsts: true,
       contentSecurityPolicy: {
@@ -148,18 +171,26 @@ const SUBDOMAIN_CONFIG = {
           styleSrc: ["'self'", "'unsafe-inline'"],
           scriptSrc: ["'self'"],
           imgSrc: ["'self'", 'data:', 'https:'],
-          connectSrc: ["'self'", 'https://api.limitlessinfotech.com', 'https://crm.limitlessinfotech.com']
-        }
-      }
+          connectSrc: [
+            "'self'",
+            'https://api.limitlessinfotech.com',
+            'https://crm.limitlessinfotech.com',
+          ],
+        },
+      },
     },
     enterprises: {
       cors: {
-        origins: ['https://limitlessinfotech.com', 'https://www.limitlessinfotech.com'],
-        credentials: true
+        origins: [
+          'https://limitlessinfotech.com',
+          'https://www.limitlessinfotech.com',
+          'https://enterprises.limitlessinfotech.com',
+        ],
+        credentials: true,
       },
       rateLimiting: {
         windowMs: 15 * 60 * 1000,
-        max: 25
+        max: 25,
       },
       hsts: true,
       contentSecurityPolicy: {
@@ -168,22 +199,40 @@ const SUBDOMAIN_CONFIG = {
           styleSrc: ["'self'", "'unsafe-inline'"],
           scriptSrc: ["'self'", "'unsafe-eval'"],
           imgSrc: ["'self'", 'data:', 'https:'],
-          connectSrc: ["'self'", 'https://api.limitlessinfotech.com', 'https://enterprise.limitlessinfotech.com'],
-          frameSrc: ["'none'"] // No iframes for security
-        }
+          connectSrc: [
+            "'self'",
+            'https://api.limitlessinfotech.com',
+            'https://enterprise.limitlessinfotech.com',
+          ],
+          frameSrc: ["'none'"], // No iframes for security
+        },
       },
       // Additional enterprise security
       authenticationRequired: true,
       ssoEnabled: true,
-      auditLogging: true
+      auditLogging: true,
     },
     about: {
       cors: {
-        origins: ['https://limitlessinfotech.com', 'https://www.limitlessinfotech.com']
+        origins: [
+          'https://limitlessinfotech.com',
+          'https://www.limitlessinfotech.com',
+          'https://about.limitlessinfotech.com',
+          'https://contact.limitlessinfotech.com',
+          'https://blog.limitlessinfotech.com',
+          'https://portfolio.limitlessinfotech.com',
+          'https://faq.limitlessinfotech.com',
+          'https://pricing.limitlessinfotech.com',
+          'https://technology.limitlessinfotech.com',
+          'https://careers.limitlessinfotech.com',
+          'https://news.limitlessinfotech.com',
+          'https://technical.limitlessinfotech.com',
+          'https://investors.limitlessinfotech.com',
+        ],
       },
       rateLimiting: {
         windowMs: 15 * 60 * 1000,
-        max: 200
+        max: 200,
       },
       hsts: true,
       contentSecurityPolicy: {
@@ -192,10 +241,10 @@ const SUBDOMAIN_CONFIG = {
           styleSrc: ["'self'", "'unsafe-inline'"],
           scriptSrc: ["'self'"],
           imgSrc: ["'self'", 'data:', 'https:'],
-          connectSrc: ["'self'"]
-        }
-      }
-    }
+          connectSrc: ["'self'"],
+        },
+      },
+    },
   },
 
   // Internationalization configurations
@@ -206,8 +255,19 @@ const SUBDOMAIN_CONFIG = {
       'about.limitlessinfotech.com': ['en', 'hi', 'ar', 'es'],
       'product.limitlessinfotech.com': ['en', 'es'],
       'services.limitlessinfotech.com': ['en', 'hi'],
-      'enterprises.limitlessinfotech.com': ['en', 'ar']
-    }
+      'enterprises.limitlessinfotech.com': ['en', 'ar'],
+      'about.limitlessinfotech.com': ['en', 'hi', 'ar', 'es'],
+      'contact.limitlessinfotech.com': ['en', 'hi', 'ar', 'es'],
+      'blog.limitlessinfotech.com': ['en', 'hi', 'ar', 'es'],
+      'portfolio.limitlessinfotech.com': ['en', 'hi', 'ar', 'es'],
+      'faq.limitlessinfotech.com': ['en', 'hi', 'ar', 'es'],
+      'pricing.limitlessinfotech.com': ['en', 'hi', 'ar', 'es'],
+      'technology.limitlessinfotech.com': ['en', 'hi', 'ar', 'es'],
+      'careers.limitlessinfotech.com': ['en', 'hi', 'ar', 'es'],
+      'news.limitlessinfotech.com': ['en', 'hi', 'ar', 'es'],
+      'technical.limitlessinfotech.com': ['en', 'hi', 'ar', 'es'],
+      'investors.limitlessinfotech.com': ['en', 'hi', 'ar', 'es'],
+    },
   },
 
   // SEO configurations for each subdomain
@@ -215,43 +275,47 @@ const SUBDOMAIN_CONFIG = {
     product: {
       sitemap: 'https://product.limitlessinfotech.com/sitemap.xml',
       robots: 'https://product.limitlessinfotech.com/robots.txt',
-      canonicalDomain: 'product.limitlessinfotech.com'
+      canonicalDomain: 'product.limitlessinfotech.com',
     },
     services: {
       sitemap: 'https://services.limitlessinfotech.com/sitemap.xml',
       robots: 'https://services.limitlessinfotech.com/robots.txt',
-      canonicalDomain: 'services.limitlessinfotech.com'
+      canonicalDomain: 'services.limitlessinfotech.com',
     },
     enterprises: {
       sitemap: 'https://enterprises.limitlessinfotech.com/sitemap.xml',
       robots: 'https://enterprises.limitlessinfotech.com/robots.txt',
-      canonicalDomain: 'enterprises.limitlessinfotech.com'
+      canonicalDomain: 'enterprises.limitlessinfotech.com',
     },
     about: {
       sitemap: 'https://about.limitlessinfotech.com/sitemap.xml',
       robots: 'https://about.limitlessinfotech.com/robots.txt',
-      canonicalDomain: 'about.limitlessinfotech.com'
-    }
+      canonicalDomain: 'about.limitlessinfotech.com',
+    },
   },
 
   // Analytics configurations
   analytics: {
     product: {
       trackingId: 'G-PRODUCT-ANALYTICS',
-      events: ['product_view', 'demo_request', 'feature_interaction']
+      events: ['product_view', 'demo_request', 'feature_interaction'],
     },
     services: {
       trackingId: 'G-SERVICES-ANALYTICS',
-      events: ['service_inquiry', 'consultation_request', 'quote_request']
+      events: ['service_inquiry', 'consultation_request', 'quote_request'],
     },
     enterprises: {
       trackingId: 'G-ENTERPRISE-ANALYTICS',
-      events: ['enterprise_inquiry', 'case_study_download', 'white_paper_request']
+      events: [
+        'enterprise_inquiry',
+        'case_study_download',
+        'white_paper_request',
+      ],
     },
     about: {
       trackingId: 'G-ABOUT-ANALYTICS',
-      events: ['about_view', 'career_view', 'team_view']
-    }
+      events: ['about_view', 'career_view', 'team_view'],
+    },
   },
 
   // Subdomain-specific branding
@@ -259,24 +323,24 @@ const SUBDOMAIN_CONFIG = {
     product: {
       primaryColor: '#1e3a8a', // Deep blue
       secondaryColor: '#d4af37', // Royal gold
-      theme: 'product-theme'
+      theme: 'product-theme',
     },
     services: {
       primaryColor: '#059669', // Emerald
       secondaryColor: '#d4af37', // Royal gold
-      theme: 'services-theme'
+      theme: 'services-theme',
     },
     enterprises: {
       primaryColor: '#7c3aed', // Violet
       secondaryColor: '#d4af37', // Royal gold
-      theme: 'enterprise-theme'
+      theme: 'enterprise-theme',
     },
     about: {
       primaryColor: '#dc2626', // Red
       secondaryColor: '#d4af37', // Royal gold
-      theme: 'about-theme'
-    }
-  }
+      theme: 'about-theme',
+    },
+  },
 };
 
 // Helper functions for subdomain management
@@ -285,11 +349,11 @@ const SubdomainHelper = {
   getCurrentSubdomain: () => {
     const hostname = window.location.hostname;
     const parts = hostname.split('.');
-    
+
     if (parts.length >= 3 && parts[parts.length - 2] === 'limitlessinfotech') {
       return parts[0] === 'www' ? parts[1] : parts[0];
     }
-    
+
     return null;
   },
 
@@ -300,7 +364,7 @@ const SubdomainHelper = {
   },
 
   // Check if current domain matches a specific subdomain
-  isSubdomain: (expectedSubdomain) => {
+  isSubdomain: expectedSubdomain => {
     return SubdomainHelper.getCurrentSubdomain() === expectedSubdomain;
   },
 
@@ -318,14 +382,16 @@ const SubdomainHelper = {
   },
 
   // Get subdomain by path
-  getSubdomainByPath: (path) => {
-    for (const [subdomain, config] of Object.entries(SUBDOMAIN_CONFIG.subdomains)) {
+  getSubdomainByPath: path => {
+    for (const [subdomain, config] of Object.entries(
+      SUBDOMAIN_CONFIG.subdomains
+    )) {
       if (config.routes.some(route => path.startsWith(route))) {
         return subdomain;
       }
     }
     return null;
-  }
+  },
 };
 
 export { SUBDOMAIN_CONFIG, SubdomainHelper };

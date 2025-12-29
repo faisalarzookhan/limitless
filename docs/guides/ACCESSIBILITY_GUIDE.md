@@ -32,23 +32,27 @@ Our application meets or exceeds WCAG 2.1 Level AA standards, which include:
 ### Navigation Components
 
 #### Breadcrumb
+
 - Semantic `<nav>` element with `aria-label="Breadcrumb"`
 - Current page indicated with `aria-current="page"`
 - Proper link labeling for screen readers
 - Logical tab order
 
 #### Pagination
+
 - Keyboard navigable with arrow keys
 - Proper ARIA labels for page numbers
 - Disabled state for inactive controls
 - Visual indication of current page
 
 #### BackToTop
+
 - Proper `aria-label` for screen readers
 - Visible focus state when tabbed to
 - Smooth scrolling for reduced motion preference
 
 #### Search
+
 - Proper labeling with `aria-label`
 - Form submission handling
 - Clear button with descriptive label
@@ -57,12 +61,14 @@ Our application meets or exceeds WCAG 2.1 Level AA standards, which include:
 ### Interactive Components
 
 #### Accordion
+
 - `aria-expanded` attribute to indicate open/closed state
 - `aria-controls` to associate trigger with content
 - Keyboard support (Enter/Space to toggle)
 - Focus management between panels
 
 #### Tabs
+
 - `role="tablist"`, `role="tab"`, and `role="tabpanel"` roles
 - `aria-selected` to indicate active tab
 - `aria-controls` to associate tab with panel
@@ -70,6 +76,7 @@ Our application meets or exceeds WCAG 2.1 Level AA standards, which include:
 - Focus management between tabs
 
 #### Modal
+
 - `role="dialog"` and `aria-modal="true"`
 - `aria-labelledby` and `aria-describedby` associations
 - Focus trap to constrain focus within modal
@@ -79,12 +86,14 @@ Our application meets or exceeds WCAG 2.1 Level AA standards, which include:
 ### Feedback Components
 
 #### Notification
+
 - `role="alert"` for critical messages
 - `aria-live` attributes for dynamic content
 - Auto-dismiss with option to dismiss manually
 - Proper color contrast
 
 #### Tooltip
+
 - `aria-describedby` association with trigger element
 - Delay support for keyboard users
 - Click-outside-to-close functionality

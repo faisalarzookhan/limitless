@@ -1,5 +1,13 @@
 import { useState } from 'react';
-import { HiOutlineUser, HiOutlineMail, HiOutlineBriefcase, HiOutlineClock, HiOutlineCode, HiOutlineLightBulb, HiCheckCircle } from 'react-icons/hi';
+import {
+  HiOutlineUser,
+  HiOutlineMail,
+  HiOutlineBriefcase,
+  HiOutlineClock,
+  HiOutlineCode,
+  HiOutlineLightBulb,
+  HiCheckCircle,
+} from 'react-icons/hi';
 import { sendLeadGenerationNotification } from '../services/notificationService';
 
 const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
@@ -11,17 +19,17 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
     timeline: '',
     techStack: '',
     budget: '',
-    requirements: ''
+    requirements: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -32,22 +40,22 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
         formType: 'dedicated-team',
         timestamp: new Date().toISOString(),
         page: window.location.pathname,
-        userAgent: navigator.userAgent
+        userAgent: navigator.userAgent,
       });
 
       // Reset form
-      setFormData({ 
-        fullName: '', 
-        email: '', 
-        company: '', 
-        projectScope: '', 
-        timeline: '', 
-        techStack: '', 
+      setFormData({
+        fullName: '',
+        email: '',
+        company: '',
+        projectScope: '',
+        timeline: '',
+        techStack: '',
         budget: '',
-        requirements: '' 
+        requirements: '',
       });
       setSubmitSuccess(true);
-      
+
       // Call success callback if provided
       if (onSubmitSuccess) {
         onSubmitSuccess();
@@ -68,9 +76,12 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
         <div className="flex items-center justify-center mb-3">
           <HiCheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
         </div>
-        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">Application Submitted!</h3>
+        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">
+          Application Submitted!
+        </h3>
         <p className="text-green-700 dark:text-green-400 text-sm">
-          Thank you for your interest in our dedicated team services. We'll review your application and contact you shortly.
+          Thank you for your interest in our dedicated team services. We'll
+          review your application and contact you shortly.
         </p>
       </div>
     );
@@ -80,7 +91,10 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="fullName"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Full Name *
           </label>
           <div className="relative">
@@ -99,9 +113,12 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
             />
           </div>
         </div>
-        
+
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Work Email *
           </label>
           <div className="relative">
@@ -121,9 +138,12 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
           </div>
         </div>
       </div>
-      
+
       <div>
-        <label htmlFor="company" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="company"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Company Name *
         </label>
         <div className="relative">
@@ -142,9 +162,12 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
           />
         </div>
       </div>
-      
+
       <div>
-        <label htmlFor="projectScope" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="projectScope"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Project Scope *
         </label>
         <div className="relative">
@@ -163,10 +186,13 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
           ></textarea>
         </div>
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="timeline" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="timeline"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Project Timeline *
           </label>
           <div className="relative">
@@ -190,9 +216,12 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
             </select>
           </div>
         </div>
-        
+
         <div>
-          <label htmlFor="budget" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="budget"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Budget Range
           </label>
           <div className="relative">
@@ -218,9 +247,12 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
           </div>
         </div>
       </div>
-      
+
       <div>
-        <label htmlFor="techStack" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="techStack"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Preferred Tech Stack
         </label>
         <div className="relative">
@@ -238,9 +270,12 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
           />
         </div>
       </div>
-      
+
       <div>
-        <label htmlFor="requirements" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="requirements"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Additional Requirements
         </label>
         <div className="relative">
@@ -258,7 +293,7 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
           ></textarea>
         </div>
       </div>
-      
+
       <button
         type="submit"
         disabled={isSubmitting}
@@ -273,9 +308,10 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
           'Apply for Dedicated Team'
         )}
       </button>
-      
+
       <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-2">
-        We'll review your application and contact you within 24-48 hours to discuss your project needs.
+        We'll review your application and contact you within 24-48 hours to
+        discuss your project needs.
       </p>
     </form>
   );

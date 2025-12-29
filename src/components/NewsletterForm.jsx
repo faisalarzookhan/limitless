@@ -10,12 +10,12 @@ const NewsletterForm = ({ variant = 'default' }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -24,7 +24,7 @@ const NewsletterForm = ({ variant = 'default' }) => {
       firstName: formData.firstName,
       email: formData.email,
       timestamp: new Date().toISOString(),
-      page: window.location.pathname
+      page: window.location.pathname,
     });
 
     // Simulate API call
@@ -32,7 +32,7 @@ const NewsletterForm = ({ variant = 'default' }) => {
       setIsSubmitting(false);
       setSubmitSuccess(true);
       setFormData({ email: '', firstName: '' });
-      
+
       // Reset success message after 5 seconds
       setTimeout(() => setSubmitSuccess(false), 5000);
     }, 1500);
@@ -44,7 +44,9 @@ const NewsletterForm = ({ variant = 'default' }) => {
         <div className="flex items-center justify-center mb-3">
           <HiCheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
         </div>
-        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">Subscribed!</h3>
+        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">
+          Subscribed!
+        </h3>
         <p className="text-green-700 dark:text-green-400 text-sm">
           Thank you for subscribing to our newsletter.
         </p>
@@ -55,7 +57,10 @@ const NewsletterForm = ({ variant = 'default' }) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="firstName"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           First Name
         </label>
         <input
@@ -69,7 +74,10 @@ const NewsletterForm = ({ variant = 'default' }) => {
         />
       </div>
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="email"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Email Address *
         </label>
         <input

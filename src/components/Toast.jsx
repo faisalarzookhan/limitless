@@ -1,5 +1,11 @@
 import { useEffect, useRef } from 'react';
-import { HiX, HiCheckCircle, HiExclamationCircle, HiInformationCircle, HiExclamation } from 'react-icons/hi';
+import {
+  HiX,
+  HiCheckCircle,
+  HiExclamationCircle,
+  HiInformationCircle,
+  HiExclamation,
+} from 'react-icons/hi';
 import { useApp } from '../context/AppContext';
 import { generateId } from '../utils/accessibility';
 
@@ -8,7 +14,7 @@ const Toast = () => {
   const regionId = generateId('notifications');
 
   return (
-    <div 
+    <div
       id={regionId}
       className="fixed top-24 right-4 z-50 space-y-3 max-w-sm w-full pointer-events-none"
       role="region"
@@ -16,7 +22,7 @@ const Toast = () => {
       aria-live="polite"
       aria-relevant="additions"
     >
-      {notifications.map((notification) => (
+      {notifications.map(notification => (
         <ToastItem
           key={notification.id}
           notification={notification}
@@ -111,12 +117,8 @@ const ToastItem = ({ notification, onClose }) => {
     >
       <div className="flex-shrink-0 mt-0.5">{getIcon()}</div>
       <div className="flex-1 min-w-0">
-        {title && (
-          <h4 className="font-semibold text-sm mb-1">{title}</h4>
-        )}
-        {message && (
-          <p className="text-sm opacity-90">{message}</p>
-        )}
+        {title && <h4 className="font-semibold text-sm mb-1">{title}</h4>}
+        {message && <p className="text-sm opacity-90">{message}</p>}
       </div>
       <button
         onClick={onClose}

@@ -8,7 +8,7 @@ class DockerSandboxService {
   // Create a new Docker-based sandbox instance
   async createSandboxInstance(userData = {}) {
     const instanceId = `sandbox-${this.generateInstanceId()}`;
-    
+
     // In a real implementation, this would call Docker API
     // For now, we'll simulate the process
     const sandboxInstance = {
@@ -23,19 +23,19 @@ class DockerSandboxService {
       resources: {
         cpu: '0.5',
         memory: '1g',
-        disk: '5g'
+        disk: '5g',
       },
       network: {
         vpcId: this.generateVpcId(),
         subnetId: this.generateSubnetId(),
-        securityGroups: ['sg-sandbox-isolation']
+        securityGroups: ['sg-sandbox-isolation'],
       },
       data: this.generateMockData(),
       progress: {
         tourCompleted: false,
         tasksCompleted: 0,
-        featuresExplored: 0
-      }
+        featuresExplored: 0,
+      },
     };
 
     // Simulate container creation
@@ -43,10 +43,10 @@ class DockerSandboxService {
 
     // Store the sandbox instance
     this.sandboxInstances.set(instanceId, sandboxInstance);
-    
+
     // Set up automatic cleanup
     this.scheduleCleanup(instanceId);
-    
+
     return sandboxInstance;
   }
 
@@ -54,10 +54,10 @@ class DockerSandboxService {
   async simulateContainerCreation(instance) {
     // Update status to initializing
     instance.status = 'initializing';
-    
+
     // Simulate Docker build/pull process
     await new Promise(resolve => setTimeout(resolve, 2000));
-    
+
     // Update status to running
     instance.status = 'running';
   }
@@ -74,15 +74,15 @@ class DockerSandboxService {
 
     // In a real implementation, this would call Docker API to stop the container
     instance.status = 'stopping';
-    
+
     // Simulate container stop process
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
     instance.status = 'stopped';
-    
+
     // Remove from active instances
     this.sandboxInstances.delete(id);
-    
+
     return true;
   }
 
@@ -90,42 +90,211 @@ class DockerSandboxService {
   generateMockData() {
     return {
       projects: [
-        { id: 1, name: 'Website Redesign', status: 'In Progress', progress: 65 },
-        { id: 2, name: 'Mobile App Development', status: 'Planning', progress: 10 },
+        {
+          id: 1,
+          name: 'Website Redesign',
+          status: 'In Progress',
+          progress: 65,
+        },
+        {
+          id: 2,
+          name: 'Mobile App Development',
+          status: 'Planning',
+          progress: 10,
+        },
         { id: 3, name: 'API Integration', status: 'Completed', progress: 100 },
         { id: 4, name: 'Security Audit', status: 'In Progress', progress: 30 },
-        { id: 5, name: 'Performance Optimization', status: 'Not Started', progress: 0 }
+        {
+          id: 5,
+          name: 'Performance Optimization',
+          status: 'Not Started',
+          progress: 0,
+        },
       ],
       tasks: [
-        { id: 1, title: 'Design wireframes', projectId: 1, status: 'Completed', assignee: 'John Doe', priority: 'High' },
-        { id: 2, title: 'Develop login page', projectId: 1, status: 'In Progress', assignee: 'Jane Smith', priority: 'Medium' },
-        { id: 3, title: 'Setup CI/CD pipeline', projectId: 4, status: 'In Progress', assignee: 'Mike Johnson', priority: 'High' },
-        { id: 4, title: 'Write API documentation', projectId: 3, status: 'Completed', assignee: 'Sarah Wilson', priority: 'Medium' },
-        { id: 5, title: 'Optimize database queries', projectId: 5, status: 'Not Started', assignee: 'Tom Brown', priority: 'High' },
-        { id: 6, title: 'Create user onboarding flow', projectId: 2, status: 'In Progress', assignee: 'Lisa Davis', priority: 'Medium' },
-        { id: 7, title: 'Implement payment gateway', projectId: 2, status: 'Not Started', assignee: 'Alex Taylor', priority: 'High' },
-        { id: 8, title: 'Fix mobile responsiveness', projectId: 1, status: 'In Progress', assignee: 'Chris Miller', priority: 'Low' },
-        { id: 9, title: 'Setup monitoring', projectId: 4, status: 'Not Started', assignee: 'Emma Wilson', priority: 'Medium' },
-        { id: 10, title: 'Performance testing', projectId: 5, status: 'Not Started', assignee: 'David Lee', priority: 'High' }
+        {
+          id: 1,
+          title: 'Design wireframes',
+          projectId: 1,
+          status: 'Completed',
+          assignee: 'John Doe',
+          priority: 'High',
+        },
+        {
+          id: 2,
+          title: 'Develop login page',
+          projectId: 1,
+          status: 'In Progress',
+          assignee: 'Jane Smith',
+          priority: 'Medium',
+        },
+        {
+          id: 3,
+          title: 'Setup CI/CD pipeline',
+          projectId: 4,
+          status: 'In Progress',
+          assignee: 'Mike Johnson',
+          priority: 'High',
+        },
+        {
+          id: 4,
+          title: 'Write API documentation',
+          projectId: 3,
+          status: 'Completed',
+          assignee: 'Sarah Wilson',
+          priority: 'Medium',
+        },
+        {
+          id: 5,
+          title: 'Optimize database queries',
+          projectId: 5,
+          status: 'Not Started',
+          assignee: 'Tom Brown',
+          priority: 'High',
+        },
+        {
+          id: 6,
+          title: 'Create user onboarding flow',
+          projectId: 2,
+          status: 'In Progress',
+          assignee: 'Lisa Davis',
+          priority: 'Medium',
+        },
+        {
+          id: 7,
+          title: 'Implement payment gateway',
+          projectId: 2,
+          status: 'Not Started',
+          assignee: 'Alex Taylor',
+          priority: 'High',
+        },
+        {
+          id: 8,
+          title: 'Fix mobile responsiveness',
+          projectId: 1,
+          status: 'In Progress',
+          assignee: 'Chris Miller',
+          priority: 'Low',
+        },
+        {
+          id: 9,
+          title: 'Setup monitoring',
+          projectId: 4,
+          status: 'Not Started',
+          assignee: 'Emma Wilson',
+          priority: 'Medium',
+        },
+        {
+          id: 10,
+          title: 'Performance testing',
+          projectId: 5,
+          status: 'Not Started',
+          assignee: 'David Lee',
+          priority: 'High',
+        },
       ],
       users: [
-        { id: 1, name: 'John Doe', email: 'john@company.com', role: 'Admin', status: 'Active' },
-        { id: 2, name: 'Jane Smith', email: 'jane@company.com', role: 'Developer', status: 'Active' },
-        { id: 3, name: 'Mike Johnson', email: 'mike@company.com', role: 'Developer', status: 'Active' },
-        { id: 4, name: 'Sarah Wilson', email: 'sarah@company.com', role: 'Designer', status: 'Active' },
-        { id: 5, name: 'Tom Brown', email: 'tom@company.com', role: 'Developer', status: 'Active' },
-        { id: 6, name: 'Lisa Davis', email: 'lisa@company.com', role: 'PM', status: 'Active' },
-        { id: 7, name: 'Alex Taylor', email: 'alex@company.com', role: 'Developer', status: 'Active' },
-        { id: 8, name: 'Chris Miller', email: 'chris@company.com', role: 'Developer', status: 'Active' },
-        { id: 9, name: 'Emma Wilson', email: 'emma@company.com', role: 'DevOps', status: 'Active' },
-        { id: 10, name: 'David Lee', email: 'david@company.com', role: 'QA', status: 'Active' }
+        {
+          id: 1,
+          name: 'John Doe',
+          email: 'john@company.com',
+          role: 'Admin',
+          status: 'Active',
+        },
+        {
+          id: 2,
+          name: 'Jane Smith',
+          email: 'jane@company.com',
+          role: 'Developer',
+          status: 'Active',
+        },
+        {
+          id: 3,
+          name: 'Mike Johnson',
+          email: 'mike@company.com',
+          role: 'Developer',
+          status: 'Active',
+        },
+        {
+          id: 4,
+          name: 'Sarah Wilson',
+          email: 'sarah@company.com',
+          role: 'Designer',
+          status: 'Active',
+        },
+        {
+          id: 5,
+          name: 'Tom Brown',
+          email: 'tom@company.com',
+          role: 'Developer',
+          status: 'Active',
+        },
+        {
+          id: 6,
+          name: 'Lisa Davis',
+          email: 'lisa@company.com',
+          role: 'PM',
+          status: 'Active',
+        },
+        {
+          id: 7,
+          name: 'Alex Taylor',
+          email: 'alex@company.com',
+          role: 'Developer',
+          status: 'Active',
+        },
+        {
+          id: 8,
+          name: 'Chris Miller',
+          email: 'chris@company.com',
+          role: 'Developer',
+          status: 'Active',
+        },
+        {
+          id: 9,
+          name: 'Emma Wilson',
+          email: 'emma@company.com',
+          role: 'DevOps',
+          status: 'Active',
+        },
+        {
+          id: 10,
+          name: 'David Lee',
+          email: 'david@company.com',
+          role: 'QA',
+          status: 'Active',
+        },
       ],
       reports: [
-        { id: 1, name: 'Weekly Progress Report', type: 'PDF', date: '2024-01-15', status: 'Generated' },
-        { id: 2, name: 'Team Productivity Metrics', type: 'CSV', date: '2024-01-14', status: 'Generated' },
-        { id: 3, name: 'Project Timeline Overview', type: 'PDF', date: '2024-01-13', status: 'Scheduled' },
-        { id: 4, name: 'Budget Utilization Report', type: 'XLS', date: '2024-01-12', status: 'Generated' }
-      ]
+        {
+          id: 1,
+          name: 'Weekly Progress Report',
+          type: 'PDF',
+          date: '2024-01-15',
+          status: 'Generated',
+        },
+        {
+          id: 2,
+          name: 'Team Productivity Metrics',
+          type: 'CSV',
+          date: '2024-01-14',
+          status: 'Generated',
+        },
+        {
+          id: 3,
+          name: 'Project Timeline Overview',
+          type: 'PDF',
+          date: '2024-01-13',
+          status: 'Scheduled',
+        },
+        {
+          id: 4,
+          name: 'Budget Utilization Report',
+          type: 'XLS',
+          date: '2024-01-12',
+          status: 'Generated',
+        },
+      ],
     };
   }
 
@@ -135,7 +304,7 @@ class DockerSandboxService {
     if (!instance) return;
 
     const timeUntilExpiry = new Date(instance.expiresAt) - new Date();
-    
+
     setTimeout(() => {
       this.cleanupSandbox(instanceId);
     }, timeUntilExpiry);
@@ -150,7 +319,7 @@ class DockerSandboxService {
     console.log(`Cleaning up expired sandbox: ${instanceId}`, {
       userId: instance.userId,
       duration: new Date(instance.expiresAt) - new Date(instance.createdAt),
-      progress: instance.progress
+      progress: instance.progress,
     });
 
     // Stop and remove the container
@@ -164,7 +333,9 @@ class DockerSandboxService {
 
   // Generate instance ID
   generateInstanceId() {
-    return Math.random().toString(36).substring(2, 10) + Date.now().toString(36);
+    return (
+      Math.random().toString(36).substring(2, 10) + Date.now().toString(36)
+    );
   }
 
   // Generate container ID
@@ -186,7 +357,7 @@ class DockerSandboxService {
   updateSandboxProgress(id, progressData) {
     const instance = this.sandboxInstances.get(id);
     if (!instance) return null;
-    
+
     instance.progress = { ...instance.progress, ...progressData };
     return instance;
   }
@@ -195,41 +366,45 @@ class DockerSandboxService {
   isSandboxValid(id) {
     const instance = this.sandboxInstances.get(id);
     if (!instance) return false;
-    
+
     return new Date() < new Date(instance.expiresAt);
   }
 
   // Get sandbox analytics
   getSandboxAnalytics() {
     const instances = this.getActiveInstances();
-    
+
     return {
       totalActive: instances.length,
       totalCreated: this.containerCounter,
       averageDuration: this.calculateAverageDuration(instances),
       completionRate: this.calculateCompletionRate(instances),
-      mostExploredFeatures: this.getMostExploredFeatures(instances)
+      mostExploredFeatures: this.getMostExploredFeatures(instances),
     };
   }
 
   // Calculate average sandbox duration
   calculateAverageDuration(instances) {
     if (instances.length === 0) return 0;
-    
+
     const totalDuration = instances.reduce((sum, instance) => {
       const start = new Date(instance.createdAt);
-      const end = instance.expiresAt ? new Date(instance.expiresAt) : new Date();
+      const end = instance.expiresAt
+        ? new Date(instance.expiresAt)
+        : new Date();
       return sum + (end - start);
     }, 0);
-    
+
     return totalDuration / instances.length;
   }
 
   // Calculate completion rate
   calculateCompletionRate(instances) {
     if (instances.length === 0) return 0;
-    
-    const completed = instances.filter(instance => instance.progress.tourCompleted).length;
+
+    const completed = instances.filter(
+      instance => instance.progress.tourCompleted
+    ).length;
     return (completed / instances.length) * 100;
   }
 
@@ -240,7 +415,7 @@ class DockerSandboxService {
       { feature: 'Project Creation', usage: 85 },
       { feature: 'Task Management', usage: 78 },
       { feature: 'User Management', usage: 65 },
-      { feature: 'Reporting', usage: 45 }
+      { feature: 'Reporting', usage: 45 },
     ];
   }
 }

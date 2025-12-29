@@ -14,8 +14,13 @@
 }
 
 /* Alternative tap highlight for accessibility */
-*[data-tap-highlight="true"] {
-  -webkit-tap-highlight-color: rgba(31, 41, 55, 0.1); /* Light gray for tap feedback */
+*[data-tap-highlight='true'] {
+  -webkit-tap-highlight-color: rgba(
+    31,
+    41,
+    55,
+    0.1
+  ); /* Light gray for tap feedback */
 }
 
 /* Standardized touch targets - minimum 44x44px as per WCAG guidelines */
@@ -26,13 +31,13 @@ input,
 select,
 textarea,
 label,
-[role="button"],
-[role="link"],
-[role="tab"],
-[role="option"],
-[role="menuitem"],
-[role="menuitemcheckbox"],
-[role="menuitemradio"],
+[role='button'],
+[role='link'],
+[role='tab'],
+[role='option'],
+[role='menuitem'],
+[role='menuitemcheckbox'],
+[role='menuitemradio'],
 .clickable,
 .interactive {
   min-width: 44px;
@@ -72,13 +77,13 @@ a {
 }
 
 /* Form element touch targets */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="tel"],
-input[type="url"],
-input[type="number"],
-input[type="search"],
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='tel'],
+input[type='url'],
+input[type='number'],
+input[type='search'],
 select,
 textarea {
   min-height: 44px;
@@ -87,15 +92,15 @@ textarea {
 }
 
 /* Checkbox and radio button touch targets */
-input[type="checkbox"],
-input[type="radio"] {
+input[type='checkbox'],
+input[type='radio'] {
   min-width: 44px;
   min-height: 44px;
   position: relative;
 }
 
-input[type="checkbox"]::before,
-input[type="radio"]::before {
+input[type='checkbox']::before,
+input[type='radio']::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -302,20 +307,20 @@ a:active {
     min-width: 44px;
     min-height: 44px;
   }
-  
+
   /* Increase touch target size on mobile */
   .btn,
   .button {
     min-height: 48px;
     padding: 14px 20px;
   }
-  
+
   .btn-sm,
   .button-sm {
     min-height: 48px;
     padding: 10px 16px;
   }
-  
+
   .btn-lg,
   .button-lg {
     min-height: 56px;
@@ -345,7 +350,12 @@ a:active {
 
 /* Custom tap highlight for important elements */
 .tap-highlight {
-  -webkit-tap-highlight-color: rgba(212, 175, 55, 0.3) !important; /* Royal Gold */
+  -webkit-tap-highlight-color: rgba(
+    212,
+    175,
+    55,
+    0.3
+  ) !important; /* Royal Gold */
   position: relative;
 }
 

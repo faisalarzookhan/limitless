@@ -90,9 +90,9 @@ Font families defined in `tailwind.config.js`:
 
 ```javascript
 fontFamily: {
-  sans: ['Inter', 'system-ui', 'sans-serif'],
-  display: ['Poppins', 'system-ui', 'sans-serif'],
-  mono: ['JetBrains Mono', 'monospace'],
+  sans: ['Figtree', 'system-ui', 'sans-serif'],
+  display: ['Outfit', 'system-ui', 'sans-serif'],
+  mono: ['Fira Code', 'monospace'],
 }
 ```
 
@@ -121,19 +121,25 @@ fontSize: {
 Our color system is organized into semantic roles:
 
 ### Primary Colors
+
 Used for primary actions, branding, and key interactive elements.
 
 ### Secondary Colors
+
 Used for secondary actions and complementary elements.
 
 ### Accent Colors
+
 Used for highlights, warnings, and attention-grabbing elements.
 
 ### Neutral Colors (Dark Scale)
+
 Used for text, backgrounds, borders, and subtle UI elements.
 
 ### Semantic Colors
+
 Colors with specific meanings:
+
 - Success: Green tones
 - Warning: Yellow/Orange tones
 - Error: Red tones
@@ -149,31 +155,31 @@ Colors with specific meanings:
 
 ### Font Sizes
 
-| Size | Class | REM | Pixels | Usage |
-|------|-------|-----|--------|-------|
-| xs | text-xs | 0.75rem | 12px | Captions, fine print |
-| sm | text-sm | 0.875rem | 14px | Secondary text |
-| base | text-base | 1rem | 16px | Body text |
-| lg | text-lg | 1.125rem | 18px | Lead paragraphs |
-| xl | text-xl | 1.25rem | 20px | Subheadings |
-| 2xl | text-2xl | 1.5rem | 24px | Section headings |
-| 3xl | text-3xl | 1.875rem | 30px | Major headings |
-| 4xl | text-4xl | 2.25rem | 36px | Page titles |
-| 5xl | text-5xl | 3rem | 48px | Hero headings |
+| Size | Class     | REM      | Pixels | Usage                |
+| ---- | --------- | -------- | ------ | -------------------- |
+| xs   | text-xs   | 0.75rem  | 12px   | Captions, fine print |
+| sm   | text-sm   | 0.875rem | 14px   | Secondary text       |
+| base | text-base | 1rem     | 16px   | Body text            |
+| lg   | text-lg   | 1.125rem | 18px   | Lead paragraphs      |
+| xl   | text-xl   | 1.25rem  | 20px   | Subheadings          |
+| 2xl  | text-2xl  | 1.5rem   | 24px   | Section headings     |
+| 3xl  | text-3xl  | 1.875rem | 30px   | Major headings       |
+| 4xl  | text-4xl  | 2.25rem  | 36px   | Page titles          |
+| 5xl  | text-5xl  | 3rem     | 48px   | Hero headings        |
 
 ### Font Weights
 
-| Weight | Class | Value | Usage |
-|--------|-------|-------|-------|
-| Thin | font-thin | 100 | Decorative headings |
-| Extra Light | font-extralight | 200 | Decorative headings |
-| Light | font-light | 300 | Subtle text |
-| Normal | font-normal | 400 | Body text |
-| Medium | font-medium | 500 | Emphasized text |
-| Semi Bold | font-semibold | 600 | Headings, labels |
-| Bold | font-bold | 700 | Strong emphasis |
-| Extra Bold | font-extrabold | 800 | Hero headings |
-| Black | font-black | 900 | Maximum emphasis |
+| Weight      | Class           | Value | Usage               |
+| ----------- | --------------- | ----- | ------------------- |
+| Thin        | font-thin       | 100   | Decorative headings |
+| Extra Light | font-extralight | 200   | Decorative headings |
+| Light       | font-light      | 300   | Subtle text         |
+| Normal      | font-normal     | 400   | Body text           |
+| Medium      | font-medium     | 500   | Emphasized text     |
+| Semi Bold   | font-semibold   | 600   | Headings, labels    |
+| Bold        | font-bold       | 700   | Strong emphasis     |
+| Extra Bold  | font-extrabold  | 800   | Hero headings       |
+| Black       | font-black      | 900   | Maximum emphasis    |
 
 ## Spacing System
 
@@ -181,78 +187,78 @@ Our spacing system uses a consistent scale based on 4px increments:
 
 ### Spacing Scale
 
-| Name | Size | REM | Pixels | Usage |
-|------|------|-----|--------|-------|
-| 0 | 0 | 0 | 0px | None |
-| 0.5 | 0.125rem | 2px | Tiny gaps |
-| 1 | 0.25rem | 4px | Micro spacing |
-| 1.5 | 0.375rem | 6px | Small gaps |
-| 2 | 0.5rem | 8px | Small spacing |
-| 2.5 | 0.625rem | 10px | Compact spacing |
-| 3 | 0.75rem | 12px | Element padding |
-| 3.5 | 0.875rem | 14px | Element padding |
-| 4 | 1rem | 16px | Standard spacing |
-| 5 | 1.25rem | 20px | Section padding |
-| 6 | 1.5rem | 24px | Section padding |
-| 7 | 1.75rem | 28px | Section padding |
-| 8 | 2rem | 32px | Large spacing |
-| 9 | 2.25rem | 36px | Large spacing |
-| 10 | 2.5rem | 40px | Large spacing |
-| 11 | 2.75rem | 44px | XL spacing |
-| 12 | 3rem | 48px | XL spacing |
-| 14 | 3.5rem | 56px | XXL spacing |
-| 16 | 4rem | 64px | XXL spacing |
-| 20 | 5rem | 80px | Hero spacing |
-| 24 | 6rem | 96px | Hero spacing |
-| 28 | 7rem | 112px | Hero spacing |
-| 32 | 8rem | 128px | Hero spacing |
-| 36 | 9rem | 144px | Hero spacing |
-| 40 | 10rem | 160px | Hero spacing |
-| 44 | 11rem | 176px | Hero spacing |
-| 48 | 12rem | 192px | Hero spacing |
-| 52 | 13rem | 208px | Hero spacing |
-| 56 | 14rem | 224px | Hero spacing |
-| 60 | 15rem | 240px | Hero spacing |
-| 64 | 16rem | 256px | Hero spacing |
-| 72 | 18rem | 288px | Hero spacing |
-| 80 | 20rem | 320px | Hero spacing |
-| 96 | 24rem | 384px | Hero spacing |
+| Name | Size     | REM   | Pixels           | Usage |
+| ---- | -------- | ----- | ---------------- | ----- |
+| 0    | 0        | 0     | 0px              | None  |
+| 0.5  | 0.125rem | 2px   | Tiny gaps        |
+| 1    | 0.25rem  | 4px   | Micro spacing    |
+| 1.5  | 0.375rem | 6px   | Small gaps       |
+| 2    | 0.5rem   | 8px   | Small spacing    |
+| 2.5  | 0.625rem | 10px  | Compact spacing  |
+| 3    | 0.75rem  | 12px  | Element padding  |
+| 3.5  | 0.875rem | 14px  | Element padding  |
+| 4    | 1rem     | 16px  | Standard spacing |
+| 5    | 1.25rem  | 20px  | Section padding  |
+| 6    | 1.5rem   | 24px  | Section padding  |
+| 7    | 1.75rem  | 28px  | Section padding  |
+| 8    | 2rem     | 32px  | Large spacing    |
+| 9    | 2.25rem  | 36px  | Large spacing    |
+| 10   | 2.5rem   | 40px  | Large spacing    |
+| 11   | 2.75rem  | 44px  | XL spacing       |
+| 12   | 3rem     | 48px  | XL spacing       |
+| 14   | 3.5rem   | 56px  | XXL spacing      |
+| 16   | 4rem     | 64px  | XXL spacing      |
+| 20   | 5rem     | 80px  | Hero spacing     |
+| 24   | 6rem     | 96px  | Hero spacing     |
+| 28   | 7rem     | 112px | Hero spacing     |
+| 32   | 8rem     | 128px | Hero spacing     |
+| 36   | 9rem     | 144px | Hero spacing     |
+| 40   | 10rem    | 160px | Hero spacing     |
+| 44   | 11rem    | 176px | Hero spacing     |
+| 48   | 12rem    | 192px | Hero spacing     |
+| 52   | 13rem    | 208px | Hero spacing     |
+| 56   | 14rem    | 224px | Hero spacing     |
+| 60   | 15rem    | 240px | Hero spacing     |
+| 64   | 16rem    | 256px | Hero spacing     |
+| 72   | 18rem    | 288px | Hero spacing     |
+| 80   | 20rem    | 320px | Hero spacing     |
+| 96   | 24rem    | 384px | Hero spacing     |
 
 ## Component Library
 
 ### Button Variants
 
-| Variant | Classes | Usage |
-|---------|---------|-------|
-| Primary | btn-primary | Main actions, CTAs |
-| Secondary | btn-secondary | Secondary actions |
-| Outline | btn-outline | Alternative actions |
-| Ghost | btn-ghost | Subtle actions |
-| Danger | btn-danger | Destructive actions |
-| Success | btn-success | Positive actions |
+| Variant   | Classes       | Usage               |
+| --------- | ------------- | ------------------- |
+| Primary   | btn-primary   | Main actions, CTAs  |
+| Secondary | btn-secondary | Secondary actions   |
+| Outline   | btn-outline   | Alternative actions |
+| Ghost     | btn-ghost     | Subtle actions      |
+| Danger    | btn-danger    | Destructive actions |
+| Success   | btn-success   | Positive actions    |
 
 ### Card Variants
 
-| Variant | Classes | Usage |
-|---------|---------|-------|
-| Default | card-default | Standard content containers |
-| Elevated | card-elevated | Prominent content |
-| Outlined | card-outlined | Subtle containers |
-| Filled | card-filled | Colored backgrounds |
-| Gradient | card-gradient | Decorative containers |
+| Variant  | Classes       | Usage                       |
+| -------- | ------------- | --------------------------- |
+| Default  | card-default  | Standard content containers |
+| Elevated | card-elevated | Prominent content           |
+| Outlined | card-outlined | Subtle containers           |
+| Filled   | card-filled   | Colored backgrounds         |
+| Gradient | card-gradient | Decorative containers       |
 
 ### Badge Variants
 
-| Variant | Classes | Usage |
-|---------|---------|-------|
-| Primary | badge-primary | Primary information |
-| Secondary | badge-secondary | Secondary information |
-| Accent | badge-accent | Highlighted information |
-| Success | badge-success | Positive status |
-| Warning | badge-warning | Caution status |
-| Danger | badge-danger | Error status |
-| Info | badge-info | Informational status |
-| Neutral | badge-neutral | Generic status |
+| Variant   | Classes         | Usage                   |
+| --------- | --------------- | ----------------------- |
+| Primary   | badge-primary   | Primary information     |
+| Secondary | badge-secondary | Secondary information   |
+| Accent    | badge-accent    | Highlighted information |
+| Success   | badge-success   | Positive status         |
+| Warning   | badge-warning   | Caution status          |
+| Danger    | badge-danger    | Error status            |
+| Info      | badge-info      | Informational status    |
+| Neutral   | badge-neutral   | Generic status          |
 
 ## Implementation Guidelines
 
@@ -299,13 +305,13 @@ We've created several custom utilities for common patterns:
 
 We use a mobile-first approach with the following breakpoints:
 
-| Breakpoint | Prefix | Width |
-|------------|--------|-------|
-| Small | sm | 640px |
-| Medium | md | 768px |
-| Large | lg | 1024px |
-| Extra Large | xl | 1280px |
-| 2X Large | 2xl | 1536px |
+| Breakpoint  | Prefix | Width  |
+| ----------- | ------ | ------ |
+| Small       | sm     | 640px  |
+| Medium      | md     | 768px  |
+| Large       | lg     | 1024px |
+| Extra Large | xl     | 1280px |
+| 2X Large    | 2xl    | 1536px |
 
 ### Container Classes
 
@@ -336,6 +342,7 @@ Defined in `src/index.css`:
 ### Theme Switching
 
 We support three theme modes:
+
 1. Light mode
 2. Dark mode
 3. System preference
@@ -346,8 +353,8 @@ Implemented through the AppContext:
 const { theme, changeTheme } = useApp();
 
 // Theme options
-changeTheme('light');  // Light theme
-changeTheme('dark');   // Dark theme
+changeTheme('light'); // Light theme
+changeTheme('dark'); // Dark theme
 changeTheme('system'); // Follow system preference
 ```
 
@@ -358,6 +365,7 @@ Our dark mode implementation provides a comfortable viewing experience in low-li
 ### Color Palette Adjustments
 
 Dark mode colors are carefully adjusted for:
+
 - Reduced eye strain
 - Better contrast ratios
 - Consistent visual hierarchy
@@ -384,9 +392,7 @@ All components automatically adapt to dark mode:
 
 ```tsx
 // Button component adapts automatically
-<button className="btn-primary">
-  Primary Button
-</button>
+<button className="btn-primary">Primary Button</button>
 
 // Renders differently in dark mode
 // Light: bg-primary-600 text-white

@@ -4,7 +4,7 @@ import './AdaptiveGrid.css';
 
 /**
  * Adaptive Grid Component
- * Utilizes CSS aspect-ratio and container queries to ensure "Showcase Projects" 
+ * Utilizes CSS aspect-ratio and container queries to ensure "Showcase Projects"
  * look pixel-perfect on Foldables, iPads, and Ultra-wide monitors.
  */
 const AdaptiveGrid = ({
@@ -21,21 +21,16 @@ const AdaptiveGrid = ({
     gridTemplateColumns: columns,
     gap,
     maxWidth,
-    '--aspect-ratio': aspectRatio
+    '--aspect-ratio': aspectRatio,
   };
 
   // If container query is provided, we'll use it to apply responsive styles
-  const gridClasses = [
-    'limitless-adaptive-grid',
-    className
-  ].filter(Boolean).join(' ');
+  const gridClasses = ['limitless-adaptive-grid', className]
+    .filter(Boolean)
+    .join(' ');
 
   return (
-    <div 
-      className={gridClasses}
-      style={gridStyles}
-      {...props}
-    >
+    <div className={gridClasses} style={gridStyles} {...props}>
       {React.Children.map(children, (child, index) => {
         if (child) {
           // Clone child elements to add aspect ratio styling if needed
@@ -44,8 +39,8 @@ const AdaptiveGrid = ({
             style: {
               ...child.props.style,
               aspectRatio: aspectRatio,
-              ...child.props.style
-            }
+              ...child.props.style,
+            },
           });
         }
         return child;
@@ -71,20 +66,15 @@ const AdaptiveGridItem = ({
     position: 'relative',
     overflow: 'hidden',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   };
 
-  const itemClasses = [
-    'limitless-adaptive-grid-item',
-    className
-  ].filter(Boolean).join(' ');
+  const itemClasses = ['limitless-adaptive-grid-item', className]
+    .filter(Boolean)
+    .join(' ');
 
   return (
-    <div 
-      className={itemClasses}
-      style={itemStyles}
-      {...props}
-    >
+    <div className={itemClasses} style={itemStyles} {...props}>
       {children}
     </div>
   );
@@ -106,30 +96,27 @@ const AspectRatioBox = ({
     aspectRatio: ratio,
     position: 'relative',
     width: '100%',
-    overflow: 'hidden'
+    overflow: 'hidden',
   };
 
-  const boxClasses = [
-    'limitless-aspect-ratio-box',
-    className
-  ].filter(Boolean).join(' ');
+  const boxClasses = ['limitless-aspect-ratio-box', className]
+    .filter(Boolean)
+    .join(' ');
 
   return (
-    <div 
-      className={boxClasses}
-      style={boxStyles}
-      {...props}
-    >
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
+    <div className={boxClasses} style={boxStyles} {...props}>
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
         {children}
       </div>
     </div>
@@ -150,20 +137,15 @@ const ResponsiveContainer = ({
   const containerStyles = {
     ...style,
     containerType: 'inline-size',
-    containerName: 'responsive-container'
+    containerName: 'responsive-container',
   };
 
-  const containerClasses = [
-    'limitless-responsive-container',
-    className
-  ].filter(Boolean).join(' ');
+  const containerClasses = ['limitless-responsive-container', className]
+    .filter(Boolean)
+    .join(' ');
 
   return (
-    <div 
-      className={containerClasses}
-      style={containerStyles}
-      {...props}
-    >
+    <div className={containerClasses} style={containerStyles} {...props}>
       <style>
         {`
           @container responsive-container ${query} {
@@ -173,11 +155,11 @@ const ResponsiveContainer = ({
           }
         `}
       </style>
-      {React.Children.map(children, (child) => {
+      {React.Children.map(children, child => {
         if (child) {
           return React.cloneElement(child, {
             ...child.props,
-            className: `${child.props.className || ''} limitless-container-query-match`
+            className: `${child.props.className || ''} limitless-container-query-match`,
           });
         }
         return child;
@@ -188,7 +170,7 @@ const ResponsiveContainer = ({
 
 // Helper function to generate container query styles
 function getContainerQueryStyles(query) {
-  // This is a simplified version - in a real implementation, 
+  // This is a simplified version - in a real implementation,
   // you'd have more sophisticated logic to handle different queries
   if (query.includes('600px')) {
     return `
@@ -212,7 +194,7 @@ AdaptiveGrid.propTypes = {
   /** Container query for responsive behavior */
   containerQuery: PropTypes.string,
   /** Maximum width of the grid */
-  maxWidth: PropTypes.string
+  maxWidth: PropTypes.string,
 };
 
 AdaptiveGridItem.propTypes = {
@@ -223,7 +205,7 @@ AdaptiveGridItem.propTypes = {
   /** Additional CSS classes */
   className: PropTypes.string,
   /** Additional inline styles */
-  style: PropTypes.object
+  style: PropTypes.object,
 };
 
 AspectRatioBox.propTypes = {
@@ -234,7 +216,7 @@ AspectRatioBox.propTypes = {
   /** Additional CSS classes */
   className: PropTypes.string,
   /** Additional inline styles */
-  style: PropTypes.object
+  style: PropTypes.object,
 };
 
 ResponsiveContainer.propTypes = {
@@ -245,7 +227,7 @@ ResponsiveContainer.propTypes = {
   /** Additional CSS classes */
   className: PropTypes.string,
   /** Additional inline styles */
-  style: PropTypes.object
+  style: PropTypes.object,
 };
 
 export { AdaptiveGrid, AdaptiveGridItem, AspectRatioBox, ResponsiveContainer };

@@ -1,37 +1,48 @@
 import React, { useState } from 'react';
 import { format, addDays, isBefore, isSameDay } from 'date-fns';
-import { 
-  HiOutlineCalendar, 
-  HiOutlineClock, 
-  HiOutlineUser, 
+import {
+  HiOutlineCalendar,
+  HiOutlineClock,
+  HiOutlineUser,
   HiOutlineCheckCircle,
-  HiOutlineX 
+  HiOutlineX,
 } from 'react-icons/hi';
 
-const CalendarIntegration = ({ onSchedule, onClose, userName = "Auralis User" }) => {
+const CalendarIntegration = ({
+  onSchedule,
+  onClose,
+  userName = 'Auralis User',
+}) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedTime, setSelectedTime] = useState('');
   const [availableTimes, setAvailableTimes] = useState([]);
   const [step, setStep] = useState(1); // 1: Date selection, 2: Time selection, 3: Confirmation
 
   // Generate available dates (next 30 days)
-  const availableDates = Array.from({ length: 30 }, (_, i) => addDays(new Date(), i));
+  const availableDates = Array.from({ length: 30 }, (_, i) =>
+    addDays(new Date(), i)
+  );
 
   // Generate available times for a given date
-  const generateAvailableTimes = (date) => {
+  const generateAvailableTimes = date => {
     const today = new Date();
     const isToday = isSameDay(date, today);
-    
+
     if (isToday) {
       // If it's today, only show times after current time
       const currentHour = today.getHours();
       const currentMinute = today.getMinutes();
-      
+
       const times = [];
       for (let hour = currentHour; hour < 18; hour++) {
         for (let minute = 0; minute < 60; minute += 30) {
-          if (hour > currentHour || (hour === currentHour && minute >= currentMinute)) {
-            times.push(`${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`);
+          if (
+            hour > currentHour ||
+            (hour === currentHour && minute >= currentMinute)
+          ) {
+            times.push(
+              `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`
+            );
           }
         }
       }
@@ -41,20 +52,22 @@ const CalendarIntegration = ({ onSchedule, onClose, userName = "Auralis User" })
       const times = [];
       for (let hour = 9; hour < 18; hour++) {
         for (let minute = 0; minute < 60; minute += 30) {
-          times.push(`${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`);
+          times.push(
+            `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`
+          );
         }
       }
       return times;
     }
   };
 
-  const handleDateSelect = (date) => {
+  const handleDateSelect = date => {
     setSelectedDate(date);
     setAvailableTimes(generateAvailableTimes(date));
     setStep(2);
   };
 
-  const handleTimeSelect = (time) => {
+  const handleTimeSelect = time => {
     setSelectedTime(time);
     setStep(3);
   };
@@ -68,7 +81,7 @@ const CalendarIntegration = ({ onSchedule, onClose, userName = "Auralis User" })
       date: selectedDate,
       time: selectedTime,
       dateTime: scheduledDateTime,
-      userName
+      userName,
     });
   };
 
@@ -90,7 +103,7 @@ const CalendarIntegration = ({ onSchedule, onClose, userName = "Auralis User" })
               {step === 2 && 'Select Time'}
               {step === 3 && 'Confirm Meeting'}
             </h3>
-            <button 
+            <button
               onClick={onClose}
               className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
             >
@@ -130,7 +143,7 @@ const CalendarIntegration = ({ onSchedule, onClose, userName = "Auralis User" })
                   {format(selectedDate, 'MMMM d, yyyy')}
                 </span>
               </div>
-              
+
               <div className="grid grid-cols-2 gap-2 max-h-64 overflow-y-auto">
                 {availableTimes.map((time, index) => (
                   <button
@@ -157,9 +170,11 @@ const CalendarIntegration = ({ onSchedule, onClose, userName = "Auralis User" })
               <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4">
                 <div className="flex items-center mb-3">
                   <HiOutlineCheckCircle className="w-6 h-6 text-green-600 mr-2" />
-                  <h4 className="font-semibold text-gray-900 dark:text-white">Meeting Details</h4>
+                  <h4 className="font-semibold text-gray-900 dark:text-white">
+                    Meeting Details
+                  </h4>
                 </div>
-                
+
                 <div className="space-y-2">
                   <div className="flex items-center">
                     <HiOutlineCalendar className="w-5 h-5 text-gray-500 mr-3" />
@@ -167,14 +182,14 @@ const CalendarIntegration = ({ onSchedule, onClose, userName = "Auralis User" })
                       {format(selectedDate, 'EEEE, MMMM d, yyyy')}
                     </span>
                   </div>
-                  
+
                   <div className="flex items-center">
                     <HiOutlineClock className="w-5 h-5 text-gray-500 mr-3" />
                     <span className="text-gray-700 dark:text-gray-300">
                       {selectedTime}
                     </span>
                   </div>
-                  
+
                   <div className="flex items-center">
                     <HiOutlineUser className="w-5 h-5 text-gray-500 mr-3" />
                     <span className="text-gray-700 dark:text-gray-300">
@@ -183,9 +198,9 @@ const CalendarIntegration = ({ onSchedule, onClose, userName = "Auralis User" })
                   </div>
                 </div>
               </div>
-              
+
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Confirm this meeting time for your consultation with Auralis AI. 
+                Confirm this meeting time for your consultation with Auralis AI.
                 You'll receive a calendar invite with the meeting details.
               </p>
             </div>
@@ -200,7 +215,7 @@ const CalendarIntegration = ({ onSchedule, onClose, userName = "Auralis User" })
                 Back
               </button>
             )}
-            
+
             <div className="ml-auto space-x-3">
               {step < 3 && (
                 <button
@@ -210,7 +225,7 @@ const CalendarIntegration = ({ onSchedule, onClose, userName = "Auralis User" })
                   Cancel
                 </button>
               )}
-              
+
               {step === 3 && (
                 <button
                   onClick={handleConfirm}

@@ -24,9 +24,11 @@
 ## 🎯 Project Overview
 
 ### About
+
 A modern, professional, and feature-rich website for **Limitless Infotech Solution** - Where Innovation Meets Execution. The website showcases IT services, products, portfolio, and provides comprehensive information about the company.
 
 ### Key Highlights
+
 - ✅ Fully responsive design (mobile, tablet, desktop)
 - ✅ Dark mode support with system preference detection
 - ✅ 19+ pages including dynamic routes
@@ -40,6 +42,7 @@ A modern, professional, and feature-rich website for **Limitless Infotech Soluti
 - ✅ WCAG accessibility compliant
 
 ### Business Information
+
 - **Company:** Limitless Infotech Solution
 - **Founder & CEO:** Faisal Khan
 - **Email:** Info@limitlessinfotech.com
@@ -52,27 +55,32 @@ A modern, professional, and feature-rich website for **Limitless Infotech Soluti
 ## 🛠️ Technology Stack
 
 ### Frontend Framework
+
 - **React 18.2.0** - Modern UI library with hooks
 - **React Router DOM 6.20.0** - Client-side routing
 - **Vite 5.0.8** - Next-generation build tool (ultra-fast HMR)
 
 ### Styling & Design
+
 - **Tailwind CSS 3.3.6** - Utility-first CSS framework
 - **PostCSS** - CSS transformations
 - **Autoprefixer** - Vendor prefixing
 - **Custom CSS** - Additional styling and animations
 
 ### UI Components & Libraries
+
 - **Framer Motion 10.16.5** - Animation library for smooth transitions
 - **React Icons 4.12.0** - Comprehensive icon library
 - **Swiper 11.0.5** - Touch-enabled slider/carousel
 
 ### Development Tools
+
 - **ESLint** - Code linting and quality
 - **Git** - Version control
 - **npm** - Package management
 
 ### Code Standards
+
 - JavaScript ES6+
 - JSX for React components
 - Functional components with hooks
@@ -167,7 +175,9 @@ Redesigned/
 ### Core Pages (19 Pages Total)
 
 #### 1. **Home Page** (`/`)
+
 **Features:**
+
 - Hero section with animated background
 - Company foundation/about section
 - Core services showcase (6 services)
@@ -179,6 +189,7 @@ Redesigned/
 - Final call-to-action
 
 **Key Components:**
+
 - Animated service cards
 - Product showcase cards
 - Interactive FAQ
@@ -187,7 +198,9 @@ Redesigned/
 ---
 
 #### 2. **Services Page** (`/services`)
+
 **Features:**
+
 - Detailed service descriptions
 - Core Services:
   - Web Development
@@ -203,6 +216,7 @@ Redesigned/
 - CTA sections
 
 **Design Elements:**
+
 - Service cards with icons
 - Process timeline
 - Tech stack badges
@@ -211,7 +225,9 @@ Redesigned/
 ---
 
 #### 3. **Portfolio Page** (`/portfolio`)
+
 **Features:**
+
 - 12+ project showcases
 - Filter by category (Web, Mobile, Software, etc.)
 - Search functionality
@@ -221,6 +237,7 @@ Redesigned/
 - Client logos
 
 **Categories:**
+
 - All Projects
 - Web Development
 - Mobile Apps
@@ -231,7 +248,9 @@ Redesigned/
 ---
 
 #### 4. **Portfolio Detail Pages** (`/portfolio/:id`)
+
 **Features:**
+
 - Comprehensive case study
 - Challenge & solution overview
 - Implementation process
@@ -247,7 +266,9 @@ Redesigned/
 ---
 
 #### 5. **Products Page** (`/products`)
+
 **Features:**
+
 - 7 Enterprise SaaS Products:
   1. **TrackIT** - IT Asset Management (500+ users)
   2. **HR-IMS** - HR Management System (2,000+ users) [Popular]
@@ -258,6 +279,7 @@ Redesigned/
   7. **DocuFlow** - Document Management (400+ users) [New]
 
 **Features per Product:**
+
 - Detailed description
 - Key features list
 - User statistics
@@ -270,7 +292,9 @@ Redesigned/
 ---
 
 #### 6. **Testimonials Page** (`/testimonials`)
+
 **Features:**
+
 - 12+ verified client reviews
 - Filter by industry
 - Filter by rating (5 stars, 4+ stars, etc.)
@@ -281,6 +305,7 @@ Redesigned/
 - Review statistics
 
 **Review Categories:**
+
 - Web Development
 - Mobile Apps
 - Custom Software
@@ -290,7 +315,9 @@ Redesigned/
 ---
 
 #### 7. **About Us Page** (`/about`)
+
 **Features:**
+
 - Company story and mission
 - Vision statement
 - Core values (4-6 values)
@@ -303,6 +330,7 @@ Redesigned/
 - Awards & certifications
 
 **Sections:**
+
 - Hero with company intro
 - Our Story
 - Mission & Vision
@@ -315,7 +343,9 @@ Redesigned/
 ---
 
 #### 8. **Contact Page** (`/contact`)
+
 **Features:**
+
 - Contact information cards
 - Multi-field contact form with validation
 - Quick action buttons (Call, Email, WhatsApp)
@@ -326,6 +356,7 @@ Redesigned/
 - Success/error messages
 
 **Form Fields:**
+
 - Name
 - Email
 - Phone
@@ -337,7 +368,9 @@ Redesigned/
 ---
 
 #### 9. **Client Requirements Form** (`/get-started`)
+
 **Features:**
+
 - Multi-step form (6 steps)
 - Progress indicator
 - Step navigation (back/next)
@@ -345,6 +378,7 @@ Redesigned/
 - Auto-save draft (localStorage)
 
 **Steps:**
+
 1. **Personal Information**
    - Name, Email, Phone, Company
 2. **Project Information**
@@ -361,7 +395,9 @@ Redesigned/
 ---
 
 #### 10. **Blog Page** (`/blog`)
+
 **Features:**
+
 - Blog articles listing
 - Categories filter
 - Search functionality
@@ -373,6 +409,7 @@ Redesigned/
 - Pagination
 
 **Categories:**
+
 - Technology
 - Web Development
 - Mobile Development
@@ -383,7 +420,9 @@ Redesigned/
 ---
 
 #### 11. **Blog Detail Page** (`/blog/:slug`)
+
 **Features:**
+
 - Full article content
 - Author bio
 - Publish date & read time
@@ -397,7 +436,9 @@ Redesigned/
 ---
 
 #### 12. **Events Page** (`/events`)
+
 **Features:**
+
 - Upcoming events
 - Past events
 - Event categories
@@ -407,6 +448,7 @@ Redesigned/
 - Registration CTA
 
 **Event Types:**
+
 - Webinars
 - Workshops
 - Conferences
@@ -416,7 +458,9 @@ Redesigned/
 ---
 
 #### 13. **Event Detail Page** (`/events/:slug`)
+
 **Features:**
+
 - Event description
 - Date, time, location
 - Speaker information
@@ -428,7 +472,9 @@ Redesigned/
 ---
 
 #### 14. **Pricing Page** (`/pricing`)
+
 **Features:**
+
 - 3-4 Pricing tiers
 - Monthly/Annual toggle
 - Feature comparison table
@@ -438,6 +484,7 @@ Redesigned/
 - CTA buttons
 
 **Plans:**
+
 - Starter
 - Professional
 - Business
@@ -446,7 +493,9 @@ Redesigned/
 ---
 
 #### 15. **Careers Page** (`/careers`)
+
 **Features:**
+
 - Open positions listing
 - Filter by department
 - Filter by location
@@ -460,7 +509,9 @@ Redesigned/
 ---
 
 #### 16. **Privacy Policy Page** (`/privacy-policy`)
+
 **Features:**
+
 - Comprehensive privacy policy
 - Table of contents
 - Last updated date
@@ -472,7 +523,9 @@ Redesigned/
 ---
 
 #### 17. **Terms of Service Page** (`/terms-of-service`)
+
 **Features:**
+
 - Terms and conditions
 - User agreements
 - Service limitations
@@ -483,7 +536,9 @@ Redesigned/
 ---
 
 #### 18. **Cookie Policy Page** (`/cookie-policy`)
+
 **Features:**
+
 - Cookie usage explanation
 - Cookie types
 - Cookie management
@@ -493,7 +548,9 @@ Redesigned/
 ---
 
 #### 19. **404 Not Found Page** (`/*`)
+
 **Features:**
+
 - Custom 404 design
 - Search functionality
 - Popular pages links
@@ -505,6 +562,7 @@ Redesigned/
 ### Global Features
 
 #### Navigation (Navbar)
+
 - Sticky/floating navbar
 - Glassmorphism effect
 - Mega menu dropdowns
@@ -514,6 +572,7 @@ Redesigned/
 - Active page highlighting
 
 #### Footer
+
 - Company information
 - Quick links (Services, About, Contact, etc.)
 - Legal links (Privacy, Terms, Cookies)
@@ -523,6 +582,7 @@ Redesigned/
 - Trust badges
 
 #### Chatbot
+
 - AI-powered responses
 - Knowledge base integration
 - Quick action buttons
@@ -533,6 +593,7 @@ Redesigned/
 - Mobile responsive
 
 #### Toast Notifications
+
 - Success messages
 - Error messages
 - Info messages
@@ -542,6 +603,7 @@ Redesigned/
 - Customizable duration
 
 #### Theme System
+
 - Light mode
 - Dark mode
 - System preference detection
@@ -554,6 +616,7 @@ Redesigned/
 ## 🚀 Installation & Setup
 
 ### Prerequisites
+
 ```bash
 Node.js v16.0.0 or higher
 npm v8.0.0 or higher (or yarn)
@@ -561,17 +624,20 @@ Git
 ```
 
 ### Step 1: Clone Repository
+
 ```bash
 git clone <repository-url>
 cd Redesigned
 ```
 
 ### Step 2: Install Dependencies
+
 ```bash
 npm install
 ```
 
 This installs:
+
 - React & React DOM
 - React Router
 - Tailwind CSS
@@ -583,6 +649,7 @@ This installs:
 - All development dependencies
 
 ### Step 3: Start Development Server
+
 ```bash
 npm run dev
 ```
@@ -590,6 +657,7 @@ npm run dev
 Server runs at: `http://localhost:5173`
 
 ### Step 4: Build for Production
+
 ```bash
 npm run build
 ```
@@ -597,6 +665,7 @@ npm run build
 Output: `dist/` folder
 
 ### Step 5: Preview Production Build
+
 ```bash
 npm run preview
 ```
@@ -608,6 +677,7 @@ npm run preview
 ### Color Palette
 
 #### Primary Colors (Blue)
+
 ```css
 primary-50:  #f0f9ff
 primary-100: #e0f2fe
@@ -623,6 +693,7 @@ primary-950: #082f49
 ```
 
 #### Secondary Colors (Purple)
+
 ```css
 secondary-500: #a855f7  /* Accent color */
 secondary-600: #9333ea
@@ -630,12 +701,14 @@ secondary-700: #7e22ce
 ```
 
 #### Accent Colors (Orange)
+
 ```css
 accent-500: #0a0b0d    /* Highlight color */
 accent-600: #1a1a1a
 ```
 
 #### Dark Mode Colors
+
 ```css
 dark-700: #334155
 dark-800: #1e293b
@@ -646,13 +719,15 @@ dark-950: #020617
 ### Typography
 
 #### Font Families
+
 ```css
-font-sans: 'Inter', system-ui, sans-serif          /* Body text */
-font-display: 'Poppins', system-ui, sans-serif     /* Headings */
-font-mono: 'JetBrains Mono', monospace             /* Code */
+font-sans: 'Figtree', system-ui, sans-serif          /* Body text */
+font-display: 'Outfit', system-ui, sans-serif     /* Headings */
+font-mono: 'Fira Code', monospace             /* Code */
 ```
 
 #### Font Sizes
+
 ```css
 text-xs:   0.75rem (12px)
 text-sm:   0.875rem (14px)
@@ -668,6 +743,7 @@ text-7xl:  4.5rem (72px)
 ```
 
 ### Spacing Scale
+
 ```css
 0.5: 0.125rem (2px)
 1:   0.25rem (4px)
@@ -685,6 +761,7 @@ text-7xl:  4.5rem (72px)
 ```
 
 ### Border Radius
+
 ```css
 rounded-sm:   0.125rem (2px)
 rounded:      0.25rem (4px)
@@ -697,6 +774,7 @@ rounded-full: 9999px
 ```
 
 ### Shadows
+
 ```css
 shadow-sm:   Subtle shadow
 shadow:      Default shadow
@@ -715,6 +793,7 @@ shadow-glow: Primary color glow
 ### Custom Utility Classes
 
 #### Buttons
+
 ```css
 .btn-primary     /* Primary CTA button */
 .btn-secondary   /* Secondary button */
@@ -723,6 +802,7 @@ shadow-glow: Primary color glow
 ```
 
 #### Cards
+
 ```css
 .service-card      /* Service showcase card */
 .testimonial-card  /* Client review card */
@@ -731,6 +811,7 @@ shadow-glow: Primary color glow
 ```
 
 #### Form Elements
+
 ```css
 .input-field      /* Text input */
 .textarea-field   /* Textarea */
@@ -741,6 +822,7 @@ shadow-glow: Primary color glow
 ```
 
 #### Layout
+
 ```css
 .section-padding      /* Consistent section padding */
 .container-custom     /* Max-width container */
@@ -749,6 +831,7 @@ shadow-glow: Primary color glow
 ```
 
 #### Text Utilities
+
 ```css
 .text-gradient            /* Multi-color gradient */
 .text-gradient-primary    /* Primary gradient */
@@ -757,6 +840,7 @@ shadow-glow: Primary color glow
 ```
 
 #### Animations
+
 ```css
 .animate-fade-in       /* Fade in animation */
 .animate-fade-in-up    /* Fade in from bottom */
@@ -772,17 +856,20 @@ shadow-glow: Primary color glow
 ### Available Scripts
 
 #### Development
+
 ```bash
 npm run dev           # Start dev server (http://localhost:5173)
 ```
 
 #### Production Build
+
 ```bash
 npm run build         # Build for production
 npm run preview       # Preview production build
 ```
 
 #### Code Quality
+
 ```bash
 npm run lint          # Run ESLint
 ```
@@ -790,34 +877,40 @@ npm run lint          # Run ESLint
 ### Development Workflow
 
 1. **Create Feature Branch**
+
 ```bash
 git checkout -b feature/your-feature-name
 ```
 
 2. **Make Changes**
+
 - Edit components in `src/components/`
 - Edit pages in `src/pages/`
 - Update data in `src/data/`
 - Modify styles in `src/index.css` or `tailwind.config.js`
 
 3. **Test Locally**
+
 ```bash
 npm run dev
 ```
 
 4. **Build & Preview**
+
 ```bash
 npm run build
 npm run preview
 ```
 
 5. **Commit Changes**
+
 ```bash
 git add .
 git commit -m "feat: add your feature description"
 ```
 
 6. **Push to Repository**
+
 ```bash
 git push origin feature/your-feature-name
 ```
@@ -825,12 +918,14 @@ git push origin feature/your-feature-name
 ### Coding Standards
 
 #### React Components
+
 - Use functional components with hooks
 - Use PascalCase for component names
 - One component per file
 - Export default at bottom
 
 **Example:**
+
 ```jsx
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -838,23 +933,21 @@ import { Link } from 'react-router-dom';
 const MyComponent = () => {
   const [state, setState] = useState(initialValue);
 
-  return (
-    <div className="container">
-      {/* Component JSX */}
-    </div>
-  );
+  return <div className="container">{/* Component JSX */}</div>;
 };
 
 export default MyComponent;
 ```
 
 #### Styling
+
 - Use Tailwind utility classes first
 - Use custom classes for repeated patterns
 - Keep responsive design in mind (mobile-first)
 - Use dark mode variants: `dark:bg-dark-900`
 
 **Example:**
+
 ```jsx
 <div className="px-6 py-12 bg-white dark:bg-dark-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
   {/* Content */}
@@ -862,11 +955,13 @@ export default MyComponent;
 ```
 
 #### State Management
+
 - Use Context API for global state
 - Use local state for component-specific data
 - Keep state minimal and flat
 
 #### File Naming
+
 - Components: `PascalCase.jsx` (e.g., `Navbar.jsx`)
 - Data files: `camelCase.js` (e.g., `portfolioData.js`)
 - Utilities: `camelCase.js` (e.g., `helpers.js`)
@@ -876,6 +971,7 @@ export default MyComponent;
 ## 🌐 Deployment
 
 ### Build Preparation
+
 1. Update environment variables (if any)
 2. Optimize images
 3. Review meta tags and SEO
@@ -887,6 +983,7 @@ export default MyComponent;
 ### Deployment Options
 
 #### Option 1: Vercel (Recommended)
+
 ```bash
 # Install Vercel CLI
 npm install -g vercel
@@ -901,6 +998,7 @@ vercel --prod
 **Auto-deployment:** Connect GitHub repository for automatic deployments
 
 #### Option 2: Netlify
+
 ```bash
 # Install Netlify CLI
 npm install -g netlify-cli
@@ -915,26 +1013,31 @@ netlify deploy --prod --dir=dist
 **Auto-deployment:** Connect GitHub repository
 
 #### Option 3: GitHub Pages
+
 1. Update `vite.config.js`:
+
 ```js
 export default defineConfig({
   base: '/repository-name/',
   // ... rest of config
-})
+});
 ```
 
 2. Build and deploy:
+
 ```bash
 npm run build
 # Deploy dist folder to gh-pages branch
 ```
 
 #### Option 4: Traditional Hosting (cPanel, etc.)
+
 1. Build project: `npm run build`
 2. Upload `dist/` folder contents to server
 3. Configure server for SPA routing
 
 **Server Configuration (Apache .htaccess):**
+
 ```apache
 <IfModule mod_rewrite.c>
   RewriteEngine On
@@ -953,24 +1056,28 @@ npm run build
 ### Regular Tasks
 
 #### Weekly
+
 - Monitor error logs
 - Check form submissions
 - Review analytics
 - Update blog/events
 
 #### Monthly
+
 - Update dependencies
 - Review security alerts
 - Backup database
 - Performance audit
 
 #### Quarterly
+
 - Content review and update
 - SEO audit
 - Security audit
 - User feedback review
 
 ### Updating Dependencies
+
 ```bash
 # Check outdated packages
 npm outdated
@@ -986,6 +1093,7 @@ npm install package-name@next
 ```
 
 ### Security Best Practices
+
 - Keep dependencies updated
 - Use HTTPS only
 - Implement CSRF protection
@@ -994,6 +1102,7 @@ npm install package-name@next
 - Regular security audits
 
 ### Performance Optimization
+
 - Lazy load images
 - Code splitting (already implemented with React.lazy)
 - Minimize bundle size
@@ -1006,6 +1115,7 @@ npm install package-name@next
 ## 📊 Performance Metrics
 
 ### Target Metrics
+
 - **Lighthouse Performance:** 95+
 - **First Contentful Paint:** < 1.5s
 - **Time to Interactive:** < 3.0s
@@ -1013,6 +1123,7 @@ npm install package-name@next
 - **Cumulative Layout Shift:** < 0.1
 
 ### Monitoring Tools
+
 - Google Lighthouse
 - Google Analytics
 - Google Search Console
@@ -1024,6 +1135,7 @@ npm install package-name@next
 ## 🔒 Security
 
 ### Implemented Security Features
+
 - ✅ HTTPS enforcement
 - ✅ Input validation on all forms
 - ✅ XSS protection (React escapes by default)
@@ -1032,6 +1144,7 @@ npm install package-name@next
 - ✅ Environment variables for sensitive configs
 
 ### Recommended Additional Security
+
 - [ ] Implement rate limiting
 - [ ] Add CAPTCHA to forms
 - [ ] Set up Content Security Policy (CSP)
@@ -1043,6 +1156,7 @@ npm install package-name@next
 ## 📈 Analytics & Tracking
 
 ### Recommended Analytics Tools
+
 1. **Google Analytics 4**
    - User behavior tracking
    - Conversion tracking
@@ -1060,6 +1174,7 @@ npm install package-name@next
    - Ad conversion tracking
 
 ### Key Metrics to Track
+
 - Page views
 - Unique visitors
 - Bounce rate
@@ -1075,6 +1190,7 @@ npm install package-name@next
 ## 🧪 Testing
 
 ### Manual Testing Checklist
+
 - [ ] All pages load correctly
 - [ ] Navigation works on all devices
 - [ ] Forms validate properly
@@ -1087,6 +1203,7 @@ npm install package-name@next
 - [ ] SEO meta tags present
 
 ### Browser Testing
+
 - [ ] Chrome (latest)
 - [ ] Firefox (latest)
 - [ ] Safari (latest)
@@ -1099,6 +1216,7 @@ npm install package-name@next
 ## 🤝 Contributing
 
 ### How to Contribute
+
 1. Fork the repository
 2. Create feature branch
 3. Make your changes
@@ -1108,6 +1226,7 @@ npm install package-name@next
 7. Create Pull Request
 
 ### Commit Message Convention
+
 ```
 feat: Add new feature
 fix: Fix bug
@@ -1123,11 +1242,14 @@ chore: Maintenance tasks
 ## 📞 Support & Contact
 
 ### Technical Support
+
 - **Email:** Info@limitlessinfotech.com
 - **Phone:** +91 77109 09492
 
 ### Documentation Issues
+
 If you find any issues with this documentation, please:
+
 1. Create an issue in the repository
 2. Email with detailed description
 3. Suggest improvements via Pull Request
@@ -1137,6 +1259,7 @@ If you find any issues with this documentation, please:
 ## 📝 Changelog
 
 ### Version 2.0.0 (Current)
+
 - ✅ 19+ pages fully implemented
 - ✅ Dark mode support
 - ✅ Chatbot integration
@@ -1148,6 +1271,7 @@ If you find any issues with this documentation, please:
 - ✅ Performance optimizations
 
 ### Version 1.0.0 (Initial)
+
 - Basic website structure
 - Core pages (Home, Services, Portfolio, About, Contact)
 - Responsive design
@@ -1158,17 +1282,21 @@ If you find any issues with this documentation, please:
 ## 🎓 Learning Resources
 
 ### React
+
 - [React Official Docs](https://react.dev)
 - [React Router](https://reactrouter.com)
 
 ### Tailwind CSS
+
 - [Tailwind Docs](https://tailwindcss.com/docs)
 - [Tailwind UI](https://tailwindui.com)
 
 ### Vite
+
 - [Vite Guide](https://vitejs.dev/guide)
 
 ### Framer Motion
+
 - [Framer Motion Docs](https://www.framer.com/motion)
 
 ---
@@ -1189,7 +1317,7 @@ This project is licensed under the ISC License.
 ---
 
 **Built with ❤️ by Limitless Infotech Solution**  
-*Where Innovation Meets Execution*
+_Where Innovation Meets Execution_
 
 ---
 

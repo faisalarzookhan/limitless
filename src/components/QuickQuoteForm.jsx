@@ -1,22 +1,27 @@
 import { useState } from 'react';
-import { HiOutlineUser, HiOutlineMail, HiOutlineLightBulb, HiCheckCircle } from 'react-icons/hi';
+import {
+  HiOutlineUser,
+  HiOutlineMail,
+  HiOutlineLightBulb,
+  HiCheckCircle,
+} from 'react-icons/hi';
 import { sendLeadGenerationNotification } from '../services/notificationService';
 
 const QuickQuoteForm = ({ variant = 'default', onSubmitSuccess }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    requirement: ''
+    requirement: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -27,13 +32,13 @@ const QuickQuoteForm = ({ variant = 'default', onSubmitSuccess }) => {
         formType: 'quick-quote',
         timestamp: new Date().toISOString(),
         page: window.location.pathname,
-        userAgent: navigator.userAgent
+        userAgent: navigator.userAgent,
       });
 
       // Reset form
       setFormData({ name: '', email: '', requirement: '' });
       setSubmitSuccess(true);
-      
+
       // Call success callback if provided
       if (onSubmitSuccess) {
         onSubmitSuccess();
@@ -54,7 +59,9 @@ const QuickQuoteForm = ({ variant = 'default', onSubmitSuccess }) => {
         <div className="flex items-center justify-center mb-3">
           <HiCheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
         </div>
-        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">Thank You!</h3>
+        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">
+          Thank You!
+        </h3>
         <p className="text-green-700 dark:text-green-400 text-sm">
           We've received your requirement and will contact you shortly.
         </p>
@@ -66,7 +73,10 @@ const QuickQuoteForm = ({ variant = 'default', onSubmitSuccess }) => {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Full Name *
           </label>
           <div className="relative">
@@ -85,9 +95,12 @@ const QuickQuoteForm = ({ variant = 'default', onSubmitSuccess }) => {
             />
           </div>
         </div>
-        
+
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Work Email *
           </label>
           <div className="relative">
@@ -107,9 +120,12 @@ const QuickQuoteForm = ({ variant = 'default', onSubmitSuccess }) => {
           </div>
         </div>
       </div>
-      
+
       <div>
-        <label htmlFor="requirement" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="requirement"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Requirement *
         </label>
         <div className="relative">
@@ -128,7 +144,7 @@ const QuickQuoteForm = ({ variant = 'default', onSubmitSuccess }) => {
           ></textarea>
         </div>
       </div>
-      
+
       <button
         type="submit"
         disabled={isSubmitting}
@@ -143,7 +159,7 @@ const QuickQuoteForm = ({ variant = 'default', onSubmitSuccess }) => {
           'Get Quote'
         )}
       </button>
-      
+
       <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-2">
         We'll contact you within 24 hours with a personalized quote.
       </p>

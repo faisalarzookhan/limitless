@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { HiOutlineMail, HiOutlineLockClosed, HiOutlineEye, HiOutlineEyeOff } from 'react-icons/hi';
+import {
+  HiOutlineMail,
+  HiOutlineLockClosed,
+  HiOutlineEye,
+  HiOutlineEyeOff,
+} from 'react-icons/hi';
 import InputField from './InputField';
 import { sendLoginNotification } from '../../services/notificationService';
 
@@ -7,20 +12,20 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    rememberMe: false
+    rememberMe: false,
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === 'checkbox' ? checked : value,
     }));
-    
+
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
@@ -29,30 +34,30 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!formData.email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Email is invalid';
     }
-    
+
     if (!formData.password) {
       newErrors.password = 'Password is required';
     } else if (formData.password.length < 6) {
       newErrors.password = 'Password must be at least 6 characters';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
-    
+
     setIsSubmitting(true);
 
     try {
@@ -62,19 +67,19 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
         rememberMe: formData.rememberMe,
         timestamp: new Date().toISOString(),
         page: window.location.pathname,
-        userAgent: navigator.userAgent
+        userAgent: navigator.userAgent,
       });
 
       // Simulate API call
       setTimeout(() => {
         setIsSubmitting(false);
         setSubmitSuccess(true);
-        
+
         // Call success callback if provided
         if (onLoginSuccess) {
           onLoginSuccess();
         }
-        
+
         // Reset success message after 5 seconds
         setTimeout(() => setSubmitSuccess(false), 5000);
       }, 1500);
@@ -88,11 +93,24 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
     return (
       <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 text-center">
         <div className="flex items-center justify-center mb-3">
-          <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+          <svg
+            className="w-8 h-8 text-green-600 dark:text-green-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M5 13l4 4L19 7"
+            ></path>
           </svg>
         </div>
-        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">Login Successful!</h3>
+        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">
+          Login Successful!
+        </h3>
         <p className="text-green-700 dark:text-green-400 text-sm">
           Welcome back! You have been successfully logged in.
         </p>
@@ -120,7 +138,7 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
           id="password"
           name="password"
           label="Password"
-          type={showPassword ? "text" : "password"}
+          type={showPassword ? 'text' : 'password'}
           value={formData.password}
           onChange={handleChange}
           placeholder="Enter your password"
@@ -147,13 +165,19 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
             onChange={handleChange}
             className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
           />
-          <label htmlFor="rememberMe" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+          <label
+            htmlFor="rememberMe"
+            className="ml-2 block text-sm text-gray-700 dark:text-gray-300"
+          >
             Remember me
           </label>
         </div>
-        
+
         <div className="text-sm">
-          <a href="/password-reset" className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+          <a
+            href="/password-reset"
+            className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
+          >
             Forgot password?
           </a>
         </div>
@@ -176,7 +200,10 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
 
       <div className="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
         Don't have an account?{' '}
-        <a href="/register" className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+        <a
+          href="/register"
+          className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
+        >
           Sign up
         </a>
       </div>

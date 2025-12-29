@@ -1,9 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
     extend: {
@@ -59,7 +56,7 @@ export default {
           800: '#1e293b',
           900: '#0f172a',
           950: '#020617',
-        }
+        },
       },
       fontFamily: {
         sans: ['Figtree', 'system-ui', 'sans-serif'],
@@ -67,32 +64,33 @@ export default {
         mono: ['Fira Code', 'monospace'],
       },
       fontSize: {
-        'xs': ['0.75rem', { lineHeight: '1.25rem' }],  // 12px, 16px line height
-        'sm': ['0.875rem', { lineHeight: '1.5rem' }],  // 14px, 20px line height
-        'base': ['1rem', { lineHeight: '1.75rem' }],   // 16px, 24px line height
-        'lg': ['1.125rem', { lineHeight: '1.75rem' }], // 18px, 24px line height
-        'xl': ['1.25rem', { lineHeight: '1.875rem' }], // 20px, 28px line height
-        '2xl': ['1.5rem', { lineHeight: '2rem' }],    // 24px, 28px line height
+        xs: ['0.75rem', { lineHeight: '1.25rem' }], // 12px, 16px line height
+        sm: ['0.875rem', { lineHeight: '1.5rem' }], // 14px, 20px line height
+        base: ['1rem', { lineHeight: '1.75rem' }], // 16px, 24px line height
+        lg: ['1.125rem', { lineHeight: '1.75rem' }], // 18px, 24px line height
+        xl: ['1.25rem', { lineHeight: '1.875rem' }], // 20px, 28px line height
+        '2xl': ['1.5rem', { lineHeight: '2rem' }], // 24px, 28px line height
         '3xl': ['1.875rem', { lineHeight: '2.25rem' }], // 30px, 36px line height
-        '4xl': ['2.375rem', { lineHeight: '2.5rem' }],  // 38px, 40px line height (Major Third from 1.25rem)
-        '5xl': ['3rem', { lineHeight: '1.2' }],       // 48px, 52px line height (Major Third from 1.875rem)
-        '6xl': ['3.75rem', { lineHeight: '1.2' }],    // 60px, 64px line height (Major Third from 2.375rem)
-        '7xl': ['4.5rem', { lineHeight: '1.1' }],     // 72px, 72px line height (Major Third from 3rem)
-        '8xl': ['6rem', { lineHeight: '1' }],         // 96px, 96px line height
-        '9xl': ['8rem', { lineHeight: '1' }],         // 128px, 128px line height
+        '4xl': ['2.375rem', { lineHeight: '2.5rem' }], // 38px, 40px line height (Major Third from 1.25rem)
+        '5xl': ['3rem', { lineHeight: '1.2' }], // 48px, 52px line height (Major Third from 1.875rem)
+        '6xl': ['3.75rem', { lineHeight: '1.2' }], // 60px, 64px line height (Major Third from 2.375rem)
+        '7xl': ['4.5rem', { lineHeight: '1.1' }], // 72px, 72px line height (Major Third from 3rem)
+        '8xl': ['6rem', { lineHeight: '1' }], // 96px, 96px line height
+        '9xl': ['8rem', { lineHeight: '1' }], // 128px, 128px line height
       },
       spacing: {
-        '128': '32rem',
-        '144': '36rem',
+        128: '32rem',
+        144: '36rem',
       },
       borderRadius: {
         '4xl': '2rem',
         '5xl': '2.5rem',
       },
       boxShadow: {
-        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
-        'soft-dark': '0 2px 15px -3px rgba(0, 0, 0, 0.15), 0 10px 20px -2px rgba(0, 0, 0, 0.12)',
-        'glow': '0 0 20px rgba(14, 165, 233, 0.3)',
+        soft: '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+        'soft-dark':
+          '0 2px 15px -3px rgba(0, 0, 0, 0.15), 0 10px 20px -2px rgba(0, 0, 0, 0.12)',
+        glow: '0 0 20px rgba(14, 165, 233, 0.3)',
         'glow-lg': '0 0 30px rgba(14, 165, 233, 0.4)',
         'inner-soft': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
         'inner-soft-dark': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.2)',
@@ -107,7 +105,7 @@ export default {
         'bounce-slow': 'bounce 3s infinite',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'spin-slow': 'spin 8s linear infinite',
-        'float': 'float 3s ease-in-out infinite',
+        float: 'float 3s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -141,13 +139,15 @@ export default {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-conic':
+          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'gradient-primary': 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
-        'gradient-secondary': 'linear-gradient(135deg, #ffc957 0%, #ffbd3a 100%)',
+        'gradient-secondary':
+          'linear-gradient(135deg, #ffc957 0%, #ffbd3a 100%)',
         'gradient-accent': 'linear-gradient(135deg, #0a0b0d 0%, #1a1a1a 100%)',
         'gradient-dark': 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
       },
     },
   },
   plugins: [],
-}
+};

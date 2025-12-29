@@ -43,12 +43,12 @@ class ResizeObserver {
 window.ResizeObserver = ResizeObserver;
 
 // Mock requestAnimationFrame
-window.requestAnimationFrame = function(callback) {
+window.requestAnimationFrame = function (callback) {
   return setTimeout(callback, 0);
 };
 
 // Mock cancelAnimationFrame
-window.cancelAnimationFrame = function(id) {
+window.cancelAnimationFrame = function (id) {
   clearTimeout(id);
 };
 

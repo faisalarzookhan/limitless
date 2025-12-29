@@ -12,13 +12,13 @@ class MonitoringService {
       errorCount: 0,
       apiResponseTime: [],
       memoryUsage: [],
-      cpuUsage: []
+      cpuUsage: [],
     };
-    
+
     this.performanceObserver = null;
     this.errorHandler = null;
     this.unhandledRejectionHandler = null;
-    
+
     this.init();
   }
 
@@ -32,7 +32,7 @@ class MonitoringService {
   setupPerformanceMonitoring() {
     // Performance Observer for Core Web Vitals
     if ('PerformanceObserver' in window) {
-      this.performanceObserver = new PerformanceObserver((list) => {
+      this.performanceObserver = new PerformanceObserver(list => {
         for (const entry of list.getEntries()) {
           if (entry.entryType === 'paint') {
             if (entry.name === 'first-contentful-paint') {
@@ -56,7 +56,12 @@ class MonitoringService {
       });
 
       this.performanceObserver.observe({
-        entryTypes: ['paint', 'largest-contentful-paint', 'layout-shift', 'first-input']
+        entryTypes: [
+          'paint',
+          'largest-contentful-paint',
+          'layout-shift',
+          'first-input',
+        ],
       });
     }
 
@@ -64,7 +69,8 @@ class MonitoringService {
     if ('navigation' in performance) {
       const navigationEntry = performance.getEntriesByType('navigation')[0];
       if (navigationEntry) {
-        this.metrics.pageLoadTime = navigationEntry.loadEventEnd - navigationEntry.fetchStart;
+        this.metrics.pageLoadTime =
+          navigationEntry.loadEventEnd - navigationEntry.fetchStart;
         this.reportMetric('PageLoadTime', this.metrics.pageLoadTime);
       }
     }
@@ -72,7 +78,7 @@ class MonitoringService {
 
   setupErrorMonitoring() {
     // Capture uncaught errors
-    this.errorHandler = (event) => {
+    this.errorHandler = event => {
       this.metrics.errorCount++;
       this.reportError({
         type: 'javascript_error',
@@ -80,27 +86,30 @@ class MonitoringService {
         filename: event.filename,
         lineno: event.lineno,
         colno: event.colno,
-        stack: event.error?.stack
+        stack: event.error?.stack,
       });
     };
 
     // Capture unhandled promise rejections
-    this.unhandledRejectionHandler = (event) => {
+    this.unhandledRejectionHandler = event => {
       this.metrics.errorCount++;
       this.reportError({
         type: 'unhandled_promise_rejection',
         message: event.reason?.message || event.reason,
-        stack: event.reason?.stack
+        stack: event.reason?.stack,
       });
     };
 
     window.addEventListener('error', this.errorHandler);
-    window.addEventListener('unhandledrejection', this.unhandledRejectionHandler);
+    window.addEventListener(
+      'unhandledrejection',
+      this.unhandledRejectionHandler
+    );
   }
 
   setupResourceMonitoring() {
     if ('PerformanceObserver' in window) {
-      const resourceObserver = new PerformanceObserver((list) => {
+      const resourceObserver = new PerformanceObserver(list => {
         for (const entry of list.getEntries()) {
           if (entry.entryType === 'resource') {
             const responseTime = entry.responseEnd - entry.fetchStart;
@@ -108,7 +117,7 @@ class MonitoringService {
               this.metrics.apiResponseTime.push(responseTime);
               this.reportMetric('ResourceLoadTime', responseTime, {
                 name: entry.name,
-                type: entry.responseEnd - entry.fetchStart
+                type: entry.responseEnd - entry.fetchStart,
               });
             }
           }
@@ -128,9 +137,9 @@ class MonitoringService {
           this.metrics.memoryUsage.push({
             used: memory.usedJSHeapSize,
             total: memory.totalJSHeapSize,
-            limit: memory.jsHeapSizeLimit
+            limit: memory.jsHeapSizeLimit,
           });
-          
+
           this.reportMetric('MemoryUsage', memory.usedJSHeapSize);
         }
       }, 5000); // Every 5 seconds
@@ -144,12 +153,12 @@ class MonitoringService {
       timestamp: Date.now(),
       url: window.location.href,
       userAgent: navigator.userAgent,
-      ...additionalData
+      ...additionalData,
     };
 
     // Send to monitoring backend (placeholder)
     this.sendToMonitoringBackend('metric', metricData);
-    
+
     // Log to console in development
     if (process.env.NODE_ENV === 'development') {
       console.log(`Metric: ${name} = ${value}`, additionalData);
@@ -161,12 +170,12 @@ class MonitoringService {
       ...errorData,
       timestamp: Date.now(),
       url: window.location.href,
-      userAgent: navigator.userAgent
+      userAgent: navigator.userAgent,
     };
 
     // Send to error tracking backend (placeholder)
     this.sendToMonitoringBackend('error', errorReport);
-    
+
     // Log to console in development
     if (process.env.NODE_ENV === 'development') {
       console.error('Error reported:', errorReport);
@@ -181,7 +190,7 @@ class MonitoringService {
       // - New Relic
       // - Custom backend endpoint
       console.log(`[Monitoring] Sending ${type}:`, data);
-      
+
       // Example API call:
       /*
       await fetch('/api/monitoring', {
@@ -212,7 +221,7 @@ class MonitoringService {
       timestamp: now,
       uptime: performance.timeOrigin ? now - performance.timeOrigin : null,
       metrics: this.getMetrics(),
-      version: process.env.REACT_APP_VERSION || '1.0.0'
+      version: process.env.REACT_APP_VERSION || '1.0.0',
     };
   }
 
@@ -220,13 +229,16 @@ class MonitoringService {
     if (this.performanceObserver) {
       this.performanceObserver.disconnect();
     }
-    
+
     if (this.errorHandler) {
       window.removeEventListener('error', this.errorHandler);
     }
-    
+
     if (this.unhandledRejectionHandler) {
-      window.removeEventListener('unhandledrejection', this.unhandledRejectionHandler);
+      window.removeEventListener(
+        'unhandledrejection',
+        this.unhandledRejectionHandler
+      );
     }
   }
 }

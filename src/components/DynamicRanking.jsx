@@ -6,11 +6,11 @@ import PropTypes from 'prop-types';
  * Dynamic Ranking Component
  * Implements dynamic re-ranking of content based on search intent tracking
  */
-const DynamicRanking = ({ 
-  contentItems = [], 
+const DynamicRanking = ({
+  contentItems = [],
   initialRanking = 'default',
   enableTracking = true,
-  children 
+  children,
 }) => {
   const [rankedContent, setRankedContent] = useState([]);
   const [currentRanking, setCurrentRanking] = useState(initialRanking);
@@ -37,26 +37,26 @@ const DynamicRanking = ({
     return () => clearInterval(interval);
   }, [contentItems, currentRanking]);
 
-  const handleRankingChange = (newRanking) => {
+  const handleRankingChange = newRanking => {
     setCurrentRanking(newRanking);
   };
 
   const getRankingOptions = () => {
     return (
       <div className="ranking-controls">
-        <button 
+        <button
           className={`ranking-btn ${currentRanking === 'default' ? 'active' : ''}`}
           onClick={() => handleRankingChange('default')}
         >
           Default
         </button>
-        <button 
+        <button
           className={`ranking-btn ${currentRanking === 'dynamic' ? 'active' : ''}`}
           onClick={() => handleRankingChange('dynamic')}
         >
           Personalized
         </button>
-        <button 
+        <button
           className={`ranking-btn ${currentRanking === 'popularity' ? 'active' : ''}`}
           onClick={() => handleRankingChange('popularity')}
         >
@@ -70,29 +70,27 @@ const DynamicRanking = ({
     <div className="dynamic-ranking-container">
       {getRankingOptions()}
       <div className="ranked-content">
-        {children ? (
-          React.Children.map(children, (child, index) => {
-            if (child && child.type === DynamicRankingItem) {
-              // Provide ranking data to child items
-              return React.cloneElement(child, {
-                ...child.props,
-                item: rankedContent[index],
-                rank: index + 1,
-                isRanked: currentRanking === 'dynamic'
-              });
-            }
-            return child;
-          })
-        ) : (
-          rankedContent.map((item, index) => (
-            <DynamicRankingItem 
-              key={item.id || index} 
-              item={item} 
-              rank={index + 1}
-              isRanked={currentRanking === 'dynamic'}
-            />
-          ))
-        )}
+        {children
+          ? React.Children.map(children, (child, index) => {
+              if (child && child.type === DynamicRankingItem) {
+                // Provide ranking data to child items
+                return React.cloneElement(child, {
+                  ...child.props,
+                  item: rankedContent[index],
+                  rank: index + 1,
+                  isRanked: currentRanking === 'dynamic',
+                });
+              }
+              return child;
+            })
+          : rankedContent.map((item, index) => (
+              <DynamicRankingItem
+                key={item.id || index}
+                item={item}
+                rank={index + 1}
+                isRanked={currentRanking === 'dynamic'}
+              />
+            ))}
       </div>
     </div>
   );
@@ -102,34 +100,35 @@ const DynamicRanking = ({
  * Dynamic Ranking Item Component
  * Individual item in the ranked list
  */
-const DynamicRankingItem = ({ 
-  item, 
-  rank = 0, 
+const DynamicRankingItem = ({
+  item,
+  rank = 0,
   isRanked = false,
   onClick,
   className = '',
-  children 
+  children,
 }) => {
   const handleClick = () => {
     if (onClick) onClick(item);
   };
 
   return (
-    <div 
+    <div
       className={`ranking-item ${className} ${isRanked ? 'ranked' : ''}`}
       onClick={handleClick}
     >
       <div className="rank-indicator">
         {isRanked && (
-          <span className="rank-number" title={`Ranked #${rank} based on your interests`}>
+          <span
+            className="rank-number"
+            title={`Ranked #${rank} based on your interests`}
+          >
             {rank}
           </span>
         )}
-        {!isRanked && (
-          <span className="default-indicator">#</span>
-        )}
+        {!isRanked && <span className="default-indicator">#</span>}
       </div>
-      
+
       <div className="item-content">
         {children ? (
           children
@@ -141,7 +140,10 @@ const DynamicRankingItem = ({
               <span className="item-category">{item.category}</span>
             )}
             {isRanked && item.relevanceScore > 0 && (
-              <span className="relevance-score" title="Relevance to your interests">
+              <span
+                className="relevance-score"
+                title="Relevance to your interests"
+              >
                 🔍 {Math.round(item.relevanceScore * 100)}%
               </span>
             )}
@@ -156,42 +158,39 @@ const DynamicRankingItem = ({
  * Search Intent Tracker Component
  * Automatically tracks search behavior and intent
  */
-const SearchIntentTracker = ({ 
+const SearchIntentTracker = ({
   searchTerm = '',
   onSearch = () => {},
   placeholder = 'Search...',
-  className = '' 
+  className = '',
 }) => {
   const [searchValue, setSearchValue] = useState('');
 
-  const handleSearch = (e) => {
+  const handleSearch = e => {
     e.preventDefault();
     const value = searchValue.trim();
     if (value) {
       searchIntentService.trackSearch(value, {
         pageUrl: window.location.href,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       });
       onSearch(value);
     }
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     setSearchValue(e.target.value);
   };
 
   const handleInputFocus = () => {
     // Track when user starts searching
     searchIntentService.trackView('search_started', window.location.href, {
-      action: 'search_focus'
+      action: 'search_focus',
     });
   };
 
   return (
-    <form 
-      className={`search-intent-form ${className}`}
-      onSubmit={handleSearch}
-    >
+    <form className={`search-intent-form ${className}`} onSubmit={handleSearch}>
       <input
         type="search"
         value={searchValue}
@@ -200,11 +199,7 @@ const SearchIntentTracker = ({
         placeholder={placeholder}
         className="search-input"
       />
-      <button 
-        type="submit" 
-        className="search-submit"
-        aria-label="Search"
-      >
+      <button type="submit" className="search-submit" aria-label="Search">
         🔍
       </button>
     </form>
@@ -223,18 +218,18 @@ const ContentPersonalizationProvider = ({ children }) => {
     // Get initial intent
     const primaryIntent = searchIntentService.getPrimaryIntent();
     setUserIntent(primaryIntent);
-    
+
     // Get intent summary
     const summary = searchIntentService.getIntentSummary();
     setIntentSummary(summary);
-    
+
     // Update periodically
     const interval = setInterval(() => {
       const updatedPrimaryIntent = searchIntentService.getPrimaryIntent();
       setUserIntent(updatedPrimaryIntent);
       setIntentSummary(searchIntentService.getIntentSummary());
     }, 10000); // Update every 10 seconds
-    
+
     return () => clearInterval(interval);
   }, []);
 
@@ -243,7 +238,7 @@ const ContentPersonalizationProvider = ({ children }) => {
       {children({
         userIntent,
         intentSummary,
-        searchIntentService
+        searchIntentService,
       })}
     </div>
   );
@@ -257,7 +252,7 @@ DynamicRanking.propTypes = {
   /** Whether to enable tracking */
   enableTracking: PropTypes.bool,
   /** Child components */
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 DynamicRankingItem.propTypes = {
@@ -272,7 +267,7 @@ DynamicRankingItem.propTypes = {
   /** Additional CSS classes */
   className: PropTypes.string,
   /** Child components */
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 SearchIntentTracker.propTypes = {
@@ -283,19 +278,19 @@ SearchIntentTracker.propTypes = {
   /** Input placeholder */
   placeholder: PropTypes.string,
   /** Additional CSS classes */
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 ContentPersonalizationProvider.propTypes = {
   /** Child render function */
-  children: PropTypes.func.isRequired
+  children: PropTypes.func.isRequired,
 };
 
-export { 
-  DynamicRanking, 
-  DynamicRankingItem, 
-  SearchIntentTracker, 
+export {
+  DynamicRanking,
+  DynamicRankingItem,
+  SearchIntentTracker,
   ContentPersonalizationProvider,
-  searchIntentService 
+  searchIntentService,
 };
 export default DynamicRanking;

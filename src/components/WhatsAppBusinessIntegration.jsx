@@ -1,5 +1,16 @@
 import { useState, useEffect } from 'react';
-import { HiChat, HiPhone, HiPaperAirplane, HiX, HiCheck, HiClock, HiUser, HiSparkles, HiQuestionMarkCircle, HiInformationCircle } from 'react-icons/hi';
+import {
+  HiChat,
+  HiPhone,
+  HiPaperAirplane,
+  HiX,
+  HiCheck,
+  HiClock,
+  HiUser,
+  HiSparkles,
+  HiQuestionMarkCircle,
+  HiInformationCircle,
+} from 'react-icons/hi';
 import { sendUserInteractionNotification } from '../services/notificationService';
 
 const WhatsAppBusinessIntegration = () => {
@@ -7,20 +18,20 @@ const WhatsAppBusinessIntegration = () => {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "Hi there! 👋 Thanks for visiting Limitless Infotech. How can we help you today?",
+      text: 'Hi there! 👋 Thanks for visiting Limitless Infotech. How can we help you today?',
       sender: 'Auralis',
       timestamp: new Date(Date.now() - 300000), // 5 minutes ago
-      status: 'read'
-    }
+      status: 'read',
+    },
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
 
   const predefinedMessages = [
-    "Tell me about your services",
+    'Tell me about your services',
     "What's your pricing?",
-    "I need help with a project",
-    "Schedule a call"
+    'I need help with a project',
+    'Schedule a call',
   ];
 
   const handleSendMessage = async (message = inputMessage) => {
@@ -31,7 +42,7 @@ const WhatsAppBusinessIntegration = () => {
       text: message,
       sender: 'Auralis',
       timestamp: new Date(),
-      status: 'sent'
+      status: 'sent',
     };
 
     setMessages(prev => [...prev, newMessage]);
@@ -43,7 +54,7 @@ const WhatsAppBusinessIntegration = () => {
         message: message,
         sender: 'Auralis',
         timestamp: new Date().toISOString(),
-        page: window.location.pathname
+        page: window.location.pathname,
       });
     } catch (error) {
       console.error('Error sending WhatsApp chat notification:', error);
@@ -58,36 +69,44 @@ const WhatsAppBusinessIntegration = () => {
         text: botResponse,
         sender: 'Auralis',
         timestamp: new Date(),
-        status: 'delivered'
+        status: 'delivered',
       };
       setMessages(prev => [...prev, responseMessage]);
       setIsTyping(false);
     }, 1500);
   };
 
-  const generateBotResponse = (message) => {
+  const generateBotResponse = message => {
     const lowerMsg = message.toLowerCase();
 
     if (lowerMsg.includes('service') || lowerMsg.includes('what do you do')) {
-      return "We offer comprehensive IT solutions including Web Development, Mobile Apps, AI/ML, Cloud Services, and Custom Software. Would you like details about any specific service?";
-    } else if (lowerMsg.includes('price') || lowerMsg.includes('cost') || lowerMsg.includes('pricing')) {
+      return 'We offer comprehensive IT solutions including Web Development, Mobile Apps, AI/ML, Cloud Services, and Custom Software. Would you like details about any specific service?';
+    } else if (
+      lowerMsg.includes('price') ||
+      lowerMsg.includes('cost') ||
+      lowerMsg.includes('pricing')
+    ) {
       return "Our pricing varies by project scope. Web dev starts at $15k, mobile apps at $25k. For accurate pricing, let's discuss your specific needs. Would you like to schedule a consultation?";
     } else if (lowerMsg.includes('help') || lowerMsg.includes('project')) {
       return "I'd be happy to help! Could you tell me more about your project requirements? Our team specializes in custom solutions tailored to your business needs.";
-    } else if (lowerMsg.includes('call') || lowerMsg.includes('meeting') || lowerMsg.includes('schedule')) {
-      return "Great! You can schedule a call with our team directly through our website or I can connect you with a specialist. Would you like me to transfer you?";
+    } else if (
+      lowerMsg.includes('call') ||
+      lowerMsg.includes('meeting') ||
+      lowerMsg.includes('schedule')
+    ) {
+      return 'Great! You can schedule a call with our team directly through our website or I can connect you with a specialist. Would you like me to transfer you?';
     } else if (lowerMsg.includes('hr-ims') || lowerMsg.includes('trackit')) {
-      return "HR-IMS and TrackIT are our flagship SaaS products. HR-IMS handles HR management, while TrackIT manages project tracking. Would you like a demo of either product?";
+      return 'HR-IMS and TrackIT are our flagship SaaS products. HR-IMS handles HR management, while TrackIT manages project tracking. Would you like a demo of either product?';
     } else {
-      return "Thanks for your message! Our team will get back to you shortly. In the meantime, you can also reach us at +917710909492 or email us at contact@limitlessinfotech.com";
+      return 'Thanks for your message! Our team will get back to you shortly. In the meantime, you can also reach us at +917710909492 or email us at contact@limitlessinfotech.com';
     }
   };
 
-  const handlePredefinedMessage = (message) => {
+  const handlePredefinedMessage = message => {
     handleSendMessage(message);
   };
 
-  const formatTime = (date) => {
+  const formatTime = date => {
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
@@ -129,7 +148,7 @@ const WhatsAppBusinessIntegration = () => {
 
           {/* Messages */}
           <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 dark:bg-dark-700">
-            {messages.map((message) => (
+            {messages.map(message => (
               <div
                 key={message.id}
                 className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
@@ -143,9 +162,13 @@ const WhatsAppBusinessIntegration = () => {
                 >
                   <p className="text-sm">{message.text}</p>
                   <div className="flex items-center justify-end mt-1">
-                    <span className="text-xs opacity-70">{formatTime(message.timestamp)}</span>
+                    <span className="text-xs opacity-70">
+                      {formatTime(message.timestamp)}
+                    </span>
                     {message.sender === 'user' && (
-                      <HiCheck className={`w-3 h-3 ml-1 ${message.status === 'read' ? 'text-blue-400' : 'text-gray-400'}`} />
+                      <HiCheck
+                        className={`w-3 h-3 ml-1 ${message.status === 'read' ? 'text-blue-400' : 'text-gray-400'}`}
+                      />
                     )}
                   </div>
                 </div>
@@ -157,8 +180,14 @@ const WhatsAppBusinessIntegration = () => {
                 <div className="bg-white dark:bg-dark-600 text-gray-900 dark:text-white rounded-2xl rounded-bl-md px-3 py-2">
                   <div className="flex space-x-1">
                     <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                    <div
+                      className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                      style={{ animationDelay: '0.1s' }}
+                    ></div>
+                    <div
+                      className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                      style={{ animationDelay: '0.2s' }}
+                    ></div>
                   </div>
                 </div>
               </div>
@@ -187,27 +216,27 @@ const WhatsAppBusinessIntegration = () => {
             <div className="flex space-x-2">
               <div className="relative flex-1">
                 <input
-                type="text"
-                value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                placeholder="Type your message to our WhatsApp support..."
-                className="w-full px-4 py-3 pl-10 bg-gray-100 dark:bg-dark-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-sm"
-                aria-label="Type your message to WhatsApp support"
-                disabled={isTyping}
-              />
-              <HiQuestionMarkCircle className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  type="text"
+                  value={inputMessage}
+                  onChange={e => setInputMessage(e.target.value)}
+                  onKeyPress={e => e.key === 'Enter' && handleSendMessage()}
+                  placeholder="Type your message to our WhatsApp support..."
+                  className="w-full px-4 py-3 pl-10 bg-gray-100 dark:bg-dark-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-sm"
+                  aria-label="Type your message to WhatsApp support"
+                  disabled={isTyping}
+                />
+                <HiQuestionMarkCircle className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+              </div>
+              <button
+                onClick={() => handleSendMessage()}
+                disabled={!inputMessage.trim()}
+                className="w-10 h-10 bg-green-500 hover:bg-green-600 disabled:bg-gray-300 dark:disabled:bg-dark-600 rounded-lg flex items-center justify-center text-white transition-colors"
+                aria-label="Send message to WhatsApp support"
+              >
+                <HiPaperAirplane className="w-5 h-5" />
+              </button>
             </div>
-            <button
-              onClick={() => handleSendMessage()}
-              disabled={!inputMessage.trim()}
-              className="w-10 h-10 bg-green-500 hover:bg-green-600 disabled:bg-gray-300 dark:disabled:bg-dark-600 rounded-lg flex items-center justify-center text-white transition-colors"
-              aria-label="Send message to WhatsApp support"
-            >
-              <HiPaperAirplane className="w-5 h-5" />
-            </button>
           </div>
-        </div>
         </div>
       )}
     </div>

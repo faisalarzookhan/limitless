@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import './SideSlidingDrawer.css';
 
 /**
- * Standardized side-sliding drawer component for project deep-dives, 
- * audit results, and user settings to maintain parent screen context 
+ * Standardized side-sliding drawer component for project deep-dives,
+ * audit results, and user settings to maintain parent screen context
  * and reduce cognitive load.
  */
 const SideSlidingDrawer = ({
@@ -20,7 +20,7 @@ const SideSlidingDrawer = ({
   zIndex = 1000,
   closeOnOutsideClick = true,
   closeOnEscapeKey = true,
-  animationDuration = 300
+  animationDuration = 300,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -43,11 +43,14 @@ const SideSlidingDrawer = ({
   }, [isOpen, isVisible, animationDuration]);
 
   // Handle escape key
-  const handleKeyDown = useCallback((event) => {
-    if (closeOnEscapeKey && event.key === 'Escape' && isOpen) {
-      onClose();
-    }
-  }, [closeOnEscapeKey, isOpen, onClose]);
+  const handleKeyDown = useCallback(
+    event => {
+      if (closeOnEscapeKey && event.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    },
+    [closeOnEscapeKey, isOpen, onClose]
+  );
 
   useEffect(() => {
     if (closeOnEscapeKey && isOpen) {
@@ -57,8 +60,11 @@ const SideSlidingDrawer = ({
   }, [handleKeyDown, closeOnEscapeKey, isOpen]);
 
   // Handle outside click
-  const handleBackdropClick = (event) => {
-    if (closeOnOutsideClick && event.target.classList.contains('drawer-backdrop')) {
+  const handleBackdropClick = event => {
+    if (
+      closeOnOutsideClick &&
+      event.target.classList.contains('drawer-backdrop')
+    ) {
       onClose();
     }
   };
@@ -74,8 +80,10 @@ const SideSlidingDrawer = ({
     positionClass,
     animationClass,
     displayClass,
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   // Calculate position styles
   const positionStyles = {
@@ -87,20 +95,20 @@ const SideSlidingDrawer = ({
     height: position === 'left' || position === 'right' ? '100%' : width,
     maxWidth: position === 'left' || position === 'right' ? '90vw' : '100%',
     maxHeight: position === 'top' || position === 'bottom' ? '90vh' : '100%',
-    zIndex
+    zIndex,
   };
 
   // Animation transition styles
   const transitionStyle = {
     transition: `transform ${animationDuration}ms cubic-bezier(0.4, 0, 0.2, 1)`,
     WebkitTransition: `transform ${animationDuration}ms cubic-bezier(0.4, 0, 0.2, 1)`,
-    msTransition: `transform ${animationDuration}ms cubic-bezier(0.4, 0, 0.2, 1)`
+    msTransition: `transform ${animationDuration}ms cubic-bezier(0.4, 0, 0.2, 1)`,
   };
 
   return (
     <>
       {backdrop && isVisible && (
-        <div 
+        <div
           className={`drawer-backdrop ${isAnimating ? 'backdrop-fade-in' : 'backdrop-fade-out'}`}
           onClick={handleBackdropClick}
           style={{
@@ -113,11 +121,11 @@ const SideSlidingDrawer = ({
             zIndex: zIndex - 1,
             opacity: isAnimating ? 1 : 0,
             transition: `opacity ${animationDuration}ms ease-in-out`,
-            pointerEvents: isAnimating ? 'auto' : 'none'
+            pointerEvents: isAnimating ? 'auto' : 'none',
           }}
         />
       )}
-      
+
       <div
         className={drawerClasses}
         style={{
@@ -129,8 +137,9 @@ const SideSlidingDrawer = ({
           display: isVisible ? 'flex' : 'none',
           flexDirection: 'column',
           backgroundColor: 'white',
-          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-          overflow: 'hidden'
+          boxShadow:
+            '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+          overflow: 'hidden',
         }}
       >
         {/* Drawer header */}
@@ -148,10 +157,14 @@ const SideSlidingDrawer = ({
                 cursor: 'pointer',
                 padding: '0.5rem',
                 borderRadius: '4px',
-                transition: 'background-color 0.2s ease'
+                transition: 'background-color 0.2s ease',
               }}
-              onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(0, 0, 0, 0.1)'}
-              onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+              onMouseEnter={e =>
+                (e.target.style.backgroundColor = 'rgba(0, 0, 0, 0.1)')
+              }
+              onMouseLeave={e =>
+                (e.target.style.backgroundColor = 'transparent')
+              }
             >
               ×
             </button>
@@ -159,7 +172,10 @@ const SideSlidingDrawer = ({
         </div>
 
         {/* Drawer content */}
-        <div className="drawer-content" style={{ flex: 1, overflow: 'auto', padding: '1rem' }}>
+        <div
+          className="drawer-content"
+          style={{ flex: 1, overflow: 'auto', padding: '1rem' }}
+        >
           {children}
         </div>
       </div>
@@ -193,7 +209,7 @@ SideSlidingDrawer.propTypes = {
   /** Whether to close when pressing the escape key */
   closeOnEscapeKey: PropTypes.bool,
   /** Duration of open/close animations in milliseconds */
-  animationDuration: PropTypes.number
+  animationDuration: PropTypes.number,
 };
 
 export default SideSlidingDrawer;

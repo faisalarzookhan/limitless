@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   HiBriefcase,
   HiLocationMarker,
@@ -21,260 +21,260 @@ import {
   HiColorSwatch,
   HiSupport,
   HiShieldCheck,
-} from "react-icons/hi";
+} from 'react-icons/hi';
 
 const Careers = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedDepartment, setSelectedDepartment] = useState("all");
-  const [selectedLocation, setSelectedLocation] = useState("all");
-  const [selectedType, setSelectedType] = useState("all");
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedDepartment, setSelectedDepartment] = useState('all');
+  const [selectedLocation, setSelectedLocation] = useState('all');
+  const [selectedType, setSelectedType] = useState('all');
 
   const departments = [
-    { value: "all", label: "All Departments" },
-    { value: "engineering", label: "Engineering" },
-    { value: "design", label: "Design" },
-    { value: "sales", label: "Sales & Marketing" },
-    { value: "support", label: "Customer Support" },
-    { value: "operations", label: "Operations" },
-    { value: "hr", label: "Human Resources" },
+    { value: 'all', label: 'All Departments' },
+    { value: 'engineering', label: 'Engineering' },
+    { value: 'design', label: 'Design' },
+    { value: 'sales', label: 'Sales & Marketing' },
+    { value: 'support', label: 'Customer Support' },
+    { value: 'operations', label: 'Operations' },
+    { value: 'hr', label: 'Human Resources' },
   ];
 
   const locations = [
-    { value: "all", label: "All Locations" },
-    { value: "mumbai", label: "Mumbai" },
-    { value: "remote", label: "Remote" },
-    { value: "hybrid", label: "Hybrid" },
+    { value: 'all', label: 'All Locations' },
+    { value: 'mumbai', label: 'Mumbai' },
+    { value: 'remote', label: 'Remote' },
+    { value: 'hybrid', label: 'Hybrid' },
   ];
 
   const jobTypes = [
-    { value: "all", label: "All Types" },
-    { value: "full-time", label: "Full-Time" },
-    { value: "part-time", label: "Part-Time" },
-    { value: "contract", label: "Contract" },
-    { value: "internship", label: "Internship" },
+    { value: 'all', label: 'All Types' },
+    { value: 'full-time', label: 'Full-Time' },
+    { value: 'part-time', label: 'Part-Time' },
+    { value: 'contract', label: 'Contract' },
+    { value: 'internship', label: 'Internship' },
   ];
 
   const jobOpenings = [
     {
       id: 1,
-      title: "Senior Full Stack Developer",
-      department: "engineering",
-      location: "Mumbai",
-      type: "full-time",
-      experience: "4-6 years",
-      salary: "₹12L - ₹18L per annum",
+      title: 'Senior Full Stack Developer',
+      department: 'engineering',
+      location: 'Mumbai',
+      type: 'full-time',
+      experience: '4-6 years',
+      salary: '₹12L - ₹18L per annum',
       description:
-        "We are looking for an experienced Full Stack Developer to join our engineering team.",
+        'We are looking for an experienced Full Stack Developer to join our engineering team.',
       requirements: [
-        "Strong proficiency in React, Node.js, and MongoDB",
-        "Experience with REST APIs and microservices",
-        "Knowledge of cloud platforms (AWS/Azure)",
-        "Excellent problem-solving skills",
+        'Strong proficiency in React, Node.js, and MongoDB',
+        'Experience with REST APIs and microservices',
+        'Knowledge of cloud platforms (AWS/Azure)',
+        'Excellent problem-solving skills',
       ],
       responsibilities: [
-        "Design and develop scalable web applications",
-        "Collaborate with cross-functional teams",
-        "Write clean, maintainable code",
-        "Mentor junior developers",
+        'Design and develop scalable web applications',
+        'Collaborate with cross-functional teams',
+        'Write clean, maintainable code',
+        'Mentor junior developers',
       ],
       icon: HiCode,
-      color: "text-blue-600",
-      bgColor: "bg-blue-50 dark:bg-blue-900/20",
-      posted: "2 days ago",
+      color: 'text-blue-600',
+      bgColor: 'bg-blue-50 dark:bg-blue-900/20',
+      posted: '2 days ago',
       applicants: 45,
     },
     {
       id: 2,
-      title: "UI/UX Designer",
-      department: "design",
-      location: "Remote",
-      type: "full-time",
-      experience: "2-4 years",
-      salary: "₹8L - ₹12L per annum",
+      title: 'UI/UX Designer',
+      department: 'design',
+      location: 'Remote',
+      type: 'full-time',
+      experience: '2-4 years',
+      salary: '₹8L - ₹12L per annum',
       description:
-        "Join our design team to create beautiful and intuitive user experiences.",
+        'Join our design team to create beautiful and intuitive user experiences.',
       requirements: [
-        "Proficiency in Figma, Adobe XD, and Sketch",
-        "Strong portfolio demonstrating UI/UX work",
-        "Understanding of design systems",
-        "Experience with user research and testing",
+        'Proficiency in Figma, Adobe XD, and Sketch',
+        'Strong portfolio demonstrating UI/UX work',
+        'Understanding of design systems',
+        'Experience with user research and testing',
       ],
       responsibilities: [
-        "Create wireframes, prototypes, and high-fidelity designs",
-        "Conduct user research and usability testing",
-        "Collaborate with developers and product managers",
-        "Maintain and evolve design systems",
+        'Create wireframes, prototypes, and high-fidelity designs',
+        'Conduct user research and usability testing',
+        'Collaborate with developers and product managers',
+        'Maintain and evolve design systems',
       ],
       icon: HiColorSwatch,
-      color: "text-purple-600",
-      bgColor: "bg-purple-50 dark:bg-purple-900/20",
-      posted: "5 days ago",
+      color: 'text-purple-600',
+      bgColor: 'bg-purple-50 dark:bg-purple-900/20',
+      posted: '5 days ago',
       applicants: 32,
     },
     {
       id: 3,
-      title: "Mobile App Developer (React Native)",
-      department: "engineering",
-      location: "Hybrid",
-      type: "full-time",
-      experience: "3-5 years",
-      salary: "₹10L - ₹15L per annum",
+      title: 'Mobile App Developer (React Native)',
+      department: 'engineering',
+      location: 'Hybrid',
+      type: 'full-time',
+      experience: '3-5 years',
+      salary: '₹10L - ₹15L per annum',
       description:
-        "Build cutting-edge mobile applications for iOS and Android platforms.",
+        'Build cutting-edge mobile applications for iOS and Android platforms.',
       requirements: [
-        "Expert-level knowledge of React Native",
-        "Experience with native iOS/Android development",
-        "Knowledge of mobile app deployment processes",
-        "Understanding of mobile UI/UX best practices",
+        'Expert-level knowledge of React Native',
+        'Experience with native iOS/Android development',
+        'Knowledge of mobile app deployment processes',
+        'Understanding of mobile UI/UX best practices',
       ],
       responsibilities: [
-        "Develop and maintain mobile applications",
-        "Optimize app performance and user experience",
-        "Integrate with backend APIs",
-        "Participate in code reviews",
+        'Develop and maintain mobile applications',
+        'Optimize app performance and user experience',
+        'Integrate with backend APIs',
+        'Participate in code reviews',
       ],
       icon: HiDeviceMobile,
-      color: "text-green-600",
-      bgColor: "bg-green-50 dark:bg-green-900/20",
-      posted: "1 week ago",
+      color: 'text-green-600',
+      bgColor: 'bg-green-50 dark:bg-green-900/20',
+      posted: '1 week ago',
       applicants: 28,
     },
     {
       id: 4,
-      title: "Business Development Manager",
-      department: "sales",
-      location: "Mumbai",
-      type: "full-time",
-      experience: "5-7 years",
-      salary: "₹15L - ₹25L per annum",
+      title: 'Business Development Manager',
+      department: 'sales',
+      location: 'Mumbai',
+      type: 'full-time',
+      experience: '5-7 years',
+      salary: '₹15L - ₹25L per annum',
       description:
-        "Drive business growth and establish strategic partnerships.",
+        'Drive business growth and establish strategic partnerships.',
       requirements: [
-        "Proven track record in B2B sales",
-        "Strong negotiation and communication skills",
-        "Experience in IT/Software industry",
-        "Network of potential clients",
+        'Proven track record in B2B sales',
+        'Strong negotiation and communication skills',
+        'Experience in IT/Software industry',
+        'Network of potential clients',
       ],
       responsibilities: [
-        "Identify and pursue new business opportunities",
-        "Build and maintain client relationships",
-        "Develop sales strategies and proposals",
-        "Achieve revenue targets",
+        'Identify and pursue new business opportunities',
+        'Build and maintain client relationships',
+        'Develop sales strategies and proposals',
+        'Achieve revenue targets',
       ],
       icon: HiChartBar,
-      color: "text-orange-600",
-      bgColor: "bg-orange-50 dark:bg-orange-900/20",
-      posted: "3 days ago",
+      color: 'text-orange-600',
+      bgColor: 'bg-orange-50 dark:bg-orange-900/20',
+      posted: '3 days ago',
       applicants: 52,
     },
     {
       id: 5,
-      title: "Customer Support Specialist",
-      department: "support",
-      location: "Remote",
-      type: "full-time",
-      experience: "1-3 years",
-      salary: "₹4L - ₹6L per annum",
+      title: 'Customer Support Specialist',
+      department: 'support',
+      location: 'Remote',
+      type: 'full-time',
+      experience: '1-3 years',
+      salary: '₹4L - ₹6L per annum',
       description:
-        "Provide exceptional support to our customers and help them succeed.",
+        'Provide exceptional support to our customers and help them succeed.',
       requirements: [
-        "Excellent communication skills",
-        "Technical aptitude and problem-solving skills",
-        "Experience with support ticketing systems",
-        "Customer-centric mindset",
+        'Excellent communication skills',
+        'Technical aptitude and problem-solving skills',
+        'Experience with support ticketing systems',
+        'Customer-centric mindset',
       ],
       responsibilities: [
-        "Respond to customer inquiries via email, chat, and phone",
-        "Troubleshoot technical issues",
-        "Document and track customer interactions",
-        "Collaborate with product team on improvements",
+        'Respond to customer inquiries via email, chat, and phone',
+        'Troubleshoot technical issues',
+        'Document and track customer interactions',
+        'Collaborate with product team on improvements',
       ],
       icon: HiSupport,
-      color: "text-cyan-600",
-      bgColor: "bg-cyan-50 dark:bg-cyan-900/20",
-      posted: "4 days ago",
+      color: 'text-cyan-600',
+      bgColor: 'bg-cyan-50 dark:bg-cyan-900/20',
+      posted: '4 days ago',
       applicants: 67,
     },
     {
       id: 6,
-      title: "DevOps Engineer",
-      department: "engineering",
-      location: "Hybrid",
-      type: "full-time",
-      experience: "3-5 years",
-      salary: "₹12L - ₹18L per annum",
+      title: 'DevOps Engineer',
+      department: 'engineering',
+      location: 'Hybrid',
+      type: 'full-time',
+      experience: '3-5 years',
+      salary: '₹12L - ₹18L per annum',
       description:
-        "Manage and optimize our infrastructure and deployment pipelines.",
+        'Manage and optimize our infrastructure and deployment pipelines.',
       requirements: [
-        "Experience with AWS/Azure/GCP",
-        "Strong knowledge of Docker and Kubernetes",
-        "Experience with CI/CD tools (Jenkins, GitLab CI)",
-        "Scripting skills (Python, Bash)",
+        'Experience with AWS/Azure/GCP',
+        'Strong knowledge of Docker and Kubernetes',
+        'Experience with CI/CD tools (Jenkins, GitLab CI)',
+        'Scripting skills (Python, Bash)',
       ],
       responsibilities: [
-        "Maintain and improve infrastructure",
-        "Automate deployment processes",
-        "Monitor system performance and security",
-        "Collaborate with development teams",
+        'Maintain and improve infrastructure',
+        'Automate deployment processes',
+        'Monitor system performance and security',
+        'Collaborate with development teams',
       ],
       icon: HiShieldCheck,
-      color: "text-red-600",
-      bgColor: "bg-red-50 dark:bg-red-900/20",
-      posted: "1 week ago",
+      color: 'text-red-600',
+      bgColor: 'bg-red-50 dark:bg-red-900/20',
+      posted: '1 week ago',
       applicants: 38,
     },
     {
       id: 7,
-      title: "Software Development Intern",
-      department: "engineering",
-      location: "Mumbai",
-      type: "internship",
-      experience: "0-1 years",
-      salary: "₹15K - ₹25K per month",
-      description: "Learn and grow with our engineering team as an intern.",
+      title: 'Software Development Intern',
+      department: 'engineering',
+      location: 'Mumbai',
+      type: 'internship',
+      experience: '0-1 years',
+      salary: '₹15K - ₹25K per month',
+      description: 'Learn and grow with our engineering team as an intern.',
       requirements: [
-        "Currently pursuing or recently completed CS/IT degree",
-        "Basic knowledge of programming (JavaScript, Python, or Java)",
-        "Passion for learning and problem-solving",
-        "Good communication skills",
+        'Currently pursuing or recently completed CS/IT degree',
+        'Basic knowledge of programming (JavaScript, Python, or Java)',
+        'Passion for learning and problem-solving',
+        'Good communication skills',
       ],
       responsibilities: [
-        "Assist in development projects",
-        "Learn from senior developers",
-        "Write and test code",
-        "Participate in team meetings and code reviews",
+        'Assist in development projects',
+        'Learn from senior developers',
+        'Write and test code',
+        'Participate in team meetings and code reviews',
       ],
       icon: HiAcademicCap,
-      color: "text-indigo-600",
-      bgColor: "bg-indigo-50 dark:bg-indigo-900/20",
-      posted: "1 day ago",
+      color: 'text-indigo-600',
+      bgColor: 'bg-indigo-50 dark:bg-indigo-900/20',
+      posted: '1 day ago',
       applicants: 145,
     },
     {
       id: 8,
-      title: "Product Manager",
-      department: "operations",
-      location: "Hybrid",
-      type: "full-time",
-      experience: "4-6 years",
-      salary: "₹15L - ₹22L per annum",
-      description: "Lead product strategy and drive product development.",
+      title: 'Product Manager',
+      department: 'operations',
+      location: 'Hybrid',
+      type: 'full-time',
+      experience: '4-6 years',
+      salary: '₹15L - ₹22L per annum',
+      description: 'Lead product strategy and drive product development.',
       requirements: [
-        "Proven experience as a Product Manager",
-        "Strong analytical and strategic thinking",
-        "Experience with Agile methodologies",
-        "Excellent stakeholder management skills",
+        'Proven experience as a Product Manager',
+        'Strong analytical and strategic thinking',
+        'Experience with Agile methodologies',
+        'Excellent stakeholder management skills',
       ],
       responsibilities: [
-        "Define product vision and roadmap",
-        "Gather and prioritize requirements",
-        "Work closely with engineering and design teams",
-        "Analyze metrics and user feedback",
+        'Define product vision and roadmap',
+        'Gather and prioritize requirements',
+        'Work closely with engineering and design teams',
+        'Analyze metrics and user feedback',
       ],
       icon: HiLightningBolt,
-      color: "text-yellow-600",
-      bgColor: "bg-yellow-50 dark:bg-yellow-900/20",
-      posted: "6 days ago",
+      color: 'text-yellow-600',
+      bgColor: 'bg-yellow-50 dark:bg-yellow-900/20',
+      posted: '6 days ago',
       applicants: 41,
     },
   ];
@@ -282,68 +282,68 @@ const Careers = () => {
   const benefits = [
     {
       icon: HiCurrencyRupee,
-      title: "Competitive Salary",
+      title: 'Competitive Salary',
       description:
-        "Market-leading compensation packages with performance bonuses",
-      color: "text-green-600",
-      bgColor: "bg-green-50 dark:bg-green-900/20",
+        'Market-leading compensation packages with performance bonuses',
+      color: 'text-green-600',
+      bgColor: 'bg-green-50 dark:bg-green-900/20',
     },
     {
       icon: HiHeart,
-      title: "Health & Wellness",
-      description: "Comprehensive health insurance for you and your family",
-      color: "text-red-600",
-      bgColor: "bg-red-50 dark:bg-red-900/20",
+      title: 'Health & Wellness',
+      description: 'Comprehensive health insurance for you and your family',
+      color: 'text-red-600',
+      bgColor: 'bg-red-50 dark:bg-red-900/20',
     },
     {
       icon: HiAcademicCap,
-      title: "Learning & Development",
-      description: "Continuous learning opportunities and professional growth",
-      color: "text-purple-600",
-      bgColor: "bg-purple-50 dark:bg-purple-900/20",
+      title: 'Learning & Development',
+      description: 'Continuous learning opportunities and professional growth',
+      color: 'text-purple-600',
+      bgColor: 'bg-purple-50 dark:bg-purple-900/20',
     },
     {
       icon: HiClock,
-      title: "Flexible Hours",
-      description: "Work-life balance with flexible working hours",
-      color: "text-blue-600",
-      bgColor: "bg-blue-50 dark:bg-blue-900/20",
+      title: 'Flexible Hours',
+      description: 'Work-life balance with flexible working hours',
+      color: 'text-blue-600',
+      bgColor: 'bg-blue-50 dark:bg-blue-900/20',
     },
     {
       icon: HiUsers,
-      title: "Great Team Culture",
-      description: "Collaborative environment with talented professionals",
-      color: "text-orange-600",
-      bgColor: "bg-orange-50 dark:bg-orange-900/20",
+      title: 'Great Team Culture',
+      description: 'Collaborative environment with talented professionals',
+      color: 'text-orange-600',
+      bgColor: 'bg-orange-50 dark:bg-orange-900/20',
     },
     {
       icon: HiTrendingUp,
-      title: "Career Growth",
-      description: "Clear career paths and advancement opportunities",
-      color: "text-cyan-600",
-      bgColor: "bg-cyan-50 dark:bg-cyan-900/20",
+      title: 'Career Growth',
+      description: 'Clear career paths and advancement opportunities',
+      color: 'text-cyan-600',
+      bgColor: 'bg-cyan-50 dark:bg-cyan-900/20',
     },
   ];
 
   const values = [
     {
-      title: "Innovation First",
-      description: "We embrace new ideas and cutting-edge technologies",
+      title: 'Innovation First',
+      description: 'We embrace new ideas and cutting-edge technologies',
       icon: HiLightningBolt,
     },
     {
-      title: "Customer Success",
+      title: 'Customer Success',
       description: "Our customers' success is our success",
       icon: HiCheckCircle,
     },
     {
-      title: "Continuous Learning",
-      description: "We invest in growth and development",
+      title: 'Continuous Learning',
+      description: 'We invest in growth and development',
       icon: HiAcademicCap,
     },
     {
-      title: "Team Collaboration",
-      description: "Together we achieve more",
+      title: 'Team Collaboration',
+      description: 'Together we achieve more',
       icon: HiUsers,
     },
   ];
@@ -351,51 +351,51 @@ const Careers = () => {
   const hiringProcess = [
     {
       step: 1,
-      title: "Apply Online",
-      description: "Submit your application through our career portal",
-      icon: "📝",
+      title: 'Apply Online',
+      description: 'Submit your application through our career portal',
+      icon: '📝',
     },
     {
       step: 2,
-      title: "Initial Screening",
-      description: "Our HR team reviews your application",
-      icon: "🔍",
+      title: 'Initial Screening',
+      description: 'Our HR team reviews your application',
+      icon: '🔍',
     },
     {
       step: 3,
-      title: "Technical Assessment",
-      description: "Showcase your skills through practical tests",
-      icon: "💻",
+      title: 'Technical Assessment',
+      description: 'Showcase your skills through practical tests',
+      icon: '💻',
     },
     {
       step: 4,
-      title: "Interview Rounds",
-      description: "Meet with team members and managers",
-      icon: "🤝",
+      title: 'Interview Rounds',
+      description: 'Meet with team members and managers',
+      icon: '🤝',
     },
     {
       step: 5,
-      title: "Offer & Onboarding",
-      description: "Join the Limitless family!",
-      icon: "🎉",
+      title: 'Offer & Onboarding',
+      description: 'Join the Limitless family!',
+      icon: '🎉',
     },
   ];
 
   // Filter jobs based on search and filters
-  const filteredJobs = jobOpenings.filter((job) => {
+  const filteredJobs = jobOpenings.filter(job => {
     const matchesSearch =
-      searchTerm === "" ||
+      searchTerm === '' ||
       job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       job.description.toLowerCase().includes(searchTerm.toLowerCase());
 
     const matchesDepartment =
-      selectedDepartment === "all" || job.department === selectedDepartment;
+      selectedDepartment === 'all' || job.department === selectedDepartment;
 
     const matchesLocation =
-      selectedLocation === "all" ||
+      selectedLocation === 'all' ||
       job.location.toLowerCase() === selectedLocation.toLowerCase();
 
-    const matchesType = selectedType === "all" || job.type === selectedType;
+    const matchesType = selectedType === 'all' || job.type === selectedType;
 
     return matchesSearch && matchesDepartment && matchesLocation && matchesType;
   });
@@ -404,7 +404,10 @@ const Careers = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative py-20 md:py-32 bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 text-white overflow-hidden">
-        <div className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8" aria-hidden="true">
+        <div
+          className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8"
+          aria-hidden="true"
+        >
           <div className="absolute inset-0 bg-pattern-grid opacity-10"></div>
         </div>
 
@@ -416,13 +419,13 @@ const Careers = () => {
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 animate-fade-in-up">
-              Build Your Career with{" "}
+              Build Your Career with{' '}
               <span className="text-secondary-300">Limitless</span>
             </h1>
 
             <p
               className="text-xl md:text-2xl text-primary-100 mb-8 animate-fade-in-up"
-              style={{ animationDelay: "0.1s" }}
+              style={{ animationDelay: '0.1s' }}
             >
               Join a team of passionate innovators creating the future of
               technology
@@ -430,7 +433,7 @@ const Careers = () => {
 
             <div
               className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up"
-              style={{ animationDelay: "0.2s" }}
+              style={{ animationDelay: '0.2s' }}
             >
               <a
                 href="#openings"
@@ -564,7 +567,7 @@ const Careers = () => {
                   type="text"
                   placeholder="Search jobs..."
                   value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onChange={e => setSearchTerm(e.target.value)}
                   className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
                 />
               </div>
@@ -572,10 +575,10 @@ const Careers = () => {
               {/* Department Filter */}
               <select
                 value={selectedDepartment}
-                onChange={(e) => setSelectedDepartment(e.target.value)}
+                onChange={e => setSelectedDepartment(e.target.value)}
                 className="px-4 py-3 rounded-xl border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
               >
-                {departments.map((dept) => (
+                {departments.map(dept => (
                   <option key={dept.value} value={dept.value}>
                     {dept.label}
                   </option>
@@ -585,10 +588,10 @@ const Careers = () => {
               {/* Location Filter */}
               <select
                 value={selectedLocation}
-                onChange={(e) => setSelectedLocation(e.target.value)}
+                onChange={e => setSelectedLocation(e.target.value)}
                 className="px-4 py-3 rounded-xl border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
               >
-                {locations.map((loc) => (
+                {locations.map(loc => (
                   <option key={loc.value} value={loc.value}>
                     {loc.label}
                   </option>
@@ -598,10 +601,10 @@ const Careers = () => {
               {/* Type Filter */}
               <select
                 value={selectedType}
-                onChange={(e) => setSelectedType(e.target.value)}
+                onChange={e => setSelectedType(e.target.value)}
                 className="px-4 py-3 rounded-xl border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
               >
-                {jobTypes.map((type) => (
+                {jobTypes.map(type => (
                   <option key={type.value} value={type.value}>
                     {type.label}
                   </option>
@@ -611,14 +614,14 @@ const Careers = () => {
 
             <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
               {filteredJobs.length} position
-              {filteredJobs.length !== 1 ? "s" : ""} found
+              {filteredJobs.length !== 1 ? 's' : ''} found
             </div>
           </div>
 
           {/* Job Listings */}
           {filteredJobs.length > 0 ? (
             <div className="grid gap-6">
-              {filteredJobs.map((job) => (
+              {filteredJobs.map(job => (
                 <div
                   key={job.id}
                   className="bg-white dark:bg-dark-800 rounded-2xl border border-gray-200 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-500 hover:shadow-xl transition-all duration-300 overflow-hidden"
@@ -645,7 +648,7 @@ const Careers = () => {
                               <div className="flex items-center space-x-1">
                                 <HiBriefcase className="w-4 h-4" />
                                 <span className="capitalize">
-                                  {job.type.replace("-", " ")}
+                                  {job.type.replace('-', ' ')}
                                 </span>
                               </div>
                               <div className="flex items-center space-x-1">
@@ -667,9 +670,8 @@ const Careers = () => {
                         <div className="flex flex-wrap gap-2 mb-4">
                           <span className="px-3 py-1 bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 text-sm font-medium rounded-full">
                             {
-                              departments.find(
-                                (d) => d.value === job.department,
-                              )?.label
+                              departments.find(d => d.value === job.department)
+                                ?.label
                             }
                           </span>
                           <span className="px-3 py-1 bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-400 text-sm font-medium rounded-full">
@@ -753,10 +755,10 @@ const Careers = () => {
               </p>
               <button
                 onClick={() => {
-                  setSearchTerm("");
-                  setSelectedDepartment("all");
-                  setSelectedLocation("all");
-                  setSelectedType("all");
+                  setSearchTerm('');
+                  setSelectedDepartment('all');
+                  setSelectedLocation('all');
+                  setSelectedType('all');
                 }}
                 className="btn-outline"
               >
@@ -787,7 +789,7 @@ const Careers = () => {
 
               {/* Steps */}
               <div className="grid grid-cols-1 md:grid-cols-5 gap-8 relative z-10">
-                {hiringProcess.map((step) => (
+                {hiringProcess.map(step => (
                   <div key={step.step} className="text-center">
                     <div className="mb-6 flex justify-center">
                       <div className="w-20 h-20 bg-white dark:bg-dark-800 border-4 border-primary-500 rounded-full flex items-center justify-center text-3xl shadow-lg">

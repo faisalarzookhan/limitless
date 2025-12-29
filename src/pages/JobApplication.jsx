@@ -10,7 +10,10 @@ const JobApplication = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-dark-900 dark:to-dark-800">
       {/* Header Section */}
       <section className="relative py-16 bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
-        <div className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8" aria-hidden="true">
+        <div
+          className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8"
+          aria-hidden="true"
+        >
           <div className="absolute inset-0 bg-pattern-grid opacity-10"></div>
         </div>
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
@@ -38,7 +41,7 @@ const JobApplication = () => {
                   Fill out the form below to apply for the position
                 </p>
               </div>
-              
+
               <JobApplicationForm />
             </div>
           </div>

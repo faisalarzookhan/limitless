@@ -4,7 +4,7 @@ import 'react-circular-progressbar/dist/styles.css';
 
 const LimitlessScore = ({ score, size = 150, strokeWidth = 8 }) => {
   // Determine color based on score
-  const getColor = (score) => {
+  const getColor = score => {
     if (score >= 80) return '#10B981'; // Green for excellent
     if (score >= 60) return '#F59E0B'; // Yellow for good
     if (score >= 40) return '#F97316'; // Orange for average
@@ -12,7 +12,7 @@ const LimitlessScore = ({ score, size = 150, strokeWidth = 8 }) => {
   };
 
   // Determine score label
-  const getScoreLabel = (score) => {
+  const getScoreLabel = score => {
     if (score >= 80) return 'Excellent';
     if (score >= 60) return 'Good';
     if (score >= 40) return 'Average';
@@ -24,10 +24,7 @@ const LimitlessScore = ({ score, size = 150, strokeWidth = 8 }) => {
 
   return (
     <div className="text-center">
-      <div 
-        className="inline-block"
-        style={{ width: size, height: size }}
-      >
+      <div className="inline-block" style={{ width: size, height: size }}>
         <CircularProgressbar
           value={score}
           text={`${score}`}
@@ -44,15 +41,10 @@ const LimitlessScore = ({ score, size = 150, strokeWidth = 8 }) => {
         />
       </div>
       <div className="mt-4">
-        <div 
-          className="text-2xl font-bold"
-          style={{ color }}
-        >
+        <div className="text-2xl font-bold" style={{ color }}>
           {scoreLabel}
         </div>
-        <div className="text-gray-600 mt-1">
-          Limitless Score
-        </div>
+        <div className="text-gray-600 mt-1">Limitless Score</div>
       </div>
     </div>
   );

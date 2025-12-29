@@ -6,7 +6,7 @@ class ReportingService {
     this.reports = new Map();
     this.reportTemplates = new Map();
     this.scheduledReports = new Map();
-    
+
     this.setupDefaultTemplates();
   }
 
@@ -14,36 +14,39 @@ class ReportingService {
   setupDefaultTemplates() {
     this.reportTemplates.set('daily', {
       name: 'Daily Status Report',
-      description: 'Daily summary of system status, performance metrics, and events',
+      description:
+        'Daily summary of system status, performance metrics, and events',
       schedule: '0 0 * * *', // Every day at midnight
-      generate: this.generateDailyReport.bind(this)
+      generate: this.generateDailyReport.bind(this),
     });
 
     this.reportTemplates.set('weekly', {
       name: 'Weekly Performance Report',
       description: 'Weekly analysis of performance metrics, errors, and trends',
       schedule: '0 1 * * 1', // Every Monday at 1 AM
-      generate: this.generateWeeklyReport.bind(this)
+      generate: this.generateWeeklyReport.bind(this),
     });
 
     this.reportTemplates.set('monthly', {
       name: 'Monthly Summary Report',
-      description: 'Monthly overview of system health, performance, and improvements',
+      description:
+        'Monthly overview of system health, performance, and improvements',
       schedule: '0 2 1 * *', // First day of every month at 2 AM
-      generate: this.generateMonthlyReport.bind(this)
+      generate: this.generateMonthlyReport.bind(this),
     });
 
     this.reportTemplates.set('deployment', {
       name: 'Deployment Report',
       description: 'Report on deployment success/failure and performance',
       schedule: null, // Triggered manually on deployment
-      generate: this.generateDeploymentReport.bind(this)
+      generate: this.generateDeploymentReport.bind(this),
     });
   }
 
   // Generate daily status report
   async generateDailyReport(options = {}) {
-    const startTime = options.startDate || new Date(Date.now() - 24 * 60 * 60 * 1000);
+    const startTime =
+      options.startDate || new Date(Date.now() - 24 * 60 * 60 * 1000);
     const endTime = options.endDate || new Date();
 
     const metrics = await this.getMetricsForPeriod(startTime, endTime);
@@ -57,20 +60,20 @@ class ReportingService {
       generatedAt: new Date().toISOString(),
       period: {
         start: startTime.toISOString(),
-        end: endTime.toISOString()
+        end: endTime.toISOString(),
       },
       summary: {
         uptime: this.calculateUptime(metrics),
         errorCount: errors.length,
         deploymentCount: deployments.length,
-        performance: this.calculatePerformanceMetrics(metrics)
+        performance: this.calculatePerformanceMetrics(metrics),
       },
       details: {
         metrics,
         errors,
-        deployments
+        deployments,
       },
-      trends: this.analyzeTrends(metrics, errors)
+      trends: this.analyzeTrends(metrics, errors),
     };
 
     this.reports.set(report.id, report);
@@ -79,12 +82,16 @@ class ReportingService {
 
   // Generate weekly performance report
   async generateWeeklyReport(options = {}) {
-    const startTime = options.startDate || new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    const startTime =
+      options.startDate || new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
     const endTime = options.endDate || new Date();
 
     const metrics = await this.getMetricsForPeriod(startTime, endTime);
     const errors = await this.getErrorsForPeriod(startTime, endTime);
-    const performance = await this.getPerformanceMetricsForPeriod(startTime, endTime);
+    const performance = await this.getPerformanceMetricsForPeriod(
+      startTime,
+      endTime
+    );
 
     const report = {
       id: `weekly-${Date.now()}`,
@@ -93,20 +100,20 @@ class ReportingService {
       generatedAt: new Date().toISOString(),
       period: {
         start: startTime.toISOString(),
-        end: endTime.toISOString()
+        end: endTime.toISOString(),
       },
       summary: {
         avgResponseTime: this.calculateAverageResponseTime(performance),
         errorRate: this.calculateErrorRate(errors, metrics),
         uptime: this.calculateUptime(metrics),
-        performanceScore: this.calculatePerformanceScore(performance)
+        performanceScore: this.calculatePerformanceScore(performance),
       },
       details: {
         performance,
         errors,
-        metrics
+        metrics,
       },
-      comparisons: this.generateWeekOverWeekComparison(startTime, endTime)
+      comparisons: this.generateWeekOverWeekComparison(startTime, endTime),
     };
 
     this.reports.set(report.id, report);
@@ -115,7 +122,8 @@ class ReportingService {
 
   // Generate monthly summary report
   async generateMonthlyReport(options = {}) {
-    const startTime = options.startDate || new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+    const startTime =
+      options.startDate || new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
     const endTime = options.endDate || new Date();
 
     const metrics = await this.getMetricsForPeriod(startTime, endTime);
@@ -129,21 +137,24 @@ class ReportingService {
       generatedAt: new Date().toISOString(),
       period: {
         start: startTime.toISOString(),
-        end: endTime.toISOString()
+        end: endTime.toISOString(),
       },
       summary: {
         totalUptime: this.calculateUptime(metrics),
         totalErrors: errors.length,
         totalDeployments: deployments.length,
         performanceImprovement: this.calculatePerformanceImprovement(metrics),
-        securityIssues: await this.getSecurityIssuesForPeriod(startTime, endTime)
+        securityIssues: await this.getSecurityIssuesForPeriod(
+          startTime,
+          endTime
+        ),
       },
       details: {
         metrics,
         errors,
-        deployments
+        deployments,
       },
-      recommendations: this.generateRecommendations(metrics, errors)
+      recommendations: this.generateRecommendations(metrics, errors),
     };
 
     this.reports.set(report.id, report);
@@ -162,13 +173,13 @@ class ReportingService {
         success: deploymentInfo.success,
         duration: deploymentInfo.duration,
         environment: deploymentInfo.environment,
-        changes: deploymentInfo.changes || []
+        changes: deploymentInfo.changes || [],
       },
       details: {
         steps: deploymentInfo.steps || [],
         errors: deploymentInfo.errors || [],
-        performance: deploymentInfo.performance || {}
-      }
+        performance: deploymentInfo.performance || {},
+      },
     };
 
     this.reports.set(report.id, report);
@@ -185,15 +196,15 @@ class ReportingService {
         responseTime: 120,
         throughput: 45,
         errorRate: 0.02,
-        uptime: 99.9
+        uptime: 99.9,
       },
       {
         timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
         responseTime: 95,
         throughput: 52,
         errorRate: 0.01,
-        uptime: 99.95
-      }
+        uptime: 99.95,
+      },
     ];
   }
 
@@ -207,15 +218,15 @@ class ReportingService {
         type: 'API_ERROR',
         message: 'Database connection timeout',
         severity: 'high',
-        count: 3
+        count: 3,
       },
       {
         timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
         type: 'FRONTEND_ERROR',
         message: 'Component failed to load',
         severity: 'medium',
-        count: 1
-      }
+        count: 1,
+      },
     ];
   }
 
@@ -230,8 +241,11 @@ class ReportingService {
         environment: 'staging',
         success: true,
         duration: 180,
-        changes: ['Fixed bug in user authentication', 'Updated payment processing']
-      }
+        changes: [
+          'Fixed bug in user authentication',
+          'Updated payment processing',
+        ],
+      },
     ];
   }
 
@@ -245,15 +259,15 @@ class ReportingService {
         lcp: 1800,
         fcp: 900,
         cls: 0.05,
-        fid: 100
+        fid: 100,
       },
       {
         timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
         lcp: 1600,
         fcp: 800,
         cls: 0.03,
-        fid: 80
-      }
+        fid: 80,
+      },
     ];
   }
 
@@ -267,15 +281,15 @@ class ReportingService {
         type: 'VULNERABILITY',
         severity: 'medium',
         description: 'Outdated dependency found',
-        resolved: false
-      }
+        resolved: false,
+      },
     ];
   }
 
   // Calculate uptime percentage
   calculateUptime(metrics) {
     if (!metrics || metrics.length === 0) return 0;
-    
+
     const totalUptime = metrics.reduce((sum, metric) => sum + metric.uptime, 0);
     return totalUptime / metrics.length;
   }
@@ -283,25 +297,31 @@ class ReportingService {
   // Calculate average response time
   calculateAverageResponseTime(performanceMetrics) {
     if (!performanceMetrics || performanceMetrics.length === 0) return 0;
-    
-    const totalResponseTime = performanceMetrics.reduce((sum, metric) => sum + metric.responseTime, 0);
+
+    const totalResponseTime = performanceMetrics.reduce(
+      (sum, metric) => sum + metric.responseTime,
+      0
+    );
     return totalResponseTime / performanceMetrics.length;
   }
 
   // Calculate error rate
   calculateErrorRate(errors, metrics) {
     if (!metrics || metrics.length === 0) return 0;
-    
+
     const totalErrors = errors.length;
-    const totalRequests = metrics.reduce((sum, metric) => sum + metric.throughput, 0);
-    
+    const totalRequests = metrics.reduce(
+      (sum, metric) => sum + metric.throughput,
+      0
+    );
+
     return totalRequests > 0 ? (totalErrors / totalRequests) * 100 : 0;
   }
 
   // Calculate performance score
   calculatePerformanceScore(performanceMetrics) {
     if (!performanceMetrics || performanceMetrics.length === 0) return 0;
-    
+
     // Calculate score based on Core Web Vitals
     let score = 0;
     performanceMetrics.forEach(metric => {
@@ -312,18 +332,22 @@ class ReportingService {
       // CLS score (lower is better, max 100)
       score += Math.max(0, Math.min(100, 100 - (metric.cls / 0.1) * 100));
     });
-    
+
     return score / performanceMetrics.length;
   }
 
   // Calculate performance improvement
   calculatePerformanceImprovement(metrics) {
     if (!metrics || metrics.length < 2) return 0;
-    
+
     const firstMetric = metrics[0];
     const lastMetric = metrics[metrics.length - 1];
-    
-    return ((lastMetric.responseTime - firstMetric.responseTime) / firstMetric.responseTime) * 100;
+
+    return (
+      ((lastMetric.responseTime - firstMetric.responseTime) /
+        firstMetric.responseTime) *
+      100
+    );
   }
 
   // Analyze trends
@@ -331,19 +355,19 @@ class ReportingService {
     const trend = {
       responseTime: this.analyzeMetricTrend(metrics, 'responseTime'),
       errorRate: this.analyzeMetricTrend(metrics, 'errorRate'),
-      errorFrequency: this.analyzeErrorTrend(errors)
+      errorFrequency: this.analyzeErrorTrend(errors),
     };
-    
+
     return trend;
   }
 
   // Analyze metric trend
   analyzeMetricTrend(metrics, metricName) {
     if (!metrics || metrics.length < 2) return 'stable';
-    
+
     const firstValue = metrics[0][metricName];
     const lastValue = metrics[metrics.length - 1][metricName];
-    
+
     if (lastValue > firstValue * 1.1) return 'degrading';
     if (lastValue < firstValue * 0.9) return 'improving';
     return 'stable';
@@ -352,18 +376,19 @@ class ReportingService {
   // Analyze error trend
   analyzeErrorTrend(errors) {
     if (!errors || errors.length === 0) return 'decreasing';
-    
+
     // Count errors in recent period vs earlier period
     const now = Date.now();
-    const recentErrors = errors.filter(e => 
-      new Date(e.timestamp).getTime() > now - (12 * 60 * 60 * 1000) // Last 12 hours
+    const recentErrors = errors.filter(
+      e => new Date(e.timestamp).getTime() > now - 12 * 60 * 60 * 1000 // Last 12 hours
     ).length;
-    
-    const earlierErrors = errors.filter(e => 
-      new Date(e.timestamp).getTime() <= now - (12 * 60 * 60 * 1000) && // Before 12 hours ago
-      new Date(e.timestamp).getTime() > now - (24 * 60 * 60 * 1000)   // Within last 24 hours
+
+    const earlierErrors = errors.filter(
+      e =>
+        new Date(e.timestamp).getTime() <= now - 12 * 60 * 60 * 1000 && // Before 12 hours ago
+        new Date(e.timestamp).getTime() > now - 24 * 60 * 60 * 1000 // Within last 24 hours
     ).length;
-    
+
     if (recentErrors > earlierErrors * 1.5) return 'increasing';
     if (recentErrors < earlierErrors * 0.5) return 'decreasing';
     return 'stable';
@@ -371,60 +396,66 @@ class ReportingService {
 
   // Generate week-over-week comparison
   generateWeekOverWeekComparison(currentStart, currentEnd) {
-    const previousStart = new Date(currentStart.getTime() - 7 * 24 * 60 * 60 * 1000);
-    const previousEnd = new Date(currentEnd.getTime() - 7 * 24 * 60 * 60 * 1000);
-    
+    const previousStart = new Date(
+      currentStart.getTime() - 7 * 24 * 60 * 60 * 1000
+    );
+    const previousEnd = new Date(
+      currentEnd.getTime() - 7 * 24 * 60 * 60 * 1000
+    );
+
     // In a real implementation, this would fetch data for both periods
     // For now, we'll return mock comparison data
     return {
       currentPeriod: {
         start: currentStart.toISOString(),
-        end: currentEnd.toISOString()
+        end: currentEnd.toISOString(),
       },
       previousPeriod: {
         start: previousStart.toISOString(),
-        end: previousEnd.toISOString()
+        end: previousEnd.toISOString(),
       },
       comparisons: {
         responseTime: {
           current: 120,
           previous: 145,
           change: -17.2,
-          trend: 'improving'
+          trend: 'improving',
         },
         errorRate: {
           current: 0.02,
           previous: 0.03,
           change: -33.3,
-          trend: 'improving'
+          trend: 'improving',
         },
         uptime: {
           current: 99.95,
           previous: 99.87,
           change: 0.08,
-          trend: 'improving'
-        }
-      }
+          trend: 'improving',
+        },
+      },
     };
   }
 
   // Generate recommendations
   generateRecommendations(metrics, errors) {
     const recommendations = [];
-    
+
     // Performance recommendations
     if (metrics && metrics.length > 0) {
-      const avgResponseTime = metrics.reduce((sum, m) => sum + m.responseTime, 0) / metrics.length;
+      const avgResponseTime =
+        metrics.reduce((sum, m) => sum + m.responseTime, 0) / metrics.length;
       if (avgResponseTime > 500) {
         recommendations.push({
           type: 'performance',
           priority: 'high',
-          description: 'Average response time is high, consider optimizing API calls',
-          action: 'Implement caching for frequently accessed data'
+          description:
+            'Average response time is high, consider optimizing API calls',
+          action: 'Implement caching for frequently accessed data',
         });
       }
     }
-    
+
     // Error recommendations
     if (errors && errors.length > 0) {
       const highSeverityErrors = errors.filter(e => e.severity === 'high');
@@ -433,11 +464,11 @@ class ReportingService {
           type: 'error',
           priority: 'critical',
           description: `Found ${highSeverityErrors.length} high severity errors`,
-          action: 'Investigate and fix high severity errors immediately'
+          action: 'Investigate and fix high severity errors immediately',
         });
       }
     }
-    
+
     return recommendations;
   }
 
@@ -446,7 +477,7 @@ class ReportingService {
     if (!this.reportTemplates.has(reportType)) {
       throw new Error(`Unknown report type: ${reportType}`);
     }
-    
+
     const reportId = `scheduled-${reportType}-${Date.now()}`;
     const scheduledReport = {
       id: reportId,
@@ -454,9 +485,9 @@ class ReportingService {
       schedule,
       options,
       lastGenerated: null,
-      nextGeneration: this.calculateNextGeneration(schedule)
+      nextGeneration: this.calculateNextGeneration(schedule),
     };
-    
+
     this.scheduledReports.set(reportId, scheduledReport);
     return scheduledReport;
   }
@@ -466,15 +497,18 @@ class ReportingService {
     // Simple implementation - in a real app, use a cron parser
     const now = new Date();
     let nextTime = new Date(now);
-    
-    if (schedule === '0 0 * * *') { // Daily at midnight
+
+    if (schedule === '0 0 * * *') {
+      // Daily at midnight
       nextTime.setHours(24, 0, 0, 0); // Next day at midnight
-    } else if (schedule === '0 1 * * 1') { // Weekly on Monday
+    } else if (schedule === '0 1 * * 1') {
+      // Weekly on Monday
       const dayOfWeek = now.getDay();
       const daysUntilNextMonday = dayOfWeek === 1 ? 7 : (8 - dayOfWeek) % 7;
       nextTime.setDate(now.getDate() + daysUntilNextMonday);
       nextTime.setHours(1, 0, 0, 0);
-    } else if (schedule === '0 2 1 * *') { // Monthly on 1st
+    } else if (schedule === '0 2 1 * *') {
+      // Monthly on 1st
       nextTime.setMonth(nextTime.getMonth() + 1);
       nextTime.setDate(1);
       nextTime.setHours(2, 0, 0, 0);
@@ -482,7 +516,7 @@ class ReportingService {
       // Default to 24 hours from now
       nextTime.setDate(nextTime.getDate() + 1);
     }
-    
+
     return nextTime;
   }
 
@@ -527,13 +561,13 @@ class ReportingService {
   convertToCSV(report) {
     // Simplified CSV conversion
     let csv = 'Metric,Value,Time\n';
-    
+
     if (report.summary) {
       Object.entries(report.summary).forEach(([key, value]) => {
         csv += `${key},${value},${report.generatedAt}\n`;
       });
     }
-    
+
     return csv;
   }
 
@@ -560,9 +594,12 @@ class ReportingService {
         
         <div class="summary">
           <h2>Summary</h2>
-          ${Object.entries(report.summary).map(([key, value]) => 
-            `<div class="summary-item"><strong>${key}:</strong> ${JSON.stringify(value)}</div>`
-          ).join('')}
+          ${Object.entries(report.summary)
+            .map(
+              ([key, value]) =>
+                `<div class="summary-item"><strong>${key}:</strong> ${JSON.stringify(value)}</div>`
+            )
+            .join('')}
         </div>
         
         <div class="details">
