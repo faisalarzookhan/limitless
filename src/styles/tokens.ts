@@ -115,9 +115,9 @@ export const colors = {
 
 export const typography = {
   fontFamily: {
-    sans: ['Inter', 'system-ui', 'sans-serif'],
-    display: ['Poppins', 'system-ui', 'sans-serif'],
-    mono: ['JetBrains Mono', 'monospace'],
+    sans: ['Figtree', 'system-ui', 'sans-serif'],
+    display: ['Outfit', 'system-ui', 'sans-serif'],
+    mono: ['Fira Code', 'monospace'],
   },
   fontSize: {
     xs: '0.75rem',      // 12px
@@ -258,8 +258,8 @@ export const transitions = {
 // Gradient definitions
 export const gradients = {
   primary: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
-  secondary: 'linear-gradient(135deg, #ffc957 0%, #ffbd3a 100%)',
-  accent: 'linear-gradient(135deg, #0a0b0d 0%, #1a1a1a 100%)',
+  secondary: 'linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%)',
+  accent: 'linear-gradient(135deg, #ffc957 0%, #ffbd3a 100%)',
   dark: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
 };
 

@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+@import './styles/enterprise-components.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -57,19 +62,19 @@
 /* Custom Utilities */
 @layer utilities {
     .text-gradient {
-        @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-secondary-500;
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-accent-500;
     }
 
     .text-gradient-primary {
         @apply bg-clip-text text-transparent bg-gradient-primary;
     }
 
-    .text-gradient-secondary {
-        @apply bg-clip-text text-transparent bg-gradient-secondary;
-    }
-
     .text-gradient-accent {
         @apply bg-clip-text text-transparent bg-gradient-accent;
+    }
+
+    .text-gradient-blue-amber {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-accent-500;
     }
 
     .card-hover {
@@ -80,8 +85,8 @@
         @apply px-8 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl;
     }
 
-    .btn-secondary {
-        @apply px-8 py-3 bg-secondary-600 text-white font-semibold rounded-xl hover:bg-secondary-700 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl;
+    .btn-accent {
+        @apply px-8 py-3 bg-accent-600 text-white font-semibold rounded-xl hover:bg-accent-700 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl;
     }
 
     .btn-outline {
@@ -113,15 +118,69 @@
     }
 
     .gradient-border {
-        @apply relative before:absolute before:inset-0 before:p-[2px] before:rounded-xl before:bg-gradient-to-r before:from-primary-500 before:to-secondary-500 before:-z-10;
+        @apply relative before:absolute before:inset-0 before:p-[2px] before:rounded-xl before:bg-gradient-to-r before:from-primary-500 before:to-accent-500 before:-z-10;
+    }
+
+    /* Asymmetrical Layout Components */
+    .asymmetrical-layout {
+        @apply grid grid-cols-1 md:grid-cols-12 gap-6;
+    }
+    
+    .asymmetrical-main {
+        @apply md:col-span-8 md:col-start-1;
+    }
+    
+    .asymmetrical-sidebar {
+        @apply md:col-span-4 md:col-start-9;
+    }
+    
+    .asymmetrical-feature {
+        @apply relative overflow-hidden rounded-2xl;
+        background: linear-gradient(135deg, #2563eb 0%, #ffc957 100%);
+    }
+    
+    .asymmetrical-card {
+        @apply rounded-2xl p-6 md:p-8 lg:p-10 shadow-soft dark:shadow-soft-dark border border-gray-100/30 dark:border-dark-700/30 transform transition-all duration-300;
+    }
+    
+    .asymmetrical-card.left-offset {
+        @apply -ml-4 md:-ml-8;
+    }
+    
+    .asymmetrical-card.right-offset {
+        @apply -mr-4 md:-mr-8;
     }
 
     .animate-scale-in {
         animation: scaleIn 0.3s ease-out forwards;
     }
+    
+    .animate-scale-in-center {
+        animation: scaleInFromCenter 0.4s ease-out forwards;
+    }
 
     .animate-fade-in {
         animation: fadeIn 0.3s ease-out forwards;
+    }
+    
+    .animate-slide-in-left {
+        animation: slideInFromLeft 0.5s ease-out forwards;
+    }
+    
+    .animate-slide-in-right {
+        animation: slideInFromRight 0.5s ease-out forwards;
+    }
+    
+    .animate-slide-in-top {
+        animation: slideInFromTop 0.5s ease-out forwards;
+    }
+    
+    .animate-slide-in-bottom {
+        animation: slideInFromBottom 0.5s ease-out forwards;
+    }
+    
+    .animate-float-gentle {
+        animation: floatGentle 3s ease-in-out infinite;
     }
 
     @keyframes scaleIn {
@@ -141,6 +200,70 @@
         }
         to {
             opacity: 1;
+        }
+    }
+    
+    @keyframes slideInFromLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    @keyframes slideInFromRight {
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    @keyframes slideInFromTop {
+        from {
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes slideInFromBottom {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes scaleInFromCenter {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    @keyframes floatGentle {
+        0%, 100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-10px);
         }
     }
 
@@ -179,9 +302,9 @@
     .hero-gradient {
         background: linear-gradient(
             135deg,
-            rgba(14, 165, 233, 0.1) 0%,
-            rgba(168, 85, 247, 0.1) 50%,
-            rgba(249, 115, 22, 0.1) 100%
+            rgba(37, 99, 235, 0.1) 0%,
+            rgba(255, 201, 87, 0.1) 50%,
+            rgba(255, 189, 58, 0.1) 100%
         );
     }
 
@@ -287,6 +410,98 @@
     background-size: 200% 100%;
     animation: skeleton 1.5s infinite;
 }
+    
+/* Distinctive Design Elements */
+.distinctive-badge {
+    @apply inline-flex items-center px-4 py-2 rounded-full font-semibold text-sm;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: white;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+    
+.distinctive-badge-amber {
+    @apply inline-flex items-center px-4 py-2 rounded-full font-semibold text-sm;
+    background: linear-gradient(135deg, #ffc957 0%, #ffbd3a 100%);
+    color: #1a1a1a;
+    box-shadow: 0 4px 14px rgba(255, 201, 87, 0.3);
+}
+    
+.distinctive-card {
+    @apply rounded-2xl p-6 md:p-8 border-0 relative overflow-hidden;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+    
+.distinctive-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #2563eb 0%, #ffc957 100%);
+}
+    
+.distinctive-button {
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300 relative overflow-hidden;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+}
+    
+.distinctive-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.6);
+}
+    
+.distinctive-button::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 20px;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(25deg);
+    transition: all 0.8s;
+}
+    
+.distinctive-button:hover::after {
+    left: 120%;
+}
+    
+.distinctive-header {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 1rem;
+}
+    
+.distinctive-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #2563eb 0%, #ffc957 100%);
+    border-radius: 2px;
+}
+    
+.distinctive-underline {
+    position: relative;
+    display: inline-block;
+}
+    
+.distinctive-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #2563eb 0%, #ffc957 100%);
+}
 
 /* Animations */
 @keyframes slideDown {
@@ -342,6 +557,49 @@
     width: 40px;
     height: 40px;
     animation: spin 1s linear infinite;
+}
+
+/* Brand Logo Architecture Derived Geometric Patterns */
+.bg-architectural-grid {
+    background-image:
+        linear-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px),
+        linear-gradient(45deg, rgba(255, 201, 87, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: center center;
+    animation: subtleMove 120s linear infinite;
+    will-change: background-position;
+}
+
+.bg-architectural-dots {
+    background-image: radial-gradient(
+        circle at center,
+        rgba(37, 99, 235, 0.1) 1px,
+        transparent 1px
+    );
+    background-size: 40px 40px;
+}
+
+.bg-architectural-triangles {
+    background-image:
+        linear-gradient(60deg, rgba(37, 99, 235, 0.05) 25%, transparent 25%),
+        linear-gradient(-60deg, rgba(255, 201, 87, 0.05) 25%, transparent 25%);
+    background-size: 40px 40px;
+}
+
+.bg-architectural-diagonal {
+    background-image:
+        linear-gradient(135deg, transparent 30%, rgba(37, 99, 235, 0.05) 30%, rgba(37, 99, 235, 0.05) 70%, transparent 70%),
+        linear-gradient(45deg, transparent 30%, rgba(255, 201, 87, 0.05) 30%, rgba(255, 201, 87, 0.05) 70%, transparent 70%);
+    background-size: 60px 60px;
+}
+
+.bg-architectural-structure {
+    background-image:
+        linear-gradient(90deg, rgba(37, 99, 235, 0.08) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(37, 99, 235, 0.08) 1px, transparent 1px),
+        linear-gradient(45deg, rgba(255, 201, 87, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
 }
 
 /* Background Patterns */

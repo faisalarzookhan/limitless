@@ -1,0 +1,311 @@
+/* Enterprise-Grade UI Components */
+
+/* Advanced Card Component */
+.enterprise-card {
+  @apply relative overflow-hidden rounded-2xl border-0 shadow-lg transition-all duration-300;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.enterprise-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #2563eb 0%, #ffc957 100%);
+}
+
+.enterprise-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+/* Mission Critical Button */
+.mission-critical-button {
+  @apply px-8 py-4 rounded-xl font-bold text-base tracking-wide transition-all duration-300 relative overflow-hidden;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+}
+
+.mission-critical-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 30px rgba(37, 99, 235, 0.6);
+}
+
+.mission-critical-button:active {
+  transform: translateY(0);
+}
+
+/* Enterprise Navigation */
+.enterprise-nav {
+  @apply flex items-center space-x-8 py-4 border-b border-gray-200;
+}
+
+.enterprise-nav-item {
+  @apply relative px-1 py-2 font-medium text-gray-700 hover:text-primary-600 cursor-pointer transition-colors duration-300;
+}
+
+.enterprise-nav-item.active {
+  @apply text-primary-600 font-semibold;
+}
+
+.enterprise-nav-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #2563eb 0%, #ffc957 100%);
+  border-radius: 2px;
+}
+
+/* Executive Dashboard Card */
+.executive-dashboard-card {
+  @apply rounded-2xl p-6 md:p-8 border-0 relative overflow-hidden;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+}
+
+.executive-dashboard-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #2563eb 0%, #ffc957 100%);
+}
+
+/* Strategic Indicator */
+.strategic-indicator {
+  @apply inline-flex items-center px-4 py-2 rounded-full font-semibold text-sm;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: white;
+}
+
+/* Enterprise Form Field */
+.enterprise-form-field {
+  @apply w-full px-6 py-4 rounded-xl border-2 border-gray-200 bg-white text-gray-900 focus:outline-none focus:ring-0 transition-all duration-300;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.enterprise-form-field:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+}
+
+/* Mission Critical Header */
+.mission-critical-header {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 1.5rem;
+  font-weight: 800;
+  font-size: 2.5rem;
+  line-height: 1.2;
+}
+
+.mission-critical-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 6px;
+  background: linear-gradient(90deg, #2563eb 0%, #ffc957 100%);
+  border-radius: 3px;
+}
+
+/* Enterprise Status Indicator */
+.enterprise-status-indicator {
+  @apply inline-flex items-center justify-center w-4 h-4 rounded-full;
+}
+
+.enterprise-status-indicator.active {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+}
+
+.enterprise-status-indicator.inactive {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.enterprise-status-indicator.warning {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+/* Board-Ready Table */
+.board-ready-table {
+  @apply min-w-full divide-y divide-gray-200 rounded-xl overflow-hidden;
+}
+
+.board-ready-table thead {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+}
+
+.board-ready-table th {
+  @apply px-6 py-4 text-left text-sm font-semibold text-white uppercase tracking-wider;
+}
+
+.board-ready-table td {
+  @apply px-6 py-4 whitespace-nowrap text-sm text-gray-700;
+}
+
+.board-ready-table tbody {
+  @apply divide-y divide-gray-200;
+}
+
+/* Executive Summary Panel */
+.executive-summary-panel {
+  @apply rounded-2xl p-8 border-0 relative overflow-hidden;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.executive-summary-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: linear-gradient(90deg, #2563eb 0%, #ffc957 100%);
+}
+
+/* Mission-Critical Alert */
+.mission-critical-alert {
+  @apply rounded-2xl p-6 border-0 relative overflow-hidden;
+  background: linear-gradient(135deg, #fef2f2 0%, #fff7ed 100%);
+  border-left: 8px solid #dc2626;
+}
+
+.mission-critical-alert.info {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border-left-color: #2563eb;
+}
+
+.mission-critical-alert.warning {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border-left-color: #f59e0b;
+}
+
+.mission-critical-alert.success {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border-left-color: #22c55e;
+}
+
+/* Enterprise-Level Progress Bar */
+.enterprise-progress-bar {
+  @apply w-full h-3 rounded-full overflow-hidden bg-gray-200;
+}
+
+.enterprise-progress-bar-fill {
+  @apply h-full rounded-full transition-all duration-500;
+  background: linear-gradient(90deg, #2563eb 0%, #ffc957 100%);
+}
+
+/* Strategic Dashboard Widget */
+.strategic-dashboard-widget {
+  @apply rounded-2xl p-6 border-0 relative overflow-hidden shadow-lg;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.strategic-dashboard-widget::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #2563eb 0%, #ffc957 100%);
+}
+
+/* Command Center Button */
+.command-center-button {
+  @apply px-6 py-3 rounded-lg font-semibold text-base transition-all duration-300 relative overflow-hidden;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+}
+
+.command-center-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.5);
+}
+
+.command-center-button:active {
+  transform: translateY(0);
+}
+
+.command-center-button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 20px;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: rotate(25deg);
+  transition: all 0.6s;
+}
+
+.command-center-button:hover::after {
+  left: 120%;
+}
+
+/* Decision Tree Node */
+.decision-tree-node {
+  @apply rounded-xl p-4 border-2 border-gray-300 bg-white shadow-md transition-all duration-300;
+}
+
+.decision-tree-node.selected {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+  transform: scale(1.02);
+}
+
+/* Mission Control Panel */
+.mission-control-panel {
+  @apply rounded-2xl p-8 border-0 relative overflow-hidden;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color: white;
+}
+
+/* Mission Critical Button Secondary */
+.mission-critical-button-secondary {
+  @apply px-8 py-4 rounded-xl font-bold text-base tracking-wide transition-all duration-300 relative overflow-hidden;
+  background: linear-gradient(135deg, #ffc957 0%, #f59e0b 100%);
+  color: #1e293b;
+  border: none;
+  box-shadow: 0 10px 25px rgba(251, 191, 36, 0.4);
+}
+
+.mission-critical-button-secondary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 30px rgba(251, 191, 36, 0.6);
+}
+
+.mission-critical-button-secondary:active {
+  transform: translateY(0);
+}
+
+/* Enterprise-Grade Toggle */
+.enterprise-toggle {
+  @apply relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300;
+  background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
+}
+
+.enterprise-toggle.checked {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+}
+
+.enterprise-toggle-thumb {
+  @apply inline-block h-4 w-4 transform rounded-full bg-white shadow-lg transition-transform duration-300;
+}
+
+.enterprise-toggle.checked .enterprise-toggle-thumb {
+  transform: translateX(20px);
+}

@@ -62,9 +62,9 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Poppins', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['Figtree', 'system-ui', 'sans-serif'],
+        display: ['Outfit', 'system-ui', 'sans-serif'],
+        mono: ['Fira Code', 'monospace'],
       },
       fontSize: {
         'xs': ['0.75rem', { lineHeight: '1.25rem' }],  // 12px, 16px line height
