@@ -1,7 +1,7 @@
 // jest.config.js
 // Jest configuration for unit testing
 
-module.exports = {
+export default {
   testEnvironment: 'jsdom',
   roots: ['<rootDir>/src'],
   collectCoverageFrom: [
@@ -22,13 +22,10 @@ module.exports = {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': [
-      'babel-jest',
-      { presets: ['@babel/preset-react'] },
-    ],
+    '^.+\\.(js|jsx|ts|tsx)$': 'ts-jest',
   },
   transformIgnorePatterns: [
-    '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$',
+    '[/\\]node_modules[/\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$',
   ],
   coverageDirectory: 'coverage',
   coverageReporters: ['json', 'lcov', 'text', 'clover', 'text-summary'],
@@ -52,8 +49,8 @@ module.exports = {
     '__mocks__/',
   ],
   globals: {
-    crypto: {
-      getRandomValues: arr => require('crypto').randomBytes(arr.length),
+    'ts-jest': {
+      tsconfig: 'tsconfig.json',
     },
   },
 };
