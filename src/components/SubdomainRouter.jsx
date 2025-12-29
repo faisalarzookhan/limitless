@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState, useMemo } from 'react';
+import { useLocation, useNavigate, Routes, Route, Navigate, useMatch } from 'react-router-dom';
 import { SUBDOMAIN_CONFIG, SubdomainHelper } from '../config/subdomainConfig';
 import PropTypes from 'prop-types';
 
@@ -19,7 +19,7 @@ const SubdomainRouter = ({ children }) => {
     const subdomain = SubdomainHelper.getCurrentSubdomain();
     setCurrentSubdomain(subdomain);
     setIsLoading(false);
-  }, [location.pathname]);
+  }, []); // Only run once on mount
 
   // Get subdomain configuration
   const getSubdomainConfig = () => {
@@ -38,9 +38,28 @@ const SubdomainRouter = ({ children }) => {
     );
   }
 
+  // Apply subdomain-specific styling
+  useEffect(() => {
+    if (currentSubdomain) {
+      document.documentElement.setAttribute('data-subdomain', currentSubdomain);
+      
+      // Apply subdomain-specific theme colors
+      const branding = SUBDOMAIN_CONFIG.branding[currentSubdomain];
+      if (branding) {
+        document.documentElement.style.setProperty('--primary-color', branding.primaryColor);
+        document.documentElement.style.setProperty('--secondary-color', branding.secondaryColor);
+      }
+    } else {
+      document.documentElement.removeAttribute('data-subdomain');
+      document.documentElement.style.removeProperty('--primary-color');
+      document.documentElement.style.removeProperty('--secondary-color');
+    }
+  }, [currentSubdomain]);
+
   return (
     <div
       className={`subdomain-router ${currentSubdomain ? `subdomain-${currentSubdomain}` : 'main-domain'}`}
+      data-subdomain={currentSubdomain}
     >
       {/* Subdomain-specific header */}
       {currentSubdomain && (
@@ -80,7 +99,7 @@ const SubdomainHeader = ({ currentSubdomain, config }) => {
   const handleSubdomainChange = subdomain => {
     const newUrl = SubdomainHelper.getSubdomainUrl(subdomain);
     if (newUrl) {
-      window.location.href = newUrl;
+      window.location.assign(newUrl);
     }
   };
 
@@ -129,7 +148,7 @@ const SubdomainHeader = ({ currentSubdomain, config }) => {
             {config.routes.slice(0, 5).map((route, index) => (
               <li key={index} className="nav-item">
                 <a
-                  href={route}
+                  href={SubdomainHelper.getSubdomainUrl(currentSubdomain, route)}
                   className="nav-link"
                   style={{
                     color:
@@ -190,7 +209,7 @@ const SubdomainFooter = ({ currentSubdomain, config }) => {
             <ul>
               {config.routes.slice(0, 4).map((route, index) => (
                 <li key={index}>
-                  <a href={route}>{route.split('/').pop() || 'Home'}</a>
+                  <a href={SubdomainHelper.getSubdomainUrl(currentSubdomain, route)}>{route.split('/').pop() || 'Home'}</a>
                 </li>
               ))}
             </ul>
@@ -244,7 +263,8 @@ const SubdomainLink = ({
     // Different subdomain, redirect to new subdomain
     const url = SubdomainHelper.getSubdomainUrl(targetSubdomain, to);
     if (url) {
-      window.location.href = url;
+      // Use window.location.assign to properly redirect to different subdomain
+      window.location.assign(url);
     }
   };
 
@@ -268,7 +288,8 @@ const SubdomainRedirect = ({ to, subdomain }) => {
   useEffect(() => {
     const url = SubdomainHelper.getSubdomainUrl(subdomain, to);
     if (url) {
-      window.location.href = url;
+      // Use window.location.assign for proper subdomain redirect
+      window.location.assign(url);
     }
   }, [to, subdomain]);
 

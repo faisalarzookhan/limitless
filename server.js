@@ -279,10 +279,22 @@ app.get('/health', (req, res) => {
 
 // Serve static files in production
 if (process.env.NODE_ENV === 'production') {
+  // Enable CORS for all routes to support subdomain access
+  app.use(cors({
+    origin: [
+      'https://limitlessinfotech.com',
+      'https://www.limitlessinfotech.com',
+      // Add other known subdomains
+      'https://*.limitlessinfotech.com'
+    ],
+    credentials: true
+  }));
+
   // Serve static files
   app.use(express.static(path.join(__dirname, 'dist')));
 
   // Serve index.html for all other routes (for SPA routing)
+  // This handles subdomain routing properly for SPA
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
   });
