@@ -71,6 +71,29 @@
 
         <!-- Theme Color -->
         <meta name="theme-color" content="#2563eb" />
+        
+        <!-- Google Analytics 4 (gtag.js) Tracking Code -->
+        <!-- This script should be placed in the <head> section of your HTML document -->
+        <!-- Primary Google Analytics property ID: G-62Q7B46GS6 -->
+        <!-- This tracking code will collect page views, events, and user behavior data -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-62Q7B46GS6"></script>
+        <script>
+          // Initialize or reference the existing dataLayer array
+          window.dataLayer = window.dataLayer || [];
+          
+          // Define the gtag function to push data to the dataLayer
+          function gtag(){dataLayer.push(arguments);}
+          
+          // Load the Google Analytics configuration
+          gtag('js', new Date());
+          
+          // Configure the primary Google Analytics property
+          gtag('config', 'G-62Q7B46GS6', {
+            // Optional configuration parameters can be added here
+            // For example: send_page_view: false, debug_mode: true
+          });
+        </script>
+        <!-- End Google Analytics 4 Tracking Code -->
 
         <title>
             Limitless Infotech Solution - Where Innovation Meets Execution
