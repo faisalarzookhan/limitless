@@ -15,28 +15,24 @@ const SubdomainRouter = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Determine current subdomain based on URL
-    const subdomain = SubdomainHelper.getCurrentSubdomain();
-    setCurrentSubdomain(subdomain);
-    setIsLoading(false);
-  }, []); // Only run once on mount
-
-  // Get subdomain configuration
-  const getSubdomainConfig = () => {
-    if (currentSubdomain && SUBDOMAIN_CONFIG.subdomains[currentSubdomain]) {
-      return SUBDOMAIN_CONFIG.subdomains[currentSubdomain];
+    try {
+      // Check if running in browser environment before accessing window
+      if (typeof window !== 'undefined' && typeof window.location !== 'undefined') {
+        // Determine current subdomain based on URL
+        const subdomain = SubdomainHelper.getCurrentSubdomain();
+        setCurrentSubdomain(subdomain);
+      } else {
+        // Not in browser environment, continue with null subdomain
+        setCurrentSubdomain(null);
+      }
+    } catch (error) {
+      console.error('Error detecting subdomain:', error);
+      // Continue with null subdomain if there's an error
+      setCurrentSubdomain(null);
+    } finally {
+      setIsLoading(false);
     }
-    return null;
-  };
-
-  // Render subdomain-specific content
-  if (isLoading) {
-    return (
-      <div className="subdomain-router-loading">
-        <div className="loading-spinner">Loading...</div>
-      </div>
-    );
-  }
+  }, []); // Only run once on mount
 
   // Apply subdomain-specific styling
   useEffect(() => {
@@ -55,6 +51,23 @@ const SubdomainRouter = ({ children }) => {
       document.documentElement.style.removeProperty('--secondary-color');
     }
   }, [currentSubdomain]);
+
+  // Get subdomain configuration
+  const getSubdomainConfig = () => {
+    if (currentSubdomain && SUBDOMAIN_CONFIG.subdomains[currentSubdomain]) {
+      return SUBDOMAIN_CONFIG.subdomains[currentSubdomain];
+    }
+    return null;
+  };
+
+  // Render subdomain-specific content
+  if (isLoading) {
+    return (
+      <div className="subdomain-router-loading">
+        <div className="loading-spinner">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div

@@ -354,7 +354,14 @@ const SubdomainHelper = {
     const parts = hostname.split('.');
 
     if (parts.length >= 3 && parts[parts.length - 2] === 'limitlessinfotech') {
-      return parts[0] === 'www' ? parts[1] : parts[0];
+      // Handle cases like www.limitlessinfotech.com (should return null for main domain)
+      // and subdomain.limitlessinfotech.com (should return subdomain)
+      if (parts[0] === 'www') {
+        return null; // www is not a subdomain
+      } else if (parts[0] === 'limitlessinfotech') {
+        return null; // main domain
+      }
+      return parts[0];
     }
 
     return null;

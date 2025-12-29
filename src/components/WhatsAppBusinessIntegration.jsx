@@ -35,6 +35,11 @@ const WhatsAppBusinessIntegration = () => {
   ];
 
   const handleSendMessage = async (message = inputMessage) => {
+    // Check if running in browser environment
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      console.warn('Not in browser environment, skipping message sending');
+      return;
+    }
     if (!message.trim()) return;
 
     const newMessage = {
@@ -50,7 +55,7 @@ const WhatsAppBusinessIntegration = () => {
 
     // Send notification about the user's message
     try {
-      await sendUserInteractionNotification('Auralis Connect', {
+      await sendUserInteractionNotification({
         message: message,
         sender: 'Auralis',
         timestamp: new Date().toISOString(),
