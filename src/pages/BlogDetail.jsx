@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
   HiCalendar,
@@ -20,7 +21,29 @@ import {
   FaWhatsapp,
   FaLink,
 } from 'react-icons/fa';
+import ErrorBoundary from '../components/ErrorBoundary';
 import { sendUserInteractionNotification } from '../services/notificationService';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5
+    }
+  }
+};
 
 const BlogDetail = () => {
   const { slug } = useParams();
@@ -315,11 +338,12 @@ const BlogDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-dark text-white">
+    <ErrorBoundary>
+      <div className="min-h-screen bg-[#0a0b0d] font-sans">
       {/* Reading Progress Bar */}
-      <div className="fixed top-0 left-0 w-full h-1 bg-dark-800 z-50">
+      <div className="fixed top-0 left-0 w-full h-1 bg-[#2563eb]/20 z-50">
         <div
-          className="h-full bg-gradient-primary transition-all duration-150"
+          className="h-full bg-[#2563eb] transition-all duration-150"
           style={{ width: `${readingProgress}%` }}
         ></div>
       </div>
@@ -328,7 +352,7 @@ const BlogDetail = () => {
       <div className="container-custom pt-24 pb-8">
         <Link
           to="/blog"
-          className="inline-flex items-center space-x-2 text-gray-400 hover:text-primary-400 transition-colors duration-300"
+          className="inline-flex items-center space-x-2 text-gray-400 hover:text-[#2563eb] transition-colors duration-300"
         >
           <HiArrowLeft className="w-5 h-5" />
           <span>Back to Blog</span>
@@ -340,7 +364,7 @@ const BlogDetail = () => {
         <div className="max-w-4xl mx-auto">
           {/* Category Badge */}
           <div className="mb-6">
-            <span className="inline-block px-4 py-2 bg-primary-600/20 text-primary-400 rounded-full text-sm font-medium">
+            <span className="inline-block px-4 py-2 bg-[#2563eb]/20 text-[#2563eb] rounded-full text-sm font-medium">
               {post.category
                 .split('-')
                 .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -349,12 +373,22 @@ const BlogDetail = () => {
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+          <motion.h1 
+            className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight font-['Outfit']"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
             {post.title}
-          </h1>
+          </motion.h1>
 
           {/* Meta Information */}
-          <div className="flex flex-wrap items-center gap-6 text-gray-400 mb-8">
+          <motion.div 
+            className="flex flex-wrap items-center gap-6 text-gray-400 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <div className="flex items-center space-x-2">
               <HiUser className="w-5 h-5" />
               <span>{post.author.name}</span>
@@ -371,44 +405,62 @@ const BlogDetail = () => {
               <HiEye className="w-5 h-5" />
               <span>{post.views.toLocaleString()} views</span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Featured Image Placeholder */}
-          <div className="mb-12 rounded-2xl overflow-hidden bg-gradient-to-br from-primary-600/20 to-secondary-600/20 aspect-video flex items-center justify-center">
+          <motion.div 
+            className="mb-12 rounded-2xl overflow-hidden bg-gradient-to-br from-[#2563eb]/20 to-[#ffc957]/20 aspect-video flex items-center justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
             <div className="text-center p-8">
-              <div className="w-20 h-20 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <div className="w-20 h-20 bg-[#2563eb] rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <HiChat className="w-10 h-10 text-white" />
               </div>
-              <p className="text-gray-400">Featured Image</p>
+              <p className="text-gray-400 font-['Figtree']">Featured Image</p>
             </div>
-          </div>
+          </motion.div>
 
           {/* Article Content */}
-          <div
+          <motion.div
             className="prose prose-invert prose-lg max-w-none mb-12"
             dangerouslySetInnerHTML={{ __html: post.content }}
             style={{
               lineHeight: '1.8',
             }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
           />
 
           {/* Tags */}
-          <div className="mb-8 pb-8 border-b border-dark-700">
+          <motion.div 
+            className="mb-8 pb-8 border-b border-[#2563eb]/30"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
             <div className="flex flex-wrap items-center gap-3">
               <HiTag className="w-5 h-5 text-gray-400" />
               {post.tags.map((tag, index) => (
                 <span
                   key={index}
-                  className="px-3 py-1 bg-dark-800 text-gray-300 rounded-full text-sm hover:bg-primary-600/20 hover:text-primary-400 transition-colors cursor-pointer"
+                  className="px-3 py-1 bg-[#1a1c20] text-gray-300 rounded-full text-sm hover:bg-[#2563eb]/20 hover:text-[#2563eb] transition-colors cursor-pointer font-['Figtree']"
                 >
                   #{tag.replace(/\s+/g, '')}
                 </span>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Social Share */}
-          <div className="mb-12 pb-8 border-b border-dark-700">
+          <motion.div 
+            className="mb-12 pb-8 border-b border-[#2563eb]/30"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-4">
                 <button
@@ -416,7 +468,7 @@ const BlogDetail = () => {
                   className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${
                     liked
                       ? 'bg-red-500/20 text-red-400'
-                      : 'bg-dark-800 text-gray-400 hover:bg-red-500/20 hover:text-red-400'
+                      : 'bg-[#1a1c20] text-gray-400 hover:bg-red-500/20 hover:text-red-400'
                   }`}
                 >
                   <HiHeart
@@ -425,83 +477,93 @@ const BlogDetail = () => {
                   <span>{liked ? post.likes + 1 : post.likes}</span>
                 </button>
 
-                <button className="flex items-center space-x-2 px-4 py-2 bg-dark-800 text-gray-400 rounded-lg hover:bg-primary-600/20 hover:text-primary-400 transition-all duration-300">
+                <button className="flex items-center space-x-2 px-4 py-2 bg-[#1a1c20] text-gray-400 rounded-lg hover:bg-[#2563eb]/20 hover:text-[#2563eb] transition-all duration-300">
                   <HiChat className="w-5 h-5" />
                   <span>{comments.length}</span>
                 </button>
               </div>
 
               <div className="flex items-center gap-2">
-                <span className="text-gray-400 mr-2">Share:</span>
+                <span className="text-gray-400 mr-2 font-['Figtree']">Share:</span>
                 <button
                   onClick={() => handleShare('facebook')}
-                  className="w-10 h-10 bg-dark-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors"
+                  className="w-10 h-10 bg-[#1a1c20] hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors"
                   aria-label="Share on Facebook"
                 >
                   <FaFacebookF className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => handleShare('twitter')}
-                  className="w-10 h-10 bg-dark-800 hover:bg-sky-500 rounded-lg flex items-center justify-center transition-colors"
+                  className="w-10 h-10 bg-[#1a1c20] hover:bg-sky-500 rounded-lg flex items-center justify-center transition-colors"
                   aria-label="Share on Twitter"
                 >
                   <FaTwitter className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => handleShare('linkedin')}
-                  className="w-10 h-10 bg-dark-800 hover:bg-blue-700 rounded-lg flex items-center justify-center transition-colors"
+                  className="w-10 h-10 bg-[#1a1c20] hover:bg-blue-700 rounded-lg flex items-center justify-center transition-colors"
                   aria-label="Share on LinkedIn"
                 >
                   <FaLinkedinIn className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => handleShare('whatsapp')}
-                  className="w-10 h-10 bg-dark-800 hover:bg-green-600 rounded-lg flex items-center justify-center transition-colors"
+                  className="w-10 h-10 bg-[#1a1c20] hover:bg-green-600 rounded-lg flex items-center justify-center transition-colors"
                   aria-label="Share on WhatsApp"
                 >
                   <FaWhatsapp className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => handleShare('copy')}
-                  className="w-10 h-10 bg-dark-800 hover:bg-primary-600 rounded-lg flex items-center justify-center transition-colors"
+                  className="w-10 h-10 bg-[#1a1c20] hover:bg-[#2563eb] rounded-lg flex items-center justify-center transition-colors"
                   aria-label="Copy link"
                 >
                   <FaLink className="w-4 h-4" />
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Author Bio */}
-          <div className="mb-12 bg-dark-800/50 rounded-2xl p-8 border border-dark-700">
-            <h3 className="text-xl font-bold text-white mb-4">
+          <motion.div 
+            className="mb-12 bg-[#1a1c20] rounded-2xl p-8 border border-[#2563eb]/30"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+          >
+            <h3 className="text-xl font-bold text-white mb-4 font-['Outfit']">
               About the Author
             </h3>
             <div className="flex items-start space-x-4">
               <div className="flex-shrink-0">
-                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 bg-[#2563eb] rounded-full flex items-center justify-center">
                   <span className="text-white text-2xl font-bold">
                     {post.author.name.charAt(0)}
                   </span>
                 </div>
               </div>
               <div>
-                <h4 className="text-lg font-semibold text-white mb-1">
+                <h4 className="text-lg font-semibold text-white mb-1 font-['Outfit']">
                   {post.author.name}
                 </h4>
-                <p className="text-primary-400 text-sm mb-3">
+                <p className="text-[#ffc957] text-sm mb-3 font-['Figtree']">
                   {post.author.role}
                 </p>
-                <p className="text-gray-400 leading-relaxed">
+                <p className="text-gray-400 leading-relaxed font-['Figtree']">
                   {post.author.bio}
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Comments Section */}
-          <div className="mb-12">
-            <h3 className="text-2xl font-bold text-white mb-6">
+          <motion.div 
+            className="mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
+            <h3 className="text-2xl font-bold text-white mb-6 font-['Outfit']">
               Comments ({comments.length})
             </h3>
 
@@ -511,12 +573,12 @@ const BlogDetail = () => {
                 value={comment}
                 onChange={e => setComment(e.target.value)}
                 placeholder="Share your thoughts..."
-                className="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary-600 mb-4"
+                className="w-full px-4 py-3 bg-[#1a1c20] border border-[#2563eb]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#2563eb] mb-4"
                 rows="4"
               ></textarea>
               <button
                 type="submit"
-                className="btn-primary"
+                className="px-6 py-3 bg-[#2563eb] text-white rounded-lg hover:bg-[#ffc957] hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit']"
                 disabled={!comment.trim()}
               >
                 Post Comment
@@ -526,13 +588,16 @@ const BlogDetail = () => {
             {/* Comments List */}
             <div className="space-y-6">
               {comments.map(c => (
-                <div
+                <motion.div
                   key={c.id}
-                  className="bg-dark-800/30 rounded-xl p-6 border border-dark-700"
+                  className="bg-[#1a1c20] rounded-xl p-6 border border-[#2563eb]/30"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
                 >
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
-                      <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
+                      <div className="w-10 h-10 bg-[#2563eb] rounded-full flex items-center justify-center">
                         <span className="text-white text-sm font-bold">
                           {c.author.charAt(0)}
                         </span>
@@ -540,35 +605,40 @@ const BlogDetail = () => {
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
-                        <h4 className="font-semibold text-white">{c.author}</h4>
-                        <span className="text-sm text-gray-500">
+                        <h4 className="font-semibold text-white font-['Figtree']">{c.author}</h4>
+                        <span className="text-sm text-gray-500 font-['Figtree']">
                           {formatDate(c.date)}
                         </span>
                       </div>
-                      <p className="text-gray-300 mb-3">{c.comment}</p>
-                      <button className="text-sm text-gray-400 hover:text-primary-400 transition-colors">
+                      <p className="text-gray-300 mb-3 font-['Figtree']">{c.comment}</p>
+                      <button className="text-sm text-gray-400 hover:text-[#2563eb] transition-colors font-['Figtree']">
                         <HiHeart className="w-4 h-4 inline mr-1" />
                         {c.likes} likes
                       </button>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Navigation: Previous/Next Posts */}
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
+          <motion.div 
+            className="grid md:grid-cols-2 gap-6 mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+          >
             {prevPost && (
               <Link
                 to={`/blog/${prevPost.slug}`}
-                className="bg-dark-800/50 rounded-xl p-6 border border-dark-700 hover:border-primary-600 transition-all duration-300 group"
+                className="bg-[#1a1c20] rounded-xl p-6 border border-[#2563eb]/30 hover:border-[#2563eb] transition-all duration-300 group"
               >
-                <div className="flex items-center space-x-3 text-gray-400 mb-3">
+                <div className="flex items-center space-x-3 text-gray-400 mb-3 font-['Figtree']">
                   <HiArrowLeft className="w-5 h-5" />
                   <span className="text-sm">Previous Article</span>
                 </div>
-                <h4 className="text-white font-semibold group-hover:text-primary-400 transition-colors">
+                <h4 className="text-white font-semibold group-hover:text-[#2563eb] transition-colors font-['Figtree']">
                   {prevPost.title}
                 </h4>
               </Link>
@@ -577,91 +647,125 @@ const BlogDetail = () => {
             {nextPost && (
               <Link
                 to={`/blog/${nextPost.slug}`}
-                className="bg-dark-800/50 rounded-xl p-6 border border-dark-700 hover:border-primary-600 transition-all duration-300 group"
+                className="bg-[#1a1c20] rounded-xl p-6 border border-[#2563eb]/30 hover:border-[#2563eb] transition-all duration-300 group"
               >
-                <div className="flex items-center justify-end space-x-3 text-gray-400 mb-3">
+                <div className="flex items-center justify-end space-x-3 text-gray-400 mb-3 font-['Figtree']">
                   <span className="text-sm">Next Article</span>
                   <HiArrowRight className="w-5 h-5" />
                 </div>
-                <h4 className="text-white font-semibold text-right group-hover:text-primary-400 transition-colors">
+                <h4 className="text-white font-semibold text-right group-hover:text-[#2563eb] transition-colors font-['Figtree']">
                   {nextPost.title}
                 </h4>
               </Link>
             )}
-          </div>
+          </motion.div>
         </div>
       </article>
 
       {/* Related Posts */}
       {relatedPosts.length > 0 && (
-        <section className="py-16 bg-dark-800/30 border-t border-dark-700">
+        <section className="py-16 bg-[#0a0b0d] border-t border-[#2563eb]/30">
           <div className="container-custom">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl font-bold text-white mb-12 text-center">
+              <motion.h2 
+                className="text-3xl font-bold text-white mb-12 text-center font-['Outfit']"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
                 Related Articles
-              </h2>
+              </motion.h2>
 
-              <div className="grid md:grid-cols-3 gap-8">
+              <motion.div 
+                className="grid md:grid-cols-3 gap-8"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+              >
                 {relatedPosts.map(relatedPost => (
-                  <Link
+                  <motion.div
                     key={relatedPost.id}
-                    to={`/blog/${relatedPost.slug}`}
-                    className="bg-dark-800 rounded-xl overflow-hidden border border-dark-700 hover:border-primary-600 transition-all duration-300 group"
+                    className="bg-[#1a1c20] rounded-xl overflow-hidden border border-[#2563eb]/30 hover:border-[#2563eb] transition-all duration-300 group"
+                    variants={itemVariants}
                   >
-                    <div className="aspect-video bg-gradient-to-br from-primary-600/20 to-secondary-600/20 flex items-center justify-center">
-                      <HiChat className="w-12 h-12 text-gray-600" />
-                    </div>
-                    <div className="p-6">
-                      <span className="inline-block px-3 py-1 bg-primary-600/20 text-primary-400 rounded-full text-xs font-medium mb-3">
-                        {relatedPost.category.split('-').join(' ')}
-                      </span>
-                      <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-primary-400 transition-colors line-clamp-2">
-                        {relatedPost.title}
-                      </h3>
-                      <p className="text-sm text-gray-400 mb-4 line-clamp-2">
-                        {relatedPost.excerpt}
-                      </p>
-                      <div className="flex items-center justify-between text-xs text-gray-500">
-                        <span>{relatedPost.readTime}</span>
-                        <span>{relatedPost.views} views</span>
+                    <Link to={`/blog/${relatedPost.slug}`}>
+                      <div className="aspect-video bg-gradient-to-br from-[#2563eb]/20 to-[#ffc957]/20 flex items-center justify-center">
+                        <HiChat className="w-12 h-12 text-gray-600" />
                       </div>
-                    </div>
-                  </Link>
+                      <div className="p-6">
+                        <span className="inline-block px-3 py-1 bg-[#2563eb]/20 text-[#2563eb] rounded-full text-xs font-medium mb-3 font-['Figtree']">
+                          {relatedPost.category.split('-').join(' ')}
+                        </span>
+                        <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#2563eb] transition-colors line-clamp-2 font-['Figtree']">
+                          {relatedPost.title}
+                        </h3>
+                        <p className="text-sm text-gray-400 mb-4 line-clamp-2 font-['Figtree']">
+                          {relatedPost.excerpt}
+                        </p>
+                        <div className="flex items-center justify-between text-xs text-gray-500 font-['Figtree']">
+                          <span>{relatedPost.readTime}</span>
+                          <span>{relatedPost.views} views</span>
+                        </div>
+                      </div>
+                    </Link>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
       )}
 
       {/* CTA Section */}
-      <section className="py-16 border-t border-dark-800">
-        <div className="container-custom">
+      <section className="py-16 border-t border-[#2563eb]/30 bg-gradient-to-br from-[#2563eb] via-[#ffc957] to-[#0a0b0d] text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2260%22%20height=%2260%22%20viewBox=%220%200%2060%2060%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg%20fill=%22none%22%20fill-rule=%22evenodd%22%3E%3Cg%20fill=%22%23ffffff%22%20fill-opacity=%220.05%22%3E%3Ccircle%20cx=%2230%22%20cy=%2230%22%20r=%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+        <div className="container-custom relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="mb-6">
-              <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto">
+            <motion.div 
+              className="mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="w-16 h-16 bg-[#0a0b0d] rounded-2xl flex items-center justify-center mx-auto">
                 <HiCheckCircle className="w-8 h-8 text-white" />
               </div>
-            </div>
-            <h2 className="text-3xl font-bold text-white mb-4">
+            </motion.div>
+            <motion.h2 
+              className="text-3xl font-bold mb-4 font-['Outfit']"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
               Ready to Transform Your Business?
-            </h2>
-            <p className="text-gray-300 mb-8">
+            </motion.h2>
+            <motion.p 
+              className="mb-8 font-['Figtree']"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
               Let's discuss how we can help you leverage the latest technologies
               to achieve your business goals.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/get-started" className="btn-primary">
+            </motion.p>
+            <motion.div 
+              className="flex flex-wrap justify-center gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <Link to="/get-started" className="px-8 py-4 bg-[#0a0b0d] text-white rounded-lg hover:bg-[#ffc957] hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit']">
                 Get Started
               </Link>
-              <Link to="/contact" className="btn-secondary">
+              <Link to="/contact" className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg hover:bg-white hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit']">
                 Contact Us
               </Link>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
     </div>
+    </ErrorBoundary>
   );
 };
 

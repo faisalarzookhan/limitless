@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
   HiLightningBolt,
   HiAcademicCap,
@@ -136,266 +137,386 @@ const InnovationLab = () => {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-dark-900 dark:to-dark-800">
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
       {/* Hero Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 text-white">
+      <motion.section 
+        className="py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#1d4ed8] to-[#ffc957] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom px-4 md:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8">
+            <motion.div 
+              className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8"
+              variants={itemVariants}
+            >
               <HiLightningBolt className="w-5 h-5" />
-              <span className="text-sm font-semibold">
+              <span className="text-sm font-semibold font-['Outfit']">
                 Innovation & Research
               </span>
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
+            </motion.div>
+            <motion.h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-['Outfit'] font-bold mb-6"
+              variants={itemVariants}
+            >
               Innovation
               <br />
               Lab
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8">
+            </motion.h1>
+            <motion.p 
+              className="text-xl md:text-2xl text-white/90 mb-8 font-['Figtree']"
+              variants={itemVariants}
+            >
               Where cutting-edge research meets practical business solutions
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            </motion.p>
+            <motion.div 
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+              variants={itemVariants}
+            >
               <Link
                 to="/contact"
-                className="btn-primary bg-white text-indigo-600 hover:bg-gray-100"
+                className="bg-[#0a0b0d] text-[#ffc957] hover:bg-[#1a1c25] px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']"
               >
                 Partner with Our Lab
               </Link>
               <Link
                 to="/research"
-                className="btn-outline border-white text-white hover:bg-white hover:text-indigo-600"
+                className="bg-transparent border border-white text-white hover:bg-white hover:text-[#2563eb] px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']"
               >
                 View Research Papers
               </Link>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Innovation Stats */}
-      <section className="section-padding">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
             {innovationStats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">
+              <motion.div 
+                key={index} 
+                className="text-center"
+                variants={itemVariants}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className="text-4xl md:text-5xl font-['Outfit'] font-bold bg-gradient-to-r from-[#2563eb] to-[#ffc957] bg-clip-text text-transparent mb-2">
                   {stat.value}
                 </div>
-                <div className="text-gray-600 dark:text-gray-400">
+                <div className="text-gray-300 font-['Figtree']">
                   {stat.label}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Research Areas */}
-      <section className="section-padding">
+      <section className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Current <span className="text-gradient">Research Areas</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
+              Current <span className="text-[#ffc957]">Research Areas</span>
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Our dedicated research teams are exploring the next generation of
               technologies
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {researchAreas.map((area, index) => (
-              <div
+              <motion.div
                 key={area.id}
-                className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700 hover:shadow-lg transition-shadow duration-300"
+                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 shadow-xl border border-gray-700"
+                initial="hidden"
+                animate="visible"
+                variants={itemVariants}
+                transition={{ delay: index * 0.1 }}
               >
                 <div className="flex items-start justify-between mb-6">
                   <div className="flex items-center">
-                    <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center mr-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-xl flex items-center justify-center mr-4">
                       <area.icon className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">
+                      <h3 className="text-2xl font-['Outfit'] font-bold mb-2 text-white">
                         {area.title}
                       </h3>
-                      <p className="text-gray-600 dark:text-gray-400">
+                      <p className="text-gray-300 font-['Figtree']">
                         {area.description}
                       </p>
                     </div>
                   </div>
-                  <div className="bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900/20 dark:to-purple-900/20 text-indigo-600 dark:text-indigo-300 px-3 py-1 rounded-full text-sm font-medium">
+                  <div className="bg-gradient-to-br from-[#2563eb] to-[#ffc957] text-[#0a0b0d] px-3 py-1 rounded-full text-sm font-semibold font-['Figtree']">
                     {area.status}
                   </div>
                 </div>
 
                 <div className="space-y-3">
-                  <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
+                  <h4 className="font-['Figtree'] font-semibold text-white mb-3">
                     Current Projects:
                   </h4>
                   {area.projects.map((project, idx) => (
-                    <div key={idx} className="flex items-start">
-                      <div className="w-2 h-2 bg-indigo-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                      <span className="text-gray-700 dark:text-gray-300 text-sm">
+                    <div key={idx} className="flex items-start font-['Figtree']">
+                      <div className="w-2 h-2 bg-[#2563eb] rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                      <span className="text-gray-300 text-sm">
                         {project}
                       </span>
                     </div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Innovation Projects */}
-      <section className="section-padding bg-gray-50 dark:bg-dark-800">
+      <section className="section-padding bg-gradient-to-br from-[#1a1c25] to-[#2d303d] text-white">
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Breakthrough <span className="text-gradient">Projects</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
+              Breakthrough <span className="text-[#ffc957]">Projects</span>
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Real-world implementations of our research that deliver measurable
               business value
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {innovationProjects.map((project, index) => (
-              <div
+              <motion.div
                 key={project.id}
-                className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700"
+                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 shadow-xl border border-gray-700"
+                initial="hidden"
+                animate="visible"
+                variants={itemVariants}
+                transition={{ delay: index * 0.1 }}
               >
-                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+                <h3 className="text-2xl font-['Outfit'] font-bold mb-4 text-white">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                <p className="text-gray-300 mb-6 font-['Figtree']">
                   {project.description}
                 </p>
 
                 <div className="mb-6">
-                  <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
+                  <h4 className="font-['Figtree'] font-semibold text-white mb-3">
                     Technologies Used:
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map((tech, idx) => (
-                      <span key={idx} className="badge badge-secondary text-xs">
+                      <span key={idx} className="bg-gray-700 text-gray-200 px-3 py-1 rounded-full text-sm font-['Figtree']">
                         {tech}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg p-4 border border-green-200 dark:border-green-800">
-                  <p className="text-sm text-green-700 dark:text-green-300">
+                <div className="bg-gradient-to-r from-green-900/30 to-emerald-900/30 rounded-lg p-4 border border-green-700">
+                  <p className="text-sm text-green-400 font-['Figtree']">
                     <strong>Impact:</strong> {project.impact}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Future Technologies */}
-      <section className="section-padding">
+      <section className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Future <span className="text-gradient">Technologies</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
+              Future <span className="text-[#ffc957]">Technologies</span>
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Emerging technologies we're preparing to integrate into our
               solutions
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {futureTechnologies.map((tech, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700"
+                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 shadow-xl border border-gray-700"
+                initial="hidden"
+                animate="visible"
+                variants={itemVariants}
+                transition={{ delay: index * 0.1 }}
               >
                 <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                  <h3 className="text-xl font-['Outfit'] font-bold text-white">
                     {tech.title}
                   </h3>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                  <span className="text-sm text-gray-400 font-['Figtree']">
                     {tech.timeline}
                   </span>
                 </div>
-                <p className="text-gray-600 dark:text-gray-400">
+                <p className="text-gray-300 font-['Figtree']">
                   {tech.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* R&D Investment */}
-      <section className="section-padding bg-gradient-to-br from-indigo-600 to-purple-600 text-white">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#2563eb] to-[#ffc957] text-[#0a0b0d]"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
           <div className="text-center">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-8">
+            <motion.h2 
+              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-8"
+              variants={itemVariants}
+            >
               R&D Investment
-            </h2>
+            </motion.h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-              <div>
-                <div className="text-4xl font-bold mb-2">15%</div>
-                <div>Revenue Invested in R&D</div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold mb-2">50+</div>
-                <div>Research Engineers</div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold mb-2">200+</div>
-                <div>Patent Applications Filed</div>
-              </div>
+              <motion.div variants={itemVariants}>
+                <div className="text-4xl font-['Outfit'] font-bold mb-2">15%</div>
+                <div className="font-['Figtree']">Revenue Invested in R&D</div>
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <div className="text-4xl font-['Outfit'] font-bold mb-2">50+</div>
+                <div className="font-['Figtree']">Research Engineers</div>
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <div className="text-4xl font-['Outfit'] font-bold mb-2">200+</div>
+                <div className="font-['Figtree']">Patent Applications Filed</div>
+              </motion.div>
             </div>
 
             <div className="max-w-3xl mx-auto">
-              <p className="text-xl text-white/90 mb-8">
+              <motion.p 
+                className="text-xl text-[#0a0b0d]/90 mb-8 font-['Figtree']"
+                variants={itemVariants}
+              >
                 We invest heavily in research and development to ensure our
                 clients have access to the most advanced technologies and
                 solutions.
-              </p>
-              <Link
-                to="/contact"
-                className="btn-primary bg-white text-indigo-600 hover:bg-gray-100"
-              >
-                Join Our Innovation Network
-              </Link>
+              </motion.p>
+              <motion.div variants={itemVariants}>
+                <Link
+                  to="/contact"
+                  className="bg-[#0a0b0d] text-[#ffc957] hover:bg-[#1a1c25] px-8 py-4 rounded-xl font-semibold transition-colors inline-flex items-center font-['Figtree']"
+                >
+                  Join Our Innovation Network
+                </Link>
+              </motion.div>
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gray-50 dark:bg-dark-800">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
-          <div className="bg-gradient-to-br from-white to-indigo-50 dark:from-dark-900 dark:to-dark-800 rounded-3xl p-12 md:p-16 text-center border border-indigo-200 dark:border-dark-700">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 text-gray-900 dark:text-white">
+          <div className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-3xl p-12 md:p-16 text-center border border-gray-700">
+            <motion.h2 
+              className="text-3xl md:text-4xl font-['Outfit'] font-bold mb-4 text-white"
+              variants={itemVariants}
+            >
               Interested in Collaborating?
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Partner with our innovation lab to develop custom solutions for
               your business challenges
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/contact" className="btn-primary">
+            </motion.p>
+            <motion.div 
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+              variants={itemVariants}
+            >
+              <Link to="/contact" className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']">
                 Start a Collaboration
               </Link>
-              <Link to="/innovation-lab" className="btn-outline">
+              <Link to="/innovation-lab" className="bg-transparent border border-[#2563eb] text-[#2563eb] hover:bg-[#2563eb] hover:text-white px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']">
                 View All Research
               </Link>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import {
   HiCurrencyDollar,
   HiChartBar,
@@ -7,7 +8,9 @@ import {
   HiClock,
   HiTrendingUp,
   HiCalculator,
+  HiSparkles,
 } from 'react-icons/hi';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 const ROICalculator = () => {
   const [calculatorType, setCalculatorType] = useState('hr-ims');
@@ -32,6 +35,27 @@ const ROICalculator = () => {
   });
 
   const [results, setResults] = useState(null);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
 
   const calculators = {
     'hr-ims': {
@@ -187,72 +211,103 @@ const ROICalculator = () => {
   const currentCalculator = calculators[calculatorType];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-dark-900 dark:to-dark-800">
+    <ErrorBoundary>
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
       {/* Hero Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white">
+      <motion.section 
+        className="py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#1d4ed8] to-[#ffc957] text-[#0a0b0d]"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom px-4 md:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8">
+            <motion.div 
+              className="inline-flex items-center space-x-2 bg-[#0a0b0d]/20 px-6 py-3 rounded-full mb-8"
+              variants={itemVariants}
+            >
               <HiCalculator className="w-5 h-5" />
-              <span className="text-sm font-semibold">ROI Calculator</span>
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-              ROI <span className="text-gradient">Calculator</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8">
+              <span className="text-sm font-semibold font-['Outfit']">
+                ROI Calculator
+              </span>
+            </motion.div>
+            <motion.h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-['Outfit'] font-bold mb-6"
+              variants={itemVariants}
+            >
+              ROI
+              <br />
+              Calculator
+            </motion.h1>
+            <motion.p 
+              className="text-xl md:text-2xl text-[#0a0b0d]/90 mb-8 font-['Figtree']"
+              variants={itemVariants}
+            >
               Calculate the return on investment for our SaaS solutions
-            </p>
+            </motion.p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="section-padding">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Calculator Form */}
             <div className="lg:w-1/2">
-              <div className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700 sticky top-8">
+              <motion.div 
+                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 shadow-xl border border-gray-700 sticky top-8"
+                variants={itemVariants}
+              >
                 <div className="mb-8">
-                  <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">
+                  <h2 className="text-2xl font-bold mb-2 text-white font-['Outfit']">
                     Select Product
                   </h2>
                   <div className="flex space-x-4">
-                    <button
+                    <motion.button
                       onClick={() => setCalculatorType('hr-ims')}
-                      className={`flex-1 py-3 px-4 rounded-lg font-medium transition-colors ${
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className={`flex-1 py-3 px-4 rounded-lg font-medium transition-colors font-['Figtree'] ${
                         calculatorType === 'hr-ims'
-                          ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
-                          : 'bg-gray-100 text-gray-700 dark:bg-dark-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-dark-600'
+                          ? 'bg-[#2563eb] text-white'
+                          : 'bg-[#1a1c25] text-gray-300 hover:bg-[#2d303d]'
                       }`}
                     >
                       HR-IMS
-                    </button>
-                    <button
+                    </motion.button>
+                    <motion.button
                       onClick={() => setCalculatorType('trackit')}
-                      className={`flex-1 py-3 px-4 rounded-lg font-medium transition-colors ${
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className={`flex-1 py-3 px-4 rounded-lg font-medium transition-colors font-['Figtree'] ${
                         calculatorType === 'trackit'
-                          ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400'
-                          : 'bg-gray-100 text-gray-700 dark:bg-dark-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-dark-600'
+                          ? 'bg-[#ffc957] text-[#0a0b0d]'
+                          : 'bg-[#1a1c25] text-gray-300 hover:bg-[#2d303d]'
                       }`}
                     >
                       TrackIT
-                    </button>
+                    </motion.button>
                   </div>
                 </div>
 
-                <h3 className="text-xl font-bold mb-6 text-gray-900 dark:text-white flex items-center">
-                  <currentCalculator.icon className="w-6 h-6 mr-3 text-blue-600 dark:text-blue-400" />
+                <h3 className="text-xl font-bold mb-6 text-white flex items-center font-['Outfit']">
+                  <currentCalculator.icon className="w-6 h-6 mr-3 text-[#2563eb]" />
                   {currentCalculator.title}
                 </h3>
 
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                <p className="text-gray-300 mb-6 font-['Figtree']">
                   {currentCalculator.description}
                 </p>
 
                 <div className="space-y-6">
                   {currentCalculator.inputs.map(input => (
                     <div key={input.id}>
-                      <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                      <label className="block text-sm font-medium mb-2 text-gray-300 font-['Figtree']">
                         {input.label}
                       </label>
                       <input
@@ -272,23 +327,23 @@ const ROICalculator = () => {
                             e.target.value
                           )
                         }
-                        className="w-full p-3 border border-gray-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-gray-900 dark:text-white"
+                        className="w-full p-3 border border-gray-600 rounded-lg bg-[#2d303d] text-white font-['Figtree']"
                       />
-                      <div className="mt-2 flex justify-between text-xs text-gray-500 dark:text-gray-400">
+                      <div className="mt-2 flex justify-between text-xs text-gray-400">
                         <span>Min: {input.min}</span>
                         <span>Max: {input.max}</span>
                       </div>
                     </div>
                   ))}
 
-                  <div className="border-t border-gray-200 dark:border-dark-600 pt-6">
-                    <h4 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+                  <div className="border-t border-gray-700 pt-6">
+                    <h4 className="text-lg font-semibold mb-4 text-white font-['Outfit']">
                       General Parameters
                     </h4>
 
                     <div className="space-y-4">
                       <div>
-                        <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                        <label className="block text-sm font-medium mb-2 text-gray-300 font-['Figtree']">
                           Implementation Cost ($)
                         </label>
                         <input
@@ -302,12 +357,12 @@ const ROICalculator = () => {
                               e.target.value
                             )
                           }
-                          className="w-full p-3 border border-gray-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-gray-900 dark:text-white"
+                          className="w-full p-3 border border-gray-600 rounded-lg bg-[#2d303d] text-white font-['Figtree']"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                        <label className="block text-sm font-medium mb-2 text-gray-300 font-['Figtree']">
                           Timeframe (Months)
                         </label>
                         <input
@@ -319,116 +374,119 @@ const ROICalculator = () => {
                           onChange={e =>
                             updateGeneralInput('timeframe', e.target.value)
                           }
-                          className="w-full p-3 border border-gray-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-gray-900 dark:text-white"
+                          className="w-full p-3 border border-gray-600 rounded-lg bg-[#2d303d] text-white font-['Figtree']"
                         />
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
 
             {/* Results */}
             <div className="lg:w-1/2">
-              <div className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700">
-                <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+              <motion.div 
+                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 shadow-xl border border-gray-700"
+                variants={itemVariants}
+              >
+                <h2 className="text-2xl font-bold mb-6 text-white font-['Outfit']">
                   ROI Results
                 </h2>
 
                 {results && (
                   <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-6 rounded-xl border border-green-200 dark:border-green-800">
+                      <div className="bg-gradient-to-br from-[#052e16]/20 to-[#047857]/20 rounded-xl p-6 shadow-lg border border-[#10b981]/30">
                         <div className="flex items-center mb-3">
-                          <HiCurrencyDollar className="w-6 h-6 text-green-600 dark:text-green-400 mr-2" />
-                          <h3 className="font-semibold text-gray-900 dark:text-white">
+                          <HiCurrencyDollar className="w-6 h-6 text-[#10b981] mr-2" />
+                          <h3 className="font-semibold text-white font-['Outfit']">
                             Net Benefits
                           </h3>
                         </div>
-                        <p className="text-3xl font-bold text-green-600 dark:text-green-400 mb-1">
+                        <p className="text-3xl font-bold text-[#10b981] mb-1 font-['Outfit']">
                           ${results.netBenefits.toLocaleString()}
                         </p>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                        <p className="text-sm text-gray-300 font-['Figtree']">
                           Total value after implementation costs
                         </p>
                       </div>
 
-                      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-6 rounded-xl border border-blue-200 dark:border-blue-800">
+                      <div className="bg-gradient-to-br from-[#1e40af]/20 to-[#3b82f6]/20 rounded-xl p-6 shadow-lg border border-[#3b82f6]/30">
                         <div className="flex items-center mb-3">
-                          <HiTrendingUp className="w-6 h-6 text-blue-600 dark:text-blue-400 mr-2" />
-                          <h3 className="font-semibold text-gray-900 dark:text-white">
+                          <HiTrendingUp className="w-6 h-6 text-[#3b82f6] mr-2" />
+                          <h3 className="font-semibold text-white font-['Outfit']">
                             ROI
                           </h3>
                         </div>
-                        <p className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-1">
+                        <p className="text-3xl font-bold text-[#3b82f6] mb-1 font-['Outfit']">
                           {results.roiPercentage}%
                         </p>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                        <p className="text-sm text-gray-300 font-['Figtree']">
                           Return on investment
                         </p>
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-6 rounded-xl border border-purple-200 dark:border-purple-800">
+                      <div className="bg-gradient-to-br from-[#7e22ce]/20 to-[#ec4899]/20 rounded-xl p-6 shadow-lg border border-[#ec4899]/30">
                         <div className="flex items-center mb-3">
-                          <HiClock className="w-6 h-6 text-purple-600 dark:text-purple-400 mr-2" />
-                          <h3 className="font-semibold text-gray-900 dark:text-white">
+                          <HiClock className="w-6 h-6 text-[#ec4899] mr-2" />
+                          <h3 className="font-semibold text-white font-['Outfit']">
                             Payback Period
                           </h3>
                         </div>
-                        <p className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-1">
+                        <p className="text-3xl font-bold text-[#ec4899] mb-1 font-['Outfit']">
                           {results.paybackPeriod} months
                         </p>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                        <p className="text-sm text-gray-300 font-['Figtree']">
                           Time to recover investment
                         </p>
                       </div>
 
-                      <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 p-6 rounded-xl border border-amber-200 dark:border-amber-800">
+                      <div className="bg-gradient-to-br from-[#b45309]/20 to-[#f59e0b]/20 rounded-xl p-6 shadow-lg border border-[#f59e0b]/30">
                         <div className="flex items-center mb-3">
-                          <HiLightningBolt className="w-6 h-6 text-amber-600 dark:text-amber-400 mr-2" />
-                          <h3 className="font-semibold text-gray-900 dark:text-white">
+                          <HiLightningBolt className="w-6 h-6 text-[#f59e0b] mr-2" />
+                          <h3 className="font-semibold text-white font-['Outfit']">
                             Annual Savings
                           </h3>
                         </div>
-                        <p className="text-3xl font-bold text-amber-600 dark:text-amber-400 mb-1">
+                        <p className="text-3xl font-bold text-[#f59e0b] mb-1 font-['Outfit']">
                           ${results.yearlySavings.toLocaleString()}
                         </p>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                        <p className="text-sm text-gray-300 font-['Figtree']">
                           Value gained per year
                         </p>
                       </div>
                     </div>
 
-                    <div className="bg-gray-50 dark:bg-dark-700 rounded-xl p-6">
-                      <h3 className="font-semibold mb-4 text-gray-900 dark:text-white">
+                    <div className="bg-[#2d303d] rounded-xl p-6">
+                      <h3 className="font-semibold mb-4 text-white font-['Outfit']">
                         Breakdown
                       </h3>
                       <div className="space-y-3">
                         <div className="flex justify-between">
-                          <span className="text-gray-600 dark:text-gray-400">
+                          <span className="text-gray-300 font-['Figtree']">
                             Total Benefits ({inputs.timeframe} months):
                           </span>
-                          <span className="font-medium text-gray-900 dark:text-white">
+                          <span className="font-medium text-white font-['Figtree']">
                             ${results.totalBenefits.toLocaleString()}
                           </span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-gray-600 dark:text-gray-400">
+                          <span className="text-gray-300 font-['Figtree']">
                             Implementation Cost:
                           </span>
-                          <span className="font-medium text-gray-900 dark:text-white">
+                          <span className="font-medium text-white font-['Figtree']">
                             -${inputs.implementationCost.toLocaleString()}
                           </span>
                         </div>
-                        <div className="border-t border-gray-200 dark:border-dark-600 pt-3">
+                        <div className="border-t border-gray-600 pt-3">
                           <div className="flex justify-between font-semibold">
-                            <span className="text-gray-900 dark:text-white">
+                            <span className="text-white font-['Figtree']">
                               Net Benefits:
                             </span>
                             <span
-                              className={`text-lg ${results.netBenefits >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}
+                              className={`text-lg ${results.netBenefits >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}
                             >
                               ${results.netBenefits.toLocaleString()}
                             </span>
@@ -437,11 +495,11 @@ const ROICalculator = () => {
                       </div>
                     </div>
 
-                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
-                      <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">
+                    <div className="bg-gradient-to-r from-[#1e40af]/20 to-[#3b82f6]/20 rounded-xl p-6 border border-[#3b82f6]/30">
+                      <h3 className="font-semibold mb-3 text-white font-['Outfit']">
                         Recommendation
                       </h3>
-                      <p className="text-gray-600 dark:text-gray-400">
+                      <p className="text-gray-300 font-['Figtree']">
                         {results.roiPercentage > 100
                           ? `With a ${results.roiPercentage}% ROI, this investment is highly recommended and will provide significant value.`
                           : results.roiPercentage > 50
@@ -451,129 +509,166 @@ const ROICalculator = () => {
                     </div>
                   </div>
                 )}
-              </div>
+              </motion.div>
 
               {/* Industry Benchmarks */}
-              <div className="mt-8 bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700">
-                <h3 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">
+              <motion.div 
+                className="mt-8 bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 shadow-xl border border-gray-700"
+                variants={itemVariants}
+              >
+                <h3 className="text-xl font-bold mb-6 text-white font-['Outfit']">
                   Industry Benchmarks
                 </h3>
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-dark-700 rounded-lg">
-                    <span className="text-gray-700 dark:text-gray-300">
+                  <div className="flex items-center justify-between p-4 bg-[#2d303d] rounded-lg">
+                    <span className="text-gray-300 font-['Figtree']">
                       Average HR Software ROI
                     </span>
-                    <span className="font-semibold text-gray-900 dark:text-white">
+                    <span className="font-semibold text-white font-['Figtree']">
                       187%
                     </span>
                   </div>
-                  <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-dark-700 rounded-lg">
-                    <span className="text-gray-700 dark:text-gray-300">
+                  <div className="flex items-center justify-between p-4 bg-[#2d303d] rounded-lg">
+                    <span className="text-gray-300 font-['Figtree']">
                       Average Project Management ROI
                     </span>
-                    <span className="font-semibold text-gray-900 dark:text-white">
+                    <span className="font-semibold text-white font-['Figtree']">
                       156%
                     </span>
                   </div>
-                  <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-dark-700 rounded-lg">
-                    <span className="text-gray-700 dark:text-gray-300">
+                  <div className="flex items-center justify-between p-4 bg-[#2d303d] rounded-lg">
+                    <span className="text-gray-300 font-['Figtree']">
                       Average Payback Period
                     </span>
-                    <span className="font-semibold text-gray-900 dark:text-white">
+                    <span className="font-semibold text-white font-['Figtree']">
                       18 months
                     </span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* How It Works */}
-      <section className="section-padding bg-gray-50 dark:bg-dark-800">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              How the <span className="text-gradient">ROI Calculator</span>{' '}
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
+              How the <span className="text-[#ffc957]">ROI Calculator</span>{' '}
               Works
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Our calculator uses industry-standard formulas to estimate your
               potential return on investment
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                <HiCalculator className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
-                Input Your Data
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Enter your specific business metrics and requirements to get
-                personalized calculations
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                <HiChartBar className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
-                Calculate Benefits
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Our algorithm calculates time savings, cost reductions, and
-                efficiency gains
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                <HiTrendingUp className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
-                See Your ROI
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Get detailed breakdown of your potential return on investment
-                and payback period
-              </p>
-            </div>
+            {[
+              {
+                title: 'Input Your Data',
+                description: 'Enter your specific business metrics and requirements to get personalized calculations',
+                icon: HiCalculator,
+                color: 'from-[#2563eb] to-[#ffc957]',
+              },
+              {
+                title: 'Calculate Benefits',
+                description: 'Our algorithm calculates time savings, cost reductions, and efficiency gains',
+                icon: HiChartBar,
+                color: 'from-[#ffc957] to-[#2563eb]',
+              },
+              {
+                title: 'See Your ROI',
+                description: 'Get detailed breakdown of your potential return on investment and payback period',
+                icon: HiTrendingUp,
+                color: 'from-[#2563eb] to-[#1d4ed8]',
+              },
+            ].map((step, index) => (
+              <motion.div 
+                key={index}
+                className="text-center"
+                initial="hidden"
+                animate="visible"
+                variants={itemVariants}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className={`w-16 h-16 bg-gradient-to-br ${step.color} rounded-full flex items-center justify-center mx-auto mb-6`}>
+                  <step.icon className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-['Outfit'] font-bold mb-3 text-white">
+                  {step.title}
+                </h3>
+                <p className="text-gray-300 font-['Figtree']">
+                  {step.description}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-br from-blue-600 to-indigo-600 text-white">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#2563eb] to-[#ffc957] text-[#0a0b0d]"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
           <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+            <motion.h2 
+              className="text-3xl md:text-4xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
               Ready to Calculate Your ROI?
-            </h2>
-            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-[#0a0b0d]/90 mb-8 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Use our calculator to see the potential value of our solutions for
               your business
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            </motion.p>
+            <motion.div 
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+              variants={itemVariants}
+            >
               <a
                 href="/roi-calculator"
-                className="btn-primary bg-white text-blue-600 hover:bg-gray-100"
+                className="bg-[#0a0b0d] text-[#ffc957] hover:bg-[#1a1c25] px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']"
               >
                 Start Calculating
               </a>
               <a
                 href="/contact"
-                className="btn-outline border-white text-white hover:bg-white hover:text-blue-600"
+                className="bg-transparent border border-[#0a0b0d] text-[#0a0b0d] hover:bg-[#0a0b0d] hover:text-[#ffc957] px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']"
               >
                 Speak with an Expert
               </a>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
+    </ErrorBoundary>
   );
 };
 

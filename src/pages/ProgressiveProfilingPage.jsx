@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import {
   HiUser,
   HiBriefcase,
@@ -9,12 +10,34 @@ import {
   HiClock,
   HiUserGroup,
   HiCheckCircle,
+  HiCode,
 } from 'react-icons/hi';
 import ProgressiveProfiling from '../components/ProgressiveProfiling';
 
 const ProgressiveProfilingPage = () => {
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [onboardingData, setOnboardingData] = useState(null);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
 
   const handleOnboardingComplete = data => {
     setOnboardingData(data);
@@ -32,25 +55,25 @@ const ProgressiveProfilingPage = () => {
       title: 'Reduced Friction',
       description: 'Collect information gradually without overwhelming users',
       icon: HiClock,
-      color: 'from-blue-500 to-cyan-500',
+      color: 'from-[#2563eb] to-[#ffc957]',
     },
     {
       title: 'Higher Completion',
       description: 'Users are more likely to complete profile information',
       icon: HiChartBar,
-      color: 'from-green-500 to-emerald-500',
+      color: 'from-[#ffc957] to-[#2563eb]',
     },
     {
       title: 'Personalized Experience',
       description: 'Tailor the experience based on user preferences',
       icon: HiUser,
-      color: 'from-purple-500 to-pink-500',
+      color: 'from-[#2563eb] to-[#1d4ed8]',
     },
     {
       title: 'Better Data Quality',
       description: 'Collect more accurate information over time',
       icon: HiShieldCheck,
-      color: 'from-yellow-500 to-amber-500',
+      color: 'from-[#ffc957] to-[#1d4ed8]',
     },
   ];
 
@@ -90,345 +113,463 @@ const ProgressiveProfilingPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-dark-900 dark:to-dark-800">
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
       {/* Hero Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 text-white">
+      <motion.section 
+        className="py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#1d4ed8] to-[#ffc957] text-[#0a0b0d]"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom px-4 md:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8">
+            <motion.div 
+              className="inline-flex items-center space-x-2 bg-[#0a0b0d]/20 px-6 py-3 rounded-full mb-8"
+              variants={itemVariants}
+            >
               <HiSparkles className="w-5 h-5" />
-              <span className="text-sm font-semibold">
+              <span className="text-sm font-semibold font-['Outfit']">
                 Progressive Profiling
               </span>
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
+            </motion.div>
+            <motion.h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-['Outfit'] font-bold mb-6"
+              variants={itemVariants}
+            >
               Progressive
               <br />
               Profiling
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8">
+            </motion.h1>
+            <motion.p 
+              className="text-xl md:text-2xl text-[#0a0b0d]/90 mb-8 font-['Figtree']"
+              variants={itemVariants}
+            >
               Collect user information gradually without overwhelming them
-            </p>
-            <button
+            </motion.p>
+            <motion.button
               onClick={() => setShowOnboarding(true)}
-              className="btn-primary bg-white text-indigo-600 hover:bg-gray-100"
+              className="bg-[#0a0b0d] text-[#ffc957] hover:bg-[#1a1c25] px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']"
+              variants={itemVariants}
             >
               Try Demo Onboarding
-            </button>
+            </motion.button>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Benefits Section */}
-      <section className="section-padding bg-white dark:bg-dark-900">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Why <span className="text-gradient">Progressive Profiling</span>?
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
+              Why <span className="text-[#ffc957]">Progressive Profiling</span>?
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Transform your user onboarding experience with smart, gradual
               information collection
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {benefits.map((benefit, index) => {
               const Icon = benefit.icon;
               return (
-                <div key={index} className="text-center">
+                <motion.div 
+                  key={index} 
+                  className="text-center"
+                  initial="hidden"
+                  animate="visible"
+                  variants={itemVariants}
+                  transition={{ delay: index * 0.1 }}
+                >
                   <div
                     className={`w-16 h-16 bg-gradient-to-br ${benefit.color} rounded-2xl flex items-center justify-center mx-auto mb-6`}
                   >
                     <Icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
+                  <h3 className="text-xl font-['Outfit'] font-bold mb-3 text-white">
                     {benefit.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
+                  <p className="text-gray-300 font-['Figtree']">
                     {benefit.description}
                   </p>
-                </div>
+                </motion.div>
               );
             })}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Stats Section */}
-      <section className="section-padding bg-gray-50 dark:bg-dark-800">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Proven <span className="text-gradient">Results</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
+              Proven <span className="text-[#ffc957]">Results</span>
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Data-driven improvements to user onboarding and engagement
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-white dark:bg-dark-800 rounded-xl p-6 shadow-soft border border-gray-100 dark:border-dark-700 text-center"
+                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-xl p-6 shadow-xl border border-gray-700 text-center"
+                initial="hidden"
+                animate="visible"
+                variants={itemVariants}
+                transition={{ delay: index * 0.1 }}
               >
-                <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                <div className="text-3xl font-['Outfit'] font-bold text-white mb-2">
                   {stat.value}
                 </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                <div className="text-sm text-gray-300 mb-1 font-['Figtree']">
                   {stat.label}
                 </div>
                 <div
-                  className={`text-sm font-medium ${
+                  className={`text-sm font-['Figtree'] font-medium ${
                     stat.change.startsWith('+')
-                      ? 'text-green-600 dark:text-green-400'
-                      : 'text-red-600 dark:text-red-400'
+                      ? 'text-green-500'
+                      : 'text-red-500'
                   }`}
                 >
                   {stat.change}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Features Section */}
-      <section className="section-padding">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Key <span className="text-gradient">Features</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
+              Key <span className="text-[#ffc957]">Features</span>
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Advanced capabilities for seamless user onboarding
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {features.map((feature, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700"
+                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 shadow-xl border border-gray-700"
+                initial="hidden"
+                animate="visible"
+                variants={itemVariants}
+                transition={{ delay: index * 0.1 }}
               >
                 <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-lg flex items-center justify-center flex-shrink-0">
                     <HiUserGroup className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
+                    <h3 className="text-xl font-['Outfit'] font-bold mb-3 text-white">
                       {feature.title}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
+                    <p className="text-gray-300 font-['Figtree']">
                       {feature.description}
                     </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Demo Section */}
-      <section className="section-padding bg-gray-50 dark:bg-dark-800">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Live <span className="text-gradient">Demo</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
+              Live <span className="text-[#ffc957]">Demo</span>
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Experience the progressive profiling onboarding flow
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="max-w-4xl mx-auto">
             {onboardingData ? (
-              <div className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700 text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6">
+              <motion.div 
+                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 shadow-xl border border-gray-700 text-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-full flex items-center justify-center mx-auto mb-6">
                   <HiCheckCircle className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+                <h3 className="text-2xl font-['Outfit'] font-bold mb-4 text-white">
                   Onboarding Complete!
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                <p className="text-gray-300 mb-6 font-['Figtree']">
                   Thank you for completing the progressive profiling onboarding.
                   Your profile has been updated.
                 </p>
-                <div className="bg-gray-50 dark:bg-dark-700 rounded-xl p-4 text-left">
-                  <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">
+                <div className="bg-gray-800 rounded-xl p-4 text-left">
+                  <h4 className="font-['Outfit'] font-semibold mb-2 text-white">
                     Your Information:
                   </h4>
-                  <pre className="text-sm text-gray-600 dark:text-gray-400 overflow-x-auto">
+                  <pre className="text-sm text-gray-300 overflow-x-auto font-['Figtree']">
                     {JSON.stringify(onboardingData, null, 2)}
                   </pre>
                 </div>
-                <button
+                <motion.button
                   onClick={() => {
                     setOnboardingData(null);
                     setShowOnboarding(true);
                   }}
-                  className="mt-6 btn-primary"
+                  className="mt-6 bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-6 py-3 rounded-xl font-['Figtree'] transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   Try Again
-                </button>
-              </div>
+                </motion.button>
+              </motion.div>
             ) : showOnboarding ? (
               <ProgressiveProfiling
                 onComplete={handleOnboardingComplete}
                 onCancel={handleOnboardingCancel}
               />
             ) : (
-              <div className="text-center">
-                <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-6">
+              <motion.div 
+                className="text-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <div className="w-24 h-24 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-full flex items-center justify-center mx-auto mb-6">
                   <HiSparkles className="w-12 h-12 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+                <h3 className="text-2xl font-['Outfit'] font-bold mb-4 text-white">
                   Progressive Profiling Demo
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
+                <p className="text-gray-300 mb-6 max-w-2xl mx-auto font-['Figtree']">
                   Click the button below to experience our progressive profiling
                   onboarding flow. We'll gradually collect information to
                   personalize your experience.
                 </p>
-                <button
+                <motion.button
                   onClick={() => setShowOnboarding(true)}
-                  className="btn-primary"
+                  className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-6 py-3 rounded-xl font-['Figtree'] transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   Start Onboarding
-                </button>
-              </div>
+                </motion.button>
+              </motion.div>
             )}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Implementation Section */}
-      <section className="section-padding">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Easy <span className="text-gradient">Implementation</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
+              Easy <span className="text-[#ffc957]">Implementation</span>
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Integrate progressive profiling into your existing onboarding flow
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mb-6">
-                <HiCode className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-                API Integration
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Simple API endpoints to track and manage user profile
-                completion.
-              </p>
-              <ul className="space-y-2">
-                <li className="flex items-center space-x-2">
-                  <HiCheckCircle className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">RESTful API</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <HiCheckCircle className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">Webhook support</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <HiCheckCircle className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">Real-time updates</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mb-6">
-                <HiUser className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-                Customizable Flows
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Tailor the onboarding experience based on user behavior and
-                preferences.
-              </p>
-              <ul className="space-y-2">
-                <li className="flex items-center space-x-2">
-                  <HiCheckCircle className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">Dynamic field ordering</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <HiCheckCircle className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">Conditional logic</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <HiCheckCircle className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">A/B testing</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700">
-              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mb-6">
-                <HiShieldCheck className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-                Privacy & Security
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Built with privacy-first principles and enterprise-grade
-                security.
-              </p>
-              <ul className="space-y-2">
-                <li className="flex items-center space-x-2">
-                  <HiCheckCircle className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">GDPR compliant</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <HiCheckCircle className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">End-to-end encryption</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <HiCheckCircle className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">SOC 2 certified</span>
-                </li>
-              </ul>
-            </div>
+            {[
+              {
+                title: 'API Integration',
+                description: 'Simple API endpoints to track and manage user profile completion.',
+                icon: HiCode,
+                color: 'from-[#2563eb] to-[#ffc957]',
+                features: [
+                  'RESTful API',
+                  'Webhook support',
+                  'Real-time updates'
+                ]
+              },
+              {
+                title: 'Customizable Flows',
+                description: 'Tailor the onboarding experience based on user behavior and preferences.',
+                icon: HiUser,
+                color: 'from-[#ffc957] to-[#2563eb]',
+                features: [
+                  'Dynamic field ordering',
+                  'Conditional logic',
+                  'A/B testing'
+                ]
+              },
+              {
+                title: 'Privacy & Security',
+                description: 'Built with privacy-first principles and enterprise-grade security.',
+                icon: HiShieldCheck,
+                color: 'from-[#2563eb] to-[#1d4ed8]',
+                features: [
+                  'GDPR compliant',
+                  'End-to-end encryption',
+                  'SOC 2 certified'
+                ]
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 shadow-xl border border-gray-700"
+                initial="hidden"
+                animate="visible"
+                variants={itemVariants}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className={`w-12 h-12 bg-gradient-to-br ${feature.color} rounded-xl flex items-center justify-center mb-6`}>
+                  <feature.icon className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-xl font-['Outfit'] font-bold mb-4 text-white">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-300 mb-4 font-['Figtree']">
+                  {feature.description}
+                </p>
+                <ul className="space-y-2">
+                  {feature.features.map((feat, idx) => (
+                    <li key={idx} className="flex items-center space-x-2">
+                      <HiCheckCircle className="w-4 h-4 text-[#2563eb]" />
+                      <span className="text-sm font-['Figtree']">{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-br from-indigo-600 to-purple-600 text-white">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#2563eb] to-[#ffc957] text-[#0a0b0d]"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
           <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+            <motion.h2 
+              className="text-3xl md:text-4xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
               Ready to Improve Your Onboarding?
-            </h2>
-            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-[#0a0b0d]/90 mb-8 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Implement progressive profiling to reduce friction and increase
               completion rates
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            </motion.p>
+            <motion.div 
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+              variants={itemVariants}
+            >
               <a
                 href="/contact"
-                className="btn-primary bg-white text-indigo-600 hover:bg-gray-100"
+                className="bg-[#0a0b0d] text-[#ffc957] hover:bg-[#1a1c25] px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']"
               >
                 Get Started
               </a>
               <a
                 href="/services"
-                className="btn-outline border-white text-white hover:bg-white hover:text-indigo-600"
+                className="bg-transparent border border-[#0a0b0d] text-[#0a0b0d] hover:bg-[#0a0b0d] hover:text-[#ffc957] px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']"
               >
                 Explore Services
               </a>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Modal Overlay */}
       {showOnboarding && (

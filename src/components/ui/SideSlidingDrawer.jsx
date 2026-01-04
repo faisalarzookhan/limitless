@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
 import './SideSlidingDrawer.css';
 
@@ -24,6 +24,9 @@ const SideSlidingDrawer = ({
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const drawerRef = useRef(null);
+  const firstFocusableRef = useRef(null);
+  const lastFocusableRef = useRef(null);
 
   // Handle open/close state changes
   useEffect(() => {
@@ -42,6 +45,49 @@ const SideSlidingDrawer = ({
     }
   }, [isOpen, isVisible, animationDuration]);
 
+  // Focus management for accessibility
+  useEffect(() => {
+    if (isOpen && drawerRef.current) {
+      // Get all focusable elements within the drawer
+      const focusableElements = drawerRef.current.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      
+      if (focusableElements.length > 0) {
+        firstFocusableRef.current = focusableElements[0];
+        lastFocusableRef.current = focusableElements[focusableElements.length - 1];
+        
+        // Focus the first element when drawer opens
+        firstFocusableRef.current.focus();
+      } else {
+        // If no focusable elements, focus the drawer container
+        drawerRef.current.focus();
+      }
+    }
+  }, [isOpen]);
+
+  // Trap focus within the drawer
+  const handleTabKey = useCallback((event) => {
+    if (event.key === 'Tab' && drawerRef.current) {
+      const focusableElements = drawerRef.current.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      
+      if (focusableElements.length === 0) return;
+      
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+      
+      if (event.shiftKey && document.activeElement === firstElement) {
+        lastElement.focus();
+        event.preventDefault();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        firstElement.focus();
+        event.preventDefault();
+      }
+    }
+  }, []);
+
   // Handle escape key
   const handleKeyDown = useCallback(
     event => {
@@ -58,6 +104,18 @@ const SideSlidingDrawer = ({
       return () => document.removeEventListener('keydown', handleKeyDown);
     }
   }, [handleKeyDown, closeOnEscapeKey, isOpen]);
+
+  // Add tab key listener for focus trapping
+  useEffect(() => {
+    if (isOpen && drawerRef.current) {
+      drawerRef.current.addEventListener('keydown', handleTabKey);
+      return () => {
+        if (drawerRef.current) {
+          drawerRef.current.removeEventListener('keydown', handleTabKey);
+        }
+      };
+    }
+  }, [handleTabKey, isOpen]);
 
   // Handle outside click
   const handleBackdropClick = event => {
@@ -127,6 +185,7 @@ const SideSlidingDrawer = ({
       )}
 
       <div
+        ref={drawerRef}
         className={drawerClasses}
         style={{
           ...positionStyles,
@@ -141,10 +200,15 @@ const SideSlidingDrawer = ({
             '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
           overflow: 'hidden',
         }}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={title ? 'drawer-title' : undefined}
+        aria-hidden={!isOpen}
+        tabIndex="-1"
       >
         {/* Drawer header */}
         <div className="drawer-header">
-          {title && <h2 className="drawer-title">{title}</h2>}
+          {title && <h2 id="drawer-title" className="drawer-title">{title}</h2>}
           {showCloseButton && (
             <button
               className="drawer-close-button"
@@ -166,7 +230,7 @@ const SideSlidingDrawer = ({
                 (e.target.style.backgroundColor = 'transparent')
               }
             >
-              ×
+              <span aria-hidden="true">×</span>
             </button>
           )}
         </div>

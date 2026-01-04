@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import {
   HiCode,
   HiDeviceMobile,
@@ -25,6 +26,7 @@ import {
   HiChevronDown,
   HiChevronUp,
 } from 'react-icons/hi';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 const Services = () => {
   const [expandedMobileFeatures, setExpandedMobileFeatures] = useState({});
@@ -44,7 +46,7 @@ const Services = () => {
       subtitle: 'Powerful, Responsive, and Scalable Web Solutions',
       description:
         'Transform your digital presence with cutting-edge web applications using React, Next.js, Node.js, and modern frameworks that drive business growth and deliver exceptional user experiences.',
-      color: 'from-blue-500 to-cyan-500',
+      color: 'from-[#2563eb] to-[#1e40af]',
       features: [
         'Responsive & Mobile-First Design',
         'SEO Optimization',
@@ -81,7 +83,7 @@ const Services = () => {
       subtitle: 'Native and Cross-Platform Mobile Excellence',
       description:
         'Build powerful mobile applications using React Native, Flutter, Swift, and Kotlin that engage users, streamline operations, and drive business success across iOS and Android platforms.',
-      color: 'from-purple-500 to-pink-500',
+      color: 'from-[#ffc957] to-[#ffbd3a]',
       features: [
         'Native iOS & Android Development',
         'Cross-Platform Solutions (React Native, Flutter)',
@@ -116,7 +118,7 @@ const Services = () => {
       subtitle: 'Tailored Solutions for Your Unique Needs',
       description:
         'Get bespoke software solutions built with Python, Java, .NET, and microservices architecture designed specifically for your business processes, challenges, and goals. No compromises, just perfect fit.',
-      color: 'from-orange-500 to-red-500',
+      color: 'from-[#0a0b0d] to-[#1e3a8a]',
       features: [
         'Requirements Analysis & Planning',
         'Custom Application Development',
@@ -152,7 +154,7 @@ const Services = () => {
       subtitle: 'Manage Relationships, Optimize Operations',
       description:
         'Custom CRM and task management systems built with React, Node.js, PostgreSQL, and real-time technologies that help you track customers, manage leads, automate workflows, and boost productivity.',
-      color: 'from-green-500 to-emerald-500',
+      color: 'from-[#2563eb] to-[#1e40af]',
       features: [
         'Customer Relationship Management',
         'Lead & Opportunity Tracking',
@@ -187,7 +189,7 @@ const Services = () => {
       subtitle: 'Intelligent Systems for the Modern Business',
       description:
         'Leverage AI and automation using Python, TensorFlow, OpenAI, and Azure AI to eliminate repetitive tasks, reduce errors, and free your team to focus on what matters most.',
-      color: 'from-yellow-500 to-amber-500',
+      color: 'from-[#ffc957] to-[#ffbd3a]',
       features: [
         'Process Automation',
         'AI-Powered Chatbots',
@@ -348,14 +350,30 @@ const Services = () => {
   ];
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative py-20 md:py-32 bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 text-white overflow-hidden">
+    <ErrorBoundary>
+      <>
+      <Helmet>
+        <title>Services - Limitless Infotech Solution</title>
+        <meta name="description" content="Comprehensive technology solutions including Web Development, Mobile App Development, Custom Software & Systems, CRM & Task Management, Business Automation & AI Integration, and more." />
+        <meta name="keywords" content="web development, mobile app development, custom software, CRM, task management, business automation, AI integration, enterprise solutions" />
+        <meta name="author" content="Limitless Infotech Solution" />
+        <meta property="og:title" content="Services - Limitless Infotech Solution" />
+        <meta property="og:description" content="Comprehensive technology solutions including Web Development, Mobile App Development, Custom Software & Systems, CRM & Task Management, Business Automation & AI Integration, and more." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.limitlessinfotech.com/services" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Services - Limitless Infotech Solution" />
+        <meta name="twitter:description" content="Comprehensive technology solutions including Web Development, Mobile App Development, Custom Software & Systems, CRM & Task Management, Business Automation & AI Integration, and more." />
+        <link rel="canonical" href="https://www.limitlessinfotech.com/services" />
+      </Helmet>
+      <div className="min-h-screen font-sans bg-[#0a0b0d]">
+        {/* Hero Section */}
+        <section className="relative py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#1e40af] to-[#0a0b0d] text-white overflow-hidden">
         <div
           className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8"
           aria-hidden="true"
         >
-          <div className="absolute inset-0 bg-pattern-grid opacity-10"></div>
+          <div className="absolute inset-0 bg-architectural-grid opacity-10"></div>
         </div>
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
@@ -379,7 +397,7 @@ const Services = () => {
             </p>
             <Link
               to="/get-started"
-              className="mission-critical-button animate-fade-in-up"
+              className="px-8 py-4 bg-[#ffc957] text-[#0a0b0d] font-bold rounded-xl hover:bg-[#ffbd3a] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl animate-fade-in-up"
               style={{ animationDelay: '0.4s' }}
             >
               Start Your Project
@@ -394,7 +412,7 @@ const Services = () => {
         <section
           key={service.id}
           id={service.id}
-          className={`section-padding ${index % 2 === 0 ? 'bg-white dark:bg-dark-900' : 'bg-gray-50 dark:bg-dark-800'}`}
+          className={`section-padding ${index % 2 === 0 ? 'bg-[#0a0b0d]' : 'bg-[#0a0b0d]/50'}`}
         >
           <div className="container-custom">
             <div
@@ -407,31 +425,31 @@ const Services = () => {
                 >
                   <service.icon className="w-8 h-8 text-white" />
                 </div>
-                <h2 className="text-3xl md:text-4xl font-display font-bold mb-3 text-gray-900 dark:text-white">
+                <h2 className="text-3xl md:text-4xl font-display font-bold mb-3 text-white">
                   {service.title}
                 </h2>
-                <p className="text-xl text-primary-600 dark:text-primary-400 font-semibold mb-4">
+                <p className="text-xl text-[#ffc957] font-semibold mb-4">
                   {service.subtitle}
                 </p>
-                <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+                <p className="text-lg text-[#cbd5e1] mb-8 leading-relaxed">
                   {service.description}
                 </p>
 
                 {/* Technologies */}
                 <div className="mb-8">
-                  <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-3 uppercase tracking-wide">
+                  <h3 className="text-sm font-bold text-white mb-3 uppercase tracking-wide">
                     Technologies We Use
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {service.technologies.map((tech, i) => (
-                      <span key={i} className="badge badge-primary">
+                      <span key={i} className="px-4 py-2 bg-[#2563eb]/20 rounded-full text-sm font-medium text-[#e2e8f0] border border-[#2563eb]/30">
                         {tech}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                <Link to="/get-started" className="mission-critical-button">
+                <Link to="/get-started" className="px-8 py-4 bg-gradient-to-r from-[#2563eb] to-[#1e40af] text-white font-bold rounded-xl hover:from-[#1d4ed8] hover:to-[#1e3a8a] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
                   Request Demo
                   <HiArrowRight className="inline-block ml-2 w-5 h-5" />
                 </Link>
@@ -445,28 +463,28 @@ const Services = () => {
               >
                 <div className="space-y-6">
                   {/* Features - Mobile Accordion */}
-                  <div className="lg:hidden bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-dark-700">
+                  <div className="lg:hidden bg-[#0a0b0d]/50 rounded-2xl p-6 shadow-2xl border border-[#2563eb]/30">
                     <button
-                      className="w-full flex justify-between items-center text-xl font-bold text-gray-900 dark:text-white py-2"
+                      className="w-full flex justify-between items-center text-xl font-bold text-white py-2"
                       onClick={() => toggleMobileFeatures(service.id)}
                       aria-expanded={expandedMobileFeatures[service.id]}
                     >
                       <div className="flex items-center">
-                        <HiCheckCircle className="w-6 h-6 text-green-500 mr-2" />
+                        <HiCheckCircle className="w-6 h-6 text-[#ffc957] mr-2" />
                         Key Features
                       </div>
                       {expandedMobileFeatures[service.id] ? (
-                        <HiChevronUp className="w-6 h-6 text-gray-600 dark:text-gray-400" />
+                        <HiChevronUp className="w-6 h-6 text-[#2563eb]" />
                       ) : (
-                        <HiChevronDown className="w-6 h-6 text-gray-600 dark:text-gray-400" />
+                        <HiChevronDown className="w-6 h-6 text-[#2563eb]" />
                       )}
                     </button>
                     {expandedMobileFeatures[service.id] && (
                       <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {service.features.map((feature, i) => (
                           <div key={i} className="flex items-start space-x-2">
-                            <HiCheckCircle className="w-5 h-5 text-primary-600 dark:text-primary-400 flex-shrink-0 mt-0.5" />
-                            <span className="text-sm text-gray-700 dark:text-gray-300">
+                            <HiCheckCircle className="w-5 h-5 text-[#2563eb] flex-shrink-0 mt-0.5" />
+                            <span className="text-sm text-[#cbd5e1]">
                               {feature}
                             </span>
                           </div>
@@ -476,16 +494,16 @@ const Services = () => {
                   </div>
 
                   {/* Features - Desktop */}
-                  <div className="hidden lg:block bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700">
-                    <h3 className="text-xl font-bold mb-6 text-gray-900 dark:text-white flex items-center">
-                      <HiCheckCircle className="w-6 h-6 text-green-500 mr-2" />
+                  <div className="hidden lg:block bg-[#0a0b0d]/50 rounded-2xl p-8 shadow-2xl border border-[#2563eb]/30">
+                    <h3 className="text-xl font-bold mb-6 text-white flex items-center">
+                      <HiCheckCircle className="w-6 h-6 text-[#ffc957] mr-2" />
                       Key Features
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {service.features.map((feature, i) => (
                         <div key={i} className="flex items-start space-x-2">
-                          <HiCheckCircle className="w-5 h-5 text-primary-600 dark:text-primary-400 flex-shrink-0 mt-0.5" />
-                          <span className="text-sm text-gray-700 dark:text-gray-300">
+                          <HiCheckCircle className="w-5 h-5 text-[#2563eb] flex-shrink-0 mt-0.5" />
+                          <span className="text-sm text-[#cbd5e1]">
                             {feature}
                           </span>
                         </div>
@@ -494,16 +512,16 @@ const Services = () => {
                   </div>
 
                   {/* Benefits */}
-                  <div className="bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-primary-900/20 dark:to-secondary-900/20 rounded-2xl p-8 border border-primary-100 dark:border-primary-800">
-                    <h3 className="text-xl font-bold mb-6 text-gray-900 dark:text-white flex items-center">
-                      <HiTrendingUp className="w-6 h-6 text-primary-600 dark:text-primary-400 mr-2" />
+                  <div className="bg-gradient-to-br from-[#2563eb]/20 to-[#ffc957]/10 rounded-2xl p-8 border border-[#2563eb]/30">
+                    <h3 className="text-xl font-bold mb-6 text-white flex items-center">
+                      <HiTrendingUp className="w-6 h-6 text-[#2563eb] mr-2" />
                       Business Benefits
                     </h3>
                     <ul className="space-y-3">
                       {service.benefits.map((benefit, i) => (
                         <li key={i} className="flex items-start space-x-3">
-                          <div className="w-2 h-2 bg-primary-600 rounded-full mt-2 flex-shrink-0"></div>
-                          <span className="text-gray-700 dark:text-gray-300">
+                          <div className="w-2 h-2 bg-[#ffc957] rounded-full mt-2 flex-shrink-0"></div>
+                          <span className="text-[#cbd5e1]">
                             {benefit}
                           </span>
                         </li>
@@ -518,34 +536,34 @@ const Services = () => {
       ))}
 
       {/* Additional Services */}
-      <section className="section-padding bg-gradient-to-br from-gray-50 to-white dark:from-dark-800 dark:to-dark-900">
+      <section className="section-padding bg-[#0a0b0d]/50">
         <div className="container-custom">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Additional <span className="text-gradient">Services</span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-white">
+              Additional <span className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] bg-clip-text text-transparent">Services</span>
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="text-lg text-[#94a3b8] max-w-2xl mx-auto">
               Complementary services to provide complete end-to-end solutions
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {additionalServices.map((service, index) => (
-              <div key={index} className="service-card group">
-                <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div key={index} className="bg-[#0a0b0d]/50 rounded-2xl p-6 border border-[#2563eb]/30 relative overflow-hidden">
+                <div className="w-12 h-12 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <service.icon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white">
+                <h3 className="text-lg font-bold mb-2 text-white">
                   {service.title}
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                <p className="text-sm text-[#cbd5e1] mb-4">
                   {service.description}
                 </p>
 
                 {/* Features - Mobile Accordion */}
                 <div className="md:hidden">
                   <button
-                    className="w-full flex justify-between items-center text-xs font-semibold text-gray-700 dark:text-gray-300 py-2"
+                    className="w-full flex justify-between items-center text-xs font-semibold text-[#cbd5e1] py-2"
                     onClick={() => toggleMobileFeatures(`additional-${index}`)}
                     aria-expanded={
                       expandedMobileFeatures[`additional-${index}`]
@@ -553,9 +571,9 @@ const Services = () => {
                   >
                     <span>Features</span>
                     {expandedMobileFeatures[`additional-${index}`] ? (
-                      <HiChevronUp className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                      <HiChevronUp className="w-4 h-4 text-[#2563eb]" />
                     ) : (
-                      <HiChevronDown className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                      <HiChevronDown className="w-4 h-4 text-[#2563eb]" />
                     )}
                   </button>
                   {expandedMobileFeatures[`additional-${index}`] && (
@@ -563,9 +581,9 @@ const Services = () => {
                       {service.features.map((feature, i) => (
                         <li
                           key={i}
-                          className="flex items-center text-xs text-gray-600 dark:text-gray-400"
+                          className="flex items-center text-xs text-[#94a3b8]"
                         >
-                          <div className="w-1.5 h-1.5 bg-primary-600 rounded-full mr-2"></div>
+                          <div className="w-1.5 h-1.5 bg-[#2563eb] rounded-full mr-2"></div>
                           {feature}
                         </li>
                       ))}
@@ -578,9 +596,9 @@ const Services = () => {
                   {service.features.map((feature, i) => (
                     <li
                       key={i}
-                      className="flex items-center text-xs text-gray-600 dark:text-gray-400"
+                      className="flex items-center text-xs text-[#94a3b8]"
                     >
-                      <div className="w-1.5 h-1.5 bg-primary-600 rounded-full mr-2"></div>
+                      <div className="w-1.5 h-1.5 bg-[#2563eb] rounded-full mr-2"></div>
                       {feature}
                     </li>
                   ))}
@@ -592,13 +610,13 @@ const Services = () => {
       </section>
 
       {/* Our Process */}
-      <section className="section-padding bg-white dark:bg-dark-900">
+      <section className="section-padding bg-[#0a0b0d]">
         <div className="container-custom">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Our <span className="text-gradient">Process</span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-white">
+              Our <span className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] bg-clip-text text-transparent">Process</span>
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="text-lg text-[#94a3b8] max-w-2xl mx-auto">
               A proven methodology that ensures successful project delivery
             </p>
           </div>
@@ -608,22 +626,22 @@ const Services = () => {
               <div key={index} className="relative">
                 {/* Connector Line */}
                 {index < processSteps.length - 1 && (
-                  <div className="hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-primary-600 to-transparent"></div>
+                  <div className="hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-[#2563eb] to-transparent"></div>
                 )}
 
                 <div className="text-center">
-                  <div className="relative inline-flex items-center justify-center w-32 h-32 bg-gradient-to-br from-primary-600 to-secondary-600 rounded-full mb-6">
-                    <div className="absolute inset-2 bg-white dark:bg-dark-900 rounded-full flex items-center justify-center">
-                      <step.icon className="w-12 h-12 text-primary-600" />
+                  <div className="relative inline-flex items-center justify-center w-32 h-32 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-full mb-6">
+                    <div className="absolute inset-2 bg-[#0a0b0d] rounded-full flex items-center justify-center">
+                      <step.icon className="w-12 h-12 text-[#2563eb]" />
                     </div>
-                    <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                    <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-[#2563eb] rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
                       {step.number}
                     </div>
                   </div>
-                  <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
+                  <h3 className="text-xl font-bold mb-3 text-white">
                     {step.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
+                  <p className="text-[#cbd5e1]">
                     {step.description}
                   </p>
                 </div>
@@ -634,7 +652,7 @@ const Services = () => {
       </section>
 
       {/* Security & Quality */}
-      <section className="section-padding bg-gradient-to-br from-primary-600 to-secondary-600 text-white">
+      <section className="section-padding bg-gradient-to-br from-[#2563eb] to-[#0a0b0d] text-white">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
@@ -664,27 +682,27 @@ const Services = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gray-50 dark:bg-dark-800">
+      <section className="section-padding bg-[#0a0b0d]/50">
         <div className="container-custom">
-          <div className="bg-gradient-to-br from-white to-primary-50 dark:from-dark-900 dark:to-dark-800 rounded-3xl p-12 md:p-16 text-center border border-primary-200 dark:border-dark-700">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 text-gray-900 dark:text-white">
+          <div className="bg-gradient-to-br from-[#0a0b0d] to-[#1e293b] rounded-3xl p-12 md:p-16 text-center border border-[#2563eb]/30">
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 text-white">
               Ready to Build Something Amazing?
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg text-[#cbd5e1] mb-8 max-w-2xl mx-auto">
               Let's discuss your project and create a solution that exceeds your
               expectations
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/get-started" className="mission-critical-button">
+              <Link to="/get-started" className="px-8 py-4 bg-gradient-to-r from-[#2563eb] to-[#1e40af] text-white font-bold rounded-xl hover:from-[#1d4ed8] hover:to-[#1e3a8a] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
                 Get Started
               </Link>
               <Link
                 to="/portfolio"
-                className="mission-critical-button-secondary"
+                className="px-8 py-4 rounded-xl font-bold text-base tracking-wide border-2 border-[#2563eb] text-[#2563eb] bg-transparent hover:bg-[#2563eb]/10 transition-all duration-300"
               >
                 View Our Work
               </Link>
-              <Link to="/contact" className="mission-critical-button-secondary">
+              <Link to="/contact" className="px-8 py-4 rounded-xl font-bold text-base tracking-wide border-2 border-[#ffc957] text-[#ffc957] bg-transparent hover:bg-[#ffc957]/10 transition-all duration-300">
                 Contact Us
               </Link>
             </div>
@@ -692,6 +710,8 @@ const Services = () => {
         </div>
       </section>
     </div>
+      </>
+    </ErrorBoundary>
   );
 };
 

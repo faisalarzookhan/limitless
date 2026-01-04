@@ -54,6 +54,19 @@ const securityMiddleware = [
     legacyHeaders: false,
   }),
 
+  // Analytics-specific rate limiting
+  rateLimit({
+    windowMs: 1 * 60 * 1000, // 1 minute
+    max: process.env.ANALYTICS_RATE_LIMIT || 20, // limit analytics events per minute
+    message: 'Too many analytics events from this IP, please try again later.',
+    standardHeaders: true,
+    legacyHeaders: false,
+    skip: (req) => {
+      // Skip rate limiting for non-analytics endpoints
+      return !req.url.includes('/analytics');
+    },
+  }),
+
   // Input sanitization
   (req, res, next) => {
     // Sanitize query parameters

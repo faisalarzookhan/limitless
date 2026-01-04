@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
   HiBriefcase,
@@ -22,6 +23,28 @@ import {
   HiSupport,
   HiShieldCheck,
 } from 'react-icons/hi';
+import ErrorBoundary from '../components/ErrorBoundary';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5
+    }
+  }
+};
 
 const Careers = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -401,164 +424,229 @@ const Careers = () => {
   });
 
   return (
-    <div className="min-h-screen">
+    <ErrorBoundary>
+    <div className="min-h-screen bg-[#0a0b0d] font-sans">
       {/* Hero Section */}
-      <section className="relative py-20 md:py-32 bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 text-white overflow-hidden">
-        <div
-          className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8"
-          aria-hidden="true"
-        >
-          <div className="absolute inset-0 bg-pattern-grid opacity-10"></div>
-        </div>
-
+      <section className="relative py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#ffc957] to-[#0a0b0d] text-white overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2260%22%20height=%2260%22%20viewBox=%220%200%2060%2060%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg%20fill=%22none%22%20fill-rule=%22evenodd%22%3E%3Cg%20fill=%22%23ffffff%22%20fill-opacity=%220.05%22%3E%3Ccircle%20cx=%2230%22%20cy=%2230%22%20r=%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8 animate-fade-in-down">
+            <motion.div 
+              className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
               <HiBriefcase className="w-5 h-5" />
-              <span className="text-sm font-semibold">Join Our Team</span>
-            </div>
+              <span className="text-sm font-semibold font-['Outfit']">Join Our Team</span>
+            </motion.div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 animate-fade-in-up">
+            <motion.h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-['Outfit']"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
               Build Your Career with{' '}
-              <span className="text-secondary-300">Limitless</span>
-            </h1>
+              <span className="text-[#ffc957]">Limitless</span>
+            </motion.h1>
 
-            <p
-              className="text-xl md:text-2xl text-primary-100 mb-8 animate-fade-in-up"
-              style={{ animationDelay: '0.1s' }}
+            <motion.p 
+              className="text-xl md:text-2xl text-gray-300 mb-8 font-['Figtree']"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
             >
               Join a team of passionate innovators creating the future of
               technology
-            </p>
+            </motion.p>
 
-            <div
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up"
-              style={{ animationDelay: '0.2s' }}
+            <motion.div 
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
             >
               <a
                 href="#openings"
-                className="btn-secondary inline-flex items-center space-x-2 bg-white text-primary-600 hover:bg-gray-100"
+                className="px-8 py-4 bg-[#0a0b0d] text-white rounded-lg hover:bg-[#ffc957] hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit'] inline-flex items-center space-x-2"
               >
                 <span>View Open Positions</span>
                 <HiChevronRight className="w-5 h-5" />
               </a>
               <Link
                 to="/about"
-                className="btn-outline border-white text-white hover:bg-white hover:text-primary-600"
+                className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg hover:bg-white hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit']"
               >
                 Learn About Us
               </Link>
-            </div>
+            </motion.div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 mt-16 max-w-2xl mx-auto">
+            <motion.div 
+              className="grid grid-cols-3 gap-8 mt-16 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
               <div className="text-center">
-                <div className="text-4xl font-bold mb-2">
+                <div className="text-4xl font-bold mb-2 font-['Outfit']">
                   {jobOpenings.length}+
                 </div>
-                <div className="text-sm text-primary-200">Open Positions</div>
+                <div className="text-sm text-gray-400 font-['Figtree']">Open Positions</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold mb-2">50+</div>
-                <div className="text-sm text-primary-200">Team Members</div>
+                <div className="text-4xl font-bold mb-2 font-['Outfit']">50+</div>
+                <div className="text-sm text-gray-400 font-['Figtree']">Team Members</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold mb-2">100%</div>
-                <div className="text-sm text-primary-200">Remote Friendly</div>
+                <div className="text-4xl font-bold mb-2 font-['Outfit']">100%</div>
+                <div className="text-sm text-gray-400 font-['Figtree']">Remote Friendly</div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Why Join Us Section */}
-      <section className="section-padding bg-white dark:bg-dark-900">
+      <section className="section-padding bg-[#0a0b0d]">
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center space-x-2 bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+          <motion.div 
+            className="text-center mb-16"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.div 
+              className="inline-flex items-center space-x-2 bg-[#2563eb]/20 text-[#2563eb] px-4 py-2 rounded-full text-sm font-semibold mb-4 font-['Outfit']"
+              variants={itemVariants}
+            >
               <HiSparkles className="w-4 h-4" />
               <span>Why Limitless?</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-gray-900 dark:text-white mb-4">
+            </motion.div>
+            <motion.h2 
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-['Outfit']"
+              variants={itemVariants}
+            >
               Benefits & Perks
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-gray-400 max-w-3xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               We believe in taking care of our team with comprehensive benefits
               and a great work environment
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {benefits.map((benefit, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="group bg-white dark:bg-dark-800 rounded-2xl p-8 border border-gray-200 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-500 transition-all duration-300 hover:shadow-xl"
+                className="group bg-[#1a1c20] rounded-2xl p-8 border border-[#2563eb]/30 hover:border-[#2563eb] transition-all duration-300 hover:shadow-xl"
+                variants={itemVariants}
               >
                 <div
                   className={`w-16 h-16 ${benefit.bgColor} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
                 >
                   <benefit.icon className={`w-8 h-8 ${benefit.color}`} />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                <h3 className="text-xl font-bold text-white mb-3 font-['Outfit']">
                   {benefit.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400">
+                <p className="text-gray-400 font-['Figtree']">
                   {benefit.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Our Values Section */}
-      <section className="section-padding bg-gray-50 dark:bg-dark-800/50">
+      <section className="section-padding bg-[#0a0b0d]">
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 dark:text-white mb-4">
+          <motion.div 
+            className="text-center mb-16"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold text-white mb-4 font-['Outfit']"
+              variants={itemVariants}
+            >
               Our Core Values
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-gray-400 max-w-3xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Values that drive us every day
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {values.map((value, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-white dark:bg-dark-800 rounded-xl p-6 text-center border border-gray-200 dark:border-dark-700 hover:shadow-lg transition-all duration-300"
+                className="bg-[#1a1c20] rounded-xl p-6 text-center border border-[#2563eb]/30 hover:shadow-lg transition-all duration-300"
+                variants={itemVariants}
               >
-                <value.icon className="w-12 h-12 text-primary-600 dark:text-primary-400 mx-auto mb-4" />
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                <value.icon className="w-12 h-12 text-[#2563eb] mx-auto mb-4" />
+                <h3 className="text-lg font-bold text-white mb-2 font-['Outfit']">
                   {value.title}
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-gray-400 font-['Figtree']">
                   {value.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Job Openings Section */}
       <section
         id="openings"
-        className="section-padding bg-white dark:bg-dark-900"
+        className="section-padding bg-[#0a0b0d]"
       >
         <div className="container-custom">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-gray-900 dark:text-white mb-4">
+          <motion.div 
+            className="text-center mb-12"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.h2 
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-['Outfit']"
+              variants={itemVariants}
+            >
               Open Positions
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-gray-400 max-w-3xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Find your perfect role and start your journey with us
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           {/* Search and Filters */}
-          <div className="bg-gray-50 dark:bg-dark-800 rounded-2xl p-6 mb-8">
+          <motion.div 
+            className="bg-[#1a1c20] rounded-2xl p-6 mb-8"
+            variants={itemVariants}
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* Search */}
               <div className="relative">
@@ -568,7 +656,7 @@ const Careers = () => {
                   placeholder="Search jobs..."
                   value={searchTerm}
                   onChange={e => setSearchTerm(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="w-full pl-12 pr-4 py-3 rounded-xl border border-[#2563eb]/30 bg-[#0a0b0d] text-white focus:outline-none focus:border-[#2563eb]"
                 />
               </div>
 
@@ -576,7 +664,7 @@ const Careers = () => {
               <select
                 value={selectedDepartment}
                 onChange={e => setSelectedDepartment(e.target.value)}
-                className="px-4 py-3 rounded-xl border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="px-4 py-3 rounded-xl border border-[#2563eb]/30 bg-[#0a0b0d] text-white focus:outline-none focus:border-[#2563eb]"
               >
                 {departments.map(dept => (
                   <option key={dept.value} value={dept.value}>
@@ -589,7 +677,7 @@ const Careers = () => {
               <select
                 value={selectedLocation}
                 onChange={e => setSelectedLocation(e.target.value)}
-                className="px-4 py-3 rounded-xl border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="px-4 py-3 rounded-xl border border-[#2563eb]/30 bg-[#0a0b0d] text-white focus:outline-none focus:border-[#2563eb]"
               >
                 {locations.map(loc => (
                   <option key={loc.value} value={loc.value}>
@@ -602,7 +690,7 @@ const Careers = () => {
               <select
                 value={selectedType}
                 onChange={e => setSelectedType(e.target.value)}
-                className="px-4 py-3 rounded-xl border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="px-4 py-3 rounded-xl border border-[#2563eb]/30 bg-[#0a0b0d] text-white focus:outline-none focus:border-[#2563eb]"
               >
                 {jobTypes.map(type => (
                   <option key={type.value} value={type.value}>
@@ -612,19 +700,25 @@ const Careers = () => {
               </select>
             </div>
 
-            <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
+            <div className="mt-4 text-sm text-gray-400 font-['Figtree']">
               {filteredJobs.length} position
               {filteredJobs.length !== 1 ? 's' : ''} found
             </div>
-          </div>
+          </motion.div>
 
           {/* Job Listings */}
           {filteredJobs.length > 0 ? (
-            <div className="grid gap-6">
+            <motion.div 
+              className="grid gap-6"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
               {filteredJobs.map(job => (
-                <div
+                <motion.div
                   key={job.id}
-                  className="bg-white dark:bg-dark-800 rounded-2xl border border-gray-200 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-500 hover:shadow-xl transition-all duration-300 overflow-hidden"
+                  className="bg-[#1a1c20] rounded-2xl border border-[#2563eb]/30 hover:border-[#2563eb] hover:shadow-xl transition-all duration-300 overflow-hidden"
+                  variants={itemVariants}
                 >
                   <div className="p-8">
                     <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
@@ -637,10 +731,10 @@ const Careers = () => {
                             <job.icon className={`w-7 h-7 ${job.color}`} />
                           </div>
                           <div className="flex-1">
-                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                            <h3 className="text-2xl font-bold text-white mb-2 font-['Outfit']">
                               {job.title}
                             </h3>
-                            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+                            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400 font-['Figtree']">
                               <div className="flex items-center space-x-1">
                                 <HiLocationMarker className="w-4 h-4" />
                                 <span>{job.location}</span>
@@ -663,60 +757,60 @@ const Careers = () => {
                           </div>
                         </div>
 
-                        <p className="text-gray-600 dark:text-gray-400 mb-4">
+                        <p className="text-gray-400 mb-4 font-['Figtree']">
                           {job.description}
                         </p>
 
                         <div className="flex flex-wrap gap-2 mb-4">
-                          <span className="px-3 py-1 bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 text-sm font-medium rounded-full">
+                          <span className="px-3 py-1 bg-[#2563eb]/20 text-[#2563eb] text-sm font-medium rounded-full font-['Figtree']">
                             {
                               departments.find(d => d.value === job.department)
                                 ?.label
                             }
                           </span>
-                          <span className="px-3 py-1 bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-400 text-sm font-medium rounded-full">
+                          <span className="px-3 py-1 bg-[#1a1c20] text-gray-400 text-sm font-medium rounded-full font-['Figtree']">
                             Posted {job.posted}
                           </span>
-                          <span className="px-3 py-1 bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-400 text-sm font-medium rounded-full">
+                          <span className="px-3 py-1 bg-[#1a1c20] text-gray-400 text-sm font-medium rounded-full font-['Figtree']">
                             {job.applicants} applicants
                           </span>
                         </div>
 
                         {/* Expandable Details */}
                         <details className="group">
-                          <summary className="flex items-center space-x-2 cursor-pointer text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium">
+                          <summary className="flex items-center space-x-2 cursor-pointer text-[#2563eb] hover:text-[#ffc957] font-medium">
                             <span>View Details</span>
                             <HiChevronRight className="w-5 h-5 group-open:rotate-90 transition-transform" />
                           </summary>
-                          <div className="mt-4 p-6 bg-gray-50 dark:bg-dark-700/50 rounded-xl">
+                          <div className="mt-4 p-6 bg-[#0a0b0d] rounded-xl border border-[#2563eb]/30">
                             <div className="grid md:grid-cols-2 gap-6">
                               <div>
-                                <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
+                                <h4 className="font-semibold text-white mb-3 font-['Outfit']">
                                   Requirements
                                 </h4>
                                 <ul className="space-y-2">
                                   {job.requirements.map((req, idx) => (
                                     <li
                                       key={idx}
-                                      className="flex items-start space-x-2 text-sm text-gray-600 dark:text-gray-400"
+                                      className="flex items-start space-x-2 text-sm text-gray-400 font-['Figtree']"
                                     >
-                                      <HiCheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                                      <HiCheckCircle className="w-5 h-5 text-[#2563eb] flex-shrink-0 mt-0.5" />
                                       <span>{req}</span>
                                     </li>
                                   ))}
                                 </ul>
                               </div>
                               <div>
-                                <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
+                                <h4 className="font-semibold text-white mb-3 font-['Outfit']">
                                   Responsibilities
                                 </h4>
                                 <ul className="space-y-2">
                                   {job.responsibilities.map((resp, idx) => (
                                     <li
                                       key={idx}
-                                      className="flex items-start space-x-2 text-sm text-gray-600 dark:text-gray-400"
+                                      className="flex items-start space-x-2 text-sm text-gray-400 font-['Figtree']"
                                     >
-                                      <HiCheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
+                                      <HiCheckCircle className="w-5 h-5 text-[#ffc957] flex-shrink-0 mt-0.5" />
                                       <span>{resp}</span>
                                     </li>
                                   ))}
@@ -731,7 +825,7 @@ const Careers = () => {
                       <div className="flex-shrink-0">
                         <Link
                           to={`/careers/apply/${job.id}`}
-                          className="btn-primary inline-flex items-center space-x-2 w-full lg:w-auto justify-center"
+                          className="px-6 py-3 bg-[#2563eb] text-white rounded-lg hover:bg-[#ffc957] hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit'] inline-flex items-center space-x-2 w-full lg:w-auto justify-center"
                         >
                           <span>Apply Now</span>
                           <HiChevronRight className="w-5 h-5" />
@@ -739,18 +833,23 @@ const Careers = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           ) : (
-            <div className="text-center py-16">
-              <div className="w-20 h-20 bg-gray-100 dark:bg-dark-800 rounded-full flex items-center justify-center mx-auto mb-6">
+            <motion.div 
+              className="text-center py-16"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="w-20 h-20 bg-[#1a1c20] rounded-full flex items-center justify-center mx-auto mb-6">
                 <HiSearch className="w-10 h-10 text-gray-400" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+              <h3 className="text-xl font-bold text-white mb-2 font-['Outfit']">
                 No Positions Found
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
+              <p className="text-gray-400 mb-6 font-['Figtree']">
                 Try adjusting your filters or search terms
               </p>
               <button
@@ -760,90 +859,113 @@ const Careers = () => {
                   setSelectedLocation('all');
                   setSelectedType('all');
                 }}
-                className="btn-outline"
+                className="px-6 py-3 bg-[#2563eb] text-white rounded-lg hover:bg-[#ffc957] hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit']"
               >
                 Clear All Filters
               </button>
-            </div>
+            </motion.div>
           )}
         </div>
       </section>
 
       {/* Hiring Process Section */}
-      <section className="section-padding bg-gray-50 dark:bg-dark-800/50">
+      <section className="section-padding bg-[#0a0b0d]">
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 dark:text-white mb-4">
+          <motion.div 
+            className="text-center mb-16"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold text-white mb-4 font-['Outfit']"
+              variants={itemVariants}
+            >
               Our Hiring Process
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-gray-400 max-w-3xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               A transparent and straightforward journey from application to
               offer
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
-          <div className="max-w-5xl mx-auto">
+          <motion.div 
+            className="max-w-5xl mx-auto"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             <div className="relative">
               {/* Connection Line */}
-              <div className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-primary-200 via-primary-400 to-secondary-400 dark:from-primary-800 dark:via-primary-600 dark:to-secondary-600 -translate-y-1/2"></div>
+              <div className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-[#2563eb] via-[#ffc957] to-[#0a0b0d] -translate-y-1/2"></div>
 
               {/* Steps */}
               <div className="grid grid-cols-1 md:grid-cols-5 gap-8 relative z-10">
                 {hiringProcess.map(step => (
-                  <div key={step.step} className="text-center">
+                  <motion.div key={step.step} className="text-center" variants={itemVariants}>
                     <div className="mb-6 flex justify-center">
-                      <div className="w-20 h-20 bg-white dark:bg-dark-800 border-4 border-primary-500 rounded-full flex items-center justify-center text-3xl shadow-lg">
+                      <div className="w-20 h-20 bg-[#1a1c20] border-4 border-[#2563eb] rounded-full flex items-center justify-center text-3xl shadow-lg">
                         {step.icon}
                       </div>
                     </div>
-                    <div className="w-8 h-8 bg-gradient-primary text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold shadow-md">
+                    <div className="w-8 h-8 bg-[#2563eb] text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold shadow-md">
                       {step.step}
                     </div>
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                    <h3 className="text-lg font-bold text-white mb-2 font-['Outfit']">
                       {step.title}
                     </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                    <p className="text-sm text-gray-400 font-['Figtree']">
                       {step.description}
                     </p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 text-white">
-        <div className="container-custom">
-          <div className="max-w-4xl mx-auto text-center">
+      <section className="section-padding bg-gradient-to-br from-[#2563eb] via-[#ffc957] to-[#0a0b0d] text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2260%22%20height=%2260%22%20viewBox=%220%200%2060%2060%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg%20fill=%22none%22%20fill-rule=%22evenodd%22%3E%3Cg%20fill=%22%23ffffff%22%20fill-opacity=%220.05%22%3E%3Ccircle%20cx=%2230%22%20cy=%2230%22%20r=%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+        <div className="container-custom relative z-10">
+          <motion.div 
+            className="max-w-4xl mx-auto text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
             <HiSparkles className="w-16 h-16 mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 font-['Outfit']">
               Don't See the Perfect Role?
             </h2>
-            <p className="text-xl text-primary-100 mb-8">
+            <p className="text-xl text-gray-300 mb-8 font-['Figtree']">
               We're always looking for talented individuals. Send us your resume
               and we'll keep you in mind for future opportunities.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 to="/contact"
-                className="btn-secondary inline-flex items-center space-x-2 bg-white text-primary-600 hover:bg-gray-100"
+                className="px-8 py-4 bg-[#0a0b0d] text-white rounded-lg hover:bg-[#ffc957] hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit'] inline-flex items-center space-x-2"
               >
                 <span>Send Your Resume</span>
                 <HiChevronRight className="w-5 h-5" />
               </Link>
               <a
                 href="mailto:careers@limitlessinfotech.com"
-                className="btn-outline border-white text-white hover:bg-white hover:text-primary-600"
+                className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg hover:bg-white hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit']"
               >
                 Email: careers@limitlessinfotech.com
               </a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>
+    </ErrorBoundary>
   );
 };
 

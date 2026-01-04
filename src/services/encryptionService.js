@@ -4,23 +4,119 @@
  * across all limitlessinfotech.com sub-domains.
  */
 
-import crypto from 'crypto';
+// Conditional import for crypto (Node.js vs browser)
+let crypto;
+let Buffer;
+
+if (typeof window === 'undefined') {
+  // Server-side (Node.js) environment
+  try {
+    crypto = require('crypto');
+    Buffer = require('buffer').Buffer;
+  } catch (e) {
+    // Fallback for environments where require is not available
+    crypto = global.crypto || window.crypto;
+    Buffer = global.Buffer || (window.Buffer && window.Buffer.from ? window.Buffer : undefined);
+  }
+} else {
+  // Browser environment - using Web Crypto API
+  crypto = window.crypto;
+  // For browser environments, we'll define a minimal Buffer polyfill if needed
+  if (typeof window.Buffer === 'undefined') {
+    // Create a minimal Buffer-like implementation for basic operations
+    Buffer = {
+      from: (input, encoding = 'utf8') => {
+        if (typeof input === 'string') {
+          if (encoding === 'hex') {
+            // Convert hex string to Uint8Array
+            const bytes = [];
+            for (let i = 0; i < input.length; i += 2) {
+              bytes.push(parseInt(input.substr(i, 2), 16));
+            }
+            return new Uint8Array(bytes);
+          } else {
+            // Convert string to Uint8Array
+            const encoder = new TextEncoder();
+            return encoder.encode(input);
+          }
+        } else if (ArrayBuffer.isView(input)) {
+          // If input is already a typed array, return it
+          return input;
+        } else {
+          // Convert array of numbers to Uint8Array
+          return new Uint8Array(input);
+        }
+      },
+      isBuffer: (obj) => obj instanceof Uint8Array || (obj && typeof obj === 'object' && obj.constructor && obj.constructor.name === 'Buffer')
+    };
+  } else {
+    Buffer = window.Buffer;
+  }
+}
+
+// Function to generate random bytes in browser environment
+function getRandomBytes(length) {
+  if (typeof window !== 'undefined') {
+    // Browser environment
+    const array = new Uint8Array(length);
+    crypto.getRandomValues(array);
+    return array;
+  } else {
+    // Node.js environment
+    return crypto.randomBytes(length);
+  }
+}
+
+// Function to handle environment variables in browser
+function getEnvVariable(key, defaultValue = null) {
+  // In browser environment, we'll check for a global config object
+  if (typeof window !== 'undefined') {
+    return window.REACT_APP_ENCRYPTION_KEY || defaultValue;
+  }
+  // In Node.js environment, use process.env
+  return (typeof process !== 'undefined' && process.env) ? process.env[key] : defaultValue;
+}
 
 class EncryptionService {
   constructor() {
-    // Use environment variable for the master key or generate a default one (not recommended for production)
-    this.masterKey =
-      process.env.REACT_APP_ENCRYPTION_KEY || this.generateRandomKey();
     this.algorithm = 'aes-256-gcm'; // AES-256 with Galois/Counter Mode
     this.ivLength = 16; // Initialization vector length for GCM
     this.authTagLength = 16; // Authentication tag length for GCM
-
+    
+    // Initialize master key property, but don't set it yet to avoid process.env access in browser
+    this._masterKey = null;
+    
+    // Warn about using encryption in browser environment
+    if (typeof window !== 'undefined') {
+      console.warn(
+        'Encryption service initialized in browser environment. Use server-side encryption for production applications.'
+      );
+    } else {
+      console.log('Encryption service initialized with AES-256-GCM algorithm');
+    }
+  }
+  
+  // Getter for master key that handles environment variables safely
+  get masterKey() {
+    if (this._masterKey === null) {
+      // Use environment variable for the master key or generate a default one (not recommended for production)
+      this._masterKey =
+        getEnvVariable('REACT_APP_ENCRYPTION_KEY') || this.generateRandomKey();
+        
+      // Validate key length (must be 32 bytes for AES-256)
+      if (this._masterKey.length !== 32) {
+        throw new Error('Encryption key must be 32 bytes for AES-256');
+      }
+    }
+    return this._masterKey;
+  }
+  
+  set masterKey(value) {
     // Validate key length (must be 32 bytes for AES-256)
-    if (this.masterKey.length !== 32) {
+    if (value.length !== 32) {
       throw new Error('Encryption key must be 32 bytes for AES-256');
     }
-
-    console.log('Encryption service initialized with AES-256-GCM algorithm');
+    this._masterKey = value;
   }
 
   /**
@@ -28,10 +124,15 @@ class EncryptionService {
    * @returns {Buffer} Random 32-byte key
    */
   generateRandomKey() {
+    // For browser compatibility
+    if (typeof window !== 'undefined') {
+      throw new Error('Key generation is not supported in browser environment. Use server-side key generation for production applications.');
+    }
+    
     console.warn(
       'Generating temporary encryption key. Use REACT_APP_ENCRYPTION_KEY environment variable in production.'
     );
-    return crypto.randomBytes(32);
+    return getRandomBytes(32);
   }
 
   /**
@@ -41,24 +142,33 @@ class EncryptionService {
    */
   encrypt(data) {
     try {
+      // Validate input
+      this.validateInput(data);
+      
+      // Sanitize if it's a string
+      let sanitizedData = data;
+      if (typeof data === 'string') {
+        sanitizedData = this.sanitizeInput(data);
+      }
+      
       // Convert data to buffer if it's a string
-      const dataBuffer = Buffer.isBuffer(data)
-        ? data
-        : Buffer.from(data, 'utf8');
+      const dataBuffer = Buffer.isBuffer(sanitizedData)
+        ? sanitizedData
+        : Buffer.from(sanitizedData, 'utf8');
 
       // Generate a random initialization vector
-      const iv = crypto.randomBytes(this.ivLength);
+      const iv = getRandomBytes(this.ivLength);
 
-      // Create cipher
+      // For browser compatibility, we'll use a simplified approach
+      // In a real implementation, you would need to handle browser encryption separately
+      if (typeof window !== 'undefined') {
+        throw new Error('Encryption is not supported in browser environment. Use server-side encryption for production applications.');
+      }
+      
+      // Node.js environment - original implementation
       const cipher = crypto.createCipher(this.algorithm, this.masterKey);
-
-      // Update cipher with data
       let encrypted = cipher.update(dataBuffer);
-
-      // Finalize encryption
       encrypted = Buffer.concat([encrypted, cipher.final()]);
-
-      // Get the authentication tag (for GCM mode)
       const authTag = cipher.getAuthTag();
 
       // Return encrypted data with IV and auth tag
@@ -98,6 +208,11 @@ class EncryptionService {
       const ivBuffer = Buffer.from(iv, 'hex');
       const authTagBuffer = Buffer.from(authTag, 'hex');
 
+      // For browser compatibility
+      if (typeof window !== 'undefined') {
+        throw new Error('Decryption is not supported in browser environment. Use server-side decryption for production applications.');
+      }
+      
       // Create decipher
       const decipher = crypto.createDecipher(this.algorithm, this.masterKey);
 
@@ -149,7 +264,21 @@ class EncryptionService {
    * @returns {string} Hashed data
    */
   hashData(data, encoding = 'hex') {
-    const dataBuffer = Buffer.isBuffer(data) ? data : Buffer.from(data, 'utf8');
+    // Validate input
+    this.validateInput(data);
+    
+    // Sanitize if it's a string
+    let sanitizedData = data;
+    if (typeof data === 'string') {
+      sanitizedData = this.sanitizeInput(data);
+    }
+    
+    // For browser compatibility
+    if (typeof window !== 'undefined') {
+      throw new Error('Hashing is not supported in browser environment. Use server-side hashing for production applications.');
+    }
+    
+    const dataBuffer = Buffer.isBuffer(sanitizedData) ? sanitizedData : Buffer.from(sanitizedData, 'utf8');
     return crypto.createHash('sha256').update(dataBuffer).digest(encoding);
   }
 
@@ -168,7 +297,21 @@ class EncryptionService {
    * @returns {boolean} True if HMAC matches
    */
   verifyHmac(data, expectedHmac) {
-    const dataBuffer = Buffer.isBuffer(data) ? data : Buffer.from(data, 'utf8');
+    // Validate input
+    this.validateInput(data);
+    
+    // Sanitize if it's a string
+    let sanitizedData = data;
+    if (typeof data === 'string') {
+      sanitizedData = this.sanitizeInput(data);
+    }
+    
+    // For browser compatibility
+    if (typeof window !== 'undefined') {
+      throw new Error('HMAC verification is not supported in browser environment. Use server-side HMAC verification for production applications.');
+    }
+    
+    const dataBuffer = Buffer.isBuffer(sanitizedData) ? sanitizedData : Buffer.from(sanitizedData, 'utf8');
     const hmac = crypto
       .createHmac('sha256', this.masterKey)
       .update(dataBuffer)
@@ -185,7 +328,21 @@ class EncryptionService {
    * @returns {string} HMAC
    */
   createHmac(data) {
-    const dataBuffer = Buffer.isBuffer(data) ? data : Buffer.from(data, 'utf8');
+    // Validate input
+    this.validateInput(data);
+    
+    // Sanitize if it's a string
+    let sanitizedData = data;
+    if (typeof data === 'string') {
+      sanitizedData = this.sanitizeInput(data);
+    }
+    
+    // For browser compatibility
+    if (typeof window !== 'undefined') {
+      throw new Error('HMAC creation is not supported in browser environment. Use server-side HMAC creation for production applications.');
+    }
+    
+    const dataBuffer = Buffer.isBuffer(sanitizedData) ? sanitizedData : Buffer.from(sanitizedData, 'utf8');
     return crypto
       .createHmac('sha256', this.masterKey)
       .update(dataBuffer)
@@ -198,7 +355,12 @@ class EncryptionService {
    * @returns {Buffer} Random salt
    */
   generateSalt(length = 32) {
-    return crypto.randomBytes(length);
+    // For browser compatibility
+    if (typeof window !== 'undefined') {
+      throw new Error('Salt generation is not supported in browser environment. Use server-side salt generation for production applications.');
+    }
+    
+    return getRandomBytes(length);
   }
 
   /**
@@ -210,6 +372,11 @@ class EncryptionService {
    * @returns {Buffer} Derived key
    */
   deriveKeyFromPassword(password, salt, iterations = 100000, keyLength = 32) {
+    // For browser compatibility
+    if (typeof window !== 'undefined') {
+      throw new Error('Key derivation is not supported in browser environment. Use server-side key derivation for production applications.');
+    }
+    
     return crypto.pbkdf2Sync(password, salt, iterations, keyLength, 'sha256');
   }
 
@@ -220,6 +387,18 @@ class EncryptionService {
    * @returns {Object} Encrypted data with salt and other metadata
    */
   encryptWithPassword(data, password) {
+    // Validate inputs
+    this.validateInput(data);
+    if (typeof password !== 'string' || password.length < 8) {
+      throw new Error('Password must be a string with at least 8 characters');
+    }
+    
+    // Sanitize data if it's a string
+    let sanitizedData = data;
+    if (typeof data === 'string') {
+      sanitizedData = this.sanitizeInput(data);
+    }
+    
     const salt = this.generateSalt();
     const derivedKey = this.deriveKeyFromPassword(password, salt);
 
@@ -227,7 +406,7 @@ class EncryptionService {
     const tempService = new EncryptionService();
     tempService.masterKey = derivedKey;
 
-    const encrypted = tempService.encrypt(data);
+    const encrypted = tempService.encrypt(sanitizedData);
 
     return {
       ...encrypted,
@@ -269,6 +448,12 @@ class EncryptionService {
    * @returns {boolean} True if TLS 1.3 is supported
    */
   isTls13Supported() {
+    // For browser compatibility
+    if (typeof window !== 'undefined') {
+      // In browser, TLS is handled by the browser and server
+      return true; // Assume TLS support in modern browsers
+    }
+    
     // Node.js supports TLS 1.3 in versions 12.17.0 and later
     const [major, minor] = process.version.substring(1).split('.').map(Number);
     return major > 12 || (major === 12 && minor >= 17);
@@ -289,11 +474,11 @@ class EncryptionService {
         'TLS_AES_128_GCM_SHA256',
       ].join(':'),
       honorCipherOrder: true,
-      secureOptions:
+      secureOptions: typeof crypto.constants !== 'undefined' ?
         crypto.constants.SSL_OP_NO_SSLv2 |
         crypto.constants.SSL_OP_NO_SSLv3 |
         crypto.constants.SSL_OP_NO_TLSv1 |
-        crypto.constants.SSL_OP_NO_TLSv1_1,
+        crypto.constants.SSL_OP_NO_TLSv1_1 : 0,
     };
   }
 
@@ -376,17 +561,147 @@ class EncryptionService {
       keyStrengthValid: this.validateKeyStrength().isRecommended,
     };
   }
+
+  /**
+   * Sanitizes input data to prevent XSS and other injection attacks
+   * @param {string} input - Input string to sanitize
+   * @returns {string} Sanitized string
+   */
+  sanitizeInput(input) {
+    if (typeof input !== 'string') {
+      return input;
+    }
+    
+    // Remove potentially dangerous characters
+    return input
+      .replace(/<script[^>]*>.*?<\/script>/gi, '') // Remove script tags
+      .replace(/<iframe[^>]*>.*?<\/iframe>/gi, '') // Remove iframe tags
+      .replace(/javascript:/gi, '') // Remove javascript protocol
+      .replace(/on\w+\s*=/gi, '') // Remove event handlers
+      .replace(/<.*?\s+src\s*=\s*["'][^"']*(?:javascript:|data:)[^"']*["'][^>]*>/gi, '') // Remove dangerous src attributes
+      .trim();
+  }
+
+  /**
+   * Validates input data before encryption
+   * @param {string|Buffer} data - Data to validate
+   * @returns {boolean} True if data is valid
+   */
+  validateInput(data) {
+    if (data === null || data === undefined) {
+      return false;
+    }
+    
+    // Check for maximum size limits
+    const dataBuffer = Buffer.isBuffer(data) ? data : Buffer.from(data, 'utf8');
+    if (dataBuffer.length > 10 * 1024 * 1024) { // 10MB limit
+      throw new Error('Input data exceeds maximum size limit of 10MB');
+    }
+    
+    return true;
+  }
 }
 
-// Export singleton instance
-const encryptionService = new EncryptionService();
-
-// For environments where crypto module is not available (browser), we provide a mock
-// In a real implementation, we would use Web Crypto API for browser environments
-if (typeof window !== 'undefined') {
-  console.warn(
-    'Encryption service initialized in browser environment. Use Node.js for production encryption.'
-  );
+// Factory function to create an encryption service instance
+// This allows for better browser compatibility
+function createEncryptionService() {
+  // Check if we're in a browser environment
+  if (typeof window !== 'undefined') {
+    console.warn(
+      'Encryption service initialized in browser environment. Use server-side encryption for production applications.'
+    );
+    
+    // Return a mock service that throws errors for any operation
+    return {
+      encrypt: () => { throw new Error('Encryption is not supported in browser environment. Use server-side encryption for production applications.'); },
+      decrypt: () => { throw new Error('Decryption is not supported in browser environment. Use server-side decryption for production applications.'); },
+      hashData: () => { throw new Error('Hashing is not supported in browser environment. Use server-side hashing for production applications.'); },
+      verifyHmac: () => { throw new Error('HMAC verification is not supported in browser environment. Use server-side HMAC verification for production applications.'); },
+      createHmac: () => { throw new Error('HMAC creation is not supported in browser environment. Use server-side HMAC creation for production applications.'); },
+      generateSalt: () => { throw new Error('Salt generation is not supported in browser environment. Use server-side salt generation for production applications.'); },
+      deriveKeyFromPassword: () => { throw new Error('Key derivation is not supported in browser environment. Use server-side key derivation for production applications.'); },
+      encryptWithPassword: () => { throw new Error('Password-based encryption is not supported in browser environment. Use server-side encryption for production applications.'); },
+      decryptWithPassword: () => { throw new Error('Password-based decryption is not supported in browser environment. Use server-side decryption for production applications.'); },
+      backupKey: () => { throw new Error('Key backup is not supported in browser environment. Use server-side key management for production applications.'); },
+      restoreKey: () => { throw new Error('Key restoration is not supported in browser environment. Use server-side key management for production applications.'); },
+      // Other methods that may be called
+      isTls13Supported: () => true, // Assume TLS support in browsers
+      getTlsConfig: () => ({ minVersion: 'TLSv1.2', maxVersion: 'TLSv1.3' }),
+      validateKeyStrength: () => ({ isValid: false, error: 'Encryption not supported in browser' }),
+      getStats: () => ({ error: 'Encryption not supported in browser' }),
+      sanitizeInput: (input) => input, // Basic sanitizer that just returns input
+      validateInput: (data) => data !== null && data !== undefined
+    };
+  }
+  
+  // In Node.js environment, return a real instance
+  return new EncryptionService();
 }
+
+// Export the factory function and a default instance
+// Use a getter to defer instantiation until needed
+let _instance = null;
+const encryptionService = {
+  get instance() {
+    if (_instance === null) {
+      _instance = createEncryptionService();
+    }
+    return _instance;
+  },
+  
+  // Proxy all method calls to the actual instance
+  encrypt: function(...args) {
+    return this.instance.encrypt(...args);
+  },
+  decrypt: function(...args) {
+    return this.instance.decrypt(...args);
+  },
+  hashData: function(...args) {
+    return this.instance.hashData(...args);
+  },
+  verifyHmac: function(...args) {
+    return this.instance.verifyHmac(...args);
+  },
+  createHmac: function(...args) {
+    return this.instance.createHmac(...args);
+  },
+  generateSalt: function(...args) {
+    return this.instance.generateSalt(...args);
+  },
+  deriveKeyFromPassword: function(...args) {
+    return this.instance.deriveKeyFromPassword(...args);
+  },
+  encryptWithPassword: function(...args) {
+    return this.instance.encryptWithPassword(...args);
+  },
+  decryptWithPassword: function(...args) {
+    return this.instance.decryptWithPassword(...args);
+  },
+  backupKey: function(...args) {
+    return this.instance.backupKey(...args);
+  },
+  restoreKey: function(...args) {
+    return this.instance.restoreKey(...args);
+  },
+  isTls13Supported: function(...args) {
+    return this.instance.isTls13Supported(...args);
+  },
+  getTlsConfig: function(...args) {
+    return this.instance.getTlsConfig(...args);
+  },
+  validateKeyStrength: function(...args) {
+    return this.instance.validateKeyStrength(...args);
+  },
+  getStats: function(...args) {
+    return this.instance.getStats(...args);
+  },
+  sanitizeInput: function(...args) {
+    return this.instance.sanitizeInput(...args);
+  },
+  validateInput: function(...args) {
+    return this.instance.validateInput(...args);
+  }
+};
 
 export default encryptionService;
+export { createEncryptionService, encryptionService as EncryptionService };

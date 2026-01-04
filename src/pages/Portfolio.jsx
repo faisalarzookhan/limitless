@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
   HiCode,
   HiDeviceMobile,
@@ -21,6 +22,7 @@ import {
 } from 'react-icons/hi';
 import { api } from '../services/api';
 import { useApp } from '../context/AppContext';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 const Portfolio = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -39,6 +41,27 @@ const Portfolio = () => {
     { id: 'ecommerce', name: 'E-commerce', icon: HiShoppingCart },
     { id: 'automation', name: 'Automation & AI', icon: HiLightningBolt },
   ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
 
   // Fetch portfolio projects from API
   useEffect(() => {
@@ -78,7 +101,7 @@ const Portfolio = () => {
             year: '2023',
             duration: '8 months',
             icon: HiOfficeBuilding,
-            color: 'from-blue-600 to-purple-600',
+            color: 'from-[#2563eb] to-[#ffc957]',
             featured: true,
             testimonial: {
               text: 'Limitless Infotech transformed our operations with IVOLEX. The system integrated all 15 locations seamlessly, automated 80% of our manual processes, and improved overall efficiency by 60%. Their team was professional, responsive, and delivered beyond expectations.',
@@ -119,7 +142,7 @@ const Portfolio = () => {
             year: '2024',
             duration: '10 months',
             icon: HiAcademicCap,
-            color: 'from-amber-600 to-orange-600',
+            color: 'from-[#ffc957] to-[#2563eb]',
             featured: true,
             testimonial: {
               text: 'Wakilni has revolutionized how we connect legal professionals with clients. The platform is intuitive, scalable, and has helped us build a thriving community of lawyers and clients. Limitless Infotech delivered a world-class solution that exceeded all our expectations.',
@@ -161,7 +184,7 @@ const Portfolio = () => {
             year: '2023',
             duration: '4 months',
             icon: HiChartBar,
-            color: 'from-green-500 to-emerald-500',
+            color: 'from-[#2563eb] to-[#1d4ed8]',
           },
           {
             id: 2,
@@ -181,7 +204,7 @@ const Portfolio = () => {
             year: '2023',
             duration: '5 months',
             icon: HiShoppingCart,
-            color: 'from-pink-500 to-rose-500',
+            color: 'from-[#ffc957] to-[#1d4ed8]',
           },
           {
             id: 3,
@@ -201,7 +224,7 @@ const Portfolio = () => {
             year: '2023',
             duration: '6 months',
             icon: HiTruck,
-            color: 'from-blue-500 to-cyan-500',
+            color: 'from-[#2563eb] to-[#ffc957]',
           },
           {
             id: 4,
@@ -221,7 +244,7 @@ const Portfolio = () => {
             year: '2023',
             duration: '7 months',
             icon: HiAcademicCap,
-            color: 'from-purple-500 to-indigo-500',
+            color: 'from-[#ffc957] to-[#2563eb]',
           },
           {
             id: 5,
@@ -241,7 +264,7 @@ const Portfolio = () => {
             year: '2023',
             duration: '8 months',
             icon: HiHeart,
-            color: 'from-red-500 to-pink-500',
+            color: 'from-[#2563eb] to-[#1d4ed8]',
           },
           {
             id: 6,
@@ -261,7 +284,7 @@ const Portfolio = () => {
             year: '2022',
             duration: '10 months',
             icon: HiCash,
-            color: 'from-yellow-500 to-amber-500',
+            color: 'from-[#ffc957] to-[#2563eb]',
           },
           {
             id: 7,
@@ -281,7 +304,7 @@ const Portfolio = () => {
             year: '2023',
             duration: '5 months',
             icon: HiOfficeBuilding,
-            color: 'from-orange-500 to-red-500',
+            color: 'from-[#2563eb] to-[#ffc957]',
           },
           {
             id: 8,
@@ -301,7 +324,7 @@ const Portfolio = () => {
             year: '2023',
             duration: '4 months',
             icon: HiShoppingCart,
-            color: 'from-green-500 to-teal-500',
+            color: 'from-[#ffc957] to-[#1d4ed8]',
           },
           {
             id: 9,
@@ -321,7 +344,7 @@ const Portfolio = () => {
             year: '2022',
             duration: '6 months',
             icon: HiOfficeBuilding,
-            color: 'from-blue-500 to-indigo-500',
+            color: 'from-[#2563eb] to-[#1d4ed8]',
           },
           {
             id: 10,
@@ -341,7 +364,7 @@ const Portfolio = () => {
             year: '2023',
             duration: '3 months',
             icon: HiLightningBolt,
-            color: 'from-purple-500 to-pink-500',
+            color: 'from-[#ffc957] to-[#2563eb]',
           },
           {
             id: 11,
@@ -361,7 +384,7 @@ const Portfolio = () => {
             year: '2023',
             duration: '5 months',
             icon: HiHeart,
-            color: 'from-red-500 to-orange-500',
+            color: 'from-[#2563eb] to-[#ffc957]',
           },
           {
             id: 12,
@@ -381,7 +404,7 @@ const Portfolio = () => {
             year: '2022',
             duration: '12 months',
             icon: HiChartBar,
-            color: 'from-indigo-500 to-purple-500',
+            color: 'from-[#ffc957] to-[#2563eb]',
           },
         ]);
       } finally {
@@ -413,9 +436,15 @@ const Portfolio = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <ErrorBoundary>
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
       {/* Hero Section */}
-      <section className="relative py-20 md:py-32 bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 text-white overflow-hidden">
+      <motion.section 
+        className="relative py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#1d4ed8] to-[#ffc957] text-[#0a0b0d] overflow-hidden"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div
           className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8"
           aria-hidden="true"
@@ -424,51 +453,68 @@ const Portfolio = () => {
         </div>
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8 animate-fade-in-down">
+            <motion.div 
+              className="inline-flex items-center space-x-2 bg-[#0a0b0d]/20 px-6 py-3 rounded-full mb-8"
+              variants={itemVariants}
+            >
               <HiCube className="w-5 h-5" />
-              <span className="text-sm font-semibold">Our Success Stories</span>
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 animate-fade-in-up">
+              <span className="text-sm font-semibold font-['Outfit']">Our Success Stories</span>
+            </motion.div>
+            <motion.h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-['Outfit'] font-bold mb-6"
+              variants={itemVariants}
+            >
               Portfolio of Excellence
-            </h1>
-            <p
-              className="text-xl md:text-2xl text-white/90 mb-8 animate-fade-in-up"
-              style={{ animationDelay: '0.2s' }}
+            </motion.h1>
+            <motion.p 
+              className="text-xl md:text-2xl text-[#0a0b0d]/90 mb-8 font-['Figtree']"
+              variants={itemVariants}
             >
               Explore our showcase of successful projects that have transformed
               businesses across industries
-            </p>
+            </motion.p>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 max-w-4xl mx-auto">
+          <motion.div 
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 max-w-4xl mx-auto"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
             {stats.map((stat, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="text-center animate-fade-in-up"
-                style={{ animationDelay: `${0.3 + index * 0.1}s` }}
+                className="text-center"
+                variants={itemVariants}
+                transition={{ delay: index * 0.1 }}
               >
-                <div className="text-3xl md:text-4xl font-bold mb-2">
+                <div className="text-3xl md:text-4xl font-['Outfit'] font-bold mb-2">
                   {stat.number}
                 </div>
-                <div className="text-sm text-white/80">{stat.label}</div>
-              </div>
+                <div className="text-sm text-[#0a0b0d]/80 font-['Figtree']">{stat.label}</div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Filter and Search Section */}
-      <section className="section-padding bg-white dark:bg-dark-900">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
           {/* Loading State */}
           {loading && (
             <div className="text-center py-16">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600 mb-4"></div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#2563eb] mb-4"></div>
+              <h3 className="text-xl font-['Outfit'] font-semibold text-white mb-2">
                 Loading projects...
               </h3>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-gray-300 font-['Figtree']">
                 Please wait while we fetch our portfolio
               </p>
             </div>
@@ -477,16 +523,16 @@ const Portfolio = () => {
           {/* Error State */}
           {error && !loading && (
             <div className="text-center py-16">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 dark:bg-red-900/20 mb-4">
-                <HiExclamation className="w-8 h-8 text-red-600 dark:text-red-400" />
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-900/20 mb-4">
+                <HiExclamation className="w-8 h-8 text-red-500" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+              <h3 className="text-xl font-['Outfit'] font-semibold text-white mb-2">
                 Unable to Load Projects
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">{error}</p>
+              <p className="text-gray-300 mb-6 font-['Figtree']">{error}</p>
               <button
                 onClick={() => window.location.reload()}
-                className="inline-flex items-center space-x-2 px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-300"
+                className="inline-flex items-center space-x-2 px-6 py-3 bg-[#2563eb] text-white rounded-lg hover:bg-[#1d4ed8] transition-colors duration-300 font-['Figtree']"
               >
                 <HiRefresh className="w-5 h-5" />
                 <span>Retry</span>
@@ -496,7 +542,12 @@ const Portfolio = () => {
 
           {/* Search Bar */}
           {!loading && !error && (
-            <div className="max-w-2xl mx-auto mb-12">
+            <motion.div 
+              className="max-w-2xl mx-auto mb-12"
+              initial="hidden"
+              animate="visible"
+              variants={itemVariants}
+            >
               <div className="relative">
                 <HiSearch className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
@@ -504,26 +555,31 @@ const Portfolio = () => {
                   placeholder="Search projects by name, client, industry, or technology..."
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 bg-gray-50 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-900 dark:text-white"
+                  className="w-full pl-12 pr-4 py-4 bg-gray-800 border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#2563eb] text-white font-['Figtree']"
                 />
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* Category Filter */}
           {!loading && !error && (
-            <div className="flex items-center justify-center mb-12">
-              <div className="inline-flex items-center space-x-2 bg-gray-50 dark:bg-dark-800 p-2 rounded-xl border border-gray-200 dark:border-dark-700">
-                <HiFilter className="w-5 h-5 text-gray-500 dark:text-gray-400 ml-2" />
+            <motion.div 
+              className="flex items-center justify-center mb-12"
+              initial="hidden"
+              animate="visible"
+              variants={itemVariants}
+            >
+              <div className="inline-flex items-center space-x-2 bg-gray-800 p-2 rounded-xl border border-gray-700">
+                <HiFilter className="w-5 h-5 text-gray-400 ml-2" />
                 <div className="flex flex-wrap gap-2">
                   {categories.map(category => (
                     <button
                       key={category.id}
                       onClick={() => setSelectedCategory(category.id)}
-                      className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center space-x-2 ${
+                      className={`px-4 py-2 rounded-lg font-['Figtree'] transition-all duration-300 flex items-center space-x-2 ${
                         selectedCategory === category.id
-                          ? 'bg-primary-600 text-white shadow-lg'
-                          : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-dark-700'
+                          ? 'bg-[#2563eb] text-white shadow-lg'
+                          : 'text-gray-400 hover:bg-gray-700'
                       }`}
                     >
                       <category.icon className="w-4 h-4" />
@@ -532,150 +588,182 @@ const Portfolio = () => {
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* Results Count */}
           {!loading && !error && (
-            <div className="text-center mb-8">
-              <p className="text-gray-600 dark:text-gray-400">
+            <motion.div 
+              className="text-center mb-8"
+              initial="hidden"
+              animate="visible"
+              variants={itemVariants}
+            >
+              <p className="text-gray-300 font-['Figtree']">
                 Showing{' '}
-                <span className="font-semibold text-primary-600 dark:text-primary-400">
+                <span className="font-semibold text-[#2563eb]">
                   {filteredProjects.length}
                 </span>{' '}
                 project{filteredProjects.length !== 1 ? 's' : ''}
               </p>
-            </div>
+            </motion.div>
           )}
 
           {/* Portfolio Grid */}
           {!loading && !error && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              initial="hidden"
+              animate="visible"
+              variants={containerVariants}
+            >
               {filteredProjects.map((project, index) => (
-                <Link
+                <motion.div
                   key={project.id}
-                  to={`/portfolio/${project.id}`}
-                  className="portfolio-card animate-fade-in-up"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  className="group"
+                  initial="hidden"
+                  animate="visible"
+                  variants={itemVariants}
+                  transition={{ delay: index * 0.1 }}
                 >
-                  {/* Project Image/Icon */}
-                  <div
-                    className={`relative h-64 bg-gradient-to-br ${project.color} flex items-center justify-center overflow-hidden`}
+                  <Link
+                    to={`/portfolio/${project.id}`}
+                    className="block bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl shadow-xl border border-gray-700 overflow-hidden transition-all duration-300 group-hover:shadow-2xl group-hover:border-[#2563eb]/50"
                   >
-                    <project.icon className="w-24 h-24 text-white opacity-80 transform group-hover:scale-110 transition-transform duration-300" />
+                    {/* Project Image/Icon */}
+                    <div
+                      className={`relative h-64 bg-gradient-to-br ${project.color} flex items-center justify-center overflow-hidden`}
+                    >
+                      <project.icon className="w-24 h-24 text-white opacity-80 transform group-hover:scale-110 transition-transform duration-300" />
 
-                    {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                      <div className="text-white">
-                        <p className="text-sm font-semibold mb-1">
-                          View Case Study
-                        </p>
-                        <HiArrowRight className="w-5 h-5" />
+                      {/* Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div className="text-white">
+                          <p className="text-sm font-semibold mb-1 font-['Figtree']">
+                            View Case Study
+                          </p>
+                          <HiArrowRight className="w-5 h-5" />
+                        </div>
+                      </div>
+
+                      {/* Year Badge */}
+                      <div className="absolute top-4 right-4 bg-[#0a0b0d]/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-white font-['Figtree']">
+                        {project.year}
                       </div>
                     </div>
 
-                    {/* Year Badge */}
-                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-gray-900">
-                      {project.year}
-                    </div>
-                  </div>
-
-                  {/* Project Info */}
-                  <div className="p-6">
-                    <div className="flex items-center space-x-2 mb-3">
-                      <span className="text-xs font-semibold text-primary-600 dark:text-primary-400 uppercase tracking-wide">
-                        {project.industry}
-                      </span>
-                      <span className="text-gray-400">•</span>
-                      <span className="text-xs text-gray-500 dark:text-gray-400">
-                        {project.duration}
-                      </span>
-                    </div>
-
-                    <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
-                      {project.title}
-                    </h3>
-
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                      {project.client}
-                    </p>
-
-                    <p className="text-gray-700 dark:text-gray-300 mb-4 line-clamp-2">
-                      {project.description}
-                    </p>
-
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tags.slice(0, 3).map((tag, i) => (
-                        <span key={i} className="badge badge-primary text-xs">
-                          {tag}
+                    {/* Project Info */}
+                    <div className="p-6">
+                      <div className="flex items-center space-x-2 mb-3">
+                        <span className="text-xs font-semibold text-[#2563eb] uppercase tracking-wide font-['Figtree']">
+                          {project.industry}
                         </span>
-                      ))}
-                    </div>
+                        <span className="text-gray-500">•</span>
+                        <span className="text-xs text-gray-400 font-['Figtree']">
+                          {project.duration}
+                        </span>
+                      </div>
 
-                    {/* Results Preview */}
-                    <div className="grid grid-cols-3 gap-2 pt-4 border-t border-gray-200 dark:border-dark-700">
-                      {Object.entries(project.results)
-                        .slice(0, 3)
-                        .map(([key, value], i) => (
-                          <div key={i} className="text-center">
-                            <div className="text-lg font-bold text-primary-600 dark:text-primary-400">
-                              {value}
-                            </div>
-                            <div className="text-xs text-gray-500 dark:text-gray-400 capitalize">
-                              {key}
-                            </div>
-                          </div>
+                      <h3 className="text-xl font-['Outfit'] font-bold mb-2 text-white group-hover:text-[#2563eb] transition-colors duration-300">
+                        {project.title}
+                      </h3>
+
+                      <p className="text-sm text-gray-300 mb-4 font-['Figtree']">
+                        {project.client}
+                      </p>
+
+                      <p className="text-gray-300 mb-4 line-clamp-2 font-['Figtree']">
+                        {project.description}
+                      </p>
+
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.tags.slice(0, 3).map((tag, i) => (
+                          <span key={i} className="bg-[#2563eb]/20 text-[#2563eb] px-2 py-1 rounded-full text-xs font-['Figtree']">
+                            {tag}
+                          </span>
                         ))}
+                      </div>
+
+                      {/* Results Preview */}
+                      <div className="grid grid-cols-3 gap-2 pt-4 border-t border-gray-700">
+                        {Object.entries(project.results)
+                          .slice(0, 3)
+                          .map(([key, value], i) => (
+                            <div key={i} className="text-center">
+                              <div className="text-lg font-['Outfit'] font-bold text-[#2563eb]">
+                                {value}
+                              </div>
+                              <div className="text-xs text-gray-400 capitalize font-['Figtree']">
+                                {key}
+                              </div>
+                            </div>
+                          ))}
+                      </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           )}
 
           {/* No Results */}
           {!loading && !error && filteredProjects.length === 0 && (
             <div className="text-center py-16">
-              <HiCube className="w-16 h-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+              <HiCube className="w-16 h-16 text-gray-500 mx-auto mb-4" />
+              <h3 className="text-xl font-['Outfit'] font-semibold text-white mb-2">
                 No projects found
               </h3>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-gray-300 font-['Figtree']">
                 Try adjusting your search or filter criteria
               </p>
             </div>
           )}
         </div>
-      </section>
+      </motion.section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-br from-primary-600 to-secondary-600 text-white">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#2563eb] to-[#ffc957] text-[#0a0b0d]"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom text-center">
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+          <motion.h2 
+            className="text-3xl md:text-4xl font-['Outfit'] font-bold mb-4"
+            variants={itemVariants}
+          >
             Ready to Be Our Next Success Story?
-          </h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p 
+            className="text-xl text-[#0a0b0d]/90 mb-8 max-w-2xl mx-auto font-['Figtree']"
+            variants={itemVariants}
+          >
             Let's create something amazing together. Your project could be
             featured here next!
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          </motion.p>
+          <motion.div 
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            variants={itemVariants}
+          >
             <Link
               to="/get-started"
-              className="btn-primary bg-white text-primary-600 hover:bg-gray-100"
+              className="bg-[#0a0b0d] text-[#ffc957] hover:bg-[#1a1c25] px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']"
             >
               Start Your Project
             </Link>
             <Link
               to="/contact"
-              className="btn-outline border-white text-white hover:bg-white hover:text-primary-600"
+              className="bg-transparent border border-[#0a0b0d] text-[#0a0b0d] hover:bg-[#0a0b0d] hover:text-[#ffc957] px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']"
             >
               Get In Touch
             </Link>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </div>
+    </ErrorBoundary>
   );
 };
 

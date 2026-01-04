@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { HiShieldCheck, HiLockClosed, HiDocumentText } from 'react-icons/hi';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 const PrivacyPolicy = () => {
   const lastUpdated = 'January 15, 2024';
@@ -200,10 +202,37 @@ const PrivacyPolicy = () => {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
   return (
-    <div className="min-h-screen">
+    <ErrorBoundary>
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
       {/* Hero Section */}
-      <section className="relative py-20 md:py-28 bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 text-white overflow-hidden">
+      <motion.section 
+        className="relative py-20 md:py-28 bg-gradient-to-br from-[#2563eb] via-[#1d4ed8] to-[#ffc957] text-[#0a0b0d] overflow-hidden"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div
           className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8"
           aria-hidden="true"
@@ -212,74 +241,97 @@ const PrivacyPolicy = () => {
         </div>
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8 animate-fade-in-down">
+            <motion.div 
+              className="inline-flex items-center space-x-2 bg-[#0a0b0d]/20 px-6 py-3 rounded-full mb-8"
+              variants={itemVariants}
+            >
               <HiShieldCheck className="w-5 h-5" />
-              <span className="text-sm font-semibold">
+              <span className="text-sm font-semibold font-['Outfit']">
                 Your Privacy Matters
               </span>
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 animate-fade-in-up">
+            </motion.div>
+            <motion.h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-['Outfit'] font-bold mb-6"
+              variants={itemVariants}
+            >
               Privacy Policy
-            </h1>
-            <p
-              className="text-xl md:text-2xl text-white/90 mb-4 animate-fade-in-up"
-              style={{ animationDelay: '0.2s' }}
+            </motion.h1>
+            <motion.p 
+              className="text-xl md:text-2xl text-[#0a0b0d]/90 mb-4 font-['Figtree']"
+              variants={itemVariants}
             >
               We are committed to protecting your personal information and your
               right to privacy
-            </p>
-            <p
-              className="text-sm text-white/80 animate-fade-in-up"
-              style={{ animationDelay: '0.3s' }}
+            </motion.p>
+            <motion.p 
+              className="text-sm text-[#0a0b0d]/80 font-['Figtree']"
+              variants={itemVariants}
             >
               Last Updated: {lastUpdated}
-            </p>
+            </motion.p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Introduction */}
-      <section className="section-padding bg-white dark:bg-dark-900">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom max-w-4xl">
-          <div className="bg-primary-50 dark:bg-primary-900/20 rounded-2xl p-8 mb-12 border border-primary-200 dark:border-primary-800">
-            <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center">
-              <HiDocumentText className="w-6 h-6 mr-3 text-primary-600 dark:text-primary-400" />
+          <motion.div 
+            className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 mb-12 border border-gray-700"
+            initial="hidden"
+            animate="visible"
+            variants={itemVariants}
+          >
+            <h2 className="text-2xl font-['Outfit'] font-bold mb-4 text-white flex items-center">
+              <HiDocumentText className="w-6 h-6 mr-3 text-[#2563eb]" />
               Introduction
             </h2>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+            <p className="text-gray-300 leading-relaxed mb-4 font-['Figtree']">
               Limitless Infotech Solution ("we," "us," or "our") respects your
               privacy and is committed to protecting your personal data. This
               privacy policy explains how we collect, use, disclose, and
               safeguard your information when you visit our website or use our
               services.
             </p>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+            <p className="text-gray-300 leading-relaxed font-['Figtree']">
               Please read this privacy policy carefully. If you do not agree
               with the terms of this privacy policy, please do not access the
               site or use our services.
             </p>
-          </div>
+          </motion.div>
 
           {/* Policy Sections */}
-          <div className="space-y-10">
+          <motion.div 
+            className="space-y-10"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
             {sections.map((section, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="border-b border-gray-200 dark:border-dark-700 pb-10 last:border-b-0"
+                className="border-b border-gray-700 pb-10 last:border-b-0"
+                variants={itemVariants}
+                transition={{ delay: index * 0.1 }}
               >
-                <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+                <h2 className="text-2xl font-['Outfit'] font-bold mb-6 text-white">
                   {section.title}
                 </h2>
                 <div className="space-y-4">
                   {section.content.map((item, idx) => (
                     <div key={idx}>
                       {item.subtitle && (
-                        <h3 className="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-200">
+                        <h3 className="text-lg font-['Outfit'] font-semibold mb-3 text-gray-200">
                           {item.subtitle}
                         </h3>
                       )}
                       {item.text && (
-                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                        <p className="text-gray-300 leading-relaxed mb-4 font-['Figtree']">
                           {item.text}
                         </p>
                       )}
@@ -287,8 +339,8 @@ const PrivacyPolicy = () => {
                         <ul className="space-y-2 ml-4">
                           {item.list.map((listItem, listIdx) => (
                             <li key={listIdx} className="flex items-start">
-                              <span className="w-2 h-2 bg-primary-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                              <span className="text-gray-700 dark:text-gray-300">
+                              <span className="w-2 h-2 bg-[#2563eb] rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                              <span className="text-gray-300 font-['Figtree']">
                                 {listItem}
                               </span>
                             </li>
@@ -298,23 +350,28 @@ const PrivacyPolicy = () => {
                     </div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Contact Box */}
-          <div className="mt-12 bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-primary-900/20 dark:to-secondary-900/20 rounded-2xl p-8 border border-primary-200 dark:border-primary-800">
+          <motion.div 
+            className="mt-12 bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 border border-gray-700"
+            initial="hidden"
+            animate="visible"
+            variants={itemVariants}
+          >
             <div className="flex items-start space-x-4">
-              <HiLockClosed className="w-8 h-8 text-primary-600 dark:text-primary-400 flex-shrink-0 mt-1" />
+              <HiLockClosed className="w-8 h-8 text-[#2563eb] flex-shrink-0 mt-1" />
               <div>
-                <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
+                <h3 className="text-xl font-['Outfit'] font-bold mb-3 text-white">
                   Questions About This Policy?
                 </h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
+                <p className="text-gray-300 mb-4 font-['Figtree']">
                   If you have questions or comments about this privacy policy,
                   please contact our Data Protection Officer:
                 </p>
-                <div className="space-y-2 text-gray-700 dark:text-gray-300">
+                <div className="space-y-2 text-gray-300 font-['Figtree']">
                   <p>
                     <strong>Email:</strong> Info@limitlessinfotech.com
                   </p>
@@ -327,23 +384,29 @@ const PrivacyPolicy = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Related Links */}
-          <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/terms-of-service" className="btn-outline">
+          <motion.div 
+            className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
+            initial="hidden"
+            animate="visible"
+            variants={itemVariants}
+          >
+            <Link to="/terms-of-service" className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-xl font-['Figtree'] transition-colors">
               Terms of Service
             </Link>
-            <Link to="/cookie-policy" className="btn-outline">
+            <Link to="/cookie-policy" className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-xl font-['Figtree'] transition-colors">
               Cookie Policy
             </Link>
-            <Link to="/contact" className="btn-primary">
+            <Link to="/contact" className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-6 py-3 rounded-xl font-['Figtree'] transition-colors">
               Contact Us
             </Link>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </div>
+    </ErrorBoundary>
   );
 };
 

@@ -6,6 +6,9 @@ import {
   HiOutlineEyeOff,
 } from 'react-icons/hi';
 import InputField from './InputField';
+import csrfService from '../../services/csrfService';
+import rateLimitService from '../../services/rateLimitService';
+import encryptionService from '../../services/encryptionService';
 import { sendPasswordResetNotification } from '../../services/notificationService';
 
 const PasswordResetForm = ({ onResetSuccess, variant = 'default' }) => {
@@ -19,6 +22,14 @@ const PasswordResetForm = ({ onResetSuccess, variant = 'default' }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [errors, setErrors] = useState({});
+  const [rateLimitError, setRateLimitError] = useState(null);
+  
+  // Get client identifier for rate limiting (using a combination of factors)
+  const getClientIdentifier = () => {
+    // In a real implementation, this would use the actual IP address from the server
+    // For client-side, we'll use a combination of factors
+    return `${window.location.hostname}_${navigator.userAgent}`;
+  };
   const [step, setStep] = useState(1); // 1: Enter email, 2: Reset password
 
   const handleChange = e => {
@@ -27,20 +38,27 @@ const PasswordResetForm = ({ onResetSuccess, variant = 'default' }) => {
       ...prev,
       [name]: value,
     }));
-
-    // Clear error when user starts typing
+    
+    // Clear error for this field when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
     }
   };
 
   const validateEmail = () => {
     const newErrors = {};
 
-    if (!formData.email) {
+    if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
+    } else {
+      const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+      if (!emailRegex.test(formData.email.trim())) {
+        newErrors.email = 'Please enter a valid email address';
+      }
     }
 
     setErrors(newErrors);
@@ -50,15 +68,15 @@ const PasswordResetForm = ({ onResetSuccess, variant = 'default' }) => {
   const validatePassword = () => {
     const newErrors = {};
 
-    if (!formData.password) {
+    if (!formData.password.trim()) {
       newErrors.password = 'New password is required';
-    } else if (formData.password.length < 6) {
+    } else if (formData.password.trim().length < 6) {
       newErrors.password = 'Password must be at least 6 characters';
     }
 
-    if (!formData.confirmPassword) {
+    if (!formData.confirmPassword.trim()) {
       newErrors.confirmPassword = 'Please confirm your password';
-    } else if (formData.password !== formData.confirmPassword) {
+    } else if (formData.password.trim() !== formData.confirmPassword.trim()) {
       newErrors.confirmPassword = 'Passwords do not match';
     }
 
@@ -68,22 +86,45 @@ const PasswordResetForm = ({ onResetSuccess, variant = 'default' }) => {
 
   const handleEmailSubmit = async e => {
     e.preventDefault();
-
+    
+    // Check rate limit for password reset requests
+    const clientIdentifier = getClientIdentifier();
+    const rateLimitCheck = rateLimitService.checkLimit(clientIdentifier, 'passwordReset');
+    
+    if (!rateLimitCheck.allowed) {
+      const retryAfterSeconds = Math.ceil(rateLimitCheck.retryAfter / 1000);
+      setRateLimitError(`Rate limit exceeded. Please try again in ${retryAfterSeconds} seconds.`);
+      return;
+    }
+    
+    // Clear any previous rate limit error
+    setRateLimitError(null);
+    
+    // Validate form first
     if (!validateEmail()) {
       return;
     }
-
+    
     setIsSubmitting(true);
+    
+    // Sanitize input data
+    const sanitizedData = {
+      email: encryptionService.sanitizeInput(formData.email),
+    };
+
+    // Add CSRF token to the data
+    const requestData = {
+      ...sanitizedData,
+      action: 'request',
+      csrfToken: csrfService.getToken(),
+      timestamp: new Date().toISOString(),
+      page: window.location.pathname,
+      userAgent: navigator.userAgent,
+    };
 
     try {
       // Send notification about the password reset request
-      await sendPasswordResetNotification({
-        email: formData.email,
-        action: 'request',
-        timestamp: new Date().toISOString(),
-        page: window.location.pathname,
-        userAgent: navigator.userAgent,
-      });
+      await sendPasswordResetNotification(requestData);
 
       // Simulate API call
       setTimeout(() => {
@@ -98,22 +139,47 @@ const PasswordResetForm = ({ onResetSuccess, variant = 'default' }) => {
 
   const handlePasswordReset = async e => {
     e.preventDefault();
-
+    
+    // Check rate limit for password reset attempts
+    const clientIdentifier = getClientIdentifier();
+    const rateLimitCheck = rateLimitService.checkLimit(clientIdentifier, 'passwordReset');
+    
+    if (!rateLimitCheck.allowed) {
+      const retryAfterSeconds = Math.ceil(rateLimitCheck.retryAfter / 1000);
+      setRateLimitError(`Rate limit exceeded. Please try again in ${retryAfterSeconds} seconds.`);
+      return;
+    }
+    
+    // Clear any previous rate limit error
+    setRateLimitError(null);
+    
+    // Validate form first
     if (!validatePassword()) {
       return;
     }
-
+    
     setIsSubmitting(true);
+    
+    // Sanitize input data
+    const sanitizedData = {
+      email: encryptionService.sanitizeInput(formData.email),
+      password: encryptionService.sanitizeInput(formData.password),
+      confirmPassword: encryptionService.sanitizeInput(formData.confirmPassword),
+    };
+
+    // Add CSRF token to the data
+    const requestData = {
+      ...sanitizedData,
+      action: 'reset',
+      csrfToken: csrfService.getToken(),
+      timestamp: new Date().toISOString(),
+      page: window.location.pathname,
+      userAgent: navigator.userAgent,
+    };
 
     try {
       // Send notification about the password reset
-      await sendPasswordResetNotification({
-        email: formData.email,
-        action: 'reset',
-        timestamp: new Date().toISOString(),
-        page: window.location.pathname,
-        userAgent: navigator.userAgent,
-      });
+      await sendPasswordResetNotification(requestData);
 
       // Simulate API call
       setTimeout(() => {
@@ -136,7 +202,7 @@ const PasswordResetForm = ({ onResetSuccess, variant = 'default' }) => {
 
   if (submitSuccess) {
     return (
-      <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 text-center">
+      <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 text-center" role="alert" aria-live="polite">
         <div className="flex items-center justify-center mb-3">
           <svg
             className="w-8 h-8 text-green-600 dark:text-green-400"
@@ -166,7 +232,12 @@ const PasswordResetForm = ({ onResetSuccess, variant = 'default' }) => {
 
   if (step === 1) {
     return (
-      <form onSubmit={handleEmailSubmit} className="space-y-4">
+      <form onSubmit={handleEmailSubmit} className="space-y-4" noValidate>
+        {rateLimitError && (
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4" role="alert" aria-live="polite">
+            <p className="text-red-700 dark:text-red-300 text-sm">{rateLimitError}</p>
+          </div>
+        )}
         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
           Reset Your Password
         </h3>
@@ -216,7 +287,12 @@ const PasswordResetForm = ({ onResetSuccess, variant = 'default' }) => {
   }
 
   return (
-    <form onSubmit={handlePasswordReset} className="space-y-4">
+    <form onSubmit={handlePasswordReset} className="space-y-4" noValidate>
+      {rateLimitError && (
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4" role="alert" aria-live="polite">
+          <p className="text-red-700 dark:text-red-300 text-sm">{rateLimitError}</p>
+        </div>
+      )}
       <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
         Create New Password
       </h3>

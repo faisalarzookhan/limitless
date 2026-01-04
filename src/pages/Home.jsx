@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import {
   HiCode,
@@ -21,7 +22,9 @@ import {
   HiArrowSmRight,
 } from 'react-icons/hi';
 
-import { AnimatedElement, DuoToneIcon } from '../components/ui';
+import AnimatedElement from '../components/ui/components/AnimatedElement';
+import DuoToneIcon from '../components/ui/components/DuoToneIcon';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 const Home = () => {
   const [openFaq, setOpenFaq] = useState(null);
@@ -32,42 +35,42 @@ const Home = () => {
       title: 'Web Development',
       description:
         'Responsive, scalable, and SEO-optimized websites built with cutting-edge technologies.',
-      color: 'from-blue-600 to-blue-800',
+      color: 'from-[#2563eb] to-[#1d4ed8]',
     },
     {
       icon: HiDeviceMobile,
       title: 'Mobile App Development',
       description:
         'Native and cross-platform mobile applications that deliver exceptional user experiences.',
-      color: 'from-blue-700 to-blue-900',
+      color: 'from-[#2563eb] to-[#1e3a8a]',
     },
     {
       icon: HiCube,
       title: 'Custom Software & Systems',
       description:
         'Tailored software solutions designed to meet your unique business requirements.',
-      color: 'from-blue-800 to-blue-950',
+      color: 'from-[#2563eb] to-[#0a0b0d]',
     },
     {
       icon: HiChartBar,
       title: 'CRM & Task Management',
       description:
         'Powerful systems to manage customer relationships and streamline business operations.',
-      color: 'from-blue-600 to-blue-700',
+      color: 'from-[#2563eb] to-[#1e40af]',
     },
     {
       icon: HiLightningBolt,
       title: 'Business Automation & AI',
       description:
         'Intelligent automation solutions that transform operations and boost productivity.',
-      color: 'from-blue-700 to-blue-800',
+      color: 'from-[#2563eb] to-[#1e40af]',
     },
     {
       icon: HiServer,
       title: 'Enterprise SaaS Products',
       description:
         'Production-ready software solutions including TrackIT, HR-IMS, WorkTrack, and more.',
-      color: 'from-blue-800 to-blue-900',
+      color: 'from-[#2563eb] to-[#1e3a8a]',
     },
   ];
 
@@ -77,7 +80,7 @@ const Home = () => {
       name: 'TrackIT',
       description: 'IT Asset Management System',
       icon: HiServer,
-      color: 'from-blue-600 to-blue-800',
+      color: 'from-[#2563eb] to-[#1e40af]',
       users: '500+',
       link: '/products',
     },
@@ -86,7 +89,7 @@ const Home = () => {
       name: 'HR-IMS',
       description: 'HR Management System',
       icon: HiUserGroup,
-      color: 'from-amber-500 to-amber-600',
+      color: 'from-[#ffc957] to-[#ffbd3a]',
       users: '2,000+',
       link: '/products',
       popular: true,
@@ -96,7 +99,7 @@ const Home = () => {
       name: 'WorkTrack',
       description: 'Workforce Management',
       icon: HiClock,
-      color: 'from-blue-700 to-blue-900',
+      color: 'from-[#2563eb] to-[#0a0b0d]',
       users: '1,500+',
       link: '/products',
     },
@@ -105,7 +108,7 @@ const Home = () => {
       name: 'IT-TMS',
       description: 'IT Ticket Management',
       icon: HiChartBar,
-      color: 'from-blue-600 to-blue-700',
+      color: 'from-[#2563eb] to-[#1e40af]',
       users: '800+',
       link: '/products',
     },
@@ -124,7 +127,7 @@ const Home = () => {
         { label: 'Users', value: '500+' },
       ],
       link: '/portfolio/101',
-      color: 'from-blue-600 to-blue-800',
+      color: 'from-[#2563eb] to-[#1e40af]',
     },
     {
       id: 'wakilni',
@@ -138,7 +141,7 @@ const Home = () => {
         { label: 'Satisfaction', value: '95%' },
       ],
       link: '/portfolio/102',
-      color: 'from-amber-500 to-amber-600',
+      color: 'from-[#ffc957] to-[#ffbd3a]',
     },
   ];
 
@@ -278,52 +281,68 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen font-sans">
+    <ErrorBoundary>
+      <>
+      <Helmet>
+        <title>Limitless Infotech Solution - Enterprise Digital Excellence</title>
+        <meta name="description" content="Transform your business with architectural-grade digital solutions. We are the architects of transformation, building tomorrow's technology today." />
+        <meta name="keywords" content="web development, mobile app development, custom software, CRM, business automation, AI integration, enterprise solutions" />
+        <meta name="author" content="Limitless Infotech Solution" />
+        <meta property="og:title" content="Limitless Infotech Solution - Enterprise Digital Excellence" />
+        <meta property="og:description" content="Transform your business with architectural-grade digital solutions. We are the architects of transformation, building tomorrow's technology today." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.limitlessinfotech.com" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Limitless Infotech Solution - Enterprise Digital Excellence" />
+        <meta name="twitter:description" content="Transform your business with architectural-grade digital solutions. We are the architects of transformation, building tomorrow's technology today." />
+        <link rel="canonical" href="https://www.limitlessinfotech.com" />
+      </Helmet>
+      <div className="min-h-screen font-sans bg-[#0a0b0d]">
       {/* Hero Section - Asymmetrical Layout */}
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-blue-100 dark:from-blue-950 dark:via-blue-900 dark:to-blue-950 bg-architectural-grid">
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#0a0b0d] via-[#1e293b] to-[#0f172a]">
         {/* Asymmetrical background elements */}
-        <div className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-blue-600/5 to-transparent"></div>
-        <div className="absolute top-1/4 right-0 w-2/5 h-2/3 bg-gradient-to-l from-amber-500/10 to-transparent"></div>
+        <div className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-[#2563eb]/10 to-transparent"></div>
+        <div className="absolute top-1/4 right-0 w-2/5 h-2/3 bg-gradient-to-l from-[#ffc957]/10 to-transparent"></div>
 
         {/* Geometric pattern derived from logo architecture */}
         <div className="absolute inset-0" aria-hidden="true">
-          <div className="absolute top-20 left-10 w-16 h-16 border-l-4 border-b-4 border-blue-500 rotate-45"></div>
-          <div className="absolute top-40 right-20 w-24 h-24 border-r-4 border-t-4 border-amber-500 rotate-12"></div>
-          <div className="absolute bottom-40 left-20 w-20 h-20 border-t-4 border-r-4 border-blue-600 -rotate-12"></div>
+          <div className="absolute top-20 left-10 w-16 h-16 border-l-4 border-b-4 border-[#2563eb] rotate-45"></div>
+          <div className="absolute top-40 right-20 w-24 h-24 border-r-4 border-t-4 border-[#ffc957] rotate-12"></div>
+          <div className="absolute bottom-40 left-20 w-20 h-20 border-t-4 border-r-4 border-[#2563eb] -rotate-12"></div>
 
           {/* Additional architectural elements */}
-          <div className="absolute top-1/3 right-1/4 w-32 h-1 bg-gradient-to-r from-blue-500 to-amber-500"></div>
-          <div className="absolute bottom-1/4 left-1/4 w-24 h-24 border-2 border-blue-400 rounded-full opacity-30"></div>
-          <div className="absolute top-1/2 left-1/3 w-2 h-24 bg-gradient-to-b from-blue-500 to-transparent"></div>
-          <div className="absolute top-1/4 right-1/3 w-24 h-2 bg-gradient-to-r from-amber-500 to-transparent"></div>
+          <div className="absolute top-1/3 right-1/4 w-32 h-1 bg-gradient-to-r from-[#2563eb] to-[#ffc957]"></div>
+          <div className="absolute bottom-1/4 left-1/4 w-24 h-24 border-2 border-[#2563eb] rounded-full opacity-30"></div>
+          <div className="absolute top-1/2 left-1/3 w-2 h-24 bg-gradient-to-b from-[#2563eb] to-transparent"></div>
+          <div className="absolute top-1/4 right-1/3 w-24 h-2 bg-gradient-to-r from-[#ffc957] to-transparent"></div>
         </div>
 
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="max-w-2xl">
               {/* Badge */}
-              <div className="inline-flex items-center space-x-2 bg-white/80 dark:bg-blue-900/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg mb-8 border border-blue-200 dark:border-blue-700">
-                <HiSparkles className="w-5 h-5 text-amber-500" />
-                <span className="text-sm font-semibold text-blue-900 dark:text-blue-100">
+              <div className="inline-flex items-center space-x-2 bg-[#0a0b0d]/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg mb-8 border border-[#2563eb]/30">
+                <HiSparkles className="w-5 h-5 text-[#ffc957]" />
+                <span className="text-sm font-semibold text-[#e2e8f0]">
                   Mission-Critical Innovation
                 </span>
               </div>
 
               {/* Main Heading */}
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 text-blue-900 dark:text-white leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 text-white leading-tight">
                 Architecting{' '}
-                <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] bg-clip-text text-transparent">
                   Enterprise
                 </span>
                 <br />
                 Digital{' '}
-                <span className="bg-gradient-to-r from-blue-700 to-blue-900 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#2563eb] to-[#1e40af] bg-clip-text text-transparent">
                   Excellence
                 </span>
               </h1>
 
               {/* Subheading */}
-              <p className="text-lg md:text-xl text-blue-800 dark:text-blue-200 mb-12 max-w-lg leading-relaxed">
+              <p className="text-lg md:text-xl text-[#cbd5e1] mb-12 max-w-lg leading-relaxed">
                 Transform your business with architectural-grade digital
                 solutions. We are the architects of transformation, building
                 tomorrow's technology today.
@@ -331,13 +350,13 @@ const Home = () => {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row items-start gap-4 mb-16">
-                <Link to="/get-started" className="mission-critical-button">
+                <Link to="/get-started" className="px-8 py-4 bg-gradient-to-r from-[#2563eb] to-[#1e40af] text-white font-bold rounded-xl hover:from-[#1d4ed8] hover:to-[#1e3a8a] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
                   Begin Strategic Initiative
                   <HiArrowRight className="inline-block ml-2 w-5 h-5" />
                 </Link>
                 <Link
                   to="/products"
-                  className="px-8 py-4 rounded-xl font-bold text-base tracking-wide border-2 border-blue-600 text-blue-700 dark:text-blue-200 bg-transparent hover:bg-blue-50 dark:hover:bg-blue-800/50 transition-all duration-300"
+                  className="px-8 py-4 rounded-xl font-bold text-base tracking-wide border-2 border-[#2563eb] text-[#2563eb] bg-transparent hover:bg-[#2563eb]/10 transition-all duration-300"
                 >
                   Explore Enterprise Solutions
                 </Link>
@@ -353,12 +372,12 @@ const Home = () => {
                 ].map((stat, index) => (
                   <div
                     key={index}
-                    className="text-center p-4 bg-white/50 dark:bg-blue-900/30 rounded-xl border border-blue-200 dark:border-blue-700"
+                    className="text-center p-4 bg-[#0a0b0d]/50 backdrop-blur-sm rounded-xl border border-[#2563eb]/30"
                   >
-                    <div className="text-2xl md:text-3xl font-bold text-blue-700 dark:text-blue-300 mb-2">
+                    <div className="text-2xl md:text-3xl font-bold text-[#e2e8f0] mb-2">
                       {stat.number}
                     </div>
-                    <div className="text-xs text-blue-600 dark:text-blue-400 font-medium">
+                    <div className="text-xs text-[#94a3b8] font-medium">
                       {stat.label}
                     </div>
                   </div>
@@ -369,20 +388,20 @@ const Home = () => {
             {/* Visual element - right side */}
             <div className="hidden lg:block">
               <div className="relative">
-                <div className="absolute -top-10 -right-10 w-full h-full bg-gradient-to-br from-amber-500/20 to-transparent rounded-3xl rotate-6"></div>
-                <div className="relative bg-white/80 dark:bg-blue-900/80 backdrop-blur-sm p-8 rounded-3xl border-2 border-blue-300 dark:border-blue-600 shadow-2xl">
+                <div className="absolute -top-10 -right-10 w-full h-full bg-gradient-to-br from-[#ffc957]/20 to-transparent rounded-3xl rotate-6"></div>
+                <div className="relative bg-[#0a0b0d]/80 backdrop-blur-sm p-8 rounded-3xl border-2 border-[#2563eb]/30 shadow-2xl">
                   <div className="space-y-4">
                     <div className="flex items-center space-x-4">
-                      <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                      <div className="h-2 bg-blue-200 dark:bg-blue-700 rounded w-3/4"></div>
+                      <div className="w-3 h-3 bg-[#2563eb] rounded-full"></div>
+                      <div className="h-2 bg-[#2563eb]/30 rounded w-3/4"></div>
                     </div>
                     <div className="flex items-center space-x-4">
-                      <div className="w-3 h-3 bg-amber-500 rounded-full"></div>
-                      <div className="h-2 bg-blue-200 dark:bg-blue-700 rounded w-1/2"></div>
+                      <div className="w-3 h-3 bg-[#ffc957] rounded-full"></div>
+                      <div className="h-2 bg-[#2563eb]/30 rounded w-1/2"></div>
                     </div>
                     <div className="flex items-center space-x-4">
-                      <div className="w-3 h-3 bg-blue-700 rounded-full"></div>
-                      <div className="h-2 bg-blue-200 dark:bg-blue-700 rounded w-5/6"></div>
+                      <div className="w-3 h-3 bg-[#0a0b0d] rounded-full"></div>
+                      <div className="h-2 bg-[#2563eb]/30 rounded w-5/6"></div>
                     </div>
                   </div>
                 </div>
@@ -393,27 +412,27 @@ const Home = () => {
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <HiChevronDown className="w-8 h-8 text-blue-500" />
+          <HiChevronDown className="w-8 h-8 text-[#2563eb]" />
         </div>
       </section>
 
       {/* Foundation/About Section - Asymmetrical */}
-      <section className="section-padding bg-white dark:bg-blue-900/50 relative overflow-hidden">
+      <section className="section-padding bg-[#0a0b0d] relative overflow-hidden">
         {/* Architectural background elements */}
         <div className="absolute inset-0" aria-hidden="true">
-          <div className="absolute top-1/4 left-10 w-20 h-20 border-2 border-blue-300 opacity-30"></div>
-          <div className="absolute bottom-1/3 right-20 w-16 h-16 border-2 border-amber-400 opacity-30"></div>
-          <div className="absolute top-1/2 right-1/4 w-2 h-32 bg-gradient-to-b from-blue-500/20 to-transparent"></div>
-          <div className="absolute bottom-1/4 left-1/3 w-32 h-2 bg-gradient-to-r from-amber-500/20 to-transparent"></div>
+          <div className="absolute top-1/4 left-10 w-20 h-20 border-2 border-[#2563eb] opacity-30"></div>
+          <div className="absolute bottom-1/3 right-20 w-16 h-16 border-2 border-[#ffc957] opacity-30"></div>
+          <div className="absolute top-1/2 right-1/4 w-2 h-32 bg-gradient-to-b from-[#2563eb]/20 to-transparent"></div>
+          <div className="absolute bottom-1/4 left-1/3 w-32 h-2 bg-gradient-to-r from-[#ffc957]/20 to-transparent"></div>
         </div>
 
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-5">
               <div className="relative">
-                <div className="absolute -top-6 -left-6 w-full h-full bg-gradient-to-br from-blue-100 to-amber-100 dark:from-blue-800/50 dark:to-amber-800/20 rounded-3xl -rotate-3"></div>
-                <div className="relative bg-blue-600 text-white p-8 rounded-3xl">
-                  <div className="text-6xl font-bold text-amber-400 mb-4">
+                <div className="absolute -top-6 -left-6 w-full h-full bg-gradient-to-br from-[#2563eb]/20 to-[#ffc957]/10 rounded-3xl -rotate-3"></div>
+                <div className="relative bg-[#2563eb] text-white p-8 rounded-3xl">
+                  <div className="text-6xl font-bold text-[#ffc957] mb-4">
                     15+
                   </div>
                   <div className="text-lg font-semibold">
@@ -426,24 +445,24 @@ const Home = () => {
               </div>
             </div>
             <div className="lg:col-span-7">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6 text-blue-900 dark:text-white">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6 text-white">
                 Our{' '}
-                <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] bg-clip-text text-transparent">
                   Architectural
                 </span>{' '}
                 Foundation
               </h2>
-              <p className="text-lg text-blue-800 dark:text-blue-200 leading-relaxed mb-6">
+              <p className="text-lg text-[#cbd5e1] leading-relaxed mb-6">
                 At Limitless Infotech Solution, we are more than developers – we
                 are{' '}
-                <span className="font-semibold text-amber-600 dark:text-amber-400">
+                <span className="font-semibold text-[#ffc957]">
                   architects of transformation
                 </span>
                 . We believe that technology should empower, not complicate.
                 Every line of code we write, every system we build, is crafted
                 with precision, security, and your success in mind.
               </p>
-              <p className="text-lg text-blue-800 dark:text-blue-200 leading-relaxed">
+              <p className="text-lg text-[#cbd5e1] leading-relaxed">
                 Our vision is to lead the world into the next era of intelligent
                 business systems, where innovation meets execution, and where
                 your business potential becomes truly limitless.
@@ -455,29 +474,29 @@ const Home = () => {
 
       {/* Core Services Section - Asymmetrical Grid */}
       <section
-        className="section-padding bg-blue-50 dark:bg-blue-900/30 relative overflow-hidden"
+        className="section-padding bg-[#0a0b0d]/50 relative overflow-hidden"
         aria-labelledby="core-services-heading"
       >
         {/* Architectural geometric elements */}
         <div className="absolute inset-0" aria-hidden="true">
-          <div className="absolute top-1/4 left-1/4 w-32 h-32 border-2 border-blue-400/30 rotate-45"></div>
-          <div className="absolute top-1/3 right-1/4 w-24 h-24 border-2 border-amber-400/30 rounded-full"></div>
-          <div className="absolute bottom-1/4 left-1/3 w-40 h-2 bg-gradient-to-r from-blue-500/20 to-amber-500/20"></div>
-          <div className="absolute bottom-1/3 right-1/3 w-2 h-40 bg-gradient-to-b from-amber-500/20 to-blue-500/20"></div>
+          <div className="absolute top-1/4 left-1/4 w-32 h-32 border-2 border-[#2563eb]/30 rotate-45"></div>
+          <div className="absolute top-1/3 right-1/4 w-24 h-24 border-2 border-[#ffc957]/30 rounded-full"></div>
+          <div className="absolute bottom-1/4 left-1/3 w-40 h-2 bg-gradient-to-r from-[#2563eb]/20 to-[#ffc957]/20"></div>
+          <div className="absolute bottom-1/3 right-1/3 w-2 h-40 bg-gradient-to-b from-[#ffc957]/20 to-[#2563eb]/20"></div>
         </div>
 
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
             <h2
               id="core-services-heading"
-              className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-blue-900 dark:text-white"
+              className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-white"
             >
               Our{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] bg-clip-text text-transparent">
                 Core Services
               </span>
             </h2>
-            <p className="text-lg text-blue-700 dark:text-blue-300 max-w-2xl mx-auto">
+            <p className="text-lg text-[#94a3b8] max-w-2xl mx-auto">
               Comprehensive technology solutions designed to transform your
               business
             </p>
@@ -487,7 +506,7 @@ const Home = () => {
             {coreServices.map((service, index) => (
               <div
                 key={index}
-                className={`lg:col-span-4 rounded-2xl transition-all duration-300 flex flex-col h-full border border-blue-200 dark:border-blue-700 bg-white dark:bg-blue-800/50 p-8 ${
+                className={`lg:col-span-4 rounded-2xl transition-all duration-300 flex flex-col h-full border border-[#2563eb]/30 bg-[#0a0b0d]/50 p-8 ${
                   index === 1 ? 'lg:col-start-2 lg:row-start-1' : ''
                 }`}
                 role="listitem"
@@ -503,15 +522,15 @@ const Home = () => {
                     secondaryColor="text-white/30"
                   />
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-blue-900 dark:text-white">
+                <h3 className="text-xl font-bold mb-3 text-white">
                   {service.title}
                 </h3>
-                <p className="text-blue-700 dark:text-blue-300 mb-4 flex-grow">
+                <p className="text-[#cbd5e1] mb-4 flex-grow">
                   {service.description}
                 </p>
                 <Link
                   to="/services"
-                  className="inline-flex items-center text-amber-600 dark:text-amber-400 font-semibold hover:gap-2 transition-all duration-300"
+                  className="inline-flex items-center text-[#ffc957] font-semibold hover:gap-2 transition-all duration-300"
                 >
                   Learn More
                   <HiArrowRight className="ml-1 w-5 h-5" />
@@ -521,7 +540,7 @@ const Home = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Link to="/services" className="mission-critical-button">
+            <Link to="/services" className="px-8 py-4 bg-gradient-to-r from-[#2563eb] to-[#1e40af] text-white font-bold rounded-xl hover:from-[#1d4ed8] hover:to-[#1e3a8a] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
               View All Services
             </Link>
           </div>
@@ -530,15 +549,15 @@ const Home = () => {
 
       {/* Why Limitless Section - Editorial Layout */}
       <section
-        className="section-padding bg-white dark:bg-blue-900 relative overflow-hidden"
+        className="section-padding bg-[#0a0b0d] relative overflow-hidden"
         aria-labelledby="why-limitless-heading"
       >
         {/* Architectural geometric elements */}
         <div className="absolute inset-0" aria-hidden="true">
-          <div className="absolute top-1/5 left-1/5 w-24 h-24 border-t-2 border-l-2 border-blue-400/30 rotate-12"></div>
-          <div className="absolute top-1/4 right-1/5 w-16 h-16 border-b-2 border-r-2 border-amber-400/30 -rotate-12"></div>
-          <div className="absolute bottom-1/5 left-1/4 w-32 h-2 bg-gradient-to-r from-blue-500/15 to-transparent"></div>
-          <div className="absolute bottom-1/4 right-1/3 w-2 h-24 bg-gradient-to-b from-amber-500/15 to-transparent"></div>
+          <div className="absolute top-1/5 left-1/5 w-24 h-24 border-t-2 border-l-2 border-[#2563eb]/30 rotate-12"></div>
+          <div className="absolute top-1/4 right-1/5 w-16 h-16 border-b-2 border-r-2 border-[#ffc957]/30 -rotate-12"></div>
+          <div className="absolute bottom-1/5 left-1/4 w-32 h-2 bg-gradient-to-r from-[#2563eb]/15 to-transparent"></div>
+          <div className="absolute bottom-1/4 right-1/3 w-2 h-24 bg-gradient-to-b from-[#ffc957]/15 to-transparent"></div>
         </div>
 
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
@@ -546,14 +565,14 @@ const Home = () => {
             <div className="lg:col-span-5">
               <h2
                 id="why-limitless-heading"
-                className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-blue-900 dark:text-white"
+                className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-white"
               >
                 Why Choose{' '}
-                <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] bg-clip-text text-transparent">
                   Limitless
                 </span>
               </h2>
-              <p className="text-lg text-blue-700 dark:text-blue-300">
+              <p className="text-lg text-[#94a3b8]">
                 Our core qualities and competitive advantages that set us apart
               </p>
             </div>
@@ -562,20 +581,20 @@ const Home = () => {
                 {whyLimitless.slice(0, 6).map((item, index) => (
                   <div
                     key={index}
-                    className="p-6 rounded-xl bg-blue-50 dark:bg-blue-800/30 border border-blue-200 dark:border-blue-700 relative overflow-hidden"
+                    className="p-6 rounded-xl bg-[#0a0b0d]/30 border border-[#2563eb]/30 relative overflow-hidden"
                   >
-                    <div className="w-12 h-12 bg-blue-100 dark:bg-blue-700 rounded-lg flex items-center justify-center mb-4">
+                    <div className="w-12 h-12 bg-[#2563eb]/20 rounded-lg flex items-center justify-center mb-4">
                       <DuoToneIcon
                         icon={item.icon}
                         size="lg"
-                        primaryColor="text-blue-600 dark:text-blue-400"
-                        secondaryColor="text-blue-600/30 dark:text-blue-400/30"
+                        primaryColor="text-[#2563eb]"
+                        secondaryColor="text-[#2563eb]/30"
                       />
                     </div>
-                    <h3 className="text-lg font-bold mb-2 text-blue-900 dark:text-white">
+                    <h3 className="text-lg font-bold mb-2 text-white">
                       {item.title}
                     </h3>
-                    <p className="text-blue-700 dark:text-blue-300 text-sm">
+                    <p className="text-[#cbd5e1] text-sm">
                       {item.description}
                     </p>
                   </div>
@@ -587,24 +606,24 @@ const Home = () => {
       </section>
 
       {/* Trusted By Section - Asymmetrical Logo Grid */}
-      <section className="section-padding bg-blue-50 dark:bg-blue-900/30 relative overflow-hidden">
+      <section className="section-padding bg-[#0a0b0d]/50 relative overflow-hidden">
         {/* Architectural geometric elements */}
         <div className="absolute inset-0" aria-hidden="true">
-          <div className="absolute top-1/4 left-1/6 w-20 h-20 border-2 border-blue-400/20 rounded-full"></div>
-          <div className="absolute top-1/3 right-1/6 w-16 h-16 border-2 border-amber-400/20 rotate-45"></div>
-          <div className="absolute bottom-1/4 left-1/4 w-36 h-2 bg-gradient-to-r from-blue-500/10 to-amber-500/10"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-2 h-32 bg-gradient-to-b from-amber-500/10 to-blue-500/10"></div>
+          <div className="absolute top-1/4 left-1/6 w-20 h-20 border-2 border-[#2563eb]/20 rounded-full"></div>
+          <div className="absolute top-1/3 right-1/6 w-16 h-16 border-2 border-[#ffc957]/20 rotate-45"></div>
+          <div className="absolute bottom-1/4 left-1/4 w-36 h-2 bg-gradient-to-r from-[#2563eb]/10 to-[#ffc957]/10"></div>
+          <div className="absolute bottom-1/3 right-1/4 w-2 h-32 bg-gradient-to-b from-[#ffc957]/10 to-[#2563eb]/10"></div>
         </div>
 
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-blue-900 dark:text-white">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-white">
               Trusted By{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] bg-clip-text text-transparent">
                 Industry Leaders
               </span>
             </h2>
-            <p className="text-lg text-blue-700 dark:text-blue-300 max-w-2xl mx-auto">
+            <p className="text-lg text-[#94a3b8] max-w-2xl mx-auto">
               Join thousands of satisfied clients who have transformed their
               businesses with our solutions
             </p>
@@ -616,15 +635,15 @@ const Home = () => {
                 key={index}
                 className="flex flex-col items-center text-center group relative"
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-amber-500 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
                   <span className="text-white font-bold text-lg">
                     {client.name.charAt(0)}
                   </span>
                 </div>
-                <span className="text-sm font-medium text-blue-900 dark:text-blue-100">
+                <span className="text-sm font-medium text-white">
                   {client.name}
                 </span>
-                <span className="text-xs text-blue-600 dark:text-blue-400">
+                <span className="text-xs text-[#94a3b8]">
                   {client.category}
                 </span>
               </div>
@@ -632,11 +651,11 @@ const Home = () => {
           </div>
 
           <div className="text-center mt-12">
-            <div className="inline-flex items-center space-x-4 text-blue-700 dark:text-blue-300 text-sm">
+            <div className="inline-flex items-center space-x-4 text-[#94a3b8] text-sm">
               <span>Trusted by industry leaders worldwide</span>
               <div className="flex space-x-1">
                 {[...Array(5)].map((_, i) => (
-                  <HiStar key={i} className="w-4 h-4 text-amber-500" />
+                  <HiStar key={i} className="w-4 h-4 text-[#ffc957]" />
                 ))}
               </div>
               <span>4.9/5 from 200+ reviews</span>
@@ -646,24 +665,24 @@ const Home = () => {
       </section>
 
       {/* Featured Products Section - Asymmetrical Layout */}
-      <section className="section-padding bg-white dark:bg-blue-900 border-t border-blue-200 dark:border-blue-800 relative overflow-hidden">
+      <section className="section-padding bg-[#0a0b0d] border-t border-[#2563eb]/30 relative overflow-hidden">
         {/* Architectural geometric elements */}
         <div className="absolute inset-0" aria-hidden="true">
-          <div className="absolute top-1/5 left-1/4 w-28 h-28 border-2 border-blue-400/25 rotate-12"></div>
-          <div className="absolute top-1/4 right-1/4 w-20 h-20 border-2 border-amber-400/25 -rotate-12"></div>
-          <div className="absolute bottom-1/5 left-1/3 w-40 h-2 bg-gradient-to-r from-blue-500/15 to-transparent"></div>
-          <div className="absolute bottom-1/4 right-1/3 w-2 h-36 bg-gradient-to-b from-amber-500/15 to-transparent"></div>
+          <div className="absolute top-1/5 left-1/4 w-28 h-28 border-2 border-[#2563eb]/25 rotate-12"></div>
+          <div className="absolute top-1/4 right-1/4 w-20 h-20 border-2 border-[#ffc957]/25 -rotate-12"></div>
+          <div className="absolute bottom-1/5 left-1/3 w-40 h-2 bg-gradient-to-r from-[#2563eb]/15 to-transparent"></div>
+          <div className="absolute bottom-1/4 right-1/3 w-2 h-36 bg-gradient-to-b from-[#ffc957]/15 to-transparent"></div>
         </div>
 
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-blue-900 dark:text-white">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-white">
               Our{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] bg-clip-text text-transparent">
                 Enterprise Products
               </span>
             </h2>
-            <p className="text-lg text-blue-700 dark:text-blue-300 max-w-2xl mx-auto">
+            <p className="text-lg text-[#94a3b8] max-w-2xl mx-auto">
               Production-ready SaaS solutions serving 10,000+ users worldwide
             </p>
           </div>
@@ -672,14 +691,14 @@ const Home = () => {
             {featuredProducts.map((product, index) => (
               <div
                 key={product.id}
-                className={`lg:col-span-3 rounded-2xl p-6 border-2 border-blue-200 dark:border-blue-700 bg-white dark:bg-blue-800/30 relative overflow-hidden ${
+                className={`lg:col-span-3 rounded-2xl p-6 border-2 border-[#2563eb]/30 bg-[#0a0b0d]/50 relative overflow-hidden ${
                   index === 1 ? 'lg:col-start-3 lg:row-start-1' : ''
                 }`}
               >
                 <Link to={product.link}>
                   {product.popular && (
                     <div className="absolute -top-3 right-4">
-                      <span className="bg-gradient-to-r from-amber-500 to-amber-600 px-3 py-1 rounded-full text-xs font-semibold text-white flex items-center">
+                      <span className="bg-gradient-to-r from-[#ffc957] to-[#ffbd3a] px-3 py-1 rounded-full text-xs font-semibold text-[#0a0b0d] flex items-center">
                         <HiStar className="w-3 h-3 mr-1" />
                         Popular
                       </span>
@@ -695,17 +714,17 @@ const Home = () => {
                       secondaryColor="text-white/30"
                     />
                   </div>
-                  <h3 className="text-xl font-bold mb-2 text-blue-900 dark:text-white">
+                  <h3 className="text-xl font-bold mb-2 text-white">
                     {product.name}
                   </h3>
-                  <p className="text-sm text-blue-700 dark:text-blue-300 mb-4">
+                  <p className="text-sm text-[#cbd5e1] mb-4">
                     {product.description}
                   </p>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-blue-600 dark:text-blue-400">
+                    <span className="text-sm text-[#94a3b8]">
                       {product.users} users
                     </span>
-                    <HiArrowRight className="w-5 h-5 text-amber-500" />
+                    <HiArrowRight className="w-5 h-5 text-[#ffc957]" />
                   </div>
                 </Link>
               </div>
@@ -713,7 +732,7 @@ const Home = () => {
           </div>
 
           <div className="text-center">
-            <Link to="/products" className="mission-critical-button">
+            <Link to="/products" className="px-8 py-4 bg-gradient-to-r from-[#2563eb] to-[#1e40af] text-white font-bold rounded-xl hover:from-[#1d4ed8] hover:to-[#1e3a8a] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
               View All 7 Products
               <HiArrowRight className="inline-block ml-2 w-5 h-5" />
             </Link>
@@ -722,16 +741,16 @@ const Home = () => {
       </section>
 
       {/* Success Stories Section - Editorial Layout */}
-      <section className="section-padding bg-blue-50 dark:bg-blue-900/30">
+      <section className="section-padding bg-[#0a0b0d]/50">
         <div className="container-custom px-4 md:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-blue-900 dark:text-white">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-white">
               Client{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] bg-clip-text text-transparent">
                 Success Stories
               </span>
             </h2>
-            <p className="text-lg text-blue-700 dark:text-blue-300 max-w-2xl mx-auto">
+            <p className="text-lg text-[#94a3b8] max-w-2xl mx-auto">
               Transforming businesses with innovative custom solutions
             </p>
           </div>
@@ -740,33 +759,33 @@ const Home = () => {
             {successStories.map((story, index) => (
               <div
                 key={story.id}
-                className="bg-white dark:bg-blue-800/50 rounded-2xl overflow-hidden border border-blue-200 dark:border-blue-700"
+                className="bg-[#0a0b0d]/50 rounded-2xl overflow-hidden border border-[#2563eb]/30"
               >
                 <Link to={story.link}>
                   <div className={`h-3 bg-gradient-to-r ${story.color}`}></div>
                   <div className="p-8">
-                    <h3 className="text-2xl font-bold mb-2 text-blue-900 dark:text-white">
+                    <h3 className="text-2xl font-bold mb-2 text-white">
                       {story.title}
                     </h3>
-                    <p className="text-amber-600 dark:text-amber-400 font-semibold mb-4">
+                    <p className="text-[#ffc957] font-semibold mb-4">
                       {story.subtitle}
                     </p>
-                    <p className="text-blue-700 dark:text-blue-300 mb-6 leading-relaxed">
+                    <p className="text-[#cbd5e1] mb-6 leading-relaxed">
                       {story.description}
                     </p>
-                    <div className="grid grid-cols-3 gap-4 pt-6 border-t border-blue-200 dark:border-blue-700">
+                    <div className="grid grid-cols-3 gap-4 pt-6 border-t border-[#2563eb]/30">
                       {story.results.map((result, idx) => (
                         <div key={idx} className="text-center">
-                          <div className="text-xl font-bold text-amber-600 dark:text-amber-400 mb-1">
+                          <div className="text-xl font-bold text-[#ffc957] mb-1">
                             {result.value}
                           </div>
-                          <div className="text-xs text-blue-600 dark:text-blue-400">
+                          <div className="text-xs text-[#94a3b8]">
                             {result.label}
                           </div>
                         </div>
                       ))}
                     </div>
-                    <div className="mt-6 flex items-center text-amber-600 dark:text-amber-400 font-semibold">
+                    <div className="mt-6 flex items-center text-[#ffc957] font-semibold">
                       Read Full Case Study
                       <HiArrowRight className="ml-2 w-5 h-5" />
                     </div>
@@ -777,7 +796,7 @@ const Home = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Link to="/portfolio" className="mission-critical-button-secondary">
+            <Link to="/portfolio" className="px-8 py-4 border-2 border-[#2563eb] text-[#2563eb] font-bold rounded-xl hover:bg-[#2563eb]/10 transition-all duration-300">
               View All Projects
             </Link>
           </div>
@@ -785,16 +804,16 @@ const Home = () => {
       </section>
 
       {/* Testimonials Section - Asymmetrical Grid */}
-      <section className="section-padding bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-950">
+      <section className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1e293b]">
         <div className="container-custom px-4 md:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-blue-900 dark:text-white">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-white">
               What Clients Say About{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] bg-clip-text text-transparent">
                 Limitless
               </span>
             </h2>
-            <p className="text-lg text-blue-800 dark:text-blue-200 max-w-2xl mx-auto">
+            <p className="text-lg text-[#cbd5e1] max-w-2xl mx-auto">
               Real experiences from businesses we've helped transform
             </p>
           </div>
@@ -803,30 +822,30 @@ const Home = () => {
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className="bg-white/80 dark:bg-blue-800/60 backdrop-blur-sm rounded-2xl p-8 border border-blue-200 dark:border-blue-700 flex flex-col h-full"
+                className="bg-[#0a0b0d]/80 backdrop-blur-sm rounded-2xl p-8 border border-[#2563eb]/30 flex flex-col h-full"
               >
                 {/* Rating */}
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <HiStar key={i} className="w-5 h-5 text-amber-500" />
+                    <HiStar key={i} className="w-5 h-5 text-[#ffc957]" />
                   ))}
                 </div>
 
                 {/* Testimonial Text */}
-                <p className="text-blue-800 dark:text-blue-200 mb-6 italic flex-grow">
+                <p className="text-[#cbd5e1] mb-6 italic flex-grow">
                   "{testimonial.text}"
                 </p>
 
                 {/* Author */}
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-amber-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-full flex items-center justify-center text-white font-bold text-lg">
                     {testimonial.name.charAt(0)}
                   </div>
                   <div>
-                    <div className="font-semibold text-blue-900 dark:text-white">
+                    <div className="font-semibold text-white">
                       {testimonial.name}
                     </div>
-                    <div className="text-sm text-blue-700 dark:text-blue-300">
+                    <div className="text-sm text-[#94a3b8]">
                       {testimonial.role}
                     </div>
                   </div>
@@ -838,7 +857,7 @@ const Home = () => {
           <div className="text-center">
             <Link
               to="/testimonials"
-              className="mission-critical-button-secondary"
+              className="px-8 py-4 border-2 border-[#2563eb] text-[#2563eb] font-bold rounded-xl hover:bg-[#2563eb]/10 transition-all duration-300"
             >
               View All Testimonials
             </Link>
@@ -847,16 +866,16 @@ const Home = () => {
       </section>
 
       {/* FAQ Section - Editorial Layout */}
-      <section className="section-padding bg-white dark:bg-blue-900">
+      <section className="section-padding bg-[#0a0b0d]">
         <div className="container-custom max-w-4xl px-4 md:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-blue-900 dark:text-white">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-white">
               Frequently Asked{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] bg-clip-text text-transparent">
                 Questions
               </span>
             </h2>
-            <p className="text-lg text-blue-700 dark:text-blue-300">
+            <p className="text-lg text-[#94a3b8]">
               Find answers to common questions about our services
             </p>
           </div>
@@ -865,25 +884,25 @@ const Home = () => {
             {faqs.slice(0, 6).map((faq, index) => (
               <div
                 key={index}
-                className="border border-blue-200 dark:border-blue-700 rounded-xl overflow-hidden"
+                className="border border-[#2563eb]/30 rounded-xl overflow-hidden"
               >
                 <button
                   onClick={() => toggleFaq(index)}
                   className="w-full flex items-center justify-between p-6 text-left"
                 >
-                  <h3 className="text-lg font-semibold text-blue-900 dark:text-white pr-4">
+                  <h3 className="text-lg font-semibold text-white pr-4">
                     {faq.question}
                   </h3>
                   {openFaq === index ? (
-                    <HiChevronUp className="w-6 h-6 text-amber-500 flex-shrink-0" />
+                    <HiChevronUp className="w-6 h-6 text-[#ffc957] flex-shrink-0" />
                   ) : (
-                    <HiChevronDown className="w-6 h-6 text-blue-400 flex-shrink-0" />
+                    <HiChevronDown className="w-6 h-6 text-[#2563eb]/50 flex-shrink-0" />
                   )}
                 </button>
 
                 {openFaq === index && (
                   <div className="px-6 pb-6">
-                    <p className="text-blue-700 dark:text-blue-300 leading-relaxed">
+                    <p className="text-[#cbd5e1] leading-relaxed">
                       {faq.answer}
                     </p>
                   </div>
@@ -895,14 +914,14 @@ const Home = () => {
       </section>
 
       {/* CTA Section - Asymmetrical Layout */}
-      <section className="section-padding bg-gradient-to-r from-blue-700 to-blue-900 text-white">
+      <section className="section-padding bg-gradient-to-r from-[#2563eb] to-[#0a0b0d] text-white">
         <div className="container-custom px-4 md:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7">
               <h2 className="text-2xl md:text-4xl lg:text-5xl font-display font-bold mb-6">
                 Ready to Transform Your Business?
                 <br />
-                <span className="text-amber-400">
+                <span className="text-[#ffc957]">
                   Architectural Excellence
                 </span>{' '}
                 Awaits
@@ -914,13 +933,13 @@ const Home = () => {
               <div className="flex flex-col sm:flex-row items-start gap-4">
                 <Link
                   to="/get-started"
-                  className="mission-critical-button text-blue-900 bg-amber-400 hover:bg-amber-300"
+                  className="px-8 py-4 bg-[#ffc957] text-[#0a0b0d] font-bold rounded-xl hover:bg-[#ffbd3a] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                 >
                   Begin Strategic Initiative
                 </Link>
                 <Link
                   to="/contact"
-                  className="px-8 py-4 rounded-xl font-bold text-base tracking-wide border-2 border-amber-400 text-amber-400 bg-transparent hover:bg-amber-400/20 transition-all duration-300"
+                  className="px-8 py-4 rounded-xl font-bold text-base tracking-wide border-2 border-[#ffc957] text-[#ffc957] bg-transparent hover:bg-[#ffc957]/20 transition-all duration-300"
                 >
                   Schedule Consultation
                 </Link>
@@ -928,11 +947,11 @@ const Home = () => {
             </div>
             <div className="lg:col-span-5">
               <div className="relative">
-                <div className="absolute -top-6 -right-6 w-full h-full bg-gradient-to-br from-amber-500/20 to-transparent rounded-3xl rotate-6"></div>
+                <div className="absolute -top-6 -right-6 w-full h-full bg-gradient-to-br from-[#ffc957]/20 to-transparent rounded-3xl rotate-6"></div>
                 <div className="relative bg-white/10 backdrop-blur-sm p-8 rounded-3xl border border-white/20">
                   <div className="flex items-center space-x-4 mb-4">
-                    <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center">
-                      <HiCheckCircle className="w-6 h-6 text-blue-900" />
+                    <div className="w-12 h-12 bg-[#ffc957] rounded-full flex items-center justify-center">
+                      <HiCheckCircle className="w-6 h-6 text-[#0a0b0d]" />
                     </div>
                     <div>
                       <div className="font-bold">Strategic Planning</div>
@@ -943,17 +962,17 @@ const Home = () => {
                   </div>
                   <div className="space-y-3">
                     <div className="flex items-center space-x-2">
-                      <HiCheckCircle className="w-4 h-4 text-amber-400" />
+                      <HiCheckCircle className="w-4 h-4 text-[#ffc957]" />
                       <span className="text-sm">
                         Mission-Critical Architecture
                       </span>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <HiCheckCircle className="w-4 h-4 text-amber-400" />
+                      <HiCheckCircle className="w-4 h-4 text-[#ffc957]" />
                       <span className="text-sm">Enterprise Security</span>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <HiCheckCircle className="w-4 h-4 text-amber-400" />
+                      <HiCheckCircle className="w-4 h-4 text-[#ffc957]" />
                       <span className="text-sm">Scalable Infrastructure</span>
                     </div>
                   </div>
@@ -964,6 +983,8 @@ const Home = () => {
         </div>
       </section>
     </div>
+      </>
+    </ErrorBoundary>
   );
 };
 

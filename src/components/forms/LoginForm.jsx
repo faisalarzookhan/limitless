@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import {
   HiOutlineMail,
   HiOutlineLockClosed,
@@ -6,6 +6,9 @@ import {
   HiOutlineEyeOff,
 } from 'react-icons/hi';
 import InputField from './InputField';
+import csrfService from '../../services/csrfService';
+import rateLimitService from '../../services/rateLimitService';
+import encryptionService from '../../services/encryptionService';
 import { sendLoginNotification } from '../../services/notificationService';
 
 const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
@@ -18,6 +21,14 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [errors, setErrors] = useState({});
+  const [rateLimitError, setRateLimitError] = useState(null);
+  
+  // Get client identifier for rate limiting (using a combination of factors)
+  const getClientIdentifier = () => {
+    // In a real implementation, this would use the actual IP address from the server
+    // For client-side, we'll use a combination of factors
+    return `${window.location.hostname}_${navigator.userAgent}`;
+  };
 
   const handleChange = e => {
     const { name, value, type, checked } = e.target;
@@ -25,25 +36,32 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
-
-    // Clear error when user starts typing
+    
+    // Clear error for this field when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
     }
   };
 
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.email) {
+    if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
+    } else {
+      const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+      if (!emailRegex.test(formData.email.trim())) {
+        newErrors.email = 'Please enter a valid email address';
+      }
     }
 
-    if (!formData.password) {
+    if (!formData.password.trim()) {
       newErrors.password = 'Password is required';
-    } else if (formData.password.length < 6) {
+    } else if (formData.password.trim().length < 6) {
       newErrors.password = 'Password must be at least 6 characters';
     }
 
@@ -53,22 +71,46 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-
+    
+    // Check rate limit
+    const clientIdentifier = getClientIdentifier();
+    const rateLimitCheck = rateLimitService.checkLimit(clientIdentifier, 'loginAttempts');
+    
+    if (!rateLimitCheck.allowed) {
+      const retryAfterSeconds = Math.ceil(rateLimitCheck.retryAfter / 1000);
+      setRateLimitError(`Rate limit exceeded. Please try again in ${retryAfterSeconds} seconds.`);
+      return;
+    }
+    
+    // Clear any previous rate limit error
+    setRateLimitError(null);
+    
+    // Validate form first
     if (!validateForm()) {
       return;
     }
-
+    
     setIsSubmitting(true);
+    
+    // Sanitize input data
+    const sanitizedData = {
+      email: encryptionService.sanitizeInput(formData.email),
+      password: encryptionService.sanitizeInput(formData.password),
+      rememberMe: formData.rememberMe,
+    };
+
+    // Add CSRF token to the data
+    const requestData = {
+      ...sanitizedData,
+      csrfToken: csrfService.getToken(),
+      timestamp: new Date().toISOString(),
+      page: window.location.pathname,
+      userAgent: navigator.userAgent,
+    };
 
     try {
       // Send notification about the login attempt
-      await sendLoginNotification({
-        email: formData.email,
-        rememberMe: formData.rememberMe,
-        timestamp: new Date().toISOString(),
-        page: window.location.pathname,
-        userAgent: navigator.userAgent,
-      });
+      await sendLoginNotification(requestData);
 
       // Simulate API call
       setTimeout(() => {
@@ -91,7 +133,7 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
 
   if (submitSuccess) {
     return (
-      <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 text-center">
+      <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 text-center" role="alert" aria-live="polite">
         <div className="flex items-center justify-center mb-3">
           <svg
             className="w-8 h-8 text-green-600 dark:text-green-400"
@@ -119,7 +161,12 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+      {rateLimitError && (
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4" role="alert" aria-live="polite">
+          <p className="text-red-700 dark:text-red-300 text-sm">{rateLimitError}</p>
+        </div>
+      )}
       <InputField
         id="email"
         name="email"
@@ -211,4 +258,4 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
   );
 };
 
-export default LoginForm;
+export default memo(LoginForm);

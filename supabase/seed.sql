@@ -192,3 +192,6 @@ SELECT pg_catalog.setval('"supabase_functions"."hooks_id_seq"', 1, false);
 \unrestrict d9CE6K20xKJLeFGMWE4hjWpYI4QJtityKG26IG6RghRV4dnmUgDUDjLbf6cZWux
 
 RESET ALL;
+
+-- Analytics Schema
+\i analytics_schema.sql

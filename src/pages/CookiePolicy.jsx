@@ -1,11 +1,35 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
   HiShieldCheck,
   HiCog,
   HiInformationCircle,
   HiDocumentText,
+  HiArrowRight,
 } from 'react-icons/hi';
+import ErrorBoundary from '../components/ErrorBoundary';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5
+    }
+  }
+};
 
 const CookiePolicy = () => {
   const lastUpdated = 'January 15, 2024';
@@ -264,64 +288,95 @@ const CookiePolicy = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-dark text-white">
+    <ErrorBoundary>
+    <div className="min-h-screen bg-[#0a0b0d] font-['Figtree']">
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-600/10 to-secondary-600/10"></div>
-
+      <section className="relative py-20 overflow-hidden bg-gradient-to-br from-[#2563eb] via-[#ffc957] to-[#0a0b0d] text-white">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2260%22%20height=%2260%22%20viewBox=%220%200%2060%2060%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg%20fill=%22none%22%20fill-rule=%22evenodd%22%3E%3Cg%20fill=%22%23ffffff%22%20fill-opacity=%220.05%22%3E%3Ccircle%20cx=%2230%22%20cy=%2230%22%20r=%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
         <div className="container-custom relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="flex justify-center mb-6">
-              <div className="w-20 h-20 bg-gradient-primary rounded-2xl flex items-center justify-center animate-float">
+            <motion.div 
+              className="flex justify-center mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="w-20 h-20 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-2xl flex items-center justify-center">
                 <HiDocumentText className="w-10 h-10 text-white" />
               </div>
-            </div>
+            </motion.div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent">
+            <motion.h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-['Outfit']"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
               Cookie Policy
-            </h1>
+            </motion.h1>
 
-            <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            <motion.p 
+              className="text-xl text-white mb-8 max-w-3xl mx-auto font-['Figtree']"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
               Learn about how Limitless Infotech Solution uses cookies and
               similar technologies to enhance your browsing experience.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-400">
+            <motion.div 
+              className="flex flex-wrap justify-center gap-4 text-sm text-gray-300"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
               <div className="flex items-center space-x-2">
-                <HiInformationCircle className="w-5 h-5 text-primary-400" />
+                <HiInformationCircle className="w-5 h-5 text-[#ffc957]" />
                 <span>Last Updated: {lastUpdated}</span>
               </div>
               <div className="flex items-center space-x-2">
-                <HiShieldCheck className="w-5 h-5 text-primary-400" />
+                <HiShieldCheck className="w-5 h-5 text-[#ffc957]" />
                 <span>GDPR Compliant</span>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Cookie Settings Manager */}
-      <section className="py-12 bg-dark-800/50 border-y border-dark-700">
+      <section className="py-12 bg-[#0a0b0d] border-y border-[#2563eb]/30">
         <div className="container-custom">
           <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-white mb-3">
+            <motion.div 
+              className="text-center mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl font-bold text-white mb-3 font-['Outfit']">
                 Manage Your Cookie Preferences
               </h2>
-              <p className="text-gray-400">
+              <p className="text-gray-400 font-['Figtree']">
                 Choose which types of cookies you want to accept
               </p>
-            </div>
+            </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <motion.div 
+              className="grid md:grid-cols-2 gap-6"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
               {cookieCategories.map(category => {
                 const Icon = category.icon;
                 const colorClasses = getColorClasses(category.color);
 
                 return (
-                  <div
+                  <motion.div
                     key={category.id}
-                    className="bg-dark-800 rounded-xl p-6 border border-dark-700 hover:border-primary-600/30 transition-all duration-300"
+                    className="bg-[#1a1c20] rounded-xl p-6 border border-[#2563eb]/30 hover:border-[#2563eb] transition-all duration-300"
+                    variants={itemVariants}
                   >
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-start space-x-3">
@@ -331,11 +386,11 @@ const CookiePolicy = () => {
                           <Icon className="w-6 h-6" />
                         </div>
                         <div>
-                          <h3 className="font-semibold text-white mb-1">
+                          <h3 className="font-semibold text-white mb-1 font-['Figtree']">
                             {category.name}
                           </h3>
                           {category.required && (
-                            <span className="text-xs text-red-400 font-medium">
+                            <span className="text-xs text-red-400 font-medium font-['Figtree']">
                               Always Active
                             </span>
                           )}
@@ -351,8 +406,8 @@ const CookiePolicy = () => {
                           className="sr-only peer"
                         />
                         <div
-                          className={`w-11 h-6 bg-dark-700 peer-focus:outline-none rounded-full peer
-                          ${category.required ? 'peer-checked:bg-red-600' : 'peer-checked:bg-primary-600'}
+                          className={`w-11 h-6 bg-[#2563eb]/30 peer-focus:outline-none rounded-full peer
+                          ${category.required ? 'peer-checked:bg-red-600' : 'peer-checked:bg-[#2563eb]'}
                           ${category.required ? 'opacity-50 cursor-not-allowed' : ''}
                           after:content-[''] after:absolute after:top-[2px] after:left-[2px]
                           after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all
@@ -361,203 +416,242 @@ const CookiePolicy = () => {
                       </label>
                     </div>
 
-                    <p className="text-sm text-gray-400 mb-4">
+                    <p className="text-sm text-gray-400 mb-4 font-['Figtree']">
                       {category.description}
                     </p>
 
-                    <div className="bg-dark-900/50 rounded-lg p-4">
-                      <p className="text-xs font-semibold text-gray-400 mb-2">
+                    <div className="bg-[#1a1c20] rounded-lg p-4">
+                      <p className="text-xs font-semibold text-gray-400 mb-2 font-['Figtree']">
                         Examples:
                       </p>
-                      <ul className="text-xs text-gray-500 space-y-1">
+                      <ul className="text-xs text-gray-500 space-y-1 font-['Figtree']">
                         {category.examples.map((example, idx) => (
                           <li key={idx} className="flex items-start">
-                            <span className="text-primary-400 mr-2">•</span>
+                            <span className="text-[#2563eb] mr-2">•</span>
                             {example}
                           </li>
                         ))}
                       </ul>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
-            </div>
+            </motion.div>
 
-            <div className="mt-8 text-center">
+            <motion.div 
+              className="mt-8 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
               <button
                 onClick={handleSavePreferences}
-                className="btn-primary px-8"
+                className="px-8 py-4 bg-[#2563eb] text-white rounded-lg hover:bg-[#ffc957] hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit']"
               >
                 Save Preferences
               </button>
-              <p className="text-sm text-gray-500 mt-3">
+              <p className="text-sm text-gray-500 mt-3 font-['Figtree']">
                 Your preferences will be saved and applied immediately
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Detailed Cookie Information */}
-      <section className="py-16">
+      <section className="py-16 bg-[#0a0b0d]">
         <div className="container-custom">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-8 text-center">
+            <motion.h2 
+              className="text-3xl font-bold text-white mb-8 text-center font-['Outfit']"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
               Cookie Details
-            </h2>
+            </motion.h2>
 
-            {cookieCategories.map((category, idx) => {
-              const Icon = category.icon;
-              const colorClasses = getColorClasses(category.color);
+            <motion.div 
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {cookieCategories.map((category, idx) => {
+                const Icon = category.icon;
+                const colorClasses = getColorClasses(category.color);
 
-              return (
-                <div
-                  key={idx}
-                  className="mb-8 bg-dark-800/30 rounded-2xl p-8 border border-dark-700"
-                >
-                  <div className="flex items-center space-x-3 mb-6">
-                    <div
-                      className={`w-10 h-10 rounded-lg flex items-center justify-center ${colorClasses}`}
-                    >
-                      <Icon className="w-5 h-5" />
+                return (
+                  <motion.div
+                    key={idx}
+                    className="mb-8 bg-[#1a1c20] rounded-2xl p-8 border border-[#2563eb]/30"
+                    variants={itemVariants}
+                  >
+                    <div className="flex items-center space-x-3 mb-6">
+                      <div
+                        className={`w-10 h-10 rounded-lg flex items-center justify-center ${colorClasses}`}
+                      >
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <h3 className="text-xl font-bold text-white font-['Outfit']">
+                        {category.name}
+                      </h3>
                     </div>
-                    <h3 className="text-xl font-bold text-white">
-                      {category.name}
-                    </h3>
-                  </div>
 
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
-                      <thead>
-                        <tr className="border-b border-dark-700">
-                          <th className="text-left py-3 px-4 text-gray-400 font-semibold">
-                            Cookie Name
-                          </th>
-                          <th className="text-left py-3 px-4 text-gray-400 font-semibold">
-                            Purpose
-                          </th>
-                          <th className="text-left py-3 px-4 text-gray-400 font-semibold">
-                            Duration
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {category.cookies.map((cookie, cookieIdx) => (
-                          <tr
-                            key={cookieIdx}
-                            className="border-b border-dark-800"
-                          >
-                            <td className="py-3 px-4 text-gray-300 font-mono text-xs">
-                              {cookie.name}
-                            </td>
-                            <td className="py-3 px-4 text-gray-400">
-                              {cookie.purpose}
-                            </td>
-                            <td className="py-3 px-4 text-gray-500">
-                              {cookie.duration}
-                            </td>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-sm">
+                        <thead>
+                          <tr className="border-b border-[#2563eb]/30">
+                            <th className="text-left py-3 px-4 text-gray-400 font-semibold font-['Figtree']">
+                              Cookie Name
+                            </th>
+                            <th className="text-left py-3 px-4 text-gray-400 font-semibold font-['Figtree']">
+                              Purpose
+                            </th>
+                            <th className="text-left py-3 px-4 text-gray-400 font-semibold font-['Figtree']">
+                              Duration
+                            </th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              );
-            })}
+                        </thead>
+                        <tbody>
+                          {category.cookies.map((cookie, cookieIdx) => (
+                            <tr
+                              key={cookieIdx}
+                              className="border-b border-[#2563eb]/10"
+                            >
+                              <td className="py-3 px-4 text-gray-300 font-mono text-xs font-['Figtree']">
+                                {cookie.name}
+                              </td>
+                              <td className="py-3 px-4 text-gray-400 font-['Figtree']">
+                                {cookie.purpose}
+                              </td>
+                              <td className="py-3 px-4 text-gray-500 font-['Figtree']">
+                                {cookie.duration}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Policy Content */}
-      <section className="py-16 bg-dark-800/30">
+      <section className="py-16 bg-[#0a0b0d]">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-12 text-center">
+            <motion.h2 
+              className="text-3xl font-bold text-white mb-12 text-center font-['Outfit']"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
               Complete Cookie Policy
-            </h2>
+            </motion.h2>
 
-            {sections.map((section, index) => (
-              <div
-                key={index}
-                className="mb-10 bg-dark-800/50 rounded-xl p-8 border border-dark-700"
-              >
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center">
-                  <span className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center text-sm mr-3">
-                    {index + 1}
-                  </span>
-                  {section.title}
-                </h3>
+            <motion.div 
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {sections.map((section, index) => (
+                <motion.div
+                  key={index}
+                  className="mb-10 bg-[#1a1c20] rounded-xl p-8 border border-[#2563eb]/30"
+                  variants={itemVariants}
+                >
+                  <h3 className="text-xl font-bold text-white mb-4 flex items-center font-['Outfit']">
+                    <span className="w-8 h-8 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-lg flex items-center justify-center text-sm mr-3">
+                      {index + 1}
+                    </span>
+                    {section.title}
+                  </h3>
 
-                {section.content && (
-                  <p className="text-gray-300 leading-relaxed mb-4">
-                    {section.content}
-                  </p>
-                )}
-
-                {section.list && (
-                  <ul className="space-y-2 ml-4 mb-4">
-                    {section.list.map((item, idx) => (
-                      <li key={idx} className="flex items-start text-gray-300">
-                        <span className="text-primary-400 mr-3 mt-1">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                {section.note && (
-                  <div className="mt-4 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
-                    <p className="text-sm text-gray-300">
-                      <span className="font-semibold text-yellow-500">
-                        Note:
-                      </span>{' '}
-                      {section.note}
+                  {section.content && (
+                    <p className="text-gray-300 leading-relaxed mb-4 font-['Figtree']">
+                      {section.content}
                     </p>
-                  </div>
-                )}
+                  )}
 
-                {section.subsections && (
-                  <div className="space-y-4 mt-4">
-                    {section.subsections.map((subsection, subIdx) => (
-                      <div key={subIdx} className="ml-4">
-                        <h4 className="font-semibold text-gray-200 mb-2">
-                          {subsection.subtitle}
-                        </h4>
-                        <p className="text-gray-300 leading-relaxed mb-2">
-                          {subsection.text}
-                        </p>
-                        {subsection.list && (
-                          <ul className="space-y-1 ml-4">
-                            {subsection.list.map((item, itemIdx) => (
-                              <li
-                                key={itemIdx}
-                                className="flex items-start text-gray-400 text-sm"
-                              >
-                                <span className="text-primary-400 mr-2">→</span>
-                                <span>{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+                  {section.list && (
+                    <ul className="space-y-2 ml-4 mb-4 font-['Figtree']">
+                      {section.list.map((item, idx) => (
+                        <li key={idx} className="flex items-start text-gray-300">
+                          <span className="text-[#2563eb] mr-3 mt-1">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  {section.note && (
+                    <div className="mt-4 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
+                      <p className="text-sm text-gray-300 font-['Figtree']">
+                        <span className="font-semibold text-yellow-500">
+                          Note:
+                        </span>{' '}
+                        {section.note}
+                      </p>
+                    </div>
+                  )}
+
+                  {section.subsections && (
+                    <div className="space-y-4 mt-4">
+                      {section.subsections.map((subsection, subIdx) => (
+                        <div key={subIdx} className="ml-4">
+                          <h4 className="font-semibold text-gray-300 mb-2 font-['Figtree']">
+                            {subsection.subtitle}
+                          </h4>
+                          <p className="text-gray-300 leading-relaxed mb-2 font-['Figtree']">
+                            {subsection.text}
+                          </p>
+                          {subsection.list && (
+                            <ul className="space-y-1 ml-4 font-['Figtree']">
+                              {subsection.list.map((item, itemIdx) => (
+                                <li
+                                  key={itemIdx}
+                                  className="flex items-start text-gray-400 text-sm"
+                                >
+                                  <span className="text-[#2563eb] mr-2">→</span>
+                                  <span>{item}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Browser Instructions */}
-      <section className="py-16 border-t border-dark-800">
+      <section className="py-16 border-t border-[#2563eb]/30 bg-[#0a0b0d]">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-8 text-center">
+            <motion.h2 
+              className="text-3xl font-bold text-white mb-8 text-center font-['Outfit']"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
               Manage Cookies in Your Browser
-            </h2>
+            </motion.h2>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <motion.div 
+              className="grid md:grid-cols-2 gap-6"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
               {[
                 {
                   name: 'Google Chrome',
@@ -576,106 +670,136 @@ const CookiePolicy = () => {
                   link: 'https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09',
                 },
               ].map((browser, idx) => (
-                <a
+                <motion.a
                   key={idx}
                   href={browser.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-dark-800 p-6 rounded-xl border border-dark-700 hover:border-primary-600 transition-all duration-300 group"
+                  className="bg-[#1a1c20] p-6 rounded-xl border border-[#2563eb]/30 hover:border-[#2563eb] transition-all duration-300 group"
+                  variants={itemVariants}
                 >
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="font-semibold text-white mb-1">
+                      <h4 className="font-semibold text-white mb-1 font-['Figtree']">
                         {browser.name}
                       </h4>
-                      <p className="text-sm text-gray-400">
+                      <p className="text-sm text-gray-400 font-['Figtree']">
                         Cookie management guide
                       </p>
                     </div>
-                    <span className="text-primary-400 group-hover:translate-x-1 transition-transform">
-                      →
+                    <span className="text-[#2563eb] group-hover:translate-x-1 transition-transform">
+                      <HiArrowRight className="w-4 h-4" />
                     </span>
                   </div>
-                </a>
+                </motion.a>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Related Links */}
-      <section className="py-12 bg-dark-800/30">
+      <section className="py-12 bg-[#0a0b0d]">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <h3 className="text-xl font-semibold text-white mb-6 text-center">
+            <motion.h3 
+              className="text-xl font-semibold text-white mb-6 text-center font-['Outfit']"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
               Related Legal Documents
-            </h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              <Link
+            </motion.h3>
+            <motion.div 
+              className="grid md:grid-cols-2 gap-6"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <motion.Link
                 to="/privacy-policy"
-                className="bg-dark-800 p-6 rounded-xl border border-dark-700 hover:border-primary-600 transition-all duration-300 group"
+                className="bg-[#1a1c20] p-6 rounded-xl border border-[#2563eb]/30 hover:border-[#2563eb] transition-all duration-300 group"
+                variants={itemVariants}
               >
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-primary-600/20 rounded-lg flex items-center justify-center group-hover:bg-primary-600/30 transition-colors">
-                    <HiShieldCheck className="w-6 h-6 text-primary-400" />
+                  <div className="w-12 h-12 bg-[#2563eb]/20 rounded-lg flex items-center justify-center group-hover:bg-[#2563eb]/30 transition-colors">
+                    <HiShieldCheck className="w-6 h-6 text-[#2563eb]" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-white mb-1">
+                    <h4 className="font-semibold text-white mb-1 font-['Figtree']">
                       Privacy Policy
                     </h4>
-                    <p className="text-sm text-gray-400">
+                    <p className="text-sm text-gray-400 font-['Figtree']">
                       How we handle your data
                     </p>
                   </div>
                 </div>
-              </Link>
+              </motion.Link>
 
-              <Link
+              <motion.Link
                 to="/terms-of-service"
-                className="bg-dark-800 p-6 rounded-xl border border-dark-700 hover:border-primary-600 transition-all duration-300 group"
+                className="bg-[#1a1c20] p-6 rounded-xl border border-[#2563eb]/30 hover:border-[#2563eb] transition-all duration-300 group"
+                variants={itemVariants}
               >
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-secondary-600/20 rounded-lg flex items-center justify-center group-hover:bg-secondary-600/30 transition-colors">
-                    <HiInformationCircle className="w-6 h-6 text-secondary-400" />
+                  <div className="w-12 h-12 bg-[#ffc957]/20 rounded-lg flex items-center justify-center group-hover:bg-[#ffc957]/30 transition-colors">
+                    <HiInformationCircle className="w-6 h-6 text-[#ffc957]" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-white mb-1">
+                    <h4 className="font-semibold text-white mb-1 font-['Figtree']">
                       Terms of Service
                     </h4>
-                    <p className="text-sm text-gray-400">
+                    <p className="text-sm text-gray-400 font-['Figtree']">
                       Our terms and conditions
                     </p>
                   </div>
                 </div>
-              </Link>
-            </div>
+              </motion.Link>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Contact CTA */}
-      <section className="py-16 border-t border-dark-800">
+      <section className="py-16 border-t border-[#2563eb]/30 bg-gradient-to-br from-[#2563eb] via-[#ffc957] to-[#0a0b0d] text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2260%22%20height=%2260%22%20viewBox=%220%200%2060%2060%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg%20fill=%22none%22%20fill-rule=%22evenodd%22%3E%3Cg%20fill=%22%23ffffff%22%20fill-opacity=%220.05%22%3E%3Ccircle%20cx=%2230%22%20cy=%2230%22%20r=%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
         <div className="container-custom">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-white mb-4">
+          <div className="max-w-3xl mx-auto text-center relative z-10">
+            <motion.h2 
+              className="text-3xl font-bold mb-4 font-['Outfit']"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
               Questions About Cookies?
-            </h2>
-            <p className="text-gray-300 mb-8">
+            </motion.h2>
+            <motion.p 
+              className="text-white mb-8 font-['Figtree']"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
               If you have any questions about our use of cookies, feel free to
               reach out to us.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/contact" className="btn-primary">
+            </motion.p>
+            <motion.div 
+              className="flex flex-wrap justify-center gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <Link to="/contact" className="px-8 py-4 bg-[#0a0b0d] text-white rounded-lg hover:bg-[#ffc957] hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit']">
                 Contact Us
               </Link>
-              <Link to="/privacy-policy" className="btn-secondary">
+              <Link to="/privacy-policy" className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg hover:bg-white hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit']">
                 View Privacy Policy
               </Link>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
     </div>
+    </ErrorBoundary>
   );
 };
 

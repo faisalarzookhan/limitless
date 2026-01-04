@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+import { motion } from 'framer-motion';
 import {
   HiStar,
   HiCheckCircle,
@@ -9,6 +11,7 @@ import {
   HiChevronDown,
   HiChevronUp,
 } from 'react-icons/hi';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 const Testimonials = () => {
   const [selectedRating, setSelectedRating] = useState('all');
@@ -234,279 +237,313 @@ const Testimonials = () => {
   };
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative py-20 md:py-32 bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 text-white overflow-hidden">
-        <div
-          className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8"
-          aria-hidden="true"
-        >
-          <div className="absolute inset-0 bg-pattern-grid opacity-10"></div>
-        </div>
-        <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8 animate-fade-in-down">
-              <HiSparkles className="w-5 h-5" />
-              <span className="text-sm font-semibold">
-                Client Success Stories
-              </span>
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 animate-fade-in-up">
-              What Our Clients Say
-            </h1>
-            <p
-              className="text-xl md:text-2xl text-white/90 mb-8 animate-fade-in-up"
-              style={{ animationDelay: '0.2s' }}
-            >
-              Real feedback from real clients who have transformed their
-              businesses with Limitless
-            </p>
+    <ErrorBoundary>
+      <>
+        <Helmet>
+          <title>Client Testimonials - Limitless Infotech Solution</title>
+          <meta name="description" content="Read real testimonials from our satisfied clients across various industries. See how we've helped businesses transform with our technology solutions and achieved outstanding results." />
+          <meta name="keywords" content="testimonials, client reviews, success stories, business transformation, technology solutions, customer feedback, case studies, client satisfaction" />
+          <meta name="author" content="Limitless Infotech Solution" />
+          <meta property="og:title" content="Client Testimonials - Limitless Infotech Solution" />
+          <meta property="og:description" content="Read real testimonials from our satisfied clients across various industries. See how we've helped businesses transform with our technology solutions and achieved outstanding results." />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://www.limitlessinfotech.com/testimonials" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content="Client Testimonials - Limitless Infotech Solution" />
+          <meta name="twitter:description" content="Read real testimonials from our satisfied clients across various industries. See how we've helped businesses transform with our technology solutions and achieved outstanding results." />
+          <link rel="canonical" href="https://www.limitlessinfotech.com/testimonials" />
+        </Helmet>
+        <div className="min-h-screen font-sans bg-[#0a0b0d] text-white">
+          {/* Hero Section - Asymmetrical Layout */}
+          <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#0a0b0d] via-[#1e293b] to-[#0f172a]">
+            {/* Asymmetrical background elements */}
+            <div className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-[#2563eb]/10 to-transparent"></div>
+            <div className="absolute top-1/4 right-0 w-2/5 h-2/3 bg-gradient-to-l from-[#ffc957]/10 to-transparent"></div>
+            <div className="absolute inset-0 bg-architectural-grid opacity-10"></div>
+            <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
+              <div className="max-w-4xl mx-auto text-center">
+                <motion.div 
+                  className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <HiSparkles className="w-5 h-5" />
+                  <span className="text-sm font-semibold">
+                    Client Success Stories
+                  </span>
+                </motion.div>
+              
+                <motion.h1 
+                  className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 text-white"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  What Our <span className="text-[#ffc957]">Clients</span> Say
+                </motion.h1>
+              
+                <motion.p
+                  className="text-xl md:text-2xl text-white/90 mb-8"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                  Real feedback from real clients who have transformed their
+                  businesses with Limitless
+                </motion.p>
 
-            {/* Overall Rating */}
-            <div
-              className="flex items-center justify-center space-x-8 mt-12 animate-fade-in-up"
-              style={{ animationDelay: '0.4s' }}
-            >
-              <div className="text-center">
-                <div className="text-5xl font-bold mb-2">{averageRating}</div>
-                <div className="flex items-center justify-center mb-2">
-                  {[...Array(5)].map((_, i) => (
-                    <HiStar key={i} className="w-6 h-6 text-yellow-400" />
-                  ))}
-                </div>
-                <div className="text-sm text-white/80">Average Rating</div>
-              </div>
-              <div className="w-px h-16 bg-white/20"></div>
-              <div className="text-center">
-                <div className="text-5xl font-bold mb-2">{totalReviews}</div>
-                <div className="text-sm text-white/80">Total Reviews</div>
-              </div>
-              <div className="w-px h-16 bg-white/20"></div>
-              <div className="text-center">
-                <div className="text-5xl font-bold mb-2">100%</div>
-                <div className="text-sm text-white/80">Verified Clients</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Filters Section */}
-      <section className="section-padding bg-white dark:bg-dark-900">
-        <div className="container-custom">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-12">
-            {/* Industry Filter */}
-            <div className="flex items-center space-x-3">
-              <HiFilter className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                Industry:
-              </span>
-              <select
-                value={selectedIndustry}
-                onChange={e => setSelectedIndustry(e.target.value)}
-                className="select-field py-2 px-4 text-sm"
-              >
-                {industries.map(industry => (
-                  <option key={industry} value={industry}>
-                    {industry === 'all' ? 'All Industries' : industry}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Rating Filter */}
-            <div className="flex items-center space-x-3">
-              <HiStar className="w-5 h-5 text-yellow-500" />
-              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                Rating:
-              </span>
-              <select
-                value={selectedRating}
-                onChange={e => setSelectedRating(e.target.value)}
-                className="select-field py-2 px-4 text-sm"
-              >
-                {ratings.map(rating => (
-                  <option key={rating} value={rating}>
-                    {rating === 'all' ? 'All Ratings' : `${rating} Stars`}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Results Count */}
-            <div className="text-sm text-gray-600 dark:text-gray-400">
-              Showing{' '}
-              <span className="font-semibold text-primary-600 dark:text-primary-400">
-                {filteredTestimonials.length}
-              </span>{' '}
-              review{filteredTestimonials.length !== 1 ? 's' : ''}
-            </div>
-          </div>
-
-          {/* Testimonials Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {filteredTestimonials.map((testimonial, index) => (
-              <div
-                key={testimonial.id}
-                className="testimonial-card animate-fade-in-up"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {/* Header */}
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-start space-x-4">
-                    {/* Avatar */}
-                    <div className="w-14 h-14 bg-gradient-primary rounded-full flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
-                      {testimonial.name.charAt(0)}
+                {/* Overall Rating */}
+                <motion.div
+                  className="flex items-center justify-center space-x-8 mt-12"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                >
+                  <div className="text-center">
+                    <div className="text-5xl font-bold mb-2">{averageRating}</div>
+                    <div className="flex items-center justify-center mb-2">
+                      {[...Array(5)].map((_, i) => (
+                        <HiStar key={i} className="w-6 h-6 text-yellow-400" />
+                      ))}
                     </div>
-                    {/* Info */}
-                    <div>
-                      <div className="flex items-center space-x-2">
-                        <h3 className="font-bold text-lg text-gray-900 dark:text-white">
-                          {testimonial.name}
-                        </h3>
-                        {testimonial.verified && (
-                          <HiCheckCircle
-                            className="w-5 h-5 text-green-500"
-                            title="Verified Client"
-                          />
-                        )}
-                      </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        {testimonial.role} at {testimonial.company}
-                      </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                        {testimonial.industry} • {testimonial.date}
-                      </p>
-                    </div>
+                    <div className="text-sm text-white/80">Average Rating</div>
                   </div>
-                  {/* Rating */}
-                  <div className="flex items-center space-x-1">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <HiStar key={i} className="w-5 h-5 text-yellow-500" />
+                  <div className="w-px h-16 bg-white/20"></div>
+                  <div className="text-center">
+                    <div className="text-5xl font-bold mb-2">{totalReviews}</div>
+                    <div className="text-sm text-white/80">Total Reviews</div>
+                  </div>
+                  <div className="w-px h-16 bg-white/20"></div>
+                  <div className="text-center">
+                    <div className="text-5xl font-bold mb-2">100%</div>
+                    <div className="text-sm text-white/80">Verified Clients</div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </section>
+
+          {/* Filters Section */}
+          <section className="py-12 bg-gradient-to-r from-[#0a0b0d] to-[#1e293b]">
+            <div className="container-custom px-4 md:px-6 lg:px-8">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-12">
+                {/* Industry Filter */}
+                <div className="flex items-center space-x-3">
+                  <HiFilter className="w-5 h-5 text-gray-400" />
+                  <span className="text-sm font-semibold text-gray-300">
+                    Industry:
+                  </span>
+                  <select
+                    value={selectedIndustry}
+                    onChange={e => setSelectedIndustry(e.target.value)}
+                    className="bg-[#1e293b] border border-[#334155] text-white py-2 px-4 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#2563eb] focus:border-transparent"
+                  >
+                    {industries.map(industry => (
+                      <option key={industry} value={industry}>
+                        {industry === 'all' ? 'All Industries' : industry}
+                      </option>
                     ))}
-                  </div>
+                  </select>
                 </div>
 
-                {/* Project Badge */}
-                <div className="inline-flex items-center px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-xs font-semibold mb-4">
-                  Project: {testimonial.project}
+                {/* Rating Filter */}
+                <div className="flex items-center space-x-3">
+                  <HiStar className="w-5 h-5 text-[#ffc957]" />
+                  <span className="text-sm font-semibold text-gray-300">
+                    Rating:
+                  </span>
+                  <select
+                    value={selectedRating}
+                    onChange={e => setSelectedRating(e.target.value)}
+                    className="bg-[#1e293b] border border-[#334155] text-white py-2 px-4 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#2563eb] focus:border-transparent"
+                  >
+                    {ratings.map(rating => (
+                      <option key={rating} value={rating}>
+                        {rating === 'all' ? 'All Ratings' : `${rating} Stars`}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
-                {/* Review Text */}
-                <div className="mb-4">
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                    "
-                    {expandedReview === testimonial.id
-                      ? testimonial.longReview
-                      : testimonial.text}
-                    "
+                {/* Results Count */}
+                <div className="text-sm text-gray-400">
+                  Showing{' '}
+                  <span className="font-semibold text-[#ffc957]">
+                    {filteredTestimonials.length}
+                  </span>{' '}
+                  review{filteredTestimonials.length !== 1 ? 's' : ''}
+                </div>
+              </div>
+
+              {/* Testimonials Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {filteredTestimonials.map((testimonial, index) => (
+                  <motion.div
+                    key={testimonial.id}
+                    className="bg-[#1e293b] rounded-2xl p-8 border border-[#334155]"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
+                    {/* Header */}
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-start space-x-4">
+                        {/* Avatar */}
+                        <div className="w-14 h-14 bg-gradient-to-br from-[#2563eb] to-[#1e40af] rounded-full flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
+                          {testimonial.name.charAt(0)}
+                        </div>
+                        {/* Info */}
+                        <div>
+                          <div className="flex items-center space-x-2">
+                            <h3 className="font-bold text-lg text-white">
+                              {testimonial.name}
+                            </h3>
+                            {testimonial.verified && (
+                              <HiCheckCircle
+                                className="w-5 h-5 text-[#ffc957]"
+                                title="Verified Client"
+                              />
+                            )}
+                          </div>
+                          <p className="text-sm text-gray-400">
+                            {testimonial.role} at {testimonial.company}
+                          </p>
+                          <p className="text-xs text-gray-500 mt-1">
+                            {testimonial.industry} • {testimonial.date}
+                          </p>
+                        </div>
+                      </div>
+                      {/* Rating */}
+                      <div className="flex items-center space-x-1">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <HiStar key={i} className="w-5 h-5 text-[#ffc957]" />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Project Badge */}
+                    <div className="inline-flex items-center px-3 py-1 bg-[#2563eb]/20 text-[#2563eb] rounded-full text-xs font-semibold mb-4">
+                      Project: {testimonial.project}
+                    </div>
+
+                    {/* Review Text */}
+                    <div className="mb-4">
+                      <p className="text-gray-300 leading-relaxed">
+                        "
+                        {expandedReview === testimonial.id
+                          ? testimonial.longReview
+                          : testimonial.text}
+                        "
+                      </p>
+                    </div>
+
+                    {/* Read More Button */}
+                    {testimonial.longReview && (
+                      <button
+                        onClick={() => toggleExpanded(testimonial.id)}
+                        className="flex items-center space-x-2 text-[#2563eb] font-semibold hover:underline text-sm"
+                      >
+                        <span>
+                          {expandedReview === testimonial.id
+                            ? 'Read Less'
+                            : 'Read Full Review'}
+                        </span>
+                        {expandedReview === testimonial.id ? (
+                          <HiChevronUp className="w-4 h-4" />
+                        ) : (
+                          <HiChevronDown className="w-4 h-4" />
+                        )}
+                      </button>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* No Results */}
+              {filteredTestimonials.length === 0 && (
+                <div className="text-center py-16">
+                  <HiUserCircle className="w-16 h-16 text-gray-500 mx-auto mb-4" />
+                  <h3 className="text-xl font-semibold text-white mb-2">
+                    No reviews found
+                  </h3>
+                  <p className="text-gray-400">
+                    Try adjusting your filters to see more reviews
                   </p>
                 </div>
-
-                {/* Read More Button */}
-                {testimonial.longReview && (
-                  <button
-                    onClick={() => toggleExpanded(testimonial.id)}
-                    className="flex items-center space-x-2 text-primary-600 dark:text-primary-400 font-semibold hover:underline text-sm"
-                  >
-                    <span>
-                      {expandedReview === testimonial.id
-                        ? 'Read Less'
-                        : 'Read Full Review'}
-                    </span>
-                    {expandedReview === testimonial.id ? (
-                      <HiChevronUp className="w-4 h-4" />
-                    ) : (
-                      <HiChevronDown className="w-4 h-4" />
-                    )}
-                  </button>
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* No Results */}
-          {filteredTestimonials.length === 0 && (
-            <div className="text-center py-16">
-              <HiUserCircle className="w-16 h-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                No reviews found
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Try adjusting your filters to see more reviews
-              </p>
+              )}
             </div>
-          )}
+          </section>
+
+          {/* Trust Indicators */}
+          <section className="section-padding bg-gray-50 dark:bg-dark-800">
+            <div className="container-custom">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <HiCheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+                    100% Verified Reviews
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Every testimonial is from real clients with completed projects
+                  </p>
+                </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-yellow-100 dark:bg-yellow-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <HiStar className="w-8 h-8 text-yellow-600 dark:text-yellow-400" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+                    {averageRating} Average Rating
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Consistently high ratings across all projects and industries
+                  </p>
+                </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <HiUserCircle className="w-8 h-8 text-primary-600 dark:text-primary-400" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+                    50+ Happy Clients
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Growing list of satisfied clients across multiple industries
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* CTA Section */}
+          <section className="section-padding bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
+            <div className="container-custom text-center">
+              <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+                Ready to Join Our Success Stories?
+              </h2>
+              <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+                Let's create a project that you'll be excited to review
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link
+                  to="/get-started"
+                  className="btn-primary bg-white text-primary-600 hover:bg-gray-100"
+                >
+                  Start Your Project
+                </Link>
+                <Link
+                  to="/portfolio"
+                  className="btn-outline border-white text-white hover:bg-white hover:text-primary-600"
+                >
+                  View Our Work
+                </Link>
+              </div>
+            </div>
+          </section>
         </div>
-      </section>
-
-      {/* Trust Indicators */}
-      <section className="section-padding bg-gray-50 dark:bg-dark-800">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                <HiCheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
-              </div>
-              <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
-                100% Verified Reviews
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Every testimonial is from real clients with completed projects
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-yellow-100 dark:bg-yellow-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                <HiStar className="w-8 h-8 text-yellow-600 dark:text-yellow-400" />
-              </div>
-              <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
-                {averageRating} Average Rating
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Consistently high ratings across all projects and industries
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                <HiUserCircle className="w-8 h-8 text-primary-600 dark:text-primary-400" />
-              </div>
-              <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
-                50+ Happy Clients
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Growing list of satisfied clients across multiple industries
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
-        <div className="container-custom text-center">
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-            Ready to Join Our Success Stories?
-          </h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Let's create a project that you'll be excited to review
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              to="/get-started"
-              className="btn-primary bg-white text-primary-600 hover:bg-gray-100"
-            >
-              Start Your Project
-            </Link>
-            <Link
-              to="/portfolio"
-              className="btn-outline border-white text-white hover:bg-white hover:text-primary-600"
-            >
-              View Our Work
-            </Link>
-          </div>
-        </div>
-      </section>
-    </div>
+      </>
+    </ErrorBoundary>
   );
 };
 

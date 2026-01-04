@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import {
   HiSearch,
   HiDocumentText,
@@ -14,6 +15,7 @@ import {
   HiChartBar,
 } from 'react-icons/hi';
 import AIPoweredSearch from '../components/AIPoweredSearch';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 const KnowledgeBase = () => {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -171,64 +173,114 @@ const KnowledgeBase = () => {
     return <HiDocumentText className="w-5 h-5" />;
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-dark-900 dark:to-dark-800">
+    <ErrorBoundary>
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
       {/* Hero Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 text-white">
+      <motion.section 
+        className="py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#1d4ed8] to-[#ffc957] text-[#0a0b0d]"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom px-4 md:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8">
+            <motion.div 
+              className="inline-flex items-center space-x-2 bg-[#0a0b0d]/20 px-6 py-3 rounded-full mb-8"
+              variants={itemVariants}
+            >
               <HiAcademicCap className="w-5 h-5" />
-              <span className="text-sm font-semibold">Knowledge Base</span>
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
+              <span className="text-sm font-semibold font-['Outfit']">Knowledge Base</span>
+            </motion.div>
+            <motion.h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-['Outfit'] font-bold mb-6"
+              variants={itemVariants}
+            >
               AI-Powered
               <br />
               Knowledge Base
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8">
+            </motion.h1>
+            <motion.p 
+              className="text-xl md:text-2xl text-[#0a0b0d]/90 mb-8 font-['Figtree']"
+              variants={itemVariants}
+            >
               Find answers, guides, and resources with our intelligent search
               system
-            </p>
+            </motion.p>
 
-            <div className="max-w-2xl mx-auto">
+            <motion.div 
+              className="max-w-2xl mx-auto"
+              variants={itemVariants}
+            >
               <AIPoweredSearch
                 placeholder="Ask anything about our products and services..."
                 className="w-full"
               />
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Search and Filter Section */}
-      <section className="section-padding bg-white dark:bg-dark-900">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
           <div className="max-w-6xl mx-auto">
             <div className="mb-8">
-              <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+              <motion.h2 
+                className="text-2xl font-['Outfit'] font-bold mb-6 text-white"
+                variants={itemVariants}
+              >
                 Browse Resources
-              </h2>
+              </motion.h2>
 
               <div className="flex flex-wrap gap-3 mb-8">
                 {categories.map(category => {
                   const Icon = category.icon;
                   return (
-                    <button
+                    <motion.button
                       key={category.id}
                       onClick={() => setActiveCategory(category.id)}
-                      className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors ${
+                      className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-['Figtree'] transition-colors ${
                         activeCategory === category.id
-                          ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300'
-                          : 'bg-gray-100 text-gray-700 dark:bg-dark-800 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-dark-700'
+                          ? 'bg-[#2563eb]/20 text-[#2563eb]'
+                          : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
                       }`}
+                      variants={itemVariants}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                     >
                       <Icon className="w-4 h-4" />
                       <span>{category.name}</span>
-                      <span className="bg-gray-200 dark:bg-dark-600 text-gray-700 dark:text-gray-300 text-xs px-2 py-0.5 rounded-full ml-1">
+                      <span className="bg-gray-700 text-gray-300 text-xs px-2 py-0.5 rounded-full ml-1">
                         {category.count}
                       </span>
-                    </button>
+                    </motion.button>
                   );
                 })}
               </div>
@@ -245,14 +297,14 @@ const KnowledgeBase = () => {
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
                   placeholder="Search resources by keyword..."
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-dark-600 rounded-xl bg-white dark:bg-dark-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-700 rounded-xl bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#2563eb] focus:border-transparent font-['Figtree']"
                 />
               </div>
             </div>
 
             {/* Results Count */}
             <div className="mb-6">
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-gray-300 font-['Figtree']">
                 Showing {filteredResources.length} of {resources.length}{' '}
                 resources
               </p>
@@ -260,32 +312,36 @@ const KnowledgeBase = () => {
 
             {/* Resources Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredResources.map(resource => (
-                <div
+              {filteredResources.map((resource, index) => (
+                <motion.div
                   key={resource.id}
-                  className="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-dark-700 hover:shadow-lg transition-shadow duration-300"
+                  className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-6 shadow-xl border border-gray-700"
+                  initial="hidden"
+                  animate="visible"
+                  variants={itemVariants}
+                  transition={{ delay: index * 0.1 }}
                 >
                   <div className="flex items-start justify-between mb-4">
-                    <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center">
+                    <div className="w-10 h-10 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-lg flex items-center justify-center">
                       {getIconForType(resource.type)}
                     </div>
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                    <span className="text-xs text-gray-400 font-['Figtree']">
                       {resource.date}
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white line-clamp-2">
+                  <h3 className="text-lg font-['Outfit'] font-bold mb-2 text-white line-clamp-2">
                     {resource.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">
+                  <p className="text-gray-300 text-sm mb-4 line-clamp-3 font-['Figtree']">
                     {resource.description}
                   </p>
 
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                    <span className="text-xs text-gray-400 font-['Figtree']">
                       {resource.readTime}
                     </span>
-                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300 capitalize">
+                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-['Figtree'] bg-[#2563eb]/20 text-[#2563eb] capitalize">
                       {resource.category.replace('-', ' ')}
                     </span>
                   </div>
@@ -294,7 +350,7 @@ const KnowledgeBase = () => {
                     {resource.tags.slice(0, 3).map((tag, index) => (
                       <span
                         key={index}
-                        className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-dark-600 text-gray-800 dark:text-gray-200"
+                        className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-['Figtree'] bg-gray-800 text-gray-300"
                       >
                         {tag}
                       </span>
@@ -303,187 +359,229 @@ const KnowledgeBase = () => {
 
                   <a
                     href={resource.url}
-                    className="btn-outline w-full flex items-center justify-center space-x-2 text-sm"
+                    className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-4 py-2 rounded-lg text-sm font-['Figtree'] w-full flex items-center justify-center transition-colors"
                   >
                     <span>Read More</span>
                   </a>
-                </div>
+                </motion.div>
               ))}
             </div>
 
             {filteredResources.length === 0 && (
-              <div className="text-center py-12">
+              <motion.div 
+                className="text-center py-12"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
                 <HiSearch className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                <h3 className="text-lg font-['Outfit'] font-medium text-white mb-2">
                   No resources found
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400">
+                <p className="text-gray-300 font-['Figtree']">
                   Try adjusting your search or browse different categories.
                 </p>
-              </div>
+              </motion.div>
             )}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* AI Features Section */}
-      <section className="section-padding bg-gray-50 dark:bg-dark-800">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              AI-Powered <span className="text-gradient">Features</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
+              AI-Powered <span className="text-[#ffc957]">Features</span>
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Our intelligent search system understands context, intent, and
               provides relevant results
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                <HiChatAlt className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
-                Natural Language Search
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Ask questions in plain English and get precise answers from our
-                knowledge base
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                <HiLightningBolt className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
-                Smart Suggestions
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Get intelligent suggestions based on your search history and
-                common queries
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                <HiChartBar className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
-                Contextual Results
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Results are ranked by relevance and context to your specific
-                needs
-              </p>
-            </div>
+            {[
+              {
+                icon: HiChatAlt,
+                title: 'Natural Language Search',
+                description: 'Ask questions in plain English and get precise answers from our knowledge base'
+              },
+              {
+                icon: HiLightningBolt,
+                title: 'Smart Suggestions',
+                description: 'Get intelligent suggestions based on your search history and common queries'
+              },
+              {
+                icon: HiChartBar,
+                title: 'Contextual Results',
+                description: 'Results are ranked by relevance and context to your specific needs'
+              }
+            ].map((feature, index) => (
+              <motion.div 
+                key={index}
+                className="text-center"
+                initial="hidden"
+                animate="visible"
+                variants={itemVariants}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-full flex items-center justify-center mx-auto mb-6">
+                  <feature.icon className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-['Outfit'] font-bold mb-3 text-white">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-300 font-['Figtree']">
+                  {feature.description}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Quick Links Section */}
-      <section className="section-padding">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Quick <span className="text-gradient">Resources</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
+              Quick <span className="text-[#ffc957]">Resources</span>
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Frequently accessed resources and tools
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <a
-              href="/api-documentation"
-              className="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-dark-700 hover:shadow-lg transition-shadow duration-300 text-center"
-            >
-              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <HiCode className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="font-bold mb-2 text-gray-900 dark:text-white">
-                API Documentation
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Complete API reference and examples
-              </p>
-            </a>
-
-            <a
-              href="/compliance"
-              className="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-dark-700 hover:shadow-lg transition-shadow duration-300 text-center"
-            >
-              <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-500 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <HiBookOpen className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="font-bold mb-2 text-gray-900 dark:text-white">
-                Compliance
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Security and compliance information
-              </p>
-            </a>
-
-            <a
-              href="/roi-calculator"
-              className="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-dark-700 hover:shadow-lg transition-shadow duration-300 text-center"
-            >
-              <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <HiSparkles className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="font-bold mb-2 text-gray-900 dark:text-white">
-                ROI Calculator
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Calculate your investment returns
-              </p>
-            </a>
-
-            <a
-              href="/client-portal"
-              className="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-dark-700 hover:shadow-lg transition-shadow duration-300 text-center"
-            >
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <HiUserGroup className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="font-bold mb-2 text-gray-900 dark:text-white">
-                Client Portal
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Manage your projects and invoices
-              </p>
-            </a>
+            {[
+              {
+                icon: HiCode,
+                title: 'API Documentation',
+                description: 'Complete API reference and examples',
+                url: '/api-documentation',
+                color: 'from-[#2563eb] to-[#ffc957]'
+              },
+              {
+                icon: HiBookOpen,
+                title: 'Compliance',
+                description: 'Security and compliance information',
+                url: '/compliance',
+                color: 'from-[#ffc957] to-[#2563eb]'
+              },
+              {
+                icon: HiSparkles,
+                title: 'ROI Calculator',
+                description: 'Calculate your investment returns',
+                url: '/roi-calculator',
+                color: 'from-[#ffc957] to-[#1d4ed8]'
+              },
+              {
+                icon: HiUserGroup,
+                title: 'Client Portal',
+                description: 'Manage your projects and invoices',
+                url: '/client-portal',
+                color: 'from-[#1d4ed8] to-[#ffc957]'
+              }
+            ].map((link, index) => (
+              <motion.a
+                key={index}
+                href={link.url}
+                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-6 shadow-xl border border-gray-700 hover:shadow-lg transition-shadow duration-300 text-center block"
+                initial="hidden"
+                animate="visible"
+                variants={itemVariants}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className={`w-12 h-12 bg-gradient-to-br ${link.color} rounded-lg flex items-center justify-center mx-auto mb-4`}>
+                  <link.icon className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="font-['Outfit'] font-bold mb-2 text-white">
+                  {link.title}
+                </h3>
+                <p className="text-sm text-gray-300 font-['Figtree']">
+                  {link.description}
+                </p>
+              </motion.a>
+            ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-br from-indigo-600 to-purple-600 text-white">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#2563eb] to-[#ffc957] text-[#0a0b0d]"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
           <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+            <motion.h2 
+              className="text-3xl md:text-4xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
               Can't Find What You Need?
-            </h2>
-            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-[#0a0b0d]/90 mb-8 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Our AI-powered search is continuously learning and improving
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            </motion.p>
+            <motion.div 
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+              variants={itemVariants}
+            >
               <a
                 href="/contact"
-                className="btn-primary bg-white text-indigo-600 hover:bg-gray-100"
+                className="bg-[#0a0b0d] text-[#ffc957] hover:bg-[#1a1c25] px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']"
               >
                 Contact Support
               </a>
               <a
                 href="/docs"
-                className="btn-outline border-white text-white hover:bg-white hover:text-indigo-600"
+                className="bg-transparent border border-[#0a0b0d] text-[#0a0b0d] hover:bg-[#0a0b0d] hover:text-[#ffc957] px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']"
               >
                 Browse All Docs
               </a>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
+    </ErrorBoundary>
   );
 };
 

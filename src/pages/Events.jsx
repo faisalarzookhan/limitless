@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
   HiCalendar,
   HiClock,
@@ -18,6 +19,7 @@ import {
   HiTrendingUp,
   HiGlobe,
 } from 'react-icons/hi';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 const Events = () => {
   const [selectedEventId, setSelectedEventId] = useState(null);
@@ -241,10 +243,37 @@ const Events = () => {
     return Math.round((current / max) * 100);
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
   return (
-    <div className="min-h-screen">
+    <ErrorBoundary>
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
       {/* Hero Section */}
-      <section className="relative py-20 md:py-32 bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 text-white overflow-hidden">
+      <motion.section 
+        className="relative py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#1d4ed8] to-[#ffc957] text-white overflow-hidden"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div
           className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8"
           aria-hidden="true"
@@ -253,52 +282,72 @@ const Events = () => {
         </div>
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8 animate-fade-in-down">
+            <motion.div 
+              className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8"
+              variants={itemVariants}
+            >
               <HiCalendar className="w-5 h-5" />
-              <span className="text-sm font-semibold">
+              <span className="text-sm font-semibold font-['Outfit']">
                 Events & Product Launches
               </span>
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 animate-fade-in-up">
+            </motion.div>
+            <motion.h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-['Outfit'] font-bold mb-6"
+              variants={itemVariants}
+            >
               Join Our Upcoming Events
-            </h1>
-            <p
-              className="text-xl md:text-2xl text-white/90 mb-8 animate-fade-in-up"
-              style={{ animationDelay: '0.2s' }}
+            </motion.h1>
+            <motion.p
+              className="text-xl md:text-2xl text-white/90 mb-8 font-['Figtree']"
+              variants={itemVariants}
             >
               Product launches, webinars, workshops, and networking
               opportunities
-            </p>
+            </motion.p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Featured Events */}
-      <section className="section-padding bg-white dark:bg-dark-900">
+      <section className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Featured <span className="text-gradient">Events</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
+              Featured <span className="text-[#ffc957]">Events</span>
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Don't miss our flagship events and product launches
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
             {events
               .filter(e => e.featured)
               .map((event, index) => (
-                <div
+                <motion.div
                   key={event.id}
-                  className="bg-gradient-to-br from-white to-gray-50 dark:from-dark-800 dark:to-dark-900 rounded-3xl overflow-hidden shadow-xl border border-gray-100 dark:border-dark-700 animate-fade-in-up"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-3xl overflow-hidden shadow-xl border border-gray-700"
+                  initial="hidden"
+                  animate="visible"
+                  variants={itemVariants}
+                  transition={{ delay: index * 0.1 }}
                 >
                   {/* Event Header Image */}
-                  <div className="relative h-64 bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center overflow-hidden">
+                  <div className="relative h-64 bg-gradient-to-br from-[#2563eb] to-[#ffc957] flex items-center justify-center overflow-hidden">
                     <HiSparkles className="w-32 h-32 text-white opacity-20" />
                     <div className="absolute top-4 left-4">
-                      <span className="badge bg-yellow-500 text-white">
+                      <span className="bg-[#ffc957] text-[#0a0b0d] px-3 py-1 rounded-full text-sm font-semibold font-['Figtree']">
                         Featured
                       </span>
                     </div>
@@ -309,68 +358,70 @@ const Events = () => {
 
                   {/* Event Content */}
                   <div className="p-8">
-                    <div className="flex items-center space-x-2 mb-3">
-                      <span className="badge badge-primary">{event.type}</span>
+                    <div className="flex flex-wrap items-center gap-2 mb-3">
+                      <span className="bg-[#2563eb] text-white px-3 py-1 rounded-full text-sm font-['Figtree']">
+                        {event.type}
+                      </span>
                       {event.tags.slice(0, 2).map((tag, i) => (
-                        <span key={i} className="badge badge-secondary text-xs">
+                        <span key={i} className="bg-gray-700 text-gray-200 px-2 py-1 rounded-full text-xs font-['Figtree']">
                           {tag}
                         </span>
                       ))}
                     </div>
 
-                    <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
+                    <h3 className="text-2xl font-['Outfit'] font-bold mb-3 text-white">
                       {event.title}
                     </h3>
 
-                    <p className="text-gray-600 dark:text-gray-400 mb-6">
+                    <p className="text-gray-300 mb-6 font-['Figtree']">
                       {event.description}
                     </p>
 
                     {/* Event Details */}
                     <div className="grid grid-cols-2 gap-4 mb-6">
                       <div className="flex items-start space-x-2">
-                        <HiCalendar className="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 flex-shrink-0" />
+                        <HiCalendar className="w-5 h-5 text-[#2563eb] mt-0.5 flex-shrink-0" />
                         <div>
-                          <p className="text-xs text-gray-500 dark:text-gray-500">
+                          <p className="text-xs text-gray-400 font-['Figtree']">
                             Date
                           </p>
-                          <p className="text-sm font-semibold text-gray-900 dark:text-white">
+                          <p className="text-sm font-semibold text-white font-['Figtree']">
                             {formatDate(event.date)}
                           </p>
                         </div>
                       </div>
 
                       <div className="flex items-start space-x-2">
-                        <HiClock className="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 flex-shrink-0" />
+                        <HiClock className="w-5 h-5 text-[#2563eb] mt-0.5 flex-shrink-0" />
                         <div>
-                          <p className="text-xs text-gray-500 dark:text-gray-500">
+                          <p className="text-xs text-gray-400 font-['Figtree']">
                             Time
                           </p>
-                          <p className="text-sm font-semibold text-gray-900 dark:text-white">
+                          <p className="text-sm font-semibold text-white font-['Figtree']">
                             {event.time}
                           </p>
                         </div>
                       </div>
 
                       <div className="flex items-start space-x-2">
-                        <HiLocationMarker className="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 flex-shrink-0" />
+                        <HiLocationMarker className="w-5 h-5 text-[#2563eb] mt-0.5 flex-shrink-0" />
                         <div>
-                          <p className="text-xs text-gray-500 dark:text-gray-500">
+                          <p className="text-xs text-gray-400 font-['Figtree']">
                             Location
                           </p>
-                          <p className="text-sm font-semibold text-gray-900 dark:text-white">
+                          <p className="text-sm font-semibold text-white font-['Figtree']">
                             {event.location}
                           </p>
                         </div>
                       </div>
 
                       <div className="flex items-start space-x-2">
-                        <HiUsers className="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 flex-shrink-0" />
+                        <HiUsers className="w-5 h-5 text-[#2563eb] mt-0.5 flex-shrink-0" />
                         <div>
-                          <p className="text-xs text-gray-500 dark:text-gray-500">
+                          <p className="text-xs text-gray-400 font-['Figtree']">
                             Attendees
                           </p>
-                          <p className="text-sm font-semibold text-gray-900 dark:text-white">
+                          <p className="text-sm font-semibold text-white font-['Figtree']">
                             {event.currentAttendees} / {event.maxAttendees}
                           </p>
                         </div>
@@ -380,10 +431,10 @@ const Events = () => {
                     {/* Attendance Progress */}
                     <div className="mb-6">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs text-gray-600 dark:text-gray-400">
+                        <span className="text-xs text-gray-400 font-['Figtree']">
                           Registration Progress
                         </span>
-                        <span className="text-xs font-semibold text-primary-600 dark:text-primary-400">
+                        <span className="text-xs font-semibold text-[#2563eb] font-['Figtree']">
                           {getAttendancePercentage(
                             event.currentAttendees,
                             event.maxAttendees
@@ -391,9 +442,9 @@ const Events = () => {
                           %
                         </span>
                       </div>
-                      <div className="h-2 bg-gray-200 dark:bg-dark-700 rounded-full overflow-hidden">
+                      <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-gradient-to-r from-primary-600 to-secondary-600"
+                          className="h-full bg-gradient-to-r from-[#2563eb] to-[#ffc957]"
                           style={{
                             width: `${getAttendancePercentage(event.currentAttendees, event.maxAttendees)}%`,
                           }}
@@ -407,7 +458,7 @@ const Events = () => {
                         <>
                           <button
                             onClick={() => handleRSVP(event.id, 'going')}
-                            className="flex-1 btn-primary text-sm"
+                            className="flex-1 bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-6 py-3 rounded-xl font-semibold transition-colors text-sm font-['Figtree']"
                           >
                             <HiCheckCircle className="inline w-5 h-5 mr-2" />
                             Register Now
@@ -418,13 +469,13 @@ const Events = () => {
                                 selectedEventId === event.id ? null : event.id
                               )
                             }
-                            className="btn-outline text-sm"
+                            className="bg-transparent border border-[#2563eb] text-[#2563eb] hover:bg-[#2563eb] hover:text-white px-6 py-3 rounded-xl font-semibold transition-colors text-sm font-['Figtree']"
                           >
                             Learn More
                           </button>
                         </>
                       ) : (
-                        <div className="flex-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-6 py-3 rounded-xl font-semibold text-center">
+                        <div className="flex-1 bg-green-900/30 text-green-400 px-6 py-3 rounded-xl font-semibold text-center font-['Figtree']">
                           <HiCheckCircle className="inline w-5 h-5 mr-2" />
                           Registered Successfully!
                         </div>
@@ -433,15 +484,20 @@ const Events = () => {
 
                     {/* Expanded Details */}
                     {selectedEventId === event.id && (
-                      <div className="border-t border-gray-200 dark:border-dark-700 pt-6 animate-slide-down">
-                        <h4 className="font-bold text-gray-900 dark:text-white mb-3">
+                      <motion.div 
+                        className="border-t border-gray-700 pt-6"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                      >
+                        <h4 className="font-['Outfit'] font-bold text-white mb-3">
                           Event Highlights
                         </h4>
                         <ul className="space-y-2 mb-6">
                           {event.highlights.map((highlight, i) => (
                             <li
                               key={i}
-                              className="flex items-start space-x-2 text-sm text-gray-600 dark:text-gray-400"
+                              className="flex items-start space-x-2 text-sm text-gray-300 font-['Figtree']"
                             >
                               <HiCheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
                               <span>{highlight}</span>
@@ -449,23 +505,23 @@ const Events = () => {
                           ))}
                         </ul>
 
-                        <h4 className="font-bold text-gray-900 dark:text-white mb-3">
+                        <h4 className="font-['Outfit'] font-bold text-white mb-3">
                           Speakers
                         </h4>
                         <div className="flex flex-wrap gap-3 mb-6">
                           {event.speakers.map((speaker, i) => (
                             <div
                               key={i}
-                              className="flex items-center space-x-2 bg-gray-100 dark:bg-dark-700 px-4 py-2 rounded-lg"
+                              className="flex items-center space-x-2 bg-gray-800 px-4 py-2 rounded-lg"
                             >
-                              <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center text-white text-sm font-bold">
+                              <div className="w-8 h-8 bg-gradient-to-r from-[#2563eb] to-[#ffc957] rounded-full flex items-center justify-center text-white text-sm font-bold">
                                 {speaker.name.charAt(0)}
                               </div>
                               <div>
-                                <p className="text-sm font-semibold text-gray-900 dark:text-white">
+                                <p className="text-sm font-semibold text-white font-['Figtree']">
                                   {speaker.name}
                                 </p>
-                                <p className="text-xs text-gray-500 dark:text-gray-400">
+                                <p className="text-xs text-gray-400 font-['Figtree']">
                                   {speaker.role}
                                 </p>
                               </div>
@@ -474,9 +530,9 @@ const Events = () => {
                         </div>
 
                         {/* Comments Section */}
-                        <div className="border-t border-gray-200 dark:border-dark-700 pt-6">
+                        <div className="border-t border-gray-700 pt-6">
                           <div className="flex items-center justify-between mb-4">
-                            <h4 className="font-bold text-gray-900 dark:text-white flex items-center">
+                            <h4 className="font-['Outfit'] font-bold text-white flex items-center">
                               <HiChat className="w-5 h-5 mr-2" />
                               Comments ({comments[event.id]?.length || 0})
                             </h4>
@@ -487,7 +543,7 @@ const Events = () => {
                                   [event.id]: !prev[event.id],
                                 }))
                               }
-                              className="text-sm text-primary-600 dark:text-primary-400 hover:underline"
+                              className="text-sm text-[#2563eb] hover:underline font-['Figtree']"
                             >
                               Add Comment
                             </button>
@@ -495,18 +551,23 @@ const Events = () => {
 
                           {/* Comment Form */}
                           {showCommentForm[event.id] && (
-                            <div className="mb-6 animate-slide-down">
+                            <motion.div 
+                              className="mb-6"
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                            >
                               <textarea
                                 value={newComment}
                                 onChange={e => setNewComment(e.target.value)}
                                 placeholder="Share your thoughts about this event..."
                                 rows="3"
-                                className="textarea-field mb-3"
+                                className="w-full bg-gray-800 text-white border border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#2563eb] font-['Figtree']"
                               ></textarea>
-                              <div className="flex gap-2">
+                              <div className="flex gap-2 mt-3">
                                 <button
                                   onClick={() => handleAddComment(event.id)}
-                                  className="btn-primary text-sm"
+                                  className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-4 py-2 rounded-lg text-sm font-['Figtree']"
                                 >
                                   Post Comment
                                 </button>
@@ -517,12 +578,12 @@ const Events = () => {
                                       [event.id]: false,
                                     }))
                                   }
-                                  className="btn-ghost text-sm"
+                                  className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-['Figtree']"
                                 >
                                   Cancel
                                 </button>
                               </div>
-                            </div>
+                            </motion.div>
                           )}
 
                           {/* Comments List */}
@@ -530,29 +591,29 @@ const Events = () => {
                             {comments[event.id]?.map(comment => (
                               <div
                                 key={comment.id}
-                                className="bg-gray-50 dark:bg-dark-700 rounded-lg p-4"
+                                className="bg-gray-800 rounded-lg p-4"
                               >
                                 <div className="flex items-start space-x-3">
-                                  <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">
+                                  <div className="w-10 h-10 bg-gradient-to-r from-[#2563eb] to-[#ffc957] rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">
                                     {comment.author.charAt(0)}
                                   </div>
                                   <div className="flex-1 min-w-0">
                                     <div className="flex items-center justify-between mb-1">
-                                      <h5 className="font-semibold text-sm text-gray-900 dark:text-white">
+                                      <h5 className="font-semibold text-sm text-white font-['Figtree']">
                                         {comment.author}
                                       </h5>
-                                      <span className="text-xs text-gray-500 dark:text-gray-400">
+                                      <span className="text-xs text-gray-400 font-['Figtree']">
                                         {comment.timestamp.toLocaleDateString()}
                                       </span>
                                     </div>
-                                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                                    <p className="text-sm text-gray-300 mb-2 font-['Figtree']">
                                       {comment.content}
                                     </p>
                                     <button
                                       onClick={() =>
                                         handleLikeComment(event.id, comment.id)
                                       }
-                                      className="flex items-center space-x-1 text-xs text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                                      className="flex items-center space-x-1 text-xs text-gray-400 hover:text-[#2563eb] transition-colors font-['Figtree']"
                                     >
                                       <HiHeart
                                         className={`w-4 h-4 ${comment.likes > 0 ? 'text-red-500 fill-current' : ''}`}
@@ -570,34 +631,51 @@ const Events = () => {
 
                             {(!comments[event.id] ||
                               comments[event.id].length === 0) && (
-                              <p className="text-center text-sm text-gray-500 dark:text-gray-400 py-8">
+                              <p className="text-center text-sm text-gray-400 py-8 font-['Figtree']">
                                 No comments yet. Be the first to share your
                                 thoughts!
                               </p>
                             )}
                           </div>
                         </div>
-                      </div>
+                      </motion.div>
                     )}
                   </div>
-                </div>
+                </motion.div>
               ))}
           </div>
 
           {/* All Events List */}
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-display font-bold mb-4">
-              All <span className="text-gradient">Events</span>
-            </h3>
-          </div>
+          <motion.div 
+            className="text-center mb-12"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.h3 
+              className="text-3xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
+              All <span className="text-[#ffc957]">Events</span>
+            </motion.h3>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
             {events.map((event, index) => (
-              <div
+              <motion.div
                 key={event.id}
-                className="bg-white dark:bg-dark-800 rounded-2xl overflow-hidden border border-gray-100 dark:border-dark-700 hover:shadow-xl transition-all duration-300"
+                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl overflow-hidden border border-gray-700 hover:shadow-xl transition-all duration-300"
+                initial="hidden"
+                animate="visible"
+                variants={itemVariants}
+                transition={{ delay: index * 0.1 }}
               >
-                <div className="relative h-48 bg-gradient-to-br from-primary-400 to-secondary-400 flex items-center justify-center">
+                <div className="relative h-48 bg-gradient-to-br from-[#2563eb] to-[#ffc957] flex items-center justify-center">
                   <HiCalendar className="w-16 h-16 text-white opacity-20" />
                   <div className="absolute top-3 right-3">
                     {getStatusBadge(event.status)}
@@ -605,23 +683,23 @@ const Events = () => {
                 </div>
 
                 <div className="p-6">
-                  <span className="badge badge-primary text-xs mb-3">
+                  <span className="bg-[#2563eb] text-white px-2 py-1 rounded-full text-xs font-['Figtree'] mb-3">
                     {event.type}
                   </span>
-                  <h4 className="text-lg font-bold mb-2 text-gray-900 dark:text-white line-clamp-2">
+                  <h4 className="text-lg font-['Outfit'] font-bold mb-2 text-white line-clamp-2">
                     {event.title}
                   </h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
+                  <p className="text-sm text-gray-300 mb-4 line-clamp-2 font-['Figtree']">
                     {event.description}
                   </p>
 
-                  <div className="space-y-2 mb-4 text-sm">
-                    <div className="flex items-center text-gray-600 dark:text-gray-400">
-                      <HiCalendar className="w-4 h-4 mr-2 text-primary-600" />
+                  <div className="space-y-2 mb-4 text-sm font-['Figtree']">
+                    <div className="flex items-center text-gray-300">
+                      <HiCalendar className="w-4 h-4 mr-2 text-[#2563eb]" />
                       {formatDate(event.date)}
                     </div>
-                    <div className="flex items-center text-gray-600 dark:text-gray-400">
-                      <HiClock className="w-4 h-4 mr-2 text-primary-600" />
+                    <div className="flex items-center text-gray-300">
+                      <HiClock className="w-4 h-4 mr-2 text-[#2563eb]" />
                       {event.time} • {event.duration}
                     </div>
                   </div>
@@ -629,37 +707,51 @@ const Events = () => {
                   <button
                     onClick={() => handleRSVP(event.id, 'going')}
                     disabled={rsvpStatus[event.id]}
-                    className="w-full btn-primary text-sm disabled:opacity-50"
+                    className={`w-full bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-4 py-3 rounded-xl font-semibold transition-colors text-sm font-['Figtree'] ${rsvpStatus[event.id] ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
                     {rsvpStatus[event.id] ? 'Registered' : 'Register Now'}
                   </button>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
+      <motion.section 
+        className="section-padding bg-gradient-to-r from-[#2563eb] to-[#ffc957] text-[#0a0b0d]"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom text-center">
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+          <motion.h2 
+            className="text-3xl md:text-4xl font-['Outfit'] font-bold mb-4"
+            variants={itemVariants}
+          >
             Stay Updated on Upcoming Events
-          </h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p 
+            className="text-xl text-[#0a0b0d]/90 mb-8 max-w-2xl mx-auto font-['Figtree']"
+            variants={itemVariants}
+          >
             Subscribe to our newsletter to receive notifications about new
             events and product launches
-          </p>
-          <Link
-            to="/contact"
-            className="btn-primary bg-white text-primary-600 hover:bg-gray-100"
-          >
-            Subscribe Now
-            <HiArrowRight className="inline-block ml-2 w-5 h-5" />
-          </Link>
+          </motion.p>
+          <motion.div variants={itemVariants}>
+            <Link
+              to="/contact"
+              className="bg-[#0a0b0d] text-[#ffc957] hover:bg-[#1a1c25] px-8 py-4 rounded-xl font-semibold transition-colors inline-flex items-center font-['Figtree']"
+            >
+              Subscribe Now
+              <HiArrowRight className="inline-block ml-2 w-5 h-5" />
+            </Link>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </div>
+    </ErrorBoundary>
   );
 };
 

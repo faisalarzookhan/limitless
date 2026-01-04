@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import {
   HiChatAlt,
   HiLightBulb,
@@ -20,25 +21,25 @@ const NaturalLanguageQueryPage = () => {
       title: 'Natural Language Understanding',
       description: 'Understand complex queries expressed in plain English',
       icon: HiAcademicCap,
-      color: 'from-blue-500 to-cyan-500',
+      color: 'from-[#2563eb] to-[#ffc957]',
     },
     {
       title: 'Contextual Responses',
       description: 'Provide relevant answers based on your specific context',
       icon: HiChatAlt,
-      color: 'from-purple-500 to-pink-500',
+      color: 'from-[#ffc957] to-[#2563eb]',
     },
     {
       title: 'Multi-Modal Queries',
       description: 'Handle different types of questions and data formats',
       icon: HiSparkles,
-      color: 'from-green-500 to-emerald-500',
+      color: 'from-[#2563eb] to-[#1d4ed8]',
     },
     {
       title: 'Real-Time Processing',
       description: 'Get instant responses to your questions',
       icon: HiLightBulb,
-      color: 'from-yellow-500 to-amber-500',
+      color: 'from-[#ffc957] to-[#1d4ed8]',
     },
   ];
 
@@ -91,117 +92,193 @@ const NaturalLanguageQueryPage = () => {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-dark-900 dark:to-dark-800">
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
       {/* Hero Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white">
+      <motion.section 
+        className="py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#1d4ed8] to-[#ffc957] text-[#0a0b0d]"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom px-4 md:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8">
+            <motion.div 
+              className="inline-flex items-center space-x-2 bg-[#0a0b0d]/20 px-6 py-3 rounded-full mb-8"
+              variants={itemVariants}
+            >
               <HiAcademicCap className="w-5 h-5" />
-              <span className="text-sm font-semibold">
+              <span className="text-sm font-semibold font-['Outfit']">
                 Natural Language Query
               </span>
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
+            </motion.div>
+            <motion.h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-['Outfit'] font-bold mb-6"
+              variants={itemVariants}
+            >
               Ask in Plain
               <br />
               English
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8">
+            </motion.h1>
+            <motion.p 
+              className="text-xl md:text-2xl text-[#0a0b0d]/90 mb-8 font-['Figtree']"
+              variants={itemVariants}
+            >
               Get instant answers to your questions using natural language
               processing
-            </p>
-            <a
+            </motion.p>
+            <motion.a
               href="#query"
-              className="btn-primary bg-white text-blue-600 hover:bg-gray-100"
+              className="bg-[#0a0b0d] text-[#ffc957] hover:bg-[#1a1c25] px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']"
+              variants={itemVariants}
             >
               Try It Now
-            </a>
+            </motion.a>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Features Section */}
-      <section className="section-padding bg-white dark:bg-dark-900">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Powerful <span className="text-gradient">Features</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
+              Powerful <span className="text-[#ffc957]">Features</span>
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Our natural language query system understands context and provides
               relevant answers
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <div key={index} className="text-center">
+                <motion.div 
+                  key={index} 
+                  className="text-center"
+                  initial="hidden"
+                  animate="visible"
+                  variants={itemVariants}
+                  transition={{ delay: index * 0.1 }}
+                >
                   <div
                     className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mx-auto mb-6`}
                   >
                     <Icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
+                  <h3 className="text-xl font-['Outfit'] font-bold mb-3 text-white">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
+                  <p className="text-gray-300 font-['Figtree']">
                     {feature.description}
                   </p>
-                </div>
+                </motion.div>
               );
             })}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Interactive Demo */}
-      <section
+      <motion.section
         id="query"
-        className="section-padding bg-gray-50 dark:bg-dark-800"
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
       >
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+            <motion.div 
+              className="text-center mb-12"
+              initial="hidden"
+              animate="visible"
+              variants={containerVariants}
+            >
+              <motion.h2 
+                className="text-3xl md:text-4xl font-['Outfit'] font-bold mb-4"
+                variants={itemVariants}
+              >
                 Try Our Natural Language Query
-              </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-400">
+              </motion.h2>
+              <motion.p 
+                className="text-lg text-gray-300 font-['Figtree']"
+                variants={itemVariants}
+              >
                 Ask any question about our services, pricing, or technical
                 capabilities
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
 
-            <div className="bg-white dark:bg-dark-800 rounded-2xl shadow-soft border border-gray-100 dark:border-dark-700 overflow-hidden">
-              <div className="p-6 border-b border-gray-200 dark:border-dark-700">
+            <motion.div 
+              className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl shadow-xl border border-gray-700 overflow-hidden"
+              variants={itemVariants}
+            >
+              <div className="p-6 border-b border-gray-700">
                 <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center">
+                  <div className="w-8 h-8 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-lg flex items-center justify-center">
                     <HiAcademicCap className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="font-bold text-gray-900 dark:text-white">
+                  <h3 className="font-['Outfit'] font-bold text-white">
                     AI Assistant
                   </h3>
                   <div className="flex-1 flex justify-end">
                     <div className="flex space-x-2">
                       <button
                         onClick={() => setActiveTab('chat')}
-                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                        className={`px-4 py-2 rounded-lg text-sm font-['Figtree'] transition-colors ${
                           activeTab === 'chat'
-                            ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300'
-                            : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                            ? 'bg-[#2563eb]/20 text-[#2563eb]'
+                            : 'text-gray-400 hover:text-white'
                         }`}
                       >
                         Chat
                       </button>
                       <button
                         onClick={() => setActiveTab('examples')}
-                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                        className={`px-4 py-2 rounded-lg text-sm font-['Figtree'] transition-colors ${
                           activeTab === 'examples'
-                            ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300'
-                            : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                            ? 'bg-[#2563eb]/20 text-[#2563eb]'
+                            : 'text-gray-400 hover:text-white'
                         }`}
                       >
                         Examples
@@ -216,24 +293,24 @@ const NaturalLanguageQueryPage = () => {
                   <NaturalLanguageQuery />
                 ) : (
                   <div className="space-y-6">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-4">
+                    <h4 className="font-['Outfit'] font-semibold text-white mb-4">
                       Example Queries
                     </h4>
                     <div className="space-y-4">
                       {useCases.map((useCase, index) => (
                         <div
                           key={index}
-                          className="bg-gray-50 dark:bg-dark-700 rounded-xl p-4"
+                          className="bg-gray-800 rounded-xl p-4"
                         >
                           <div className="flex items-start space-x-3">
-                            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <div className="w-8 h-8 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-full flex items-center justify-center flex-shrink-0">
                               <HiChatAlt className="w-4 h-4 text-white" />
                             </div>
                             <div className="flex-1">
-                              <p className="font-medium text-gray-900 dark:text-white mb-2">
+                              <p className="font-['Figtree'] font-medium text-white mb-2">
                                 {useCase.question}
                               </p>
-                              <p className="text-gray-600 dark:text-gray-400 text-sm">
+                              <p className="text-gray-300 text-sm font-['Figtree']">
                                 {useCase.answer}
                               </p>
                             </div>
@@ -244,59 +321,95 @@ const NaturalLanguageQueryPage = () => {
                   </div>
                 )}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Benefits Section */}
-      <section className="section-padding">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Business <span className="text-gradient">Benefits</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
+              Business <span className="text-[#ffc957]">Benefits</span>
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Natural language querying transforms how users interact with your
               systems
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {benefits.map((benefit, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-dark-700 text-center"
+                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-6 shadow-xl border border-gray-700 text-center"
+                initial="hidden"
+                animate="visible"
+                variants={itemVariants}
+                transition={{ delay: index * 0.1 }}
               >
-                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-xl flex items-center justify-center mx-auto mb-4">
                   <HiLightBulb className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
+                <h3 className="text-xl font-['Outfit'] font-bold mb-3 text-white">
                   {benefit.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                <p className="text-gray-300 mb-4 font-['Figtree']">
                   {benefit.description}
                 </p>
-                <div className="text-2xl font-bold text-green-600 dark:text-green-400">
+                <div className="text-2xl font-['Outfit'] font-bold text-[#ffc957]">
                   {benefit.metric}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Technical Implementation */}
-      <section className="section-padding bg-gray-50 dark:bg-dark-800">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Technical <span className="text-gradient">Implementation</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
+              Technical <span className="text-[#ffc957]">Implementation</span>
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Built with cutting-edge NLP and AI technologies
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
@@ -327,146 +440,166 @@ const NaturalLanguageQueryPage = () => {
             ].map((tech, index) => {
               const Icon = tech.icon;
               return (
-                <div key={index} className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <motion.div 
+                  key={index} 
+                  className="text-center"
+                  initial="hidden"
+                  animate="visible"
+                  variants={itemVariants}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <div className="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-2xl flex items-center justify-center mx-auto mb-4">
                     <Icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="font-bold mb-1 text-gray-900 dark:text-white">
+                  <h3 className="font-['Outfit'] font-bold mb-1 text-white">
                     {tech.name}
                   </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-gray-300 font-['Figtree']">
                     {tech.description}
                   </p>
-                </div>
+                </motion.div>
               );
             })}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Integration Options */}
-      <section className="section-padding">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Easy <span className="text-gradient">Integration</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
+              Easy <span className="text-[#ffc957]">Integration</span>
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Add natural language querying to your existing systems
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mb-6">
-                <HiCode className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-                API Integration
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
-                Integrate our natural language query API into your existing
-                applications and systems.
-              </p>
-              <ul className="space-y-2">
-                <li className="flex items-center space-x-2">
-                  <HiChatAlt className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">RESTful API endpoints</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <HiChatAlt className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">Real-time processing</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <HiChatAlt className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">Customizable responses</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mb-6">
-                <HiDocumentText className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-                Widget Embed
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
-                Embed our chat widget directly into your website or application.
-              </p>
-              <ul className="space-y-2">
-                <li className="flex items-center space-x-2">
-                  <HiChatAlt className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">Lightweight JavaScript</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <HiChatAlt className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">Customizable UI</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <HiChatAlt className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">Branded experience</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700">
-              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mb-6">
-                <HiUserGroup className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-                Custom Solutions
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
-                Tailored natural language solutions for your specific business
-                needs.
-              </p>
-              <ul className="space-y-2">
-                <li className="flex items-center space-x-2">
-                  <HiChatAlt className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">Domain-specific models</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <HiChatAlt className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">Private data integration</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <HiChatAlt className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">Enterprise security</span>
-                </li>
-              </ul>
-            </div>
+            {[
+              {
+                title: 'API Integration',
+                description: 'Integrate our natural language query API into your existing applications and systems.',
+                icon: HiCode,
+                color: 'from-[#2563eb] to-[#ffc957]',
+                features: [
+                  'RESTful API endpoints',
+                  'Real-time processing',
+                  'Customizable responses'
+                ]
+              },
+              {
+                title: 'Widget Embed',
+                description: 'Embed our chat widget directly into your website or application.',
+                icon: HiDocumentText,
+                color: 'from-[#ffc957] to-[#2563eb]',
+                features: [
+                  'Lightweight JavaScript',
+                  'Customizable UI',
+                  'Branded experience'
+                ]
+              },
+              {
+                title: 'Custom Solutions',
+                description: 'Tailored natural language solutions for your specific business needs.',
+                icon: HiUserGroup,
+                color: 'from-[#2563eb] to-[#1d4ed8]',
+                features: [
+                  'Domain-specific models',
+                  'Private data integration',
+                  'Enterprise security'
+                ]
+              }
+            ].map((option, index) => (
+              <motion.div
+                key={index}
+                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 shadow-xl border border-gray-700"
+                initial="hidden"
+                animate="visible"
+                variants={itemVariants}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className={`w-12 h-12 bg-gradient-to-br ${option.color} rounded-xl flex items-center justify-center mb-6`}>
+                  <option.icon className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-xl font-['Outfit'] font-bold mb-4 text-white">
+                  {option.title}
+                </h3>
+                <p className="text-gray-300 mb-6 font-['Figtree']">
+                  {option.description}
+                </p>
+                <ul className="space-y-2">
+                  {option.features.map((feature, idx) => (
+                    <li className="flex items-center space-x-2" key={idx}>
+                      <HiChatAlt className="w-4 h-4 text-[#2563eb]" />
+                      <span className="text-sm font-['Figtree']">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-br from-blue-600 to-indigo-600 text-white">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#2563eb] to-[#ffc957] text-[#0a0b0d]"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
           <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+            <motion.h2 
+              className="text-3xl md:text-4xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
               Ready to Implement Natural Language Querying?
-            </h2>
-            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-[#0a0b0d]/90 mb-8 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Transform how users interact with your systems
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            </motion.p>
+            <motion.div 
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+              variants={itemVariants}
+            >
               <a
                 href="/contact"
-                className="btn-primary bg-white text-blue-600 hover:bg-gray-100"
+                className="bg-[#0a0b0d] text-[#ffc957] hover:bg-[#1a1c25] px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']"
               >
                 Get Started
               </a>
               <a
                 href="/ai-features"
-                className="btn-outline border-white text-white hover:bg-white hover:text-blue-600"
+                className="bg-transparent border border-[#0a0b0d] text-[#0a0b0d] hover:bg-[#0a0b0d] hover:text-[#ffc957] px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']"
               >
                 Explore AI Features
               </a>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 };

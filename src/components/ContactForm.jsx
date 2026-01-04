@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import {
   HiMail,
   HiUser,
@@ -7,7 +7,10 @@ import {
   HiPhone,
   HiDocumentText,
 } from 'react-icons/hi';
-import { sendContactNotification } from '../services/notificationService';
+import notificationService from '../services/notificationService';
+import encryptionService from '../services/encryptionService';
+import csrfService from '../services/csrfService';
+import rateLimitService from '../services/rateLimitService';
 
 const ContactForm = ({ variant = 'default' }) => {
   const [formData, setFormData] = useState({
@@ -17,28 +20,111 @@ const ContactForm = ({ variant = 'default' }) => {
     subject: '',
     message: '',
   });
+  const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [rateLimitError, setRateLimitError] = useState(null);
+  
+  // Get client identifier for rate limiting (using a combination of factors)
+  const getClientIdentifier = () => {
+    // In a real implementation, this would use the actual IP address from the server
+    // For client-side, we'll use a combination of factors
+    return `${window.location.hostname}_${navigator.userAgent}`;
+  };
+
+  // Validation functions
+  const validateForm = () => {
+    const newErrors = {};
+    
+    // Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'Name must be at least 2 characters';
+    }
+    
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else {
+      const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+      if (!emailRegex.test(formData.email)) {
+        newErrors.email = 'Please enter a valid email address';
+      }
+    }
+    
+    // Subject validation
+    if (!formData.subject) {
+      newErrors.subject = 'Please select a subject';
+    }
+    
+    // Message validation
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleChange = e => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
+    
+    // Check rate limit
+    const clientIdentifier = getClientIdentifier();
+    const rateLimitCheck = rateLimitService.checkLimit(clientIdentifier, 'contactForm');
+    
+    if (!rateLimitCheck.allowed) {
+      const retryAfterSeconds = Math.ceil(rateLimitCheck.retryAfter / 1000);
+      setRateLimitError(`Rate limit exceeded. Please try again in ${retryAfterSeconds} seconds.`);
+      return;
+    }
+    
+    // Clear any previous rate limit error
+    setRateLimitError(null);
+    
+    // Validate form first
+    if (!validateForm()) {
+      return;
+    }
+    
     setIsSubmitting(true);
+    
+    // Sanitize input data
+    const sanitizedData = {
+      name: encryptionService.sanitizeInput(formData.name),
+      email: encryptionService.sanitizeInput(formData.email),
+      phone: encryptionService.sanitizeInput(formData.phone),
+      subject: encryptionService.sanitizeInput(formData.subject),
+      message: encryptionService.sanitizeInput(formData.message),
+    };
 
-    // Send notification about the contact form submission
-    await sendContactNotification({
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
-      subject: formData.subject,
-      message: formData.message,
+    // Add CSRF token to the data
+    const requestData = {
+      ...sanitizedData,
+      csrfToken: csrfService.getToken(),
       timestamp: new Date().toISOString(),
       page: window.location.pathname,
-    });
+    };
+
+    // Send notification about the contact form submission
+    await notificationService.sendContactNotification(requestData);
 
     // Simulate API call
     setTimeout(() => {
@@ -53,9 +139,9 @@ const ContactForm = ({ variant = 'default' }) => {
 
   if (submitSuccess) {
     return (
-      <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 text-center">
+      <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 text-center" role="alert" aria-live="polite">
         <div className="flex items-center justify-center mb-3">
-          <HiCheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
+          <HiCheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" aria-hidden="true" />
         </div>
         <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">
           Message Sent!
@@ -68,7 +154,12 @@ const ContactForm = ({ variant = 'default' }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+      {rateLimitError && (
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4" role="alert" aria-live="polite">
+          <p className="text-red-700 dark:text-red-300 text-sm">{rateLimitError}</p>
+        </div>
+      )}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label
@@ -88,10 +179,13 @@ const ContactForm = ({ variant = 'default' }) => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
+              className={`w-full pl-10 pr-4 py-3 rounded-lg border ${errors.name ? 'border-red-500' : 'border-gray-300 dark:border-dark-600'} bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300`}
               placeholder="Your full name"
             />
           </div>
+          {errors.name && (
+            <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+          )}
         </div>
         <div>
           <label
@@ -111,10 +205,13 @@ const ContactForm = ({ variant = 'default' }) => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
+              className={`w-full pl-10 pr-4 py-3 rounded-lg border ${errors.email ? 'border-red-500' : 'border-gray-300 dark:border-dark-600'} bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300`}
               placeholder="your@email.com"
             />
           </div>
+          {errors.email && (
+            <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+          )}
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -152,7 +249,7 @@ const ContactForm = ({ variant = 'default' }) => {
               value={formData.subject}
               onChange={handleChange}
               required
-              className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
+              className={`w-full pl-10 pr-4 py-3 rounded-lg border ${errors.subject ? 'border-red-500' : 'border-gray-300 dark:border-dark-600'} bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300`}
             >
               <option value="">Select a subject</option>
               <option value="general">General Inquiry</option>
@@ -163,6 +260,9 @@ const ContactForm = ({ variant = 'default' }) => {
               <option value="other">Other</option>
             </select>
           </div>
+          {errors.subject && (
+            <p className="mt-1 text-sm text-red-600">{errors.subject}</p>
+          )}
         </div>
       </div>
       <div>
@@ -183,10 +283,13 @@ const ContactForm = ({ variant = 'default' }) => {
             onChange={handleChange}
             required
             rows="5"
-            className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
+            className={`w-full pl-10 pr-4 py-3 rounded-lg border ${errors.message ? 'border-red-500' : 'border-gray-300 dark:border-dark-600'} bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300`}
             placeholder="Tell us about your project or inquiry..."
           ></textarea>
         </div>
+        {errors.message && (
+          <p className="mt-1 text-sm text-red-600">{errors.message}</p>
+        )}
       </div>
       <button
         type="submit"
@@ -206,4 +309,4 @@ const ContactForm = ({ variant = 'default' }) => {
   );
 };
 
-export default ContactForm;
+export default memo(ContactForm);

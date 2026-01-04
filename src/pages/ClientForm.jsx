@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -24,6 +25,7 @@ import {
   HiAcademicCap,
 } from 'react-icons/hi';
 import { sendLeadGenerationNotification } from '../services/notificationService';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 const ClientForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -204,94 +206,118 @@ const ClientForm = () => {
 
   if (submitSuccess) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-dark-900 dark:to-dark-800 flex items-center justify-center px-4">
-        <div className="max-w-2xl w-full bg-white dark:bg-dark-800 rounded-3xl p-12 shadow-2xl text-center animate-scale-up">
-          <div className="w-24 h-24 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-8">
-            <HiCheckCircle className="w-16 h-16 text-green-600 dark:text-green-400" />
+      <ErrorBoundary>
+      <div className="min-h-screen bg-[#0a0b0d] flex items-center justify-center px-4">
+        <motion.div 
+          className="max-w-2xl w-full bg-[#1a1c20] rounded-3xl p-12 text-center"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="w-24 h-24 bg-[#2563eb]/20 rounded-full flex items-center justify-center mx-auto mb-8">
+            <HiCheckCircle className="w-16 h-16 text-[#2563eb]" />
           </div>
-          <h1 className="text-4xl font-display font-bold mb-4 text-gray-900 dark:text-white">
+          <h1 className="text-4xl font-bold mb-4 text-white font-['Outfit']">
             Thank You!
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
+          <p className="text-xl text-gray-400 mb-8 font-['Figtree']">
             Your project requirements have been submitted successfully. Our team
             will review your information and get back to you within 24 hours.
           </p>
-          <div className="bg-primary-50 dark:bg-primary-900/20 rounded-2xl p-6 mb-8">
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+          <div className="bg-[#2563eb]/10 rounded-2xl p-6 mb-8 border border-[#2563eb]/30">
+            <h3 className="font-semibold text-white mb-2 font-['Outfit']">
               What Happens Next?
             </h3>
-            <ul className="text-left space-y-2 text-gray-700 dark:text-gray-300">
+            <ul className="text-left space-y-2 text-gray-400">
               <li className="flex items-start space-x-2">
-                <HiCheckCircle className="w-5 h-5 text-primary-600 mt-0.5 flex-shrink-0" />
+                <HiCheckCircle className="w-5 h-5 text-[#2563eb] mt-0.5 flex-shrink-0" />
                 <span>We'll review your requirements in detail</span>
               </li>
               <li className="flex items-start space-x-2">
-                <HiCheckCircle className="w-5 h-5 text-primary-600 mt-0.5 flex-shrink-0" />
+                <HiCheckCircle className="w-5 h-5 text-[#2563eb] mt-0.5 flex-shrink-0" />
                 <span>
                   Schedule a consultation call to discuss your project
                 </span>
               </li>
               <li className="flex items-start space-x-2">
-                <HiCheckCircle className="w-5 h-5 text-primary-600 mt-0.5 flex-shrink-0" />
+                <HiCheckCircle className="w-5 h-5 text-[#2563eb] mt-0.5 flex-shrink-0" />
                 <span>Provide a detailed proposal with timeline and cost</span>
               </li>
               <li className="flex items-start space-x-2">
-                <HiCheckCircle className="w-5 h-5 text-primary-600 mt-0.5 flex-shrink-0" />
+                <HiCheckCircle className="w-5 h-5 text-[#2563eb] mt-0.5 flex-shrink-0" />
                 <span>Begin development once approved</span>
               </li>
             </ul>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/" className="btn-primary">
+            <Link to="/" className="px-6 py-3 bg-[#2563eb] text-white rounded-lg hover:bg-[#ffc957] hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit']">
               Back to Home
             </Link>
-            <Link to="/portfolio" className="btn-outline">
+            <Link to="/portfolio" className="px-6 py-3 bg-transparent border-2 border-[#2563eb] text-[#2563eb] rounded-lg hover:bg-[#2563eb] hover:text-white transition-colors duration-300 font-['Outfit']">
               View Our Work
             </Link>
           </div>
-        </div>
+        </motion.div>
       </div>
+      </ErrorBoundary>
     );
   }
 
   const progressPercentage = (currentStep / totalSteps) * 100;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-dark-900 dark:to-dark-800">
+    <ErrorBoundary>
+    <div className="min-h-screen bg-[#0a0b0d] font-sans">
       {/* Header */}
-      <section className="bg-gradient-to-r from-primary-600 to-secondary-600 text-white py-12">
-        <div className="container-custom px-4 md:px-6 lg:px-8">
+      <section className="bg-gradient-to-br from-[#2563eb] via-[#ffc957] to-[#0a0b0d] text-white py-12 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2260%22%20height=%2260%22%20viewBox=%220%200%2060%2060%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg%20fill=%22none%22%20fill-rule=%22evenodd%22%3E%3Cg%20fill=%22%23ffffff%22%20fill-opacity=%220.05%22%3E%3Ccircle%20cx=%2230%22%20cy=%2230%22%20r=%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+        <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center space-x-2 bg-white/20 px-4 py-2 rounded-full mb-4">
+            <motion.div 
+              className="inline-flex items-center space-x-2 bg-white/20 px-4 py-2 rounded-full mb-4"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
               <HiSparkles className="w-4 h-4" />
-              <span className="text-sm font-semibold">Start Your Project</span>
-            </div>
-            <h1 className="text-3xl md:text-4xl font-display font-bold mb-3">
+              <span className="text-sm font-semibold font-['Outfit']">Start Your Project</span>
+            </motion.div>
+            <motion.h1 
+              className="text-3xl md:text-4xl font-bold mb-3 font-['Outfit']"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
               Client Requirements Form
-            </h1>
-            <p className="text-lg text-white/90">
+            </motion.h1>
+            <motion.p 
+              className="text-lg text-gray-300 font-['Figtree']"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
               Help us understand your project better so we can provide the best
               solution
-            </p>
+            </motion.p>
           </div>
         </div>
       </section>
 
       {/* Progress Bar */}
-      <div className="bg-white dark:bg-dark-800 border-b border-gray-200 dark:border-dark-700 sticky top-20 z-40">
+      <div className="bg-[#0a0b0d] border-b border-[#2563eb]/30 sticky top-20 z-40">
         <div className="container-custom px-4 md:px-6 lg:px-8 py-4">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+              <span className="text-sm font-semibold text-gray-400 font-['Figtree']">
                 Step {currentStep} of {totalSteps}
               </span>
-              <span className="text-sm font-semibold text-primary-600 dark:text-primary-400">
+              <span className="text-sm font-semibold text-[#2563eb] font-['Figtree']">
                 {Math.round(progressPercentage)}% Complete
               </span>
             </div>
-            <div className="h-2 bg-gray-200 dark:bg-dark-700 rounded-full overflow-hidden">
+            <div className="h-2 bg-[#1a1c20] rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-primary-600 to-secondary-600 transition-all duration-500 ease-out"
+                className="h-full bg-gradient-to-r from-[#2563eb] to-[#ffc957] transition-all duration-500 ease-out"
                 style={{ width: `${progressPercentage}%` }}
               ></div>
             </div>
@@ -306,16 +332,21 @@ const ClientForm = () => {
             <form onSubmit={handleSubmit}>
               {/* Step 1: Personal Information */}
               {currentStep === 1 && (
-                <div className="bg-white dark:bg-dark-800 rounded-3xl p-8 md:p-10 shadow-soft border border-gray-100 dark:border-dark-700 animate-fade-in">
+                <motion.div 
+                  className="bg-[#1a1c20] rounded-3xl p-8 md:p-10 border border-[#2563eb]/30"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
                   <div className="flex items-center space-x-3 mb-6">
-                    <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center">
-                      <HiUser className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                    <div className="w-12 h-12 bg-[#2563eb]/20 rounded-xl flex items-center justify-center">
+                      <HiUser className="w-6 h-6 text-[#2563eb]" />
                     </div>
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                      <h2 className="text-2xl font-bold text-white font-['Outfit']">
                         Personal Information
                       </h2>
-                      <p className="text-gray-600 dark:text-gray-400">
+                      <p className="text-gray-400 font-['Figtree']">
                         Let's start with your basic information
                       </p>
                     </div>
@@ -324,7 +355,7 @@ const ClientForm = () => {
                   <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label htmlFor="fullName" className="label-text">
+                        <label htmlFor="fullName" className="label-text text-gray-300 font-['Figtree']">
                           Full Name *
                         </label>
                         <input
@@ -334,13 +365,13 @@ const ClientForm = () => {
                           value={formData.fullName}
                           onChange={handleChange}
                           required
-                          className="input-field"
+                          className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#2563eb]"
                           placeholder="John Doe"
                         />
                       </div>
 
                       <div>
-                        <label htmlFor="email" className="label-text">
+                        <label htmlFor="email" className="label-text text-gray-300 font-['Figtree']">
                           Email Address *
                         </label>
                         <input
@@ -350,7 +381,7 @@ const ClientForm = () => {
                           value={formData.email}
                           onChange={handleChange}
                           required
-                          className="input-field"
+                          className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#2563eb]"
                           placeholder="john@example.com"
                         />
                       </div>
@@ -358,7 +389,7 @@ const ClientForm = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label htmlFor="phone" className="label-text">
+                        <label htmlFor="phone" className="label-text text-gray-300 font-['Figtree']">
                           Phone Number *
                         </label>
                         <input
@@ -368,13 +399,13 @@ const ClientForm = () => {
                           value={formData.phone}
                           onChange={handleChange}
                           required
-                          className="input-field"
+                          className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#2563eb]"
                           placeholder="+91 98765 43210"
                         />
                       </div>
 
                       <div>
-                        <label htmlFor="company" className="label-text">
+                        <label htmlFor="company" className="label-text text-gray-300 font-['Figtree']">
                           Company Name *
                         </label>
                         <input
@@ -384,7 +415,7 @@ const ClientForm = () => {
                           value={formData.company}
                           onChange={handleChange}
                           required
-                          className="input-field"
+                          className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#2563eb]"
                           placeholder="Your Company"
                         />
                       </div>
@@ -392,7 +423,7 @@ const ClientForm = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label htmlFor="website" className="label-text">
+                        <label htmlFor="website" className="label-text text-gray-300 font-['Figtree']">
                           Website (Optional)
                         </label>
                         <input
@@ -401,13 +432,13 @@ const ClientForm = () => {
                           name="website"
                           value={formData.website}
                           onChange={handleChange}
-                          className="input-field"
+                          className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#2563eb]"
                           placeholder="https://yourwebsite.com"
                         />
                       </div>
 
                       <div>
-                        <label htmlFor="role" className="label-text">
+                        <label htmlFor="role" className="label-text text-gray-300 font-['Figtree']">
                           Your Role *
                         </label>
                         <select
@@ -416,7 +447,7 @@ const ClientForm = () => {
                           value={formData.role}
                           onChange={handleChange}
                           required
-                          className="select-field"
+                          className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white focus:outline-none focus:border-[#2563eb]"
                         >
                           <option value="">Select your role</option>
                           <option value="founder">Founder/CEO</option>
@@ -429,21 +460,26 @@ const ClientForm = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               )}
 
               {/* Step 2: Project Information */}
               {currentStep === 2 && (
-                <div className="bg-white dark:bg-dark-800 rounded-3xl p-8 md:p-10 shadow-soft border border-gray-100 dark:border-dark-700 animate-fade-in">
+                <motion.div 
+                  className="bg-[#1a1c20] rounded-3xl p-8 md:p-10 border border-[#2563eb]/30"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
                   <div className="flex items-center space-x-3 mb-6">
-                    <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center">
-                      <HiDocument className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                    <div className="w-12 h-12 bg-[#2563eb]/20 rounded-xl flex items-center justify-center">
+                      <HiDocument className="w-6 h-6 text-[#2563eb]" />
                     </div>
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                      <h2 className="text-2xl font-bold text-white font-['Outfit']">
                         Project Information
                       </h2>
-                      <p className="text-gray-600 dark:text-gray-400">
+                      <p className="text-gray-400 font-['Figtree']">
                         Tell us about your project
                       </p>
                     </div>
@@ -451,7 +487,7 @@ const ClientForm = () => {
 
                   <div className="space-y-6">
                     <div>
-                      <label className="label-text">
+                      <label className="label-text text-gray-300 font-['Figtree']">
                         Project Type * (Select all that apply)
                       </label>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-2">
@@ -460,8 +496,8 @@ const ClientForm = () => {
                             key={type.value}
                             className={`flex items-center space-x-3 p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
                               formData.projectType.includes(type.value)
-                                ? 'border-primary-600 bg-primary-50 dark:bg-primary-900/20'
-                                : 'border-gray-200 dark:border-dark-700 hover:border-primary-300'
+                                ? 'border-[#2563eb] bg-[#2563eb]/10'
+                                : 'border-[#2563eb]/30 hover:border-[#2563eb]'
                             }`}
                           >
                             <input
@@ -472,10 +508,10 @@ const ClientForm = () => {
                                 type.value
                               )}
                               onChange={handleChange}
-                              className="checkbox-field"
+                              className="w-4 h-4 text-[#2563eb] bg-[#0a0b0d] border-[#2563eb]/30 rounded focus:ring-[#2563eb] focus:ring-2"
                             />
-                            <type.icon className="w-6 h-6 text-primary-600 dark:text-primary-400" />
-                            <span className="text-sm font-medium text-gray-900 dark:text-white">
+                            <type.icon className="w-6 h-6 text-[#2563eb]" />
+                            <span className="text-sm font-medium text-white font-['Figtree']">
                               {type.label}
                             </span>
                           </label>
@@ -484,7 +520,7 @@ const ClientForm = () => {
                     </div>
 
                     <div>
-                      <label htmlFor="projectTitle" className="label-text">
+                      <label htmlFor="projectTitle" className="label-text text-gray-300 font-['Figtree']">
                         Project Title *
                       </label>
                       <input
@@ -494,7 +530,7 @@ const ClientForm = () => {
                         value={formData.projectTitle}
                         onChange={handleChange}
                         required
-                        className="input-field"
+                        className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#2563eb]"
                         placeholder="e.g., E-commerce Platform for Fashion Retail"
                       />
                     </div>
@@ -502,7 +538,7 @@ const ClientForm = () => {
                     <div>
                       <label
                         htmlFor="projectDescription"
-                        className="label-text"
+                        className="label-text text-gray-300 font-['Figtree']"
                       >
                         Project Description *
                       </label>
@@ -513,14 +549,14 @@ const ClientForm = () => {
                         onChange={handleChange}
                         required
                         rows="6"
-                        className="textarea-field"
+                        className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#2563eb]"
                         placeholder="Describe your project in detail. What problem are you trying to solve? What are your main goals?"
                       ></textarea>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label htmlFor="industry" className="label-text">
+                        <label htmlFor="industry" className="label-text text-gray-300 font-['Figtree']">
                           Industry *
                         </label>
                         <select
@@ -529,7 +565,7 @@ const ClientForm = () => {
                           value={formData.industry}
                           onChange={handleChange}
                           required
-                          className="select-field"
+                          className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white focus:outline-none focus:border-[#2563eb]"
                         >
                           <option value="">Select industry</option>
                           <option value="technology">Technology</option>
@@ -547,7 +583,7 @@ const ClientForm = () => {
                       </div>
 
                       <div>
-                        <label htmlFor="targetAudience" className="label-text">
+                        <label htmlFor="targetAudience" className="label-text text-gray-300 font-['Figtree']">
                           Target Audience *
                         </label>
                         <input
@@ -557,27 +593,32 @@ const ClientForm = () => {
                           value={formData.targetAudience}
                           onChange={handleChange}
                           required
-                          className="input-field"
+                          className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#2563eb]"
                           placeholder="e.g., Small business owners, Students"
                         />
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               )}
 
               {/* Step 3: Requirements & Features */}
               {currentStep === 3 && (
-                <div className="bg-white dark:bg-dark-800 rounded-3xl p-8 md:p-10 shadow-soft border border-gray-100 dark:border-dark-700 animate-fade-in">
+                <motion.div 
+                  className="bg-[#1a1c20] rounded-3xl p-8 md:p-10 border border-[#2563eb]/30"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
                   <div className="flex items-center space-x-3 mb-6">
-                    <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center">
-                      <HiCube className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                    <div className="w-12 h-12 bg-[#2563eb]/20 rounded-xl flex items-center justify-center">
+                      <HiCube className="w-6 h-6 text-[#2563eb]" />
                     </div>
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                      <h2 className="text-2xl font-bold text-white font-['Outfit']">
                         Requirements & Features
                       </h2>
-                      <p className="text-gray-600 dark:text-gray-400">
+                      <p className="text-gray-400 font-['Figtree']">
                         What features do you need?
                       </p>
                     </div>
@@ -585,14 +626,14 @@ const ClientForm = () => {
 
                   <div className="space-y-6">
                     <div>
-                      <label className="label-text">
+                      <label className="label-text text-gray-300 font-['Figtree']">
                         Required Features (Select all that apply)
                       </label>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
                         {features.map(feature => (
                           <label
                             key={feature}
-                            className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200 dark:border-dark-700 hover:bg-gray-50 dark:hover:bg-dark-700 cursor-pointer transition-colors duration-200"
+                            className="flex items-center space-x-3 p-3 rounded-lg border border-[#2563eb]/30 hover:bg-[#2563eb]/10 cursor-pointer transition-colors duration-200"
                           >
                             <input
                               type="checkbox"
@@ -602,9 +643,9 @@ const ClientForm = () => {
                                 feature
                               )}
                               onChange={handleChange}
-                              className="checkbox-field"
+                              className="w-4 h-4 text-[#2563eb] bg-[#0a0b0d] border-[#2563eb]/30 rounded focus:ring-[#2563eb] focus:ring-2"
                             />
-                            <span className="text-sm text-gray-900 dark:text-white">
+                            <span className="text-sm text-white font-['Figtree']">
                               {feature}
                             </span>
                           </label>
@@ -613,7 +654,7 @@ const ClientForm = () => {
                     </div>
 
                     <div>
-                      <label htmlFor="customFeatures" className="label-text">
+                      <label htmlFor="customFeatures" className="label-text text-gray-300 font-['Figtree']">
                         Additional Custom Features
                       </label>
                       <textarea
@@ -622,13 +663,13 @@ const ClientForm = () => {
                         value={formData.customFeatures}
                         onChange={handleChange}
                         rows="4"
-                        className="textarea-field"
+                        className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#2563eb]"
                         placeholder="Describe any specific features not listed above..."
                       ></textarea>
                     </div>
 
                     <div>
-                      <label className="label-text">
+                      <label className="label-text text-gray-300 font-['Figtree']">
                         Target Platforms * (Select all that apply)
                       </label>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
@@ -637,8 +678,8 @@ const ClientForm = () => {
                             key={platform.value}
                             className={`flex items-center space-x-3 p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
                               formData.platforms.includes(platform.value)
-                                ? 'border-primary-600 bg-primary-50 dark:bg-primary-900/20'
-                                : 'border-gray-200 dark:border-dark-700 hover:border-primary-300'
+                                ? 'border-[#2563eb] bg-[#2563eb]/10'
+                                : 'border-[#2563eb]/30 hover:border-[#2563eb]'
                             }`}
                           >
                             <input
@@ -649,9 +690,9 @@ const ClientForm = () => {
                                 platform.value
                               )}
                               onChange={handleChange}
-                              className="checkbox-field"
+                              className="w-4 h-4 text-[#2563eb] bg-[#0a0b0d] border-[#2563eb]/30 rounded focus:ring-[#2563eb] focus:ring-2"
                             />
-                            <span className="font-medium text-gray-900 dark:text-white">
+                            <span className="font-medium text-white font-['Figtree']">
                               {platform.label}
                             </span>
                           </label>
@@ -660,7 +701,7 @@ const ClientForm = () => {
                     </div>
 
                     <div>
-                      <label htmlFor="integrations" className="label-text">
+                      <label htmlFor="integrations" className="label-text text-gray-300 font-['Figtree']">
                         Required Integrations
                       </label>
                       <textarea
@@ -669,26 +710,31 @@ const ClientForm = () => {
                         value={formData.integrations}
                         onChange={handleChange}
                         rows="3"
-                        className="textarea-field"
+                        className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#2563eb]"
                         placeholder="List any third-party services or APIs you need to integrate (e.g., Stripe, Twilio, Google Maps)..."
                       ></textarea>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               )}
 
               {/* Step 4: Budget & Timeline */}
               {currentStep === 4 && (
-                <div className="bg-white dark:bg-dark-800 rounded-3xl p-8 md:p-10 shadow-soft border border-gray-100 dark:border-dark-700 animate-fade-in">
+                <motion.div 
+                  className="bg-[#1a1c20] rounded-3xl p-8 md:p-10 border border-[#2563eb]/30"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
                   <div className="flex items-center space-x-3 mb-6">
-                    <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center">
-                      <HiCurrencyDollar className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                    <div className="w-12 h-12 bg-[#2563eb]/20 rounded-xl flex items-center justify-center">
+                      <HiCurrencyDollar className="w-6 h-6 text-[#2563eb]" />
                     </div>
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                      <h2 className="text-2xl font-bold text-white font-['Outfit']">
                         Budget & Timeline
                       </h2>
-                      <p className="text-gray-600 dark:text-gray-400">
+                      <p className="text-gray-400 font-['Figtree']">
                         Help us understand your constraints
                       </p>
                     </div>
@@ -696,7 +742,7 @@ const ClientForm = () => {
 
                   <div className="space-y-6">
                     <div>
-                      <label htmlFor="budget" className="label-text">
+                      <label htmlFor="budget" className="label-text text-gray-300 font-['Figtree']">
                         Budget Range *
                       </label>
                       <select
@@ -705,7 +751,7 @@ const ClientForm = () => {
                         value={formData.budget}
                         onChange={handleChange}
                         required
-                        className="select-field"
+                        className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white focus:outline-none focus:border-[#2563eb]"
                       >
                         <option value="">Select budget range</option>
                         {budgetRanges.map(range => (
@@ -718,7 +764,7 @@ const ClientForm = () => {
 
                     {formData.budget === 'custom' && (
                       <div>
-                        <label htmlFor="customBudget" className="label-text">
+                        <label htmlFor="customBudget" className="label-text text-gray-300 font-['Figtree']">
                           Specify Your Budget
                         </label>
                         <input
@@ -727,14 +773,14 @@ const ClientForm = () => {
                           name="customBudget"
                           value={formData.customBudget}
                           onChange={handleChange}
-                          className="input-field"
+                          className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#2563eb]"
                           placeholder="Enter your budget"
                         />
                       </div>
                     )}
 
                     <div>
-                      <label htmlFor="timeline" className="label-text">
+                      <label htmlFor="timeline" className="label-text text-gray-300 font-['Figtree']">
                         Expected Timeline *
                       </label>
                       <select
@@ -743,7 +789,7 @@ const ClientForm = () => {
                         value={formData.timeline}
                         onChange={handleChange}
                         required
-                        className="select-field"
+                        className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white focus:outline-none focus:border-[#2563eb]"
                       >
                         <option value="">Select timeline</option>
                         {timelines.map(time => (
@@ -755,7 +801,7 @@ const ClientForm = () => {
                     </div>
 
                     <div>
-                      <label htmlFor="startDate" className="label-text">
+                      <label htmlFor="startDate" className="label-text text-gray-300 font-['Figtree']">
                         Preferred Start Date *
                       </label>
                       <input
@@ -765,13 +811,13 @@ const ClientForm = () => {
                         value={formData.startDate}
                         onChange={handleChange}
                         required
-                        className="input-field"
+                        className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white focus:outline-none focus:border-[#2563eb]"
                         min={new Date().toISOString().split('T')[0]}
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="priority" className="label-text">
+                      <label htmlFor="priority" className="label-text text-gray-300 font-['Figtree']">
                         Project Priority *
                       </label>
                       <div className="space-y-3 mt-2">
@@ -780,8 +826,8 @@ const ClientForm = () => {
                             key={prio.value}
                             className={`flex items-start space-x-3 p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
                               formData.priority === prio.value
-                                ? 'border-primary-600 bg-primary-50 dark:bg-primary-900/20'
-                                : 'border-gray-200 dark:border-dark-700 hover:border-primary-300'
+                                ? 'border-[#2563eb] bg-[#2563eb]/10'
+                                : 'border-[#2563eb]/30 hover:border-[#2563eb]'
                             }`}
                           >
                             <input
@@ -790,9 +836,9 @@ const ClientForm = () => {
                               value={prio.value}
                               checked={formData.priority === prio.value}
                               onChange={handleChange}
-                              className="mt-1"
+                              className="mt-1 w-4 h-4 text-[#2563eb] bg-[#0a0b0d] border-[#2563eb]/30 focus:ring-[#2563eb] focus:ring-2"
                             />
-                            <span className="font-medium text-gray-900 dark:text-white">
+                            <span className="font-medium text-white font-['Figtree']">
                               {prio.label}
                             </span>
                           </label>
@@ -800,21 +846,26 @@ const ClientForm = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               )}
 
               {/* Step 5: Additional Information */}
               {currentStep === 5 && (
-                <div className="bg-white dark:bg-dark-800 rounded-3xl p-8 md:p-10 shadow-soft border border-gray-100 dark:border-dark-700 animate-fade-in">
+                <motion.div 
+                  className="bg-[#1a1c20] rounded-3xl p-8 md:p-10 border border-[#2563eb]/30"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
                   <div className="flex items-center space-x-3 mb-6">
-                    <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center">
-                      <HiServer className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                    <div className="w-12 h-12 bg-[#2563eb]/20 rounded-xl flex items-center justify-center">
+                      <HiServer className="w-6 h-6 text-[#2563eb]" />
                     </div>
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                      <h2 className="text-2xl font-bold text-white font-['Outfit']">
                         Additional Information
                       </h2>
-                      <p className="text-gray-600 dark:text-gray-400">
+                      <p className="text-gray-400 font-['Figtree']">
                         Help us understand your context better
                       </p>
                     </div>
@@ -822,7 +873,7 @@ const ClientForm = () => {
 
                   <div className="space-y-6">
                     <div>
-                      <label htmlFor="existingSystems" className="label-text">
+                      <label htmlFor="existingSystems" className="label-text text-gray-300 font-['Figtree']">
                         Existing Systems & Technologies
                       </label>
                       <textarea
@@ -831,13 +882,13 @@ const ClientForm = () => {
                         value={formData.existingSystems}
                         onChange={handleChange}
                         rows="4"
-                        className="textarea-field"
+                        className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#2563eb]"
                         placeholder="Do you have any existing systems, databases, or technologies that need to be integrated or replaced?"
                       ></textarea>
                     </div>
 
                     <div>
-                      <label htmlFor="designPreferences" className="label-text">
+                      <label htmlFor="designPreferences" className="label-text text-gray-300 font-['Figtree']">
                         Design Preferences
                       </label>
                       <textarea
@@ -846,13 +897,13 @@ const ClientForm = () => {
                         value={formData.designPreferences}
                         onChange={handleChange}
                         rows="4"
-                        className="textarea-field"
+                        className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#2563eb]"
                         placeholder="Do you have any design preferences, brand guidelines, or reference websites you'd like us to consider?"
                       ></textarea>
                     </div>
 
                     <div>
-                      <label htmlFor="competitors" className="label-text">
+                      <label htmlFor="competitors" className="label-text text-gray-300 font-['Figtree']">
                         Competitors & Inspirations
                       </label>
                       <textarea
@@ -861,13 +912,13 @@ const ClientForm = () => {
                         value={formData.competitors}
                         onChange={handleChange}
                         rows="3"
-                        className="textarea-field"
+                        className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#2563eb]"
                         placeholder="List any competitor websites or applications that you admire or want to differentiate from..."
                       ></textarea>
                     </div>
 
                     <div>
-                      <label htmlFor="successMetrics" className="label-text">
+                      <label htmlFor="successMetrics" className="label-text text-gray-300 font-['Figtree']">
                         Success Metrics
                       </label>
                       <textarea
@@ -876,13 +927,13 @@ const ClientForm = () => {
                         value={formData.successMetrics}
                         onChange={handleChange}
                         rows="3"
-                        className="textarea-field"
+                        className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#2563eb]"
                         placeholder="How will you measure the success of this project? (e.g., increased sales, reduced costs, user engagement)"
                       ></textarea>
                     </div>
 
                     <div>
-                      <label htmlFor="additionalNotes" className="label-text">
+                      <label htmlFor="additionalNotes" className="label-text text-gray-300 font-['Figtree']">
                         Additional Notes
                       </label>
                       <textarea
@@ -891,26 +942,31 @@ const ClientForm = () => {
                         value={formData.additionalNotes}
                         onChange={handleChange}
                         rows="4"
-                        className="textarea-field"
+                        className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#2563eb]"
                         placeholder="Any other information you'd like to share about your project..."
                       ></textarea>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               )}
 
               {/* Step 6: Review & Submit */}
               {currentStep === 6 && (
-                <div className="bg-white dark:bg-dark-800 rounded-3xl p-8 md:p-10 shadow-soft border border-gray-100 dark:border-dark-700 animate-fade-in">
+                <motion.div 
+                  className="bg-[#1a1c20] rounded-3xl p-8 md:p-10 border border-[#2563eb]/30"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
                   <div className="flex items-center space-x-3 mb-6">
-                    <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center">
-                      <HiCheckCircle className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                    <div className="w-12 h-12 bg-[#2563eb]/20 rounded-xl flex items-center justify-center">
+                      <HiCheckCircle className="w-6 h-6 text-[#2563eb]" />
                     </div>
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                      <h2 className="text-2xl font-bold text-white font-['Outfit']">
                         Review & Submit
                       </h2>
-                      <p className="text-gray-600 dark:text-gray-400">
+                      <p className="text-gray-400 font-['Figtree']">
                         Review your information and submit
                       </p>
                     </div>
@@ -918,40 +974,40 @@ const ClientForm = () => {
 
                   <div className="space-y-6">
                     {/* Personal Info Summary */}
-                    <div className="bg-gray-50 dark:bg-dark-700 rounded-xl p-6">
-                      <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-4">
+                    <div className="bg-[#0a0b0d] rounded-xl p-6 border border-[#2563eb]/30">
+                      <h3 className="font-bold text-lg text-white mb-4 font-['Outfit']">
                         Personal Information
                       </h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                         <div>
-                          <span className="text-gray-600 dark:text-gray-400">
+                          <span className="text-gray-400">
                             Name:
                           </span>
-                          <span className="ml-2 font-semibold text-gray-900 dark:text-white">
+                          <span className="ml-2 font-semibold text-white">
                             {formData.fullName}
                           </span>
                         </div>
                         <div>
-                          <span className="text-gray-600 dark:text-gray-400">
+                          <span className="text-gray-400">
                             Email:
                           </span>
-                          <span className="ml-2 font-semibold text-gray-900 dark:text-white">
+                          <span className="ml-2 font-semibold text-white">
                             {formData.email}
                           </span>
                         </div>
                         <div>
-                          <span className="text-gray-600 dark:text-gray-400">
+                          <span className="text-gray-400">
                             Phone:
                           </span>
-                          <span className="ml-2 font-semibold text-gray-900 dark:text-white">
+                          <span className="ml-2 font-semibold text-white">
                             {formData.phone}
                           </span>
                         </div>
                         <div>
-                          <span className="text-gray-600 dark:text-gray-400">
+                          <span className="text-gray-400">
                             Company:
                           </span>
-                          <span className="ml-2 font-semibold text-gray-900 dark:text-white">
+                          <span className="ml-2 font-semibold text-white">
                             {formData.company}
                           </span>
                         </div>
@@ -959,41 +1015,41 @@ const ClientForm = () => {
                     </div>
 
                     {/* Project Info Summary */}
-                    <div className="bg-gray-50 dark:bg-dark-700 rounded-xl p-6">
-                      <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-4">
+                    <div className="bg-[#0a0b0d] rounded-xl p-6 border border-[#2563eb]/30">
+                      <h3 className="font-bold text-lg text-white mb-4 font-['Outfit']">
                         Project Information
                       </h3>
                       <div className="space-y-3 text-sm">
                         <div>
-                          <span className="text-gray-600 dark:text-gray-400">
+                          <span className="text-gray-400">
                             Project Type:
                           </span>
-                          <span className="ml-2 font-semibold text-gray-900 dark:text-white">
+                          <span className="ml-2 font-semibold text-white">
                             {formData.projectType.join(', ') || 'Not specified'}
                           </span>
                         </div>
                         <div>
-                          <span className="text-gray-600 dark:text-gray-400">
+                          <span className="text-gray-400">
                             Title:
                           </span>
-                          <span className="ml-2 font-semibold text-gray-900 dark:text-white">
+                          <span className="ml-2 font-semibold text-white">
                             {formData.projectTitle}
                           </span>
                         </div>
                         <div>
-                          <span className="text-gray-600 dark:text-gray-400">
+                          <span className="text-gray-400">
                             Budget:
                           </span>
-                          <span className="ml-2 font-semibold text-gray-900 dark:text-white">
+                          <span className="ml-2 font-semibold text-white">
                             {budgetRanges.find(b => b.value === formData.budget)
                               ?.label || 'Not specified'}
                           </span>
                         </div>
                         <div>
-                          <span className="text-gray-600 dark:text-gray-400">
+                          <span className="text-gray-400">
                             Timeline:
                           </span>
-                          <span className="ml-2 font-semibold text-gray-900 dark:text-white">
+                          <span className="ml-2 font-semibold text-white">
                             {timelines.find(t => t.value === formData.timeline)
                               ?.label || 'Not specified'}
                           </span>
@@ -1003,7 +1059,7 @@ const ClientForm = () => {
 
                     {/* How Did You Hear */}
                     <div>
-                      <label htmlFor="referralSource" className="label-text">
+                      <label htmlFor="referralSource" className="label-text text-gray-300 font-['Figtree']">
                         How did you hear about us?
                       </label>
                       <select
@@ -1011,7 +1067,7 @@ const ClientForm = () => {
                         name="referralSource"
                         value={formData.referralSource}
                         onChange={handleChange}
-                        className="select-field"
+                        className="w-full px-4 py-3 bg-[#0a0b0d] border border-[#2563eb]/30 rounded-lg text-white focus:outline-none focus:border-[#2563eb]"
                       >
                         <option value="">Select source</option>
                         <option value="google">Google Search</option>
@@ -1024,7 +1080,7 @@ const ClientForm = () => {
                     </div>
 
                     {/* Consent */}
-                    <div className="bg-primary-50 dark:bg-primary-900/20 rounded-xl p-6 border border-primary-200 dark:border-primary-800">
+                    <div className="bg-[#2563eb]/10 rounded-xl p-6 border border-[#2563eb]/30">
                       <label className="flex items-start space-x-3 cursor-pointer">
                         <input
                           type="checkbox"
@@ -1032,20 +1088,20 @@ const ClientForm = () => {
                           checked={formData.consent}
                           onChange={handleChange}
                           required
-                          className="checkbox-field mt-1"
+                          className="mt-1 w-4 h-4 text-[#2563eb] bg-[#0a0b0d] border-[#2563eb]/30 rounded focus:ring-[#2563eb] focus:ring-2"
                         />
-                        <span className="text-sm text-gray-700 dark:text-gray-300">
+                        <span className="text-sm text-gray-400 font-['Figtree']">
                           I agree to the{' '}
                           <Link
                             to="/terms-of-service"
-                            className="text-primary-600 dark:text-primary-400 hover:underline"
+                            className="text-[#2563eb] hover:underline"
                           >
                             Terms of Service
                           </Link>{' '}
                           and{' '}
                           <Link
                             to="/privacy-policy"
-                            className="text-primary-600 dark:text-primary-400 hover:underline"
+                            className="text-[#2563eb] hover:underline"
                           >
                             Privacy Policy
                           </Link>
@@ -1056,7 +1112,7 @@ const ClientForm = () => {
                       </label>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               )}
 
               {/* Navigation Buttons */}
@@ -1065,13 +1121,13 @@ const ClientForm = () => {
                   type="button"
                   onClick={handlePrevious}
                   disabled={currentStep === 1}
-                  className="btn-ghost disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                  className="px-6 py-3 bg-[#2563eb] text-white rounded-lg hover:bg-[#ffc957] hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit'] disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
                 >
                   <HiArrowLeft className="w-5 h-5 mr-2" />
                   Previous
                 </button>
 
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="text-sm text-gray-400 font-['Figtree']">
                   Step {currentStep} of {totalSteps}
                 </div>
 
@@ -1079,7 +1135,7 @@ const ClientForm = () => {
                   <button
                     type="button"
                     onClick={handleNext}
-                    className="btn-primary flex items-center"
+                    className="px-6 py-3 bg-[#2563eb] text-white rounded-lg hover:bg-[#ffc957] hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit'] flex items-center"
                   >
                     Next
                     <HiArrowRight className="w-5 h-5 ml-2" />
@@ -1088,7 +1144,7 @@ const ClientForm = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting || !formData.consent}
-                    className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                    className="px-6 py-3 bg-[#2563eb] text-white rounded-lg hover:bg-[#ffc957] hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit'] disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
                   >
                     {isSubmitting ? (
                       <>
@@ -1109,6 +1165,7 @@ const ClientForm = () => {
         </div>
       </section>
     </div>
+    </ErrorBoundary>
   );
 };
 

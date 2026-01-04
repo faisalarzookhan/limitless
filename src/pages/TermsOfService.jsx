@@ -1,8 +1,31 @@
 import { Link } from 'react-router-dom';
-import { HiDocumentText, HiShieldCheck, HiScale } from 'react-icons/hi';
+import { motion } from 'framer-motion';
+import { HiDocumentText, HiShieldCheck, HiScale, HiSparkles } from 'react-icons/hi';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 const TermsOfService = () => {
   const lastUpdated = 'January 15, 2024';
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
 
   const sections = [
     {
@@ -404,58 +427,79 @@ const TermsOfService = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-dark text-white">
+    <ErrorBoundary>
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-600/10 to-secondary-600/10"></div>
-
-        <div className="container-custom relative z-10">
+      <motion.section 
+        className="py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#1d4ed8] to-[#ffc957] text-[#0a0b0d]"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
+        <div className="container-custom px-4 md:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="flex justify-center mb-6">
-              <div className="w-20 h-20 bg-gradient-primary rounded-2xl flex items-center justify-center animate-float">
-                <HiScale className="w-10 h-10 text-white" />
-              </div>
-            </div>
-
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent">
-              Terms of Service
-            </h1>
-
-            <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            <motion.div 
+              className="inline-flex items-center space-x-2 bg-[#0a0b0d]/20 px-6 py-3 rounded-full mb-8"
+              variants={itemVariants}
+            >
+              <HiScale className="w-5 h-5" />
+              <span className="text-sm font-semibold font-['Outfit']">
+                Legal Agreement
+              </span>
+            </motion.div>
+            <motion.h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-['Outfit'] font-bold mb-6"
+              variants={itemVariants}
+            >
+              Terms of
+              <br />
+              Service
+            </motion.h1>
+            <motion.p 
+              className="text-xl md:text-2xl text-[#0a0b0d]/90 mb-8 font-['Figtree']"
+              variants={itemVariants}
+            >
               Please read these terms carefully before using our services. By
               using Limitless Infotech Solution services, you agree to be bound
               by these terms.
-            </p>
-
-            <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-400">
+            </motion.p>
+            <motion.div 
+              className="flex flex-wrap justify-center gap-4 text-sm text-[#0a0b0d]/80"
+              variants={itemVariants}
+            >
               <div className="flex items-center space-x-2">
-                <HiDocumentText className="w-5 h-5 text-primary-400" />
-                <span>Last Updated: {lastUpdated}</span>
+                <HiDocumentText className="w-5 h-5" />
+                <span className="font-['Figtree']">Last Updated: {lastUpdated}</span>
               </div>
               <div className="flex items-center space-x-2">
-                <HiShieldCheck className="w-5 h-5 text-primary-400" />
-                <span>Legal Agreement</span>
+                <HiShieldCheck className="w-5 h-5" />
+                <span className="font-['Figtree']">Legal Agreement</span>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Important Notice */}
-      <section className="py-8 bg-yellow-500/10 border-y border-yellow-500/20">
+      <motion.section 
+        className="py-8 bg-[#b45309]/20 border-y border-[#f59e0b]/30"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-start space-x-4">
               <div className="flex-shrink-0">
-                <div className="w-10 h-10 bg-yellow-500/20 rounded-lg flex items-center justify-center">
-                  <span className="text-yellow-500 text-xl">⚠️</span>
+                <div className="w-10 h-10 bg-[#f59e0b]/20 rounded-lg flex items-center justify-center">
+                  <span className="text-[#f59e0b] text-xl">⚠️</span>
                 </div>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-yellow-500 mb-2">
+                <h3 className="text-lg font-semibold text-[#f59e0b] mb-2 font-['Outfit']">
                   Important Legal Notice
                 </h3>
-                <p className="text-gray-300 text-sm leading-relaxed">
+                <p className="text-gray-300 text-sm leading-relaxed font-['Figtree']">
                   These Terms of Service constitute a legally binding agreement
                   between you and Limitless Infotech Solution. If you do not
                   agree with any part of these terms, you must not use our
@@ -467,19 +511,28 @@ const TermsOfService = () => {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Main Content */}
-      <section className="py-16">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
             {sections.map((section, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="mb-12 bg-dark-800/30 rounded-2xl p-8 border border-dark-700 hover:border-primary-600/30 transition-all duration-300"
+                className="mb-12 bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 shadow-xl border border-gray-700"
+                initial="hidden"
+                animate="visible"
+                variants={itemVariants}
+                transition={{ delay: index * 0.1 }}
               >
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-                  <span className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center text-sm mr-3">
+                <h2 className="text-2xl font-bold text-white mb-6 flex items-center font-['Outfit']">
+                  <span className="w-8 h-8 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-lg flex items-center justify-center text-sm mr-3">
                     {index + 1}
                   </span>
                   {section.title}
@@ -489,23 +542,23 @@ const TermsOfService = () => {
                   {section.content.map((item, itemIndex) => (
                     <div key={itemIndex} className="text-gray-300">
                       {item.subtitle && (
-                        <h3 className="text-lg font-semibold text-gray-200 mb-3">
+                        <h3 className="text-lg font-semibold text-white mb-3 font-['Outfit']">
                           {item.subtitle}
                         </h3>
                       )}
 
                       {item.text && (
-                        <p className="leading-relaxed mb-4">{item.text}</p>
+                        <p className="leading-relaxed mb-4 font-['Figtree']">{item.text}</p>
                       )}
 
                       {item.list && (
                         <ul className="space-y-2 ml-4">
                           {item.list.map((listItem, listIndex) => (
                             <li key={listIndex} className="flex items-start">
-                              <span className="text-primary-400 mr-3 mt-1 flex-shrink-0">
+                              <span className="text-[#2563eb] mr-3 mt-1 flex-shrink-0">
                                 •
                               </span>
-                              <span className="leading-relaxed">
+                              <span className="leading-relaxed font-['Figtree']">
                                 {listItem}
                               </span>
                             </li>
@@ -515,106 +568,147 @@ const TermsOfService = () => {
                     </div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Acceptance Section */}
-      <section className="py-16 bg-dark-800/30">
+      <motion.section 
+        className="py-16 bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-gradient-to-br from-primary-600/20 to-secondary-600/20 rounded-2xl p-8 border border-primary-600/30">
-              <h2 className="text-2xl font-bold text-white mb-4">
+            <motion.div 
+              className="bg-gradient-to-br from-[#2563eb]/20 to-[#ffc957]/20 rounded-2xl p-8 border border-[#2563eb]/30"
+              variants={itemVariants}
+            >
+              <h2 className="text-2xl font-bold text-white mb-4 font-['Outfit']">
                 Acknowledgment and Acceptance
               </h2>
-              <p className="text-gray-300 leading-relaxed mb-6">
+              <p className="text-gray-300 leading-relaxed mb-6 font-['Figtree']">
                 BY USING OUR SERVICES, SUBMITTING INFORMATION THROUGH OUR
                 WEBSITE, OR ENTERING INTO A SERVICE AGREEMENT WITH LIMITLESS
                 INFOTECH SOLUTION, YOU ACKNOWLEDGE THAT YOU HAVE READ,
                 UNDERSTOOD, AND AGREE TO BE BOUND BY THESE TERMS OF SERVICE.
               </p>
-              <p className="text-gray-400 text-sm">
+              <p className="text-gray-400 text-sm font-['Figtree']">
                 If you have questions or concerns about these Terms, please
                 contact us before using our services.
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Related Links */}
-      <section className="py-12">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <h3 className="text-xl font-semibold text-white mb-6 text-center">
+            <motion.h3 
+              className="text-xl font-semibold text-white mb-6 text-center font-['Outfit']"
+              variants={itemVariants}
+            >
               Related Legal Documents
-            </h3>
+            </motion.h3>
             <div className="grid md:grid-cols-2 gap-6">
-              <Link
-                to="/privacy-policy"
-                className="bg-dark-800 p-6 rounded-xl border border-dark-700 hover:border-primary-600 transition-all duration-300 group"
+              <motion.div 
+                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-6 shadow-xl border border-gray-700 hover:border-[#2563eb]/50 transition-all duration-300 group"
+                whileHover={{ y: -5 }}
+                variants={itemVariants}
+                transition={{ delay: 0.1 }}
               >
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-primary-600/20 rounded-lg flex items-center justify-center group-hover:bg-primary-600/30 transition-colors">
-                    <HiShieldCheck className="w-6 h-6 text-primary-400" />
+                <Link to="/privacy-policy" className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-lg flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-[#ffc957] group-hover:to-[#2563eb] transition-colors">
+                    <HiShieldCheck className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-white mb-1">
+                    <h4 className="font-semibold text-white mb-1 font-['Outfit']">
                       Privacy Policy
                     </h4>
-                    <p className="text-sm text-gray-400">
+                    <p className="text-sm text-gray-300 font-['Figtree']">
                       How we handle your data
                     </p>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </motion.div>
 
-              <Link
-                to="/cookie-policy"
-                className="bg-dark-800 p-6 rounded-xl border border-dark-700 hover:border-primary-600 transition-all duration-300 group"
+              <motion.div 
+                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-6 shadow-xl border border-gray-700 hover:border-[#ffc957]/50 transition-all duration-300 group"
+                whileHover={{ y: -5 }}
+                variants={itemVariants}
+                transition={{ delay: 0.2 }}
               >
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-secondary-600/20 rounded-lg flex items-center justify-center group-hover:bg-secondary-600/30 transition-colors">
-                    <HiDocumentText className="w-6 h-6 text-secondary-400" />
+                <Link to="/cookie-policy" className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#ffc957] to-[#2563eb] rounded-lg flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-[#2563eb] group-hover:to-[#ffc957] transition-colors">
+                    <HiDocumentText className="w-6 h-6 text-[#0a0b0d]" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-white mb-1">
+                    <h4 className="font-semibold text-white mb-1 font-['Outfit']">
                       Cookie Policy
                     </h4>
-                    <p className="text-sm text-gray-400">How we use cookies</p>
+                    <p className="text-sm text-gray-300 font-['Figtree']">How we use cookies</p>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </motion.div>
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Contact CTA */}
-      <section className="py-16 border-t border-dark-800">
+      <motion.section 
+        className="section-padding bg-gradient-to-br from-[#2563eb] to-[#ffc957] text-[#0a0b0d]"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="container-custom">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-white mb-4">
+            <motion.h2 
+              className="text-3xl md:text-4xl font-['Outfit'] font-bold mb-4"
+              variants={itemVariants}
+            >
               Questions About These Terms?
-            </h2>
-            <p className="text-gray-300 mb-8">
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-[#0a0b0d]/90 mb-8 max-w-2xl mx-auto font-['Figtree']"
+              variants={itemVariants}
+            >
               Our team is here to help clarify any questions you may have about
               our Terms of Service.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/contact" className="btn-primary">
+            </motion.p>
+            <motion.div 
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+              variants={itemVariants}
+            >
+              <Link
+                to="/contact"
+                className="bg-[#0a0b0d] text-[#ffc957] hover:bg-[#1a1c25] px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']"
+              >
                 Contact Us
               </Link>
-              <Link to="/get-started" className="btn-secondary">
+              <Link
+                to="/get-started"
+                className="bg-transparent border border-[#0a0b0d] text-[#0a0b0d] hover:bg-[#0a0b0d] hover:text-[#ffc957] px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']"
+              >
                 Get Started
               </Link>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
+    </ErrorBoundary>
   );
 };
 

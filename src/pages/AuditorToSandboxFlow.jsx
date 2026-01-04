@@ -1,8 +1,31 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import DigitalHealthAuditor from '../components/DigitalHealthAuditor';
 import SandboxEnvironment from '../components/SandboxEnvironment';
 import EngagementSystem from '../components/EngagementSystem';
 import analyticsService from '../services/analyticsService';
+import ErrorBoundary from '../components/ErrorBoundary';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5
+    }
+  }
+};
 
 const AuditorToSandboxFlow = () => {
   const [currentStage, setCurrentStage] = useState('auditor'); // 'auditor', 'sandbox'
@@ -63,72 +86,92 @@ const AuditorToSandboxFlow = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
+    <ErrorBoundary>
+    <div className="min-h-screen bg-[#0a0b0d] font-sans">
       {currentStage === 'auditor' && (
-        <div className="container mx-auto px-4 py-8">
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              Digital Health <span className="text-blue-600">Auditor</span>
+        <motion.div 
+          className="container mx-auto px-4 py-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div className="text-center mb-8" variants={itemVariants}>
+            <h1 className="text-4xl font-bold text-white mb-4 font-['Outfit']">
+              Digital Health <span className="text-[#ffc957]">Auditor</span>
             </h1>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto font-['Figtree']">
               Get a comprehensive analysis of your website's performance,
               security, and SEO with our AI-powered auditor
             </p>
-          </div>
+          </motion.div>
 
-          <DigitalHealthAuditor
-            onAuditComplete={handleAuditComplete}
-            onSandboxRequest={handleSandboxStart}
-          />
+          <motion.div variants={itemVariants}>
+            <DigitalHealthAuditor
+              onAuditComplete={handleAuditComplete}
+              onSandboxRequest={handleSandboxStart}
+            />
+          </motion.div>
 
           {/* Engagement tracking for auditor */}
           {auditResults && (
-            <EngagementSystem
-              userType="auditor"
-              userData={userData}
-              results={auditResults}
-            />
+            <motion.div variants={itemVariants}>
+              <EngagementSystem
+                userType="auditor"
+                userData={userData}
+                results={auditResults}
+              />
+            </motion.div>
           )}
-        </div>
+        </motion.div>
       )}
 
       {currentStage === 'sandbox' && (
-        <div>
+        <motion.div 
+          className="container mx-auto px-4 py-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           <SandboxEnvironment onExit={handleSandboxExit} />
 
           {/* Engagement tracking for sandbox */}
           {sandboxStarted && (
-            <EngagementSystem
-              userType="sandbox"
-              results={{
-                sandboxId: 'current-sandbox-id',
-                usageData: {
-                  tourCompleted: false,
-                  tasksCompleted: 0,
-                  featuresExplored: 0,
-                },
-              }}
-            />
+            <motion.div variants={itemVariants}>
+              <EngagementSystem
+                userType="sandbox"
+                results={{
+                  sandboxId: 'current-sandbox-id',
+                  usageData: {
+                    tourCompleted: false,
+                    tasksCompleted: 0,
+                    featuresExplored: 0,
+                  },
+                }}
+              />
+            </motion.div>
           )}
-        </div>
+        </motion.div>
       )}
 
       {/* Conversion Metrics Summary */}
-      <div className="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 max-w-xs">
-        <h4 className="font-semibold text-gray-900 mb-2">Live Metrics</h4>
-        <div className="text-sm text-gray-600 space-y-1">
+      <motion.div 
+        className="fixed bottom-4 right-4 bg-[#1a1c20] rounded-lg shadow-lg p-4 max-w-xs border border-[#2563eb]/30"
+        variants={itemVariants}
+      >
+        <h4 className="font-semibold text-white mb-2 font-['Outfit']">Live Metrics</h4>
+        <div className="text-sm text-gray-300 space-y-1 font-['Figtree']">
           <div>
-            Stage: <span className="font-medium">{currentStage}</span>
+            Stage: <span className="font-medium text-[#ffc957]">{currentStage}</span>
           </div>
           <div>
-            Events Tracked:{' '}
-            <span className="font-medium">
+            Events Tracked: 
+            <span className="font-medium text-white">
               {analyticsService.getDashboardData().totalEvents}
             </span>
           </div>
           <div>
-            Conversion Rate:{' '}
-            <span className="font-medium">
+            Conversion Rate: 
+            <span className="font-medium text-white">
               {analyticsService
                 .getConversionMetrics()
                 .overallConversionRate.toFixed(2)}
@@ -136,8 +179,9 @@ const AuditorToSandboxFlow = () => {
             </span>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
+    </ErrorBoundary>
   );
 };
 

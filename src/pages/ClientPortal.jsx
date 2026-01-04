@@ -21,6 +21,7 @@ import {
   HiLockClosed,
 } from 'react-icons/hi';
 import Navbar from '../components/Navbar';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 const ClientPortal = props => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -650,6 +651,7 @@ const ClientPortal = props => {
   };
 
   return (
+    <ErrorBoundary>
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-dark-900 dark:to-dark-800">
       <Navbar isTransparent={true} />
 
@@ -743,6 +745,7 @@ const ClientPortal = props => {
         </div>
       </section>
     </div>
+    </ErrorBoundary>
   );
 };
 
