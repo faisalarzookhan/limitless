@@ -75,7 +75,7 @@ const App = () => {
           <SubdomainRouter>
             <Navbar />
             <PrivacyConsent />
-            <main id="content" className="min-h-screen font-sans bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
+            <main id="content" className="min-h-screen pt-20 md:pt-24 font-sans bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
               <ErrorBoundary>
                 <Routes>
                   {/* Main domain routes */}
