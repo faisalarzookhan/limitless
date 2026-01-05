@@ -50,7 +50,7 @@ const DigitalHealthAuditorPage = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-[#0a0b0d] font-['Figtree'] py-8">
+      <div className="min-h-screen bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100 font-['Figtree'] py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Hero Section */}
           <motion.div 

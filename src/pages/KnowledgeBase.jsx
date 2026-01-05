@@ -196,7 +196,7 @@ const KnowledgeBase = () => {
 
   return (
     <ErrorBoundary>
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
+    <div className="min-h-screen bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
       {/* Hero Section */}
       <motion.section 
         className="py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#1d4ed8] to-[#ffc957] text-[#0a0b0d]"

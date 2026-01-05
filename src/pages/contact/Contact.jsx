@@ -161,7 +161,7 @@ const Contact = () => {
         <meta name="twitter:description" content="Get in touch with Limitless Infotech Solution. Reach out via email, phone, or visit our office in Mumbai. We offer 24-hour response time for all inquiries." />
         <link rel="canonical" href="https://www.limitlessinfotech.com/contact" />
       </Helmet>
-      <div className="min-h-screen font-sans bg-[#0a0b0d] text-white">
+      <div className="min-h-screen font-sans bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
         {/* Hero Section - Asymmetrical Layout */}
         <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#0a0b0d] via-[#1e293b] to-[#0f172a]">
           {/* Asymmetrical background elements */}

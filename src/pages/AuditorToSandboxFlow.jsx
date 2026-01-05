@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import DigitalHealthAuditor from '../components/features/DigitalHealthAuditor';
-import SandboxEnvironment from '../components/features/SandboxEnvironment';
-import EngagementSystem from '../components/features/EngagementSystem';
+import DigitalHealthAuditor from '../components/DigitalHealthAuditor';
+import SandboxEnvironment from '../components/SandboxEnvironment';
+import EngagementSystem from '../components/features/engagement/EngagementSystem';
 import analyticsService from '../services/analytics/analyticsService';
 import ErrorBoundary from '../components/ErrorBoundary';
 
@@ -87,7 +87,7 @@ const AuditorToSandboxFlow = () => {
 
   return (
     <ErrorBoundary>
-    <div className="min-h-screen bg-[#0a0b0d] font-sans">
+    <div className="min-h-screen bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100 font-sans">
       {currentStage === 'auditor' && (
         <motion.div 
           className="container mx-auto px-4 py-8"

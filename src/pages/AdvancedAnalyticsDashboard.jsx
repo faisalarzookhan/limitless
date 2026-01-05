@@ -182,7 +182,7 @@ const AdvancedAnalyticsDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0a0b0d] flex items-center justify-center p-6">
+      <div className="min-h-screen bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100 flex items-center justify-center p-6">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#ffc957] mb-4"></div>
           <p className="text-[#cbd5e1] font-medium font-['Figtree']">Loading analytics data...</p>
@@ -193,7 +193,7 @@ const AdvancedAnalyticsDashboard = () => {
 
   return (
     <ErrorBoundary>
-    <div className="min-h-screen bg-[#0a0b0d] p-6">
+    <div className="min-h-screen bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100 p-6">
       <div className="max-w-7xl mx-auto bg-[#0a0b0d] p-6 rounded-2xl">
         <motion.div 
           initial={{ opacity: 0, y: -20 }}

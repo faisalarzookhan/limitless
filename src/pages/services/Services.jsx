@@ -366,7 +366,7 @@ const Services = () => {
         <meta name="twitter:description" content="Comprehensive technology solutions including Web Development, Mobile App Development, Custom Software & Systems, CRM & Task Management, Business Automation & AI Integration, and more." />
         <link rel="canonical" href="https://www.limitlessinfotech.com/services" />
       </Helmet>
-      <div className="min-h-screen font-sans bg-[#0a0b0d]">
+      <div className="min-h-screen font-sans bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
         {/* Hero Section */}
         <section className="relative py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#1e40af] to-[#0a0b0d] text-white overflow-hidden">
         <div

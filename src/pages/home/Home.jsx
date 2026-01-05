@@ -297,7 +297,7 @@ const Home = () => {
         <meta name="twitter:description" content="Transform your business with architectural-grade digital solutions. We are the architects of transformation, building tomorrow's technology today." />
         <link rel="canonical" href="https://www.limitlessinfotech.com" />
       </Helmet>
-      <div className="min-h-screen font-sans bg-[#0a0b0d]">
+      <div className="min-h-screen font-sans bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
       {/* Hero Section - Asymmetrical Layout */}
       <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#0a0b0d] via-[#1e293b] to-[#0f172a]">
         {/* Asymmetrical background elements */}

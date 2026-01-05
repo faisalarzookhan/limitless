@@ -153,9 +153,9 @@ const About = () => {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen font-sans bg-[#0a0b0d]">
+      <div className="min-h-screen font-sans bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
         {/* Hero Section - Asymmetrical Layout */}
-        <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#0a0b0d] via-[#1e293b] to-[#0f172a]">
+        <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-white dark:from-dark-900 to-gray-100 dark:to-dark-800">
           {/* Asymmetrical background elements */}
           <div className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-[#2563eb]/10 to-transparent"></div>
           <div className="absolute top-1/4 right-0 w-2/5 h-2/3 bg-gradient-to-l from-[#ffc957]/10 to-transparent"></div>

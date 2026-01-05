@@ -266,7 +266,7 @@ const Events = () => {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
+      <div className="min-h-screen bg-gradient-to-br from-white dark:from-dark-900 to-gray-100 dark:to-dark-800 bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
       {/* Hero Section */}
       <motion.section 
         className="relative py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#1d4ed8] to-[#ffc957] text-white overflow-hidden"
@@ -309,7 +309,7 @@ const Events = () => {
       </motion.section>
 
       {/* Featured Events */}
-      <section className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
+      <section className="section-padding bg-gradient-to-br from-white dark:from-dark-900 to-gray-100 dark:to-dark-800 text-gray-900 dark:text-gray-100">
         <div className="container-custom">
           <motion.div 
             className="text-center mb-16"
@@ -337,7 +337,7 @@ const Events = () => {
               .map((event, index) => (
                 <motion.div
                   key={event.id}
-                  className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-3xl overflow-hidden shadow-xl border border-gray-700"
+                  className="bg-gradient-to-br from-white dark:from-dark-800 to-gray-100 dark:to-dark-700 rounded-3xl overflow-hidden shadow-xl dark:shadow-soft-dark border border-gray-200 dark:border-dark-700"
                   initial="hidden"
                   animate="visible"
                   variants={itemVariants}
@@ -669,7 +669,7 @@ const Events = () => {
             {events.map((event, index) => (
               <motion.div
                 key={event.id}
-                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl overflow-hidden border border-gray-700 hover:shadow-xl transition-all duration-300"
+                className="bg-gradient-to-br from-white dark:from-dark-800 to-gray-100 dark:to-dark-700 rounded-2xl overflow-hidden border border-gray-200 dark:border-dark-700 hover:shadow-xl dark:hover:shadow-2xl transition-all duration-300"
                 initial="hidden"
                 animate="visible"
                 variants={itemVariants}

@@ -22,7 +22,7 @@ import {
   FaLink,
 } from 'react-icons/fa';
 import ErrorBoundary from '../components/ErrorBoundary';
-import { sendUserInteractionNotification } from '../services/notificationService';
+import { sendUserInteractionNotification } from '../services/notification/notificationService';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -339,7 +339,7 @@ const BlogDetail = () => {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-[#0a0b0d] font-sans">
+      <div className="min-h-screen bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100 font-sans">
       {/* Reading Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-1 bg-[#2563eb]/20 z-50">
         <div

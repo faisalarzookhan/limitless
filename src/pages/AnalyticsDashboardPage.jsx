@@ -89,7 +89,7 @@ const AnalyticsDashboardPage = memo(() => {
   return (
     <ErrorBoundary>
     <Layout>
-      <div className="min-h-screen bg-[#0a0b0d] py-8">
+      <div className="min-h-screen bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             className="bg-[#0a0b0d] rounded-2xl p-6"
@@ -297,10 +297,10 @@ const AnalyticsDashboardPage = memo(() => {
               with our team to learn more.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <button className="bg-[#ffc957] text-[#0a0b0d] font-semibold py-3 px-8 rounded-lg hover:bg-[#ffb830] transition duration-300 font-['Outfit'] font-bold">
+              <button className="bg-[#ffc957] text-[#0a0b0d] font-semibold py-3 px-8 rounded-lg hover:bg-[#ffb830] transition duration-300 font-['Outfit']">
                 Request Demo
               </button>
-              <button className="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-[#0a0b0d] transition duration-300 font-['Outfit'] font-bold">
+              <button className="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-[#0a0b0d] transition duration-300 font-['Outfit']">
                 Contact Sales
               </button>
             </div>

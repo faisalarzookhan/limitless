@@ -1,5 +1,5 @@
 import Layout from '../components/layout/Layout';
-import Chatbot from '../components/features/Chatbot';
+import Chatbot from '../components/features/chatbot/Chatbot';
 import { motion } from 'framer-motion';
 import {
   HiChatAlt2,
@@ -36,7 +36,7 @@ const AuralisAIPage = () => {
   return (
     <ErrorBoundary>
     <Layout>
-      <div className="min-h-screen bg-[#0a0b0d] py-8 font-sans">
+      <div className="min-h-screen bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100 py-8 font-sans">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Hero Section */}
           <motion.div 
@@ -66,10 +66,10 @@ const AuralisAIPage = () => {
               className="flex flex-wrap justify-center gap-4"
               variants={itemVariants}
             >
-              <button className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] text-[#0a0b0d] font-semibold py-3 px-8 rounded-lg hover:from-[#1d4ed8] hover:to-[#ffb830] transition-all duration-300 shadow-lg hover:shadow-xl font-['Outfit'] font-bold">
+              <button className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] text-[#0a0b0d] font-semibold py-3 px-8 rounded-lg hover:from-[#1d4ed8] hover:to-[#ffb830] transition-all duration-300 shadow-lg hover:shadow-xl font-['Outfit']">
                 Start Conversation
               </button>
-              <button className="bg-transparent border-2 border-[#2563eb] text-white font-semibold py-3 px-8 rounded-lg hover:bg-[#2563eb] transition-colors font-['Outfit'] font-bold">
+              <button className="bg-transparent border-2 border-[#2563eb] text-white font-semibold py-3 px-8 rounded-lg hover:bg-[#2563eb] transition-colors font-['Outfit']">
                 View Documentation
               </button>
             </motion.div>
@@ -385,10 +385,10 @@ const AuralisAIPage = () => {
               className="flex flex-col sm:flex-row justify-center gap-4"
               variants={itemVariants}
             >
-              <button className="bg-[#ffc957] text-[#0a0b0d] font-semibold py-3 px-8 rounded-lg hover:bg-[#ffb830] transition duration-300 font-['Outfit'] font-bold">
+              <button className="bg-[#ffc957] text-[#0a0b0d] font-semibold py-3 px-8 rounded-lg hover:bg-[#ffb830] transition duration-300 font-['Outfit']">
                 Start Chatting Now
               </button>
-              <button className="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-[#0a0b0d] transition duration-300 font-['Outfit'] font-bold">
+              <button className="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-[#0a0b0d] transition duration-300 font-['Outfit']">
                 Schedule Demo
               </button>
             </motion.div>

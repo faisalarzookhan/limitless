@@ -15,7 +15,7 @@ import {
   HiChevronRight,
   HiArrowRight,
 } from 'react-icons/hi';
-import PredictiveAnalyticsDashboard from '../components/features/PredictiveAnalyticsDashboard';
+import PredictiveAnalyticsDashboard from '../components/PredictiveAnalyticsDashboard';
 import ErrorBoundary from '../components/ErrorBoundary';
 
 const containerVariants = {

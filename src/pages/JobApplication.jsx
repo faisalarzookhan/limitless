@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import JobApplicationForm from '../components/JobApplicationForm';
+import CareerApplicationForm from '../components/forms/career/CareerApplicationForm';
 import ErrorBoundary from '../components/ErrorBoundary';
 
 const JobApplication = () => {
@@ -31,7 +31,7 @@ const JobApplication = () => {
   // For now, we'll just render the form
   return (
     <ErrorBoundary>
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
+    <div className="min-h-screen bg-gradient-to-br from-white dark:from-dark-900 to-gray-100 dark:to-dark-800 bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
       {/* Header Section */}
       <motion.section 
         className="relative py-16 bg-gradient-to-r from-[#2563eb] to-[#ffc957] text-[#0a0b0d]"
@@ -65,7 +65,7 @@ const JobApplication = () => {
 
       {/* Application Form Section */}
       <motion.section 
-        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
+        className="section-padding bg-gradient-to-br from-white dark:from-dark-900 to-gray-100 dark:to-dark-800 text-gray-900 dark:text-gray-100"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
@@ -73,7 +73,7 @@ const JobApplication = () => {
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
             <motion.div 
-              className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-3xl p-8 md:p-10 shadow-xl border border-gray-700"
+              className="bg-gradient-to-br from-white dark:from-dark-800 to-gray-100 dark:to-dark-700 rounded-3xl p-8 md:p-10 shadow-xl dark:shadow-soft-dark border border-gray-200 dark:border-dark-700"
               variants={itemVariants}
             >
               <div className="text-center mb-8">
@@ -91,7 +91,7 @@ const JobApplication = () => {
                 </motion.p>
               </div>
 
-              <JobApplicationForm />
+              <CareerApplicationForm />
             </motion.div>
           </div>
         </div>

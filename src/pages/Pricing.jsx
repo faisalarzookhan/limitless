@@ -278,7 +278,7 @@ const Pricing = () => {
         <meta name="twitter:description" content="Transparent pricing for development packages, support plans, and add-on services. Choose from Starter, Professional, and Enterprise packages with flexible billing options." />
         <link rel="canonical" href="https://www.limitlessinfotech.com/pricing" />
       </Helmet>
-      <div className="min-h-screen font-sans bg-[#0a0b0d] text-white">
+      <div className="min-h-screen font-sans bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
         {/* Hero Section - Asymmetrical Layout */}
         <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#0a0b0d] via-[#1e293b] to-[#0f172a]">
           {/* Asymmetrical background elements */}

@@ -49,6 +49,8 @@ const WhatsAppIntegrationPage = lazy(() => import('./pages/WhatsAppIntegrationPa
 const AIFeatures = lazy(() => import('./pages/AIFeatures'));
 const AuralisAIPage = lazy(() => import('./pages/AuralisAIPage'));
 const ApiDocumentation = lazy(() => import('./pages/ApiDocumentation'));
+const KnowledgeBase = lazy(() => import('./pages/KnowledgeBase'));
+const ResponsiveToolkitDemo = lazy(() => import('./pages/ResponsiveToolkitDemo'));
 
 // Subdomain-specific pages
 const AuditorToSandboxFlow = lazy(() => import('./pages/AuditorToSandboxFlow'));
@@ -73,7 +75,7 @@ const App = () => {
           <SubdomainRouter>
             <Navbar />
             <PrivacyConsent />
-            <main id="content">
+            <main id="content" className="min-h-screen font-sans bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
               <ErrorBoundary>
                 <Routes>
                   {/* Main domain routes */}
@@ -184,6 +186,29 @@ const App = () => {
                   } />
                   <Route path="/auditor-to-sandbox" element={
                     <Suspense fallback={<PageLoader />}> <AuditorToSandboxFlow /> </Suspense>
+                  } />
+                  
+                  {/* Additional specific routes */}
+                  <Route path="/knowledge-base" element={
+                    <Suspense fallback={<PageLoader />}> <KnowledgeBase /> </Suspense>
+                  } />
+                  <Route path="/get-started" element={
+                    <Suspense fallback={<PageLoader />}> <Contact /> </Suspense>
+                  } />
+                  <Route path="/blog/limitless-innovation" element={
+                    <Suspense fallback={<PageLoader />}> <BlogDetail /> </Suspense>
+                  } />
+                  <Route path="/events/webinar-series" element={
+                    <Suspense fallback={<PageLoader />}> <EventDetail /> </Suspense>
+                  } />
+                  <Route path="/careers/open-positions" element={
+                    <Suspense fallback={<PageLoader />}> <Careers /> </Suspense>
+                  } />
+                  <Route path="/docs" element={
+                    <Suspense fallback={<PageLoader />}> <ApiDocumentation /> </Suspense>
+                  } />
+                  <Route path="/responsive-toolkit" element={
+                    <Suspense fallback={<PageLoader />}> <ResponsiveToolkitDemo /> </Suspense>
                   } />
                   
                   {/* Catch-all for unknown routes */}

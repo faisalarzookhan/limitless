@@ -18,7 +18,7 @@ import {
   HiRefresh,
   HiSparkles,
 } from 'react-icons/hi';
-import { api } from '../services/api/api';
+import { api } from '../services/api';
 import { useApp } from '../context/AppContext';
 import ErrorBoundary from '../components/ErrorBoundary';
 
@@ -289,7 +289,7 @@ const Blog = () => {
           <meta name="twitter:description" content="Stay updated with the latest technology trends, tutorials, and industry insights from Limitless Infotech Solution. Read our blog for expert knowledge and best practices." />
           <link rel="canonical" href="https://www.limitlessinfotech.com/blog" />
         </Helmet>
-        <div className="min-h-screen font-sans bg-[#0a0b0d] text-white">
+        <div className="min-h-screen font-sans bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
           {/* Hero Section - Asymmetrical Layout */}
           <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#0a0b0d] via-[#1e293b] to-[#0f172a]">
             {/* Asymmetrical background elements */}

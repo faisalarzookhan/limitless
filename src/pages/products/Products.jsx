@@ -359,7 +359,7 @@ const Products = () => {
         <meta name="twitter:description" content="Explore our suite of 7 enterprise-grade SaaS products that accelerate your business. Ready-to-deploy solutions for management, tracking, communication, and development." />
         <link rel="canonical" href="https://www.limitlessinfotech.com/products" />
       </Helmet>
-      <div className="min-h-screen font-sans bg-[#0a0b0d] text-white">
+      <div className="min-h-screen font-sans bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
         {/* Hero Section - Asymmetrical Layout */}
         <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#0a0b0d] via-[#1e293b] to-[#0f172a]">
           {/* Asymmetrical background elements */}

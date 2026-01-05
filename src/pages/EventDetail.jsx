@@ -30,7 +30,7 @@ import {
   FaCalendarPlus,
 } from 'react-icons/fa';
 import ErrorBoundary from '../components/ErrorBoundary';
-import { sendUserInteractionNotification } from '../services/notificationService';
+import { sendUserInteractionNotification } from '../services/notification/notificationService';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -405,7 +405,7 @@ END:VCALENDAR`;
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-[#0a0b0d] font-['Figtree']">
+      <div className="min-h-screen bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100 font-['Figtree']">
       {/* Back Button */}
       <div className="container-custom pt-24 pb-8">
         <Link

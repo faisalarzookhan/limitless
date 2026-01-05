@@ -496,7 +496,7 @@ const ApiDocumentation = () => {
 
   return (
     <ErrorBoundary>
-    <div className="min-h-screen bg-[#0a0b0d] font-sans">
+    <div className="min-h-screen bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100 font-sans">
       {/* Hero Section */}
       <section className="py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#ffc957] to-[#0a0b0d] text-white relative overflow-hidden">
         <div className="absolute inset-0 hero-pattern-bg opacity-20"></div>
@@ -540,13 +540,13 @@ const ApiDocumentation = () => {
             >
               <a
                 href="#playground"
-                className="bg-[#ffc957] text-[#0a0b0d] font-semibold py-3 px-8 rounded-lg hover:bg-[#ffb830] transition duration-300 font-['Outfit'] font-bold"
+                className="bg-[#ffc957] text-[#0a0b0d] font-semibold py-3 px-8 rounded-lg hover:bg-[#ffb830] transition duration-300 font-['Outfit']"
               >
                 API Playground
               </a>
               <a
                 href="#sdk"
-                className="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-[#0a0b0d] transition duration-300 font-['Outfit'] font-bold"
+                className="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-[#0a0b0d] transition duration-300 font-['Outfit']"
               >
                 Download SDK
               </a>
@@ -649,7 +649,7 @@ const ApiDocumentation = () => {
                       className="w-full p-3 border border-[#2563eb]/30 rounded-lg bg-[#0a0b0d] text-white font-['Figtree']"
                     />
                   </div>
-                  <button className="bg-[#2563eb] text-white w-full py-3 px-6 rounded-lg hover:bg-[#1d4ed8] transition duration-300 font-['Outfit'] font-bold">
+                  <button className="bg-[#2563eb] text-white w-full py-3 px-6 rounded-lg hover:bg-[#1d4ed8] transition duration-300 font-['Outfit']">
                     Execute Request
                   </button>
                 </div>
@@ -790,13 +790,13 @@ const ApiDocumentation = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href="/contact"
-                className="bg-[#ffc957] text-[#0a0b0d] font-semibold py-3 px-8 rounded-lg hover:bg-[#ffb830] transition duration-300 font-['Outfit'] font-bold"
+                className="bg-[#ffc957] text-[#0a0b0d] font-semibold py-3 px-8 rounded-lg hover:bg-[#ffb830] transition duration-300 font-['Outfit']"
               >
                 Get API Access
               </a>
               <a
                 href="/api-documentation"
-                className="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-[#0a0b0d] transition duration-300 font-['Outfit'] font-bold"
+                className="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-[#0a0b0d] transition duration-300 font-['Outfit']"
               >
                 View Full Docs
               </a>

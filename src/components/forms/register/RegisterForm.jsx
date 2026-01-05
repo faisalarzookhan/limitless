@@ -7,7 +7,7 @@ import {
   HiOutlineEyeOff,
 } from 'react-icons/hi';
 import InputField from './InputField';
-import csrfService from '../../../services/auth/csrfService';
+import csrfService from '../../../services/csrfService';
 import rateLimitService from '../../../services/rateLimitService';
 import encryptionService from '../../../services/auth/encryptionService';
 import { sendRegistrationNotification } from '../../../services/notification/notificationService';

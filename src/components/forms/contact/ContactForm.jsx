@@ -9,7 +9,7 @@ import {
 } from 'react-icons/hi';
 import notificationService from '../../../services/notification/notificationService';
 import encryptionService from '../../../services/auth/encryptionService';
-import csrfService from '../../../services/auth/csrfService';
+import csrfService from '../../../services/csrfService';
 import rateLimitService from '../../../services/rateLimitService';
 
 const ContactForm = ({ variant = 'default' }) => {
