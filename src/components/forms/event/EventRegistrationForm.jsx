@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { HiOutlineUser, HiOutlineMail, HiOutlinePhone, HiOutlineBriefcase, HiOutlineCalendar, HiOutlineLocationMarker, HiOutlineTicket, HiOutlineCheckCircle } from 'react-icons/hi';
-import { InputField } from '../InputField';
-import { SelectField } from '../SelectField';
+import InputField from '../InputField';
+import SelectField from '../SelectField';
 
 const EventRegistrationForm = ({ eventName = 'Upcoming Event', eventDate = 'TBD', variant = 'default', onSubmit, className = '' }) => {
   const [formData, setFormData] = useState({

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ResponsiveToolkit, ResponsiveToolkitAdvanced } from '../components/ui/ResponsiveToolkit';
+import ResponsiveToolkit from '../components/ui/ResponsiveToolkit';
 import { motion } from 'framer-motion';
 import { HiArrowsExpand, HiChartBar, HiDocumentText, HiLightningBolt, HiSparkles, HiUserGroup } from 'react-icons/hi';
 
@@ -194,40 +194,38 @@ const ResponsiveToolkitDemo = () => {
                     </div>
                   </ResponsiveToolkit>
                 ) : (
-                  <ResponsiveToolkitAdvanced
-                    aspectRatio={aspectRatio}
+                  <ResponsiveToolkit
+                    aspectRatio={aspectRatio.replace('/', ':')}
                     onResize={handleResize}
-                    showResizeHandles={true}
-                    enableResponsiveGrid={true}
-                    gridColumns={3}
-                    gridRows={2}
                     containerClassName="w-full h-full"
                   >
-                    <div className="text-center">
-                      <HiChartBar className="w-8 h-8 mx-auto mb-2 text-gray-600" />
-                      <p className="font-medium">Grid Item 1</p>
+                    <div className="grid grid-cols-3 gap-4 h-full w-full">
+                      <div className="text-center bg-white p-4 rounded-lg">
+                        <HiChartBar className="w-8 h-8 mx-auto mb-2 text-gray-600" />
+                        <p className="font-medium">Grid Item 1</p>
+                      </div>
+                      <div className="text-center bg-white p-4 rounded-lg">
+                        <HiDocumentText className="w-8 h-8 mx-auto mb-2 text-gray-600" />
+                        <p className="font-medium">Grid Item 2</p>
+                      </div>
+                      <div className="text-center bg-white p-4 rounded-lg">
+                        <HiLightningBolt className="w-8 h-8 mx-auto mb-2 text-gray-600" />
+                        <p className="font-medium">Grid Item 3</p>
+                      </div>
+                      <div className="text-center bg-white p-4 rounded-lg">
+                        <HiSparkles className="w-8 h-8 mx-auto mb-2 text-gray-600" />
+                        <p className="font-medium">Grid Item 4</p>
+                      </div>
+                      <div className="text-center bg-white p-4 rounded-lg">
+                        <HiUserGroup className="w-8 h-8 mx-auto mb-2 text-gray-600" />
+                        <p className="font-medium">Grid Item 5</p>
+                      </div>
+                      <div className="text-center bg-white p-4 rounded-lg">
+                        <HiArrowsExpand className="w-8 h-8 mx-auto mb-2 text-gray-600" />
+                        <p className="font-medium">Grid Item 6</p>
+                      </div>
                     </div>
-                    <div className="text-center">
-                      <HiDocumentText className="w-8 h-8 mx-auto mb-2 text-gray-600" />
-                      <p className="font-medium">Grid Item 2</p>
-                    </div>
-                    <div className="text-center">
-                      <HiLightningBolt className="w-8 h-8 mx-auto mb-2 text-gray-600" />
-                      <p className="font-medium">Grid Item 3</p>
-                    </div>
-                    <div className="text-center">
-                      <HiSparkles className="w-8 h-8 mx-auto mb-2 text-gray-600" />
-                      <p className="font-medium">Grid Item 4</p>
-                    </div>
-                    <div className="text-center">
-                      <HiUserGroup className="w-8 h-8 mx-auto mb-2 text-gray-600" />
-                      <p className="font-medium">Grid Item 5</p>
-                    </div>
-                    <div className="text-center">
-                      <HiArrowsExpand className="w-8 h-8 mx-auto mb-2 text-gray-600" />
-                      <p className="font-medium">Grid Item 6</p>
-                    </div>
-                  </ResponsiveToolkitAdvanced>
+                  </ResponsiveToolkit>
                 )}
               </div>
             </div>

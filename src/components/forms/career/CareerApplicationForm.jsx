@@ -1,8 +1,8 @@
 import { useState, useCallback } from 'react';
 import { HiOutlineUser, HiOutlineMail, HiOutlinePhone, HiOutlineBriefcase, HiOutlineDocumentText, HiOutlineLink, HiOutlineAcademicCap, HiOutlineCheckCircle } from 'react-icons/hi';
-import { InputField } from '../InputField';
-import { TextAreaField } from '../TextAreaField';
-import { SelectField } from '../SelectField';
+import InputField from '../InputField';
+import TextAreaField from '../TextAreaField';
+import SelectField from '../SelectField';
 
 const CareerApplicationForm = ({ jobTitle = 'Open Position', variant = 'default', onSubmit, className = '' }) => {
   const [formData, setFormData] = useState({

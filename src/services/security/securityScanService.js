@@ -1,5 +1,5 @@
 // src/services/securityScanService.js
-import { getPerformanceMetrics } from '../utils/performance';
+import { getPerformanceMetrics } from '../../utils/performance';
 
 class SecurityScanService {
   constructor() {

@@ -6,10 +6,10 @@ import {
   HiOutlineEyeOff,
 } from 'react-icons/hi';
 import InputField from './InputField';
-import csrfService from '../../services/csrfService';
-import rateLimitService from '../../services/rateLimitService';
-import encryptionService from '../../services/encryptionService';
-import { sendPasswordResetNotification } from '../../services/notificationService';
+import csrfService from '../../../services/csrfService';
+import rateLimitService from '../../../services/rateLimitService';
+import encryptionService from '../../../services/auth/encryptionService';
+import { sendPasswordResetNotification } from '../../../services/notification/notificationService';
 
 const PasswordResetForm = ({ onResetSuccess, variant = 'default' }) => {
   const [formData, setFormData] = useState({

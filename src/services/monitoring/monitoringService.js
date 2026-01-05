@@ -1,5 +1,5 @@
 // src/services/monitoringService.js
-import { getPerformanceMetrics } from '../utils/performance';
+import { getPerformanceMetrics } from '../../utils/performance';
 
 class MonitoringService {
   constructor() {

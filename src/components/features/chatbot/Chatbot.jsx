@@ -15,7 +15,7 @@ import {
   HiMail,
 } from 'react-icons/hi';
 import { sendUserInteractionNotification } from '../../../services/notification/notificationService';
-import CalendarIntegration from './CalendarIntegration';
+import CalendarIntegration from '../../CalendarIntegration';
 
 const Chatbot = () => {
   const navigate = useNavigate();

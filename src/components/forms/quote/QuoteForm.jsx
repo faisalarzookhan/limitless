@@ -1,8 +1,8 @@
 import { useState, useCallback } from 'react';
 import { HiOutlineLightBulb, HiOutlineBriefcase, HiOutlineUser, HiOutlineMail, HiOutlinePhone, HiOutlineDocumentText, HiOutlineCurrencyDollar, HiOutlineCalendar, HiOutlineCheckCircle } from 'react-icons/hi';
-import { InputField } from '../InputField';
-import { TextAreaField } from '../TextAreaField';
-import { SelectField } from '../SelectField';
+import InputField from '../InputField';
+import TextAreaField from '../TextAreaField';
+import SelectField from '../SelectField';
 
 const QuoteForm = ({ variant = 'default', onSubmit, className = '' }) => {
   const [formData, setFormData] = useState({

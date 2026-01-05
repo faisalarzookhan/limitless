@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { HiOutlineChatAlt2, HiOutlineStar, HiOutlineUser, HiOutlineMail, HiOutlineLightBulb, HiOutlineCheckCircle } from 'react-icons/hi';
-import { InputField } from '../InputField';
-import { TextAreaField } from '../TextAreaField';
+import InputField from '../InputField';
+import TextAreaField from '../TextAreaField';
 
 const FeedbackForm = ({ variant = 'default', onSubmit, className = '' }) => {
   const [formData, setFormData] = useState({
