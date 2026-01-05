@@ -26,7 +26,7 @@ import {
   HiChevronDown,
   HiChevronUp,
 } from 'react-icons/hi';
-import ErrorBoundary from '../components/ErrorBoundary';
+import ErrorBoundary from '../../components/ErrorBoundary';
 
 const Services = () => {
   const [expandedMobileFeatures, setExpandedMobileFeatures] = useState({});

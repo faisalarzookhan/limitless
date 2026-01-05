@@ -1,23 +1,28 @@
 import { useState, memo } from 'react';
 import {
+  HiOutlineUser,
   HiOutlineMail,
   HiOutlineLockClosed,
   HiOutlineEye,
   HiOutlineEyeOff,
 } from 'react-icons/hi';
 import InputField from './InputField';
-import csrfService from '../../services/csrfService';
-import rateLimitService from '../../services/rateLimitService';
-import encryptionService from '../../services/encryptionService';
-import { sendLoginNotification } from '../../services/notificationService';
+import csrfService from '../../../services/auth/csrfService';
+import rateLimitService from '../../../services/rateLimitService';
+import encryptionService from '../../../services/auth/encryptionService';
+import { sendRegistrationNotification } from '../../../services/notification/notificationService';
 
-const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
+const RegisterForm = ({ onRegisterSuccess, variant = 'default' }) => {
   const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
-    rememberMe: false,
+    confirmPassword: '',
+    agreeToTerms: false,
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [errors, setErrors] = useState({});
@@ -50,6 +55,18 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
   const validateForm = () => {
     const newErrors = {};
 
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'First name is required';
+    } else if (formData.firstName.trim().length < 2) {
+      newErrors.firstName = 'First name must be at least 2 characters';
+    }
+
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = 'Last name is required';
+    } else if (formData.lastName.trim().length < 2) {
+      newErrors.lastName = 'Last name must be at least 2 characters';
+    }
+
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else {
@@ -65,6 +82,16 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
       newErrors.password = 'Password must be at least 6 characters';
     }
 
+    if (!formData.confirmPassword.trim()) {
+      newErrors.confirmPassword = 'Please confirm your password';
+    } else if (formData.password.trim() !== formData.confirmPassword.trim()) {
+      newErrors.confirmPassword = 'Passwords do not match';
+    }
+
+    if (!formData.agreeToTerms) {
+      newErrors.agreeToTerms = 'You must agree to the terms and conditions';
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -74,7 +101,7 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
     
     // Check rate limit
     const clientIdentifier = getClientIdentifier();
-    const rateLimitCheck = rateLimitService.checkLimit(clientIdentifier, 'loginAttempts');
+    const rateLimitCheck = rateLimitService.checkLimit(clientIdentifier, 'registration');
     
     if (!rateLimitCheck.allowed) {
       const retryAfterSeconds = Math.ceil(rateLimitCheck.retryAfter / 1000);
@@ -94,9 +121,12 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
     
     // Sanitize input data
     const sanitizedData = {
+      firstName: encryptionService.sanitizeInput(formData.firstName),
+      lastName: encryptionService.sanitizeInput(formData.lastName),
       email: encryptionService.sanitizeInput(formData.email),
       password: encryptionService.sanitizeInput(formData.password),
-      rememberMe: formData.rememberMe,
+      confirmPassword: encryptionService.sanitizeInput(formData.confirmPassword),
+      agreeToTerms: formData.agreeToTerms,
     };
 
     // Add CSRF token to the data
@@ -109,8 +139,8 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
     };
 
     try {
-      // Send notification about the login attempt
-      await sendLoginNotification(requestData);
+      // Send notification about the registration
+      await sendRegistrationNotification(requestData);
 
       // Simulate API call
       setTimeout(() => {
@@ -118,8 +148,8 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
         setSubmitSuccess(true);
 
         // Call success callback if provided
-        if (onLoginSuccess) {
-          onLoginSuccess();
+        if (onRegisterSuccess) {
+          onRegisterSuccess();
         }
 
         // Reset success message after 5 seconds
@@ -127,7 +157,7 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
       }, 1500);
     } catch (error) {
       setIsSubmitting(false);
-      console.error('Login error:', error);
+      console.error('Registration error:', error);
     }
   };
 
@@ -151,10 +181,10 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
           </svg>
         </div>
         <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">
-          Login Successful!
+          Registration Successful!
         </h3>
         <p className="text-green-700 dark:text-green-400 text-sm">
-          Welcome back! You have been successfully logged in.
+          Welcome! Your account has been created successfully.
         </p>
       </div>
     );
@@ -167,6 +197,34 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
           <p className="text-red-700 dark:text-red-300 text-sm">{rateLimitError}</p>
         </div>
       )}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <InputField
+          id="firstName"
+          name="firstName"
+          label="First Name"
+          type="text"
+          value={formData.firstName}
+          onChange={handleChange}
+          placeholder="John"
+          required
+          error={errors.firstName}
+          icon={HiOutlineUser}
+        />
+
+        <InputField
+          id="lastName"
+          name="lastName"
+          label="Last Name"
+          type="text"
+          value={formData.lastName}
+          onChange={handleChange}
+          placeholder="Doe"
+          required
+          error={errors.lastName}
+          icon={HiOutlineUser}
+        />
+      </div>
+
       <InputField
         id="email"
         name="email"
@@ -188,7 +246,7 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
           type={showPassword ? 'text' : 'password'}
           value={formData.password}
           onChange={handleChange}
-          placeholder="Enter your password"
+          placeholder="Create a password"
           required
           error={errors.password}
           icon={HiOutlineLockClosed}
@@ -202,31 +260,64 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
         </button>
       </div>
 
-      <div className="flex items-center justify-between">
-        <div className="flex items-center">
+      <div className="relative">
+        <InputField
+          id="confirmPassword"
+          name="confirmPassword"
+          label="Confirm Password"
+          type={showConfirmPassword ? 'text' : 'password'}
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          placeholder="Confirm your password"
+          required
+          error={errors.confirmPassword}
+          icon={HiOutlineLockClosed}
+        />
+        <button
+          type="button"
+          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+          className="absolute right-3 top-11 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
+        >
+          {showConfirmPassword ? <HiOutlineEyeOff /> : <HiOutlineEye />}
+        </button>
+      </div>
+
+      <div className="flex items-start">
+        <div className="flex items-center h-5">
           <input
-            id="rememberMe"
-            name="rememberMe"
+            id="agreeToTerms"
+            name="agreeToTerms"
             type="checkbox"
-            checked={formData.rememberMe}
+            checked={formData.agreeToTerms}
             onChange={handleChange}
             className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
           />
-          <label
-            htmlFor="rememberMe"
-            className="ml-2 block text-sm text-gray-700 dark:text-gray-300"
-          >
-            Remember me
-          </label>
         </div>
-
-        <div className="text-sm">
-          <a
-            href="/password-reset"
-            className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
+        <div className="ml-3 text-sm">
+          <label
+            htmlFor="agreeToTerms"
+            className="text-gray-700 dark:text-gray-300"
           >
-            Forgot password?
-          </a>
+            I agree to the{' '}
+            <a
+              href="/terms"
+              className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
+            >
+              Terms and Conditions
+            </a>{' '}
+            and{' '}
+            <a
+              href="/privacy"
+              className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
+            >
+              Privacy Policy
+            </a>
+          </label>
+          {errors.agreeToTerms && (
+            <p className="text-red-600 dark:text-red-400 text-sm mt-1">
+              {errors.agreeToTerms}
+            </p>
+          )}
         </div>
       </div>
 
@@ -238,24 +329,24 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
         {isSubmitting ? (
           <>
             <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-            Signing in...
+            Creating account...
           </>
         ) : (
-          'Sign In'
+          'Create Account'
         )}
       </button>
 
       <div className="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
-        Don't have an account?{' '}
+        Already have an account?{' '}
         <a
-          href="/register"
+          href="/login"
           className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
         >
-          Sign up
+          Sign in
         </a>
       </div>
     </form>
   );
 };
 
-export default memo(LoginForm);
+export default memo(RegisterForm);

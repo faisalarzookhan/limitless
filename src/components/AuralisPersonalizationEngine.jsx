@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { sendUserInteractionNotification } from '../services/notificationService';
+import { sendUserInteractionNotification } from '../services/notification/notificationService';
 
 const AuralisPersonalizationEngine = ({ children, userId = 'anonymous' }) => {
   const [userProfile, setUserProfile] = useState({

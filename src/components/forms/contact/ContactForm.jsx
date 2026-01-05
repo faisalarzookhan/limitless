@@ -7,10 +7,10 @@ import {
   HiPhone,
   HiDocumentText,
 } from 'react-icons/hi';
-import notificationService from '../services/notificationService';
-import encryptionService from '../services/encryptionService';
-import csrfService from '../services/csrfService';
-import rateLimitService from '../services/rateLimitService';
+import notificationService from '../../../services/notification/notificationService';
+import encryptionService from '../../../services/auth/encryptionService';
+import csrfService from '../../../services/auth/csrfService';
+import rateLimitService from '../../../services/rateLimitService';
 
 const ContactForm = ({ variant = 'default' }) => {
   const [formData, setFormData] = useState({

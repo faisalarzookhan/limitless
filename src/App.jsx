@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppProvider } from './context/AppContext';
 import { SubdomainRouter } from './components/SubdomainRouter';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import Navbar from './components/layout/header/Navbar';
+import Footer from './components/layout/footer/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import FloatingButtons from './components/FloatingButtons';
 import WhatsAppBusinessIntegration from './components/WhatsAppBusinessIntegration';
@@ -13,11 +13,11 @@ import PrivacyConsent from './components/PrivacyConsent';
 import ErrorBoundary from './components/ErrorBoundary';
 
 // Lazy load page components for code splitting
-const Home = lazy(() => import('./pages/Home'));
-const About = lazy(() => import('./pages/About'));
-const Services = lazy(() => import('./pages/Services'));
-const Products = lazy(() => import('./pages/Products'));
-const Contact = lazy(() => import('./pages/Contact'));
+const Home = lazy(() => import('./pages/home/Home'));
+const About = lazy(() => import('./pages/about/About'));
+const Services = lazy(() => import('./pages/services/Services'));
+const Products = lazy(() => import('./pages/products/Products'));
+const Contact = lazy(() => import('./pages/contact/Contact'));
 const Pricing = lazy(() => import('./pages/Pricing'));
 const Portfolio = lazy(() => import('./pages/Portfolio'));
 const PortfolioDetail = lazy(() => import('./pages/PortfolioDetail'));
@@ -55,10 +55,10 @@ const AuditorToSandboxFlow = lazy(() => import('./pages/AuditorToSandboxFlow'));
 
 // Loading component for lazy-loaded pages
 const PageLoader = () => (
-  <div className="flex items-center justify-center min-h-screen bg-[#0a0b0d]">
+  <div className="flex items-center justify-center min-h-screen bg-white dark:bg-dark-900">
     <div className="text-center">
-      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#2563eb] mx-auto mb-4"></div>
-      <p className="text-white text-lg">Loading page...</p>
+      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600 mx-auto mb-4"></div>
+      <p className="text-gray-900 dark:text-white text-lg">Loading page...</p>
     </div>
   </div>
 );

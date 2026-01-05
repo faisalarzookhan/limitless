@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import engagementService from '../services/engagementService';
+import engagementService from '../../../services/engagement/engagementService';
 
 const EngagementSystem = ({
   userType = 'auditor',

@@ -1,5 +1,5 @@
 // Notification Service for handling all user interaction notifications
-import api from './api';
+import api from '../api';
 
 class NotificationService {
   constructor() {

@@ -5,7 +5,7 @@ import {
   HiOutlineUserCircle,
   HiOutlineChartBar,
 } from 'react-icons/hi';
-import sandboxService from '../services/sandboxService';
+import sandboxService from '../services/sandbox/sandboxService';
 
 const SandboxEnvironment = ({ onExit }) => {
   const [timeRemaining, setTimeRemaining] = useState(4 * 60 * 60); // 4 hours in seconds

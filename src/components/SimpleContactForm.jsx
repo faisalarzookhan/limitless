@@ -5,7 +5,7 @@ import {
   HiQuestionMarkCircle,
   HiCheckCircle,
 } from 'react-icons/hi';
-import { sendContactNotification } from '../services/notificationService';
+import { sendContactNotification } from '../services/notification/notificationService';
 
 const SimpleContactForm = ({ variant = 'default' }) => {
   const [formData, setFormData] = useState({

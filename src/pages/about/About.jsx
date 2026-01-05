@@ -14,10 +14,10 @@ import {
   HiPhone,
   HiLocationMarker,
 } from 'react-icons/hi';
-import AnimatedElement from '../components/ui/components/AnimatedElement';
-import DuoToneIcon from '../components/ui/components/DuoToneIcon';
-import FeedbackForm from '../components/FeedbackForm';
-import ErrorBoundary from '../components/ErrorBoundary';
+import AnimatedElement from '../../components/ui/components/AnimatedElement';
+import DuoToneIcon from '../../components/ui/components/DuoToneIcon';
+import FeedbackForm from '../../components/FeedbackForm';
+import ErrorBoundary from '../../components/ErrorBoundary';
 
 const About = () => {
   const values = [

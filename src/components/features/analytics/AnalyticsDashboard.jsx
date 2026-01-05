@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import analyticsService from '../services/analyticsService';
+import analyticsService from '../../../services/analytics/analyticsService';
 
 const AnalyticsDashboard = () => {
   const [dashboardData, setDashboardData] = useState(null);

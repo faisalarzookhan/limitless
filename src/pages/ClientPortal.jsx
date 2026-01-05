@@ -20,7 +20,7 @@ import {
   HiTrendingUp,
   HiLockClosed,
 } from 'react-icons/hi';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/layout/Navbar';
 import ErrorBoundary from '../components/ErrorBoundary';
 
 const ClientPortal = props => {

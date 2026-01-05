@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { sendUserInteractionNotification } from '../services/notificationService';
+import { sendUserInteractionNotification } from '../services/notification/notificationService';
 
 const HeatmapIntegration = () => {
   const [interactions, setInteractions] = useState([]);

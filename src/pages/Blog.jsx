@@ -18,7 +18,7 @@ import {
   HiRefresh,
   HiSparkles,
 } from 'react-icons/hi';
-import { api } from '../services/api';
+import { api } from '../services/api/api';
 import { useApp } from '../context/AppContext';
 import ErrorBoundary from '../components/ErrorBoundary';
 

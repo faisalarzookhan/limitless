@@ -11,7 +11,7 @@ export const useApp = () => {
 };
 
 export const AppProvider = ({ children }) => {
-  const [theme, setTheme] = useState('system');
+  const [theme, setTheme] = useState('light');
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [notifications, setNotifications] = useState([]);
@@ -20,7 +20,7 @@ export const AppProvider = ({ children }) => {
 
   // Theme Management
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'system';
+    const savedTheme = localStorage.getItem('theme') || 'light';
     setTheme(savedTheme);
     applyTheme(savedTheme);
   }, []);

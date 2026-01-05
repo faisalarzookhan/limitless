@@ -21,8 +21,8 @@ import {
   HiShieldCheck,
   HiCurrencyDollar,
 } from 'react-icons/hi';
-import { useApp } from '../context/AppContext';
-import { Image } from './ui';
+import { useApp } from '../../../context/AppContext';
+import Image from '../../ui/components/Image';
 
 const Navbar = ({ isTransparent = false }) => {
   const { theme, changeTheme } = useApp();

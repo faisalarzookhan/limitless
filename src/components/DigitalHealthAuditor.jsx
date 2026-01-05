@@ -12,13 +12,13 @@ import {
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import LimitlessScore from './LimitlessScore';
-import securityScanService from '../services/securityScanService';
-import lighthouseService from '../services/lighthouseService';
+import securityScanService from '../services/security/securityScanService';
+import lighthouseService from '../services/analytics/lighthouseService';
 import {
   generateTechnicalAuditReport,
   downloadPDF,
-} from '../services/pdfGenerationService';
-import { sendLeadGenerationNotification } from '../services/notificationService';
+} from '../services/pdf/pdfGenerationService';
+import { sendLeadGenerationNotification } from '../services/notification/notificationService';
 
 const DigitalHealthAuditor = ({ onAuditComplete, onSandboxRequest }) => {
   const [url, setUrl] = useState('');

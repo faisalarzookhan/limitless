@@ -8,7 +8,7 @@ import {
   HiCheckCircle,
   HiLink,
 } from 'react-icons/hi';
-import { sendJobApplicationNotification } from '../services/notificationService';
+import { sendJobApplicationNotification } from '../services/notification/notificationService';
 
 const JobApplicationForm = () => {
   const [formData, setFormData] = useState({

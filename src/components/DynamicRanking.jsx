@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import searchIntentService from '../services/searchIntentService';
+import searchIntentService from '../services/analytics/searchIntentService';
 import PropTypes from 'prop-types';
 
 /**

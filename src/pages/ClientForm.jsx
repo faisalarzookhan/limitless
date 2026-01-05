@@ -24,7 +24,7 @@ import {
   HiShoppingCart,
   HiAcademicCap,
 } from 'react-icons/hi';
-import { sendLeadGenerationNotification } from '../services/notificationService';
+import { sendLeadGenerationNotification } from '../services/notification/notificationService';
 import ErrorBoundary from '../components/ErrorBoundary';
 
 const ClientForm = () => {

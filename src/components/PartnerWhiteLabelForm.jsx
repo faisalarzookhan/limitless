@@ -8,7 +8,7 @@ import {
   HiOutlineLightBulb,
   HiCheckCircle,
 } from 'react-icons/hi';
-import { sendLeadGenerationNotification } from '../services/notificationService';
+import { sendLeadGenerationNotification } from '../services/notification/notificationService';
 
 const PartnerWhiteLabelForm = ({ variant = 'default', onSubmitSuccess }) => {
   const [formData, setFormData] = useState({

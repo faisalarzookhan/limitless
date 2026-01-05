@@ -1,5 +1,5 @@
 import Layout from '../components/layout/Layout';
-import AuralisPersonalizationEngine from '../components/AuralisPersonalizationEngine';
+import AuralisPersonalizationEngine from '../components/features/AuralisPersonalizationEngine';
 import { motion } from 'framer-motion';
 import {
   HiOutlineGlobe,

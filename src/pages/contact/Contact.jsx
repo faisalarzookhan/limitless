@@ -16,7 +16,7 @@ import {
   HiCalendar,
   HiSparkles,
 } from 'react-icons/hi';
-import ContactForm from '../components/ContactForm';
+import ContactForm from '../../components/forms/contact/ContactForm';
 import {
   FaFacebookF,
   FaTwitter,
@@ -25,7 +25,7 @@ import {
   FaGithub,
   FaWhatsapp,
 } from 'react-icons/fa';
-import ErrorBoundary from '../components/ErrorBoundary';
+import ErrorBoundary from '../../components/ErrorBoundary';
 
 const Contact = () => {
   const contactInfo = [

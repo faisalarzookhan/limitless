@@ -19,9 +19,9 @@ import {
   HiMoon,
   HiSparkles,
 } from 'react-icons/hi';
-import { useApp } from '../context/AppContext';
-import { Image } from './ui';
-import NewsletterForm from './NewsletterForm';
+import { useApp } from '../../../context/AppContext';
+import Image from '../../ui/components/Image';
+import NewsletterForm from '../../../components/forms/newsletter/NewsletterForm';
 
 const Footer = () => {
   const { theme, changeTheme } = useApp();

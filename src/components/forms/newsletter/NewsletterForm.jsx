@@ -1,9 +1,9 @@
 import { useState, memo } from 'react';
 import { HiMail, HiUser, HiCheckCircle } from 'react-icons/hi';
-import csrfService from '../services/csrfService';
-import rateLimitService from '../services/rateLimitService';
-import encryptionService from '../services/encryptionService';
-import { sendNewsletterNotification } from '../services/notificationService';
+import csrfService from '../../../services/csrfService';
+import rateLimitService from '../../../services/rateLimitService';
+import encryptionService from '../../../services/auth/encryptionService';
+import { sendNewsletterNotification } from '../../../services/notification/notificationService';
 
 const NewsletterForm = ({ variant = 'default' }) => {
   const [formData, setFormData] = useState({

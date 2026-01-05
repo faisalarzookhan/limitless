@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import DigitalHealthAuditor from '../components/DigitalHealthAuditor';
-import SandboxEnvironment from '../components/SandboxEnvironment';
-import EngagementSystem from '../components/EngagementSystem';
-import analyticsService from '../services/analyticsService';
+import DigitalHealthAuditor from '../components/features/DigitalHealthAuditor';
+import SandboxEnvironment from '../components/features/SandboxEnvironment';
+import EngagementSystem from '../components/features/EngagementSystem';
+import analyticsService from '../services/analytics/analyticsService';
 import ErrorBoundary from '../components/ErrorBoundary';
 
 const containerVariants = {

@@ -20,7 +20,7 @@ import {
   HiStar,
   HiSparkles,
 } from 'react-icons/hi';
-import ErrorBoundary from '../components/ErrorBoundary';
+import ErrorBoundary from '../../components/ErrorBoundary';
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');

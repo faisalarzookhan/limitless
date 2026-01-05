@@ -8,10 +8,10 @@ import {
   HiOutlineLightBulb,
   HiCheckCircle,
 } from 'react-icons/hi';
-import csrfService from '../services/csrfService';
-import rateLimitService from '../services/rateLimitService';
-import encryptionService from '../services/encryptionService';
-import { sendLeadGenerationNotification } from '../services/notificationService';
+import csrfService from '../services/auth/csrfService';
+import rateLimitService from '../services/auth/rateLimitService';
+import encryptionService from '../services/auth/encryptionService';
+import { sendLeadGenerationNotification } from '../services/notification/notificationService';
 
 const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
   const [formData, setFormData] = useState({

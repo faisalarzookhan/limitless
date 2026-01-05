@@ -1,5 +1,5 @@
 import Layout from '../components/layout/Layout';
-import Chatbot from '../components/Chatbot';
+import Chatbot from '../components/features/Chatbot';
 import { motion } from 'framer-motion';
 import {
   HiChatAlt2,

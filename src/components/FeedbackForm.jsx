@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { HiStar, HiChatAlt, HiUser, HiCheckCircle } from 'react-icons/hi';
-import { sendFeedbackNotification } from '../services/notificationService';
+import { sendFeedbackNotification } from '../services/notification/notificationService';
 
 const FeedbackForm = ({ variant = 'default' }) => {
   const [formData, setFormData] = useState({
