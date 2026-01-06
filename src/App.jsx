@@ -87,7 +87,7 @@ const App = () => {
                   } />
                   <Route path="/services" element={
                     <Suspense fallback={<PageLoader />}> <Services /> </Suspense>
-                  } />
+                  } />  
                   <Route path="/products" element={
                     <Suspense fallback={<PageLoader />}> <Products /> </Suspense>
                   } />
