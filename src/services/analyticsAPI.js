@@ -52,6 +52,12 @@ class AnalyticsAPI {
 
   // Track page view
   async trackPageView(data) {
+    // Check if running in browser environment
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      console.warn('Analytics: Not in browser environment, skipping page view tracking');
+      return Promise.resolve();
+    }
+    
     const payload = {
       ...data,
       timestamp: new Date().toISOString(),
@@ -76,6 +82,12 @@ class AnalyticsAPI {
 
   // Track custom event
   async trackEvent(eventName, properties = {}) {
+    // Check if running in browser environment
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      console.warn('Analytics: Not in browser environment, skipping event tracking');
+      return Promise.resolve();
+    }
+    
     const payload = {
       eventName,
       properties,
@@ -93,6 +105,12 @@ class AnalyticsAPI {
 
   // Track user interaction (clicks, scrolls, etc.)
   async trackInteraction(interactionType, elementData = {}) {
+    // Check if running in browser environment
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      console.warn('Analytics: Not in browser environment, skipping interaction tracking');
+      return Promise.resolve();
+    }
+    
     const payload = {
       interactionType,
       elementData,
@@ -110,6 +128,12 @@ class AnalyticsAPI {
 
   // Track form submission
   async trackFormSubmission(formId, formData, success = true) {
+    // Check if running in browser environment
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      console.warn('Analytics: Not in browser environment, skipping form submission tracking');
+      return Promise.resolve();
+    }
+    
     const payload = {
       formId,
       formData: this.sanitizeFormData(formData),
@@ -128,6 +152,12 @@ class AnalyticsAPI {
 
   // Track conversion
   async trackConversion(conversionName, value = 0, currency = 'USD', properties = {}) {
+    // Check if running in browser environment
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      console.warn('Analytics: Not in browser environment, skipping conversion tracking');
+      return Promise.resolve();
+    }
+    
     const payload = {
       conversionName,
       value,
@@ -237,6 +267,12 @@ class AnalyticsAPI {
 
   // Track session start
   async trackSessionStart(sessionData) {
+    // Check if running in browser environment
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      console.warn('Analytics: Not in browser environment, skipping session start tracking');
+      return Promise.resolve();
+    }
+    
     const payload = {
       ...sessionData,
       startTime: new Date().toISOString(),

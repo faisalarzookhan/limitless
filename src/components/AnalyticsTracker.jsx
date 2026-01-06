@@ -29,6 +29,11 @@ const AnalyticsTracker = () => {
   // Track page view
   const trackPageView = useCallback(async () => {
     try {
+      // Only track if in browser environment
+      if (typeof window === 'undefined' || typeof document === 'undefined') {
+        return;
+      }
+      
       // Only track if user has consented to analytics
       const consent = localStorage.getItem('analytics_consent');
       if (consent === 'false') return;
@@ -60,6 +65,11 @@ const AnalyticsTracker = () => {
   // Track custom event
   const trackEvent = useCallback(async (eventName, properties = {}) => {
     try {
+      // Only track if in browser environment
+      if (typeof window === 'undefined' || typeof document === 'undefined') {
+        return;
+      }
+      
       // Only track if user has consented to analytics
       const consent = localStorage.getItem('analytics_consent');
       if (consent === 'false') return;
@@ -77,6 +87,11 @@ const AnalyticsTracker = () => {
   // Track user interaction
   const trackInteraction = useCallback(async (interactionType, elementData = {}) => {
     try {
+      // Only track if in browser environment
+      if (typeof window === 'undefined' || typeof document === 'undefined') {
+        return;
+      }
+      
       // Only track if user has consented to analytics
       const consent = localStorage.getItem('analytics_consent');
       if (consent === 'false') return;
@@ -95,6 +110,11 @@ const AnalyticsTracker = () => {
   // Track form submission
   const trackFormSubmission = useCallback(async (formId, formData, success = true) => {
     try {
+      // Only track if in browser environment
+      if (typeof window === 'undefined' || typeof document === 'undefined') {
+        return;
+      }
+      
       // Only track if user has consented to analytics
       const consent = localStorage.getItem('analytics_consent');
       if (consent === 'false') return;
@@ -112,6 +132,11 @@ const AnalyticsTracker = () => {
   // Track conversion
   const trackConversion = useCallback(async (conversionName, value = 0, currency = 'USD', properties = {}) => {
     try {
+      // Only track if in browser environment
+      if (typeof window === 'undefined' || typeof document === 'undefined') {
+        return;
+      }
+      
       // Only track if user has consented to analytics
       const consent = localStorage.getItem('analytics_consent');
       if (consent === 'false') return;
@@ -188,6 +213,11 @@ const AnalyticsTracker = () => {
   
   // Initialize analytics
   useEffect(() => {
+    // Only run in browser environment
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return;
+    }
+    
     // Check if user has given consent for analytics
     const consent = localStorage.getItem('analytics_consent');
     if (consent === null) {
