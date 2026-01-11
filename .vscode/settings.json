@@ -3,5 +3,6 @@
     "*.css": "tailwindcss"
   },
   "scss.lint.unknownAtRules": "ignore",
-  "css.lint.unknownAtRules": "ignore"
+  "css.lint.unknownAtRules": "ignore",
+  "git.blame.editorDecoration.enabled": true
 }

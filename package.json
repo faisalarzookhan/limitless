@@ -95,11 +95,5 @@
     "trust"
   ],
   "author": "Faisal Khan",
-  "license": "ISC",
-  "overrides": {
-    "react-helmet-async": {
-      "react": "$react",
-      "react-dom": "$react-dom"
-    }
-  }
+  "license": "ISC"
 }
