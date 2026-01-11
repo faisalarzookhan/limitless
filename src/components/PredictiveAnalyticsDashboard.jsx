@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  HiTrendingUp,
-  HiTrendingDown,
-  HiChartBar,
-  HiUserGroup,
-  HiCurrencyDollar,
-  HiClock,
-  HiRefresh,
-} from 'react-icons/hi';
+  TrendingUp,
+  TrendingDown,
+  BarChart3,
+  Users,
+  DollarSign,
+  Clock,
+  RefreshCw,
+  Zap,
+  Cpu,
+  Shield,
+  Activity
+} from 'lucide-react';
 import { Line, Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -21,7 +26,6 @@ import {
   Legend,
 } from 'chart.js';
 
-// Register Chart.js components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -38,7 +42,6 @@ const PredictiveAnalyticsDashboard = () => {
   const [predictions, setPredictions] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Mock data for the dashboard
   const mockPredictions = {
     roi: {
       current: 3.2,
@@ -66,24 +69,27 @@ const PredictiveAnalyticsDashboard = () => {
     },
   };
 
-  // Mock chart data
   const engagementData = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
     datasets: [
       {
         label: 'Current Engagement',
         data: [3.2, 3.5, 3.8, 4.0, 4.2, 4.5, 4.2],
-        borderColor: '#3B82F6',
-        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+        borderColor: '#1ba6d6',
+        backgroundColor: 'rgba(27, 166, 214, 0.1)',
         tension: 0.4,
+        borderWidth: 3,
+        pointBackgroundColor: '#1ba6d6',
       },
       {
         label: 'Predicted Engagement',
         data: [4.0, 4.3, 4.6, 4.9, 5.2, 5.5, 5.8],
-        borderColor: '#10B981',
-        backgroundColor: 'rgba(16, 185, 129, 0.1)',
-        borderDash: [5, 5],
+        borderColor: '#ffc957',
+        backgroundColor: 'rgba(255, 201, 87, 0.1)',
+        borderDash: [10, 5],
         tension: 0.4,
+        borderWidth: 2,
+        pointBackgroundColor: '#ffc957',
       },
     ],
   };
@@ -94,12 +100,14 @@ const PredictiveAnalyticsDashboard = () => {
       {
         label: 'Current Conversion',
         data: [2.1, 2.3, 2.4, 2.4],
-        backgroundColor: '#3B82F6',
+        backgroundColor: 'rgba(27, 166, 214, 0.6)',
+        borderRadius: 12,
       },
       {
         label: 'Predicted Conversion',
         data: [2.5, 2.8, 3.0, 3.1],
-        backgroundColor: '#10B981',
+        backgroundColor: 'rgba(255, 201, 87, 0.6)',
+        borderRadius: 12,
       },
     ],
   };
@@ -110,22 +118,22 @@ const PredictiveAnalyticsDashboard = () => {
       {
         label: 'Current Utilization',
         data: [75, 68, 82, 78, 65],
-        backgroundColor: '#3B82F6',
+        backgroundColor: 'rgba(27, 166, 214, 0.6)',
+        borderRadius: 12,
       },
       {
         label: 'Predicted Utilization',
         data: [82, 75, 88, 85, 72],
-        backgroundColor: '#10B981',
+        backgroundColor: 'rgba(255, 201, 87, 0.6)',
+        borderRadius: 12,
       },
     ],
   };
 
-  // Simulate data loading
   useEffect(() => {
     const loadPredictions = async () => {
       setIsLoading(true);
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await new Promise(resolve => setTimeout(resolve, 2000));
       setPredictions(mockPredictions);
       setIsLoading(false);
     };
@@ -138,378 +146,214 @@ const PredictiveAnalyticsDashboard = () => {
     setTimeout(() => {
       setPredictions(mockPredictions);
       setIsLoading(false);
-    }, 1000);
+    }, 1500);
   };
 
   if (isLoading) {
     return (
-      <div className="bg-white dark:bg-dark-800 rounded-2xl shadow-lg p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-            Predictive Analytics Dashboard
-          </h2>
-          <button
-            onClick={refreshData}
-            className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 rounded-lg transition-colors"
-            disabled={isLoading}
-          >
-            <HiRefresh
-              className={`w-5 h-5 ${isLoading ? 'animate-spin' : ''}`}
-            />
-          </button>
+      <div className="bg-white/5 backdrop-blur-3xl rounded-[3rem] border border-white/10 p-12 min-h-[600px] flex flex-col items-center justify-center">
+        <div className="w-20 h-20 bg-[#1ba6d6] rounded-3xl flex items-center justify-center mb-8 relative">
+          <div className="absolute inset-0 bg-[#1ba6d6] blur-2xl opacity-20 animate-pulse"></div>
+          <RefreshCw className="w-10 h-10 text-white animate-spin" />
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {[1, 2, 3, 4].map(item => (
-            <div
-              key={item}
-              className="bg-gray-50 dark:bg-dark-700 rounded-xl p-6 animate-pulse"
-            >
-              <div className="h-4 bg-gray-200 dark:bg-dark-600 rounded w-3/4 mb-4"></div>
-              <div className="h-8 bg-gray-200 dark:bg-dark-600 rounded w-1/2 mb-2"></div>
-              <div className="h-4 bg-gray-200 dark:bg-dark-600 rounded w-1/3"></div>
-            </div>
-          ))}
-        </div>
-
-        <div className="space-y-8">
-          <div className="h-64 bg-gray-50 dark:bg-dark-700 rounded-xl animate-pulse"></div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="h-64 bg-gray-50 dark:bg-dark-700 rounded-xl animate-pulse"></div>
-            <div className="h-64 bg-gray-50 dark:bg-dark-700 rounded-xl animate-pulse"></div>
-          </div>
-        </div>
+        <h3 className="text-xs font-black text-white uppercase tracking-[0.4em] mb-4">Initializing Neural Dashboard</h3>
+        <p className="text-[0.6rem] text-white/30 font-black uppercase tracking-[0.2em]">Synchronizing cross-network data streams...</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white dark:bg-dark-800 rounded-2xl shadow-lg overflow-hidden">
-      <div className="p-6 border-b border-gray-200 dark:border-dark-700">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="bg-white/5 backdrop-blur-3xl rounded-[3rem] border border-white/10 overflow-hidden relative"
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1ba6d6]/5 to-transparent pointer-events-none"></div>
+      
+      <div className="p-10 border-b border-white/5 relative z-10">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
           <div>
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-              Predictive Analytics Dashboard
+            <h2 className="text-2xl font-black text-white uppercase tracking-tighter mb-2">
+              Predictive <span className="text-[#1ba6d6]">Terminal</span>
             </h2>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-              AI-driven insights and predictions for your business growth
+            <p className="text-[0.6rem] text-white/30 font-black uppercase tracking-[0.2em]">
+              AI-DRIVEN ANALYTICS ARCHIVE // NODE: PROXIMA-9
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <select
               value={timeRange}
               onChange={e => setTimeRange(e.target.value)}
-              className="px-3 py-2 border border-gray-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-[0.7rem] font-black uppercase tracking-widest text-white outline-none cursor-pointer hover:bg-white/10 transition-all duration-300"
             >
-              <option value="7d">Last 7 days</option>
-              <option value="30d">Last 30 days</option>
-              <option value="90d">Last 90 days</option>
-              <option value="1y">Last year</option>
+              <option value="7d" className="bg-[#0e1114]">7 CYCLES</option>
+              <option value="30d" className="bg-[#0e1114]">30 CYCLES</option>
+              <option value="90d" className="bg-[#0e1114]">90 CYCLES</option>
+              <option value="1y" className="bg-[#0e1114]">365 CYCLES</option>
             </select>
 
             <button
               onClick={refreshData}
-              className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 rounded-lg transition-colors"
-              disabled={isLoading}
+              className="p-4 bg-white/5 border border-white/10 rounded-2xl text-white/40 hover:text-[#1ba6d6] hover:bg-white/10 transition-all duration-300"
             >
-              <HiRefresh
-                className={`w-5 h-5 ${isLoading ? 'animate-spin' : ''}`}
-              />
+              <RefreshCw className="w-5 h-5" />
             </button>
           </div>
         </div>
       </div>
 
-      {/* KPI Cards */}
-      <div className="p-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800/50">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-blue-600 dark:text-blue-400">
-                  ROI
-                </p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
-                  {predictions.roi.current}x
-                </p>
-                <div className="flex items-center mt-2">
-                  <span
-                    className={`text-sm font-medium ${predictions.roi.trend === 'up' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}
-                  >
-                    {predictions.roi.change}
-                  </span>
-                  <span className="text-sm text-gray-600 dark:text-gray-400 ml-1">
-                    predicted
-                  </span>
-                </div>
+      <div className="p-10 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {/* KPI Card ROI */}
+          <div className="bg-white/5 border border-white/5 rounded-[2rem] p-8 hover:bg-white/10 transition-all duration-500 group">
+            <div className="flex items-center justify-between mb-6">
+              <div className="w-12 h-12 bg-[#1ba6d6]/10 rounded-2xl flex items-center justify-center text-[#1ba6d6] group-hover:scale-110 transition-transform">
+                <DollarSign className="w-6 h-6" />
               </div>
-              <div
-                className={`p-3 rounded-lg ${predictions.roi.trend === 'up' ? 'bg-green-100 dark:bg-green-900/30' : 'bg-red-100 dark:bg-red-900/30'}`}
-              >
-                {predictions.roi.trend === 'up' ? (
-                  <HiTrendingUp className="w-6 h-6 text-green-600 dark:text-green-400" />
-                ) : (
-                  <HiTrendingDown className="w-6 h-6 text-red-600 dark:text-red-400" />
-                )}
+              <div className="px-3 py-1 bg-green-500/10 rounded-full">
+                <p className="text-[0.55rem] font-black text-green-500 uppercase">PREDICTED</p>
               </div>
+            </div>
+            <p className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.2em] mb-2">Current ROI</p>
+            <p className="text-3xl font-black text-white mb-4">{predictions.roi.current}x</p>
+            <div className="flex items-center gap-2">
+              <TrendingUp className="w-4 h-4 text-green-500" />
+              <span className="text-[0.6rem] font-black text-green-500">{predictions.roi.change} INCREASE</span>
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-xl p-6 border border-purple-200 dark:border-purple-800/50">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-purple-600 dark:text-purple-400">
-                  Resource Utilization
-                </p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
-                  {predictions.resourceUtilization.current}%
-                </p>
-                <div className="flex items-center mt-2">
-                  <span
-                    className={`text-sm font-medium ${predictions.resourceUtilization.trend === 'up' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}
-                  >
-                    {predictions.resourceUtilization.change}
-                  </span>
-                  <span className="text-sm text-gray-600 dark:text-gray-400 ml-1">
-                    predicted
-                  </span>
-                </div>
+          {/* KPI Card Utilization */}
+          <div className="bg-white/5 border border-white/5 rounded-[2rem] p-8 hover:bg-white/10 transition-all duration-500 group">
+            <div className="flex items-center justify-between mb-6">
+              <div className="w-12 h-12 bg-[#ffc957]/10 rounded-2xl flex items-center justify-center text-[#ffc957] group-hover:scale-110 transition-transform">
+                <Cpu className="w-6 h-6" />
               </div>
-              <div
-                className={`p-3 rounded-lg ${predictions.resourceUtilization.trend === 'up' ? 'bg-green-100 dark:bg-green-900/30' : 'bg-red-100 dark:bg-red-900/30'}`}
-              >
-                {predictions.resourceUtilization.trend === 'up' ? (
-                  <HiTrendingUp className="w-6 h-6 text-green-600 dark:text-green-400" />
-                ) : (
-                  <HiTrendingDown className="w-6 h-6 text-red-600 dark:text-red-400" />
-                )}
+              <div className="px-3 py-1 bg-green-500/10 rounded-full">
+                <p className="text-[0.55rem] font-black text-green-500 uppercase">PREDICTED</p>
               </div>
+            </div>
+            <p className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.2em] mb-2">Resource Utilization</p>
+            <p className="text-3xl font-black text-white mb-4">{predictions.resourceUtilization.current}%</p>
+            <div className="flex items-center gap-2">
+              <TrendingUp className="w-4 h-4 text-green-500" />
+              <span className="text-[0.6rem] font-black text-green-500">{predictions.resourceUtilization.change} GROWTH</span>
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl p-6 border border-green-200 dark:border-green-800/50">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-green-600 dark:text-green-400">
-                  User Engagement
-                </p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
-                  {predictions.userEngagement.current} min
-                </p>
-                <div className="flex items-center mt-2">
-                  <span
-                    className={`text-sm font-medium ${predictions.userEngagement.trend === 'up' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}
-                  >
-                    {predictions.userEngagement.change}
-                  </span>
-                  <span className="text-sm text-gray-600 dark:text-gray-400 ml-1">
-                    predicted
-                  </span>
-                </div>
+          {/* KPI Card Engagement */}
+          <div className="bg-white/5 border border-white/5 rounded-[2rem] p-8 hover:bg-white/10 transition-all duration-500 group">
+            <div className="flex items-center justify-between mb-6">
+              <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                <Activity className="w-6 h-6" />
               </div>
-              <div
-                className={`p-3 rounded-lg ${predictions.userEngagement.trend === 'up' ? 'bg-green-100 dark:bg-green-900/30' : 'bg-red-100 dark:bg-red-900/30'}`}
-              >
-                {predictions.userEngagement.trend === 'up' ? (
-                  <HiTrendingUp className="w-6 h-6 text-green-600 dark:text-green-400" />
-                ) : (
-                  <HiTrendingDown className="w-6 h-6 text-green-600 dark:text-red-400" />
-                )}
+              <div className="px-3 py-1 bg-green-500/10 rounded-full">
+                <p className="text-[0.55rem] font-black text-green-500 uppercase">PREDICTED</p>
               </div>
+            </div>
+            <p className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.2em] mb-2">Engagement</p>
+            <p className="text-3xl font-black text-white mb-4">{predictions.userEngagement.current}M</p>
+            <div className="flex items-center gap-2">
+              <TrendingUp className="w-4 h-4 text-green-500" />
+              <span className="text-[0.6rem] font-black text-green-500">{predictions.userEngagement.change} BOOST</span>
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 rounded-xl p-6 border border-orange-200 dark:border-orange-800/50">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-orange-600 dark:text-orange-400">
-                  Conversion Rate
-                </p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
-                  {predictions.conversionRate.current}%
-                </p>
-                <div className="flex items-center mt-2">
-                  <span
-                    className={`text-sm font-medium ${predictions.conversionRate.trend === 'up' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}
-                  >
-                    {predictions.conversionRate.change}
-                  </span>
-                  <span className="text-sm text-gray-600 dark:text-gray-400 ml-1">
-                    predicted
-                  </span>
-                </div>
+          {/* KPI Card Conversion */}
+          <div className="bg-white/5 border border-white/5 rounded-[2rem] p-8 hover:bg-white/10 transition-all duration-500 group">
+            <div className="flex items-center justify-between mb-6">
+              <div className="w-12 h-12 bg-[#1ba6d6]/10 rounded-2xl flex items-center justify-center text-[#1ba6d6] group-hover:scale-110 transition-transform">
+                <Users className="w-6 h-6" />
               </div>
-              <div
-                className={`p-3 rounded-lg ${predictions.conversionRate.trend === 'up' ? 'bg-green-100 dark:bg-green-900/30' : 'bg-red-100 dark:bg-red-900/30'}`}
-              >
-                {predictions.conversionRate.trend === 'up' ? (
-                  <HiTrendingUp className="w-6 h-6 text-green-600 dark:text-green-400" />
-                ) : (
-                  <HiTrendingDown className="w-6 h-6 text-green-600 dark:text-red-400" />
-                )}
+              <div className="px-3 py-1 bg-green-500/10 rounded-full">
+                <p className="text-[0.55rem] font-black text-green-500 uppercase">PREDICTED</p>
               </div>
+            </div>
+            <p className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.2em] mb-2">Conversion Rate</p>
+            <p className="text-3xl font-black text-white mb-4">{predictions.conversionRate.current}%</p>
+            <div className="flex items-center gap-2">
+              <TrendingUp className="w-4 h-4 text-green-500" />
+              <span className="text-[0.6rem] font-black text-green-500">{predictions.conversionRate.change} VELOCITY</span>
             </div>
           </div>
         </div>
 
-        {/* Charts Section */}
-        <div className="space-y-8">
-          {/* Engagement Trend Chart */}
-          <div className="bg-gray-50 dark:bg-dark-700 rounded-xl p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                User Engagement Trend
-              </h3>
-              <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                <div className="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
-                <span>Current</span>
-                <div className="w-3 h-3 bg-green-500 rounded-full mr-2 ml-4"></div>
-                <span>Predicted</span>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-10">
+            <h3 className="text-sm font-black text-white uppercase tracking-[0.3em] mb-8">Engagement Projection</h3>
             <Line
               data={engagementData}
               options={{
                 responsive: true,
                 plugins: {
                   legend: {
-                    position: 'top',
-                  },
-                  title: {
-                    display: true,
-                    text: 'Engagement Time (minutes)',
+                    display: false,
                   },
                 },
                 scales: {
-                  y: {
-                    beginAtZero: true,
-                    title: {
-                      display: true,
-                      text: 'Minutes',
-                    },
-                  },
+                  x: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, border: { display: false } },
+                  y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, border: { display: false } },
                 },
               }}
             />
           </div>
 
-          {/* Conversion Rate Chart */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-gray-50 dark:bg-dark-700 rounded-xl p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
-                Conversion Rate Projection
-              </h3>
-              <Bar
-                data={conversionData}
-                options={{
-                  responsive: true,
-                  plugins: {
-                    legend: {
-                      position: 'top',
-                    },
+          <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-10">
+            <h3 className="text-sm font-black text-white uppercase tracking-[0.3em] mb-8">Resource Efficiency</h3>
+            <Bar
+              data={resourceData}
+              options={{
+                responsive: true,
+                plugins: {
+                  legend: {
+                    display: false,
                   },
-                  scales: {
-                    y: {
-                      beginAtZero: true,
-                      title: {
-                        display: true,
-                        text: 'Percentage (%)',
-                      },
-                    },
-                  },
-                }}
-              />
-            </div>
-
-            <div className="bg-gray-50 dark:bg-dark-700 rounded-xl p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
-                Resource Utilization Forecast
-              </h3>
-              <Bar
-                data={resourceData}
-                options={{
-                  responsive: true,
-                  plugins: {
-                    legend: {
-                      position: 'top',
-                    },
-                  },
-                  scales: {
-                    y: {
-                      beginAtZero: true,
-                      title: {
-                        display: true,
-                        text: 'Percentage (%)',
-                      },
-                    },
-                  },
-                }}
-              />
-            </div>
+                },
+                scales: {
+                  x: { grid: { display: false }, border: { display: false } },
+                  y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, border: { display: false } },
+                },
+              }}
+            />
           </div>
         </div>
-      </div>
 
-      {/* Recommendations Section */}
-      <div className="p-6 bg-gray-50 dark:bg-dark-700 border-t border-gray-200 dark:border-dark-700">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-          AI Recommendations
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-white dark:bg-dark-800 rounded-lg p-4 border border-gray-200 dark:border-dark-600">
-            <div className="flex items-start">
-              <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg mr-3">
-                <HiChartBar className="w-5 h-5 text-green-600 dark:text-green-400" />
+        <div className="mt-12 bg-[#1ba6d6]/5 border border-[#1ba6d6]/10 rounded-[3rem] p-10">
+          <h3 className="text-xs font-black text-[#1ba6d6] uppercase tracking-[0.5em] mb-8">AI RECOMMENDATIONS</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="flex gap-6">
+              <div className="w-12 h-12 bg-[#1ba6d6] rounded-2xl flex items-center justify-center flex-shrink-0">
+                <Cpu className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h4 className="font-medium text-gray-900 dark:text-white">
-                  Optimize Server Capacity
-                </h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                  Based on predicted utilization, consider scaling server
-                  capacity by 15% for Q4.
-                </p>
+                <h4 className="text-[0.65rem] font-black text-white uppercase tracking-widest mb-2">SCALING PROTOCOL</h4>
+                <p className="text-[0.6rem] text-white/40 font-black uppercase tracking-widest leading-relaxed">Consider 15% capacity boost for nodes designated in Q4 trajectory.</p>
               </div>
             </div>
-          </div>
 
-          <div className="bg-white dark:bg-dark-800 rounded-lg p-4 border border-gray-200 dark:border-dark-600">
-            <div className="flex items-start">
-              <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg mr-3">
-                <HiUserGroup className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            <div className="flex gap-6">
+              <div className="w-12 h-12 bg-[#ffc957] rounded-2xl flex items-center justify-center flex-shrink-0">
+                <Users className="w-6 h-6 text-[#0e1114]" />
               </div>
               <div>
-                <h4 className="font-medium text-gray-900 dark:text-white">
-                  Enhance User Experience
-                </h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                  Predicted 38% engagement increase suggests implementing
-                  personalization features.
-                </p>
+                <h4 className="text-[0.65rem] font-black text-white uppercase tracking-widest mb-2">NEURAL PERSONALIZATION</h4>
+                <p className="text-[0.6rem] text-white/40 font-black uppercase tracking-widest leading-relaxed">Engagement spike suggests deploying dynamic user mapping modules.</p>
               </div>
             </div>
-          </div>
 
-          <div className="bg-white dark:bg-dark-800 rounded-lg p-4 border border-gray-200 dark:border-dark-600">
-            <div className="flex items-start">
-              <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg mr-3">
-                <HiCurrencyDollar className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+            <div className="flex gap-6">
+              <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center flex-shrink-0">
+                <Shield className="w-6 h-6 text-[#0e1114]" />
               </div>
               <div>
-                <h4 className="font-medium text-gray-900 dark:text-white">
-                  ROI Improvement Strategy
-                </h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                  With predicted 28% ROI increase, consider investing in
-                  marketing automation tools.
-                </p>
+                <h4 className="text-[0.65rem] font-black text-white uppercase tracking-widest mb-2">ROI PRESERVATION</h4>
+                <p className="text-[0.6rem] text-white/40 font-black uppercase tracking-widest leading-relaxed">Integrate automated budget logic to sustain the 28% growth factor.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

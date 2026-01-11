@@ -13,9 +13,24 @@ import {
   ArcElement,
 } from 'chart.js';
 import { analyticsAPI } from '../services/analyticsAPI';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useApp } from '../context/AppContext';
 import ErrorBoundary from '../components/ErrorBoundary';
+import {
+  Users,
+  Eye,
+  MousePointer2,
+  TrendingDown,
+  TrendingUp,
+  Activity,
+  Calendar,
+  Layers,
+  BarChart,
+  ArrowUpRight,
+  ShieldCheck,
+  Zap,
+  ChevronDown
+} from 'lucide-react';
 
 ChartJS.register(
   CategoryScale,
@@ -40,9 +55,8 @@ const AdvancedAnalyticsDashboard = () => {
     bounceRate: 0,
   });
   const [loading, setLoading] = useState(true);
-  const [dateRange, setDateRange] = useState('7d'); // 7 days, 30 days, etc.
+  const [dateRange, setDateRange] = useState('7d');
 
-  // Fetch real analytics data from API
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -60,7 +74,6 @@ const AdvancedAnalyticsDashboard = () => {
         });
       } catch (error) {
         console.error('Error fetching analytics data:', error);
-        // Set default values in case of error
         setAnalyticsData({
           pageViews: [],
           events: [],
@@ -79,15 +92,20 @@ const AdvancedAnalyticsDashboard = () => {
     fetchData();
   }, [dateRange]);
 
-  // Chart data configurations
   const pageViewsData = {
     labels: analyticsData.pageViews.map(pv => pv.date),
     datasets: [
       {
-        label: 'Page Views',
+        label: 'Structural Throughput',
         data: analyticsData.pageViews.map(pv => pv.count),
-        borderColor: '#2563eb', // Primary Brand Blue
-        backgroundColor: 'rgba(37, 99, 235, 0.2)', // Primary Brand Blue with transparency
+        borderColor: '#3b82f6',
+        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+        fill: true,
+        tension: 0.4,
+        pointBackgroundColor: '#3b82f6',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: '#3b82f6',
       },
     ],
   };
@@ -96,21 +114,16 @@ const AdvancedAnalyticsDashboard = () => {
     labels: analyticsData.events.map(e => e.name),
     datasets: [
       {
-        label: 'Event Count',
+        label: 'Protocol Activity',
         data: analyticsData.events.map(e => e.count),
         backgroundColor: [
-          'rgba(37, 99, 235, 0.7)', // Primary Brand Blue
-          'rgba(255, 201, 87, 0.7)', // Corporate Amber
-          'rgba(10, 11, 13, 0.7)', // Enterprise Dark
-          'rgba(37, 99, 235, 0.5)', // Primary Brand Blue (lighter)
+          'rgba(59, 130, 246, 0.8)',
+          'rgba(251, 191, 36, 0.8)',
+          'rgba(168, 85, 247, 0.8)',
+          'rgba(236, 72, 153, 0.8)',
         ],
-        borderColor: [
-          '#2563eb', // Primary Brand Blue
-          '#ffc957', // Corporate Amber
-          '#0a0b0d', // Enterprise Dark
-          '#2563eb', // Primary Brand Blue
-        ],
-        borderWidth: 1,
+        borderColor: 'rgba(255, 255, 255, 0.1)',
+        borderWidth: 2,
       },
     ],
   };
@@ -119,19 +132,11 @@ const AdvancedAnalyticsDashboard = () => {
     labels: analyticsData.conversions.map(c => c.name),
     datasets: [
       {
-        label: 'Conversion Count',
+        label: 'Node Conversion',
         data: analyticsData.conversions.map(c => c.count),
-        backgroundColor: [
-          'rgba(37, 99, 235, 0.7)', // Primary Brand Blue
-          'rgba(255, 201, 87, 0.7)', // Corporate Amber
-          'rgba(10, 11, 13, 0.7)', // Enterprise Dark
-        ],
-        borderColor: [
-          '#2563eb', // Primary Brand Blue
-          '#ffc957', // Corporate Amber
-          '#0a0b0d', // Enterprise Dark
-        ],
-        borderWidth: 1,
+        backgroundColor: 'rgba(59, 130, 246, 0.6)',
+        hoverBackgroundColor: '#3b82f6',
+        borderRadius: 8,
       },
     ],
   };
@@ -141,320 +146,254 @@ const AdvancedAnalyticsDashboard = () => {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: 'top',
+        position: 'bottom',
         labels: {
-          color: theme === 'dark' ? '#e2e8f0' : '#475569',
+          color: '#94a3b8',
+          padding: 20,
           font: {
-            family: 'Figtree, system-ui, sans-serif',
+            family: 'Inter, system-ui, sans-serif',
+            size: 11,
+            weight: 'bold'
           },
+          usePointStyle: true,
         },
       },
-      title: {
-        display: false,
-        text: 'Chart Title',
-      },
+      tooltip: {
+        backgroundColor: 'rgba(15, 23, 42, 0.9)',
+        titleFont: { size: 14, weight: 'black' },
+        bodyFont: { size: 12 },
+        padding: 12,
+        cornerRadius: 12,
+        displayColors: false,
+      }
     },
     scales: {
       x: {
-        ticks: {
-          color: theme === 'dark' ? '#e2e8f0' : '#475569',
-          font: {
-            family: 'Figtree, system-ui, sans-serif',
-          },
-        },
-        grid: {
-          color: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
-        },
+        ticks: { color: '#64748b', font: { size: 10, weight: 'bold' } },
+        grid: { display: false },
       },
       y: {
-        ticks: {
-          color: theme === 'dark' ? '#e2e8f0' : '#475569',
-          font: {
-            family: 'Figtree, system-ui, sans-serif',
-          },
-        },
-        grid: {
-          color: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
-        },
+        ticks: { color: '#64748b', font: { size: 10, weight: 'bold' } },
+        grid: { color: 'rgba(255, 255, 255, 0.05)' },
       },
     },
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100 flex items-center justify-center p-6">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#ffc957] mb-4"></div>
-          <p className="text-[#cbd5e1] font-medium font-['Figtree']">Loading analytics data...</p>
+      <div className="min-h-screen bg-dark-900 flex items-center justify-center">
+        <div className="relative">
+          <div className="w-16 h-16 rounded-full border-t-2 border-primary-500 animate-spin" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Zap className="w-6 h-6 text-primary-400 animate-pulse" />
+          </div>
         </div>
       </div>
     );
   }
 
+  const kpis = [
+    { label: 'Total Syncs', value: analyticsData.totalUsers, icon: Users, change: '+12%', color: 'text-primary-400', bg: 'bg-primary-500/10' },
+    { label: 'Neural Visits', value: analyticsData.uniqueVisitors, icon: Eye, change: '+8%', color: 'text-secondary-400', bg: 'bg-secondary-500/10' },
+    { label: 'Flux Rate', value: `${analyticsData.bounceRate}%`, icon: Activity, change: '-2%', color: 'text-white', bg: 'bg-white/10' },
+    { label: 'Total Conversions', value: '85', icon: Zap, change: '+15%', color: 'text-primary-400', bg: 'bg-primary-500/10' },
+  ];
+
   return (
     <ErrorBoundary>
-    <div className="min-h-screen bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100 p-6">
-      <div className="max-w-7xl mx-auto bg-[#0a0b0d] p-6 rounded-2xl">
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-8"
-        >
-          <h1 className="text-4xl font-bold text-white font-['Outfit']">Analytics Dashboard</h1>
-          <p className="text-[#cbd5e1] mt-2 text-lg font-['Figtree']">Comprehensive analytics and insights for your website</p>
-        </motion.div>
-
-        {/* Date Range Selector */}
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-[#cbd5e1] mb-2 font-['Figtree']">Date Range</label>
-          <select
-            value={dateRange}
-            onChange={(e) => setDateRange(e.target.value)}
-            className="bg-[#1a1c20] border border-[#2563eb] text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ffc957] transition-all duration-300 font-['Outfit'] text-lg"
-          >
-            <option value="7d" className="bg-[#0a0b0d] text-white font-['Outfit']">Last 7 days</option>
-            <option value="30d" className="bg-[#0a0b0d] text-white font-['Outfit']">Last 30 days</option>
-            <option value="90d" className="bg-[#0a0b0d] text-white font-['Outfit']">Last 90 days</option>
-            <option value="1y" className="bg-[#0a0b0d] text-white font-['Outfit']">Last year</option>
-          </select>
+      <div className="relative min-h-screen bg-dark-900 text-white overflow-hidden selection:bg-primary-500/30">
+        {/* Background Grid */}
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-0 left-0 w-full h-full bg-grid-white/[0.01]" />
+          <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary-500/5 blur-[150px] rounded-full" />
         </div>
 
-        {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-[#1a1c20] rounded-2xl p-6 border border-[#2563eb] border-opacity-30 shadow-lg"
-            whileHover={{ y: -5 }}
-          >
-            <h3 className="text-lg font-semibold text-gray-300 font-['Outfit']">Total Users</h3>
-            <p className="text-4xl font-bold text-[#2563eb] mt-2 font-['Outfit']">{analyticsData.totalUsers.toLocaleString()}</p>
-            <p className="text-sm text-green-400 mt-1 flex items-center font-['Figtree']">
-              <span className="mr-1">▲</span> +12% from last period
-            </p>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-[#1a1c20] rounded-2xl p-6 border border-[#2563eb] border-opacity-30 shadow-lg"
-            whileHover={{ y: -5 }}
-          >
-            <h3 className="text-lg font-semibold text-gray-300 font-['Outfit']">Unique Visitors</h3>
-            <p className="text-4xl font-bold text-[#ffc957] mt-2 font-['Outfit']">{analyticsData.uniqueVisitors.toLocaleString()}</p>
-            <p className="text-sm text-green-400 mt-1 flex items-center font-['Figtree']">
-              <span className="mr-1">▲</span> +8% from last period
-            </p>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="bg-[#1a1c20] rounded-2xl p-6 border border-[#2563eb] border-opacity-30 shadow-lg"
-            whileHover={{ y: -5 }}
-          >
-            <h3 className="text-lg font-semibold text-gray-300 font-['Outfit']">Bounce Rate</h3>
-            <p className="text-4xl font-bold text-[#0a0b0d] mt-2 font-['Outfit']">{analyticsData.bounceRate}%</p>
-            <p className="text-sm text-red-400 mt-1 flex items-center font-['Figtree']">
-              <span className="mr-1">▼</span> -2% from last period
-            </p>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="bg-[#1a1c20] rounded-2xl p-6 border border-[#2563eb] border-opacity-30 shadow-lg"
-            whileHover={{ y: -5 }}
-          >
-            <h3 className="text-lg font-semibold text-gray-300 font-['Outfit']">Conversions</h3>
-            <p className="text-4xl font-bold text-white mt-2 font-['Outfit']">85</p>
-            <p className="text-sm text-green-400 mt-1 flex items-center font-['Figtree']">
-              <span className="mr-1">▲</span> +15% from last period
-            </p>
-          </motion.div>
-        </div>
+        <div className="relative z-10 p-8 md:p-12 lg:p-16">
+          <div className="max-w-7xl mx-auto">
+            {/* Top Bar */}
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-16">
+              <div>
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="flex items-center gap-3 mb-4"
+                >
+                   <div className="w-10 h-10 rounded-xl bg-primary-500/10 flex items-center justify-center border border-primary-500/20">
+                      <BarChart className="w-5 h-5 text-primary-400" />
+                   </div>
+                   <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500">Advanced Telemetry</span>
+                </motion.div>
+                <motion.h1 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-4xl md:text-5xl font-black italic tracking-tighter"
+                >
+                  Neural <span className="not-italic bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent underline decoration-primary-500/20 underline-offset-8">Insight</span> Hub
+                </motion.h1>
+              </div>
 
-        {/* Charts Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          {/* Page Views Chart */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="bg-[#1a1c20] rounded-2xl p-6 border border-[#2563eb] border-opacity-30 shadow-lg"
-          >
-            <h3 className="text-lg font-semibold text-white mb-4 font-['Outfit']">Page Views Over Time</h3>
-            <div className="h-80">
-              <Line data={pageViewsData} options={{
-                ...chartOptions,
-                plugins: {
-                  ...chartOptions.plugins,
-                  title: {
-                    display: false,
-                  },
-                },
-                scales: {
-                  x: {
-                    ticks: {
-                      color: theme === 'dark' ? '#e2e8f0' : '#475569',
-                      font: {
-                        family: 'Figtree, system-ui, sans-serif',
-                      },
-                    },
-                    grid: {
-                      color: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
-                    },
-                  },
-                  y: {
-                    ticks: {
-                      color: theme === 'dark' ? '#e2e8f0' : '#475569',
-                      font: {
-                        family: 'Figtree, system-ui, sans-serif',
-                      },
-                    },
-                    grid: {
-                      color: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
-                    },
-                  },
-                },
-              }} />
+              <div className="flex items-center gap-4">
+                <div className="relative">
+                  <select
+                    value={dateRange}
+                    onChange={(e) => setDateRange(e.target.value)}
+                    className="appearance-none bg-white/5 border border-white/10 text-white rounded-2xl px-6 py-4 pr-12 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all font-bold text-sm tracking-wide cursor-pointer hover:bg-white/10"
+                  >
+                    <option value="7d">Last 7 Cycles</option>
+                    <option value="30d">Last 30 Cycles</option>
+                    <option value="90d">Last 90 Cycles</option>
+                    <option value="1y">Complete Epoch</option>
+                  </select>
+                  <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                </div>
+                <button className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                  <Calendar className="w-5 h-5 text-gray-400" />
+                </button>
+              </div>
             </div>
-          </motion.div>
 
-          {/* Events Chart */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="bg-[#1a1c20] rounded-2xl p-6 border border-[#2563eb] border-opacity-30 shadow-lg"
-          >
-            <h3 className="text-lg font-semibold text-white mb-4 font-['Outfit']">Event Distribution</h3>
-            <div className="h-80">
-              <Pie data={eventsData} options={{
-                ...chartOptions,
-                plugins: {
-                  ...chartOptions.plugins,
-                  title: {
-                    display: false,
-                  },
-                  legend: {
-                    labels: {
-                      color: theme === 'dark' ? '#e2e8f0' : '#475569',
-                      font: {
-                        family: 'Figtree, system-ui, sans-serif',
-                      },
-                    },
-                  },
-                },
-              }} />
+            {/* KPI Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+              {kpis.map((kpi, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -5 }}
+                  className="p-1 rounded-[32px] bg-gradient-to-br from-white/10 to-transparent border border-white/10"
+                >
+                   <div className="bg-[#0e1114]/50 backdrop-blur-xl rounded-[31px] p-8 h-full">
+                      <div className="flex items-center justify-between mb-8">
+                         <div className={`w-12 h-12 rounded-2xl ${kpi.bg} flex items-center justify-center`}>
+                            <kpi.icon className={`w-6 h-6 ${kpi.color}`} />
+                         </div>
+                         <div className={`flex items-center gap-1 text-[10px] font-black p-2 rounded-lg bg-white/5 ${kpi.change.startsWith('+') ? 'text-green-500' : 'text-red-500'}`}>
+                            {kpi.change.startsWith('+') ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
+                            {kpi.change}
+                         </div>
+                      </div>
+                      <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">{kpi.label}</p>
+                      <h3 className="text-3xl font-black tracking-tighter">{kpi.value.toLocaleString()}</h3>
+                   </div>
+                </motion.div>
+              ))}
             </div>
-          </motion.div>
-        </div>
 
-        {/* Conversions Chart */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.7 }}
-          className="bg-[#1a1c20] rounded-2xl p-6 border border-[#2563eb] border-opacity-30 shadow-lg mb-8"
-        >
-          <h3 className="text-lg font-semibold text-white mb-4 font-['Outfit']">Conversions</h3>
-          <div className="h-80">
-            <Bar data={conversionsData} options={{
-              ...chartOptions,
-              plugins: {
-                ...chartOptions.plugins,
-                title: {
-                  display: false,
-                },
-              },
-              scales: {
-                x: {
-                  ticks: {
-                    color: theme === 'dark' ? '#e2e8f0' : '#475569',
-                    font: {
-                      family: 'Figtree, system-ui, sans-serif',
-                    },
-                  },
-                  grid: {
-                    display: false,
-                  },
-                },
-                y: {
-                  ticks: {
-                    color: theme === 'dark' ? '#e2e8f0' : '#475569',
-                    font: {
-                      family: 'Figtree, system-ui, sans-serif',
-                    },
-                  },
-                  grid: {
-                    color: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
-                  },
-                },
-              },
-            }} />
+            {/* Charts Row */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+               <motion.div 
+                 initial={{ opacity: 0, scale: 0.98 }}
+                 animate={{ opacity: 1, scale: 1 }}
+                 className="p-10 rounded-[48px] bg-white/5 border border-white/10 backdrop-blur-sm relative overflow-hidden group"
+               >
+                  <div className="flex items-center justify-between mb-12">
+                     <div>
+                        <h2 className="text-xl font-black tracking-tight">Systemic Throughput</h2>
+                        <p className="text-[10px] font-black text-primary-400 uppercase tracking-widest mt-1">Real-time Volume Analysis</p>
+                     </div>
+                     <Activity className="w-5 h-5 text-gray-600 group-hover:text-primary-400 transition-colors" />
+                  </div>
+                  <div className="h-80 relative z-10">
+                     <Line data={pageViewsData} options={chartOptions} />
+                  </div>
+                  <div className="absolute inset-0 bg-grid-white/[0.01]" />
+               </motion.div>
+
+               <motion.div 
+                 initial={{ opacity: 0, scale: 0.98 }}
+                 animate={{ opacity: 1, scale: 1 }}
+                 className="p-10 rounded-[48px] bg-white/5 border border-white/10 backdrop-blur-sm relative overflow-hidden group"
+               >
+                  <div className="flex items-center justify-between mb-12">
+                     <div>
+                        <h2 className="text-xl font-black tracking-tight">Protocol Synthesis</h2>
+                        <p className="text-[10px] font-black text-secondary-400 uppercase tracking-widest mt-1">Nodal Type Distribution</p>
+                     </div>
+                     <Layers className="w-5 h-5 text-gray-600 group-hover:text-secondary-400 transition-colors" />
+                  </div>
+                  <div className="h-80 relative z-10">
+                     <Pie data={eventsData} options={chartOptions} />
+                  </div>
+                  <div className="absolute inset-0 bg-grid-white/[0.01]" />
+               </motion.div>
+            </div>
+
+            {/* Conversions & Bottom Tables */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-10 rounded-[48px] bg-white/5 border border-white/10 mb-8"
+            >
+               <div className="flex items-center justify-between mb-12">
+                  <div>
+                    <h2 className="text-xl font-black tracking-tight">Conversion Velocity</h2>
+                    <p className="text-[10px] font-black text-primary-400 uppercase tracking-widest mt-1">Deterministic Goal Tracking</p>
+                  </div>
+                  <ShieldCheck className="w-5 h-5 text-green-500" />
+               </div>
+               <div className="h-80">
+                  <Bar data={conversionsData} options={chartOptions} />
+               </div>
+            </motion.div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+               {/* Top Data Panels */}
+               <motion.div 
+                 initial={{ opacity: 0, x: -30 }}
+                 animate={{ opacity: 1, x: 0 }}
+                 className="p-10 rounded-[48px] bg-white/5 border border-white/10"
+               >
+                  <h3 className="text-lg font-black tracking-tight mb-8 flex items-center gap-3">
+                     <MousePointer2 className="w-5 h-5 text-primary-400" /> Structural Entrypoints
+                  </h3>
+                  <div className="space-y-4">
+                     {analyticsData.topPages?.map((item, index) => (
+                       <div key={index} className="flex justify-between items-center p-6 rounded-3xl bg-white/5 hover:bg-white/10 border border-transparent hover:border-white/10 transition-all group">
+                          <div className="flex-1">
+                             <p className="text-sm font-bold text-white group-hover:text-primary-400 transition-colors uppercase tracking-tight">{item.page}</p>
+                             <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mt-1">{item.views?.toLocaleString()} EPOCHS</p>
+                          </div>
+                          <div className="flex items-center gap-3">
+                             <span className="text-xs font-black text-green-500">{item.change}</span>
+                             <ArrowUpRight className="w-4 h-4 text-gray-700 group-hover:text-white transition-colors" />
+                          </div>
+                       </div>
+                     )) || (
+                       <div className="py-12 text-center text-gray-600 font-bold uppercase tracking-widest text-xs">Awaiting Data Cycles...</div>
+                     )}
+                  </div>
+               </motion.div>
+
+               <motion.div 
+                 initial={{ opacity: 0, x: 30 }}
+                 animate={{ opacity: 1, x: 0 }}
+                 className="p-10 rounded-[48px] bg-white/5 border border-white/10"
+               >
+                  <h3 className="text-lg font-black tracking-tight mb-8 flex items-center gap-3">
+                     <Zap className="w-5 h-5 text-secondary-400" /> Priority Signal Events
+                  </h3>
+                  <div className="space-y-4">
+                     {analyticsData.topEvents?.map((item, index) => (
+                       <div key={index} className="flex justify-between items-center p-6 rounded-3xl bg-white/5 hover:bg-white/10 border border-transparent hover:border-white/10 transition-all group">
+                          <div className="flex-1">
+                             <p className="text-sm font-bold text-white group-hover:text-secondary-400 transition-colors uppercase tracking-tight">{item.event}</p>
+                             <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mt-1">{item.count} PULSES</p>
+                          </div>
+                          <div className="flex items-center gap-3">
+                             <span className="text-xs font-black text-green-500">{item.change}</span>
+                             <ArrowUpRight className="w-4 h-4 text-gray-700 group-hover:text-white transition-colors" />
+                          </div>
+                       </div>
+                     )) || (
+                       <div className="py-12 text-center text-gray-600 font-bold uppercase tracking-widest text-xs">Awaiting Signal Sync...</div>
+                     )}
+                  </div>
+               </motion.div>
+            </div>
           </div>
-        </motion.div>
-
-        {/* Top Pages and Top Events */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Top Pages */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-            className="bg-[#1a1c20] rounded-2xl p-6 border border-[#2563eb] border-opacity-30 shadow-lg"
-          >
-            <h3 className="text-lg font-semibold text-white mb-4 font-['Outfit']">Top Pages</h3>
-            <div className="space-y-4">
-              {analyticsData.topPages?.map((item, index) => (
-                <div key={index} className="flex justify-between items-center pb-3 border-b border-[#334155]">
-                  <div className="flex-1">
-                    <p className="font-medium text-[#2563eb] truncate font-['Figtree']">{item.page}</p>
-                    <p className="text-sm text-[#94a3b8] font-['Figtree']">{item.views?.toLocaleString()} views</p>
-                  </div>
-                  <span className="text-green-400 font-medium bg-[#1a1c20] px-2 py-1 rounded-md text-sm font-['Figtree']">
-                    {item.change}
-                  </span>
-                </div>
-              )) || (
-                <p className="text-[#64748b] text-center py-4 font-['Figtree']">No data available</p>
-              )}
-            </div>
-          </motion.div>
-
-          {/* Top Events */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.9 }}
-            className="bg-[#1a1c20] rounded-2xl p-6 border border-[#2563eb] border-opacity-30 shadow-lg"
-          >
-            <h3 className="text-lg font-semibold text-white mb-4 font-['Outfit']">Top Events</h3>
-            <div className="space-y-4">
-              {analyticsData.topEvents?.map((item, index) => (
-                <div key={index} className="flex justify-between items-center pb-3 border-b border-[#334155]">
-                  <div className="flex-1">
-                    <p className="font-medium text-[#ffc957] truncate font-['Figtree']">{item.event}</p>
-                    <p className="text-sm text-[#94a3b8] font-['Figtree']">{item.count} occurrences</p>
-                  </div>
-                  <span className="text-green-400 font-medium bg-[#1a1c20] px-2 py-1 rounded-md text-sm font-['Figtree']">
-                    {item.change}
-                  </span>
-                </div>
-              )) || (
-                <p className="text-[#64748b] text-center py-4 font-['Figtree']">No data available</p>
-              )}
-            </div>
-          </motion.div>
         </div>
       </div>
-    </div>
     </ErrorBoundary>
   );
 };

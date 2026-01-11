@@ -1,10 +1,14 @@
 import { useState, memo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  HiOutlineUser,
-  HiOutlineMail,
-  HiOutlineLightBulb,
-  HiCheckCircle,
-} from 'react-icons/hi';
+  User,
+  Mail,
+  Lightbulb,
+  CheckCircle2,
+  ChevronRight,
+  Send,
+  AlertCircle
+} from 'lucide-react';
 import csrfService from '../services/csrfService';
 import rateLimitService from '../services/rateLimitService';
 import encryptionService from '../services/auth/encryptionService';
@@ -21,38 +25,32 @@ const QuickQuoteForm = ({ variant = 'default', onSubmitSuccess }) => {
   const [errors, setErrors] = useState({});
   const [rateLimitError, setRateLimitError] = useState(null);
   
-  // Get client identifier for rate limiting (using a combination of factors)
   const getClientIdentifier = () => {
-    // In a real implementation, this would use the actual IP address from the server
-    // For client-side, we'll use a combination of factors
     return `${window.location.hostname}_${navigator.userAgent}`;
   };
 
   const validateForm = () => {
     const newErrors = {};
     
-    // Name validation
     if (!formData.name.trim()) {
-      newErrors.name = 'Full name is required';
+      newErrors.name = 'VALID IDENTIFIER REQUIRED';
     } else if (formData.name.trim().length < 2) {
-      newErrors.name = 'Full name must be at least 2 characters';
+      newErrors.name = 'IDENTIFIER TOO SHORT';
     }
     
-    // Email validation
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = 'NEURAL NODE REQUIRED';
     } else {
       const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
       if (!emailRegex.test(formData.email.trim())) {
-        newErrors.email = 'Please enter a valid email address';
+        newErrors.email = 'INVALID NEURAL NODE';
       }
     }
     
-    // Requirement validation
     if (!formData.requirement.trim()) {
-      newErrors.requirement = 'Requirement is required';
+      newErrors.requirement = 'CORE REQUIREMENT REQUIRED';
     } else if (formData.requirement.trim().length < 10) {
-      newErrors.requirement = 'Requirement must be at least 10 characters';
+      newErrors.requirement = 'INSUFFICIENT DATA DENSITY';
     }
     
     setErrors(newErrors);
@@ -63,7 +61,6 @@ const QuickQuoteForm = ({ variant = 'default', onSubmitSuccess }) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     
-    // Clear error for this field when user starts typing
     if (errors[name]) {
       setErrors(prev => {
         const newErrors = { ...prev };
@@ -76,34 +73,26 @@ const QuickQuoteForm = ({ variant = 'default', onSubmitSuccess }) => {
   const handleSubmit = async e => {
     e.preventDefault();
     
-    // Check rate limit
     const clientIdentifier = getClientIdentifier();
     const rateLimitCheck = rateLimitService.checkLimit(clientIdentifier, 'quickQuoteForm');
     
     if (!rateLimitCheck.allowed) {
       const retryAfterSeconds = Math.ceil(rateLimitCheck.retryAfter / 1000);
-      setRateLimitError(`Rate limit exceeded. Please try again in ${retryAfterSeconds} seconds.`);
+      setRateLimitError(`PROTOCOL STANDBY: PLEASE RETRY IN ${retryAfterSeconds} SECONDS.`);
       return;
     }
     
-    // Clear any previous rate limit error
     setRateLimitError(null);
-    
-    // Validate form first
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
     
     setIsSubmitting(true);
     
-    // Sanitize input data
     const sanitizedData = {
       name: encryptionService.sanitizeInput(formData.name),
       email: encryptionService.sanitizeInput(formData.email),
       requirement: encryptionService.sanitizeInput(formData.requirement),
     };
 
-    // Add CSRF token to the data
     const requestData = {
       ...sanitizedData,
       formType: 'quick-quote',
@@ -114,19 +103,10 @@ const QuickQuoteForm = ({ variant = 'default', onSubmitSuccess }) => {
     };
 
     try {
-      // Send notification about the form submission
       await sendLeadGenerationNotification(requestData);
-
-      // Reset form
       setFormData({ name: '', email: '', requirement: '' });
       setSubmitSuccess(true);
-
-      // Call success callback if provided
-      if (onSubmitSuccess) {
-        onSubmitSuccess();
-      }
-
-      // Reset success message after 5 seconds
+      if (onSubmitSuccess) onSubmitSuccess();
       setTimeout(() => setSubmitSuccess(false), 5000);
     } catch (error) {
       console.error('Error submitting quick quote:', error);
@@ -137,38 +117,51 @@ const QuickQuoteForm = ({ variant = 'default', onSubmitSuccess }) => {
 
   if (submitSuccess) {
     return (
-      <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 text-center" role="alert" aria-live="polite">
-        <div className="flex items-center justify-center mb-3">
-          <HiCheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
+        animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+        className="bg-[#1ba6d6]/5 border border-[#1ba6d6]/30 rounded-[2rem] p-10 text-center relative overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1ba6d6]/10 to-transparent pointer-events-none"></div>
+        <div className="flex items-center justify-center mb-6 relative z-10">
+          <div className="w-16 h-16 bg-[#1ba6d6] rounded-2xl flex items-center justify-center shadow-[0_0_30px_rgba(27,166,214,0.4)]">
+            <CheckCircle2 className="w-8 h-8 text-white" />
+          </div>
         </div>
-        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">
-          Thank You!
+        <h3 className="text-sm font-black text-white uppercase tracking-[0.3em] mb-4 relative z-10">
+          TRANSMISSION SUCCESS
         </h3>
-        <p className="text-green-700 dark:text-green-400 text-sm">
-          We've received your requirement and will contact you shortly.
+        <p className="text-[0.65rem] text-white/50 font-black uppercase tracking-widest leading-relaxed relative z-10">
+          Neural link established. A Limitless architect will transmit a response shortly.
         </p>
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-      {rateLimitError && (
-        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4" role="alert" aria-live="polite">
-          <p className="text-red-700 dark:text-red-300 text-sm">{rateLimitError}</p>
-        </div>
-      )}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label
-            htmlFor="name"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+    <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+      <AnimatePresence>
+        {rateLimitError && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="bg-[#ff4d4d]/10 border border-[#ff4d4d]/20 rounded-2xl p-4 flex items-center gap-3 overflow-hidden"
           >
-            Full Name *
+            <AlertCircle className="w-4 h-4 text-[#ff4d4d] flex-shrink-0" />
+            <p className="text-[0.6rem] font-black text-[#ff4d4d] uppercase tracking-widest">{rateLimitError}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-3">
+          <label htmlFor="name" className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.3em] ml-4">
+            IDENTIFIER *
           </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <HiOutlineUser className="h-5 w-5 text-gray-400" />
+          <div className="relative group">
+            <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-white/20 group-focus-within:text-[#1ba6d6] transition-colors">
+              <User className="h-4 w-4" />
             </div>
             <input
               type="text"
@@ -177,25 +170,22 @@ const QuickQuoteForm = ({ variant = 'default', onSubmitSuccess }) => {
               value={formData.name}
               onChange={handleChange}
               required
-              className={`w-full pl-10 pr-4 py-3 rounded-lg border ${errors.name ? 'border-red-500' : 'border-gray-300 dark:border-dark-600'} bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300`}
-              placeholder="Your full name"
+              className={`w-full pl-14 pr-6 py-5 rounded-2xl bg-white/5 border ${errors.name ? 'border-[#ff4d4d]/50' : 'border-white/5'} focus:border-[#1ba6d6]/50 focus:bg-white/10 text-[0.7rem] font-black uppercase tracking-widest text-white placeholder:text-white/10 transition-all duration-500 outline-none`}
+              placeholder="YOUR FULL NAME"
             />
           </div>
           {errors.name && (
-            <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+            <p className="text-[0.55rem] font-black text-[#ff4d4d] uppercase tracking-widest mt-2 ml-4">{errors.name}</p>
           )}
         </div>
 
-        <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-          >
-            Work Email *
+        <div className="space-y-3">
+          <label htmlFor="email" className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.3em] ml-4">
+            NEURAL NODE *
           </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <HiOutlineMail className="h-5 w-5 text-gray-400" />
+          <div className="relative group">
+            <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-white/20 group-focus-within:text-[#1ba6d6] transition-colors">
+              <Mail className="h-4 w-4" />
             </div>
             <input
               type="email"
@@ -204,26 +194,23 @@ const QuickQuoteForm = ({ variant = 'default', onSubmitSuccess }) => {
               value={formData.email}
               onChange={handleChange}
               required
-              className={`w-full pl-10 pr-4 py-3 rounded-lg border ${errors.email ? 'border-red-500' : 'border-gray-300 dark:border-dark-600'} bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300`}
-              placeholder="your@company.com"
+              className={`w-full pl-14 pr-6 py-5 rounded-2xl bg-white/5 border ${errors.email ? 'border-[#ff4d4d]/50' : 'border-white/5'} focus:border-[#1ba6d6]/50 focus:bg-white/10 text-[0.7rem] font-black uppercase tracking-widest text-white placeholder:text-white/10 transition-all duration-500 outline-none`}
+              placeholder="YOUR@COMPANY.COM"
             />
           </div>
           {errors.email && (
-            <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+            <p className="text-[0.55rem] font-black text-[#ff4d4d] uppercase tracking-widest mt-2 ml-4">{errors.email}</p>
           )}
         </div>
       </div>
 
-      <div>
-        <label
-          htmlFor="requirement"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-        >
-          Requirement *
+      <div className="space-y-3">
+        <label htmlFor="requirement" className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.3em] ml-4">
+          CORE REQUIREMENT *
         </label>
-        <div className="relative">
-          <div className="absolute top-3 left-3">
-            <HiOutlineLightBulb className="h-5 w-5 text-gray-400" />
+        <div className="relative group">
+          <div className="absolute top-6 left-6 text-white/20 group-focus-within:text-[#1ba6d6] transition-colors">
+            <Lightbulb className="h-4 w-4" />
           </div>
           <textarea
             id="requirement"
@@ -232,32 +219,35 @@ const QuickQuoteForm = ({ variant = 'default', onSubmitSuccess }) => {
             onChange={handleChange}
             required
             rows="3"
-            className={`w-full pl-10 pr-4 py-3 rounded-lg border ${errors.requirement ? 'border-red-500' : 'border-gray-300 dark:border-dark-600'} bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300`}
-            placeholder="Briefly describe your requirement..."
+            className={`w-full pl-14 pr-6 py-6 rounded-2xl bg-white/5 border ${errors.requirement ? 'border-[#ff4d4d]/50' : 'border-white/5'} focus:border-[#1ba6d6]/50 focus:bg-white/10 text-[0.7rem] font-black uppercase tracking-widest text-white placeholder:text-white/10 transition-all duration-500 outline-none resize-none`}
+            placeholder="BRIEFLY DESCRIBE YOUR REQUIREMENT..."
           ></textarea>
         </div>
         {errors.requirement && (
-          <p className="mt-1 text-sm text-red-600">{errors.requirement}</p>
+          <p className="text-[0.55rem] font-black text-[#ff4d4d] uppercase tracking-widest mt-2 ml-4">{errors.requirement}</p>
         )}
       </div>
 
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-primary-700 hover:to-secondary-700 transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+        className="w-full py-6 bg-[#1ba6d6] text-white text-[0.7rem] font-black uppercase tracking-[0.5em] mask-btn hover:scale-[1.02] active:scale-95 disabled:opacity-30 disabled:grayscale transition-all duration-500 shadow-[0_0_30px_rgba(27,166,214,0.3)] flex items-center justify-center group"
       >
         {isSubmitting ? (
           <>
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-            Submitting...
+            <div className="animate-spin rounded-full h-4 w-4 border-2 border-white/30 border-t-white mr-4"></div>
+            PROCESSING...
           </>
         ) : (
-          'Get Quote'
+          <>
+            INITIALIZE QUOTE
+            <ChevronRight className="ml-4 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </>
         )}
       </button>
 
-      <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-2">
-        We'll contact you within 24 hours with a personalized quote.
+      <p className="text-[0.55rem] text-white/20 font-black uppercase tracking-[0.3em] text-center mt-6">
+        Architecture deployment scheduled within <span className="text-white/40">24 cycles</span>.
       </p>
     </form>
   );

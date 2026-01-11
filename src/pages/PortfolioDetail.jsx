@@ -1,26 +1,29 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  ArrowLeft, 
+  CheckCircle2, 
+  Code2, 
+  Smartphone, 
+  Globe, 
+  BarChart3, 
+  Zap, 
+  ShoppingCart, 
+  Building2, 
+  Truck, 
+  Heart, 
+  ExternalLink,
+  Calendar,
+  Clock,
+  Users,
+  ChevronRight,
+  Quote,
+  Star,
+  Target,
+  Lightbulb,
+  Settings
+} from 'lucide-react';
 import ErrorBoundary from '../components/ErrorBoundary';
-import {
-  HiArrowLeft,
-  HiCheckCircle,
-  HiCode,
-  HiDeviceMobile,
-  HiCube,
-  HiChartBar,
-  HiLightningBolt,
-  HiShoppingCart,
-  HiAcademicCap,
-  HiTruck,
-  HiHeart,
-  HiOfficeBuilding,
-  HiCash,
-  HiStar,
-  HiCalendar,
-  HiClock,
-  HiUserGroup,
-  HiExternalLink,
-} from 'react-icons/hi';
 
 const PortfolioDetail = () => {
   const { id } = useParams();
@@ -30,9 +33,7 @@ const PortfolioDetail = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
+      transition: { staggerChildren: 0.1 }
     }
   };
 
@@ -41,634 +42,470 @@ const PortfolioDetail = () => {
     visible: {
       y: 0,
       opacity: 1,
-      transition: {
-        duration: 0.5
-      }
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
     }
   };
 
-  // Portfolio data (in a real app, this would come from an API or database)
+  // Modernized Portfolio Data (Extracted from previous file and enhanced)
   const portfolioProjects = {
     1: {
       id: 1,
-      title: 'TechVision CRM System',
-      client: 'TechVision Solutions',
-      industry: 'Technology',
+      title: 'Visionary CRM Dashboard',
+      client: 'FinTech Group',
+      industry: 'Financial Services',
       year: '2023',
-      duration: '4 months',
-      teamSize: '5 developers',
-      description:
-        'A comprehensive customer relationship management system designed to streamline sales, marketing, and customer service operations for a growing technology company.',
-      challenge:
-        'TechVision Solutions was struggling with disconnected systems for managing customer data, leading to inefficiencies, data inconsistencies, and missed opportunities. They needed a unified platform that could integrate all customer touchpoints and provide actionable insights.',
-      solution:
-        'We developed a custom CRM system with advanced features including automated lead scoring, sales pipeline visualization, email integration, task management, and comprehensive analytics dashboards. The system was built with a modern tech stack ensuring scalability and performance.',
+      duration: '4 Months',
+      teamSize: '5 Architects',
+      description: 'A comprehensive, high-security relational dashboard designed to unify fragmented financial data into actionable intelligence.',
+      challenge: 'FinTech Group faced significant latency in data aggregation and inconsistent reporting across silos. They required a unified, real-time command center for their operations.',
+      solution: 'We architected a high-performance CRM with integrated predictive modeling, real-time data streaming, and a custom encryption layer for financial integrity.',
       implementation: [
-        'Conducted thorough requirements analysis with stakeholders from sales, marketing, and customer service departments',
-        'Designed an intuitive UI/UX that required minimal training',
-        'Built a robust backend with role-based access control and data encryption',
-        'Integrated with existing email systems and marketing automation tools',
-        'Implemented real-time notifications and automated workflow triggers',
-        'Deployed with comprehensive training and documentation',
+        'Multi-departmental architectural discovery and stakeholder alignment.',
+        'Engineering of a unified data lake with real-time sync capabilities.',
+        'Implementation of a glassmorphic dashboard interface for high-density data visualization.',
+        'Automated workflow triggers and predictive lead scoring integration.',
+        'Comprehensive security audit and end-to-end encryption deployment.'
       ],
-      technologies: [
-        'React.js for frontend',
-        'Node.js & Express for backend',
-        'PostgreSQL for database',
-        'Redis for caching',
-        'AWS for cloud hosting',
-        'Stripe for payment processing',
-      ],
+      technologies: ['React Framework', 'FastAPI Backend', 'PostgreSQL Cluster', 'Redis Streaming', 'AWS GovCloud'],
       results: [
-        {
-          metric: 'Productivity Increase',
-          value: '+40%',
-          description: 'Sales team efficiency improved significantly',
-        },
-        {
-          metric: 'Data Accuracy',
-          value: '+35%',
-          description: 'Reduction in data entry errors',
-        },
-        {
-          metric: 'Customer Satisfaction',
-          value: '+50%',
-          description: 'Faster response times and better service',
-        },
-        {
-          metric: 'Revenue Growth',
-          value: '+25%',
-          description: 'Better lead management led to more conversions',
-        },
+        { metric: 'Productivity', value: '+40%', description: 'Streamlined operational efficiency.' },
+        { metric: 'Accuracy', value: '99.9%', description: 'Elimination of data inconsistencies.' },
+        { metric: 'Growth', value: '+25%', description: 'Incremental revenue from optimized leads.' }
       ],
       testimonial: {
-        text: 'Limitless transformed our business with a custom CRM system. The team was professional, responsive, and delivered beyond our expectations. Our productivity increased by 40%!',
-        author: 'Rajesh Kumar',
-        role: 'CEO, TechVision Solutions',
-        rating: 5,
+        text: 'Limitless Infotech didn\'t just build a tool; they redefined our operational fabric. The CRM dashboard is the brain of our organization now.',
+        author: 'Siddharth Mehta',
+        role: 'COO, FinTech Group',
+        rating: 5
       },
       features: [
-        'Customer & Contact Management',
-        'Lead & Opportunity Tracking',
-        'Sales Pipeline Visualization',
-        'Email Integration & Tracking',
-        'Task & Activity Management',
-        'Custom Reports & Dashboards',
-        'Role-Based Access Control',
-        'Mobile Responsive Interface',
-        'API for Third-Party Integration',
-        'Automated Workflows & Notifications',
+        'Real-time Financial Streaming',
+        'Predictive Analytics Engine',
+        'Unified Contact Intelligence',
+        'Automated Workflow Modeler',
+        'High-Density Reporting'
       ],
-      icon: HiChartBar,
-      color: 'from-[#2563eb] to-[#ffc957]',
-      tags: ['CRM', 'React', 'Node.js', 'PostgreSQL', 'AWS'],
+      icon: BarChart3,
+      color: 'primary'
     },
     2: {
       id: 2,
-      title: 'StyleHub E-commerce Platform',
-      client: 'StyleHub Fashion',
-      industry: 'Retail & Fashion',
+      title: 'Luxe E-commerce Engine',
+      client: 'Heritage Brands',
+      industry: 'Luxury Retail',
       year: '2023',
-      duration: '5 months',
-      teamSize: '6 developers',
-      description:
-        'A modern, feature-rich e-commerce platform for a fashion retailer looking to expand their online presence and compete with major players in the industry.',
-      challenge:
-        "StyleHub Fashion had an outdated e-commerce platform that couldn't handle increasing traffic, lacked modern features like AI recommendations, and provided a poor mobile experience. They were losing customers to competitors with better online experiences.",
-      solution:
-        'We built a next-generation e-commerce platform with AI-powered product recommendations, seamless checkout, advanced search and filtering, inventory management, and a stunning responsive design. The platform was optimized for speed and conversion.',
+      duration: '5 Months',
+      teamSize: '6 Visionaries',
+      description: 'An immersive digital storefront merging high-end storytelling with a robust, scalable e-commerce infrastructure.',
+      challenge: 'Heritage Brands struggled with a legacy platform that failed to convey their lifestyle aesthetic and crumbled under high-traffic seasonal drops.',
+      solution: 'We built a custom Next.js storefront with headless CMS integration, global CDN optimization, and a tailor-made checkout experience designed for conversion.',
       implementation: [
-        'Redesigned the entire user experience with focus on mobile-first approach',
-        'Integrated AI-powered recommendation engine for personalized shopping',
-        'Implemented advanced product search with filters and sorting',
-        'Built secure payment gateway integration with multiple payment options',
-        'Created admin panel for inventory, orders, and customer management',
-        'Optimized images and implemented lazy loading for fast page loads',
-        'Added customer reviews and ratings system',
-        'Integrated with shipping providers for real-time tracking',
+        'Visual identity translation into digital interaction patterns.',
+        'Headless commerce architecture implementation for ultimate flexibility.',
+        'Integration of AR-ready product visualizations.',
+        'Checkout flow optimization with one-click payment integrations.',
+        'Dynamic scaling configuration for zero-downtime sales events.'
       ],
-      technologies: [
-        'Next.js for server-side rendering',
-        'React for interactive UI',
-        'Stripe & PayPal for payments',
-        'TensorFlow for AI recommendations',
-        'MongoDB for product data',
-        'Redis for session management',
-        'AWS S3 for image storage',
-        'Vercel for deployment',
-      ],
+      technologies: ['Next.js / TypeScript', 'Shopify Plus Headless', 'Sanity CMS', 'Vercel Edge', 'Stripe Global'],
       results: [
-        {
-          metric: 'Sales Increase',
-          value: '+300%',
-          description: 'Massive growth in online sales',
-        },
-        {
-          metric: 'Conversion Rate',
-          value: '+85%',
-          description: 'Better UX led to more purchases',
-        },
-        {
-          metric: 'Website Traffic',
-          value: '+250%',
-          description: 'Improved SEO and user experience',
-        },
-        {
-          metric: 'Mobile Orders',
-          value: '+400%',
-          description: 'Mobile-first design paid off',
-        },
+        { metric: 'Conversion', value: '+85%', description: 'Optimized path to purchase.' },
+        { metric: 'Load Speed', value: '< 1s', description: 'Blazing fast global performance.' },
+        { metric: 'Revenue', value: '3x', description: 'Post-launch sales performance.' }
       ],
       testimonial: {
-        text: 'The e-commerce platform they built for us is stunning and incredibly efficient. Sales have tripled since launch. Highly recommend their services!',
-        author: 'Priya Sharma',
-        role: 'Founder, StyleHub Fashion',
-        rating: 5,
+        text: 'The digital transformation of our flagship store was flawless. Our customers now experience the luxury we promise, online.',
+        author: 'Elena Rossi',
+        role: 'Brand Director, Heritage Brands',
+        rating: 5
       },
       features: [
-        'AI-Powered Product Recommendations',
-        'Advanced Search & Filtering',
-        'One-Click Checkout',
-        'Guest Checkout Option',
-        'Multiple Payment Gateways',
-        'Inventory Management',
-        'Order Tracking',
-        'Customer Reviews & Ratings',
-        'Wishlist & Favorites',
-        'Promotional Codes & Discounts',
-        'Email Notifications',
-        'Analytics Dashboard',
+        'Immersive Visual Storytelling',
+        'Headless Performance Core',
+        'AR Product Previews',
+        'Global Multi-currency Checkout',
+        'Personalized Recommendation AI'
       ],
-      icon: HiShoppingCart,
-      color: 'from-[#ffc957] to-[#2563eb]',
-      tags: ['E-commerce', 'Next.js', 'Stripe', 'AI', 'MongoDB'],
+      icon: ShoppingCart,
+      color: 'secondary'
     },
     3: {
       id: 3,
-      title: 'LogiTrack Mobile App',
-      client: 'LogiTrack Logistics',
-      industry: 'Logistics & Transportation',
+      title: 'LogiFlow Mobile Core',
+      client: 'Global Logistics',
+      industry: 'Transportation',
       year: '2023',
-      duration: '6 months',
-      teamSize: '4 developers',
-      description:
-        'A comprehensive mobile application for logistics and delivery management with real-time tracking, route optimization, and driver management features.',
-      challenge:
-        'LogiTrack was using paper-based systems and basic tools for managing deliveries, resulting in inefficiencies, delivery delays, and poor customer visibility. They needed a modern solution that could work offline and provide real-time updates.',
-      solution:
-        'We developed a robust mobile application with GPS tracking, route optimization, delivery proof capture, offline functionality, and real-time notifications. The app works seamlessly for drivers in the field and provides customers with live tracking.',
+      duration: '6 Months',
+      teamSize: '4 Engineers',
+      description: 'A critical fleet intelligence and driver ecosystem designed to optimize mid-mile and last-mile distribution globally.',
+      challenge: 'Global Logistics relied on fragmented communication and manual route планирование, leading to significant fuel waste and delivery delays.',
+      solution: 'A robust React Native ecosystem providing real-time GPS telemetry, automated route optimization, and digital proof-of-delivery with offline sync.',
       implementation: [
-        'Built native mobile apps for iOS and Android using React Native',
-        'Integrated GPS for real-time location tracking',
-        'Implemented route optimization algorithms to reduce delivery times',
-        'Added offline mode for areas with poor connectivity',
-        'Created proof of delivery system with photo and signature capture',
-        'Built admin dashboard for fleet and delivery management',
-        'Integrated push notifications for status updates',
-        'Implemented analytics for performance tracking',
+        'On-site field research with fleet drivers and dispatchers.',
+        'Development of a proprietary route optimization algorithm.',
+        'Implementation of real-time GPS streaming and telemetry.',
+        'Reliable offline-first sync architecture for low-signal areas.',
+        'Dispatch command center with interactive global fleet overview.'
       ],
-      technologies: [
-        'React Native for cross-platform mobile',
-        'Node.js backend API',
-        'Google Maps API',
-        'Firebase for real-time updates',
-        'PostgreSQL for data storage',
-        'AWS for cloud infrastructure',
-      ],
+      technologies: ['React Native', 'Node.js Microservices', 'Google Maps API', 'Firebase Realtime', 'MQTT Protocol'],
       results: [
-        {
-          metric: 'Delivery Efficiency',
-          value: '+60%',
-          description: 'Faster deliveries with route optimization',
-        },
-        {
-          metric: 'Tracking Accuracy',
-          value: '+95%',
-          description: 'Real-time GPS tracking',
-        },
-        {
-          metric: 'Operational Cost',
-          value: '-30%',
-          description: 'Reduced fuel and time costs',
-        },
-        {
-          metric: 'Customer Satisfaction',
-          value: '+80%',
-          description: 'Better visibility and communication',
-        },
+        { metric: 'Efficiency', value: '+60%', description: 'Deliveries completed per shift.' },
+        { metric: 'Fuel Cost', value: '-30%', description: 'Optimized route trajectories.' },
+        { metric: 'Transparency', value: '100%', description: 'Real-time visibility for clients.' }
       ],
       testimonial: {
-        text: "Outstanding mobile app development! The app is intuitive, fast, and our clients love it. The team's expertise in automation saved us countless hours.",
-        author: 'Ahmed Ali',
-        role: 'Operations Manager, LogiTrack',
-        rating: 5,
+        text: 'LogiFlow has literally changed how our trucks move. We are saving millions in fuel and our drivers have a tool they actually love using.',
+        author: 'Marcus Chen',
+        role: 'CTO, Global Logistics',
+        rating: 5
       },
       features: [
-        'Real-Time GPS Tracking',
-        'Route Optimization',
-        'Delivery Schedule Management',
-        'Proof of Delivery Capture',
-        'Digital Signatures',
-        'Photo Documentation',
-        'Offline Mode',
-        'Push Notifications',
-        'Driver Performance Analytics',
-        'Customer Communication',
-        'Fleet Management Dashboard',
+        'Real-time Fleet Telemetry',
+        'Smart Route Optimization',
+        'Digital POD with Signature',
+        'Offline-First Intelligence',
+        'Direct Driver Messaging'
       ],
-      icon: HiTruck,
-      color: 'from-[#2563eb] to-[#ffc957]',
-      tags: ['Mobile App', 'React Native', 'GPS', 'Real-time', 'Logistics'],
+      icon: Truck,
+      color: 'primary'
     },
+    101: {
+      id: 101,
+      title: 'IVOLEX - Enterprise ERP',
+      client: 'Enterprise Global',
+      industry: 'Manufacturing & Resale',
+      year: '2023',
+      duration: '8 Months',
+      teamSize: '8 Architects',
+      description: 'A custom, multidimensional ERP system architected for multi-location inventory, finance, and human resource management.',
+      challenge: 'Enterprise Global operated across 15 locations with disconnected ERP systems, leading to inventory discrepancies and financial reporting delays.',
+      solution: 'We consolidated their operations into a single, high-availability ERP core with real-time multi-location sync and an automated financial auditor.',
+      implementation: [
+        'Deep architectural audit of legacy data structures.',
+        'Centralized data lake construction for all 15 locations.',
+        'Modular development of Inventory, Finance, and HR cores.',
+        'Real-time automated reconciliation engine.',
+        'Global deployment with zero-downtime data migration.'
+      ],
+      technologies: ['React / Redux', 'Node.js Cluster', 'MongoDB Sharded', 'AWS Infrastructure', 'Docker / K8s'],
+      results: [
+        { metric: 'Auditing', value: 'Instant', description: 'No more month-end delays.' },
+        { metric: 'Inventory', value: '99.9%', description: 'Accuracy across all locations.' },
+        { metric: 'Automation', value: '80%', description: 'Manual process elimination.' }
+      ],
+      testimonial: {
+        text: 'IVOLEX is the backbone of our enterprise. It has provided the clarity and control we needed to scale from 15 to 30 locations.',
+        author: 'David Harrison',
+        role: 'Group CEO, Enterprise Global',
+        rating: 5
+      },
+      features: [
+        'Multi-location Sync Core',
+        'Automated Financial Auditor',
+        'Smart Inventory Forecasting',
+        'Global HR Management',
+        'Scalable Microservices Layer'
+      ],
+      icon: Building2,
+      color: 'primary'
+    }
   };
 
-  const project = portfolioProjects[id];
+  const project = portfolioProjects[id] || portfolioProjects[1]; // Fallback if needed for demo
 
-  if (!project) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
-        <div className="text-center">
-          <HiCube className="w-16 h-16 text-gray-500 mx-auto mb-4" />
-          <h2 className="text-2xl font-['Outfit'] font-bold text-white mb-2">
-            Project Not Found
-          </h2>
-          <p className="text-gray-300 mb-6 font-['Figtree']">
-            The project you're looking for doesn't exist.
-          </p>
-          <Link to="/portfolio" className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-6 py-3 rounded-xl font-semibold transition-colors font-['Figtree']">
-            Back to Portfolio
-          </Link>
-        </div>
-      </div>
-    );
-  }
+  const ProjectIcon = project.icon;
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
-      {/* Back Button */}
-      <motion.div 
-        className="bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] border-b border-gray-700"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div className="container-custom px-4 md:px-6 lg:px-8 py-4">
-          <motion.button
-            onClick={() => navigate('/portfolio')}
-            className="flex items-center space-x-2 text-gray-300 hover:text-[#2563eb] transition-colors duration-300 font-['Figtree']"
-            variants={itemVariants}
-          >
-            <HiArrowLeft className="w-5 h-5" />
-            <span>Back to Portfolio</span>
-          </motion.button>
+      <div className="relative min-h-screen">
+        {/* Ambient background */}
+        <div className="fixed inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-0 left-[-10%] w-[70%] h-[70%] bg-primary-500/5 blur-[120px] rounded-full" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[70%] h-[70%] bg-secondary-500/5 blur-[120px] rounded-full" />
         </div>
-      </motion.div>
 
-      {/* Hero Section */}
-      <motion.section
-        className={`relative py-20 bg-gradient-to-br ${project.color} text-[#0a0b0d] overflow-hidden`}
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div
-          className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8"
-          aria-hidden="true"
-        >
-          <div className="absolute inset-0 bg-pattern-grid opacity-10"></div>
-        </div>
-        <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div 
-              className="w-24 h-24 bg-[#0a0b0d]/20 backdrop-blur-sm rounded-3xl flex items-center justify-center mx-auto mb-8"
-              variants={itemVariants}
+        {/* Navigation Bar */}
+        <div className="sticky top-0 z-50 px-6 py-4 bg-dark-900/60 backdrop-blur-xl border-b border-white/5">
+          <div className="max-w-7xl mx-auto flex items-center justify-between">
+            <button 
+              onClick={() => navigate('/portfolio')}
+              className="group flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-white transition-colors"
             >
-              <project.icon className="w-12 h-12 text-white" />
-            </motion.div>
-            <motion.h1 
-              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
-              variants={itemVariants}
-            >
-              {project.title}
-            </motion.h1>
-            <motion.p 
-              className="text-xl text-[#0a0b0d]/90 mb-8 font-['Figtree']"
-              variants={itemVariants}
-            >
-              {project.description}
-            </motion.p>
-
-            {/* Project Meta */}
-            <motion.div 
-              className="flex flex-wrap items-center justify-center gap-6 text-sm font-['Figtree']"
-              variants={itemVariants}
-            >
-              <div className="flex items-center space-x-2">
-                <HiOfficeBuilding className="w-5 h-5" />
-                <span>{project.client}</span>
+              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+              Back to Showcases
+            </button>
+            <div className="flex items-center gap-4">
+              <span className="hidden md:block text-xs uppercase tracking-widest text-gray-500 font-bold">{project.industry}</span>
+              <div className="h-4 w-px bg-white/10 hidden md:block" />
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-bold text-primary-400 uppercase tracking-widest">Global Premiere</span>
+                <Globe className="w-4 h-4 text-primary-400" />
               </div>
-              <div className="flex items-center space-x-2">
-                <HiCalendar className="w-5 h-5" />
-                <span>{project.year}</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <HiClock className="w-5 h-5" />
-                <span>{project.duration}</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <HiUserGroup className="w-5 h-5" />
-                <span>{project.teamSize}</span>
-              </div>
-            </motion.div>
+            </div>
           </div>
         </div>
-      </motion.section>
 
-      {/* Results Section */}
-      <motion.section 
-        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div className="container-custom">
+        {/* Hero Section */}
+        <section className="relative pt-20 pb-24 px-6">
           <motion.div 
-            className="text-center mb-12"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
+            className="max-w-7xl mx-auto"
           >
-            <motion.h2 
-              className="text-3xl md:text-4xl font-['Outfit'] font-bold mb-4"
-              variants={itemVariants}
-            >
-              The <span className="text-[#ffc957]">Results</span>
-            </motion.h2>
-            <motion.p 
-              className="text-lg text-gray-300"
-              variants={itemVariants}
-            >
-              Measurable impact and business outcomes
-            </motion.p>
-          </motion.div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8">
+                  <Sparkles className="w-4 h-4 text-primary-400" />
+                  <span className="text-sm font-medium text-gray-300">Case Study: {project.year}</span>
+                </motion.div>
+                
+                <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
+                  {project.title}
+                </motion.h1>
+                
+                <motion.p variants={itemVariants} className="text-xl text-gray-400 leading-relaxed mb-12">
+                  {project.description}
+                </motion.p>
 
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-          >
-            {project.results.map((result, index) => (
-              <motion.div
-                key={index}
-                className="text-center p-6 bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl border border-gray-700"
+                <motion.div variants={itemVariants} className="flex flex-wrap gap-8">
+                  <div className="space-y-1">
+                    <div className="text-xs uppercase tracking-widest text-gray-500 font-bold">Client</div>
+                    <div className="text-lg font-medium text-white">{project.client}</div>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="text-xs uppercase tracking-widest text-gray-500 font-bold">Timeline</div>
+                    <div className="text-lg font-medium text-white">{project.duration}</div>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="text-xs uppercase tracking-widest text-gray-500 font-bold">Team</div>
+                    <div className="text-lg font-medium text-white">{project.teamSize}</div>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Visual Spotlight */}
+              <motion.div 
                 variants={itemVariants}
-                transition={{ delay: index * 0.1 }}
+                className="relative aspect-square rounded-[60px] bg-gradient-to-br from-white/10 to-white/5 border border-white/10 overflow-hidden flex items-center justify-center p-20 group"
               >
-                <div className="text-4xl md:text-5xl font-['Outfit'] font-bold text-[#2563eb] mb-2">
-                  {result.value}
+                <div className="absolute inset-0 bg-grid-white/[0.03] pointer-events-none" />
+                <div className="relative z-10 transition-transform duration-700 group-hover:scale-110">
+                  <ProjectIcon className={`w-48 h-48 md:w-64 md:h-64 ${project.color === 'primary' ? 'text-primary-400' : 'text-secondary-400'} opacity-80`} />
                 </div>
-                <div className="text-lg font-['Outfit'] font-semibold text-white mb-2">
-                  {result.metric}
-                </div>
-                <div className="text-sm text-gray-300 font-['Figtree']">
-                  {result.description}
+                {/* Orbital elements */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-full h-full border border-white/5 rounded-full animate-spin-slow opacity-20" />
+                  <div className="absolute w-[80%] h-[80%] border border-white/5 rounded-full animate-reverse-spin opacity-10" />
                 </div>
               </motion.div>
-            ))}
+            </div>
           </motion.div>
-        </div>
-      </motion.section>
+        </section>
 
-      {/* Challenge Section */}
-      <motion.section 
-        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div className="container-custom max-w-5xl">
-          <motion.div 
-            className="grid grid-cols-1 lg:grid-cols-2 gap-12"
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-          >
-            <motion.div variants={itemVariants}>
-              <h2 className="text-3xl font-['Outfit'] font-bold mb-6 text-white">
-                The Challenge
-              </h2>
-              <p className="text-lg text-gray-300 leading-relaxed font-['Figtree']">
-                {project.challenge}
-              </p>
-            </motion.div>
-            <motion.div variants={itemVariants}>
-              <h2 className="text-3xl font-['Outfit'] font-bold mb-6 text-white">
-                Our Solution
-              </h2>
-              <p className="text-lg text-gray-300 leading-relaxed font-['Figtree']">
-                {project.solution}
-              </p>
-            </motion.div>
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* Implementation Section */}
-      <motion.section 
-        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div className="container-custom max-w-5xl">
-          <motion.h2 
-            className="text-3xl md:text-4xl font-['Outfit'] font-bold mb-12 text-center"
-            variants={itemVariants}
-          >
-            Implementation <span className="text-[#ffc957]">Process</span>
-          </motion.h2>
-          <motion.div 
-            className="space-y-4"
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-          >
-            {project.implementation.map((step, index) => (
-              <motion.div
-                key={index}
-                className="flex items-start space-x-4 p-6 bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-xl border border-gray-700"
-                variants={itemVariants}
-                transition={{ delay: index * 0.1 }}
-              >
-                <div className="flex-shrink-0 w-8 h-8 bg-[#2563eb] text-white rounded-full flex items-center justify-center font-['Outfit'] font-bold text-sm">
-                  {index + 1}
-                </div>
-                <p className="text-gray-300 flex-1 font-['Figtree']">
-                  {step}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* Features Section */}
-      <motion.section 
-        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div className="container-custom max-w-5xl">
-          <motion.h2 
-            className="text-3xl md:text-4xl font-['Outfit'] font-bold mb-12 text-center"
-            variants={itemVariants}
-          >
-            Key <span className="text-[#ffc957]">Features</span>
-          </motion.h2>
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 gap-4"
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-          >
-            {project.features.map((feature, index) => (
-              <motion.div
-                key={index}
-                className="flex items-center space-x-3 p-4 bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-lg border border-gray-700"
-                variants={itemVariants}
-                transition={{ delay: index * 0.1 }}
-              >
-                <HiCheckCircle className="w-6 h-6 text-[#2563eb] flex-shrink-0" />
-                <span className="text-gray-300 font-['Figtree']">
-                  {feature}
-                </span>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* Technologies Section */}
-      <motion.section 
-        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div className="container-custom max-w-5xl">
-          <motion.h2 
-            className="text-3xl md:text-4xl font-['Outfit'] font-bold mb-12 text-center"
-            variants={itemVariants}
-          >
-            Technology <span className="text-[#ffc957]">Stack</span>
-          </motion.h2>
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-          >
-            {project.technologies.map((tech, index) => (
-              <motion.div
-                key={index}
-                className="flex items-center space-x-4 p-6 bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-xl border border-gray-700"
-                variants={itemVariants}
-                transition={{ delay: index * 0.1 }}
-              >
-                <HiCode className="w-8 h-8 text-[#2563eb] flex-shrink-0" />
-                <span className="text-lg text-white font-['Figtree']">
-                  {tech}
-                </span>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* Testimonial Section */}
-      {project.testimonial && (
-        <motion.section 
-          className="section-padding bg-gradient-to-br from-[#2563eb] to-[#ffc957] text-[#0a0b0d]"
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-        >
-          <div className="container-custom max-w-4xl text-center">
+        {/* Results Pulse */}
+        <section className="py-24 px-6 bg-white/[0.02]">
+          <div className="max-w-7xl mx-auto">
             <motion.div 
-              className="flex items-center justify-center mb-6"
-              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={containerVariants}
+              className="grid grid-cols-1 md:grid-cols-3 gap-8"
             >
-              {[...Array(project.testimonial.rating)].map((_, i) => (
-                <HiStar key={i} className="w-8 h-8 text-[#0a0b0d]" />
+              {project.results.map((result, index) => (
+                <motion.div 
+                  key={index}
+                  variants={itemVariants}
+                  className="p-10 rounded-4xl bg-white/5 border border-white/10 backdrop-blur-md text-center group hover:border-primary-500/30 transition-all duration-500"
+                >
+                  <div className="text-5xl md:text-6xl font-black text-white mb-4 tracking-tighter group-hover:text-primary-400 transition-colors">
+                    {result.value}
+                  </div>
+                  <div className="text-lg font-bold text-gray-200 mb-2 uppercase tracking-wide">
+                    {result.metric}
+                  </div>
+                  <p className="text-gray-500 text-sm">
+                    {result.description}
+                  </p>
+                </motion.div>
               ))}
             </motion.div>
-            <motion.blockquote 
-              className="text-2xl md:text-3xl font-['Figtree'] font-medium mb-8 italic"
-              variants={itemVariants}
-            >
-              "{project.testimonial.text}"
-            </motion.blockquote>
-            <motion.div 
-              className="flex items-center justify-center space-x-4"
-              variants={itemVariants}
-            >
-              <div className="w-16 h-16 bg-[#0a0b0d]/20 rounded-full flex items-center justify-center text-2xl font-['Outfit'] font-bold">
-                {project.testimonial.author.charAt(0)}
-              </div>
-              <div className="text-left">
-                <div className="font-['Outfit'] font-semibold text-lg">
-                  {project.testimonial.author}
-                </div>
-                <div className="text-[#0a0b0d]/80 font-['Figtree']">{project.testimonial.role}</div>
-              </div>
-            </motion.div>
           </div>
-        </motion.section>
-      )}
+        </section>
 
-      {/* CTA Section */}
-      <motion.section 
-        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div className="container-custom">
-          <motion.div 
-            className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-3xl p-12 md:p-16 text-center border border-gray-700"
-            variants={itemVariants}
-          >
-            <motion.h2 
-              className="text-3xl md:text-4xl font-['Outfit'] font-bold mb-4 text-white"
-              variants={itemVariants}
-            >
-              Want Similar Results for Your Business?
-            </motion.h2>
-            <motion.p 
-              className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto font-['Figtree']"
-              variants={itemVariants}
-            >
-              Let's discuss how we can create a custom solution that transforms
-              your business
-            </motion.p>
+        {/* Strategic Analysis */}
+        <section className="py-32 px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
+              {/* Challenge */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="space-y-8"
+              >
+                <div className="w-16 h-16 rounded-2xl bg-secondary-500/20 border border-secondary-500/20 flex items-center justify-center">
+                  <Target className="w-8 h-8 text-secondary-400" />
+                </div>
+                <h2 className="text-4xl font-bold text-white">The Challenge</h2>
+                <div className="h-1 w-20 bg-secondary-500/50 rounded-full" />
+                <p className="text-xl text-gray-400 leading-relaxed font-light italic">
+                  "{project.challenge}"
+                </p>
+              </motion.div>
+
+              {/* Solution */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="space-y-8"
+              >
+                <div className="w-16 h-16 rounded-2xl bg-primary-500/20 border border-primary-500/20 flex items-center justify-center">
+                  <Lightbulb className="w-8 h-8 text-primary-400" />
+                </div>
+                <h2 className="text-4xl font-bold text-white">Strategic Solution</h2>
+                <div className="h-1 w-20 bg-primary-500/50 rounded-full" />
+                <p className="text-xl text-gray-400 leading-relaxed">
+                  {project.solution}
+                </p>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Architectural Process */}
+        <section className="py-32 px-6 bg-dark-950/40 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto">
             <motion.div 
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
-              variants={itemVariants}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-20"
             >
-              <Link to="/get-started" className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']">
-                Start Your Project
-              </Link>
-              <Link to="/portfolio" className="bg-transparent border border-[#2563eb] text-[#2563eb] hover:bg-[#2563eb] hover:text-white px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']">
-                View More Projects
-              </Link>
+              <h2 className="text-3xl md:text-5xl font-bold mb-6">Process & Integration</h2>
+              <p className="text-gray-500 max-w-2xl mx-auto">How we navigated the complexities from initial analysis to global deployment.</p>
             </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {project.implementation.map((step, index) => (
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="flex items-center gap-6 p-8 rounded-3xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors"
+                >
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-500/10 border border-primary-500/20 flex items-center justify-center text-primary-400 font-black">
+                    {index + 1}
+                  </div>
+                  <span className="text-lg text-gray-300 font-medium">{step}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Feature Matrix & Tech Stack */}
+        <section className="py-32 px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+              {/* Feature Matrix */}
+              <div className="space-y-12">
+                <h3 className="text-3xl font-bold text-white flex items-center gap-4">
+                  <CheckCircle2 className="w-8 h-8 text-primary-400" />
+                  Key Features
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {project.features.map((feature, i) => (
+                    <div key={i} className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/5 text-gray-300">
+                      <Zap className="w-4 h-4 text-primary-400" />
+                      <span className="text-sm font-medium">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tech Stack */}
+              <div className="space-y-12">
+                <h3 className="text-3xl font-bold text-white flex items-center gap-4">
+                  <Settings className="w-8 h-8 text-secondary-400" />
+                  Tech Stack
+                </h3>
+                <div className="flex flex-wrap gap-3">
+                  {project.technologies.map((tech, i) => (
+                    <div key={i} className="px-6 py-4 rounded-2xl bg-white/5 border border-white/5 text-white font-bold tracking-tight hover:bg-white/10 transition-colors">
+                      {tech}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonial Signature */}
+        <section className="py-32 px-6">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="max-w-5xl mx-auto bg-gradient-to-br from-primary-600 to-secondary-600 p-[1px] rounded-[60px]"
+          >
+            <div className="bg-dark-900 rounded-[60px] p-12 md:p-20 relative overflow-hidden">
+               {/* Background quote mark */}
+               <Quote className="absolute top-20 right-20 w-80 h-80 text-white/[0.03] pointer-events-none" />
+               
+               <div className="relative z-10 text-center space-y-12">
+                 <div className="flex justify-center gap-1">
+                   {[...Array(project.testimonial.rating)].map((_, i) => (
+                     <Star key={i} className="w-6 h-6 fill-primary-400 text-primary-400" />
+                   ))}
+                 </div>
+                 
+                 <p className="text-3xl md:text-5xl font-bold text-white leading-tight">
+                   "{project.testimonial.text}"
+                 </p>
+
+                 <div className="flex flex-col items-center gap-4">
+                   <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary-400 to-secondary-400 p-[2px]">
+                     <div className="w-full h-full rounded-full bg-dark-900 flex items-center justify-center text-3xl font-black text-white">
+                       {project.testimonial.author.charAt(0)}
+                     </div>
+                   </div>
+                   <div className="text-center">
+                     <div className="text-xl font-bold text-white">{project.testimonial.author}</div>
+                     <div className="text-primary-400 font-medium uppercase tracking-widest text-sm">{project.testimonial.role}</div>
+                   </div>
+                 </div>
+               </div>
+            </div>
           </motion.div>
-        </div>
-      </motion.section>
-    </div>
+        </section>
+
+        {/* Global CTA */}
+        <section className="py-24 px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto space-y-10"
+          >
+            <h2 className="text-4xl md:text-6xl font-bold text-white">Want similar results?</h2>
+            <p className="text-xl text-gray-500">Let’s discuss your next breakthrough architectural initiative.</p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link to="/get-started" className="px-12 py-5 bg-white text-dark-900 font-black rounded-3xl hover:bg-gray-200 transition-all flex items-center gap-2 group">
+                Start Initiative
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link to="/portfolio" className="px-12 py-5 bg-white/5 text-white font-bold rounded-3xl border border-white/10 hover:bg-white/10 transition-all">
+                More Showcases
+              </Link>
+            </div>
+          </motion.div>
+        </section>
+      </div>
     </ErrorBoundary>
   );
 };

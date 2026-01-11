@@ -1,26 +1,28 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import {
-  HiCode,
-  HiDeviceMobile,
-  HiCube,
-  HiChartBar,
-  HiLightningBolt,
-  HiShieldCheck,
-  HiSparkles,
-  HiServer,
-  HiTrendingUp,
-  HiClock,
-  HiUserGroup,
-  HiChevronDown,
-  HiChevronUp,
-  HiStar,
-  HiCheckCircle,
-  HiArrowRight,
-  HiArrowSmLeft,
-  HiArrowSmRight,
-} from 'react-icons/hi';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Code, 
+  Smartphone, 
+  Box, 
+  BarChart3, 
+  Zap, 
+  ShieldCheck, 
+  Sparkles, 
+  Server, 
+  TrendingUp, 
+  Clock, 
+  Users, 
+  ChevronDown, 
+  ChevronUp, 
+  Star, 
+  CheckCircle2, 
+  ArrowRight,
+  Database,
+  Search,
+  Bot
+} from 'lucide-react';
 
 import AnimatedElement from '../../components/ui/components/AnimatedElement';
 import DuoToneIcon from '../../components/ui/components/DuoToneIcon';
@@ -31,46 +33,46 @@ const Home = () => {
 
   const coreServices = [
     {
-      icon: HiCode,
+      icon: Code,
       title: 'Web Development',
       description:
         'Responsive, scalable, and SEO-optimized websites built with cutting-edge technologies.',
-      color: 'from-[#2563eb] to-[#1d4ed8]',
+      color: 'from-[#1ba6d6] to-[#0e1114]',
     },
     {
-      icon: HiDeviceMobile,
+      icon: Smartphone,
       title: 'Mobile App Development',
       description:
         'Native and cross-platform mobile applications that deliver exceptional user experiences.',
-      color: 'from-[#2563eb] to-[#1e3a8a]',
+      color: 'from-[#1ba6d6] to-[#0e1114]',
     },
     {
-      icon: HiCube,
+      icon: Box,
       title: 'Custom Software & Systems',
       description:
         'Tailored software solutions designed to meet your unique business requirements.',
-      color: 'from-[#2563eb] to-[#0a0b0d]',
+      color: 'from-[#1ba6d6] to-[#0e1114]',
     },
     {
-      icon: HiChartBar,
+      icon: BarChart3,
       title: 'CRM & Task Management',
       description:
         'Powerful systems to manage customer relationships and streamline business operations.',
-      color: 'from-[#2563eb] to-[#1e40af]',
+      color: 'from-[#1ba6d6] to-[#0e1114]',
     },
     {
-      icon: HiLightningBolt,
+      icon: Zap,
       title: 'Business Automation & AI',
       description:
         'Intelligent automation solutions that transform operations and boost productivity.',
-      color: 'from-[#2563eb] to-[#1e40af]',
+      color: 'from-[#1ba6d6] to-[#0e1114]',
     },
     {
-      icon: HiServer,
+      icon: Server,
       title: 'Enterprise SaaS Products',
       description:
         'Production-ready software solutions including TrackIT, HR-IMS, WorkTrack, and more.',
-      color: 'from-[#2563eb] to-[#1e3a8a]',
+      color: 'from-[#1ba6d6] to-[#0e1114]',
     },
   ];
 
@@ -79,8 +81,8 @@ const Home = () => {
       id: 'trackit',
       name: 'TrackIT',
       description: 'IT Asset Management System',
-      icon: HiServer,
-      color: 'from-[#2563eb] to-[#1e40af]',
+      icon: Server,
+      color: 'from-[#1ba6d6] to-[#0e1114]',
       users: '500+',
       link: '/products',
     },
@@ -88,8 +90,8 @@ const Home = () => {
       id: 'hrims',
       name: 'HR-IMS',
       description: 'HR Management System',
-      icon: HiUserGroup,
-      color: 'from-[#ffc957] to-[#ffbd3a]',
+      icon: Users,
+      color: 'from-[#ffc957] to-[#0e1114]',
       users: '2,000+',
       link: '/products',
       popular: true,
@@ -98,8 +100,8 @@ const Home = () => {
       id: 'worktrack',
       name: 'WorkTrack',
       description: 'Workforce Management',
-      icon: HiClock,
-      color: 'from-[#2563eb] to-[#0a0b0d]',
+      icon: Clock,
+      color: 'from-[#1ba6d6] to-[#0e1114]',
       users: '1,500+',
       link: '/products',
     },
@@ -107,8 +109,8 @@ const Home = () => {
       id: 'ittms',
       name: 'IT-TMS',
       description: 'IT Ticket Management',
-      icon: HiChartBar,
-      color: 'from-[#2563eb] to-[#1e40af]',
+      icon: BarChart3,
+      color: 'from-[#1ba6d6] to-[#0e1114]',
       users: '800+',
       link: '/products',
     },
@@ -147,43 +149,43 @@ const Home = () => {
 
   const whyLimitless = [
     {
-      icon: HiShieldCheck,
+      icon: ShieldCheck,
       title: 'Total Security',
       description:
         'Enterprise-grade security protocols with bank-level encryption and SOC2 compliance standards.',
     },
     {
-      icon: HiCube,
+      icon: Box,
       title: '7+ Production-Ready Products',
       description:
         'Complete suite of SaaS products serving 10,000+ users worldwide, from IT management to HR systems.',
     },
     {
-      icon: HiSparkles,
+      icon: Sparkles,
       title: 'True Uniqueness',
       description:
         'Every solution is custom-crafted to reflect your brand identity and meet your specific business needs.',
     },
     {
-      icon: HiServer,
+      icon: Server,
       title: 'Reliability & Scalability',
       description:
         'Built to grow with your business, our solutions handle increased demand without compromising performance.',
     },
     {
-      icon: HiTrendingUp,
+      icon: TrendingUp,
       title: 'Speed + Performance',
       description:
         'Lightning-fast applications optimized for peak performance, delivering exceptional user experiences.',
     },
     {
-      icon: HiClock,
+      icon: Clock,
       title: 'Smart & Future-Ready',
       description:
         'Forward-thinking solutions leveraging AI and emerging technologies to keep you ahead of the curve.',
     },
     {
-      icon: HiUserGroup,
+      icon: Users,
       title: 'Royal Client Experience',
       description:
         'White-glove service with dedicated support, ensuring your success is our top priority at every step.',
@@ -321,44 +323,44 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="max-w-2xl">
               {/* Badge */}
-              <div className="inline-flex items-center space-x-2 bg-[#0a0b0d]/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg mb-8 border border-[#2563eb]/30">
-                <HiSparkles className="w-5 h-5 text-[#ffc957]" />
-                <span className="text-sm font-semibold text-[#e2e8f0]">
+              <div className="inline-flex items-center space-x-2 bg-white/5 backdrop-blur-xl px-6 py-3 rounded-full shadow-2xl mb-8 border border-white/10 group hover:border-[#1ba6d6]/50 transition-all duration-500">
+                <Sparkles className="w-5 h-5 text-[#1ba6d6] group-hover:animate-pulse" />
+                <span className="text-[0.65rem] font-black text-white uppercase tracking-[0.3em]">
                   Mission-Critical Innovation
                 </span>
               </div>
 
               {/* Main Heading */}
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 text-white leading-tight">
-                Architecting{' '}
-                <span className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] bg-clip-text text-transparent">
-                  Enterprise
+              <h1 className="text-5xl md:text-6xl lg:text-8xl font-black mb-8 text-white leading-[0.9] tracking-tighter">
+                ARCHITECTING{' '}
+                <span className="text-[#1ba6d6] drop-shadow-[0_0_15px_rgba(27,166,214,0.3)]">
+                  ENTERPRISE
                 </span>
                 <br />
-                Digital{' '}
-                <span className="bg-gradient-to-r from-[#2563eb] to-[#1e40af] bg-clip-text text-transparent">
-                  Excellence
+                DIGITAL{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/20">
+                  EXCELLENCE
                 </span>
               </h1>
 
               {/* Subheading */}
-              <p className="text-lg md:text-xl text-[#cbd5e1] mb-12 max-w-lg leading-relaxed">
-                Transform your business with architectural-grade digital
-                solutions. We are the architects of transformation, building
-                tomorrow's technology today.
+              <p className="text-sm md:text-base text-[#94a3b8] mb-12 max-w-lg leading-relaxed uppercase tracking-widest opacity-80">
+                Transform your architecture with neural-grade digital
+                solutions. We are the orchestrators of transformation, building
+                the nexus of tomorrow today.
               </p>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row items-start gap-4 mb-16">
-                <Link to="/get-started" className="px-8 py-4 bg-gradient-to-r from-[#2563eb] to-[#1e40af] text-white font-bold rounded-xl hover:from-[#1d4ed8] hover:to-[#1e3a8a] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-                  Begin Strategic Initiative
-                  <HiArrowRight className="inline-block ml-2 w-5 h-5" />
+              <div className="flex flex-col sm:flex-row items-start gap-6 mb-16">
+                <Link to="/get-started" className="px-10 py-5 bg-[#1ba6d6] text-white text-xs font-black uppercase tracking-[0.3em] mask-btn hover:scale-105 transition-all duration-500 shadow-[0_0_30px_rgba(27,166,214,0.3)] flex items-center group">
+                  Begin Strategic Nexus
+                  <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-2 transition-transform" />
                 </Link>
                 <Link
                   to="/products"
-                  className="px-8 py-4 rounded-xl font-bold text-base tracking-wide border-2 border-[#2563eb] text-[#2563eb] bg-transparent hover:bg-[#2563eb]/10 transition-all duration-300"
+                  className="px-10 py-5 border border-white/10 text-white text-xs font-black uppercase tracking-[0.3em] hover:bg-white/5 hover:border-white/20 transition-all duration-500 backdrop-blur-md"
                 >
-                  Explore Enterprise Solutions
+                  Explore Core Protocols
                 </Link>
               </div>
 
@@ -411,8 +413,9 @@ const Home = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <HiChevronDown className="w-8 h-8 text-[#2563eb]" />
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer flex flex-col items-center gap-2 group">
+          <span className="text-[0.5rem] text-[#94a3b8] uppercase tracking-[0.5em] font-black group-hover:text-white transition-colors">Observe</span>
+          <ChevronDown className="w-6 h-6 text-[#1ba6d6]" />
         </div>
       </section>
 
@@ -445,27 +448,21 @@ const Home = () => {
               </div>
             </div>
             <div className="lg:col-span-7">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6 text-white">
-                Our{' '}
-                <span className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] bg-clip-text text-transparent">
+              <h2 className="text-4xl lg:text-6xl font-black mb-8 text-white tracking-tighter uppercase">
+                Our Neural{' '}
+                <span className="text-[#1ba6d6] drop-shadow-[0_0_10px_rgba(27,166,214,0.3)]">
                   Architectural
                 </span>{' '}
                 Foundation
               </h2>
-              <p className="text-lg text-[#cbd5e1] leading-relaxed mb-6">
-                At Limitless Infotech Solution, we are more than developers – we
-                are{' '}
-                <span className="font-semibold text-[#ffc957]">
-                  architects of transformation
-                </span>
-                . We believe that technology should empower, not complicate.
+              <p className="text-sm text-[#94a3b8] leading-[1.8] mb-8 uppercase tracking-widest opacity-80 font-medium">
+                At Limitless Infotech Solution, we are the architects of the next paradigm. We believe that technology should empower, not complicate.
                 Every line of code we write, every system we build, is crafted
-                with precision, security, and your success in mind.
+                with high-fidelity precision and neural security.
               </p>
-              <p className="text-lg text-[#cbd5e1] leading-relaxed">
-                Our vision is to lead the world into the next era of intelligent
-                business systems, where innovation meets execution, and where
-                your business potential becomes truly limitless.
+              <p className="text-sm text-[#94a3b8] leading-[1.8] uppercase tracking-widest opacity-60 font-medium">
+                Our vision is to blueprint the next era of intelligent
+                business ecosystems, where innovation meets the speed of light.
               </p>
             </div>
           </div>
@@ -486,62 +483,55 @@ const Home = () => {
         </div>
 
         <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
+          <div className="text-center mb-24">
             <h2
               id="core-services-heading"
-              className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-white"
+              className="text-4xl lg:text-7xl font-black mb-6 text-white tracking-tighter uppercase"
             >
-              Our{' '}
-              <span className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] bg-clip-text text-transparent">
-                Core Services
+              Core{' '}
+              <span className="text-[#1ba6d6]">
+                Capabilities
               </span>
             </h2>
-            <p className="text-lg text-[#94a3b8] max-w-2xl mx-auto">
-              Comprehensive technology solutions designed to transform your
-              business
+            <p className="text-xs text-[#94a3b8] uppercase tracking-[0.4em] font-black opacity-60">
+              Advanced neural infrastructures for enterprise evolution
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
-            {coreServices.map((service, index) => (
-              <div
+              <motion.div
                 key={index}
-                className={`lg:col-span-4 rounded-2xl transition-all duration-300 flex flex-col h-full border border-[#2563eb]/30 bg-[#0a0b0d]/50 p-8 ${
+                whileHover={{ y: -10, scale: 1.02 }}
+                className={`lg:col-span-4 rounded-3xl transition-all duration-500 flex flex-col h-full border border-white/5 bg-[#1ba6d6]/5 backdrop-blur-3xl p-10 group hover:border-[#1ba6d6]/30 ${
                   index === 1 ? 'lg:col-start-2 lg:row-start-1' : ''
                 }`}
                 role="listitem"
               >
                 <div
-                  className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-xl flex items-center justify-center mb-6 self-start`}
+                  className={`w-14 h-14 bg-[#1ba6d6] rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_20px_rgba(27,166,214,0.3)] group-hover:shadow-[0_0_30px_rgba(27,166,214,0.5)] transition-all`}
                   aria-hidden="true"
                 >
-                  <DuoToneIcon
-                    icon={service.icon}
-                    size="xl"
-                    primaryColor="text-white"
-                    secondaryColor="text-white/30"
-                  />
+                  <service.icon className="text-white w-6 h-6" />
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-white">
+                <h3 className="text-xl font-black mb-4 text-white uppercase tracking-tight">
                   {service.title}
                 </h3>
-                <p className="text-[#cbd5e1] mb-4 flex-grow">
+                <p className="text-[#94a3b8] text-xs uppercase tracking-wider leading-relaxed mb-8 flex-grow opacity-80">
                   {service.description}
                 </p>
                 <Link
                   to="/services"
-                  className="inline-flex items-center text-[#ffc957] font-semibold hover:gap-2 transition-all duration-300"
+                  className="inline-flex items-center text-[#1ba6d6] text-[0.6rem] font-black uppercase tracking-[0.2em] group-hover:gap-4 transition-all duration-300"
                 >
-                  Learn More
-                  <HiArrowRight className="ml-1 w-5 h-5" />
+                  Initialize Protocol
+                  <ArrowRight className="ml-2 w-4 h-4" />
                 </Link>
-              </div>
-            ))}
+              </motion.div>
           </div>
 
-          <div className="text-center mt-12">
-            <Link to="/services" className="px-8 py-4 bg-gradient-to-r from-[#2563eb] to-[#1e40af] text-white font-bold rounded-xl hover:from-[#1d4ed8] hover:to-[#1e3a8a] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-              View All Services
+          <div className="text-center mt-20">
+            <Link to="/services" className="px-12 py-5 bg-[#1ba6d6] text-white text-xs font-black uppercase tracking-[0.4em] mask-btn hover:scale-105 transition-all duration-500 shadow-[0_0_30px_rgba(27,166,214,0.3)]">
+              View Deployment Map
             </Link>
           </div>
         </div>
@@ -731,10 +721,10 @@ const Home = () => {
             ))}
           </div>
 
-          <div className="text-center">
-            <Link to="/products" className="px-8 py-4 bg-gradient-to-r from-[#2563eb] to-[#1e40af] text-white font-bold rounded-xl hover:from-[#1d4ed8] hover:to-[#1e3a8a] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+          <div className="text-center mt-20">
+            <Link to="/products" className="px-12 py-5 bg-[#1ba6d6] text-white text-xs font-black uppercase tracking-[0.4em] mask-btn hover:scale-105 transition-all duration-500 shadow-[0_0_30px_rgba(27,166,214,0.3)] inline-flex items-center group">
               View All 7 Products
-              <HiArrowRight className="inline-block ml-2 w-5 h-5" />
+              <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-2 transition-transform" />
             </Link>
           </div>
         </div>
@@ -757,47 +747,48 @@ const Home = () => {
 
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {successStories.map((story, index) => (
-              <div
+              <motion.div
                 key={story.id}
-                className="bg-[#0a0b0d]/50 rounded-2xl overflow-hidden border border-[#2563eb]/30"
+                whileHover={{ y: -10 }}
+                className="bg-white/5 backdrop-blur-3xl rounded-3xl overflow-hidden border border-white/10 group hover:border-[#1ba6d6]/30 transition-all duration-500"
               >
                 <Link to={story.link}>
-                  <div className={`h-3 bg-gradient-to-r ${story.color}`}></div>
-                  <div className="p-8">
-                    <h3 className="text-2xl font-bold mb-2 text-white">
+                  <div className={`h-2 bg-[#1ba6d6] shadow-[0_0_15px_rgba(27,166,214,0.3)]`}></div>
+                  <div className="p-10">
+                    <h3 className="text-2xl font-black mb-2 text-white uppercase tracking-tighter">
                       {story.title}
                     </h3>
-                    <p className="text-[#ffc957] font-semibold mb-4">
+                    <p className="text-[#1ba6d6] text-[0.6rem] font-black uppercase tracking-[0.2em] mb-6 opacity-80">
                       {story.subtitle}
                     </p>
-                    <p className="text-[#cbd5e1] mb-6 leading-relaxed">
+                    <p className="text-[#94a3b8] text-xs uppercase tracking-[0.1em] mb-8 leading-relaxed opacity-70">
                       {story.description}
                     </p>
-                    <div className="grid grid-cols-3 gap-4 pt-6 border-t border-[#2563eb]/30">
+                    <div className="grid grid-cols-3 gap-6 pt-8 border-t border-white/5">
                       {story.results.map((result, idx) => (
                         <div key={idx} className="text-center">
-                          <div className="text-xl font-bold text-[#ffc957] mb-1">
+                          <div className="text-lg font-black text-white mb-1 uppercase">
                             {result.value}
                           </div>
-                          <div className="text-xs text-[#94a3b8]">
+                          <div className="text-[0.5rem] text-[#94a3b8] uppercase tracking-widest font-black opacity-60">
                             {result.label}
                           </div>
                         </div>
                       ))}
                     </div>
-                    <div className="mt-6 flex items-center text-[#ffc957] font-semibold">
-                      Read Full Case Study
-                      <HiArrowRight className="ml-2 w-5 h-5" />
+                    <div className="mt-8 flex items-center text-[#1ba6d6] text-[0.6rem] font-black uppercase tracking-[0.2em] group-hover:gap-4 transition-all duration-300">
+                      Decipher Intelligence
+                      <ArrowRight className="ml-2 w-4 h-4" />
                     </div>
                   </div>
                 </Link>
-              </div>
+              </motion.div>
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <Link to="/portfolio" className="px-8 py-4 border-2 border-[#2563eb] text-[#2563eb] font-bold rounded-xl hover:bg-[#2563eb]/10 transition-all duration-300">
-              View All Projects
+          <div className="text-center mt-20">
+            <Link to="/portfolio" className="px-12 py-5 border border-white/10 text-white text-xs font-black uppercase tracking-[0.3em] hover:bg-white/5 hover:border-[#1ba6d6]/30 transition-all duration-500 backdrop-blur-md inline-block">
+              Analyze Full Archive
             </Link>
           </div>
         </div>
@@ -807,59 +798,57 @@ const Home = () => {
       <section className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1e293b]">
         <div className="container-custom px-4 md:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-white">
-              What Clients Say About{' '}
-              <span className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] bg-clip-text text-transparent">
-                Limitless
+            <h2 className="text-4xl lg:text-7xl font-black mb-6 text-white tracking-tighter uppercase text-center">
+              Client{' '}
+              <span className="text-[#1ba6d6]">
+                Transmissions
               </span>
             </h2>
-            <p className="text-lg text-[#cbd5e1] max-w-2xl mx-auto">
-              Real experiences from businesses we've helped transform
+            <p className="text-xs text-[#94a3b8] uppercase tracking-[0.4em] font-black opacity-60 text-center">
+              Verified experiences from the Limitless network
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 max-w-6xl mx-auto">
             {testimonials.map((testimonial, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-[#0a0b0d]/80 backdrop-blur-sm rounded-2xl p-8 border border-[#2563eb]/30 flex flex-col h-full"
+                whileHover={{ scale: 1.02 }}
+                className="bg-white/5 backdrop-blur-3xl rounded-3xl p-10 border border-white/10 flex flex-col h-full group hover:border-[#1ba6d6]/30 transition-all duration-500"
               >
-                {/* Rating */}
-                <div className="flex items-center mb-4">
+                <div className="flex items-center mb-6">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <HiStar key={i} className="w-5 h-5 text-[#ffc957]" />
+                    <Star key={i} className="w-4 h-4 text-[#1ba6d6] fill-[#1ba6d6] mr-1" />
                   ))}
                 </div>
 
-                {/* Testimonial Text */}
-                <p className="text-[#cbd5e1] mb-6 italic flex-grow">
+                <p className="text-[#94a3b8] mb-8 text-sm uppercase tracking-widest leading-relaxed italic opacity-80 flex-grow">
                   "{testimonial.text}"
                 </p>
 
-                {/* Author */}
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-full flex items-center justify-center text-white font-bold text-lg">
+                <div className="flex items-center space-x-4 pt-8 border-t border-white/5">
+                  <div className="w-12 h-12 bg-[#1ba6d6] rounded-xl flex items-center justify-center text-white font-black text-lg shadow-[0_0_15px_rgba(27,166,214,0.3)]">
                     {testimonial.name.charAt(0)}
                   </div>
                   <div>
-                    <div className="font-semibold text-white">
+                    <div className="font-black text-white text-xs uppercase tracking-widest mb-1">
                       {testimonial.name}
                     </div>
-                    <div className="text-sm text-[#94a3b8]">
+                    <div className="text-[0.6rem] text-[#1ba6d6] font-black uppercase tracking-[0.2em] opacity-60">
                       {testimonial.role}
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
-          <div className="text-center">
+          <div className="text-center mt-12">
             <Link
               to="/testimonials"
-              className="px-8 py-4 border-2 border-[#2563eb] text-[#2563eb] font-bold rounded-xl hover:bg-[#2563eb]/10 transition-all duration-300"
+              className="px-10 py-4 border border-white/10 text-white text-[0.6rem] font-black uppercase tracking-[0.3em] hover:bg-white/5 hover:border-[#1ba6d6]/30 transition-all duration-500 backdrop-blur-md inline-block"
             >
-              View All Testimonials
+              View Full Network Feed
             </Link>
           </div>
         </div>
@@ -868,15 +857,15 @@ const Home = () => {
       {/* FAQ Section - Editorial Layout */}
       <section className="section-padding bg-[#0a0b0d]">
         <div className="container-custom max-w-4xl px-4 md:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-white">
-              Frequently Asked{' '}
-              <span className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] bg-clip-text text-transparent">
-                Questions
+          <div className="text-center mb-24">
+            <h2 className="text-4xl lg:text-7xl font-black mb-6 text-white tracking-tighter uppercase">
+              Neural{' '}
+              <span className="text-[#1ba6d6]">
+                Archive
               </span>
             </h2>
-            <p className="text-lg text-[#94a3b8]">
-              Find answers to common questions about our services
+            <p className="text-xs text-[#94a3b8] uppercase tracking-[0.4em] font-black opacity-60">
+              Query resolution for the Limitless architecture
             </p>
           </div>
 
@@ -884,99 +873,68 @@ const Home = () => {
             {faqs.slice(0, 6).map((faq, index) => (
               <div
                 key={index}
-                className="border border-[#2563eb]/30 rounded-xl overflow-hidden"
+                className="border border-white/5 bg-white/5 backdrop-blur-xl rounded-2xl overflow-hidden hover:border-[#1ba6d6]/30 transition-all duration-500"
               >
                 <button
                   onClick={() => toggleFaq(index)}
-                  className="w-full flex items-center justify-between p-6 text-left"
+                  className="w-full flex items-center justify-between p-8 text-left group"
                 >
-                  <h3 className="text-lg font-semibold text-white pr-4">
+                  <h3 className="text-xs font-black text-white uppercase tracking-widest pr-4 group-hover:text-[#1ba6d6] transition-colors">
                     {faq.question}
                   </h3>
                   {openFaq === index ? (
-                    <HiChevronUp className="w-6 h-6 text-[#ffc957] flex-shrink-0" />
+                    <ChevronUp className="w-5 h-5 text-[#1ba6d6] flex-shrink-0" />
                   ) : (
-                    <HiChevronDown className="w-6 h-6 text-[#2563eb]/50 flex-shrink-0" />
+                    <ChevronDown className="w-5 h-5 text-[#94a3b8] flex-shrink-0" />
                   )}
                 </button>
 
-                {openFaq === index && (
-                  <div className="px-6 pb-6">
-                    <p className="text-[#cbd5e1] leading-relaxed">
-                      {faq.answer}
-                    </p>
-                  </div>
-                )}
+                <AnimatePresence>
+                  {openFaq === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="px-8 pb-8"
+                    >
+                      <p className="text-[#94a3b8] text-xs uppercase tracking-wider leading-relaxed opacity-80">
+                        {faq.answer}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section - Asymmetrical Layout */}
-      <section className="section-padding bg-gradient-to-r from-[#2563eb] to-[#0a0b0d] text-white">
-        <div className="container-custom px-4 md:px-6 lg:px-8">
+      <section className="section-padding relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1ba6d6] to-[#0e1114]"></div>
+        <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7">
-              <h2 className="text-2xl md:text-4xl lg:text-5xl font-display font-bold mb-6">
-                Ready to Transform Your Business?
-                <br />
-                <span className="text-[#ffc957]">
-                  Architectural Excellence
-                </span>{' '}
-                Awaits
+            <div className="lg:col-span-12 text-center">
+              <h2 className="text-5xl md:text-8xl font-black mb-8 text-white tracking-tighter uppercase leading-[0.9]">
+                Ready to Initialize<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/20">The Deployment?</span>
               </h2>
-              <p className="text-xl mb-8 opacity-90 max-w-2xl">
-                Let's discuss how we can help you achieve your goals with
-                innovative technology solutions
+              <p className="text-sm md:text-base text-white/60 mb-12 max-w-2xl mx-auto uppercase tracking-widest leading-relaxed font-black">
+                Architectural Excellence is a choice. Initialize the nexus protocol today.
               </p>
-              <div className="flex flex-col sm:flex-row items-start gap-4">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                 <Link
                   to="/get-started"
-                  className="px-8 py-4 bg-[#ffc957] text-[#0a0b0d] font-bold rounded-xl hover:bg-[#ffbd3a] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                  className="px-12 py-6 bg-white text-[#0e1114] text-xs font-black uppercase tracking-[0.4em] mask-btn hover:scale-105 transition-all duration-500 shadow-2xl flex items-center group"
                 >
-                  Begin Strategic Initiative
+                  Begin Strategy
+                  <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-2 transition-transform" />
                 </Link>
                 <Link
                   to="/contact"
-                  className="px-8 py-4 rounded-xl font-bold text-base tracking-wide border-2 border-[#ffc957] text-[#ffc957] bg-transparent hover:bg-[#ffc957]/20 transition-all duration-300"
+                  className="px-12 py-6 border-2 border-white/20 text-white text-xs font-black uppercase tracking-[0.4em] hover:bg-white/10 transition-all duration-500"
                 >
-                  Schedule Consultation
+                  Schedule Meet
                 </Link>
-              </div>
-            </div>
-            <div className="lg:col-span-5">
-              <div className="relative">
-                <div className="absolute -top-6 -right-6 w-full h-full bg-gradient-to-br from-[#ffc957]/20 to-transparent rounded-3xl rotate-6"></div>
-                <div className="relative bg-white/10 backdrop-blur-sm p-8 rounded-3xl border border-white/20">
-                  <div className="flex items-center space-x-4 mb-4">
-                    <div className="w-12 h-12 bg-[#ffc957] rounded-full flex items-center justify-center">
-                      <HiCheckCircle className="w-6 h-6 text-[#0a0b0d]" />
-                    </div>
-                    <div>
-                      <div className="font-bold">Strategic Planning</div>
-                      <div className="text-sm opacity-80">
-                        Enterprise-Grade Solutions
-                      </div>
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="flex items-center space-x-2">
-                      <HiCheckCircle className="w-4 h-4 text-[#ffc957]" />
-                      <span className="text-sm">
-                        Mission-Critical Architecture
-                      </span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <HiCheckCircle className="w-4 h-4 text-[#ffc957]" />
-                      <span className="text-sm">Enterprise Security</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <HiCheckCircle className="w-4 h-4 text-[#ffc957]" />
-                      <span className="text-sm">Scalable Infrastructure</span>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

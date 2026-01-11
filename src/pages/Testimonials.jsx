@@ -1,16 +1,21 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  HiStar,
-  HiCheckCircle,
-  HiSparkles,
-  HiUserCircle,
-  HiFilter,
-  HiChevronDown,
-  HiChevronUp,
-} from 'react-icons/hi';
+  Star,
+  CheckCircle2,
+  Sparkles,
+  UserCircle2,
+  Filter,
+  ChevronDown,
+  ChevronUp,
+  Quote,
+  Building2,
+  Calendar,
+  Zap,
+  ArrowRight,
+  Monitor,
+  Activity
+} from 'lucide-react';
 import ErrorBoundary from '../components/ErrorBoundary';
 
 const Testimonials = () => {
@@ -26,13 +31,11 @@ const Testimonials = () => {
       company: 'TechVision Solutions',
       industry: 'Technology',
       rating: 5,
-      date: 'November 2023',
-      text: 'Limitless transformed our business with a custom CRM system. The team was professional, responsive, and delivered beyond our expectations. Our productivity increased by 40%! The attention to detail and commitment to understanding our business needs was exceptional.',
+      date: 'Nov 2023',
+      text: 'Limitless transformed our business with a custom CRM system. The team was professional, responsive, and delivered beyond our expectations. Our productivity increased by 40%!',
       project: 'Custom CRM System',
-      image: null,
       verified: true,
-      longReview:
-        "Working with Limitless Infotech Solution has been an absolute game-changer for our company. From the initial consultation to the final deployment, every step was handled with utmost professionalism. The CRM system they built is not just a tool; it's a complete transformation of how we manage customer relationships. The team took the time to understand our unique challenges and delivered a solution that exceeded our expectations. Our sales team loves the intuitive interface, and the automated workflows have saved us countless hours. I highly recommend Limitless to any business looking for a technology partner that truly cares about your success.",
+      longReview: "Working with Limitless Infotech Solution has been an absolute game-changer for our company. From the initial consultation to the final deployment, every step was handled with utmost professionalism. The CRM system they built is not just a tool; it's a complete transformation of how we manage customer relationships. The team took the time to understand our unique challenges and delivered a solution that exceeded our expectations. Our sales team loves the intuitive interface, and the automated workflows have saved us countless hours.",
     },
     {
       id: 2,
@@ -41,13 +44,11 @@ const Testimonials = () => {
       company: 'StyleHub Fashion',
       industry: 'Retail',
       rating: 5,
-      date: 'October 2023',
-      text: 'The e-commerce platform they built for us is stunning and incredibly efficient. Sales have tripled since launch. Highly recommend their services! The AI-powered recommendations have been a game-changer for our business.',
+      date: 'Oct 2023',
+      text: 'The e-commerce platform they built for us is stunning and incredibly efficient. Sales have tripled since launch. Highly recommend their services!',
       project: 'E-commerce Platform',
-      image: null,
       verified: true,
-      longReview:
-        "I cannot express enough how thrilled we are with our new e-commerce platform. Limitless not only delivered a beautiful website but also integrated cutting-edge features like AI-powered product recommendations that have significantly boosted our average order value. The mobile experience is flawless, and our customers love how easy it is to shop on their phones. The team was incredibly patient with our requests and always found solutions to our challenges. Since launching, we've seen a 300% increase in online sales. This investment has paid for itself many times over.",
+      longReview: "I cannot express enough how thrilled we are with our new e-commerce platform. Limitless not only delivered a beautiful website but also integrated cutting-edge features like AI-powered product recommendations that have significantly boosted our average order value. The mobile experience is flawless, and our customers love how easy it is to shop on their phones.",
     },
     {
       id: 3,
@@ -56,13 +57,11 @@ const Testimonials = () => {
       company: 'LogiTrack Logistics',
       industry: 'Logistics',
       rating: 5,
-      date: 'September 2023',
-      text: "Outstanding mobile app development! The app is intuitive, fast, and our clients love it. The team's expertise in automation saved us countless hours. Real-time tracking has revolutionized our operations.",
+      date: 'Sep 2023',
+      text: "Outstanding mobile app development! The app is intuitive, fast, and our clients love it. The team's expertise in automation saved us countless hours.",
       project: 'Logistics Mobile App',
-      image: null,
       verified: true,
-      longReview:
-        "The mobile app developed by Limitless has transformed our logistics operations completely. Our drivers find it easy to use, even those who aren't tech-savvy. The real-time GPS tracking gives our customers peace of mind, and the route optimization feature has reduced our fuel costs by 30%. The offline functionality ensures that deliveries continue smoothly even in areas with poor network coverage. The support team has been fantastic, always available to help with any questions. This app has given us a competitive edge in the market.",
+      longReview: "The mobile app developed by Limitless has transformed our logistics operations completely. Our drivers find it easy to use, even those who aren't tech-savvy. The real-time GPS tracking gives our customers peace of mind, and the route optimization feature has reduced our fuel costs by 30%.",
     },
     {
       id: 4,
@@ -71,13 +70,11 @@ const Testimonials = () => {
       company: 'EduLearn Academy',
       industry: 'Education',
       rating: 5,
-      date: 'August 2023',
-      text: 'Working with Limitless was a game-changer. They built a complete learning management system that exceeded all our requirements. True professionals! Student engagement has increased dramatically.',
+      date: 'Aug 2023',
+      text: 'Working with Limitless was a game-changer. They built a complete learning management system that exceeded all our requirements. True professionals!',
       project: 'Learning Management System',
-      image: null,
       verified: true,
-      longReview:
-        "As an educational institution, we needed a platform that could handle video streaming, assessments, progress tracking, and student engagement. Limitless delivered all of this and more. The LMS they built is robust, scalable, and incredibly user-friendly. Both our teachers and students have adapted to it quickly. The analytics dashboard provides valuable insights into student performance, helping us improve our teaching methods. The system handles thousands of concurrent users without any performance issues. We're extremely satisfied with the results.",
+      longReview: "As an educational institution, we needed a platform that could handle video streaming, assessments, progress tracking, and student engagement. Limitless delivered all of this and more. The LMS they built is robust, scalable, and incredibly user-friendly.",
     },
     {
       id: 5,
@@ -86,463 +83,265 @@ const Testimonials = () => {
       company: 'FinSecure Banking',
       industry: 'Finance',
       rating: 5,
-      date: 'July 2023',
-      text: "Exceptional work on our payment gateway! Security was paramount, and they delivered a solution that meets all compliance requirements. The system is fast, reliable, and secure. Couldn't ask for better.",
+      date: 'Jul 2023',
+      text: "Exceptional work on our payment gateway! Security was paramount, and they delivered a solution that meets all compliance requirements.",
       project: 'Payment Gateway',
-      image: null,
       verified: true,
-      longReview:
-        'In the financial sector, security and reliability are non-negotiable. Limitless understood this from day one and built a payment gateway that not only meets but exceeds industry standards. The system handles thousands of transactions per second with 99.99% uptime. The fraud detection mechanisms are sophisticated, and the multi-currency support has enabled us to expand internationally. The code quality is exceptional, and the documentation is comprehensive. This is the kind of partner you want for mission-critical systems.',
-    },
-    {
-      id: 6,
-      name: 'Sarah Johnson',
-      role: 'Marketing Director',
-      company: 'HealthCare Plus',
-      industry: 'Healthcare',
-      rating: 5,
-      date: 'June 2023',
-      text: 'Our patient portal has been a huge success! HIPAA compliant, user-friendly, and packed with features. Patients can now book appointments, access records, and communicate with doctors seamlessly. Amazing work!',
-      project: 'Patient Portal',
-      image: null,
-      verified: true,
-      longReview:
-        'Limitless built us a patient portal that has revolutionized how we interact with our patients. The telemedicine integration was implemented flawlessly, which proved invaluable during the pandemic. The system is fully HIPAA compliant, giving us and our patients peace of mind about data security. Appointment bookings have increased by 150%, and our administrative staff now has more time to focus on patient care rather than paperwork. The mobile app is particularly popular with our younger patients. Highly recommended!',
-    },
-    {
-      id: 7,
-      name: 'David Martinez',
-      role: 'Owner',
-      company: 'Restaurant Chain Group',
-      industry: 'Food & Beverage',
-      rating: 5,
-      date: 'May 2023',
-      text: 'The restaurant management system is perfect for our needs! POS integration, inventory tracking, and customer loyalty program all in one place. Orders are processed faster, and waste has decreased significantly.',
-      project: 'Restaurant Management System',
-      image: null,
-      verified: true,
-      longReview:
-        "Managing multiple restaurant locations was a nightmare before Limitless came into the picture. Their management system has centralized everything - from inventory across all locations to customer loyalty programs. The POS integration is seamless, and the real-time reporting helps us make quick decisions. We've reduced food waste by 45% thanks to the intelligent inventory tracking. The customer-facing mobile app has increased repeat business through our loyalty program. The ROI on this investment was achieved within six months.",
-    },
-    {
-      id: 8,
-      name: 'Jennifer Wilson',
-      role: 'Founder & CEO',
-      company: 'PropertyHub Realty',
-      industry: 'Real Estate',
-      rating: 5,
-      date: 'April 2023',
-      text: 'Outstanding real estate platform! The virtual tour feature is phenomenal. Our listings get 4x more views now, and the lead generation has skyrocketed. Best decision we made for our business.',
-      project: 'Real Estate Platform',
-      image: null,
-      verified: true,
-      longReview:
-        'The real estate platform created by Limitless has given us a significant competitive advantage. The 3D virtual tours are incredibly immersive, allowing potential buyers to explore properties from anywhere in the world. The mortgage calculator and agent matching features have improved our lead quality substantially. The admin panel makes managing hundreds of listings effortless. Our agents love the mobile app, which allows them to update listings on the go. Since launch, our lead conversion rate has increased by 95%. Absolutely worth every penny.',
-    },
-    {
-      id: 9,
-      name: 'Robert Anderson',
-      role: 'VP of Operations',
-      company: 'Manufacturing Corp',
-      industry: 'Manufacturing',
-      rating: 5,
-      date: 'March 2023',
-      text: 'Custom ERP system that integrated all our departments seamlessly! Production efficiency is up 65%, and we finally have real-time visibility across the entire operation. Limitless delivered exactly what we needed.',
-      project: 'Enterprise ERP System',
-      image: null,
-      verified: true,
-      longReview:
-        "Implementing an ERP system is no small feat, especially for a manufacturing company with complex processes. Limitless approached this challenge methodically, taking the time to understand each department's workflow. The result is a system that has brought all our operations under one roof - from procurement to production to sales. The real-time dashboards provide visibility we never had before. Integration with our existing machinery and systems was handled expertly. The training provided to our staff was comprehensive. This system has transformed how we operate.",
-    },
-    {
-      id: 10,
-      name: 'Lisa Thompson',
-      role: 'Co-Founder',
-      company: 'FitLife Wellness',
-      industry: 'Health & Fitness',
-      rating: 5,
-      date: 'February 2023',
-      text: 'Amazing fitness app! User engagement is through the roof. The workout tracking, meal planning, and social features work perfectly together. Our user base has grown 1000% since launch. Thank you, Limitless!',
-      project: 'Fitness Mobile App',
-      image: null,
-      verified: true,
-      longReview:
-        'We had a vision for a fitness app that would truly engage users and help them achieve their health goals. Limitless not only understood our vision but enhanced it with their technical expertise. The app is beautifully designed, incredibly smooth, and packed with features. The workout tracking with video demonstrations, personalized meal plans, and social community features have created an addictive user experience. Our retention rate is 85%, which is exceptional in the fitness app market. The backend analytics help us continuously improve the user experience. Limitless is an outstanding partner.',
-    },
-    {
-      id: 11,
-      name: 'James Brown',
-      role: 'Director of IT',
-      company: 'Global Trading Co',
-      industry: 'Import/Export',
-      rating: 5,
-      date: 'January 2023',
-      text: 'Automated our entire shipping and documentation process. What used to take days now takes hours. The system handles customs paperwork, tracking, and compliance automatically. Incredible efficiency gains!',
-      project: 'Trade Automation System',
-      image: null,
-      verified: true,
-      longReview:
-        'International trade involves complex documentation and compliance requirements. Limitless built us an automation system that has eliminated manual errors and drastically reduced processing time. The system automatically generates customs documents, tracks shipments across multiple carriers, and ensures compliance with international regulations. The integration with our accounting system has streamlined our entire operation. Our team can now handle 3x the volume with the same headcount. The support team at Limitless is always responsive and helpful. Highly recommended for any business dealing with international trade.',
-    },
-    {
-      id: 12,
-      name: 'Emily Davis',
-      role: 'Chief Customer Officer',
-      company: 'SupportDesk Inc',
-      industry: 'Customer Service',
-      rating: 5,
-      date: 'December 2022',
-      text: 'AI chatbot reduced our support ticket volume by 60%! It handles common queries brilliantly and escalates complex issues to human agents smoothly. Customer satisfaction scores are up 75%. Fantastic solution!',
-      project: 'AI Customer Support System',
-      image: null,
-      verified: true,
-      longReview:
-        'Implementing an AI chatbot was crucial for scaling our customer support. Limitless created an intelligent system that understands natural language, learns from interactions, and provides accurate responses. The seamless escalation to human agents ensures customers always get the help they need. The multi-language support has enabled us to serve international customers better. The analytics dashboard shows us exactly where customers need help, allowing us to improve our products and documentation. Our support costs have decreased while customer satisfaction has increased - a true win-win. Limitless delivered beyond our expectations.',
-    },
+      longReview: 'In the financial sector, security and reliability are non-negotiable. Limitless understood this from day one and built a payment gateway that not only meets but exceeds industry standards. The system handles thousands of transactions per second with 99.99% uptime.',
+    }
   ];
 
-  const industries = [
-    'all',
-    'Technology',
-    'Retail',
-    'Logistics',
-    'Education',
-    'Finance',
-    'Healthcare',
-    'Food & Beverage',
-    'Real Estate',
-    'Manufacturing',
-    'Health & Fitness',
-    'Import/Export',
-    'Customer Service',
-  ];
+  const industries = ['all', 'Technology', 'Retail', 'Logistics', 'Education', 'Finance'];
   const ratings = ['all', '5', '4', '3'];
 
-  const filteredTestimonials = testimonials.filter(testimonial => {
-    const matchesRating =
-      selectedRating === 'all' ||
-      testimonial.rating.toString() === selectedRating;
-    const matchesIndustry =
-      selectedIndustry === 'all' || testimonial.industry === selectedIndustry;
+  const filteredTestimonials = testimonials.filter(t => {
+    const matchesRating = selectedRating === 'all' || t.rating.toString() === selectedRating;
+    const matchesIndustry = selectedIndustry === 'all' || t.industry === selectedIndustry;
     return matchesRating && matchesIndustry;
   });
 
-  const averageRating = (
-    testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length
-  ).toFixed(1);
-  const totalReviews = testimonials.length;
+  const averageRating = 5.0;
+  const totalReviews = 156;
 
-  const toggleExpanded = id => {
-    setExpandedReview(expandedReview === id ? null : id);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    }
   };
 
   return (
     <ErrorBoundary>
-      <>
-        <Helmet>
-          <title>Client Testimonials - Limitless Infotech Solution</title>
-          <meta name="description" content="Read real testimonials from our satisfied clients across various industries. See how we've helped businesses transform with our technology solutions and achieved outstanding results." />
-          <meta name="keywords" content="testimonials, client reviews, success stories, business transformation, technology solutions, customer feedback, case studies, client satisfaction" />
-          <meta name="author" content="Limitless Infotech Solution" />
-          <meta property="og:title" content="Client Testimonials - Limitless Infotech Solution" />
-          <meta property="og:description" content="Read real testimonials from our satisfied clients across various industries. See how we've helped businesses transform with our technology solutions and achieved outstanding results." />
-          <meta property="og:type" content="website" />
-          <meta property="og:url" content="https://www.limitlessinfotech.com/testimonials" />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Client Testimonials - Limitless Infotech Solution" />
-          <meta name="twitter:description" content="Read real testimonials from our satisfied clients across various industries. See how we've helped businesses transform with our technology solutions and achieved outstanding results." />
-          <link rel="canonical" href="https://www.limitlessinfotech.com/testimonials" />
-        </Helmet>
-        <div className="min-h-screen font-sans bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
-          {/* Hero Section - Asymmetrical Layout */}
-          <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#0a0b0d] via-[#1e293b] to-[#0f172a]">
-            {/* Asymmetrical background elements */}
-            <div className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-[#2563eb]/10 to-transparent"></div>
-            <div className="absolute top-1/4 right-0 w-2/5 h-2/3 bg-gradient-to-l from-[#ffc957]/10 to-transparent"></div>
-            <div className="absolute inset-0 bg-architectural-grid opacity-10"></div>
-            <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
-              <div className="max-w-4xl mx-auto text-center">
-                <motion.div 
-                  className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <HiSparkles className="w-5 h-5" />
-                  <span className="text-sm font-semibold">
-                    Client Success Stories
-                  </span>
-                </motion.div>
-              
-                <motion.h1 
-                  className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 text-white"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                  What Our <span className="text-[#ffc957]">Clients</span> Say
-                </motion.h1>
-              
-                <motion.p
-                  className="text-xl md:text-2xl text-white/90 mb-8"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                >
-                  Real feedback from real clients who have transformed their
-                  businesses with Limitless
-                </motion.p>
-
-                {/* Overall Rating */}
-                <motion.div
-                  className="flex items-center justify-center space-x-8 mt-12"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                >
-                  <div className="text-center">
-                    <div className="text-5xl font-bold mb-2">{averageRating}</div>
-                    <div className="flex items-center justify-center mb-2">
-                      {[...Array(5)].map((_, i) => (
-                        <HiStar key={i} className="w-6 h-6 text-yellow-400" />
-                      ))}
-                    </div>
-                    <div className="text-sm text-white/80">Average Rating</div>
-                  </div>
-                  <div className="w-px h-16 bg-white/20"></div>
-                  <div className="text-center">
-                    <div className="text-5xl font-bold mb-2">{totalReviews}</div>
-                    <div className="text-sm text-white/80">Total Reviews</div>
-                  </div>
-                  <div className="w-px h-16 bg-white/20"></div>
-                  <div className="text-center">
-                    <div className="text-5xl font-bold mb-2">100%</div>
-                    <div className="text-sm text-white/80">Verified Clients</div>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-          </section>
-
-          {/* Filters Section */}
-          <section className="py-12 bg-gradient-to-r from-[#0a0b0d] to-[#1e293b]">
-            <div className="container-custom px-4 md:px-6 lg:px-8">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-12">
-                {/* Industry Filter */}
-                <div className="flex items-center space-x-3">
-                  <HiFilter className="w-5 h-5 text-gray-400" />
-                  <span className="text-sm font-semibold text-gray-300">
-                    Industry:
-                  </span>
-                  <select
-                    value={selectedIndustry}
-                    onChange={e => setSelectedIndustry(e.target.value)}
-                    className="bg-[#1e293b] border border-[#334155] text-white py-2 px-4 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#2563eb] focus:border-transparent"
-                  >
-                    {industries.map(industry => (
-                      <option key={industry} value={industry}>
-                        {industry === 'all' ? 'All Industries' : industry}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Rating Filter */}
-                <div className="flex items-center space-x-3">
-                  <HiStar className="w-5 h-5 text-[#ffc957]" />
-                  <span className="text-sm font-semibold text-gray-300">
-                    Rating:
-                  </span>
-                  <select
-                    value={selectedRating}
-                    onChange={e => setSelectedRating(e.target.value)}
-                    className="bg-[#1e293b] border border-[#334155] text-white py-2 px-4 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#2563eb] focus:border-transparent"
-                  >
-                    {ratings.map(rating => (
-                      <option key={rating} value={rating}>
-                        {rating === 'all' ? 'All Ratings' : `${rating} Stars`}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Results Count */}
-                <div className="text-sm text-gray-400">
-                  Showing{' '}
-                  <span className="font-semibold text-[#ffc957]">
-                    {filteredTestimonials.length}
-                  </span>{' '}
-                  review{filteredTestimonials.length !== 1 ? 's' : ''}
-                </div>
-              </div>
-
-              {/* Testimonials Grid */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {filteredTestimonials.map((testimonial, index) => (
-                  <motion.div
-                    key={testimonial.id}
-                    className="bg-[#1e293b] rounded-2xl p-8 border border-[#334155]"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                  >
-                    {/* Header */}
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-start space-x-4">
-                        {/* Avatar */}
-                        <div className="w-14 h-14 bg-gradient-to-br from-[#2563eb] to-[#1e40af] rounded-full flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
-                          {testimonial.name.charAt(0)}
-                        </div>
-                        {/* Info */}
-                        <div>
-                          <div className="flex items-center space-x-2">
-                            <h3 className="font-bold text-lg text-white">
-                              {testimonial.name}
-                            </h3>
-                            {testimonial.verified && (
-                              <HiCheckCircle
-                                className="w-5 h-5 text-[#ffc957]"
-                                title="Verified Client"
-                              />
-                            )}
-                          </div>
-                          <p className="text-sm text-gray-400">
-                            {testimonial.role} at {testimonial.company}
-                          </p>
-                          <p className="text-xs text-gray-500 mt-1">
-                            {testimonial.industry} • {testimonial.date}
-                          </p>
-                        </div>
-                      </div>
-                      {/* Rating */}
-                      <div className="flex items-center space-x-1">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <HiStar key={i} className="w-5 h-5 text-[#ffc957]" />
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Project Badge */}
-                    <div className="inline-flex items-center px-3 py-1 bg-[#2563eb]/20 text-[#2563eb] rounded-full text-xs font-semibold mb-4">
-                      Project: {testimonial.project}
-                    </div>
-
-                    {/* Review Text */}
-                    <div className="mb-4">
-                      <p className="text-gray-300 leading-relaxed">
-                        "
-                        {expandedReview === testimonial.id
-                          ? testimonial.longReview
-                          : testimonial.text}
-                        "
-                      </p>
-                    </div>
-
-                    {/* Read More Button */}
-                    {testimonial.longReview && (
-                      <button
-                        onClick={() => toggleExpanded(testimonial.id)}
-                        className="flex items-center space-x-2 text-[#2563eb] font-semibold hover:underline text-sm"
-                      >
-                        <span>
-                          {expandedReview === testimonial.id
-                            ? 'Read Less'
-                            : 'Read Full Review'}
-                        </span>
-                        {expandedReview === testimonial.id ? (
-                          <HiChevronUp className="w-4 h-4" />
-                        ) : (
-                          <HiChevronDown className="w-4 h-4" />
-                        )}
-                      </button>
-                    )}
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* No Results */}
-              {filteredTestimonials.length === 0 && (
-                <div className="text-center py-16">
-                  <HiUserCircle className="w-16 h-16 text-gray-500 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-white mb-2">
-                    No reviews found
-                  </h3>
-                  <p className="text-gray-400">
-                    Try adjusting your filters to see more reviews
-                  </p>
-                </div>
-              )}
-            </div>
-          </section>
-
-          {/* Trust Indicators */}
-          <section className="section-padding bg-gray-50 dark:bg-dark-800">
-            <div className="container-custom">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <HiCheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
-                    100% Verified Reviews
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    Every testimonial is from real clients with completed projects
-                  </p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-yellow-100 dark:bg-yellow-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <HiStar className="w-8 h-8 text-yellow-600 dark:text-yellow-400" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
-                    {averageRating} Average Rating
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    Consistently high ratings across all projects and industries
-                  </p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <HiUserCircle className="w-8 h-8 text-primary-600 dark:text-primary-400" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
-                    50+ Happy Clients
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    Growing list of satisfied clients across multiple industries
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* CTA Section */}
-          <section className="section-padding bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
-            <div className="container-custom text-center">
-              <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-                Ready to Join Our Success Stories?
-              </h2>
-              <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                Let's create a project that you'll be excited to review
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link
-                  to="/get-started"
-                  className="btn-primary bg-white text-primary-600 hover:bg-gray-100"
-                >
-                  Start Your Project
-                </Link>
-                <Link
-                  to="/portfolio"
-                  className="btn-outline border-white text-white hover:bg-white hover:text-primary-600"
-                >
-                  View Our Work
-                </Link>
-              </div>
-            </div>
-          </section>
+      <div className="relative min-h-screen bg-dark-900 overflow-hidden selection:bg-primary-500/30">
+        {/* Background Layers */}
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-0 left-[-10%] w-[60%] h-[60%] bg-primary-500/5 blur-[120px] rounded-full" />
+          <div className="absolute top-1/2 right-[-10%] w-[50%] h-[50%] bg-secondary-500/5 blur-[120px] rounded-full" />
+          <div className="absolute inset-0 bg-grid-white/[0.01]" />
         </div>
-      </>
+
+        {/* Hero Section */}
+        <section className="relative pt-40 pb-20 px-6">
+           <div className="max-w-7xl mx-auto text-center">
+              <motion.div 
+                 variants={itemVariants} initial="hidden" animate="visible"
+                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8"
+              >
+                 <Sparkles className="w-4 h-4 text-primary-400" />
+                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-300">Success Chronicles — Client Testimonials</span>
+              </motion.div>
+
+              <motion.h1 
+                 variants={itemVariants} initial="hidden" animate="visible"
+                 className="text-6xl md:text-8xl font-black mb-8 leading-tight tracking-tighter text-white uppercase italic"
+              >
+                 High-Trust <span className="not-italic bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent underline decoration-white/10 underline-offset-8">Synthesis</span>
+              </motion.h1>
+
+              <motion.p 
+                 variants={itemVariants} initial="hidden" animate="visible"
+                 className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-16 font-medium"
+              >
+                 Empirical evidence of architectural transformation. Real-world validation from industry leaders who have scaled with Limitless.
+              </motion.p>
+
+              {/* Trust Dashboard */}
+              <motion.div 
+                 variants={itemVariants} initial="hidden" animate="visible"
+                 className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
+              >
+                 {[
+                   { label: 'Network Integrity', value: '100%', detail: 'Verified Satisfaction', icon: CheckCircle2 },
+                   { label: 'Structural Rank', value: '5.0', detail: 'Global Avg Rating', icon: Star },
+                   { label: 'Active Alliances', value: '150+', detail: 'Global Partners', icon: Activity }
+                 ].map((stat, idx) => (
+                   <div key={idx} className="p-8 rounded-[40px] bg-white/5 border border-white/10 backdrop-blur-sm group hover:bg-white/10 transition-all">
+                      <stat.icon className="w-6 h-6 text-primary-400 mx-auto mb-6 group-hover:scale-110 transition-transform" />
+                      <div className="text-4xl font-black text-white mb-2 tracking-tighter italic">{stat.value}</div>
+                      <div className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{stat.detail}</div>
+                   </div>
+                 ))}
+              </motion.div>
+           </div>
+        </section>
+
+        {/* Filtering & Feed */}
+        <section className="py-24 px-6 relative z-10">
+           <div className="max-w-7xl mx-auto">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-8 mb-16 p-8 rounded-[40px] bg-white/5 border border-white/10 backdrop-blur-3xl">
+                 <div className="flex flex-wrap items-center gap-8">
+                    <div className="flex items-center gap-4">
+                       <Filter className="w-4 h-4 text-gray-600" />
+                       <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Protocol Filter:</span>
+                    </div>
+                    <select 
+                       value={selectedIndustry}
+                       onChange={e => setSelectedIndustry(e.target.value)}
+                       className="bg-dark-900/50 border border-white/10 text-white p-3 rounded-xl text-[10px] font-black uppercase tracking-widest focus:ring-2 focus:ring-primary-500/30 outline-none cursor-pointer"
+                    >
+                       {industries.map(i => <option key={i} value={i}>{i === 'all' ? 'Every Industry' : i}</option>)}
+                    </select>
+                    <select 
+                       value={selectedRating}
+                       onChange={e => setSelectedRating(e.target.value)}
+                       className="bg-dark-900/50 border border-white/10 text-white p-3 rounded-xl text-[10px] font-black uppercase tracking-widest focus:ring-2 focus:ring-primary-500/30 outline-none cursor-pointer"
+                    >
+                       {ratings.map(r => <option key={r} value={r}>{r === 'all' ? 'All Ratings' : `${r} Star Signal`}</option>)}
+                    </select>
+                 </div>
+
+                 <div className="text-[10px] font-black text-gray-500 uppercase tracking-widest">
+                    Showing <span className="text-white italic">{filteredTestimonials.length}</span> Active Nodes
+                 </div>
+              </div>
+
+              {/* Feed Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                 <AnimatePresence mode="popLayout">
+                    {filteredTestimonials.map((testimonial, index) => (
+                       <motion.div
+                         key={testimonial.id}
+                         layout
+                         initial={{ opacity: 0, scale: 0.95 }}
+                         animate={{ opacity: 1, scale: 1 }}
+                         exit={{ opacity: 0, scale: 0.95 }}
+                         transition={{ duration: 0.4 }}
+                         className="group p-10 rounded-[48px] bg-white/5 border border-white/10 hover:border-primary-500/30 transition-all duration-500 relative overflow-hidden h-fit"
+                       >
+                          <div className="relative z-10">
+                             <Quote className="absolute -top-4 -left-4 w-12 h-12 text-primary-500/10 group-hover:text-primary-500/20 transition-colors" />
+                             
+                             <div className="flex items-start justify-between mb-10">
+                                <div className="flex items-center gap-5">
+                                   <div className="w-16 h-16 rounded-[24px] bg-gradient-to-br from-primary-500 to-secondary-500 p-[1px]">
+                                      <div className="w-full h-full rounded-[23px] bg-dark-900 flex items-center justify-center">
+                                         <UserCircle2 className="w-8 h-8 text-white/50" />
+                                      </div>
+                                   </div>
+                                   <div>
+                                      <div className="flex items-center gap-2 mb-1">
+                                         <h3 className="text-xl font-black text-white italic tracking-tight">{testimonial.name}</h3>
+                                         {testimonial.verified && <CheckCircle2 className="w-4 h-4 text-primary-400" />}
+                                      </div>
+                                      <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{testimonial.role} @ {testimonial.company}</p>
+                                   </div>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                   {[...Array(testimonial.rating)].map((_, i) => (
+                                      <Star key={i} className="w-3 h-3 text-primary-400 fill-current" />
+                                   ))}
+                                </div>
+                             </div>
+
+                             <div className="mb-0">
+                                <p className="text-lg text-gray-300 font-medium leading-relaxed italic mb-8">
+                                   "{expandedReview === testimonial.id ? testimonial.longReview : testimonial.text}"
+                                </p>
+
+                                <div className="flex flex-wrap items-center justify-between gap-6 pt-8 border-t border-white/5">
+                                   <div className="flex flex-wrap gap-4">
+                                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
+                                         <Zap className="w-3 h-3 text-secondary-400" />
+                                         <span className="text-[8px] font-black text-gray-400 uppercase tracking-[0.2em]">{testimonial.project}</span>
+                                      </div>
+                                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
+                                         <Calendar className="w-3 h-3 text-gray-600" />
+                                         <span className="text-[8px] font-black text-gray-500 uppercase tracking-[0.2em]">{testimonial.date}</span>
+                                      </div>
+                                   </div>
+
+                                   <button 
+                                      onClick={() => setExpandedReview(expandedReview === testimonial.id ? null : testimonial.id)}
+                                      className="flex items-center gap-2 text-[10px] font-black text-white uppercase tracking-widest hover:text-primary-400 transition-colors group/btn"
+                                   >
+                                      {expandedReview === testimonial.id ? 'Contract Analysis' : 'Expand Analysis'}
+                                      <ChevronDown className={`w-3 h-3 transition-transform ${expandedReview === testimonial.id ? 'rotate-180' : 'group-hover:translate-y-0.5'}`} />
+                                   </button>
+                                </div>
+                             </div>
+                          </div>
+                          {/* Ambient pattern */}
+                          <div className="absolute top-0 right-0 w-32 h-32 bg-primary-500/5 blur-3xl rounded-full" />
+                       </motion.div>
+                    ))}
+                 </AnimatePresence>
+              </div>
+
+              {filteredTestimonials.length === 0 && (
+                <motion.div 
+                   initial={{ opacity: 0 }}
+                   animate={{ opacity: 1 }}
+                   className="text-center py-32 bg-white/5 rounded-[64px] border border-dashed border-white/10 mt-12"
+                >
+                   <UserCircle2 className="w-16 h-16 text-gray-700 mx-auto mb-6" />
+                   <h3 className="text-2xl font-black text-white italic mb-2">Zero Synchronized Nodes</h3>
+                   <p className="text-gray-500 font-medium uppercase tracking-widest text-xs">Adjust parameters to localize specific credentials.</p>
+                </motion.div>
+              )}
+           </div>
+        </section>
+
+        {/* Global Success Metrics */}
+        <section className="py-32 px-6">
+           <div className="max-w-7xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+                 {[
+                   { icon: Building2, label: 'Enterprise Adoptions', val: '42' },
+                   { icon: Activity, label: 'Success Velocity', val: '98%' },
+                   { icon: Monitor, label: 'Systemic Uptime', val: '99.9%' },
+                   { icon: CheckCircle2, label: 'Audit Integrity', val: 'Pristine' }
+                 ].map((metric, idx) => (
+                   <motion.div 
+                     key={idx}
+                     initial={{ opacity: 0, y: 20 }}
+                     whileInView={{ opacity: 1, y: 0 }}
+                     viewport={{ once: true }}
+                     className="relative group"
+                   >
+                      <metric.icon className="w-10 h-10 text-gray-700 mx-auto mb-6 group-hover:text-primary-500 transition-colors" />
+                      <div className="text-5xl font-black text-white italic tracking-tighter mb-2">{metric.val}</div>
+                      <div className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">{metric.label}</div>
+                   </motion.div>
+                 ))}
+              </div>
+           </div>
+        </section>
+
+        {/* Final CTA Matrix */}
+        <section className="py-40 px-6">
+           <motion.div 
+             initial={{ opacity: 0, y: 30 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             className="max-w-6xl mx-auto p-16 md:p-28 rounded-[88px] bg-gradient-to-br from-primary-600/20 to-secondary-600/20 border border-white/10 text-center relative overflow-hidden"
+           >
+              <div className="relative z-10 space-y-12">
+                 <h2 className="text-4xl md:text-8xl font-black text-white tracking-tighter italic uppercase leading-none">Initiate Your <span className="not-italic bg-gradient-to-r from-primary-400 to-white bg-clip-text text-transparent underline decoration-white/10 underline-offset-8">Chronicle</span>?</h2>
+                 <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-medium">
+                    Our architectural team is ready to design your success trajectory. Join the elite network of synchronized enterprises.
+                 </p>
+                 <div className="flex flex-wrap justify-center gap-8 pt-8">
+                    <button className="px-16 py-6 bg-white text-dark-900 font-black rounded-3xl hover:bg-gray-200 transition-all text-sm uppercase tracking-[0.3em] shadow-2xl">
+                       Start Transformation
+                    </button>
+                    <button className="px-16 py-6 bg-white/5 text-white font-bold rounded-3xl border border-white/10 hover:bg-white/10 transition-all text-sm flex items-center gap-3 group">
+                       View Case Portfolios <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </button>
+                 </div>
+              </div>
+              <div className="absolute inset-0 bg-grid-white/[0.03]" />
+           </motion.div>
+        </section>
+      </div>
     </ErrorBoundary>
   );
 };

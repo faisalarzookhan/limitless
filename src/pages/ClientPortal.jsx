@@ -1,750 +1,212 @@
-import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import {
-  HiUser,
-  HiDocumentText,
-  HiChartBar,
-  HiCreditCard,
-  HiDownload,
-  HiCog,
-  HiBell,
-  HiCheckCircle,
-  HiClock,
-  HiUserGroup,
-  HiShieldCheck,
-  HiUserCircle,
-  HiMail,
-  HiPhone,
-  HiLocationMarker,
-  HiCalendar,
-  HiCurrencyDollar,
-  HiTrendingUp,
-  HiLockClosed,
-} from 'react-icons/hi';
-import Navbar from '../components/layout/header/Navbar';
+  LayoutDashboard,
+  Box,
+  MessageSquare,
+  FileText,
+  Settings,
+  Bell,
+  Search,
+  Zap,
+  Clock,
+  CheckCircle2,
+  ChevronRight,
+  ArrowUpRight,
+  Plus,
+  Users,
+  Activity,
+  ShieldCheck,
+  Package
+} from 'lucide-react';
 import ErrorBoundary from '../components/ErrorBoundary';
 
-const ClientPortal = props => {
-  const [activeTab, setActiveTab] = useState('dashboard');
-  const [userRole, setUserRole] = useState('admin'); // admin, manager, user
-  const [notifications, setNotifications] = useState([]);
-  const [projects, setProjects] = useState([]);
-  const [invoices, setInvoices] = useState([]);
+const ClientPortal = () => {
+  const activeProjects = [
+    { id: 1, name: 'Neural CRM V2', progress: 75, status: 'Synthesis', efficiency: '+12%' },
+    { id: 2, name: 'Auralis Integration', progress: 40, status: 'Node Audit', efficiency: '+5%' },
+  ];
 
-  // Mock data initialization
-  useEffect(() => {
-    // Mock notifications
-    setNotifications([
-      {
-        id: 1,
-        type: 'info',
-        message: 'Your project milestone has been completed',
-        time: '2 hours ago',
-        read: false,
-      },
-      {
-        id: 2,
-        type: 'success',
-        message: 'Invoice #INV-001 has been paid',
-        time: '1 day ago',
-        read: true,
-      },
-      {
-        id: 3,
-        type: 'warning',
-        message: 'Subscription renewal required',
-        time: '3 days ago',
-        read: false,
-      },
-    ]);
+  const recentActivity = [
+    { id: 1, type: 'Update', text: 'Architecture audit completed for Neural CRM V2.', time: '2h ago', icon: Activity },
+    { id: 2, type: 'Message', text: 'New message from Architect Sarah Chen regarding payload optimization.', time: '5h ago', icon: MessageSquare },
+    { id: 3, type: 'System', text: 'Security protocols updated to Version 4.2.', time: '1d ago', icon: ShieldCheck },
+  ];
 
-    // Mock projects
-    setProjects([
-      {
-        id: 1,
-        name: 'HR-IMS Implementation',
-        status: 'completed',
-        progress: 100,
-        client: 'TechCorp',
-        deadline: '2024-01-15',
-      },
-      {
-        id: 2,
-        name: 'TrackIT Migration',
-        status: 'in-progress',
-        progress: 75,
-        client: 'LogiSolutions',
-        deadline: '2024-02-28',
-      },
-      {
-        id: 3,
-        name: 'API Integration',
-        status: 'pending',
-        progress: 10,
-        client: 'FinancePro',
-        deadline: '2024-03-15',
-      },
-    ]);
-
-    // Mock invoices
-    setInvoices([
-      {
-        id: 'INV-001',
-        date: '2024-01-01',
-        amount: 25000,
-        status: 'paid',
-        dueDate: '2024-01-15',
-      },
-      {
-        id: 'INV-002',
-        date: '2024-02-01',
-        amount: 15000,
-        status: 'pending',
-        dueDate: '2024-02-15',
-      },
-      {
-        id: 'INV-003',
-        date: '2024-03-01',
-        amount: 35000,
-        status: 'pending',
-        dueDate: '2024-03-15',
-      },
-    ]);
-  }, []);
-
-  const user = {
-    name: 'John Doe',
-    email: 'john.doe@clientcompany.com',
-    company: 'Client Company Inc.',
-    role: 'CTO',
-    avatar: 'https://via.placeholder.com/100x100',
-    joinDate: '2023-06-15',
-    lastLogin: '2024-01-15 14:30:00',
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
   };
 
-  const stats = [
-    {
-      label: 'Active Projects',
-      value: projects.filter(p => p.status !== 'completed').length,
-      change: '+2',
-      icon: HiChartBar,
-    },
-    {
-      label: 'Total Invoices',
-      value: invoices.length,
-      change: '+1',
-      icon: HiCurrencyDollar,
-    },
-    { label: 'Pending Tasks', value: 5, change: '-3', icon: HiCheckCircle },
-    { label: 'Uptime', value: '99.9%', change: '+0.1%', icon: HiTrendingUp },
-  ];
-
-  const tabs = [
-    { id: 'dashboard', label: 'Dashboard', icon: HiChartBar },
-    { id: 'projects', label: 'Projects', icon: HiDocumentText },
-    { id: 'invoices', label: 'Invoices', icon: HiCreditCard },
-    { id: 'documents', label: 'Documents', icon: HiDownload },
-    { id: 'settings', label: 'Settings', icon: HiCog },
-  ];
-
-  const renderDashboard = () => (
-    <div className="space-y-8">
-      {/* Welcome Section */}
-      <div className="bg-gradient-to-br from-blue-600 to-indigo-600 text-white rounded-2xl p-8">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-2xl font-bold mb-2">
-              Welcome back, {user.name}
-            </h2>
-            <p className="text-blue-100">
-              Here's what's happening with your projects today.
-            </p>
-          </div>
-          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-            <HiUser className="w-8 h-8" />
-          </div>
-        </div>
-      </div>
-
-      {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat, index) => {
-          const Icon = stat.icon;
-          return (
-            <div
-              key={index}
-              className="bg-white dark:bg-dark-800 rounded-xl p-6 shadow-soft border border-gray-100 dark:border-dark-700"
-            >
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center">
-                  <Icon className="w-6 h-6 text-white" />
-                </div>
-                <span
-                  className={`text-sm font-medium ${
-                    stat.change.startsWith('+')
-                      ? 'text-green-600'
-                      : stat.change.startsWith('-')
-                        ? 'text-red-600'
-                        : 'text-gray-600'
-                  }`}
-                >
-                  {stat.change}
-                </span>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
-                {stat.value}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                {stat.label}
-              </p>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Recent Activity */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Projects */}
-        <div className="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-dark-700">
-          <h3 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">
-            Recent Projects
-          </h3>
-          <div className="space-y-4">
-            {projects.slice(0, 3).map(project => (
-              <div
-                key={project.id}
-                className="flex items-center justify-between p-4 bg-gray-50 dark:bg-dark-700 rounded-lg"
-              >
-                <div className="flex-1">
-                  <h4 className="font-semibold text-gray-900 dark:text-white">
-                    {project.name}
-                  </h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    {project.client}
-                  </p>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <div className="w-24 bg-gray-200 dark:bg-dark-600 rounded-full h-2">
-                    <div
-                      className={`h-2 rounded-full ${
-                        project.status === 'completed'
-                          ? 'bg-green-500'
-                          : project.status === 'in-progress'
-                            ? 'bg-blue-500'
-                            : 'bg-yellow-500'
-                      }`}
-                      style={{ width: `${project.progress}%` }}
-                    ></div>
-                  </div>
-                  <span
-                    className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      project.status === 'completed'
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
-                        : project.status === 'in-progress'
-                          ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400'
-                          : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
-                    }`}
-                  >
-                    {project.status.replace('-', ' ')}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Invoices */}
-        <div className="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-dark-700">
-          <h3 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">
-            Recent Invoices
-          </h3>
-          <div className="space-y-4">
-            {invoices.slice(0, 3).map(invoice => (
-              <div
-                key={invoice.id}
-                className="flex items-center justify-between p-4 bg-gray-50 dark:bg-dark-700 rounded-lg"
-              >
-                <div className="flex-1">
-                  <h4 className="font-semibold text-gray-900 dark:text-white">
-                    {invoice.id}
-                  </h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    {invoice.date}
-                  </p>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <span className="font-semibold text-gray-900 dark:text-white">
-                    ${invoice.amount.toLocaleString()}
-                  </span>
-                  <span
-                    className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      invoice.status === 'paid'
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
-                        : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
-                    }`}
-                  >
-                    {invoice.status}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderProjects = () => (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Projects
-        </h2>
-        <button className="btn-primary">New Project</button>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map(project => (
-          <div
-            key={project.id}
-            className="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-dark-700"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-bold text-gray-900 dark:text-white">
-                {project.name}
-              </h3>
-              <span
-                className={`px-3 py-1 rounded-full text-xs font-medium ${
-                  project.status === 'completed'
-                    ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
-                    : project.status === 'in-progress'
-                      ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400'
-                      : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
-                }`}
-              >
-                {project.status.replace('-', ' ')}
-              </span>
-            </div>
-
-            <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
-              Client: {project.client}
-            </p>
-
-            <div className="mb-4">
-              <div className="flex justify-between text-sm mb-1">
-                <span>Progress</span>
-                <span>{project.progress}%</span>
-              </div>
-              <div className="w-full bg-gray-200 dark:bg-dark-600 rounded-full h-2">
-                <div
-                  className={`h-2 rounded-full ${
-                    project.status === 'completed'
-                      ? 'bg-green-500'
-                      : project.status === 'in-progress'
-                        ? 'bg-blue-500'
-                        : 'bg-yellow-500'
-                  }`}
-                  style={{ width: `${project.progress}%` }}
-                ></div>
-              </div>
-            </div>
-
-            <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
-              <span>Deadline: {project.deadline}</span>
-              <button className="text-blue-600 dark:text-blue-400 hover:underline">
-                View Details
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-
-  const renderInvoices = () => (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Invoices
-        </h2>
-        <button className="btn-primary">Download All</button>
-      </div>
-
-      <div className="bg-white dark:bg-dark-800 rounded-2xl shadow-soft border border-gray-100 dark:border-dark-700 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-gray-50 dark:bg-dark-700">
-              <tr>
-                <th className="px-6 py-4 text-left text-sm font-medium text-gray-900 dark:text-white">
-                  Invoice ID
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-gray-900 dark:text-white">
-                  Date
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-gray-900 dark:text-white">
-                  Amount
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-gray-900 dark:text-white">
-                  Status
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-gray-900 dark:text-white">
-                  Due Date
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-gray-900 dark:text-white">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200 dark:divide-dark-600">
-              {invoices.map(invoice => (
-                <tr
-                  key={invoice.id}
-                  className="hover:bg-gray-50 dark:hover:bg-dark-700"
-                >
-                  <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
-                    {invoice.id}
-                  </td>
-                  <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">
-                    {invoice.date}
-                  </td>
-                  <td className="px-6 py-4 text-sm font-semibold text-gray-900 dark:text-white">
-                    ${invoice.amount.toLocaleString()}
-                  </td>
-                  <td className="px-6 py-4">
-                    <span
-                      className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        invoice.status === 'paid'
-                          ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
-                          : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
-                      }`}
-                    >
-                      {invoice.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">
-                    {invoice.dueDate}
-                  </td>
-                  <td className="px-6 py-4 text-sm">
-                    <button className="text-blue-600 dark:text-blue-400 hover:underline mr-3">
-                      View
-                    </button>
-                    <button className="text-gray-600 dark:text-gray-400 hover:underline">
-                      Download
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderDocuments = () => (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Documents
-        </h2>
-        <button className="btn-primary">Upload Document</button>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {[
-          {
-            name: 'Project Proposal.pdf',
-            type: 'pdf',
-            size: '2.4 MB',
-            date: '2024-01-10',
-          },
-          {
-            name: 'Contract Agreement.docx',
-            type: 'doc',
-            size: '1.8 MB',
-            date: '2024-01-08',
-          },
-          {
-            name: 'Technical Specs.pdf',
-            type: 'pdf',
-            size: '3.2 MB',
-            date: '2024-01-05',
-          },
-          {
-            name: 'Meeting Notes.txt',
-            type: 'txt',
-            size: '0.5 MB',
-            date: '2024-01-03',
-          },
-          {
-            name: 'Project Timeline.xlsx',
-            type: 'xls',
-            size: '1.1 MB',
-            date: '2024-01-01',
-          },
-          {
-            name: 'Security Audit.pdf',
-            type: 'pdf',
-            size: '4.7 MB',
-            date: '2023-12-28',
-          },
-        ].map((doc, index) => (
-          <div
-            key={index}
-            className="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-dark-700"
-          >
-            <div className="flex items-center mb-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center mr-4">
-                {doc.type === 'pdf' && (
-                  <span className="text-white font-bold text-xs">PDF</span>
-                )}
-                {doc.type === 'doc' && (
-                  <span className="text-white font-bold text-xs">DOC</span>
-                )}
-                {doc.type === 'xls' && (
-                  <span className="text-white font-bold text-xs">XLS</span>
-                )}
-                {doc.type === 'txt' && (
-                  <span className="text-white font-bold text-xs">TXT</span>
-                )}
-              </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-gray-900 dark:text-white truncate">
-                  {doc.name}
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  {doc.size}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600 dark:text-gray-400">
-                {doc.date}
-              </span>
-              <button className="text-blue-600 dark:text-blue-400 hover:underline text-sm">
-                Download
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-
-  const renderSettings = () => (
-    <div className="space-y-8">
-      <div className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700">
-        <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-          Account Settings
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
-              Personal Information
-            </h3>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  defaultValue={user.name}
-                  className="w-full p-3 border border-gray-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-gray-900 dark:text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  defaultValue={user.email}
-                  className="w-full p-3 border border-gray-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-gray-900 dark:text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                  Company
-                </label>
-                <input
-                  type="text"
-                  defaultValue={user.company}
-                  className="w-full p-3 border border-gray-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-gray-900 dark:text-white"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-col items-center">
-            <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mb-4">
-              <HiUser className="w-16 h-16 text-white" />
-            </div>
-            <button className="btn-outline">Change Avatar</button>
-          </div>
-        </div>
-
-        <div className="mt-8 pt-6 border-t border-gray-200 dark:border-dark-600">
-          <button className="btn-primary">Update Profile</button>
-        </div>
-      </div>
-
-      <div className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-soft border border-gray-100 dark:border-dark-700">
-        <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
-          Security Settings
-        </h3>
-
-        <div className="space-y-6">
-          <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-dark-700 rounded-lg">
-            <div className="flex items-center">
-              <HiLockClosed className="w-5 h-5 text-gray-600 dark:text-gray-400 mr-3" />
-              <div>
-                <h4 className="font-medium text-gray-900 dark:text-white">
-                  Two-Factor Authentication
-                </h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Add an extra layer of security to your account
-                </p>
-              </div>
-            </div>
-            <button className="btn-outline text-sm">Enable</button>
-          </div>
-
-          <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-dark-700 rounded-lg">
-            <div className="flex items-center">
-              <HiShieldCheck className="w-5 h-5 text-gray-600 dark:text-gray-400 mr-3" />
-              <div>
-                <h4 className="font-medium text-gray-900 dark:text-white">
-                  Password
-                </h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Change your account password
-                </p>
-              </div>
-            </div>
-            <button className="btn-outline text-sm">Change</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderTabContent = () => {
-    switch (activeTab) {
-      case 'dashboard':
-        return renderDashboard();
-      case 'projects':
-        return renderProjects();
-      case 'invoices':
-        return renderInvoices();
-      case 'documents':
-        return renderDocuments();
-      case 'settings':
-        return renderSettings();
-      default:
-        return renderDashboard();
-    }
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
   };
 
   return (
     <ErrorBoundary>
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-dark-900 dark:to-dark-800">
-      <Navbar isTransparent={true} />
-
-      <section className="pt-32 pb-16">
-        <div className="container-custom">
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* Sidebar */}
-            <div className="lg:w-1/4">
-              <div className="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-dark-700 sticky top-8">
-                <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mr-4">
-                    <HiUser className="w-8 h-8 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-gray-900 dark:text-white">
-                      {user.name}
-                    </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      {user.role}
-                    </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-500">
-                      {user.company}
-                    </p>
-                  </div>
-                </div>
-
-                <nav className="space-y-2">
-                  {tabs.map(tab => {
-                    const Icon = tab.icon;
-                    return (
-                      <button
-                        key={tab.id}
-                        onClick={() => setActiveTab(tab.id)}
-                        className={`w-full text-left px-4 py-3 rounded-lg flex items-center space-x-3 transition-colors ${
-                          activeTab === tab.id
-                            ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300'
-                            : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-dark-700'
-                        }`}
-                      >
-                        <Icon className="w-5 h-5" />
-                        <span className="font-medium">{tab.label}</span>
-                      </button>
-                    );
-                  })}
-                </nav>
-
-                <div className="mt-8 pt-6 border-t border-gray-200 dark:border-dark-600">
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-gray-600 dark:text-gray-400">
-                        Role
-                      </span>
-                      <span className="font-medium text-gray-900 dark:text-white capitalize">
-                        {userRole}
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-gray-600 dark:text-gray-400">
-                        Last Login
-                      </span>
-                      <span className="font-medium text-gray-900 dark:text-white">
-                        {user.lastLogin}
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-gray-600 dark:text-gray-400">
-                        Account Since
-                      </span>
-                      <span className="font-medium text-gray-900 dark:text-white">
-                        {user.joinDate}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Main Content */}
-            <div className="lg:w-3/4">
-              <div className="mb-8">
-                <h1 className="text-3xl md:text-4xl font-display font-bold mb-2 text-gray-900 dark:text-white">
-                  Client Portal
-                </h1>
-                <p className="text-gray-600 dark:text-gray-400">
-                  Manage your projects, invoices, and documents in one place
-                </p>
-              </div>
-              {renderTabContent()}
-            </div>
-          </div>
+      <div className="relative min-h-screen bg-dark-900 overflow-hidden text-white selection:bg-primary-500/30">
+        {/* Dashboard Atmosphere */}
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-0 right-0 w-[40%] h-[40%] bg-primary-500/5 blur-[120px] rounded-full" />
+          <div className="absolute bottom-0 left-0 w-[40%] h-[40%] bg-secondary-500/5 blur-[120px] rounded-full" />
+          <div className="absolute inset-0 bg-grid-white/[0.01]" />
         </div>
-      </section>
-    </div>
+
+        {/* Top Navigation / Header */}
+        <header className="relative z-20 border-b border-white/5 bg-dark-950/50 backdrop-blur-3xl px-8 py-6">
+           <div className="max-w-7xl mx-auto flex items-center justify-between">
+              <div className="flex items-center gap-6">
+                 <div className="p-3 rounded-2xl bg-white/5 border border-white/10">
+                    <LayoutDashboard className="w-6 h-6 text-primary-400" />
+                 </div>
+                 <div>
+                    <h1 className="text-xl font-black italic tracking-tighter uppercase">Management <span className="text-primary-400">Console</span></h1>
+                    <div className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Client Portal V4.2 — ID: LIS-9021</div>
+                 </div>
+              </div>
+
+              <div className="hidden md:flex items-center gap-8">
+                 <div className="relative">
+                    <div className="absolute -top-1 -right-1 w-2 h-2 bg-primary-500 rounded-full animate-pulse" />
+                    <Bell className="w-5 h-5 text-gray-500 hover:text-white cursor-pointer transition-colors" />
+                 </div>
+                 <div className="h-8 w-px bg-white/10" />
+                 <div className="flex items-center gap-4">
+                    <div className="text-right">
+                       <div className="text-sm font-black text-white italic tracking-tight">Enterprise Node</div>
+                       <div className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Tier: Architect Plus</div>
+                    </div>
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-secondary-500 p-0.5">
+                       <div className="w-full h-full rounded-[9px] bg-dark-900 flex items-center justify-center">
+                          <Users className="w-5 h-5 text-white/50" />
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </header>
+
+        <main className="relative z-10 p-8 pt-12 pb-32">
+           <div className="max-w-7xl mx-auto space-y-12">
+              
+              {/* Quick Actions / Stats */}
+              <motion.div variants={containerVariants} initial="hidden" animate="visible" className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                 {[
+                   { label: 'Neural Throughput', val: '98.2%', icon: Zap, color: 'text-primary-400' },
+                   { label: 'Active Alliances', val: '02', icon: Box, color: 'text-secondary-400' },
+                   { label: 'System Integrity', val: 'Pristine', icon: ShieldCheck, color: 'text-white' },
+                   { label: 'Temporal Savings', val: '45h', icon: Clock, color: 'text-primary-500' }
+                 ].map((stat, idx) => (
+                   <motion.div key={idx} variants={itemVariants} className="p-8 rounded-[40px] bg-white/5 border border-white/10 hover:bg-white/10 transition-all group">
+                      <stat.icon className={`w-6 h-6 ${stat.color} mb-6 group-hover:scale-110 transition-transform`} />
+                      <div className="text-3xl font-black text-white italic tracking-tighter mb-1">{stat.val}</div>
+                      <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest">{stat.label}</div>
+                   </motion.div>
+                 ))}
+              </motion.div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                 {/* Left Column: Active Projects */}
+                 <div className="lg:col-span-2 space-y-12">
+                    <motion.div variants={itemVariants} initial="hidden" animate="visible" className="p-10 rounded-[56px] bg-white/5 border border-white/10 backdrop-blur-sm relative overflow-hidden">
+                       <div className="relative z-10">
+                          <div className="flex items-center justify-between mb-12">
+                             <h2 className="text-2xl font-black text-white italic uppercase tracking-tighter flex items-center gap-3">
+                                <Activity className="w-6 h-6 text-primary-400" /> Architectural Feed
+                             </h2>
+                             <button className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white hover:text-dark-900 transition-all">
+                                <Plus className="w-4 h-4" />
+                             </button>
+                          </div>
+
+                          <div className="space-y-6">
+                             {activeProjects.map(project => (
+                                <div key={project.id} className="p-8 rounded-[32px] bg-white/5 border border-white/5 hover:border-primary-500/30 transition-all group">
+                                   <div className="flex items-center justify-between mb-6">
+                                      <div>
+                                         <h3 className="text-lg font-black text-white italic tracking-tight">{project.name}</h3>
+                                         <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{project.status}</p>
+                                      </div>
+                                      <div className="text-right">
+                                         <div className="text-xl font-black text-primary-400 italic tracking-tighter">{project.progress}%</div>
+                                         <div className="text-[8px] font-black text-green-500 uppercase tracking-widest">{project.efficiency} Efficiency Gains</div>
+                                      </div>
+                                   </div>
+                                   <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                                      <motion.div 
+                                         initial={{ width: 0 }} animate={{ width: `${project.progress}%` }} transition={{ duration: 1.5, delay: 0.5 }}
+                                         className="h-full bg-gradient-to-r from-primary-500 to-secondary-500" 
+                                      />
+                                   </div>
+                                </div>
+                             ))}
+                          </div>
+                          
+                          <div className="mt-12 flex justify-center">
+                             <button className="flex items-center gap-3 text-[10px] font-black text-gray-500 uppercase tracking-[0.3em] hover:text-white transition-colors">
+                                View Full Archive <ChevronRight className="w-4 h-4" />
+                             </button>
+                          </div>
+                       </div>
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                       <motion.div variants={itemVariants} className="p-10 rounded-[56px] bg-white/5 border border-white/10 group hover:border-secondary-500/30 transition-all">
+                          <FileText className="w-8 h-8 text-secondary-400 mb-8" />
+                          <h3 className="text-xl font-black text-white italic tracking-tight mb-4 uppercase">Node Artifacts</h3>
+                          <p className="text-sm text-gray-500 font-medium leading-relaxed mb-8">Access contracts, invoices, and architectural blueprints.</p>
+                          <button className="flex items-center gap-2 text-[10px] font-black text-white uppercase tracking-widest hover:text-secondary-400 transition-colors">
+                             OPEN VAULT <ArrowUpRight className="w-4 h-4" />
+                          </button>
+                       </motion.div>
+
+                       <motion.div variants={itemVariants} className="p-10 rounded-[56px] bg-white/5 border border-white/10 group hover:border-primary-500/30 transition-all">
+                          <Package className="w-8 h-8 text-primary-400 mb-8" />
+                          <h3 className="text-xl font-black text-white italic tracking-tight mb-4 uppercase">Asset Library</h3>
+                          <p className="text-sm text-gray-500 font-medium leading-relaxed mb-8">Synchronize components and global media nodes.</p>
+                          <button className="flex items-center gap-2 text-[10px] font-black text-white uppercase tracking-widest hover:text-primary-400 transition-colors">
+                             MANAGE REPO <ArrowUpRight className="w-4 h-4" />
+                          </button>
+                       </motion.div>
+                    </div>
+                 </div>
+
+                 {/* Right Column: Console Activity */}
+                 <div className="space-y-12">
+                    <motion.div variants={itemVariants} initial="hidden" animate="visible" className="p-10 rounded-[56px] bg-white/5 border border-white/10 backdrop-blur-3xl h-full flex flex-col">
+                       <h2 className="text-xl font-black text-white italic uppercase tracking-tighter mb-10 flex items-center gap-3">
+                          <Bell className="w-5 h-5 text-primary-400" /> Registry Logs
+                       </h2>
+                       
+                       <div className="space-y-8 flex-1">
+                          {recentActivity.map(activity => (
+                             <div key={activity.id} className="flex gap-6 group">
+                                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:border-primary-500/30 transition-all">
+                                   <activity.icon className="w-5 h-5 text-gray-600 group-hover:text-primary-400" />
+                                </div>
+                                <div>
+                                   <div className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">{activity.type} — {activity.time}</div>
+                                   <p className="text-sm font-medium text-gray-300 leading-relaxed italic">{activity.text}</p>
+                                </div>
+                             </div>
+                          ))}
+                       </div>
+
+                       <div className="mt-12 p-8 rounded-[40px] bg-primary-500/10 border border-primary-500/20">
+                          <h4 className="text-sm font-black text-white italic tracking-tight mb-4 uppercase">Critical Support</h4>
+                          <p className="text-[10px] text-gray-400 font-medium leading-relaxed uppercase tracking-widest mb-6">
+                             Average response latency: <span className="text-primary-400">12 minutes</span>
+                          </p>
+                          <button className="w-full py-4 bg-white text-dark-900 font-black rounded-2xl text-[10px] uppercase tracking-widest hover:bg-gray-200 transition-all">
+                             INITIATE PULSE
+                          </button>
+                       </div>
+                    </motion.div>
+                 </div>
+              </div>
+           </div>
+        </main>
+      </div>
     </ErrorBoundary>
   );
 };

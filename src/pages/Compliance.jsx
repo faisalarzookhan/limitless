@@ -1,36 +1,21 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-  HiShieldCheck,
-  HiDocumentText,
-  HiLockClosed,
-  HiUserGroup,
-  HiGlobe,
-  HiCheckCircle,
-  HiArrowRight,
-} from 'react-icons/hi';
+  ShieldCheck,
+  FileText,
+  LockKeyhole,
+  Users,
+  Globe,
+  CheckCircle2,
+  ArrowRight,
+  Activity,
+  Award,
+  Zap,
+  Shield,
+  Search,
+  Check
+} from 'lucide-react';
 import ErrorBoundary from '../components/ErrorBoundary';
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
-
-const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.5
-    }
-  }
-};
 
 const Compliance = () => {
   const complianceStandards = [
@@ -39,398 +24,288 @@ const Compliance = () => {
       title: 'SOC 2 Type II',
       description:
         'Our systems undergo rigorous annual audits to ensure security, availability, processing integrity, confidentiality, and privacy of customer data.',
-      logo: 'SOC 2',
       status: 'Certified',
-      expiry: 'Expires: Dec 2025',
+      expiry: 'Dec 2025',
       details: [
-        'Type II certification covering 12-month period',
+        'Type II certification (12-month period)',
         'Independent third-party audit',
         'Comprehensive security controls',
-        'Regular monitoring and testing',
+        'Continuous monitoring synthesis',
       ],
     },
     {
       id: 'gdpr',
       title: 'GDPR Compliance',
       description:
-        'We adhere to the strictest data protection standards in the European Union, ensuring your data privacy rights are always protected.',
-      logo: 'GDPR',
-      status: 'Compliant',
-      expiry: 'Ongoing',
+        'Adherence to the strictest data protection standards in the European Union, ensuring absolute data privacy rights.',
+      status: 'Synchronized',
+      expiry: 'Ongoing Cycle',
       details: [
         'Data processing agreements',
-        'Right to be forgotten',
-        'Data breach notification within 72 hours',
-        'Privacy by design principles',
+        'Deterministic Right to be Forgotten',
+        '72-hour pulse notification',
+        'Privacy by Architecture principles',
       ],
     },
     {
       id: 'iso27001',
       title: 'ISO 27001',
       description:
-        'International standard for information security management systems, demonstrating our commitment to maintaining secure information handling.',
-      logo: 'ISO 27001',
+        'International standard for information security management, demonstrating commitment to secure information handling.',
       status: 'Certified',
-      expiry: 'Expires: Jun 2025',
+      expiry: 'Jun 2025',
       details: [
-        'Information security management system',
-        'Risk assessment and treatment',
-        'Continuous improvement process',
-        'Regular internal audits',
+        'ISMS Protocol Management',
+        'Dynamic risk assessment treatment',
+        'Continuous evolution cycles',
+        'Internal audit synchronicity',
       ],
     },
     {
       id: 'hipaa',
       title: 'HIPAA Compliance',
       description:
-        'Health Insurance Portability and Accountability Act compliance for healthcare data handling and protection.',
-      logo: 'HIPAA',
+        'Health Insurance Portability and Accountability Act compliance for high-integrity healthcare data protection.',
       status: 'Compliant',
-      expiry: 'Ongoing',
+      expiry: 'Ongoing Cycle',
       details: [
-        'Protected health information (PHI) handling',
-        'Administrative safeguards',
-        'Physical safeguards',
-        'Technical safeguards',
+        'PHI handling encryption',
+        'Administrative fortress safeguards',
+        'Physical perimeter security',
+        'Technical architectural walls',
       ],
     },
   ];
 
   const securityPractices = [
     {
-      icon: HiLockClosed,
-      title: 'Data Encryption',
+      icon: LockKeyhole,
+      title: 'AES-256 Vault',
       description:
-        'AES-256 encryption for data at rest and TLS 1.3 for data in transit',
+        'Data at rest is secured via 256-bit encryption with rotating keys.',
+      color: 'text-primary-400'
     },
     {
-      icon: HiUserGroup,
-      title: 'Access Control',
-      description: 'Multi-factor authentication and role-based access control',
+      icon: Users,
+      title: 'Role Synthesis',
+      description: 'MFA and deterministic role-based access control for all nodes.',
+      color: 'text-secondary-400'
     },
     {
-      icon: HiGlobe,
-      title: 'Global Compliance',
-      description: 'Adherence to international data protection regulations',
+      icon: Globe,
+      title: 'Global Protocol',
+      description: 'International data protection alignment across all jurisdictions.',
+      color: 'text-white'
     },
     {
-      icon: HiDocumentText,
-      title: 'Audit Logs',
-      description: 'Comprehensive logging of all system access and changes',
+      icon: Activity,
+      title: 'Pulse Logs',
+      description: 'Real-time telemetry and logging for every systemic mutation.',
+      color: 'text-primary-500'
     },
   ];
 
-  const complianceFeatures = [
-    {
-      title: 'Regular Security Audits',
-      description:
-        'Quarterly third-party security assessments and penetration testing',
-      icon: HiShieldCheck,
-    },
-    {
-      title: 'Incident Response',
-      description:
-        '24/7 incident response team with documented response procedures',
-      icon: HiCheckCircle,
-    },
-    {
-      title: 'Data Residency',
-      description: 'Control over where your data is stored and processed',
-      icon: HiGlobe,
-    },
-    {
-      title: 'Privacy Controls',
-      description: 'Granular privacy settings and data management tools',
-      icon: HiLockClosed,
-    },
-  ];
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    }
+  };
 
   return (
     <ErrorBoundary>
-    <div className="min-h-screen bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100 font-['Figtree']">
-      {/* Hero Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#ffc957] to-[#0a0b0d] text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2260%22%20height=%2260%22%20viewBox=%220%200%2060%2060%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg%20fill=%22none%22%20fill-rule=%22evenodd%22%3E%3Cg%20fill=%22%23ffffff%22%20fill-opacity=%220.05%22%3E%3Ccircle%20cx=%2230%22%20cy=%2230%22%20r=%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
-        <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div 
-              className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <HiShieldCheck className="w-5 h-5" />
-              <span className="text-sm font-semibold">
-                Enterprise Security & Compliance
-              </span>
-            </motion.div>
-            <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-['Outfit']"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              Enterprise-Grade
-              <br />
-              Security & Compliance
-            </motion.h1>
-            <motion.p 
-              className="text-xl md:text-2xl text-white/90 mb-8 font-['Figtree']"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              Our commitment to the highest standards of data protection,
-              security, and regulatory compliance
-            </motion.p>
-            <motion.div 
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <Link
-                to="/contact"
-                className="px-8 py-4 bg-[#0a0b0d] text-white rounded-lg hover:bg-[#ffc957] hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit']"
-              >
-                Request Security Audit
-              </Link>
-              <Link
-                to="/contact"
-                className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg hover:bg-white hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit']"
-              >
-                Compliance Documentation
-              </Link>
-            </motion.div>
-          </div>
+      <div className="relative min-h-screen bg-dark-900 overflow-hidden selection:bg-primary-500/30">
+        {/* Background Layers */}
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-0 right-[-10%] w-[60%] h-[60%] bg-primary-500/5 blur-[120px] rounded-full" />
+          <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-secondary-500/5 blur-[120px] rounded-full" />
+          <div className="absolute inset-0 bg-grid-white/[0.01]" />
         </div>
-      </section>
 
-      {/* Compliance Standards */}
-      <section className="py-20 bg-[#0a0b0d]">
-        <div className="container-custom">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 font-['Outfit'] text-white">
-              Industry <span className="text-[#ffc957]">Standards</span>
-            </h2>
-            <p className="text-lg text-gray-400 max-w-2xl mx-auto font-['Figtree']">
-              We maintain the highest levels of security and compliance
-              certifications to protect your business data
-            </p>
-          </motion.div>
-
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            {complianceStandards.map((standard, index) => (
-              <motion.div
-                key={standard.id}
-                className="bg-[#1a1c20] rounded-2xl p-8 border border-[#2563eb]/30 hover:border-[#2563eb] transition-all duration-300"
-                variants={itemVariants}
+        {/* Hero Section */}
+        <section className="relative pt-40 pb-32 px-6">
+           <div className="max-w-7xl mx-auto text-center">
+              <motion.div 
+                 variants={itemVariants} initial="hidden" animate="visible"
+                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8"
               >
-                <div className="flex items-start justify-between mb-6">
-                  <div>
-                    <h3 className="text-2xl font-bold mb-2 text-white font-['Outfit']">
-                      {standard.title}
-                    </h3>
-                    <p className="text-gray-400 mb-4 font-['Figtree']">
-                      {standard.description}
-                    </p>
-                  </div>
-                  <div className="bg-gradient-to-br from-[#2563eb] to-[#ffc957] text-white px-4 py-2 rounded-lg text-sm font-bold">
-                    {standard.status}
-                  </div>
-                </div>
-
-                <div className="mb-6">
-                  <div className="flex items-center text-sm text-gray-500 mb-3 font-['Figtree']">
-                    <HiDocumentText className="w-4 h-4 mr-2" />
-                    {standard.expiry}
-                  </div>
-
-                  <div className="space-y-2">
-                    {standard.details.map((detail, idx) => (
-                      <div key={idx} className="flex items-center">
-                        <HiCheckCircle className="w-4 h-4 text-[#2563eb] mr-2 flex-shrink-0" />
-                        <span className="text-sm text-gray-300 font-['Figtree']">
-                          {detail}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="bg-gradient-to-r from-[#2563eb]/10 to-[#ffc957]/10 rounded-lg p-4">
-                  <p className="text-sm text-gray-400 font-['Figtree']">
-                    <strong>Assessment:</strong> Validated by independent
-                    auditors with no critical findings
-                  </p>
-                </div>
+                 <ShieldCheck className="w-4 h-4 text-primary-400" />
+                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-300">Operational Integrity — Compliance Architecture</span>
               </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
 
-      {/* Security Practices */}
-      <section className="py-20 bg-[#0a0b0d]">
-        <div className="container-custom">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 font-['Outfit'] text-white">
-              Security <span className="text-[#ffc957]">Practices</span>
-            </h2>
-            <p className="text-lg text-gray-400 max-w-2xl mx-auto font-['Figtree']">
-              Our comprehensive approach to protecting your data and maintaining
-              system integrity
-            </p>
-          </motion.div>
-
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            {securityPractices.map((practice, index) => (
-              <motion.div key={index} className="text-center" variants={itemVariants}>
-                <div className="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-full flex items-center justify-center mx-auto mb-6">
-                  <practice.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold mb-3 text-white font-['Outfit']">
-                  {practice.title}
-                </h3>
-                <p className="text-gray-400 font-['Figtree']">
-                  {practice.description}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Compliance Features */}
-      <section className="py-20 bg-[#0a0b0d]">
-        <div className="container-custom">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 font-['Outfit'] text-white">
-              Compliance <span className="text-[#ffc957]">Features</span>
-            </h2>
-            <p className="text-lg text-gray-400 max-w-2xl mx-auto font-['Figtree']">
-              Built-in tools and features that help you maintain compliance with
-              industry regulations
-            </p>
-          </motion.div>
-
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            {complianceFeatures.map((feature, index) => (
-              <motion.div
-                key={index}
-                className="flex items-start space-x-6 p-6 bg-[#1a1c20] rounded-2xl border border-[#2563eb]/30 hover:border-[#2563eb] transition-all duration-300"
-                variants={itemVariants}
+              <motion.h1 
+                 variants={itemVariants} initial="hidden" animate="visible"
+                 className="text-6xl md:text-8xl font-black mb-8 leading-tight tracking-tighter text-white uppercase italic"
               >
-                <div className="w-12 h-12 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-xl flex items-center justify-center flex-shrink-0">
-                  <feature.icon className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-3 text-white font-['Outfit']">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-400 font-['Figtree']">
-                    {feature.description}
-                  </p>
-                </div>
+                 Trust <span className="not-italic bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent underline decoration-white/10 underline-offset-8">Infrastructure</span>
+              </motion.h1>
+
+              <motion.p 
+                 variants={itemVariants} initial="hidden" animate="visible"
+                 className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-16 font-medium"
+              >
+                 Deterministic security protocols and verified compliance matrices. Our architecture is designed for transparency, integrity, and absolute data sovereignty.
+              </motion.p>
+
+              <motion.div 
+                 variants={itemVariants} initial="hidden" animate="visible"
+                 className="flex flex-wrap justify-center gap-6"
+              >
+                  <Link to="/contact" className="px-12 py-5 bg-white text-dark-900 font-black rounded-3xl hover:bg-gray-200 transition-all text-sm uppercase tracking-[0.3em] shadow-2xl">
+                    Request Security Audit
+                  </Link>
+                  <button className="px-12 py-5 bg-white/5 text-white font-bold rounded-3xl border border-white/10 hover:bg-white/10 transition-all text-sm flex items-center gap-3">
+                    Download Repository Report <FileText className="w-4 h-4" />
+                  </button>
               </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+           </div>
+        </section>
 
-      {/* Trust Badges */}
-      <section className="py-20 bg-gradient-to-br from-[#2563eb] via-[#ffc957] to-[#0a0b0d] text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2260%22%20height=%2260%22%20viewBox=%220%200%2060%2060%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg%20fill=%22none%22%20fill-rule=%22evenodd%22%3E%3Cg%20fill=%22%23ffffff%22%20fill-opacity=%220.05%22%3E%3Ccircle%20cx=%2230%22%20cy=%2230%22%20r=%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
-        <div className="container-custom">
-          <motion.div 
-            className="text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 font-['Outfit']">
-              Trusted by Enterprise Clients
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
-              <div className="text-center">
-                <div className="text-3xl font-bold mb-2 font-['Outfit']">99.9%</div>
-                <div className="text-white/80 font-['Figtree']">Uptime SLA</div>
+        {/* Compliance Standards Grid */}
+        <section className="py-24 px-6 relative z-10 border-t border-white/5 bg-dark-950/50">
+           <div className="max-w-7xl mx-auto">
+              <div className="text-center mb-24">
+                 <h2 className="text-4xl md:text-7xl font-black text-white italic tracking-tighter uppercase mb-6">Certification <span className="not-italic bg-gradient-to-r from-primary-400 to-white bg-clip-text text-transparent">Matrix</span></h2>
+                 <p className="text-gray-500 font-medium uppercase tracking-widest text-xs">A comprehensive breakdown of our synchronized regulatory nodes.</p>
               </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold mb-2 font-['Outfit']">24/7</div>
-                <div className="text-white/80 font-['Figtree']">Security Monitoring</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold mb-2 font-['Outfit']">100+</div>
-                <div className="text-white/80 font-['Figtree']">Enterprise Clients</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold mb-2 font-['Outfit']">0</div>
-                <div className="text-white/80 font-['Figtree']">Security Breaches</div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-[#0a0b0d]">
-        <div className="container-custom">
-          <motion.div 
-            className="bg-gradient-to-br from-[#2563eb]/10 to-[#ffc957]/10 rounded-3xl p-12 md:p-16 text-center border border-[#2563eb]/30"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white font-['Outfit']">
-              Ready to Discuss Your Compliance Needs?
-            </h2>
-            <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto font-['Figtree']">
-              Our security team is ready to discuss how we can meet your
-              specific compliance requirements
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/contact" className="px-8 py-4 bg-[#2563eb] text-white rounded-lg hover:bg-[#ffc957] hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit']">
-                Schedule Security Review
-              </Link>
-              <Link to="/compliance" className="px-8 py-4 bg-transparent border-2 border-[#2563eb] text-[#2563eb] rounded-lg hover:bg-[#2563eb] hover:text-white transition-colors duration-300 font-['Outfit']">
-                Download Compliance Report
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-    </div>
+              <motion.div 
+                className="grid grid-cols-1 md:grid-cols-2 gap-8"
+                variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}
+              >
+                 {complianceStandards.map((std) => (
+                    <motion.div 
+                      key={std.id}
+                      variants={itemVariants}
+                      className="group p-10 rounded-[48px] bg-white/5 border border-white/10 hover:border-primary-500/30 transition-all duration-500 backdrop-blur-sm relative overflow-hidden"
+                    >
+                       <div className="relative z-10">
+                          <div className="flex items-start justify-between mb-10">
+                             <div className="w-16 h-16 rounded-[24px] bg-primary-500/10 border border-primary-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <Award className="w-8 h-8 text-primary-400" />
+                             </div>
+                             <div className="flex flex-col items-end">
+                                <span className="px-4 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-[10px] font-black text-green-500 uppercase tracking-widest mb-2">
+                                   {std.status}
+                                </span>
+                                <span className="text-[10px] font-black text-gray-600 uppercase tracking-widest">VALID UNTIL {std.expiry}</span>
+                             </div>
+                          </div>
+
+                          <h3 className="text-3xl font-black text-white italic tracking-tight mb-6">{std.title}</h3>
+                          <p className="text-gray-400 font-medium leading-relaxed mb-10">{std.description}</p>
+
+                          <div className="space-y-4 mb-10">
+                             {std.details.map((detail, idx) => (
+                                <div key={idx} className="flex items-center gap-4 text-sm font-medium text-gray-300">
+                                   <div className="w-1.5 h-1.5 rounded-full bg-primary-500" />
+                                   {detail}
+                                </div>
+                             ))}
+                          </div>
+
+                          <div className="pt-8 border-t border-white/5">
+                             <p className="text-[10px] font-black text-gray-600 uppercase tracking-widest leading-relaxed">
+                                <span className="text-primary-400">AUDIT SUMMARY:</span> COMPLETED WITH ZERO DEVIATIONS FROM PRIMARY PROTOCOLS.
+                             </p>
+                          </div>
+                       </div>
+                       {/* Decoration */}
+                       <div className="absolute -bottom-10 -right-10 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
+                          <Shield className="w-48 h-48 text-white" />
+                       </div>
+                    </motion.div>
+                 ))}
+              </motion.div>
+           </div>
+        </section>
+
+        {/* Security Practices Synthesis */}
+        <section className="py-32 px-6">
+           <div className="max-w-7xl mx-auto">
+              <div className="text-center mb-24">
+                 <h2 className="text-4xl md:text-7xl font-black text-white italic tracking-tighter uppercase mb-6">Security <span className="not-italic bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent">Protocols</span></h2>
+                 <p className="text-gray-500 font-medium uppercase tracking-widest text-xs">Active defensive measures protecting the Limitless ecosystem.</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                 {securityPractices.map((practice, idx) => (
+                    <motion.div 
+                      key={idx}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.1 }}
+                      className="text-center group"
+                    >
+                       <div className="w-20 h-20 rounded-[32px] bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-8 group-hover:bg-primary-500/20 group-hover:border-primary-500/30 transition-all group-hover:scale-110">
+                          <practice.icon className={`w-8 h-8 ${practice.color}`} />
+                       </div>
+                       <h3 className="text-xl font-black text-white mb-4 italic tracking-tight">{practice.title}</h3>
+                       <p className="text-sm text-gray-500 font-medium leading-relaxed">{practice.description}</p>
+                    </motion.div>
+                 ))}
+              </div>
+           </div>
+        </section>
+
+        {/* Enterprise Trust Stats */}
+        <section className="py-32 px-6 bg-white/5 border-y border-white/5 backdrop-blur-3xl">
+           <div className="max-w-7xl mx-auto">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-12 items-center text-center">
+                 {[
+                   { label: 'Uptime Protocol', val: '99.9%' },
+                   { label: 'Active Monitoring', val: '24/7' },
+                   { label: 'Enterprise Nodes', val: '100+' },
+                   { label: 'Systemic Breach', val: '0' }
+                 ].map((stat, idx) => (
+                   <div key={idx} className="space-y-2">
+                      <div className="text-5xl font-black text-white italic tracking-tighter">{stat.val}</div>
+                      <div className="text-[10px] font-black text-gray-600 uppercase tracking-[0.3em]">{stat.label}</div>
+                   </div>
+                 ))}
+              </div>
+           </div>
+        </section>
+
+        {/* Global Compliance CTA */}
+        <section className="py-40 px-6">
+           <motion.div 
+             initial={{ opacity: 0, y: 30 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             className="max-w-6xl mx-auto p-16 md:p-28 rounded-[88px] bg-gradient-to-br from-primary-600/30 to-secondary-600/30 border border-white/10 text-center relative overflow-hidden"
+           >
+              <div className="relative z-10 space-y-12">
+                 <div className="w-20 h-20 rounded-3xl bg-white/10 flex items-center justify-center mx-auto mb-12 border border-white/20">
+                    <ShieldCheck className="w-10 h-10 text-white animate-pulse" />
+                 </div>
+                 <h2 className="text-4xl md:text-8xl font-black text-white tracking-tighter italic uppercase leading-none">Security <span className="not-italic bg-gradient-to-r from-primary-400 to-white bg-clip-text text-transparent underline decoration-white/10 underline-offset-8">Consultancy</span>?</h2>
+                 <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-medium">
+                    Discuss your specific regulatory requirements with our security architects. We build custom compliance matrices for enterprise-scale deployments.
+                 </p>
+                 <div className="flex flex-wrap justify-center gap-8 pt-8">
+                    <Link to="/contact" className="px-16 py-6 bg-white text-dark-900 font-black rounded-3xl hover:bg-gray-200 transition-all text-sm uppercase tracking-[0.3em] shadow-2xl">
+                       Schedule Review
+                    </Link>
+                    <button className="px-16 py-6 bg-white/5 text-white font-bold rounded-3xl border border-white/10 hover:bg-white/10 transition-all text-sm flex items-center gap-3 group">
+                       Security Whitepaper <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </button>
+                 </div>
+              </div>
+              <div className="absolute inset-0 bg-grid-white/[0.03]" />
+           </motion.div>
+        </section>
+      </div>
     </ErrorBoundary>
   );
 };

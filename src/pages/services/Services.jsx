@@ -1,716 +1,343 @@
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import {
-  HiCode,
-  HiDeviceMobile,
-  HiCube,
-  HiChartBar,
-  HiLightningBolt,
-  HiServer,
-  HiCloud,
-  HiCog,
-  HiShieldCheck,
-  HiSparkles,
-  HiTrendingUp,
-  HiUsers,
-  HiCheckCircle,
-  HiArrowRight,
-  HiGlobe,
-  HiChip,
-  HiDatabase,
-  HiRefresh,
-  HiLockClosed,
-  HiPhotograph,
-  HiPuzzle,
-  HiChevronDown,
-  HiChevronUp,
-} from 'react-icons/hi';
+import { 
+  Code2, 
+  Smartphone, 
+  Cpu, 
+  Database, 
+  BarChart3, 
+  Zap, 
+  Cloud, 
+  ShieldCheck, 
+  Briefcase, 
+  Globe, 
+  Layers, 
+  Sparkles,
+  ArrowRight,
+  CheckCircle2,
+  TrendingUp,
+  Search,
+  Users,
+  Server,
+  Puzzle,
+  Camera,
+  RefreshCw,
+  Trophy
+} from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
 
 const Services = () => {
-  const [expandedMobileFeatures, setExpandedMobileFeatures] = useState({});
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
 
-  const toggleMobileFeatures = serviceId => {
-    setExpandedMobileFeatures(prev => ({
-      ...prev,
-      [serviceId]: !prev[serviceId],
-    }));
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    }
   };
 
   const mainServices = [
     {
       id: 'web',
-      icon: HiCode,
+      icon: Code2,
       title: 'Web Development',
       subtitle: 'Powerful, Responsive, and Scalable Web Solutions',
-      description:
-        'Transform your digital presence with cutting-edge web applications using React, Next.js, Node.js, and modern frameworks that drive business growth and deliver exceptional user experiences.',
-      color: 'from-[#2563eb] to-[#1e40af]',
+      description: 'Transform your digital presence with cutting-edge web applications using React, Next.js, Node.js, and modern frameworks that drive business growth.',
+      color: 'primary',
       features: [
         'Responsive & Mobile-First Design',
         'SEO Optimization',
         'Progressive Web Apps (PWA)',
         'E-commerce Solutions',
         'Custom Web Applications',
-        'Content Management Systems',
-        'API Development & Integration',
-        'Performance Optimization',
-        'Cross-Browser Compatibility',
-        'Accessibility Standards (WCAG)',
+        'API Development & Integration'
       ],
-      technologies: [
-        'React',
-        'Next.js',
-        'Vue',
-        'Angular',
-        'Node.js',
-        'PHP',
-        'WordPress',
-        'Shopify',
-      ],
-      benefits: [
-        'Increased online visibility and reach',
-        'Enhanced user engagement and conversion',
-        'Scalable infrastructure for growth',
-        'Reduced maintenance costs',
-      ],
+      technologies: ['React', 'Next.js', 'Node.js', 'PostgreSQL', 'Tailwind CSS']
     },
     {
       id: 'mobile',
-      icon: HiDeviceMobile,
+      icon: Smartphone,
       title: 'Mobile App Development',
       subtitle: 'Native and Cross-Platform Mobile Excellence',
-      description:
-        'Build powerful mobile applications using React Native, Flutter, Swift, and Kotlin that engage users, streamline operations, and drive business success across iOS and Android platforms.',
-      color: 'from-[#ffc957] to-[#ffbd3a]',
+      description: 'Build powerful mobile applications using React Native, Flutter, and Swift that engage users and drive business success across all platforms.',
+      color: 'secondary',
       features: [
         'Native iOS & Android Development',
         'Cross-Platform Solutions (React Native, Flutter)',
         'Intuitive UI/UX Design',
-        'Offline Functionality',
-        'Push Notifications',
+        'Push Notifications & Cloud Messaging',
         'In-App Purchases',
-        'Real-Time Synchronization',
-        'Social Media Integration',
-        'App Store Optimization (ASO)',
-        'Analytics & Performance Tracking',
+        'Offline Functionality'
       ],
-      technologies: [
-        'React Native',
-        'Flutter',
-        'Swift',
-        'Kotlin',
-        'Firebase',
-        'GraphQL',
-      ],
-      benefits: [
-        'Reach customers on their preferred devices',
-        'Increase customer engagement and loyalty',
-        'Streamline business processes',
-        'Generate new revenue streams',
-      ],
+      technologies: ['React Native', 'Flutter', 'Swift', 'Kotlin', 'Firebase']
     },
     {
       id: 'software',
-      icon: HiCube,
+      icon: Cpu,
       title: 'Custom Software & Systems',
       subtitle: 'Tailored Solutions for Your Unique Needs',
-      description:
-        'Get bespoke software solutions built with Python, Java, .NET, and microservices architecture designed specifically for your business processes, challenges, and goals. No compromises, just perfect fit.',
-      color: 'from-[#0a0b0d] to-[#1e3a8a]',
+      description: 'Get bespoke software solutions built with Python, Java, and microservices architecture designed specifically for your business processes.',
+      color: 'brand',
       features: [
-        'Requirements Analysis & Planning',
         'Custom Application Development',
         'Legacy System Modernization',
         'System Integration',
-        'Data Migration Services',
         'Enterprise Resource Planning (ERP)',
         'Workflow Automation',
-        'Reporting & Analytics',
-        'Multi-Tenant Architecture',
-        'White-Label Solutions',
+        'Data Migration Services'
       ],
-      technologies: [
-        'Python',
-        '.NET',
-        'Java',
-        'C#',
-        'Microservices',
-        'Docker',
-        'Kubernetes',
-      ],
-      benefits: [
-        'Perfect alignment with business processes',
-        'Competitive advantage through unique features',
-        'Full ownership and control',
-        'Seamless integration with existing systems',
-      ],
+      technologies: ['Python', 'Java', '.NET', 'Docker', 'Kubernetes']
     },
     {
       id: 'crm',
-      icon: HiChartBar,
-      title: 'CRM & Task Management Apps',
+      icon: BarChart3,
+      title: 'CRM & Task Management',
       subtitle: 'Manage Relationships, Optimize Operations',
-      description:
-        'Custom CRM and task management systems built with React, Node.js, PostgreSQL, and real-time technologies that help you track customers, manage leads, automate workflows, and boost productivity.',
-      color: 'from-[#2563eb] to-[#1e40af]',
+      description: 'Custom CRM and task management systems that help you track customers, manage leads, automate workflows, and boost productivity.',
+      color: 'primary',
       features: [
-        'Customer Relationship Management',
         'Lead & Opportunity Tracking',
         'Sales Pipeline Management',
         'Task & Project Management',
         'Team Collaboration Tools',
-        'Email Integration',
-        'Calendar & Scheduling',
-        'Document Management',
         'Automated Workflows',
-        'Custom Reports & Dashboards',
+        'Custom Reports & Dashboards'
       ],
-      technologies: [
-        'React',
-        'Node.js',
-        'PostgreSQL',
-        'Redis',
-        'WebSockets',
-        'REST APIs',
-      ],
-      benefits: [
-        'Improved customer satisfaction',
-        'Increased sales conversion rates',
-        'Better team collaboration',
-        'Data-driven decision making',
-      ],
-    },
-    {
-      id: 'automation',
-      icon: HiLightningBolt,
-      title: 'Business Automation & AI Integration',
-      subtitle: 'Intelligent Systems for the Modern Business',
-      description:
-        'Leverage AI and automation using Python, TensorFlow, OpenAI, and Azure AI to eliminate repetitive tasks, reduce errors, and free your team to focus on what matters most.',
-      color: 'from-[#ffc957] to-[#ffbd3a]',
-      features: [
-        'Process Automation',
-        'AI-Powered Chatbots',
-        'Machine Learning Integration',
-        'Natural Language Processing',
-        'Predictive Analytics',
-        'Robotic Process Automation (RPA)',
-        'Intelligent Data Extraction',
-        'Automated Reporting',
-        'Email Automation',
-        'Workflow Optimization',
-      ],
-      technologies: [
-        'Python',
-        'TensorFlow',
-        'OpenAI',
-        'Azure AI',
-        'Power Automate',
-        'Zapier',
-      ],
-      benefits: [
-        'Reduced operational costs',
-        'Increased efficiency and productivity',
-        'Minimized human errors',
-        'Faster decision-making',
-      ],
-    },
+      technologies: ['React', 'Node.js', 'PostgreSQL', 'Redis', 'WebSockets']
+    }
   ];
 
   const additionalServices = [
-    {
-      icon: HiChip,
-      title: 'IoT Solutions',
-      description:
-        'Connect physical devices to the digital world with secure IoT implementations using Arduino, Raspberry Pi, MQTT, and AWS IoT.',
-      features: [
-        'Device Integration',
-        'Real-Time Monitoring',
-        'Data Analytics',
-        'Cloud Connectivity',
-      ],
-    },
-    {
-      icon: HiServer,
-      title: 'Network Installation',
-      description:
-        'Professional network setup using Cisco, Juniper, and enterprise-grade equipment for reliable and secure business connectivity.',
-      features: [
-        'LAN/WAN Setup',
-        'Router Configuration',
-        'Security Implementation',
-        'Network Optimization',
-      ],
-    },
-    {
-      icon: HiDatabase,
-      title: 'Server Setup',
-      description:
-        'Robust server infrastructure using AWS, Azure, GCP, and Linux/Windows Server for your applications and data.',
-      features: [
-        'Server Configuration',
-        'Load Balancing',
-        'Security Hardening',
-        'Backup Solutions',
-      ],
-    },
-    {
-      icon: HiPuzzle,
-      title: 'UI/UX Design',
-      description:
-        'Create intuitive and engaging user experiences using Figma, Adobe XD, and modern design principles that delight customers.',
-      features: [
-        'User Research',
-        'Wireframing',
-        'Prototyping',
-        'Visual Design',
-      ],
-    },
-    {
-      icon: HiPhotograph,
-      title: 'Branding & Logo Design',
-      description:
-        'Build a strong visual identity using Adobe Creative Suite, Canva, and brand strategy principles that represents your brand perfectly.',
-      features: [
-        'Logo Design',
-        'Brand Guidelines',
-        'Color Palette',
-        'Typography Selection',
-      ],
-    },
-    {
-      icon: HiCloud,
-      title: 'Cloud Hosting & Infrastructure',
-      description:
-        'Secure, scalable cloud hosting on AWS, Azure, and GCP with performance monitoring and DevOps automation.',
-      features: [
-        'AWS/Azure/GCP',
-        'Performance Monitoring',
-        'Auto-Scaling',
-        'CDN Integration',
-      ],
-    },
-    {
-      icon: HiRefresh,
-      title: 'Maintenance & Support',
-      description:
-        'Keep your systems running flawlessly with ongoing maintenance using DevOps practices and monitoring tools.',
-      features: [
-        '24/7 Support',
-        'Regular Updates',
-        'Bug Fixes',
-        'Security Patches',
-      ],
-    },
-    {
-      icon: HiTrendingUp,
-      title: 'Digital Marketing',
-      description:
-        'Grow your online presence with data-driven marketing strategies using Google Analytics, Meta Ads, and SEO tools.',
-      features: [
-        'Social Media Management',
-        'Content Strategy',
-        'SEO/SEM',
-        'Analytics',
-      ],
-    },
+    { icon: Globe, title: 'IoT Solutions', description: 'Connect physical devices to the digital world.' },
+    { icon: Server, title: 'Network Setup', description: 'Enterprise-grade equipment for secure connectivity.' },
+    { icon: Database, title: 'Server Infra', description: 'Robust server setups using AWS, Azure, and GCP.' },
+    { icon: Puzzle, title: 'UI/UX Design', description: 'Intuitive and engaging user experiences.' },
+    { icon: Camera, title: 'Branding', description: 'Build a strong visual identity for your brand.' },
+    { icon: Cloud, title: 'Cloud Hosting', description: 'Secure, scalable cloud hosting with DevOps.' },
+    { icon: RefreshCw, title: 'Support', description: 'Keep your systems running flawlessly 24/7.' },
+    { icon: TrendingUp, title: 'Digital Marketing', description: 'Grow your online presence with data-driven strategies.' }
   ];
 
-  const processSteps = [
-    {
-      number: '01',
-      title: 'Discovery & Planning',
-      description:
-        'We understand your business, goals, and challenges to create a comprehensive project plan.',
-      icon: HiUsers,
-    },
-    {
-      number: '02',
-      title: 'Design & Prototype',
-      description:
-        'Create wireframes and prototypes to visualize the solution before development begins.',
-      icon: HiSparkles,
-    },
-    {
-      number: '03',
-      title: 'Development & Testing',
-      description:
-        'Build your solution with clean code, rigorous testing, and quality assurance.',
-      icon: HiCode,
-    },
-    {
-      number: '04',
-      title: 'Launch & Support',
-      description:
-        'Deploy to production and provide ongoing support to ensure continued success.',
-      icon: HiCheckCircle,
-    },
+  const processStages = [
+    { number: '01', title: 'Discovery', icon: Search, description: 'Deep dive into your requirements and goals.' },
+    { number: '02', title: 'Design', icon: Sparkles, description: 'Creating the blueprint for your digital solution.' },
+    { number: '03', title: 'Develop', icon: Code2, description: 'Building with precision and cutting-edge tech.' },
+    { number: '04', title: 'Deploy', icon: Zap, description: 'Launching and scaling for maximum impact.' }
   ];
 
   return (
     <ErrorBoundary>
-      <>
       <Helmet>
-        <title>Services - Limitless Infotech Solution</title>
-        <meta name="description" content="Comprehensive technology solutions including Web Development, Mobile App Development, Custom Software & Systems, CRM & Task Management, Business Automation & AI Integration, and more." />
-        <meta name="keywords" content="web development, mobile app development, custom software, CRM, task management, business automation, AI integration, enterprise solutions" />
-        <meta name="author" content="Limitless Infotech Solution" />
-        <meta property="og:title" content="Services - Limitless Infotech Solution" />
-        <meta property="og:description" content="Comprehensive technology solutions including Web Development, Mobile App Development, Custom Software & Systems, CRM & Task Management, Business Automation & AI Integration, and more." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.limitlessinfotech.com/services" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Services - Limitless Infotech Solution" />
-        <meta name="twitter:description" content="Comprehensive technology solutions including Web Development, Mobile App Development, Custom Software & Systems, CRM & Task Management, Business Automation & AI Integration, and more." />
-        <link rel="canonical" href="https://www.limitlessinfotech.com/services" />
+        <title>Services | Limitless Inotech</title>
+        <meta name="description" content="Explore our premium range of technology solutions from web development to AI integration." />
       </Helmet>
-      <div className="min-h-screen font-sans bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
+
+      <div className="relative">
+        {/* Ambient background glow */}
+        <div className="fixed inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-1/4 left-[-10%] w-[50%] h-[50%] bg-primary-500/5 blur-[120px] rounded-full" />
+          <div className="absolute bottom-1/4 right-[-10%] w-[50%] h-[50%] bg-secondary-500/5 blur-[120px] rounded-full" />
+        </div>
+
         {/* Hero Section */}
-        <section className="relative py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#1e40af] to-[#0a0b0d] text-white overflow-hidden">
-        <div
-          className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8"
-          aria-hidden="true"
-        >
-          <div className="absolute inset-0 bg-architectural-grid opacity-10"></div>
-        </div>
-        <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8 animate-fade-in-down">
-              <HiSparkles className="w-5 h-5" />
-              <span className="text-sm font-semibold">
-                Comprehensive Technology Solutions
+        <section className="relative pt-32 pb-24 px-6 overflow-hidden">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className="max-w-7xl mx-auto text-center"
+          >
+            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8">
+              <Zap className="w-4 h-4 text-primary-400" />
+              <span className="text-sm font-medium bg-gradient-to-r from-primary-400 to-primary-200 bg-clip-text text-transparent">Limitless Possibilities</span>
+            </motion.div>
+            
+            <motion.h1 variants={itemVariants} className="text-5xl md:text-8xl font-bold mb-8 leading-tight">
+              Solutions that <br />
+              <span className="bg-gradient-to-r from-primary-400 via-primary-200 to-secondary-400 bg-clip-text text-transparent">
+                Redefine Success
               </span>
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 animate-fade-in-up">
-              Services That Transform
-              <br />
-              Your Business
-            </h1>
-            <p
-              className="text-xl md:text-2xl text-white/90 mb-8 animate-fade-in-up"
-              style={{ animationDelay: '0.2s' }}
-            >
-              From web and mobile development to AI-powered automation, we
-              deliver end-to-end solutions that drive growth and innovation.
-            </p>
-            <Link
-              to="/get-started"
-              className="px-8 py-4 bg-[#ffc957] text-[#0a0b0d] font-bold rounded-xl hover:bg-[#ffbd3a] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl animate-fade-in-up"
-              style={{ animationDelay: '0.4s' }}
-            >
-              Start Your Project
-              <HiArrowRight className="inline-block ml-2 w-5 h-5" />
-            </Link>
-          </div>
-        </div>
-      </section>
+            </motion.h1>
+            
+            <motion.p variants={itemVariants} className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+              We provide end-to-end technology services designed to empower your business with high-performance, secure, and scalable digital solutions.
+            </motion.p>
+          </motion.div>
+        </section>
 
-      {/* Main Services */}
-      {mainServices.map((service, index) => (
-        <section
-          key={service.id}
-          id={service.id}
-          className={`section-padding ${index % 2 === 0 ? 'bg-[#0a0b0d]' : 'bg-[#0a0b0d]/50'}`}
-        >
-          <div className="container-custom">
-            <div
-              className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}
-            >
-              {/* Content */}
-              <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
-                <div
-                  className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${service.color} rounded-2xl mb-6`}
-                >
-                  <service.icon className="w-8 h-8 text-white" />
+        {/* Main Services Grid */}
+        <section className="py-24 px-6">
+          <div className="max-w-7xl mx-auto space-y-32">
+            {mainServices.map((service, index) => (
+              <motion.div 
+                key={service.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-16 items-center`}
+              >
+                {/* Visual Side */}
+                <div className="flex-1 w-full">
+                  <div className={`relative aspect-square md:aspect-video rounded-4xl overflow-hidden bg-gradient-to-br ${
+                    service.color === 'primary' ? 'from-primary-600/20 to-primary-900/40' : 
+                    service.color === 'secondary' ? 'from-secondary-600/20 to-secondary-900/40' : 
+                    'from-brand-600/20 to-brand-900/40'
+                  } border border-white/10 group overflow-hidden`}>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <service.icon className={`w-32 h-32 ${
+                        service.color === 'primary' ? 'text-primary-400' : 
+                        service.color === 'secondary' ? 'text-secondary-400' : 
+                        'text-brand-400'
+                      } opacity-20 group-hover:scale-110 transition-transform duration-700`} />
+                    </div>
+                    {/* Floating accents */}
+                    <div className="absolute top-10 left-10 p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl animate-float">
+                      <div className="flex gap-2">
+                        {[1, 2, 3].map(i => <div key={i} className="w-2 h-2 rounded-full bg-primary-400" />)}
+                      </div>
+                    </div>
+                    <div className="absolute bottom-10 right-10 p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl animate-float-delayed">
+                      <Code2 className="w-6 h-6 text-secondary-400" />
+                    </div>
+                  </div>
                 </div>
-                <h2 className="text-3xl md:text-4xl font-display font-bold mb-3 text-white">
-                  {service.title}
-                </h2>
-                <p className="text-xl text-[#ffc957] font-semibold mb-4">
-                  {service.subtitle}
-                </p>
-                <p className="text-lg text-[#cbd5e1] mb-8 leading-relaxed">
-                  {service.description}
-                </p>
 
-                {/* Technologies */}
-                <div className="mb-8">
-                  <h3 className="text-sm font-bold text-white mb-3 uppercase tracking-wide">
-                    Technologies We Use
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {service.technologies.map((tech, i) => (
-                      <span key={i} className="px-4 py-2 bg-[#2563eb]/20 rounded-full text-sm font-medium text-[#e2e8f0] border border-[#2563eb]/30">
+                {/* Content Side */}
+                <div className="flex-1 space-y-8">
+                  <div className="space-y-4">
+                    <h2 className="text-4xl md:text-5xl font-bold text-white">{service.title}</h2>
+                    <p className="text-xl text-primary-400/80 font-medium">{service.subtitle}</p>
+                    <p className="text-gray-400 leading-relaxed text-lg">{service.description}</p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {service.features.map((feature, i) => (
+                      <div key={i} className="flex items-center gap-3 text-sm text-gray-300">
+                        <CheckCircle2 className="w-5 h-5 text-primary-400 flex-shrink-0" />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="pt-4 flex flex-wrap gap-2">
+                    {service.technologies.map(tech => (
+                      <span key={tech} className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400">
                         {tech}
                       </span>
                     ))}
                   </div>
-                </div>
 
-                <Link to="/get-started" className="px-8 py-4 bg-gradient-to-r from-[#2563eb] to-[#1e40af] text-white font-bold rounded-xl hover:from-[#1d4ed8] hover:to-[#1e3a8a] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-                  Request Demo
-                  <HiArrowRight className="inline-block ml-2 w-5 h-5" />
-                </Link>
-              </div>
-
-              {/* Features & Benefits */}
-              <div
-                className={
-                  index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''
-                }
-              >
-                <div className="space-y-6">
-                  {/* Features - Mobile Accordion */}
-                  <div className="lg:hidden bg-[#0a0b0d]/50 rounded-2xl p-6 shadow-2xl border border-[#2563eb]/30">
-                    <button
-                      className="w-full flex justify-between items-center text-xl font-bold text-white py-2"
-                      onClick={() => toggleMobileFeatures(service.id)}
-                      aria-expanded={expandedMobileFeatures[service.id]}
-                    >
-                      <div className="flex items-center">
-                        <HiCheckCircle className="w-6 h-6 text-[#ffc957] mr-2" />
-                        Key Features
-                      </div>
-                      {expandedMobileFeatures[service.id] ? (
-                        <HiChevronUp className="w-6 h-6 text-[#2563eb]" />
-                      ) : (
-                        <HiChevronDown className="w-6 h-6 text-[#2563eb]" />
-                      )}
-                    </button>
-                    {expandedMobileFeatures[service.id] && (
-                      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        {service.features.map((feature, i) => (
-                          <div key={i} className="flex items-start space-x-2">
-                            <HiCheckCircle className="w-5 h-5 text-[#2563eb] flex-shrink-0 mt-0.5" />
-                            <span className="text-sm text-[#cbd5e1]">
-                              {feature}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Features - Desktop */}
-                  <div className="hidden lg:block bg-[#0a0b0d]/50 rounded-2xl p-8 shadow-2xl border border-[#2563eb]/30">
-                    <h3 className="text-xl font-bold mb-6 text-white flex items-center">
-                      <HiCheckCircle className="w-6 h-6 text-[#ffc957] mr-2" />
-                      Key Features
-                    </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {service.features.map((feature, i) => (
-                        <div key={i} className="flex items-start space-x-2">
-                          <HiCheckCircle className="w-5 h-5 text-[#2563eb] flex-shrink-0 mt-0.5" />
-                          <span className="text-sm text-[#cbd5e1]">
-                            {feature}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Benefits */}
-                  <div className="bg-gradient-to-br from-[#2563eb]/20 to-[#ffc957]/10 rounded-2xl p-8 border border-[#2563eb]/30">
-                    <h3 className="text-xl font-bold mb-6 text-white flex items-center">
-                      <HiTrendingUp className="w-6 h-6 text-[#2563eb] mr-2" />
-                      Business Benefits
-                    </h3>
-                    <ul className="space-y-3">
-                      {service.benefits.map((benefit, i) => (
-                        <li key={i} className="flex items-start space-x-3">
-                          <div className="w-2 h-2 bg-[#ffc957] rounded-full mt-2 flex-shrink-0"></div>
-                          <span className="text-[#cbd5e1]">
-                            {benefit}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
+                  <div className="pt-6">
+                    <Link to="/get-started" className={`inline-flex items-center gap-2 text-lg font-bold ${
+                      service.color === 'primary' ? 'text-primary-400' : 
+                      service.color === 'secondary' ? 'text-secondary-400' : 
+                      'text-brand-400'
+                    } group`}>
+                      Learn more about {service.title}
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </Link>
                   </div>
                 </div>
-              </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Additional Services Grid */}
+        <section className="py-24 px-6 bg-white/[0.02]">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16 space-y-4">
+                <h2 className="text-4xl font-bold">Extended Expertise</h2>
+                <p className="text-gray-400">Complementary services to build your complete digital ecosystem</p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {additionalServices.map((service, index) => (
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                  className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-primary-500/30 transition-all group"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-primary-500/10 flex items-center justify-center mb-6 group-hover:bg-primary-500/20 transition-colors">
+                    <service.icon className="w-6 h-6 text-primary-400" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2 text-white">{service.title}</h3>
+                  <p className="text-sm text-gray-400 leading-relaxed">{service.description}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
-      ))}
 
-      {/* Additional Services */}
-      <section className="section-padding bg-[#0a0b0d]/50">
-        <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-white">
-              Additional <span className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] bg-clip-text text-transparent">Services</span>
-            </h2>
-            <p className="text-lg text-[#94a3b8] max-w-2xl mx-auto">
-              Complementary services to provide complete end-to-end solutions
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {additionalServices.map((service, index) => (
-              <div key={index} className="bg-[#0a0b0d]/50 rounded-2xl p-6 border border-[#2563eb]/30 relative overflow-hidden">
-                <div className="w-12 h-12 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <service.icon className="w-6 h-6 text-white" />
+        {/* Our Process Stage */}
+        <section className="py-24 px-6">
+            <div className="max-w-7xl mx-auto">
+                <div className="text-center mb-16 space-y-4">
+                    <h2 className="text-4xl font-bold">Our Execution Workflow</h2>
+                    <p className="text-gray-400">How we bring your vision to life from initial concept to launch</p>
                 </div>
-                <h3 className="text-lg font-bold mb-2 text-white">
-                  {service.title}
-                </h3>
-                <p className="text-sm text-[#cbd5e1] mb-4">
-                  {service.description}
-                </p>
-
-                {/* Features - Mobile Accordion */}
-                <div className="md:hidden">
-                  <button
-                    className="w-full flex justify-between items-center text-xs font-semibold text-[#cbd5e1] py-2"
-                    onClick={() => toggleMobileFeatures(`additional-${index}`)}
-                    aria-expanded={
-                      expandedMobileFeatures[`additional-${index}`]
-                    }
-                  >
-                    <span>Features</span>
-                    {expandedMobileFeatures[`additional-${index}`] ? (
-                      <HiChevronUp className="w-4 h-4 text-[#2563eb]" />
-                    ) : (
-                      <HiChevronDown className="w-4 h-4 text-[#2563eb]" />
-                    )}
-                  </button>
-                  {expandedMobileFeatures[`additional-${index}`] && (
-                    <ul className="space-y-2 mt-2">
-                      {service.features.map((feature, i) => (
-                        <li
-                          key={i}
-                          className="flex items-center text-xs text-[#94a3b8]"
-                        >
-                          <div className="w-1.5 h-1.5 bg-[#2563eb] rounded-full mr-2"></div>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                <div className="grid md:grid-cols-4 gap-8">
+                    {processStages.map((stage, index) => (
+                        <div key={index} className="relative group">
+                            {index < 3 && (
+                                <div className="hidden md:block absolute top-[60px] left-1/2 w-full h-[1px] bg-white/10 -z-10" />
+                            )}
+                            <div className="text-center space-y-6">
+                                <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center mx-auto group-hover:bg-primary-500 transition-colors duration-500">
+                                    <stage.icon className="w-6 h-6 text-primary-400 group-hover:text-white transition-colors" />
+                                </div>
+                                <div className="space-y-2">
+                                    <span className="text-primary-400 font-bold text-xs uppercase tracking-widest">{stage.number}</span>
+                                    <h3 className="text-xl font-bold text-white">{stage.title}</h3>
+                                    <p className="text-sm text-gray-400 leading-relaxed px-4">{stage.description}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
+            </div>
+        </section>
 
-                {/* Features - Desktop */}
-                <ul className="space-y-2 hidden md:block">
-                  {service.features.map((feature, i) => (
-                    <li
-                      key={i}
-                      className="flex items-center text-xs text-[#94a3b8]"
-                    >
-                      <div className="w-1.5 h-1.5 bg-[#2563eb] rounded-full mr-2"></div>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+        {/* CTA Banner */}
+        <section className="py-24 px-6">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="max-w-6xl mx-auto p-12 md:p-20 rounded-[40px] bg-gradient-to-br from-primary-600/30 to-secondary-600/30 border border-white/20 backdrop-blur-2xl text-center relative overflow-hidden"
+          >
+            <div className="relative z-10">
+              <h2 className="text-4xl md:text-5xl font-bold mb-8">Ready to Build Something Truly Limitless?</h2>
+              <div className="flex flex-wrap justify-center gap-6">
+                <Link to="/get-started" className="px-10 py-4 bg-white text-dark-900 font-bold rounded-2xl hover:bg-gray-100 transition-all shadow-xl shadow-white/10 inline-flex items-center gap-2 group">
+                  Consultation
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <Link to="/contact" className="px-10 py-4 bg-white/5 text-white font-bold rounded-2xl hover:bg-white/10 border border-white/10 backdrop-blur-md transition-all">
+                  Get in Touch
+                </Link>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Our Process */}
-      <section className="section-padding bg-[#0a0b0d]">
-        <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-white">
-              Our <span className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] bg-clip-text text-transparent">Process</span>
-            </h2>
-            <p className="text-lg text-[#94a3b8] max-w-2xl mx-auto">
-              A proven methodology that ensures successful project delivery
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {processSteps.map((step, index) => (
-              <div key={index} className="relative">
-                {/* Connector Line */}
-                {index < processSteps.length - 1 && (
-                  <div className="hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-[#2563eb] to-transparent"></div>
-                )}
-
-                <div className="text-center">
-                  <div className="relative inline-flex items-center justify-center w-32 h-32 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-full mb-6">
-                    <div className="absolute inset-2 bg-[#0a0b0d] rounded-full flex items-center justify-center">
-                      <step.icon className="w-12 h-12 text-[#2563eb]" />
-                    </div>
-                    <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-[#2563eb] rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                      {step.number}
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-bold mb-3 text-white">
-                    {step.title}
-                  </h3>
-                  <p className="text-[#cbd5e1]">
-                    {step.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Security & Quality */}
-      <section className="section-padding bg-gradient-to-br from-[#2563eb] to-[#0a0b0d] text-white">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <HiShieldCheck className="w-16 h-16 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold mb-3">Enterprise Security</h3>
-              <p className="text-white/90">
-                Bank-level encryption, secure coding practices, and compliance
-                with industry standards
-              </p>
             </div>
-            <div className="text-center">
-              <HiLockClosed className="w-16 h-16 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold mb-3">Data Protection</h3>
-              <p className="text-white/90">
-                GDPR compliance, secure data storage, and robust backup systems
-              </p>
-            </div>
-            <div className="text-center">
-              <HiGlobe className="w-16 h-16 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold mb-3">Global Standards</h3>
-              <p className="text-white/90">
-                Following international best practices and quality standards
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="section-padding bg-[#0a0b0d]/50">
-        <div className="container-custom">
-          <div className="bg-gradient-to-br from-[#0a0b0d] to-[#1e293b] rounded-3xl p-12 md:p-16 text-center border border-[#2563eb]/30">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 text-white">
-              Ready to Build Something Amazing?
-            </h2>
-            <p className="text-lg text-[#cbd5e1] mb-8 max-w-2xl mx-auto">
-              Let's discuss your project and create a solution that exceeds your
-              expectations
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/get-started" className="px-8 py-4 bg-gradient-to-r from-[#2563eb] to-[#1e40af] text-white font-bold rounded-xl hover:from-[#1d4ed8] hover:to-[#1e3a8a] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-                Get Started
-              </Link>
-              <Link
-                to="/portfolio"
-                className="px-8 py-4 rounded-xl font-bold text-base tracking-wide border-2 border-[#2563eb] text-[#2563eb] bg-transparent hover:bg-[#2563eb]/10 transition-all duration-300"
-              >
-                View Our Work
-              </Link>
-              <Link to="/contact" className="px-8 py-4 rounded-xl font-bold text-base tracking-wide border-2 border-[#ffc957] text-[#ffc957] bg-transparent hover:bg-[#ffc957]/10 transition-all duration-300">
-                Contact Us
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-      </>
+            {/* Visual background sparkle */}
+            <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary-400/20 blur-[100px] rounded-full pointer-events-none" />
+            <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-secondary-400/20 blur-[100px] rounded-full pointer-events-none" />
+          </motion.div>
+        </section>
+      </div>
     </ErrorBoundary>
   );
 };

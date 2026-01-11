@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sohne:wght@700&display=swap');
 @import './styles/enterprise-components.css';
+
+:root {
+  --ease-industrial: cubic-bezier(0.16, 1, 0.3, 1);
+}
 
 @tailwind base;
 @tailwind components;
@@ -61,6 +66,71 @@
 
 /* Custom Utilities */
 @layer utilities {
+  .mask-facet { clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%); }
+  .mask-btn { clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%, 0 35%); transition: all 0.3s ease; }
+  .mask-diagonal { clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%); }
+
+  .blueprint-grid {
+      position: fixed;
+      inset: 0;
+      background-size: 80px 80px;
+      z-index: -1;
+      mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
+  }
+
+  .glass-panel {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+  }
+
+  .on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s var(--ease-industrial), transform 0.8s var(--ease-industrial);
+  }
+  
+  .on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+  }
+
+  .on-scroll-mask {
+      clip-path: inset(0 100% 0 0);
+      transition: clip-path 1.2s var(--ease-industrial);
+  }
+
+  .on-scroll-mask.visible {
+      clip-path: inset(0 0% 0 0);
+  }
+
+  .modal-backdrop {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+  }
+  .modal-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+  }
+  .modal-content {
+      transform: scale(0.95) translateY(20px);
+      opacity: 0;
+      transition: all 0.4s var(--ease-industrial);
+  }
+  .modal-backdrop.active .modal-content {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+  }
+
+  .mobile-menu {
+      clip-path: circle(0% at 100% 0);
+      transition: clip-path 0.6s var(--ease-industrial);
+  }
+  .mobile-menu.active {
+      clip-path: circle(150% at 100% 0);
+  }
+
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-accent-500;
   }

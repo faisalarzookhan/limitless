@@ -1,11 +1,6 @@
 import { useState, memo } from 'react';
-import {
-  HiOutlineMail,
-  HiOutlineLockClosed,
-  HiOutlineEye,
-  HiOutlineEyeOff,
-} from 'react-icons/hi';
-import InputField from './InputField';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, Lock, Eye, EyeOff, CheckCircle2, Send, AlertCircle, ShieldCheck } from 'lucide-react';
 import csrfService from '../../../services/csrfService';
 import rateLimitService from '../../../services/rateLimitService';
 import encryptionService from '../../../services/auth/encryptionService';
@@ -23,10 +18,7 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
   const [errors, setErrors] = useState({});
   const [rateLimitError, setRateLimitError] = useState(null);
   
-  // Get client identifier for rate limiting (using a combination of factors)
   const getClientIdentifier = () => {
-    // In a real implementation, this would use the actual IP address from the server
-    // For client-side, we'll use a combination of factors
     return `${window.location.hostname}_${navigator.userAgent}`;
   };
 
@@ -37,7 +29,6 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
       [name]: type === 'checkbox' ? checked : value,
     }));
     
-    // Clear error for this field when user starts typing
     if (errors[name]) {
       setErrors(prev => {
         const newErrors = { ...prev };
@@ -51,18 +42,15 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
     const newErrors = {};
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else {
-      const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-      if (!emailRegex.test(formData.email.trim())) {
-        newErrors.email = 'Please enter a valid email address';
-      }
+      newErrors.email = 'Identifier required';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email.trim())) {
+      newErrors.email = 'Invalid protocol';
     }
 
     if (!formData.password.trim()) {
-      newErrors.password = 'Password is required';
+      newErrors.password = 'Auth key required';
     } else if (formData.password.trim().length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
+      newErrors.password = 'Key strength insufficient';
     }
 
     setErrors(newErrors);
@@ -71,35 +59,25 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    
-    // Check rate limit
     const clientIdentifier = getClientIdentifier();
     const rateLimitCheck = rateLimitService.checkLimit(clientIdentifier, 'loginAttempts');
     
     if (!rateLimitCheck.allowed) {
-      const retryAfterSeconds = Math.ceil(rateLimitCheck.retryAfter / 1000);
-      setRateLimitError(`Rate limit exceeded. Please try again in ${retryAfterSeconds} seconds.`);
+      setRateLimitError(`Auth Lockout Active. Retry in ${Math.ceil(rateLimitCheck.retryAfter / 1000)}s.`);
       return;
     }
     
-    // Clear any previous rate limit error
     setRateLimitError(null);
-    
-    // Validate form first
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
     
     setIsSubmitting(true);
     
-    // Sanitize input data
     const sanitizedData = {
       email: encryptionService.sanitizeInput(formData.email),
       password: encryptionService.sanitizeInput(formData.password),
       rememberMe: formData.rememberMe,
     };
 
-    // Add CSRF token to the data
     const requestData = {
       ...sanitizedData,
       csrfToken: csrfService.getToken(),
@@ -109,152 +87,131 @@ const LoginForm = ({ onLoginSuccess, variant = 'default' }) => {
     };
 
     try {
-      // Send notification about the login attempt
       await sendLoginNotification(requestData);
 
-      // Simulate API call
       setTimeout(() => {
         setIsSubmitting(false);
         setSubmitSuccess(true);
-
-        // Call success callback if provided
-        if (onLoginSuccess) {
-          onLoginSuccess();
-        }
-
-        // Reset success message after 5 seconds
+        if (onLoginSuccess) onLoginSuccess();
         setTimeout(() => setSubmitSuccess(false), 5000);
       }, 1500);
     } catch (error) {
       setIsSubmitting(false);
-      console.error('Login error:', error);
+      console.error('Auth breakdown:', error);
     }
   };
 
-  if (submitSuccess) {
-    return (
-      <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 text-center" role="alert" aria-live="polite">
-        <div className="flex items-center justify-center mb-3">
-          <svg
-            className="w-8 h-8 text-green-600 dark:text-green-400"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M5 13l4 4L19 7"
-            ></path>
-          </svg>
-        </div>
-        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">
-          Login Successful!
-        </h3>
-        <p className="text-green-700 dark:text-green-400 text-sm">
-          Welcome back! You have been successfully logged in.
-        </p>
-      </div>
-    );
-  }
-
   return (
-    <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-      {rateLimitError && (
-        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4" role="alert" aria-live="polite">
-          <p className="text-red-700 dark:text-red-300 text-sm">{rateLimitError}</p>
-        </div>
-      )}
-      <InputField
-        id="email"
-        name="email"
-        label="Email Address"
-        type="email"
-        value={formData.email}
-        onChange={handleChange}
-        placeholder="your@email.com"
-        required
-        error={errors.email}
-        icon={HiOutlineMail}
-      />
-
-      <div className="relative">
-        <InputField
-          id="password"
-          name="password"
-          label="Password"
-          type={showPassword ? 'text' : 'password'}
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="Enter your password"
-          required
-          error={errors.password}
-          icon={HiOutlineLockClosed}
-        />
-        <button
-          type="button"
-          onClick={() => setShowPassword(!showPassword)}
-          className="absolute right-3 top-11 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
-        >
-          {showPassword ? <HiOutlineEyeOff /> : <HiOutlineEye />}
-        </button>
-      </div>
-
-      <div className="flex items-center justify-between">
-        <div className="flex items-center">
-          <input
-            id="rememberMe"
-            name="rememberMe"
-            type="checkbox"
-            checked={formData.rememberMe}
-            onChange={handleChange}
-            className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
-          />
-          <label
-            htmlFor="rememberMe"
-            className="ml-2 block text-sm text-gray-700 dark:text-gray-300"
+    <div className="relative">
+      <AnimatePresence mode="wait">
+        {submitSuccess ? (
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            className="bg-[#1ba6d6]/10 border border-[#1ba6d6]/20 backdrop-blur-xl rounded-2xl p-10 text-center"
           >
-            Remember me
-          </label>
-        </div>
-
-        <div className="text-sm">
-          <a
-            href="/password-reset"
-            className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
-          >
-            Forgot password?
-          </a>
-        </div>
-      </div>
-
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-primary-700 hover:to-secondary-700 transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-      >
-        {isSubmitting ? (
-          <>
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-            Signing in...
-          </>
+            <div className="w-16 h-16 bg-[#1ba6d6] rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(27,166,214,0.4)]">
+              <CheckCircle2 color="white" size={32} />
+            </div>
+            <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-2">Access Granted</h3>
+            <p className="text-[#94a3b8] text-sm leading-relaxed uppercase tracking-widest opacity-60">Identity verified. Welcome to the Nexus.</p>
+          </motion.div>
         ) : (
-          'Sign In'
-        )}
-      </button>
+          <motion.form 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            onSubmit={handleSubmit} 
+            className="space-y-6"
+            noValidate
+          >
+            {rateLimitError && (
+              <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 flex items-center gap-3">
+                <AlertCircle className="text-red-500" size={20} />
+                <p className="text-red-500 text-xs font-bold uppercase tracking-widest">{rateLimitError}</p>
+              </div>
+            )}
 
-      <div className="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
-        Don't have an account?{' '}
-        <a
-          href="/register"
-          className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
-        >
-          Sign up
-        </a>
-      </div>
-    </form>
+            <div className="space-y-4">
+              <div className="relative group">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94a3b8] group-focus-within:text-[#1ba6d6] transition-colors" />
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`w-full bg-white/5 border ${errors.email ? 'border-red-500' : 'border-white/10'} focus:border-[#1ba6d6] rounded-xl px-12 py-4 text-white placeholder:text-white/20 outline-none transition-all duration-300 backdrop-blur-md`}
+                  placeholder="Neural Identity (Email)"
+                />
+                {errors.email && <p className="text-red-500 text-[0.6rem] uppercase tracking-widest mt-1 ml-4">{errors.email}</p>}
+              </div>
+
+              <div className="relative group">
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94a3b8] group-focus-within:text-[#1ba6d6] transition-colors" />
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className={`w-full bg-white/5 border ${errors.password ? 'border-red-500' : 'border-white/10'} focus:border-[#1ba6d6] rounded-xl px-12 py-4 text-white placeholder:text-white/20 outline-none transition-all duration-300 backdrop-blur-md pr-12`}
+                  placeholder="Security Cipher"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#94a3b8] hover:text-white transition-colors"
+                >
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                </button>
+                {errors.password && <p className="text-red-500 text-[0.6rem] uppercase tracking-widest mt-1 ml-4">{errors.password}</p>}
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between px-2">
+              <label className="flex items-center gap-3 cursor-pointer group">
+                <div className="relative">
+                  <input
+                    type="checkbox"
+                    name="rememberMe"
+                    checked={formData.rememberMe}
+                    onChange={handleChange}
+                    className="peer hidden"
+                  />
+                  <div className="w-5 h-5 border-2 border-white/10 rounded-md peer-checked:bg-[#1ba6d6] peer-checked:border-[#1ba6d6] transition-all" />
+                  <CheckCircle2 className="absolute inset-0 m-auto w-3 h-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity" />
+                </div>
+                <span className="text-[0.65rem] text-[#94a3b8] uppercase tracking-widest group-hover:text-white transition-colors">Persistent Link</span>
+              </label>
+
+              <a href="/password-reset" className="text-[0.65rem] text-[#1ba6d6] hover:text-white transition-colors uppercase tracking-widest font-bold">Restore Access</a>
+            </div>
+
+            <motion.button
+              whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(27,166,214,0.3)" }}
+              whileTap={{ scale: 0.98 }}
+              disabled={isSubmitting}
+              type="submit"
+              className="w-full py-5 bg-[#1ba6d6] hover:bg-[#1592bd] text-white font-black text-xs uppercase tracking-[0.4em] mask-btn transition-colors disabled:opacity-50 flex items-center justify-center gap-3"
+            >
+              {isSubmitting ? (
+                <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+              ) : (
+                <>
+                  Authorize Node
+                  <ShieldCheck size={18} />
+                </>
+              )}
+            </motion.button>
+
+            <div className="text-center">
+              <p className="text-[0.6rem] text-[#94a3b8] uppercase tracking-widest opacity-40">
+                New Identity? <a href="/register" className="text-[#1ba6d6] hover:text-white font-bold transition-colors">Register Protocol</a>
+              </p>
+            </div>
+          </motion.form>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
 

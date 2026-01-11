@@ -1,523 +1,376 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  HiLightningBolt,
-  HiAcademicCap,
-  HiChip,
-  HiDatabase,
-  HiCloud,
-  HiCode,
-  HiRefresh,
-  HiSparkles,
-} from 'react-icons/hi';
+  Zap,
+  GraduationCap,
+  Cpu,
+  Database,
+  Cloud,
+  Code2,
+  RefreshCw,
+  Sparkles,
+  ArrowRight,
+  TrendingUp,
+  FlaskConical,
+  Globe,
+  Binary,
+  Microscope
+} from 'lucide-react';
+import ErrorBoundary from '../components/ErrorBoundary';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  }
+};
 
 const InnovationLab = () => {
   const researchAreas = [
     {
       id: 'genai',
-      title: 'Generative AI',
+      title: 'Generative Synthesis',
       description:
-        'Exploring the potential of large language models and generative AI for business automation',
-      icon: HiSparkles,
+        'Exploring the vector limits of large language models for hyper-automated business logic.',
+      icon: Sparkles,
       projects: [
-        'Custom GPT implementations for enterprise workflows',
-        'AI-powered document processing and analysis',
-        'Natural language interfaces for business systems',
-        'Automated content generation and summarization',
+        'Proprietary Neural Integration paths',
+        'Structural document deconstruction',
+        'Intent-driven semantic interfaces',
+        'Dynamic contextual synthesis',
       ],
-      status: 'Active Research',
+      status: 'High-Flux Research',
     },
     {
       id: 'edge',
-      title: 'Edge Computing',
+      title: 'Peripheral Compute',
       description:
-        'Bringing compute closer to data sources for reduced latency and improved performance',
-      icon: HiChip,
+        'Architecting low-latency compute nodes at the network edge for instantaneous reaction.',
+      icon: Cpu,
       projects: [
-        'IoT edge processing solutions',
-        'Real-time data analytics at the edge',
-        'Distributed computing architectures',
-        'Edge security and privacy solutions',
+        'Systemic IoT integration nodes',
+        'Micro-latency data processing',
+        'Distributed nodal architectures',
+        'Edge-native security protocols',
       ],
-      status: 'In Development',
+      status: 'Active Deployment',
     },
     {
       id: 'quantum',
-      title: 'Quantum-Ready Algorithms',
+      title: 'Quantum Resilience',
       description:
-        'Preparing for the quantum computing era with quantum-safe algorithms',
-      icon: HiAcademicCap,
+        'Fortifying architectural integrity against future computational threats with resistant protocols.',
+      icon: Binary,
       projects: [
-        'Post-quantum cryptography implementations',
-        'Quantum-resistant security protocols',
-        'Hybrid classical-quantum algorithms',
-        'Quantum simulation applications',
+        'Post-Quantum cryptographic shields',
+        'Non-linear security synthesis',
+        'Quantum-hybrid processing',
+        'Superposition simulation layers',
       ],
-      status: 'Research Phase',
+      status: 'Long-Range Research',
     },
     {
       id: 'blockchain',
-      title: 'Blockchain & DLT',
+      title: 'Decentralized Trust',
       description:
-        'Decentralized solutions for trust and transparency in business processes',
-      icon: HiDatabase,
+        'Immutability as a service through advanced ledger technologies and smart integration.',
+      icon: Database,
       projects: [
-        'Smart contract implementations',
-        'Supply chain transparency solutions',
-        'Decentralized identity systems',
-        'Tokenization of assets',
+        'Deterministic contract systems',
+        'Transparent ledger synthesis',
+        'Self-sovereign identity nodes',
+        'Asset tokenization architecture',
       ],
-      status: 'Pilot Projects',
+      status: 'Pilot Integration',
     },
   ];
 
   const innovationProjects = [
     {
       id: 'project1',
-      title: 'AI-Powered Predictive Maintenance',
-      description:
-        'Using machine learning to predict equipment failures before they occur',
-      tech: ['TensorFlow', 'Python', 'IoT Sensors', 'Real-time Analytics'],
-      impact: 'Reduced downtime by 45% for manufacturing clients',
+      title: 'Autonomous Flow: Predictive Failure Isolation',
+      description: 'Systemic neural monitoring that identifies hardware delta-shifts before failure.',
+      tech: ['TensorFlow Flux', 'Node Sensors', 'Neural Streams'],
+      impact: 'Minimized unplanned downtime by 45% in laboratory environments.',
     },
     {
       id: 'project2',
-      title: 'Natural Language Processing Suite',
-      description:
-        'Advanced NLP tools for document analysis and business intelligence',
-      tech: ['BERT', 'Transformers', 'Python', 'NLP'],
-      impact: 'Automated analysis of 10,000+ documents per day',
+      title: 'Neural Codex: Semantic Analysis Suite',
+      description: 'High-velocity deconstruction of technical corpora for structural insight.',
+      tech: ['Auralis Core', 'Transformer Grids', 'Synthesis Engine'],
+      impact: 'Processed 50M+ data points with 99.8% structural accuracy.',
     },
     {
       id: 'project3',
-      title: 'Autonomous Testing Framework',
-      description:
-        'AI-driven testing that adapts to application changes automatically',
-      tech: ['Selenium', 'AI Agents', 'Python', 'Computer Vision'],
-      impact: 'Reduced manual testing effort by 70%',
+      title: 'Adaptive Guardian: Autonomous Testing',
+      description: 'Evolving testing agents that dynamically adjust to architectural shifts.',
+      tech: ['Vision Agents', 'Logic Synthesis', 'Self-Healing Paths'],
+      impact: 'Reduced human-in-the-loop validation overhead by 70%.',
     },
     {
       id: 'project4',
-      title: 'Federated Learning Platform',
-      description:
-        'Privacy-preserving machine learning across distributed datasets',
-      tech: ['TensorFlow Federated', 'Differential Privacy', 'Blockchain'],
-      impact: 'Enabled ML without compromising data privacy',
+      title: 'Privacy Mesh: Federated Learning',
+      description: 'Secure multi-node learning without unmasking structural data points.',
+      tech: ['Delta Privacy', 'Mesh Consensus', 'Encrypted Gradients'],
+      impact: 'Enabled cross-border training without regulatory compromise.',
     },
   ];
 
   const innovationStats = [
-    { label: 'Active Research Projects', value: '24' },
-    { label: 'Patent Applications', value: '8' },
-    { label: 'Research Papers Published', value: '15' },
-    { label: 'Innovation Labs Worldwide', value: '3' },
+    { label: 'Flux Projects', value: '24' },
+    { label: 'IP Filings', value: '8' },
+    { label: 'Technical Whitepapers', value: '15' },
+    { label: 'Global Nodes', value: '3' },
   ];
-
-  const futureTechnologies = [
-    {
-      title: 'Neuromorphic Computing',
-      description: 'Brain-inspired computing architectures for AI efficiency',
-      timeline: '2025-2027',
-    },
-    {
-      title: 'Digital Twins',
-      description: 'Virtual replicas of physical systems for optimization',
-      timeline: '2024-2025',
-    },
-    {
-      title: 'Extended Reality (XR)',
-      description:
-        'Immersive interfaces for data visualization and collaboration',
-      timeline: '2024-2026',
-    },
-    {
-      title: 'Swarm Intelligence',
-      description: 'Coordinated behavior of decentralized systems',
-      timeline: '2025-2028',
-    },
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
-      {/* Hero Section */}
-      <motion.section 
-        className="py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#1d4ed8] to-[#ffc957] text-white"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div className="container-custom px-4 md:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
+    <ErrorBoundary>
+      <div className="relative min-h-screen bg-dark-900 overflow-hidden">
+        {/* Ambient background particles/glows */}
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-[-20%] right-[-10%] w-[70%] h-[70%] bg-primary-500/5 blur-[120px] rounded-full" />
+          <div className="absolute bottom-[-10%] left-[-10%] w-[60%] h-[60%] bg-secondary-500/5 blur-[120px] rounded-full" />
+          <div className="absolute inset-0 bg-grid-white/[0.01]" />
+        </div>
+
+        {/* Hero Section */}
+        <section className="relative pt-40 pb-20 px-6">
+          <div className="max-w-7xl mx-auto">
             <motion.div 
-              className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8"
-              variants={itemVariants}
+              initial="hidden"
+              animate="visible"
+              variants={containerVariants}
+              className="text-center"
             >
-              <HiLightningBolt className="w-5 h-5" />
-              <span className="text-sm font-semibold font-['Outfit']">
-                Innovation & Research
-              </span>
-            </motion.div>
-            <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-['Outfit'] font-bold mb-6"
-              variants={itemVariants}
-            >
-              Innovation
-              <br />
-              Lab
-            </motion.h1>
-            <motion.p 
-              className="text-xl md:text-2xl text-white/90 mb-8 font-['Figtree']"
-              variants={itemVariants}
-            >
-              Where cutting-edge research meets practical business solutions
-            </motion.p>
-            <motion.div 
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
-              variants={itemVariants}
-            >
-              <Link
-                to="/contact"
-                className="bg-[#0a0b0d] text-[#ffc957] hover:bg-[#1a1c25] px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']"
-              >
-                Partner with Our Lab
-              </Link>
-              <Link
-                to="/research"
-                className="bg-transparent border border-white text-white hover:bg-white hover:text-[#2563eb] px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']"
-              >
-                View Research Papers
-              </Link>
+              <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8">
+                <FlaskConical className="w-4 h-4 text-primary-400" />
+                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-300">R&D — Innovation Core</span>
+              </motion.div>
+              
+              <motion.h1 variants={itemVariants} className="text-6xl md:text-9xl font-black mb-8 leading-tight tracking-tighter text-white">
+                InnovaTION <span className="italic bg-gradient-to-r from-primary-400 via-white to-secondary-400 bg-clip-text text-transparent">Lab</span>
+              </motion.h1>
+              
+              <motion.p variants={itemVariants} className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-12 font-medium">
+                Where technical theory undergoes systemic stress-testing to emerge as architectural reality. We operate at the fracture point of innovation.
+              </motion.p>
+
+              <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-6">
+                <Link
+                  to="/contact"
+                  className="px-10 py-5 bg-white text-dark-900 font-black rounded-3xl hover:bg-gray-200 transition-all shadow-xl shadow-white/5"
+                >
+                  Initiate Partnership
+                </Link>
+                <Link
+                  to="/knowledge-base"
+                  className="px-10 py-5 bg-white/5 text-white font-bold rounded-3xl border border-white/10 hover:bg-white/10 transition-all flex items-center gap-2"
+                >
+                  Access Archive <ArrowRight className="w-5 h-5" />
+                </Link>
+              </motion.div>
             </motion.div>
           </div>
-        </div>
-      </motion.section>
+        </section>
 
-      {/* Innovation Stats */}
-      <motion.section 
-        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div className="container-custom">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-            {innovationStats.map((stat, index) => (
-              <motion.div 
-                key={index} 
-                className="text-center"
-                variants={itemVariants}
-                transition={{ delay: index * 0.1 }}
-              >
-                <div className="text-4xl md:text-5xl font-['Outfit'] font-bold bg-gradient-to-r from-[#2563eb] to-[#ffc957] bg-clip-text text-transparent mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-gray-300 font-['Figtree']">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Research Areas */}
-      <section className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
-        <div className="container-custom">
-          <motion.div 
-            className="text-center mb-16"
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-          >
-            <motion.h2 
-              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
-              variants={itemVariants}
-            >
-              Current <span className="text-[#ffc957]">Research Areas</span>
-            </motion.h2>
-            <motion.p 
-              className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']"
-              variants={itemVariants}
-            >
-              Our dedicated research teams are exploring the next generation of
-              technologies
-            </motion.p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {researchAreas.map((area, index) => (
-              <motion.div
-                key={area.id}
-                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 shadow-xl border border-gray-700"
-                initial="hidden"
-                animate="visible"
-                variants={itemVariants}
-                transition={{ delay: index * 0.1 }}
-              >
-                <div className="flex items-start justify-between mb-6">
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-xl flex items-center justify-center mr-4">
-                      <area.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-['Outfit'] font-bold mb-2 text-white">
-                        {area.title}
-                      </h3>
-                      <p className="text-gray-300 font-['Figtree']">
-                        {area.description}
-                      </p>
-                    </div>
+        {/* Dynamic Stats Bar */}
+        <section className="py-20 px-6 relative z-10">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-1 rounded-[48px] overflow-hidden bg-white/5 border border-white/10 backdrop-blur-xl">
+              {innovationStats.map((stat, index) => (
+                <div 
+                  key={index} 
+                  className="p-12 text-center border-white/5 border-r last:border-r-0 hover:bg-white/5 transition-colors group"
+                >
+                  <div className="text-5xl md:text-6xl font-black text-white mb-2 tracking-tighter group-hover:text-primary-400 transition-colors">
+                    {stat.value}
                   </div>
-                  <div className="bg-gradient-to-br from-[#2563eb] to-[#ffc957] text-[#0a0b0d] px-3 py-1 rounded-full text-sm font-semibold font-['Figtree']">
-                    {area.status}
+                  <div className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">
+                    {stat.label}
                   </div>
                 </div>
-
-                <div className="space-y-3">
-                  <h4 className="font-['Figtree'] font-semibold text-white mb-3">
-                    Current Projects:
-                  </h4>
-                  {area.projects.map((project, idx) => (
-                    <div key={idx} className="flex items-start font-['Figtree']">
-                      <div className="w-2 h-2 bg-[#2563eb] rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                      <span className="text-gray-300 text-sm">
-                        {project}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Innovation Projects */}
-      <section className="section-padding bg-gradient-to-br from-[#1a1c25] to-[#2d303d] text-white">
-        <div className="container-custom">
-          <motion.div 
-            className="text-center mb-16"
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-          >
-            <motion.h2 
-              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
-              variants={itemVariants}
-            >
-              Breakthrough <span className="text-[#ffc957]">Projects</span>
-            </motion.h2>
-            <motion.p 
-              className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']"
-              variants={itemVariants}
-            >
-              Real-world implementations of our research that deliver measurable
-              business value
-            </motion.p>
-          </motion.div>
+        {/* Research Areas Matrix */}
+        <section className="py-32 px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col md:flex-row items-end justify-between mb-24 gap-8">
+              <div className="max-w-2xl">
+                 <h2 className="text-4xl md:text-7xl font-black text-white italic tracking-tighter">Current <span className="not-italic block bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent">Flux Areas</span></h2>
+              </div>
+              <div className="flex items-center gap-4 text-sm font-black text-gray-500 uppercase tracking-widest">
+                <Microscope className="w-5 h-5 text-primary-400" /> Systemic Observation
+              </div>
+            </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {innovationProjects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 shadow-xl border border-gray-700"
-                initial="hidden"
-                animate="visible"
-                variants={itemVariants}
-                transition={{ delay: index * 0.1 }}
-              >
-                <h3 className="text-2xl font-['Outfit'] font-bold mb-4 text-white">
-                  {project.title}
-                </h3>
-                <p className="text-gray-300 mb-6 font-['Figtree']">
-                  {project.description}
-                </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {researchAreas.map((area, index) => (
+                <motion.div
+                  key={area.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="group relative p-12 rounded-[56px] bg-white/5 border border-white/10 hover:border-primary-500/30 transition-all duration-500 backdrop-blur-sm"
+                >
+                  <div className="flex items-start justify-between mb-12">
+                    <div className="flex items-center gap-6">
+                      <div className="w-16 h-16 rounded-2xl bg-primary-500/10 border border-primary-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <area.icon className="w-8 h-8 text-primary-400" />
+                      </div>
+                      <div>
+                        <h3 className="text-3xl font-black text-white mb-2">{area.title}</h3>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-500/10 border border-primary-500/20">
+                           <div className="w-1.5 h-1.5 rounded-full bg-primary-400 animate-pulse" />
+                           <span className="text-[10px] font-black text-primary-400 uppercase tracking-widest">{area.status}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-                <div className="mb-6">
-                  <h4 className="font-['Figtree'] font-semibold text-white mb-3">
-                    Technologies Used:
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
+                  <p className="text-gray-400 text-lg leading-relaxed mb-10 font-medium">
+                    {area.description}
+                  </p>
+
+                  <div className="space-y-4 pt-10 border-t border-white/5">
+                    <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em] mb-6">Active Sub-Fluxes:</h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {area.projects.map((project, idx) => (
+                        <div key={idx} className="flex items-center gap-3 group/item">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary-500/30 group-hover/item:bg-primary-400 transition-colors" />
+                          <span className="text-sm font-bold text-gray-400 group-hover/item:text-white transition-colors">{project}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="absolute top-12 right-12 opacity-0 group-hover:opacity-5 transition-opacity">
+                    <area.icon className="w-32 h-32 text-white" />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Breakthrough Case Studies */}
+        <section className="py-32 px-6 relative bg-dark-950/50">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-24">
+              <h2 className="text-4xl md:text-8xl font-black text-white italic tracking-tighter mb-8 italic">Project <span className="not-italic bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent">Synthesis</span></h2>
+              <p className="text-xl text-gray-500 max-w-2xl mx-auto font-medium">Measurable architectural benchmarks achieved through laboratory research.</p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {innovationProjects.map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="p-12 md:p-16 rounded-[64px] bg-white/5 border border-white/10 relative overflow-hidden group hover:bg-white/[0.07] transition-all"
+                >
+                  <h3 className="text-3xl font-black text-white mb-6 leading-tight group-hover:text-primary-400 transition-colors">{project.title}</h3>
+                  <p className="text-gray-400 text-lg mb-10 leading-relaxed font-medium">
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-10">
                     {project.tech.map((tech, idx) => (
-                      <span key={idx} className="bg-gray-700 text-gray-200 px-3 py-1 rounded-full text-sm font-['Figtree']">
+                      <span key={idx} className="bg-white/5 border border-white/5 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest text-gray-400 group-hover:text-white group-hover:border-primary-500/20 transition-all">
                         {tech}
                       </span>
                     ))}
                   </div>
-                </div>
 
-                <div className="bg-gradient-to-r from-green-900/30 to-emerald-900/30 rounded-lg p-4 border border-green-700">
-                  <p className="text-sm text-green-400 font-['Figtree']">
-                    <strong>Impact:</strong> {project.impact}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Future Technologies */}
-      <section className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
-        <div className="container-custom">
-          <motion.div 
-            className="text-center mb-16"
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-          >
-            <motion.h2 
-              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
-              variants={itemVariants}
-            >
-              Future <span className="text-[#ffc957]">Technologies</span>
-            </motion.h2>
-            <motion.p 
-              className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']"
-              variants={itemVariants}
-            >
-              Emerging technologies we're preparing to integrate into our
-              solutions
-            </motion.p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {futureTechnologies.map((tech, index) => (
-              <motion.div
-                key={index}
-                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 shadow-xl border border-gray-700"
-                initial="hidden"
-                animate="visible"
-                variants={itemVariants}
-                transition={{ delay: index * 0.1 }}
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-xl font-['Outfit'] font-bold text-white">
-                    {tech.title}
-                  </h3>
-                  <span className="text-sm text-gray-400 font-['Figtree']">
-                    {tech.timeline}
-                  </span>
-                </div>
-                <p className="text-gray-300 font-['Figtree']">
-                  {tech.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* R&D Investment */}
-      <motion.section 
-        className="section-padding bg-gradient-to-br from-[#2563eb] to-[#ffc957] text-[#0a0b0d]"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div className="container-custom">
-          <div className="text-center">
-            <motion.h2 
-              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-8"
-              variants={itemVariants}
-            >
-              R&D Investment
-            </motion.h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-              <motion.div variants={itemVariants}>
-                <div className="text-4xl font-['Outfit'] font-bold mb-2">15%</div>
-                <div className="font-['Figtree']">Revenue Invested in R&D</div>
-              </motion.div>
-              <motion.div variants={itemVariants}>
-                <div className="text-4xl font-['Outfit'] font-bold mb-2">50+</div>
-                <div className="font-['Figtree']">Research Engineers</div>
-              </motion.div>
-              <motion.div variants={itemVariants}>
-                <div className="text-4xl font-['Outfit'] font-bold mb-2">200+</div>
-                <div className="font-['Figtree']">Patent Applications Filed</div>
-              </motion.div>
-            </div>
-
-            <div className="max-w-3xl mx-auto">
-              <motion.p 
-                className="text-xl text-[#0a0b0d]/90 mb-8 font-['Figtree']"
-                variants={itemVariants}
-              >
-                We invest heavily in research and development to ensure our
-                clients have access to the most advanced technologies and
-                solutions.
-              </motion.p>
-              <motion.div variants={itemVariants}>
-                <Link
-                  to="/contact"
-                  className="bg-[#0a0b0d] text-[#ffc957] hover:bg-[#1a1c25] px-8 py-4 rounded-xl font-semibold transition-colors inline-flex items-center font-['Figtree']"
-                >
-                  Join Our Innovation Network
-                </Link>
-              </motion.div>
+                  <div className="p-8 rounded-[32px] bg-green-500/5 border border-green-500/10 flex items-center gap-6">
+                    <div className="w-12 h-12 rounded-2xl bg-green-500/10 flex items-center justify-center flex-shrink-0">
+                      <TrendingUp className="w-6 h-6 text-green-500" />
+                    </div>
+                    <div>
+                      <h4 className="text-[10px] font-black text-green-500 uppercase tracking-widest mb-1">Architectural impact</h4>
+                      <p className="text-gray-300 font-bold">{project.impact}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
-        </div>
-      </motion.section>
+        </section>
 
-      {/* CTA Section */}
-      <motion.section 
-        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div className="container-custom">
-          <div className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-3xl p-12 md:p-16 text-center border border-gray-700">
-            <motion.h2 
-              className="text-3xl md:text-4xl font-['Outfit'] font-bold mb-4 text-white"
-              variants={itemVariants}
-            >
-              Interested in Collaborating?
-            </motion.h2>
-            <motion.p 
-              className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto font-['Figtree']"
-              variants={itemVariants}
-            >
-              Partner with our innovation lab to develop custom solutions for
-              your business challenges
-            </motion.p>
-            <motion.div 
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
-              variants={itemVariants}
-            >
-              <Link to="/contact" className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']">
-                Start a Collaboration
-              </Link>
-              <Link to="/innovation-lab" className="bg-transparent border border-[#2563eb] text-[#2563eb] hover:bg-[#2563eb] hover:text-white px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']">
-                View All Research
-              </Link>
-            </motion.div>
+        {/* Investment & Future */}
+        <section className="py-40 px-6">
+          <div className="max-w-7xl mx-auto">
+             <div className="relative p-1 rounded-[72px] bg-gradient-to-br from-primary-600/30 to-secondary-600/30 border border-white/10 overflow-hidden">
+                <div className="bg-[#0e1114]/90 backdrop-blur-3xl rounded-[70px] p-20 md:p-32 text-center">
+                   <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-20 text-white">
+                      <div>
+                        <div className="text-7xl font-black mb-4 tracking-tighter italic">15%</div>
+                        <p className="text-xs font-black uppercase tracking-[0.4em] text-primary-400">Structural Reinvestment</p>
+                      </div>
+                      <div>
+                        <div className="text-7xl font-black mb-4 tracking-tighter italic">50+</div>
+                        <p className="text-xs font-black uppercase tracking-[0.4em] text-secondary-400">Neural Architects</p>
+                      </div>
+                      <div>
+                        <div className="text-7xl font-black mb-4 tracking-tighter italic">200+</div>
+                        <p className="text-xs font-black uppercase tracking-[0.4em] text-white">Global IP Nodes</p>
+                      </div>
+                   </div>
+
+                   <p className="text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed font-medium mb-16 italic">
+                     "Our commitment to architectural evolution is deterministic. We do not observe the future; we architect the variables that define it."
+                   </p>
+
+                   <div className="flex flex-wrap justify-center gap-6">
+                      <button className="px-12 py-5 bg-white text-dark-900 font-black rounded-3xl hover:bg-gray-200 transition-all text-sm uppercase tracking-[0.2em] shadow-2xl shadow-white/10">
+                        Join the Network
+                      </button>
+                      <button className="px-12 py-5 bg-white/5 text-white font-bold rounded-3xl border border-white/10 hover:bg-white/10 transition-all text-sm">
+                        View Research Repository
+                      </button>
+                   </div>
+                </div>
+                {/* Visual Background Pattern */}
+                <div className="absolute inset-0 bg-grid-white/[0.02] pointer-events-none" />
+             </div>
           </div>
-        </div>
-      </motion.section>
-    </div>
+        </section>
+
+        {/* Global Network Footer CTA */}
+        <section className="py-32 px-6">
+           <div className="max-w-7xl mx-auto text-center">
+              <h3 className="text-xs font-black text-gray-600 uppercase tracking-[0.8em] mb-12">Global Innovation Nodes</h3>
+              <div className="flex flex-wrap justify-center gap-12 text-2xl font-black text-white/20 tracking-tighter">
+                 <span className="hover:text-primary-400 transition-colors cursor-default">SAN FRANCISCO</span>
+                 <span className="hover:text-secondary-400 transition-colors cursor-default">SINGAPORE</span>
+                 <span className="hover:text-white transition-colors cursor-default">BERLIN</span>
+                 <span className="hover:text-primary-400 transition-colors cursor-default">DUBAI</span>
+                 <span className="hover:text-secondary-400 transition-colors cursor-default">LONDON</span>
+              </div>
+           </div>
+        </section>
+      </div>
+    </ErrorBoundary>
   );
 };
 

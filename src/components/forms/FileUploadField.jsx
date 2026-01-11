@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
-import { HiOutlineCloudUpload, HiCheckCircle, HiXCircle } from 'react-icons/hi';
-import FormFieldWrapper from './FormFieldWrapper';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  UploadCloud, 
+  CheckCircle2, 
+  XCircle, 
+  FileText, 
+  Zap, 
+  ShieldCheck,
+  AlertCircle,
+  X
+} from 'lucide-react';
 
 const FileUploadField = ({
   id,
@@ -34,7 +43,7 @@ const FileUploadField = ({
           name: file.name,
           size: (file.size / 1024 / 1024).toFixed(2) + ' MB',
           status: 'error',
-          message: `File size exceeds ${maxSize / 1024 / 1024} MB limit`,
+          message: `Buffer Overflow: Max ${maxSize / 1024 / 1024}MB limit`,
         });
         return;
       }
@@ -68,32 +77,34 @@ const FileUploadField = ({
     handleFiles(files);
   };
 
-  const removeFile = () => {
+  const removeFile = (e) => {
+    e.stopPropagation();
     setFileInfo(null);
     onChange({ target: { name, value: null } });
   };
 
   return (
-    <FormFieldWrapper
-      label={label}
-      id={id}
-      required={required}
-      error={error}
-      description={description}
-      className={className}
-    >
-      <div
-        className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors duration-300 ${
-          isDragging
-            ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20'
-            : error
-              ? 'border-red-300 dark:border-red-600'
-              : 'border-gray-300 dark:border-dark-600 hover:border-primary-500'
-        }`}
+    <div className={`space-y-2 ${className}`}>
+      {label && (
+        <label className="text-[10px] font-black text-gray-500 uppercase flex items-center gap-2 tracking-widest">
+          <FileText className="w-3 h-3 text-[#1ba6d6]" /> {label} {required && <span className="text-red-500">*</span>}
+        </label>
+      )}
+      
+      <motion.div
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         onClick={() => document.getElementById(`file-input-${id}`).click()}
+        whileHover={{ scale: 0.995 }}
+        whileTap={{ scale: 0.98 }}
+        className={`relative border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all overflow-hidden ${
+          isDragging
+            ? 'border-[#1ba6d6] bg-[#1ba6d6]/10'
+            : error
+              ? 'border-red-500/50 bg-red-500/5'
+              : 'border-white/10 bg-white/5 hover:border-[#1ba6d6]/50'
+        }`}
       >
         <input
           id={`file-input-${id}`}
@@ -105,50 +116,70 @@ const FileUploadField = ({
           {...props}
         />
 
-        <div className="flex flex-col items-center justify-center">
-          <HiOutlineCloudUpload className="w-12 h-12 text-gray-400 mb-3" />
-          <p className="text-gray-600 dark:text-gray-300 mb-1">
-            <span className="font-medium text-primary-600 dark:text-primary-400">
-              Click to upload
-            </span>{' '}
-            or drag and drop
-          </p>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            {accept === '*' ? 'Any file type' : accept} (Max:{' '}
-            {(maxSize / 1024 / 1024).toFixed(0)}MB)
-          </p>
-        </div>
-      </div>
+        <AnimatePresence mode="wait">
+          {!fileInfo ? (
+            <motion.div
+              key="prompt"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="flex flex-col items-center justify-center space-y-4"
+            >
+              <div className={`p-4 rounded-full transition-colors ${isDragging ? 'bg-[#1ba6d6] text-white' : 'bg-white/5 text-gray-400'}`}>
+                <UploadCloud className="w-8 h-8" />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-white">
+                  Inject Data Stream
+                </p>
+                <p className="text-xs text-gray-500 mt-1 uppercase tracking-tighter font-black">
+                  Click or drag protocol files here
+                </p>
+              </div>
+              <div className="flex gap-4 text-[10px] font-bold text-gray-600 uppercase tracking-widest">
+                <span>{accept === '*' ? 'ALL_PROTOCOLS' : accept}</span>
+                <span className="w-1 h-1 bg-gray-600 rounded-full my-auto" />
+                <span>MAX_{ (maxSize / 1024 / 1024).toFixed(0) }MB</span>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="fileinfo"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="flex flex-col items-center justify-center space-y-4"
+            >
+              <div className={`p-4 rounded-full ${fileInfo.status === 'success' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'}`}>
+                {fileInfo.status === 'success' ? <ShieldCheck className="w-10 h-10" /> : <AlertCircle className="w-10 h-10" />}
+              </div>
+              <div className="max-w-xs truncate">
+                <p className="text-sm font-bold text-white truncate">{fileInfo.name}</p>
+                <p className="text-xs font-black text-gray-500 uppercase tracking-tighter mt-1">{fileInfo.size}</p>
+              </div>
+              
+              {fileInfo.status === 'error' && (
+                <p className="text-[10px] font-black text-red-400 uppercase tracking-widest bg-red-400/10 px-3 py-1 rounded-full border border-red-400/20">
+                  {fileInfo.message}
+                </p>
+              )}
 
-      {fileInfo && (
-        <div className="flex items-center justify-between bg-gray-50 dark:bg-dark-700 rounded-lg p-3 mt-2">
-          <div className="flex items-center">
-            {fileInfo.status === 'success' ? (
-              <HiCheckCircle className="w-5 h-5 text-green-500 mr-2" />
-            ) : (
-              <HiXCircle className="w-5 h-5 text-red-500 mr-2" />
-            )}
-            <div>
-              <p className="text-sm font-medium text-gray-900 dark:text-white truncate max-w-xs">
-                {fileInfo.name}
-              </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                {fileInfo.size}{' '}
-                {fileInfo.status === 'error' && `- ${fileInfo.message}`}
-              </p>
-            </div>
-          </div>
-          <button
-            type="button"
-            onClick={removeFile}
-            className="text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
-          >
-            Remove
-          </button>
-        </div>
-      )}
-    </FormFieldWrapper>
+              <button
+                type="button"
+                onClick={removeFile}
+                className="flex items-center gap-2 text-[10px] font-black text-gray-500 hover:text-white uppercase tracking-widest transition-colors"
+              >
+                <X className="w-3 h-3" /> Purge Cache
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+
+      {description && <p className="text-[10px] text-gray-500 font-bold uppercase tracking-tighter mt-1">{description}</p>}
+      {error && <p className="text-[10px] text-red-500 font-bold uppercase tracking-tighter mt-1">{error}</p>}
+    </div>
   );
 };
 
 export default FileUploadField;
+

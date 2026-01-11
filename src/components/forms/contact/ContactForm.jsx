@@ -1,12 +1,16 @@
 import { useState, memo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  HiMail,
-  HiUser,
-  HiQuestionMarkCircle,
-  HiCheckCircle,
-  HiPhone,
-  HiDocumentText,
-} from 'react-icons/hi';
+  Mail,
+  User,
+  HelpCircle,
+  CheckCircle2,
+  Phone,
+  FileText,
+  Send,
+  AlertCircle,
+  ChevronDown
+} from 'lucide-react';
 import notificationService from '../../../services/notification/notificationService';
 import encryptionService from '../../../services/auth/encryptionService';
 import csrfService from '../../../services/csrfService';
@@ -25,45 +29,20 @@ const ContactForm = ({ variant = 'default' }) => {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [rateLimitError, setRateLimitError] = useState(null);
   
-  // Get client identifier for rate limiting (using a combination of factors)
   const getClientIdentifier = () => {
-    // In a real implementation, this would use the actual IP address from the server
-    // For client-side, we'll use a combination of factors
     return `${window.location.hostname}_${navigator.userAgent}`;
   };
 
-  // Validation functions
   const validateForm = () => {
     const newErrors = {};
-    
-    // Name validation
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    } else if (formData.name.trim().length < 2) {
-      newErrors.name = 'Name must be at least 2 characters';
-    }
-    
-    // Email validation
+    if (!formData.name.trim()) newErrors.name = 'Identity required';
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else {
-      const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-      if (!emailRegex.test(formData.email)) {
-        newErrors.email = 'Please enter a valid email address';
-      }
+      newErrors.email = 'Channel required';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
+      newErrors.email = 'Invalid protocol';
     }
-    
-    // Subject validation
-    if (!formData.subject) {
-      newErrors.subject = 'Please select a subject';
-    }
-    
-    // Message validation
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
-    }
+    if (!formData.subject) newErrors.subject = 'Sector required';
+    if (!formData.message.trim()) newErrors.message = 'Payload required';
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -72,8 +51,6 @@ const ContactForm = ({ variant = 'default' }) => {
   const handleChange = e => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    
-    // Clear error for this field when user starts typing
     if (errors[name]) {
       setErrors(prev => {
         const newErrors = { ...prev };
@@ -85,28 +62,18 @@ const ContactForm = ({ variant = 'default' }) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    
-    // Check rate limit
     const clientIdentifier = getClientIdentifier();
     const rateLimitCheck = rateLimitService.checkLimit(clientIdentifier, 'contactForm');
     
     if (!rateLimitCheck.allowed) {
-      const retryAfterSeconds = Math.ceil(rateLimitCheck.retryAfter / 1000);
-      setRateLimitError(`Rate limit exceeded. Please try again in ${retryAfterSeconds} seconds.`);
+      setRateLimitError(`Flood protection active. Retry in ${Math.ceil(rateLimitCheck.retryAfter / 1000)}s.`);
       return;
     }
     
-    // Clear any previous rate limit error
     setRateLimitError(null);
-    
-    // Validate form first
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
     
     setIsSubmitting(true);
-    
-    // Sanitize input data
     const sanitizedData = {
       name: encryptionService.sanitizeInput(formData.name),
       email: encryptionService.sanitizeInput(formData.email),
@@ -115,7 +82,6 @@ const ContactForm = ({ variant = 'default' }) => {
       message: encryptionService.sanitizeInput(formData.message),
     };
 
-    // Add CSRF token to the data
     const requestData = {
       ...sanitizedData,
       csrfToken: csrfService.getToken(),
@@ -123,189 +89,173 @@ const ContactForm = ({ variant = 'default' }) => {
       page: window.location.pathname,
     };
 
-    // Send notification about the contact form submission
     await notificationService.sendContactNotification(requestData);
 
-    // Simulate API call
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitSuccess(true);
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-
-      // Reset success message after 5 seconds
       setTimeout(() => setSubmitSuccess(false), 5000);
     }, 1500);
   };
 
-  if (submitSuccess) {
-    return (
-      <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 text-center" role="alert" aria-live="polite">
-        <div className="flex items-center justify-center mb-3">
-          <HiCheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" aria-hidden="true" />
-        </div>
-        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">
-          Message Sent!
-        </h3>
-        <p className="text-green-700 dark:text-green-400 text-sm">
-          Thank you for contacting us. We'll get back to you soon.
-        </p>
-      </div>
-    );
-  }
-
   return (
-    <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-      {rateLimitError && (
-        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4" role="alert" aria-live="polite">
-          <p className="text-red-700 dark:text-red-300 text-sm">{rateLimitError}</p>
-        </div>
-      )}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label
-            htmlFor="name"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+    <div className="relative">
+      <AnimatePresence mode="wait">
+        {submitSuccess ? (
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            className="bg-[#1ba6d6]/10 border border-[#1ba6d6]/20 backdrop-blur-xl rounded-2xl p-10 text-center"
           >
-            Full Name *
-          </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <HiUser className="h-5 w-5 text-gray-400" />
+            <div className="w-16 h-16 bg-[#1ba6d6] rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(27,166,214,0.4)]">
+              <CheckCircle2 color="white" size={32} />
             </div>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className={`w-full pl-10 pr-4 py-3 rounded-lg border ${errors.name ? 'border-red-500' : 'border-gray-300 dark:border-dark-600'} bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300`}
-              placeholder="Your full name"
-            />
-          </div>
-          {errors.name && (
-            <p className="mt-1 text-sm text-red-600">{errors.name}</p>
-          )}
-        </div>
-        <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-          >
-            Email Address *
-          </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <HiMail className="h-5 w-5 text-gray-400" />
-            </div>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className={`w-full pl-10 pr-4 py-3 rounded-lg border ${errors.email ? 'border-red-500' : 'border-gray-300 dark:border-dark-600'} bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300`}
-              placeholder="your@email.com"
-            />
-          </div>
-          {errors.email && (
-            <p className="mt-1 text-sm text-red-600">{errors.email}</p>
-          )}
-        </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label
-            htmlFor="phone"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-          >
-            Phone Number
-          </label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
-            placeholder="+91 98765 43210"
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="subject"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-          >
-            Subject *
-          </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <HiQuestionMarkCircle className="h-5 w-5 text-gray-400" />
-            </div>
-            <select
-              id="subject"
-              name="subject"
-              value={formData.subject}
-              onChange={handleChange}
-              required
-              className={`w-full pl-10 pr-4 py-3 rounded-lg border ${errors.subject ? 'border-red-500' : 'border-gray-300 dark:border-dark-600'} bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300`}
-            >
-              <option value="">Select a subject</option>
-              <option value="general">General Inquiry</option>
-              <option value="project">Project Discussion</option>
-              <option value="support">Support Request</option>
-              <option value="partnership">Partnership Opportunity</option>
-              <option value="feedback">Feedback</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          {errors.subject && (
-            <p className="mt-1 text-sm text-red-600">{errors.subject}</p>
-          )}
-        </div>
-      </div>
-      <div>
-        <label
-          htmlFor="message"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-        >
-          Your Message *
-        </label>
-        <div className="relative">
-          <div className="absolute top-3 left-3">
-            <HiDocumentText className="h-5 w-5 text-gray-400" />
-          </div>
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            required
-            rows="5"
-            className={`w-full pl-10 pr-4 py-3 rounded-lg border ${errors.message ? 'border-red-500' : 'border-gray-300 dark:border-dark-600'} bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300`}
-            placeholder="Tell us about your project or inquiry..."
-          ></textarea>
-        </div>
-        {errors.message && (
-          <p className="mt-1 text-sm text-red-600">{errors.message}</p>
-        )}
-      </div>
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-primary-700 hover:to-secondary-700 transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-      >
-        {isSubmitting ? (
-          <>
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-            Sending Message...
-          </>
+            <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-2">Transmission Successful</h3>
+            <p className="text-[#94a3b8] text-sm leading-relaxed">Our architects have received your briefing. A representative will establish contact shortly.</p>
+          </motion.div>
         ) : (
-          'Send Message'
+          <motion.form 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            onSubmit={handleSubmit} 
+            className="space-y-6"
+          >
+            {rateLimitError && (
+              <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 flex items-center gap-3">
+                <AlertCircle className="text-red-500 w-5 h-5 flex-shrink-0" />
+                <p className="text-red-500 text-xs font-bold uppercase tracking-widest">{rateLimitError}</p>
+              </div>
+            )}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-[0.65rem] font-black text-[#1ba6d6] uppercase tracking-[0.2em] ml-1">Identity Node</label>
+                <div className="relative group">
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94a3b8] group-focus-within:text-[#1ba6d6] transition-colors" />
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className={`w-full bg-white/5 border ${errors.name ? 'border-red-500' : 'border-white/10'} focus:border-[#1ba6d6] rounded-xl px-12 py-4 text-white placeholder:text-white/20 outline-none transition-all duration-300 backdrop-blur-md`}
+                    placeholder="Full Name / Organization"
+                  />
+                  <AnimatePresence>
+                    {errors.name && (
+                      <motion.span initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="absolute -bottom-5 right-1 text-[0.6rem] font-bold text-red-500 uppercase">{errors.name}</motion.span>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[0.65rem] font-black text-[#1ba6d6] uppercase tracking-[0.2em] ml-1">Communication Channel</label>
+                <div className="relative group">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94a3b8] group-focus-within:text-[#1ba6d6] transition-colors" />
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className={`w-full bg-white/5 border ${errors.email ? 'border-red-500' : 'border-white/10'} focus:border-[#1ba6d6] rounded-xl px-12 py-4 text-white placeholder:text-white/20 outline-none transition-all duration-300 backdrop-blur-md`}
+                    placeholder="official@domain.com"
+                  />
+                   <AnimatePresence>
+                    {errors.email && (
+                      <motion.span initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="absolute -bottom-5 right-1 text-[0.6rem] font-bold text-red-500 uppercase">{errors.email}</motion.span>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-[0.65rem] font-black text-[#1ba6d6] uppercase tracking-[0.2em] ml-1">Telemetry (Optional)</label>
+                <div className="relative group">
+                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94a3b8] group-focus-within:text-[#1ba6d6] transition-colors" />
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="w-full bg-white/5 border border-white/10 focus:border-[#1ba6d6] rounded-xl px-12 py-4 text-white placeholder:text-white/20 outline-none transition-all duration-300 backdrop-blur-md"
+                    placeholder="+1 (000) 000-0000"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[0.65rem] font-black text-[#1ba6d6] uppercase tracking-[0.2em] ml-1">Project Sector</label>
+                <div className="relative group">
+                  <HelpCircle className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94a3b8] group-focus-within:text-[#1ba6d6] transition-colors pointer-events-none" />
+                  <select
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    className={`w-full bg-white/5 border ${errors.subject ? 'border-red-500' : 'border-white/10'} focus:border-[#1ba6d6] rounded-xl px-12 py-4 text-white/80 appearance-none outline-none transition-all duration-300 backdrop-blur-md cursor-pointer`}
+                  >
+                    <option value="" className="bg-[#0e1114]">Select Domain</option>
+                    <option value="general" className="bg-[#0e1114]">General Protocol</option>
+                    <option value="project" className="bg-[#0e1114]">Custom Architecture</option>
+                    <option value="support" className="bg-[#0e1114]">System Continuity</option>
+                    <option value="partnership" className="bg-[#0e1114]">Strategic Alliance</option>
+                  </select>
+                  <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94a3b8] transition-transform group-hover:translate-y-[-40%]" />
+                   <AnimatePresence>
+                    {errors.subject && (
+                      <motion.span initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="absolute -bottom-5 right-1 text-[0.6rem] font-bold text-red-500 uppercase">{errors.subject}</motion.span>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-[0.65rem] font-black text-[#1ba6d6] uppercase tracking-[0.2em] ml-1">Mission Payload</label>
+              <div className="relative group">
+                <FileText className="absolute left-4 top-6 w-4 h-4 text-[#94a3b8] group-focus-within:text-[#1ba6d6] transition-colors" />
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows="5"
+                  className={`w-full bg-white/5 border ${errors.message ? 'border-red-500' : 'border-white/10'} focus:border-[#1ba6d6] rounded-2xl px-12 py-6 text-white placeholder:text-white/20 outline-none transition-all duration-300 backdrop-blur-md resize-none`}
+                  placeholder="Describe the architectural requirements of your project..."
+                />
+                 <AnimatePresence>
+                    {errors.message && (
+                      <motion.span initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="absolute -bottom-2 right-1 text-[0.6rem] font-bold text-red-500 uppercase">{errors.message}</motion.span>
+                    )}
+                  </AnimatePresence>
+              </div>
+            </div>
+
+            <motion.button
+              whileHover={{ scale: 1.01, boxShadow: "0 0 20px rgba(27,166,214,0.3)" }}
+              whileTap={{ scale: 0.99 }}
+              disabled={isSubmitting}
+              type="submit"
+              className="w-full py-5 bg-[#1ba6d6] hover:bg-[#1592bd] text-white font-black text-xs uppercase tracking-[0.4em] mask-btn transition-colors disabled:opacity-50 flex items-center justify-center gap-3 relative overflow-hidden group"
+            >
+              {isSubmitting ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  Establishing Link...
+                </>
+              ) : (
+                <>
+                  Establish Protocol
+                  <Send size={14} className="transition-transform group-hover:translate-x-1" />
+                </>
+              )}
+            </motion.button>
+          </motion.form>
         )}
-      </button>
-    </form>
+      </AnimatePresence>
+    </div>
   );
 };
 

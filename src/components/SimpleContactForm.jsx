@@ -1,10 +1,14 @@
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  HiMail,
-  HiUser,
-  HiQuestionMarkCircle,
-  HiCheckCircle,
-} from 'react-icons/hi';
+  Mail,
+  User,
+  HelpCircle,
+  CheckCircle2,
+  ChevronRight,
+  Send,
+  MessageSquare
+} from 'lucide-react';
 import { sendContactNotification } from '../services/notification/notificationService';
 
 const SimpleContactForm = ({ variant = 'default' }) => {
@@ -53,33 +57,40 @@ const SimpleContactForm = ({ variant = 'default' }) => {
 
   if (submitSuccess) {
     return (
-      <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 text-center">
-        <div className="flex items-center justify-center mb-3">
-          <HiCheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
+        animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+        className="bg-[#1ba6d6]/5 border border-[#1ba6d6]/30 rounded-[2rem] p-10 text-center relative overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1ba6d6]/10 to-transparent pointer-events-none"></div>
+        <div className="flex items-center justify-center mb-6 relative z-10">
+          <div className="w-16 h-16 bg-[#1ba6d6] rounded-2xl flex items-center justify-center shadow-[0_0_30px_rgba(27,166,214,0.4)]">
+            <CheckCircle2 className="w-8 h-8 text-white" />
+          </div>
         </div>
-        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">
-          Message Sent!
+        <h3 className="text-sm font-black text-white uppercase tracking-[0.3em] mb-4 relative z-10">
+          Transmission Success
         </h3>
-        <p className="text-green-700 dark:text-green-400 text-sm">
-          We'll get back to you soon.
+        <p className="text-[0.65rem] text-white/50 font-black uppercase tracking-widest leading-relaxed relative z-10">
+          Neural link established. We'll transmit a response across the network encrypted shortly.
         </p>
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-3">
           <label
             htmlFor="name"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.3em]"
           >
-            Name *
+            Identifier *
           </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <HiUser className="h-5 w-5 text-gray-400" />
+          <div className="relative group">
+            <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+              <User className="h-4 w-4 text-white/20 group-focus-within:text-[#1ba6d6] transition-colors" />
             </div>
             <input
               type="text"
@@ -88,21 +99,21 @@ const SimpleContactForm = ({ variant = 'default' }) => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
-              placeholder="Your name"
+              className="w-full pl-12 pr-6 py-5 rounded-2xl bg-white/5 border border-white/5 focus:border-[#1ba6d6]/50 focus:bg-white/10 text-[0.7rem] font-black uppercase tracking-widest text-white placeholder:text-white/20 transition-all duration-500 outline-none"
+              placeholder="YOUR IDENTIFIER"
             />
           </div>
         </div>
-        <div>
+        <div className="space-y-3">
           <label
             htmlFor="email"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.3em]"
           >
-            Email *
+            Neural Node *
           </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <HiMail className="h-5 w-5 text-gray-400" />
+          <div className="relative group">
+            <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+              <Mail className="h-4 w-4 text-white/20 group-focus-within:text-[#1ba6d6] transition-colors" />
             </div>
             <input
               type="email"
@@ -111,22 +122,22 @@ const SimpleContactForm = ({ variant = 'default' }) => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
-              placeholder="your@email.com"
+              className="w-full pl-12 pr-6 py-5 rounded-2xl bg-white/5 border border-white/5 focus:border-[#1ba6d6]/50 focus:bg-white/10 text-[0.7rem] font-black uppercase tracking-widest text-white placeholder:text-white/20 transition-all duration-500 outline-none"
+              placeholder="ARCHIVE@NODE.COM"
             />
           </div>
         </div>
       </div>
-      <div>
+      <div className="space-y-3">
         <label
           htmlFor="subject"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.3em]"
         >
-          Subject *
+          Protocol Subject *
         </label>
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <HiQuestionMarkCircle className="h-5 w-5 text-gray-400" />
+        <div className="relative group">
+          <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+            <HelpCircle className="h-4 w-4 text-white/20 group-focus-within:text-[#1ba6d6] transition-colors" />
           </div>
           <select
             id="subject"
@@ -134,47 +145,55 @@ const SimpleContactForm = ({ variant = 'default' }) => {
             value={formData.subject}
             onChange={handleChange}
             required
-            className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
+            className="w-full pl-12 pr-6 py-5 rounded-2xl bg-white/5 border border-white/5 focus:border-[#1ba6d6]/50 focus:bg-white/10 text-[0.7rem] font-black uppercase tracking-widest text-white appearance-none transition-all duration-500 outline-none"
           >
-            <option value="">Select a subject</option>
-            <option value="general">General Inquiry</option>
-            <option value="support">Support Request</option>
-            <option value="feedback">Feedback</option>
-            <option value="complaint">Complaint</option>
-            <option value="other">Other</option>
+            <option value="" className="bg-[#0e1114]">SELECT PROTOCOL</option>
+            <option value="general" className="bg-[#0e1114]">GENERAL INQUIRY</option>
+            <option value="support" className="bg-[#0e1114]">SUPPORT REQUEST</option>
+            <option value="feedback" className="bg-[#0e1114]">FEEDBACK TRANSMISSION</option>
+            <option value="complaint" className="bg-[#0e1114]">SYSTEM ANOMALY</option>
+            <option value="other" className="bg-[#0e1114]">OTHER</option>
           </select>
         </div>
       </div>
-      <div>
+      <div className="space-y-3">
         <label
           htmlFor="message"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.3em]"
         >
-          Message *
+          Core Transmission *
         </label>
-        <textarea
-          id="message"
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          required
-          rows="4"
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
-          placeholder="Your message..."
-        ></textarea>
+        <div className="relative group">
+          <div className="absolute top-6 left-5 flex items-center pointer-events-none">
+            <MessageSquare className="h-4 w-4 text-white/20 group-focus-within:text-[#1ba6d6] transition-colors" />
+          </div>
+          <textarea
+            id="message"
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            required
+            rows="4"
+            className="w-full pl-12 pr-6 py-5 rounded-2xl bg-white/5 border border-white/5 focus:border-[#1ba6d6]/50 focus:bg-white/10 text-[0.7rem] font-black uppercase tracking-widest text-white placeholder:text-white/20 transition-all duration-500 outline-none resize-none"
+            placeholder="ENCODE YOUR MESSAGE..."
+          ></textarea>
+        </div>
       </div>
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-primary-700 hover:to-secondary-700 transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+        className="w-full py-6 bg-[#1ba6d6] text-white text-[0.7rem] font-black uppercase tracking-[0.4em] mask-btn hover:scale-[1.02] active:scale-95 disabled:opacity-30 disabled:grayscale transition-all duration-500 shadow-[0_0_30px_rgba(27,166,214,0.3)] flex items-center justify-center group"
       >
         {isSubmitting ? (
           <>
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-            Sending...
+            <div className="animate-spin rounded-full h-4 w-4 border-2 border-white/30 border-t-white mr-3"></div>
+            Transmitting...
           </>
         ) : (
-          'Send Message'
+          <>
+            Send Transmission
+            <ChevronRight className="ml-3 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </>
         )}
       </button>
     </form>

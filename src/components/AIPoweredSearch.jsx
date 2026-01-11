@@ -1,17 +1,23 @@
 import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  HiSearch,
-  HiX,
-  HiSparkles,
-  HiDocumentText,
-  HiCode,
-  HiBookOpen,
-  HiVideoCamera,
-  HiLink,
-} from 'react-icons/hi';
+  Search,
+  X,
+  Sparkles,
+  FileText,
+  Code2,
+  BookOpen,
+  Video,
+  Link,
+  Shield,
+  Zap,
+  Target,
+  ArrowRight,
+  Database
+} from 'lucide-react';
 
 const AIPoweredSearch = ({
-  placeholder = 'Search our knowledge base...',
+  placeholder = 'Query the Limitless matrix...',
   className = '',
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,87 +28,79 @@ const AIPoweredSearch = ({
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchRef = useRef(null);
 
-  // Mock search data - in a real implementation, this would come from an API
   const mockKnowledgeBase = [
     {
       id: 1,
-      title: 'Getting Started with HR-IMS',
-      content:
-        'Learn how to set up and configure the HR Information Management System for your organization.',
+      title: 'Neural Onboarding: HR-IMS',
+      content: 'Initialize operational protocols for system-wide HR management integration.',
       type: 'documentation',
       url: '/docs/hr-ims-getting-started',
-      tags: ['hr-ims', 'setup', 'configuration', 'onboarding'],
+      tags: ['system', 'setup', 'neural', 'init'],
     },
     {
       id: 2,
-      title: 'TrackIT API Integration Guide',
-      content:
-        'Complete guide to integrating TrackIT with your existing systems using our REST API.',
+      title: 'TrackIT Core API Integration',
+      content: 'Real-time telemetry synchronization via REST-vector architecture.',
       type: 'api',
       url: '/docs/trackit-api',
-      tags: ['trackit', 'api', 'integration', 'development'],
+      tags: ['vector', 'api', 'telemetry', 'dev'],
     },
     {
       id: 3,
-      title: 'Security Best Practices',
-      content:
-        'Learn about our security measures and best practices for securing your data.',
+      title: 'Encrypted Security Matrix',
+      content: 'Structural integrity protocols and multi-layer data preservation units.',
       type: 'security',
       url: '/docs/security',
-      tags: ['security', 'compliance', 'best-practices', 'gdpr'],
+      tags: ['shield', 'compliance', 'matrix', 'secure'],
     },
     {
       id: 4,
-      title: 'ROI Calculator for HR Solutions',
-      content:
-        'Calculate the return on investment for implementing our HR management solutions.',
+      title: 'Strategic ROI Projection',
+      content: 'Algorithmic assessment of resource yield for advanced deployments.',
       type: 'tool',
       url: '/roi-calculator',
-      tags: ['roi', 'calculator', 'hr', 'finance'],
+      tags: ['yield', 'analysis', 'resource', 'logic'],
     },
     {
       id: 5,
-      title: 'Client Portal User Guide',
-      content:
-        'Complete guide to using the client portal for project tracking and management.',
+      title: 'Architect Portal User Manual',
+      content: 'Master control interface for cross-domain project orchestration.',
       type: 'documentation',
       url: '/docs/client-portal',
-      tags: ['client-portal', 'guide', 'tracking', 'management'],
+      tags: ['nexus', 'terminal', 'control', 'manual'],
     },
     {
       id: 6,
-      title: 'API Rate Limits and Quotas',
-      content: 'Understanding rate limits and how to optimize your API usage.',
+      title: 'API Frequency & Bandwidth',
+      content: 'Optimizing data stream velocity and neural network capacity.',
       type: 'api',
       url: '/docs/api-limits',
-      tags: ['api', 'limits', 'quotas', 'optimization'],
+      tags: ['bandwidth', 'velocity', 'optimization', 'stream'],
     },
     {
       id: 7,
-      title: 'Compliance and Certifications',
-      content:
-        'Detailed information about our compliance standards and certifications.',
+      title: 'Operational Certifications',
+      content: 'Global standards of technical excellence and structural efficiency.',
       type: 'compliance',
       url: '/compliance',
-      tags: ['compliance', 'certifications', 'soc2', 'iso27001'],
+      tags: ['iso', 'standard', 'accredited', 'nexus'],
     },
     {
       id: 8,
-      title: 'Video Tutorial: Setting up your first project',
-      content:
-        'Step-by-step video tutorial for creating your first project in our platform.',
+      title: 'Visual Core: First Deployment',
+      content: 'Video archive of target infrastructure initialization sequence.',
       type: 'video',
       url: '/videos/setup-tutorial',
-      tags: ['video', 'tutorial', 'setup', 'project'],
+      tags: ['archive', 'visual', 'initialization', 'core'],
     },
   ];
 
   const searchSuggestions = [
-    'How to integrate with existing systems?',
-    'Security and compliance information',
-    'API documentation and examples',
-    'ROI calculator for HR solutions',
-    'Client portal user guide',
+    'How to initialize system sync?',
+    'Latest security matrix protocols',
+    'Core API documentation archive',
+    'Resource yield projection logic',
+    'Master architect console portal',
   ];
 
   useEffect(() => {
@@ -124,12 +122,9 @@ const AIPoweredSearch = ({
     }
 
     setIsLoading(true);
-
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 300));
+    await new Promise(resolve => setTimeout(resolve, 600));
 
     const searchLower = searchQuery.toLowerCase();
-
     const filteredResults = mockKnowledgeBase.filter(
       item =>
         item.title.toLowerCase().includes(searchLower) ||
@@ -174,20 +169,21 @@ const AIPoweredSearch = ({
   };
 
   const getIconForType = type => {
+    const iconClass = "w-4 h-4";
     switch (type) {
       case 'documentation':
-        return <HiDocumentText className="w-5 h-5 text-blue-500" />;
+        return <FileText className={`${iconClass} text-[#1ba6d6]`} />;
       case 'api':
-        return <HiCode className="w-5 h-5 text-green-500" />;
+        return <Code2 className={`${iconClass} text-[#25d366]`} />;
       case 'video':
-        return <HiVideoCamera className="w-5 h-5 text-purple-500" />;
+        return <Video className={`${iconClass} text-[#ff4d4d]`} />;
       case 'tool':
-        return <HiSparkles className="w-5 h-5 text-yellow-500" />;
+        return <Sparkles className={`${iconClass} text-[#ffc957]`} />;
       case 'security':
       case 'compliance':
-        return <HiBookOpen className="w-5 h-5 text-red-500" />;
+        return <Shield className={`${iconClass} text-[#1ba6d6]`} />;
       default:
-        return <HiDocumentText className="w-5 h-5 text-gray-500" />;
+        return <Database className={`${iconClass} text-white/40`} />;
     }
   };
 
@@ -199,124 +195,147 @@ const AIPoweredSearch = ({
 
   return (
     <div className={`relative ${className}`} ref={searchRef}>
-      <div className="relative">
-        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <HiSearch className="h-5 w-5 text-gray-400" />
+      <div className="relative group">
+        <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-white/20 group-focus-within:text-[#1ba6d6] transition-colors">
+          <Search className="h-4 w-4" />
         </div>
         <input
           type="text"
           value={query}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          onFocus={() => setIsOpen(true)}
+          onFocus={() => {
+            setIsOpen(true);
+            setShowSuggestions(true);
+          }}
           placeholder={placeholder}
-          className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-dark-600 rounded-xl bg-white dark:bg-dark-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+          className="block w-full pl-14 pr-12 py-5 bg-white/5 border border-white/5 rounded-2xl text-[0.7rem] font-black uppercase tracking-widest text-white placeholder:text-white/10 outline-none focus:border-[#1ba6d6]/50 focus:bg-white/10 transition-all duration-500"
         />
-        {query && (
-          <button
-            onClick={() => {
-              setQuery('');
-              setResults([]);
-              setIsOpen(false);
-            }}
-            className="absolute inset-y-0 right-0 pr-3 flex items-center"
-          >
-            <HiX className="h-5 w-5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300" />
-          </button>
-        )}
+        <AnimatePresence>
+          {query && (
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              onClick={() => {
+                setQuery('');
+                setResults([]);
+                setIsOpen(false);
+              }}
+              className="absolute inset-y-0 right-0 pr-6 flex items-center text-white/20 hover:text-white transition-colors"
+            >
+              <X className="h-4 w-4" />
+            </motion.button>
+          )}
+        </AnimatePresence>
       </div>
 
-      {(isOpen || results.length > 0) && (
-        <div className="absolute z-50 mt-2 w-full bg-white dark:bg-dark-800 rounded-xl shadow-2xl border border-gray-200 dark:border-dark-600 max-h-96 overflow-hidden">
-          {isLoading ? (
-            <div className="p-4 flex items-center justify-center">
-              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary-600"></div>
-              <span className="ml-2 text-gray-600 dark:text-gray-400">
-                Searching...
-              </span>
-            </div>
-          ) : results.length > 0 ? (
-            <div className="max-h-96 overflow-y-auto">
-              <div className="p-2">
-                <div className="px-3 py-2 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
-                  Search Results ({results.length})
-                </div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+            className="absolute z-[100] mt-4 w-full bg-[#0e1114]/90 backdrop-blur-3xl rounded-3xl border border-white/10 shadow-[0_50px_100px_rgba(0,0,0,0.5)] overflow-hidden"
+          >
+            {isLoading ? (
+              <div className="p-12 flex flex-col items-center justify-center gap-4">
+                <div className="w-10 h-10 border-2 border-[#1ba6d6]/20 border-t-[#1ba6d6] rounded-full animate-spin"></div>
+                <p className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.2em]">Matrix Query Ongoing</p>
               </div>
-              <ul className="divide-y divide-gray-200 dark:divide-dark-600">
-                {results.map((result, index) => (
-                  <li
-                    key={result.id}
-                    className={`p-3 cursor-pointer transition-colors ${
-                      index === selectedIndex
-                        ? 'bg-primary-50 dark:bg-primary-900/20'
-                        : 'hover:bg-gray-50 dark:hover:bg-dark-700'
-                    }`}
-                    onClick={() => {
-                      window.location.href = result.url;
-                    }}
-                  >
-                    <div className="flex items-start space-x-3">
-                      {getIconForType(result.type)}
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
-                          {result.title}
-                        </p>
-                        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">
-                          {result.content}
-                        </p>
-                        <div className="flex flex-wrap gap-1 mt-2">
-                          {result.tags.slice(0, 3).map((tag, tagIndex) => (
-                            <span
-                              key={tagIndex}
-                              className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-dark-600 text-gray-800 dark:text-gray-200"
-                            >
-                              {tag}
-                            </span>
-                          ))}
+            ) : results.length > 0 ? (
+              <div className="max-h-[450px] overflow-y-auto scrollbar-hide">
+                <div className="p-6 border-b border-white/5 bg-white/5">
+                  <p className="text-[0.6rem] font-black text-[#1ba6d6] uppercase tracking-[0.3em]">
+                    TELEMETRY OUTPUT: {results.length} NODES IDENTIFIED
+                  </p>
+                </div>
+                <ul className="divide-y divide-white/5">
+                  {results.map((result, index) => (
+                    <motion.li
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                      key={result.id}
+                      className={`p-6 cursor-pointer transition-all duration-300 ${
+                        index === selectedIndex
+                          ? 'bg-white/10'
+                          : 'hover:bg-white/5'
+                      }`}
+                      onClick={() => {
+                        window.location.href = result.url;
+                      }}
+                    >
+                      <div className="flex items-start gap-6">
+                        <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center shrink-0 border border-white/5 group-hover:border-[#1ba6d6]/30 transition-colors">
+                          {getIconForType(result.type)}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-[0.75rem] font-black text-white uppercase tracking-widest truncate mb-2">
+                            {result.title}
+                          </p>
+                          <p className="text-[0.65rem] text-white/30 font-black uppercase tracking-widest leading-relaxed line-clamp-2">
+                            {result.content}
+                          </p>
+                          <div className="flex flex-wrap gap-2 mt-4">
+                            {result.tags.map((tag, tagIndex) => (
+                              <span
+                                key={tagIndex}
+                                className="px-2 py-1 rounded-md text-[0.55rem] font-black uppercase tracking-widest bg-white/5 text-white/20 border border-white/5"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : query.length > 2 ? (
-            <div className="p-8 text-center">
-              <HiSearch className="mx-auto h-12 w-12 text-gray-400" />
-              <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-white">
-                No results found
-              </h3>
-              <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                No documents matched your search query. Try different keywords.
-              </p>
-            </div>
-          ) : (
-            showSuggestions && (
-              <div className="p-2">
-                <div className="px-3 py-2 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
-                  Popular Searches
-                </div>
-                <ul className="divide-y divide-gray-200 dark:divide-dark-600">
-                  {searchSuggestions.map((suggestion, index) => (
-                    <li
-                      key={index}
-                      className="p-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-dark-700 transition-colors"
-                      onClick={() => handleSuggestionClick(suggestion)}
-                    >
-                      <div className="flex items-center space-x-3">
-                        <HiSparkles className="w-5 h-5 text-yellow-500" />
-                        <span className="text-sm text-gray-900 dark:text-white">
-                          {suggestion}
-                        </span>
-                      </div>
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
               </div>
-            )
-          )}
-        </div>
-      )}
+            ) : query.length > 2 ? (
+              <div className="p-16 text-center">
+                <div className="w-16 h-16 bg-[#ff4d4d]/10 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-[#ff4d4d]/20 text-[#ff4d4d]">
+                  <Database className="w-8 h-8" />
+                </div>
+                <h3 className="text-sm font-black text-white uppercase tracking-[0.3em] mb-3">
+                  QUERY NULLIFIED
+                </h3>
+                <p className="text-[0.6rem] text-white/30 font-black uppercase tracking-[0.2em] max-w-xs mx-auto">
+                  Requested vectors not identified within the current Limitless architecture.
+                </p>
+              </div>
+            ) : (
+              showSuggestions && (
+                <div className="p-4">
+                  <div className="p-4 border-b border-white/5">
+                    <p className="text-[0.6rem] font-black text-white/20 uppercase tracking-[0.3em]">
+                      FREQUENT VECTORS
+                    </p>
+                  </div>
+                  <ul className="space-y-1 mt-2">
+                    {searchSuggestions.map((suggestion, index) => (
+                      <li
+                        key={index}
+                        className="group flex items-center justify-between p-4 rounded-xl hover:bg-white/5 transition-all duration-300 cursor-pointer"
+                        onClick={() => handleSuggestionClick(suggestion)}
+                      >
+                        <div className="flex items-center gap-4">
+                          <Sparkles className="w-4 h-4 text-[#ffc957] group-hover:scale-110 transition-transform" />
+                          <span className="text-[0.7rem] font-black text-white/60 group-hover:text-white uppercase tracking-widest transition-colors">
+                            {suggestion}
+                          </span>
+                        </div>
+                        <ArrowRight className="w-4 h-4 text-white/0 group-hover:text-[#1ba6d6] group-hover:translate-x-1 transition-all" />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

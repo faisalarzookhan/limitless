@@ -1,152 +1,137 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { HiSparkles, HiChevronDown, HiArrowRight } from 'react-icons/hi';
-import { AnimatedElement, DuoToneIcon } from '../ui';
+import { motion } from 'framer-motion';
+import { 
+  Sparkles, 
+  ChevronDown, 
+  ArrowRight, 
+  Shield, 
+  Globe, 
+  Cpu,
+  Layers
+} from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   return (
     <section
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-dark-900 dark:via-dark-800 dark:to-dark-900 pt-28"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0e1114]"
       aria-labelledby="hero-heading"
     >
-      {/* Background Pattern - Aligned with container */}
-      <div
-        className="absolute inset-0 container-wide px-4 md:px-6 lg:px-8"
-        aria-hidden="true"
-      >
-        <div className="absolute inset-0 bg-pattern-grid opacity-30"></div>
+      {/* Background Layer: Grid & Neon Glow */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#1ba6d6]/10 rounded-full blur-[120px]" />
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#0080ff]/10 rounded-full blur-[100px]" />
       </div>
 
-      {/* Animated Background Elements */}
-      <div
-        className="absolute top-20 left-10 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl animate-float"
-        aria-hidden="true"
-      ></div>
-      <div
-        className="absolute bottom-20 right-10 w-96 h-96 bg-secondary-500/10 rounded-full blur-3xl animate-float"
-        style={{ animationDelay: '1s' }}
-        aria-hidden="true"
-      ></div>
-
-      <div className="container-wide px-4 md:px-6 lg:px-8 relative z-10">
+      <div className="container-wide px-4 md:px-6 lg:px-8 relative z-10 py-20">
         <div className="text-center max-w-5xl mx-auto">
           {/* Badge */}
-          <AnimatedElement
-            animation="fade-in-down"
-            className="inline-flex items-center space-x-2 bg-white dark:bg-dark-800 px-6 py-3 rounded-full shadow-soft mb-8"
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 bg-white/5 border border-white/10 backdrop-blur-md px-4 py-2 rounded-full mb-8"
           >
-            <HiSparkles
-              className="w-5 h-5 text-primary-600"
-              aria-hidden="true"
-            />
-            <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-              Where Innovation Meets Execution
+            <Sparkles className="w-4 h-4 text-[#1ba6d6]" />
+            <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+              Neural Network Online
             </span>
-          </AnimatedElement>
+          </motion.div>
 
           {/* Main Heading */}
-          <AnimatedElement animation="fade-in-up" delay={0.1} className="mb-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="mb-8"
+          >
             <h1
               id="hero-heading"
-              className="text-5xl md:text-6xl lg:text-7xl font-display font-bold"
+              className="text-6xl md:text-7xl lg:text-8xl font-black text-white leading-tight tracking-tighter"
             >
-              Empowering Businesses with{' '}
-              <span className="text-gradient">Technology</span>
-              <br />
-              that is{' '}
-              <span className="text-gradient-secondary">Secure, Unique,</span>
-              <br />
-              and <span className="text-gradient-accent">Limitless</span>
+              Architecting the <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1ba6d6] via-[#0080ff] to-[#1ba6d6] animate-gradient-x">
+                Limitless Spectrum
+              </span>
             </h1>
-          </AnimatedElement>
+          </motion.div>
 
           {/* Subheading */}
-          <AnimatedElement
-            animation="fade-in-up"
-            delay={0.2}
-            className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-12 max-w-3xl mx-auto"
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed"
           >
-            <p>
-              Transform your business with cutting-edge digital solutions. We
-              are the architects of transformation, building tomorrow's
-              technology today.
-            </p>
-          </AnimatedElement>
+            Scale your enterprise beyond the digital horizon. We deploy high-fidelity software solutions, 
+            secured by neural-grade protocols and architected for eternal performance.
+          </motion.p>
 
           {/* CTA Buttons */}
-          <AnimatedElement
-            animation="fade-in-up"
-            delay={0.3}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-6"
           >
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                to="/get-started"
-                className="btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-                aria-label="Get started with our services"
-              >
-                Get Started
-                <HiArrowRight
-                  className="inline-block ml-2 w-5 h-5"
-                  aria-hidden="true"
-                />
-              </Link>
-              <Link
-                to="/products"
-                className="btn-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500"
-                aria-label="Explore our products"
-              >
-                Explore Our Products
-              </Link>
-              <Link
-                to="/portfolio"
-                className="btn-outline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-                aria-label="View our portfolio"
-              >
-                View Our Work
-              </Link>
-            </div>
-          </AnimatedElement>
+            <Link
+              to="/get-started"
+              className="group relative px-8 py-4 bg-[#1ba6d6] text-white font-bold rounded-xl overflow-hidden transition-all hover:scale-105 active:scale-95"
+            >
+              <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
+              <span className="relative flex items-center gap-2">
+                Initiate Protocol
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Link>
+            
+            <Link
+              to="/products"
+              className="px-8 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-xl backdrop-blur-md hover:bg-white/10 transition-all border-b-4 border-b-[#1ba6d6]/50"
+            >
+              Explore Node Repository
+            </Link>
+          </motion.div>
 
           {/* Stats */}
-          <AnimatedElement
-            animation="fade-in-up"
-            delay={0.4}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20"
-          >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-24">
             {[
-              { number: '50+', label: 'Products & Solutions' },
-              { number: '7', label: 'SaaS Products' },
-              { number: '10K+', label: 'Product Users' },
-              { number: '24/7', label: 'Support Available' },
+              { icon: Layers, number: '500+', label: 'Active Nodes' },
+              { icon: Cpu, number: '7', label: 'Core Engines' },
+              { icon: Globe, number: '10M+', label: 'Neural Uplinks' },
+              { icon: Shield, number: '99.9%', label: 'Uptime Protocol' },
             ].map((stat, index) => (
-              <AnimatedElement
+              <motion.div
                 key={index}
-                animation="fade-in-up"
-                delay={0.5 + index * 0.1}
-                className="text-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 + index * 0.1 }}
+                className="p-6 bg-white/[0.02] border border-white/5 rounded-2xl backdrop-blur-sm hover:border-[#1ba6d6]/30 transition-colors group text-center"
               >
-                <div>
-                  <div className="text-3xl md:text-4xl font-bold text-gradient-primary mb-2">
-                    {stat.number}
-                  </div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">
-                    {stat.label}
-                  </div>
+                <div className="w-10 h-10 bg-[#1ba6d6]/10 rounded-lg flex items-center justify-center mx-auto mb-4 border border-[#1ba6d6]/20 group-hover:scale-110 transition-transform">
+                  <stat.icon className="w-5 h-5 text-[#1ba6d6]" />
                 </div>
-              </AnimatedElement>
+                <div className="text-3xl font-black text-white mb-1">
+                  {stat.number}
+                </div>
+                <div className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">
+                  {stat.label}
+                </div>
+              </motion.div>
             ))}
-          </AnimatedElement>
+          </div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
-        aria-label="Scroll down"
+      <motion.div
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-gray-500"
       >
-        <HiChevronDown className="w-8 h-8 text-gray-400" aria-hidden="true" />
-      </div>
+        <ChevronDown className="w-8 h-8 opacity-50" />
+      </motion.div>
     </section>
   );
 };

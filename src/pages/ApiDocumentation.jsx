@@ -1,17 +1,27 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import '../styles/hero-pattern.css';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  HiCode,
-  HiDocumentText,
-  HiTerminal,
-  HiLockClosed,
-  HiRefresh,
-  HiUser,
-  HiBriefcase,
-  HiCalendar,
-  HiChartBar,
-} from 'react-icons/hi';
+  Code2,
+  FileText,
+  Terminal,
+  Lock,
+  RefreshCw,
+  User,
+  Briefcase,
+  Calendar,
+  BarChart3,
+  Cpu,
+  ChevronRight,
+  ArrowRight,
+  ShieldCheck,
+  Zap,
+  Box,
+  Globe,
+  Database,
+  Search,
+  CheckCircle2,
+  Play
+} from 'lucide-react';
 import ErrorBoundary from '../components/ErrorBoundary';
 
 const containerVariants = {
@@ -30,7 +40,8 @@ const itemVariants = {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.5
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1]
     }
   }
 };
@@ -46,28 +57,11 @@ const ApiDocumentation = () => {
         path: '/api/auth/login',
         description: 'Authenticate user and get access token',
         parameters: [
-          {
-            name: 'email',
-            type: 'string',
-            required: true,
-            description: 'User email address',
-          },
-          {
-            name: 'password',
-            type: 'string',
-            required: true,
-            description: 'User password',
-          },
+          { name: 'email', type: 'string', required: true, description: 'User email address' },
+          { name: 'password', type: 'string', required: true, description: 'User password' },
         ],
         responses: [
-          {
-            code: 200,
-            description: 'Successful authentication',
-            example: {
-              token: 'jwt_token_here',
-              user: { id: 1, email: 'user@example.com' },
-            },
-          },
+          { code: 200, description: 'Successful authentication', example: { token: 'jwt_token_here', user: { id: 1, email: 'user@example.com' } } },
           { code: 401, description: 'Invalid credentials' },
         ],
       },
@@ -76,34 +70,12 @@ const ApiDocumentation = () => {
         path: '/api/auth/register',
         description: 'Register a new user account',
         parameters: [
-          {
-            name: 'email',
-            type: 'string',
-            required: true,
-            description: 'User email address',
-          },
-          {
-            name: 'password',
-            type: 'string',
-            required: true,
-            description: 'User password (min 8 characters)',
-          },
-          {
-            name: 'name',
-            type: 'string',
-            required: true,
-            description: 'User full name',
-          },
+          { name: 'email', type: 'string', required: true, description: 'User email address' },
+          { name: 'password', type: 'string', required: true, description: 'User password (min 8 characters)' },
+          { name: 'name', type: 'string', required: true, description: 'User full name' },
         ],
         responses: [
-          {
-            code: 201,
-            description: 'User created successfully',
-            example: {
-              user: { id: 1, email: 'user@example.com' },
-              token: 'jwt_token_here',
-            },
-          },
+          { code: 201, description: 'User created successfully', example: { user: { id: 1, email: 'user@example.com' }, token: 'jwt_token_here' } },
           { code: 409, description: 'Email already exists' },
         ],
       },
@@ -113,24 +85,9 @@ const ApiDocumentation = () => {
         method: 'GET',
         path: '/api/users/profile',
         description: 'Get current user profile information',
-        headers: [
-          {
-            name: 'Authorization',
-            required: true,
-            description: 'Bearer token',
-          },
-        ],
+        headers: [{ name: 'Authorization', required: true, description: 'Bearer token' }],
         responses: [
-          {
-            code: 200,
-            description: 'User profile retrieved',
-            example: {
-              id: 1,
-              email: 'user@example.com',
-              name: 'John Doe',
-              role: 'user',
-            },
-          },
+          { code: 200, description: 'User profile retrieved', example: { id: 1, email: 'user@example.com', name: 'John Doe', role: 'user' } },
           { code: 401, description: 'Unauthorized' },
         ],
       },
@@ -138,37 +95,13 @@ const ApiDocumentation = () => {
         method: 'PUT',
         path: '/api/users/profile',
         description: 'Update user profile information',
-        headers: [
-          {
-            name: 'Authorization',
-            required: true,
-            description: 'Bearer token',
-          },
-        ],
+        headers: [{ name: 'Authorization', required: true, description: 'Bearer token' }],
         parameters: [
-          {
-            name: 'name',
-            type: 'string',
-            required: false,
-            description: 'User full name',
-          },
-          {
-            name: 'email',
-            type: 'string',
-            required: false,
-            description: 'User email address',
-          },
+          { name: 'name', type: 'string', required: false, description: 'User full name' },
+          { name: 'email', type: 'string', required: false, description: 'User email address' },
         ],
         responses: [
-          {
-            code: 200,
-            description: 'Profile updated successfully',
-            example: {
-              id: 1,
-              email: 'updated@example.com',
-              name: 'Updated Name',
-            },
-          },
+          { code: 200, description: 'Profile updated successfully', example: { id: 1, email: 'updated@example.com', name: 'Updated Name' } },
           { code: 401, description: 'Unauthorized' },
         ],
       },
@@ -178,52 +111,10 @@ const ApiDocumentation = () => {
         method: 'GET',
         path: '/api/products',
         description: 'Get list of all products',
-        headers: [
-          {
-            name: 'Authorization',
-            required: true,
-            description: 'Bearer token',
-          },
-        ],
+        headers: [{ name: 'Authorization', required: true, description: 'Bearer token' }],
         responses: [
-          {
-            code: 200,
-            description: 'Products retrieved successfully',
-            example: [
-              {
-                id: 1,
-                name: 'TrackIT',
-                description: 'Project tracking solution',
-                status: 'active',
-              },
-            ],
-          },
+          { code: 200, description: 'Products retrieved successfully', example: [{ id: 1, name: 'TrackIT', description: 'Project tracking solution', status: 'active' }] },
           { code: 401, description: 'Unauthorized' },
-        ],
-      },
-      {
-        method: 'GET',
-        path: '/api/products/:id',
-        description: 'Get specific product details',
-        headers: [
-          {
-            name: 'Authorization',
-            required: true,
-            description: 'Bearer token',
-          },
-        ],
-        responses: [
-          {
-            code: 200,
-            description: 'Product details retrieved',
-            example: {
-              id: 1,
-              name: 'TrackIT',
-              description: 'Project tracking solution',
-              features: ['task management', 'time tracking'],
-            },
-          },
-          { code: 404, description: 'Product not found' },
         ],
       },
     ],
@@ -232,19 +123,9 @@ const ApiDocumentation = () => {
         method: 'GET',
         path: '/api/analytics/dashboard',
         description: 'Get dashboard analytics data',
-        headers: [
-          {
-            name: 'Authorization',
-            required: true,
-            description: 'Bearer token',
-          },
-        ],
+        headers: [{ name: 'Authorization', required: true, description: 'Bearer token' }],
         responses: [
-          {
-            code: 200,
-            description: 'Analytics data retrieved',
-            example: { users: 1000, activeProjects: 50, revenue: 50000 },
-          },
+          { code: 200, description: 'Analytics data retrieved', example: { users: 1000, activeProjects: 50, revenue: 50000 } },
           { code: 401, description: 'Unauthorized' },
         ],
       },
@@ -252,559 +133,381 @@ const ApiDocumentation = () => {
   };
 
   const tabs = [
-    { id: 'overview', label: 'Overview', icon: HiDocumentText },
-    { id: 'auth', label: 'Authentication', icon: HiLockClosed },
-    { id: 'users', label: 'Users', icon: HiUser },
-    { id: 'products', label: 'Products', icon: HiBriefcase },
-    { id: 'analytics', label: 'Analytics', icon: HiChartBar },
+    { id: 'overview', label: 'Overview', icon: FileText },
+    { id: 'auth', label: 'Authentication', icon: Lock },
+    { id: 'users', label: 'Users', icon: User },
+    { id: 'products', label: 'Products', icon: Briefcase },
+    { id: 'analytics', label: 'Analytics', icon: BarChart3 },
   ];
 
   const renderOverview = () => (
-    <motion.div className="space-y-8" variants={containerVariants} initial="hidden" animate="visible">
-      <motion.div className="bg-[#1a1c20] rounded-2xl p-8 shadow-lg border border-[#2563eb] border-opacity-30" variants={itemVariants}>
-        <h2 className="text-2xl font-bold mb-6 text-white font-['Outfit']">
-          API Overview
-        </h2>
-        <p className="text-gray-300 mb-6 font-['Figtree']">
-          Our RESTful API provides programmatic access to all platform features.
-          All endpoints are secured with JWT authentication.
-        </p>
+    <motion.div className="space-y-12" variants={containerVariants} initial="hidden" animate="visible">
+      <motion.div className="bg-white/5 rounded-[40px] p-10 backdrop-blur-3xl border border-white/10 relative overflow-hidden" variants={itemVariants}>
+        <div className="relative z-10">
+          <h2 className="text-3xl font-black mb-8 text-white italic tracking-tight">API Synthesis</h2>
+          <p className="text-lg text-gray-400 mb-12 font-medium leading-relaxed max-w-2xl">
+            Our RESTful API provides programmatic access to all systemic nodes. All endpoints are secured with 256-bit encryption and deterministic JWT authentication.
+          </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <motion.div className="bg-gradient-to-br from-[#2563eb]/20 to-[#ffc957]/20 p-6 rounded-xl border border-[#2563eb]/30" variants={itemVariants}>
-            <HiCode className="w-8 h-8 text-[#2563eb] mb-3" />
-            <h3 className="font-bold mb-2 text-white font-['Outfit']">
-              RESTful Design
-            </h3>
-            <p className="text-sm text-gray-300 font-['Figtree']">
-              Consistent, predictable API design following REST principles
-            </p>
-          </motion.div>
-          <motion.div className="bg-gradient-to-br from-[#ffc957]/20 to-[#2563eb]/20 p-6 rounded-xl border border-[#2563eb]/30" variants={itemVariants}>
-            <HiLockClosed className="w-8 h-8 text-[#ffc957] mb-3" />
-            <h3 className="font-bold mb-2 text-white font-['Outfit']">
-              Secure by Default
-            </h3>
-            <p className="text-sm text-gray-300 font-['Figtree']">
-              JWT authentication and HTTPS encryption for all requests
-            </p>
-          </motion.div>
-          <motion.div className="bg-gradient-to-br from-[#0a0b0d]/20 to-[#2563eb]/20 p-6 rounded-xl border border-[#2563eb]/30" variants={itemVariants}>
-            <HiRefresh className="w-8 h-8 text-[#0a0b0d] mb-3" />
-            <h3 className="font-bold mb-2 text-white font-['Outfit']">
-              Rate Limited
-            </h3>
-            <p className="text-sm text-gray-300 font-['Figtree']">
-              Fair usage policies with rate limiting to ensure performance
-            </p>
-          </motion.div>
-        </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            {[
+              { icon: Code2, title: 'REST Architecture', desc: 'Predictive endpoint design following strict REST principles.', color: 'text-primary-400' },
+              { icon: Lock, title: 'Secure Vault', desc: 'Default JWT sync and HTTPS encapsulation for all packets.', color: 'text-secondary-400' },
+              { icon: RefreshCw, title: 'Velocity Control', desc: 'Fair usage rate limiting ensuring millisecond precision.', color: 'text-white' },
+            ].map((feature, idx) => (
+              <div key={idx} className="p-8 rounded-3xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                <feature.icon className={`w-10 h-10 ${feature.color} mb-6`} />
+                <h3 className="font-black text-white uppercase tracking-widest text-sm mb-3">{feature.title}</h3>
+                <p className="text-xs text-gray-500 font-bold leading-relaxed">{feature.desc}</p>
+              </div>
+            ))}
+          </div>
 
-        <div className="bg-[#1a1c20] rounded-xl p-6 border border-[#2563eb]/30">
-          <h3 className="font-bold mb-4 text-white font-['Outfit']">
-            Base URL
-          </h3>
-          <code className="block bg-[#0a0b0d] text-[#ffc957] p-4 rounded-lg font-mono text-sm overflow-x-auto">
-            https://api.limitlessinfotech.com/v1
-          </code>
+          <div className="p-8 rounded-3xl bg-dark-950 border border-white/5">
+            <h3 className="text-[10px] font-black mb-4 text-gray-500 uppercase tracking-[0.4em]">Root Node URL</h3>
+            <div className="flex items-center gap-4 bg-[#0e1114] p-4 rounded-2xl border border-white/5 overflow-hidden">
+               <code className="text-primary-400 font-mono text-sm tracking-tight">https://api.limitlessinfotech.com/v1</code>
+               <button className="ml-auto p-2 hover:bg-white/5 rounded-lg transition-colors">
+                  <RefreshCw className="w-4 h-4 text-gray-600" />
+               </button>
+            </div>
+          </div>
         </div>
+        <div className="absolute inset-0 bg-grid-white/[0.01]" />
       </motion.div>
 
-      <motion.div className="bg-[#1a1c20] rounded-2xl p-8 shadow-lg border border-[#2563eb] border-opacity-30" variants={itemVariants}>
-        <h2 className="text-2xl font-bold mb-6 text-white font-['Outfit']">
-          Authentication
-        </h2>
-        <p className="text-gray-300 mb-6 font-['Figtree']">
-          All API requests require a valid JWT token in the Authorization
-          header.
+      <motion.div className="bg-white/5 rounded-[40px] p-10 border border-white/10" variants={itemVariants}>
+        <h2 className="text-2xl font-black mb-8 text-white italic tracking-tight">Handshake Protocol</h2>
+        <p className="text-gray-400 mb-12 font-medium leading-relaxed max-w-2xl">
+          Integrate the Authorization header with a valid JWT pulse for all requests.
         </p>
 
-        <div className="bg-[#1a1c20] rounded-xl p-6 mb-6 border border-[#2563eb]/30">
-          <h3 className="font-bold mb-3 text-white font-['Outfit']">
-            Example Request
-          </h3>
-          <pre className="bg-[#0a0b0d] text-[#ffc957] p-4 rounded-lg font-mono text-sm overflow-x-auto">
-            {`curl -X GET https://api.limitlessinfotech.com/v1/users/profile \\
-  -H "Authorization: Bearer YOUR_JWT_TOKEN" \\
-  -H "Content-Type: application/json"`}
-          </pre>
+        <div className="bg-[#0e1114] rounded-2xl p-8 border border-white/5 mb-12">
+           <h3 className="text-[10px] font-black mb-6 text-gray-500 uppercase tracking-[0.4em]">Header Synthesis</h3>
+           <pre className="font-mono text-xs text-secondary-400 overflow-x-auto selection:bg-secondary-500/30">
+             {`curl -X GET https://api.limitlessinfotech.com/v1/users/profile \\
+-H "Authorization: Bearer YOUR_SYNAPSE_TOKEN" \\
+-H "Content-Type: application/json"`}
+           </pre>
         </div>
 
-        <div className="bg-[#1a1c20] rounded-xl p-6 border border-[#2563eb]/30">
-          <h3 className="font-bold mb-3 text-white font-['Outfit']">
-            Rate Limits
-          </h3>
-          <p className="text-gray-300 mb-4 font-['Figtree']">
-            Default rate limits:
-          </p>
-          <ul className="text-gray-300 space-y-2 font-['Figtree']">
-            <li>• 1000 requests per hour per IP</li>
-            <li>• 100 requests per minute per authenticated user</li>
-            <li>• 10 requests per second for unauthenticated users</li>
-          </ul>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+           {[
+             { label: 'IP RATE LIMIT', value: '1,000 / HR' },
+             { label: 'USER RATE LIMIT', value: '100 / MIN' },
+             { label: 'GLOBAL SYNC', value: '99.99%' }
+           ].map((stat, idx) => (
+             <div key={idx} className="text-center p-6 border-r border-white/5 last:border-0">
+                <div className="text-xl font-black text-white mb-2">{stat.value}</div>
+                <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest">{stat.label}</div>
+             </div>
+           ))}
         </div>
       </motion.div>
     </motion.div>
   );
 
   const renderEndpoint = endpoint => (
-    <motion.div className="bg-[#1a1c20] rounded-2xl p-6 shadow-lg border border-[#2563eb] border-opacity-30 mb-6" variants={itemVariants}>
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center space-x-4">
+    <motion.div 
+      className="bg-white/5 rounded-[40px] p-8 border border-white/10 mb-8 overflow-hidden group hover:border-primary-500/30 transition-all duration-500" 
+      variants={itemVariants}
+    >
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+        <div className="flex items-center gap-6">
           <span
-            className={`px-3 py-1 rounded-full text-sm font-mono font-bold ${
+            className={`px-4 py-2 rounded-xl text-[10px] font-black tracking-widest uppercase ${
               endpoint.method === 'GET'
-                ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                ? 'bg-green-500/10 text-green-500 border border-green-500/20'
                 : endpoint.method === 'POST'
-                  ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400'
-                  : endpoint.method === 'PUT'
-                    ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
-                    : endpoint.method === 'DELETE'
-                      ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
-                      : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300'
+                  ? 'bg-blue-500/10 text-blue-500 border border-blue-500/20'
+                  : 'bg-amber-500/10 text-amber-500 border border-amber-500/20'
             }`}
           >
             {endpoint.method}
           </span>
-          <code className="font-mono text-white">
+          <code className="text-lg font-black text-white italic tracking-tight group-hover:text-primary-400 transition-colors">
             {endpoint.path}
           </code>
         </div>
         <button
-          onClick={() =>
-            setSelectedEndpoint(
-              selectedEndpoint === endpoint.path ? null : endpoint.path
-            )
-          }
-          className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+          onClick={() => setSelectedEndpoint(selectedEndpoint === endpoint.path ? null : endpoint.path)}
+          className="px-6 py-2 rounded-xl bg-white/5 text-[10px] font-black uppercase tracking-widest text-gray-500 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2"
         >
-          {selectedEndpoint === endpoint.path ? 'Hide' : 'Show Details'}
+          {selectedEndpoint === endpoint.path ? 'Collapse Node' : 'Expand Node'}
+          <ChevronRight className={`w-3 h-3 transition-transform ${selectedEndpoint === endpoint.path ? 'rotate-90' : ''}`} />
         </button>
       </div>
 
-      <p className="text-gray-300 mb-4 font-['Figtree']">
+      <p className="text-gray-400 font-medium text-sm leading-relaxed mb-8 max-w-2xl px-2">
         {endpoint.description}
       </p>
 
-      {selectedEndpoint === endpoint.path && (
-        <div className="space-y-6">
-          {endpoint.headers && endpoint.headers.length > 0 && (
-            <div>
-              <h4 className="font-bold mb-3 text-white font-['Outfit']">
-                Headers
-              </h4>
-              <div className="space-y-2">
-                {endpoint.headers.map((header, idx) => (
-                  <div
-                    key={idx}
-                    className="flex items-center justify-between p-3 bg-[#1a1c20] rounded-lg border border-[#2563eb]/20"
-                  >
-                    <div className="flex items-center">
-                      <span className="font-mono text-sm font-bold mr-3 text-white">
-                        {header.name}
-                      </span>
-                      {header.required && (
-                        <span className="text-xs bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400 px-2 py-1 rounded">
-                          Required
-                        </span>
-                      )}
-                    </div>
-                    <span className="text-sm text-gray-300 font-['Figtree']">
-                      {header.description}
-                    </span>
+      <AnimatePresence>
+        {selectedEndpoint === endpoint.path && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden"
+          >
+            <div className="space-y-12 pt-8 border-t border-white/5 px-2">
+              {endpoint.parameters && (
+                <div className="space-y-6">
+                  <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em]">Input Parameters</h4>
+                  <div className="space-y-4">
+                    {endpoint.parameters.map((param, idx) => (
+                      <div key={idx} className="flex justify-between items-center p-6 bg-[#0e1114] rounded-3xl border border-white/5 hover:border-white/10 transition-colors group/row">
+                        <div className="flex items-center gap-4">
+                          <code className="text-sm font-black text-primary-400 uppercase tracking-widest">{param.name}</code>
+                          <span className="px-2 py-0.5 rounded-lg bg-white/5 text-[8px] font-black text-gray-500 uppercase">{param.type}</span>
+                          {param.required && <span className="text-[8px] font-black text-red-500 uppercase tracking-widest italic">Required</span>}
+                        </div>
+                        <span className="text-xs text-gray-500 font-bold italic">{param.description}</span>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {endpoint.parameters && endpoint.parameters.length > 0 && (
-            <div>
-              <h4 className="font-bold mb-3 text-white font-['Outfit']">
-                Parameters
-              </h4>
-              <div className="space-y-2">
-                {endpoint.parameters.map((param, idx) => (
-                  <div
-                    key={idx}
-                    className="flex items-center justify-between p-3 bg-[#1a1c20] rounded-lg border border-[#2563eb]/20"
-                  >
-                    <div className="flex items-center">
-                      <span className="font-mono text-sm font-bold mr-3 text-white">
-                        {param.name}
-                      </span>
-                      <span className="text-xs bg-[#2563eb] text-white px-2 py-1 rounded">
-                        {param.type}
-                      </span>
-                      {param.required && (
-                        <span className="text-xs bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400 px-2 py-1 rounded ml-2">
-                          Required
-                        </span>
-                      )}
-                    </div>
-                    <span className="text-sm text-gray-300 font-['Figtree']">
-                      {param.description}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          <div>
-            <h4 className="font-bold mb-3 text-white font-['Outfit']">
-              Responses
-            </h4>
-            <div className="space-y-4">
-              {endpoint.responses.map((response, idx) => (
-                <div
-                  key={idx}
-                  className="bg-[#1a1c20] rounded-lg p-4 border border-[#2563eb]/20"
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="font-mono font-bold text-white">
-                      {response.code}
-                    </span>
-                    <span className="text-gray-300 font-['Figtree']">
-                      {response.description}
-                    </span>
-                  </div>
-                  <pre className="bg-[#0a0b0d] text-[#ffc957] p-3 rounded font-mono text-xs overflow-x-auto">
-                    {JSON.stringify(response.example, null, 2)}
-                  </pre>
                 </div>
-              ))}
+              )}
+
+              <div className="space-y-6">
+                <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em]">Response Synthesis</h4>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  {endpoint.responses.map((response, idx) => (
+                    <div key={idx} className="bg-[#0e1114] rounded-[32px] p-8 border border-white/5">
+                      <div className="flex items-center justify-between mb-6">
+                        <span className={`text-xs font-black p-2 rounded-xl ${response.code === 200 || response.code === 201 ? 'bg-green-500/10 text-green-500 border border-green-500/20' : 'bg-red-500/10 text-red-500 border border-red-500/20'}`}>
+                          HTTP {response.code}
+                        </span>
+                        <span className="text-[10px] font-black text-gray-600 uppercase tracking-widest">{response.description}</span>
+                      </div>
+                      <pre className="text-xs font-mono text-secondary-400 bg-black/30 p-6 rounded-2xl overflow-x-auto whitespace-pre-wrap selection:bg-secondary-500/30">
+                        {JSON.stringify(response.example, null, 2)}
+                      </pre>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 
-  const renderTabContent = () => {
-    if (activeTab === 'overview') {
-      return renderOverview();
-    }
-
-    const endpoints = apiEndpoints[activeTab] || [];
-    return (
-      <div className="space-y-6">
-        {endpoints.map((endpoint, index) => renderEndpoint(endpoint))}
-      </div>
-    );
-  };
-
   return (
     <ErrorBoundary>
-    <div className="min-h-screen bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100 font-sans">
-      {/* Hero Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#ffc957] to-[#0a0b0d] text-white relative overflow-hidden">
-        <div className="absolute inset-0 hero-pattern-bg opacity-20"></div>
-        <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div 
-              className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <HiTerminal className="w-5 h-5" />
-              <span className="text-sm font-semibold">API Documentation</span>
+      <div className="relative min-h-screen bg-dark-900 overflow-hidden text-white selection:bg-primary-500/30">
+        {/* Ambient background particles/glows */}
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-0 right-[-10%] w-[60%] h-[60%] bg-primary-500/5 blur-[150px] rounded-full" />
+          <div className="absolute bottom-[-10%] left-[-10%] w-[60%] h-[60%] bg-secondary-500/5 blur-[150px] rounded-full" />
+          <div className="absolute inset-0 bg-grid-white/[0.01]" />
+        </div>
+
+        {/* Hero Section */}
+        <section className="relative pt-40 pb-20 px-6">
+          <div className="max-w-7xl mx-auto text-center">
+            <motion.div variants={itemVariants} initial="hidden" animate="visible" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8">
+              <Terminal className="w-4 h-4 text-primary-400" />
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-300">Developer Interface — API Docs</span>
             </motion.div>
             
-            <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-['Outfit']"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              API
-              <br />
-              Documentation
+            <motion.h1 variants={itemVariants} initial="hidden" animate="visible" className="text-6xl md:text-8xl font-black mb-8 leading-tight tracking-tighter text-white uppercase italic">
+              Architect <span className="not-italic bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent underline decoration-white/10 underline-offset-8">Documentation</span>
             </motion.h1>
             
-            <motion.p
-              className="text-xl md:text-2xl text-white/90 mb-8 font-['Figtree']"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              Comprehensive API documentation for seamless integration
+            <motion.p variants={itemVariants} initial="hidden" animate="visible" className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-16 font-medium">
+              A comprehensive portal for high-precision systemic integration. Build high-trust applications on the Limitless backbone.
             </motion.p>
             
             <motion.div 
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
+               variants={itemVariants} initial="hidden" animate="visible"
+               className="flex flex-wrap justify-center gap-6"
             >
-              <a
-                href="#playground"
-                className="bg-[#ffc957] text-[#0a0b0d] font-semibold py-3 px-8 rounded-lg hover:bg-[#ffb830] transition duration-300 font-['Outfit']"
-              >
-                API Playground
-              </a>
-              <a
-                href="#sdk"
-                className="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-[#0a0b0d] transition duration-300 font-['Outfit']"
-              >
-                Download SDK
-              </a>
+               <button className="px-12 py-5 bg-white text-dark-900 font-black rounded-3xl hover:bg-gray-200 transition-all text-sm uppercase tracking-[0.2em] shadow-2xl flex items-center gap-3">
+                  <Play className="w-4 h-4 fill-current" />
+                  API Playground
+               </button>
+               <button className="px-12 py-5 bg-white/5 text-white font-bold rounded-3xl border border-white/10 hover:bg-white/10 transition-all text-sm flex items-center gap-3 group">
+                  Retrieve Global SDK <Box className="w-4 h-4 group-hover:scale-110 transition-transform" />
+               </button>
             </motion.div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Main Content */}
-      <section className="section-padding bg-[#0a0b0d]">
-        <div className="container-custom">
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* Sidebar */}
-            <div className="lg:w-1/4">
-              <motion.div 
-                className="bg-[#1a1c20] rounded-2xl p-6 shadow-lg border border-[#2563eb] border-opacity-30 sticky top-8"
-                variants={itemVariants}
-              >
-                <h3 className="font-bold mb-4 text-white font-['Outfit']">
-                  API Sections
-                </h3>
-                <nav className="space-y-2">
-                  {tabs.map(tab => {
-                    const Icon = tab.icon;
-                    return (
-                      <button
-                        key={tab.id}
-                        onClick={() => setActiveTab(tab.id)}
-                        className={`w-full text-left px-4 py-3 rounded-lg flex items-center space-x-3 transition-colors ${
-                          activeTab === tab.id
-                            ? 'bg-[#2563eb] text-white'
-                            : 'text-gray-300 hover:bg-[#2563eb] hover:text-white'
-                        }`}
-                      >
-                        <Icon className="w-5 h-5" />
-                        <span className="font-medium font-['Figtree']">{tab.label}</span>
-                      </button>
-                    );
-                  })}
-                </nav>
-              </motion.div>
-            </div>
+        {/* Main Content Hub */}
+        <section className="py-24 px-6 relative z-10">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col xl:flex-row gap-16">
+              {/* Specialized Sidebar */}
+              <div className="xl:w-1/4">
+                 <motion.div 
+                   variants={itemVariants} initial="hidden" animate="visible"
+                   className="sticky top-32 p-10 rounded-[48px] bg-white/5 border border-white/10 backdrop-blur-3xl"
+                 >
+                    <h3 className="text-[10px] font-black text-primary-400 uppercase tracking-[0.4em] mb-12">Registry Sections</h3>
+                    <nav className="space-y-4">
+                       {tabs.map(tab => (
+                         <button
+                           key={tab.id}
+                           onClick={() => setActiveTab(tab.id)}
+                           className={`w-full flex items-center gap-5 p-5 rounded-2xl transition-all group ${
+                             activeTab === tab.id 
+                             ? 'bg-white text-dark-900 shadow-2xl translate-x-1' 
+                             : 'text-gray-500 hover:text-white hover:bg-white/5'
+                           }`}
+                         >
+                            <tab.icon className={`w-5 h-5 ${activeTab === tab.id ? 'text-primary-600' : 'text-gray-600 group-hover:text-primary-400'}`} />
+                            <span className="text-sm font-black uppercase tracking-widest">{tab.label}</span>
+                         </button>
+                       ))}
+                    </nav>
 
-            {/* Main Content */}
-            <div className="lg:w-3/4" variants={itemVariants}>{renderTabContent()}</div>
-          </div>
-        </div>
-      </section>
-
-      {/* API Playground */}
-      <section
-        id="playground"
-        className="section-padding bg-[#0a0b0d]"
-      >
-        <div className="container-custom">
-          <motion.div className="text-center mb-16" variants={itemVariants}>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white font-['Outfit']">
-              Interactive <span className="text-[#ffc957]">API Playground</span>
-            </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']">
-              Test our API endpoints directly in your browser
-            </p>
-          </motion.div>
-
-          <div className="bg-[#1a1c20] rounded-2xl p-8 shadow-lg border border-[#2563eb] border-opacity-30">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-bold mb-4 text-white font-['Outfit']">
-                  Try It Out
-                </h3>
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-gray-300 font-['Figtree']">
-                      Method
-                    </label>
-                    <select className="w-full p-3 border border-[#2563eb]/30 rounded-lg bg-[#0a0b0d] text-white font-['Figtree']">
-                      <option>GET</option>
-                      <option>POST</option>
-                      <option>PUT</option>
-                      <option>DELETE</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-gray-300 font-['Figtree']">
-                      Endpoint
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="/api/users/profile"
-                      className="w-full p-3 border border-[#2563eb]/30 rounded-lg bg-[#0a0b0d] text-white font-['Figtree']"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-gray-300 font-['Figtree']">
-                      Authorization
-                    </label>
-                    <input
-                      type="password"
-                      placeholder="Bearer token"
-                      className="w-full p-3 border border-[#2563eb]/30 rounded-lg bg-[#0a0b0d] text-white font-['Figtree']"
-                    />
-                  </div>
-                  <button className="bg-[#2563eb] text-white w-full py-3 px-6 rounded-lg hover:bg-[#1d4ed8] transition duration-300 font-['Outfit']">
-                    Execute Request
-                  </button>
-                </div>
+                    <div className="mt-20 pt-10 border-t border-white/10">
+                       <div className="flex items-center gap-4 group cursor-pointer">
+                          <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center border border-green-500/20">
+                             <CheckCircle2 className="w-5 h-5 text-green-500" />
+                          </div>
+                          <div>
+                             <div className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-0.5">Global Status</div>
+                             <div className="text-xs font-bold text-white group-hover:text-green-500 transition-colors">OPERATIONAL</div>
+                          </div>
+                       </div>
+                    </div>
+                 </motion.div>
               </div>
-              <div>
-                <h3 className="text-xl font-bold mb-4 text-white font-['Outfit']">
-                  Response
-                </h3>
-                <div className="bg-[#0a0b0d] text-[#ffc957] p-4 rounded-lg font-mono text-sm h-64 overflow-auto">
-                  {`{
+
+              {/* Main Feed Content */}
+              <div className="xl:flex-1 min-h-[800px]">
+                 <AnimatePresence mode="wait">
+                   <motion.div
+                     key={activeTab}
+                     initial={{ opacity: 0, x: 20 }}
+                     animate={{ opacity: 1, x: 0 }}
+                     exit={{ opacity: 0, x: -20 }}
+                     transition={{ duration: 0.5 }}
+                   >
+                     {activeTab === 'overview' ? renderOverview() : (
+                       <div className="space-y-6">
+                         <div className="mb-12">
+                            <h2 className="text-4xl font-black text-white italic tracking-tighter mb-4 capitalize">{activeTab} Nodes</h2>
+                            <p className="text-gray-500 font-medium tracking-widest uppercase text-xs">Primary documentation for {activeTab} protocol endpoints.</p>
+                         </div>
+                         {apiEndpoints[activeTab]?.map(renderEndpoint)}
+                       </div>
+                     )}
+                   </motion.div>
+                 </AnimatePresence>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Playground Container */}
+        <section id="playground" className="py-32 px-6 bg-dark-950/50 relative overflow-hidden">
+           <div className="max-w-7xl mx-auto relative z-10">
+              <div className="text-center mb-24">
+                 <h2 className="text-4xl md:text-7xl font-black text-white italic tracking-tighter uppercase mb-8">Nodal <span className="not-italic bg-gradient-to-r from-primary-400 to-white bg-clip-text text-transparent">Simulator</span></h2>
+                 <p className="text-xl text-gray-500 max-w-2xl mx-auto font-medium italic">Interact with systemic endpoints directly via our architectural playground.</p>
+              </div>
+
+              <div className="p-1 rounded-[64px] bg-gradient-to-br from-white/10 to-transparent border border-white/10 overflow-hidden shadow-3xl">
+                 <div className="bg-[#0e1114]/80 backdrop-blur-3xl rounded-[62px] p-8 md:p-16">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                       <div className="space-y-10">
+                          <div className="flex items-center gap-3 px-3 py-1 rounded-full bg-primary-500/10 border border-primary-500/20 w-fit">
+                             <div className="w-1.5 h-1.5 rounded-full bg-primary-500 animate-pulse" />
+                             <span className="text-[8px] font-black text-primary-400 uppercase tracking-widest">Simulation Mode Active</span>
+                          </div>
+                          <h3 className="text-2xl font-black text-white italic tracking-tight">Sync Request Builder</h3>
+                          
+                          <div className="space-y-8">
+                             <div className="space-y-4">
+                                <label className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em]">Protocol Method</label>
+                                <select className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 text-white font-bold focus:ring-2 focus:ring-primary-500/30">
+                                   <option>GET — RETRIEVE</option>
+                                   <option>POST — EXECUTE</option>
+                                   <option>PUT — MUTATE</option>
+                                   <option>DELETE — TERMINATE</option>
+                                </select>
+                             </div>
+                             <div className="space-y-4">
+                                <label className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em]">Node Path</label>
+                                <div className="relative">
+                                   <input type="text" placeholder="/api/users/profile" className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 pl-8 text-white font-mono text-sm" />
+                                   <Globe className="absolute right-6 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-700" />
+                                </div>
+                             </div>
+                             <button className="w-full py-6 rounded-3xl bg-primary-500 text-dark-900 font-black text-sm uppercase tracking-[0.3em] hover:bg-primary-400 transition-all shadow-xl shadow-primary-500/10 flex items-center justify-center gap-3">
+                                <Play className="w-4 h-4 fill-current" />
+                                Initiate Synchronicity
+                             </button>
+                          </div>
+                       </div>
+
+                       <div className="space-y-10">
+                          <h3 className="text-2xl font-black text-white italic tracking-tight">Signal Response</h3>
+                          <div className="h-[400px] bg-black/50 rounded-[40px] border border-white/5 p-8 relative overflow-hidden">
+                             <pre className="font-mono text-xs text-secondary-400 selection:bg-secondary-500/30 leading-relaxed">
+{`{
   "status": "success",
+  "latency": "14ms",
   "data": {
-    "user": {
-      "id": 1,
-      "email": "user@example.com",
-      "name": "John Doe"
+    "node": "central-primary-01",
+    "payload": {
+       "user_id": "LX-942",
+       "auth_lvl": "Architect",
+       "status": "Synchronized"
     }
   }
 }`}
-                </div>
+                             </pre>
+                             <div className="absolute top-4 right-8 flex gap-2">
+                                <div className="w-2 h-2 rounded-full bg-primary-500/20" />
+                                <div className="w-2 h-2 rounded-full bg-secondary-500/20" />
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
+           </div>
+           <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-primary-500 to-transparent opacity-20" />
+        </section>
 
-      {/* SDKs & Libraries */}
-      <section className="section-padding bg-[#0a0b0d]">
-        <div className="container-custom">
-          <motion.div className="text-center mb-16" variants={itemVariants}>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white font-['Outfit']">
-              SDKs & <span className="text-[#ffc957]">Libraries</span>
-            </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']">
-              Official SDKs for popular programming languages
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <motion.div className="bg-[#1a1c20] rounded-xl p-6 shadow-lg border border-[#2563eb] border-opacity-30 text-center" variants={itemVariants}>
-              <div className="w-12 h-12 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-lg flex items-center justify-center mx-auto mb-4">
-                <span className="text-white font-bold text-lg">JS</span>
+        {/* Global Documentation CTA */}
+        <section className="py-40 px-6">
+           <motion.div 
+             initial={{ opacity: 0, y: 30 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             className="max-w-6xl mx-auto p-16 md:p-28 rounded-[88px] bg-gradient-to-br from-primary-600/30 via-secondary-600/30 to-dark-950 border border-white/10 text-center relative overflow-hidden"
+           >
+              <div className="relative z-10 space-y-12">
+                 <div className="flex justify-center flex-wrap gap-8 mb-16">
+                    {['JAVASCRIPT', 'PYTHON', 'JAVA', '.NET'].map(lib => (
+                      <div key={lib} className="px-6 py-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-4 group hover:bg-white text-gray-500 hover:text-dark-900 transition-all">
+                         <Box className="w-5 h-5" />
+                         <span className="text-[10px] font-black uppercase tracking-widest">{lib} SDK</span>
+                      </div>
+                    ))}
+                 </div>
+                 <h2 className="text-4xl md:text-8xl font-black text-white tracking-tighter italic uppercase leading-none">Ready for <span className="not-italic bg-gradient-to-r from-primary-400 to-white bg-clip-text text-transparent underline decoration-white/10 underline-offset-8">Integration</span>?</h2>
+                 <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-medium">
+                    Initiate your developer account and access restricted neural endpoints for enterprise-grade architectural deployments.
+                 </p>
+                 <div className="flex flex-wrap justify-center gap-8 pt-8">
+                    <button className="px-16 py-6 bg-white text-dark-900 font-black rounded-3xl hover:bg-gray-200 transition-all text-sm uppercase tracking-[0.3em] shadow-2xl">
+                       Get API Credentials
+                    </button>
+                    <button className="px-16 py-6 bg-white/5 text-white font-bold rounded-3xl border border-white/10 hover:bg-white/10 transition-all text-sm flex items-center gap-3 group">
+                       Consult Engineering <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </button>
+                 </div>
               </div>
-              <h3 className="font-bold mb-2 text-white font-['Outfit']">
-                JavaScript
-              </h3>
-              <p className="text-sm text-gray-300 mb-4 font-['Figtree']">
-                For Node.js and browser applications
-              </p>
-              <code className="block text-xs bg-[#0a0b0d] text-[#ffc957] p-2 rounded mb-3 font-mono">
-                npm install @limitlessinfotech/api
-              </code>
-              <a
-                href="#"
-                className="text-[#2563eb] hover:text-[#ffc957] hover:underline text-sm font-['Figtree']"
-              >
-                Documentation
-              </a>
-            </motion.div>
-
-            <motion.div className="bg-[#1a1c20] rounded-xl p-6 shadow-lg border border-[#2563eb] border-opacity-30 text-center" variants={itemVariants}>
-              <div className="w-12 h-12 bg-gradient-to-br from-[#ffc957] to-[#2563eb] rounded-lg flex items-center justify-center mx-auto mb-4">
-                <span className="text-white font-bold text-lg">PY</span>
-              </div>
-              <h3 className="font-bold mb-2 text-white font-['Outfit']">
-                Python
-              </h3>
-              <p className="text-sm text-gray-300 mb-4 font-['Figtree']">
-                For Python applications
-              </p>
-              <code className="block text-xs bg-[#0a0b0d] text-[#ffc957] p-2 rounded mb-3 font-mono">
-                pip install limitlessinfotech-api
-              </code>
-              <a
-                href="#"
-                className="text-[#2563eb] hover:text-[#ffc957] hover:underline text-sm font-['Figtree']"
-              >
-                Documentation
-              </a>
-            </motion.div>
-
-            <motion.div className="bg-[#1a1c20] rounded-xl p-6 shadow-lg border border-[#2563eb] border-opacity-30 text-center" variants={itemVariants}>
-              <div className="w-12 h-12 bg-gradient-to-br from-[#0a0b0d] to-[#2563eb] rounded-lg flex items-center justify-center mx-auto mb-4">
-                <span className="text-white font-bold text-lg">JAVA</span>
-              </div>
-              <h3 className="font-bold mb-2 text-white font-['Outfit']">
-                Java
-              </h3>
-              <p className="text-sm text-gray-300 mb-4 font-['Figtree']">
-                For Java applications
-              </p>
-              <code className="block text-xs bg-[#0a0b0d] text-[#ffc957] p-2 rounded mb-3 font-mono">
-                Maven dependency
-              </code>
-              <a
-                href="#"
-                className="text-[#2563eb] hover:text-[#ffc957] hover:underline text-sm font-['Figtree']"
-              >
-                Documentation
-              </a>
-            </motion.div>
-
-            <motion.div className="bg-[#1a1c20] rounded-xl p-6 shadow-lg border border-[#2563eb] border-opacity-30 text-center" variants={itemVariants}>
-              <div className="w-12 h-12 bg-gradient-to-br from-[#2563eb] to-[#0a0b0d] rounded-lg flex items-center justify-center mx-auto mb-4">
-                <span className="text-white font-bold text-lg">NET</span>
-              </div>
-              <h3 className="font-bold mb-2 text-white font-['Outfit']">
-                .NET
-              </h3>
-              <p className="text-sm text-gray-300 mb-4 font-['Figtree']">
-                For .NET applications
-              </p>
-              <code className="block text-xs bg-[#0a0b0d] text-[#ffc957] p-2 rounded mb-3 font-mono">
-                NuGet package
-              </code>
-              <a
-                href="#"
-                className="text-[#2563eb] hover:text-[#ffc957] hover:underline text-sm font-['Figtree']"
-              >
-                Documentation
-              </a>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-br from-[#2563eb] via-[#ffc957] to-[#0a0b0d] text-white">
-        <div className="container-custom">
-          <motion.div className="text-center" variants={itemVariants}>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 font-['Outfit']">
-              Ready to Integrate?
-            </h2>
-            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto font-['Figtree']">
-              Get started with our API today and unlock the full potential of
-              our platform
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="/contact"
-                className="bg-[#ffc957] text-[#0a0b0d] font-semibold py-3 px-8 rounded-lg hover:bg-[#ffb830] transition duration-300 font-['Outfit']"
-              >
-                Get API Access
-              </a>
-              <a
-                href="/api-documentation"
-                className="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-[#0a0b0d] transition duration-300 font-['Outfit']"
-              >
-                View Full Docs
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-    </div>
+              <div className="absolute inset-0 bg-grid-white/[0.03]" />
+           </motion.div>
+        </section>
+      </div>
     </ErrorBoundary>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { HiArrowUp } from 'react-icons/hi';
-import Button from '../Button';
+import { ArrowUp } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface BackToTopProps {
   threshold?: number;
@@ -10,7 +10,7 @@ interface BackToTopProps {
 
 const BackToTop: React.FC<BackToTopProps> = ({
   threshold = 300,
-  className = 'scroll-to-top',
+  className = '',
   children,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -35,28 +35,26 @@ const BackToTop: React.FC<BackToTopProps> = ({
     });
   };
 
-  if (!isVisible) return null;
-
   return (
-    <div className={`fixed bottom-8 right-8 z-40 ${className}`}>
-      {children ? (
-        <button
-          onClick={scrollToTop}
-          className="focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-full"
-          aria-label="Scroll to top"
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ scale: 0, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0, opacity: 0, y: 20 }}
+          className={`fixed bottom-8 right-8 z-40 ${className}`}
         >
-          {children}
-        </button>
-      ) : (
-        <Button
-          variant="primary"
-          icon={<HiArrowUp className="w-5 h-5" />}
-          onClick={scrollToTop}
-          aria-label="Scroll to top"
-          className="p-4 rounded-full shadow-lg hover:shadow-xl"
-        />
+          <button
+            onClick={scrollToTop}
+            className="w-14 h-14 bg-[#1ba6d6] text-white rounded-2xl flex items-center justify-center shadow-[0_0_30px_rgba(27,166,214,0.3)] hover:scale-110 active:scale-95 transition-all duration-300 group overflow-hidden relative"
+            aria-label="Scroll to top"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+            {children || <ArrowUp className="w-6 h-6 relative z-10 group-hover:-translate-y-1 transition-transform" />}
+          </button>
+        </motion.div>
       )}
-    </div>
+    </AnimatePresence>
   );
 };
 

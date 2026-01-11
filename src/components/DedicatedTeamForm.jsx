@@ -1,13 +1,21 @@
-import { useState, memo } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  HiOutlineUser,
-  HiOutlineMail,
-  HiOutlineBriefcase,
-  HiOutlineClock,
-  HiOutlineCode,
-  HiOutlineLightBulb,
-  HiCheckCircle,
-} from 'react-icons/hi';
+  User,
+  Mail,
+  Building2,
+  Clock,
+  Code2,
+  Lightbulb,
+  CheckCircle2,
+  ChevronRight,
+  ShieldCheck,
+  Zap,
+  Globe,
+  Settings,
+  DollarSign,
+  FileText
+} from 'lucide-react';
 import csrfService from '../services/csrfService';
 import rateLimitService from '../services/rateLimitService';
 import encryptionService from '../services/auth/encryptionService';
@@ -171,39 +179,50 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
 
   if (submitSuccess) {
     return (
-      <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 text-center" role="alert" aria-live="polite">
-        <div className="flex items-center justify-center mb-3">
-          <HiCheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
+        animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+        className="bg-[#1ba6d6]/5 border border-[#1ba6d6]/30 rounded-[2.5rem] p-12 text-center relative overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1ba6d6]/10 to-transparent pointer-events-none"></div>
+        <div className="flex items-center justify-center mb-8 relative z-10">
+          <div className="w-20 h-20 bg-[#1ba6d6] rounded-3xl flex items-center justify-center shadow-[0_0_50px_rgba(27,166,214,0.4)]">
+            <CheckCircle2 className="w-10 h-10 text-white" />
+          </div>
         </div>
-        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">
-          Application Submitted!
+        <h3 className="text-xl font-black text-white uppercase tracking-[0.3em] mb-6 relative z-10">
+          Application Received
         </h3>
-        <p className="text-green-700 dark:text-green-400 text-sm">
-          Thank you for your interest in our dedicated team services. We'll
-          review your application and contact you shortly.
+        <p className="text-[0.65rem] text-white/50 font-black uppercase tracking-widest leading-relaxed max-w-md mx-auto relative z-10">
+          Your request for dedicated neural resources has been logged. Our deployment strategists will establish a secure connection shortly.
         </p>
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+    <form onSubmit={handleSubmit} className="space-y-8" noValidate>
       {rateLimitError && (
-        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4" role="alert" aria-live="polite">
-          <p className="text-red-700 dark:text-red-300 text-sm">{rateLimitError}</p>
-        </div>
+        <motion.div 
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-red-500/10 border border-red-500/20 rounded-2xl p-5" role="alert"
+        >
+          <p className="text-red-500 text-[0.6rem] font-black uppercase tracking-widest text-center">{rateLimitError}</p>
+        </motion.div>
       )}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="space-y-3">
           <label
             htmlFor="fullName"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.3em] ml-1"
           >
-            Full Name *
+            Operator Identity *
           </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <HiOutlineUser className="h-5 w-5 text-gray-400" />
+          <div className="relative group">
+            <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+              <User className="h-4 w-4 text-white/20 group-focus-within:text-[#1ba6d6] transition-colors" />
             </div>
             <input
               type="text"
@@ -212,25 +231,25 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
               value={formData.fullName}
               onChange={handleChange}
               required
-              className={`w-full pl-10 pr-4 py-3 rounded-lg border ${errors.fullName ? 'border-red-500' : 'border-gray-300 dark:border-dark-600'} bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300`}
-              placeholder="Your full name"
+              className={`w-full pl-12 pr-6 py-5 rounded-2xl bg-white/5 border ${errors.fullName ? 'border-red-500/50' : 'border-white/5'} focus:border-[#1ba6d6]/50 focus:bg-white/10 text-[0.75rem] font-black uppercase tracking-widest text-white placeholder:text-white/20 transition-all duration-500 outline-none`}
+              placeholder="FULL NAME"
             />
           </div>
           {errors.fullName && (
-            <p className="mt-1 text-sm text-red-600">{errors.fullName}</p>
+            <p className="text-[0.55rem] font-black text-red-500 uppercase tracking-widest ml-1">{errors.fullName}</p>
           )}
         </div>
 
-        <div>
+        <div className="space-y-3">
           <label
             htmlFor="email"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.3em] ml-1"
           >
-            Work Email *
+            Communication Node *
           </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <HiOutlineMail className="h-5 w-5 text-gray-400" />
+          <div className="relative group">
+            <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+              <Mail className="h-4 w-4 text-white/20 group-focus-within:text-[#1ba6d6] transition-colors" />
             </div>
             <input
               type="email"
@@ -239,26 +258,26 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
               value={formData.email}
               onChange={handleChange}
               required
-              className={`w-full pl-10 pr-4 py-3 rounded-lg border ${errors.email ? 'border-red-500' : 'border-gray-300 dark:border-dark-600'} bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300`}
-              placeholder="your@company.com"
+              className={`w-full pl-12 pr-6 py-5 rounded-2xl bg-white/5 border ${errors.email ? 'border-red-500/50' : 'border-white/5'} focus:border-[#1ba6d6]/50 focus:bg-white/10 text-[0.75rem] font-black uppercase tracking-widest text-white placeholder:text-white/20 transition-all duration-500 outline-none`}
+              placeholder="OFFICIAL@NODE.COM"
             />
           </div>
           {errors.email && (
-            <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+            <p className="text-[0.55rem] font-black text-red-500 uppercase tracking-widest ml-1">{errors.email}</p>
           )}
         </div>
       </div>
 
-      <div>
+      <div className="space-y-3">
         <label
           htmlFor="company"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.3em] ml-1"
         >
-          Company Name *
+          Corporation *
         </label>
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <HiOutlineBriefcase className="h-5 w-5 text-gray-400" />
+        <div className="relative group">
+          <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+            <Building2 className="h-4 w-4 text-white/20 group-focus-within:text-[#1ba6d6] transition-colors" />
           </div>
           <input
             type="text"
@@ -267,25 +286,25 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
             value={formData.company}
             onChange={handleChange}
             required
-            className={`w-full pl-10 pr-4 py-3 rounded-lg border ${errors.company ? 'border-red-500' : 'border-gray-300 dark:border-dark-600'} bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300`}
-            placeholder="Your company name"
+            className={`w-full pl-12 pr-6 py-5 rounded-2xl bg-white/5 border ${errors.company ? 'border-red-500/50' : 'border-white/5'} focus:border-[#1ba6d6]/50 focus:bg-white/10 text-[0.75rem] font-black uppercase tracking-widest text-white placeholder:text-white/20 transition-all duration-500 outline-none`}
+            placeholder="ORGANIZATION NAME"
           />
         </div>
         {errors.company && (
-          <p className="mt-1 text-sm text-red-600">{errors.company}</p>
+          <p className="text-[0.55rem] font-black text-red-500 uppercase tracking-widest ml-1">{errors.company}</p>
         )}
       </div>
 
-      <div>
+      <div className="space-y-3">
         <label
           htmlFor="projectScope"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.3em] ml-1"
         >
-          Project Scope *
+          Mission Blueprint *
         </label>
-        <div className="relative">
-          <div className="absolute top-3 left-3">
-            <HiOutlineLightBulb className="h-5 w-5 text-gray-400" />
+        <div className="relative group">
+          <div className="absolute top-6 left-5 flex items-center pointer-events-none">
+            <FileText className="h-4 w-4 text-white/20 group-focus-within:text-[#1ba6d6] transition-colors" />
           </div>
           <textarea
             id="projectScope"
@@ -294,26 +313,26 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
             onChange={handleChange}
             required
             rows="3"
-            className={`w-full pl-10 pr-4 py-3 rounded-lg border ${errors.projectScope ? 'border-red-500' : 'border-gray-300 dark:border-dark-600'} bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300`}
-            placeholder="Describe your project scope and objectives..."
+            className={`w-full pl-12 pr-6 py-5 rounded-2xl bg-white/5 border ${errors.projectScope ? 'border-red-500/50' : 'border-white/5'} focus:border-[#1ba6d6]/50 focus:bg-white/10 text-[0.75rem] font-black uppercase tracking-widest text-white placeholder:text-white/20 transition-all duration-500 outline-none resize-none`}
+            placeholder="DESCRIBE ARCHITECTURAL OBJECTIVES..."
           ></textarea>
         </div>
         {errors.projectScope && (
-          <p className="mt-1 text-sm text-red-600">{errors.projectScope}</p>
+          <p className="text-[0.55rem] font-black text-red-500 uppercase tracking-widest ml-1">{errors.projectScope}</p>
         )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="space-y-3">
           <label
             htmlFor="timeline"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.3em] ml-1"
           >
-            Project Timeline *
+            Temporal Constraint *
           </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <HiOutlineClock className="h-5 w-5 text-gray-400" />
+          <div className="relative group">
+            <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+              <Clock className="h-4 w-4 text-white/20 group-focus-within:text-[#1ba6d6] transition-colors" />
             </div>
             <select
               id="timeline"
@@ -321,62 +340,62 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
               value={formData.timeline}
               onChange={handleChange}
               required
-              className={`w-full pl-10 pr-4 py-3 rounded-lg border ${errors.timeline ? 'border-red-500' : 'border-gray-300 dark:border-dark-600'} bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300`}
+              className={`w-full pl-12 pr-12 py-5 rounded-2xl bg-white/5 border ${errors.timeline ? 'border-red-500/50' : 'border-white/5'} focus:border-[#1ba6d6]/50 focus:bg-white/10 text-[0.75rem] font-black uppercase tracking-widest text-white appearance-none outline-none transition-all duration-500 cursor-pointer`}
             >
-              <option value="">Select timeline</option>
-              <option value="1-3 months">1-3 months</option>
-              <option value="3-6 months">3-6 months</option>
-              <option value="6-12 months">6-12 months</option>
-              <option value="12+ months">12+ months</option>
-              <option value="ongoing">Ongoing/Long-term</option>
+              <option value="" className="bg-[#0e1114]">SELECT CYCLE</option>
+              <option value="1-3 months" className="bg-[#0e1114]">1-3 QUARTERS</option>
+              <option value="3-6 months" className="bg-[#0e1114]">3-6 QUARTERS</option>
+              <option value="6-12 months" className="bg-[#0e1114]">6-12 QUARTERS</option>
+              <option value="12+ months" className="bg-[#0e1114]">ANNUAL+</option>
+              <option value="ongoing" className="bg-[#0e1114]">PERPETUAL</option>
             </select>
           </div>
           {errors.timeline && (
-            <p className="mt-1 text-sm text-red-600">{errors.timeline}</p>
+            <p className="text-[0.55rem] font-black text-red-500 uppercase tracking-widest ml-1">{errors.timeline}</p>
           )}
         </div>
 
-        <div>
+        <div className="space-y-3">
           <label
             htmlFor="budget"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.3em] ml-1"
           >
-            Budget Range
+            Resource Allocation
           </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <HiOutlineBriefcase className="h-5 w-5 text-gray-400" />
+          <div className="relative group">
+            <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+              <DollarSign className="h-4 w-4 text-white/20 group-focus-within:text-[#1ba6d6] transition-colors" />
             </div>
             <select
               id="budget"
               name="budget"
               value={formData.budget}
               onChange={handleChange}
-              className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
+              className="w-full pl-12 pr-12 py-5 rounded-2xl bg-white/5 border border-white/5 focus:border-[#1ba6d6]/50 focus:bg-white/10 text-[0.75rem] font-black uppercase tracking-widest text-white appearance-none outline-none transition-all duration-500 cursor-pointer"
             >
-              <option value="">Select budget range</option>
-              <option value="under-10k">Under $10,000</option>
-              <option value="10k-25k">$10,000 - $25,000</option>
-              <option value="25k-50k">$25,000 - $50,000</option>
-              <option value="50k-100k">$50,000 - $100,000</option>
-              <option value="100k-250k">$100,000 - $250,000</option>
-              <option value="250k-plus">$250,000+</option>
-              <option value="tbd">To be determined</option>
+              <option value="" className="bg-[#0e1114]">SELECT BAND</option>
+              <option value="under-10k" className="bg-[#0e1114]">UNDER $10K</option>
+              <option value="10k-25k" className="bg-[#0e1114]">$10K - $25K</option>
+              <option value="25k-50k" className="bg-[#0e1114]">$25K - $50K</option>
+              <option value="50k-100k" className="bg-[#0e1114]">$50K - $100K</option>
+              <option value="100k-250k" className="bg-[#0e1114]">$100K - $250K</option>
+              <option value="250k-plus" className="bg-[#0e1114]">$250K+</option>
+              <option value="tbd" className="bg-[#0e1114]">TO BE DEFINED</option>
             </select>
           </div>
         </div>
       </div>
 
-      <div>
+      <div className="space-y-3">
         <label
           htmlFor="techStack"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.3em] ml-1"
         >
-          Preferred Tech Stack
+          Neural Frameworks
         </label>
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <HiOutlineCode className="h-5 w-5 text-gray-400" />
+        <div className="relative group">
+          <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+            <Code2 className="h-4 w-4 text-white/20 group-focus-within:text-[#1ba6d6] transition-colors" />
           </div>
           <input
             type="text"
@@ -384,22 +403,22 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
             name="techStack"
             value={formData.techStack}
             onChange={handleChange}
-            className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
-            placeholder="e.g., React, Node.js, AWS, etc."
+            className="w-full pl-12 pr-6 py-5 rounded-2xl bg-white/5 border border-white/5 focus:border-[#1ba6d6]/50 focus:bg-white/10 text-[0.75rem] font-black uppercase tracking-widest text-white placeholder:text-white/20 transition-all duration-500 outline-none"
+            placeholder="E.G. REACT, NODE.JS, AWS, KUBERNETES"
           />
         </div>
       </div>
 
-      <div>
+      <div className="space-y-3">
         <label
           htmlFor="requirements"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.3em] ml-1"
         >
-          Additional Requirements
+          Specialized Protocols
         </label>
-        <div className="relative">
-          <div className="absolute top-3 left-3">
-            <HiOutlineLightBulb className="h-5 w-5 text-gray-400" />
+        <div className="relative group">
+          <div className="absolute top-6 left-5 flex items-center pointer-events-none">
+            <Zap className="h-4 w-4 text-white/20 group-focus-within:text-[#ffc957] transition-colors" />
           </div>
           <textarea
             id="requirements"
@@ -407,8 +426,8 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
             value={formData.requirements}
             onChange={handleChange}
             rows="3"
-            className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
-            placeholder="Any additional requirements, constraints, or specific needs..."
+            className="w-full pl-12 pr-6 py-5 rounded-2xl bg-white/5 border border-white/5 focus:border-[#ffc957]/50 focus:bg-white/10 text-[0.75rem] font-black uppercase tracking-widest text-white placeholder:text-white/20 transition-all duration-500 outline-none resize-none"
+            placeholder="ADDITIONAL SECURITY OR INFRASTRUCTURE REQUIREMENTS..."
           ></textarea>
         </div>
       </div>
@@ -416,22 +435,35 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-primary-700 hover:to-secondary-700 transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+        className="w-full py-6 bg-[#1ba6d6] text-white text-[0.8rem] font-black uppercase tracking-[0.4em] mask-btn hover:scale-[1.02] active:scale-95 disabled:opacity-30 transition-all duration-500 shadow-[0_0_40px_rgba(27,166,214,0.3)] flex items-center justify-center group"
       >
         {isSubmitting ? (
           <>
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-            Submitting...
+            <div className="animate-spin rounded-full h-5 w-5 border-2 border-white/30 border-t-white mr-4"></div>
+            ESTABLISHING CONNECTION...
           </>
         ) : (
-          'Apply for Dedicated Team'
+          <>
+            INITIATE DEPLOYMENT PROTOCOL
+            <ChevronRight className="ml-4 w-5 h-5 group-hover:translate-x-2 transition-transform" />
+          </>
         )}
       </button>
 
-      <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-2">
-        We'll review your application and contact you within 24-48 hours to
-        discuss your project needs.
-      </p>
+      <div className="flex flex-wrap justify-center gap-8 py-4 opacity-50">
+        <div className="flex items-center space-x-2">
+          <ShieldCheck className="w-3.5 h-3.5 text-[#1ba6d6]" />
+          <span className="text-[0.5rem] font-black uppercase tracking-[0.2em] text-white">Encrypted Node</span>
+        </div>
+        <div className="flex items-center space-x-2">
+          <Zap className="w-3.5 h-3.5 text-[#ffc957]" />
+          <span className="text-[0.5rem] font-black uppercase tracking-[0.2em] text-white">Priority Relay</span>
+        </div>
+        <div className="flex items-center space-x-2">
+          <Globe className="w-3.5 h-3.5 text-white" />
+          <span className="text-[0.5rem] font-black uppercase tracking-[0.2em] text-white">Global Perimeter</span>
+        </div>
+      </div>
     </form>
   );
 };

@@ -1,6 +1,19 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { HiShieldCheck, HiLockClosed, HiDocumentText } from 'react-icons/hi';
+import { 
+  ShieldCheck, 
+  Lock, 
+  FileText, 
+  ChevronRight, 
+  Info, 
+  ArrowRight,
+  UserCheck,
+  Globe,
+  Database,
+  Eye,
+  RefreshCw,
+  Mail
+} from 'lucide-react';
 import ErrorBoundary from '../components/ErrorBoundary';
 
 const PrivacyPolicy = () => {
@@ -8,6 +21,7 @@ const PrivacyPolicy = () => {
 
   const sections = [
     {
+      id: 'collection',
       title: '1. Information We Collect',
       content: [
         {
@@ -27,6 +41,7 @@ const PrivacyPolicy = () => {
       ],
     },
     {
+      id: 'usage',
       title: '2. How We Use Your Information',
       content: [
         {
@@ -39,16 +54,15 @@ const PrivacyPolicy = () => {
             'To send you information about our services and updates',
             'To process your service requests and manage projects',
             'To improve our website and user experience',
-            'To send administrative information such as updates to our terms and policies',
             'To protect our services and ensure security',
             'To fulfill and manage your orders and requests',
-            'To deliver targeted advertising and marketing communications',
             'To comply with legal obligations',
           ],
         },
       ],
     },
     {
+      id: 'sharing',
       title: '3. Information Sharing and Disclosure',
       content: [
         {
@@ -57,9 +71,7 @@ const PrivacyPolicy = () => {
             'With service providers who help us operate our business',
             'With business partners for joint marketing initiatives',
             'When required by law or to respond to legal process',
-            'To protect rights, property, or safety of Limitless Infotech, our clients, or others',
-            'In connection with a business transfer, merger, or acquisition',
-            'With your explicit consent',
+            'To protect rights, property, or safety of Limitless Infotech',
           ],
         },
         {
@@ -73,6 +85,7 @@ const PrivacyPolicy = () => {
       ],
     },
     {
+      id: 'security',
       title: '4. Data Security',
       content: [
         {
@@ -84,8 +97,6 @@ const PrivacyPolicy = () => {
             'Secure servers and databases',
             'Regular security audits and updates',
             'Access controls and authentication',
-            'Employee training on data protection',
-            'Regular backups and disaster recovery plans',
           ],
         },
         {
@@ -94,48 +105,28 @@ const PrivacyPolicy = () => {
       ],
     },
     {
-      title: '5. Cookies and Tracking Technologies',
+      id: 'rights',
+      title: '5. Your Privacy Rights',
       content: [
         {
-          subtitle: '5.1 What We Use',
-          text: 'We use cookies and similar tracking technologies to track activity on our website and hold certain information. You can instruct your browser to refuse all cookies or indicate when a cookie is being sent.',
-        },
-        {
-          subtitle: '5.2 Types of Cookies:',
-          list: [
-            'Essential Cookies - Required for website functionality',
-            'Performance Cookies - Help us improve our website',
-            'Functionality Cookies - Remember your preferences',
-            'Analytics Cookies - Understand how you use our site',
-            'Marketing Cookies - Deliver relevant advertisements',
-          ],
-        },
-      ],
-    },
-    {
-      title: '6. Your Privacy Rights',
-      content: [
-        {
-          subtitle: '6.1 You Have the Right To:',
+          subtitle: '5.1 You Have the Right To:',
           list: [
             'Access your personal information we hold',
             'Correct inaccurate or incomplete information',
             'Request deletion of your personal information',
             'Object to processing of your personal information',
-            'Request restriction of processing',
             'Data portability',
-            'Withdraw consent at any time',
-            'Lodge a complaint with a supervisory authority',
           ],
         },
         {
-          subtitle: '6.2 How to Exercise Your Rights',
+          subtitle: '5.2 How to Exercise Your Rights',
           text: 'To exercise any of these rights, please contact us at Info@limitlessinfotech.com. We will respond to your request within 30 days.',
         },
       ],
     },
     {
-      title: '7. Data Retention',
+      id: 'retention',
+      title: '6. Data Retention',
       content: [
         {
           text: 'We retain your personal information only for as long as necessary to fulfill the purposes outlined in this privacy policy, unless a longer retention period is required or permitted by law.',
@@ -146,46 +137,13 @@ const PrivacyPolicy = () => {
             'Account Information - Duration of account plus 3 years',
             'Project Data - Duration of project plus 7 years',
             'Communication Records - 3 years from last contact',
-            'Marketing Data - Until you unsubscribe or request deletion',
-            'Legal Documents - As required by law',
           ],
         },
       ],
     },
     {
-      title: '8. International Data Transfers',
-      content: [
-        {
-          text: 'Your information may be transferred to and maintained on computers located outside of your state, province, country, or other governmental jurisdiction where data protection laws may differ. We ensure appropriate safeguards are in place for such transfers.',
-        },
-      ],
-    },
-    {
-      title: "9. Children's Privacy",
-      content: [
-        {
-          text: 'Our services are not intended for individuals under the age of 18. We do not knowingly collect personal information from children. If you are a parent or guardian and believe your child has provided us with personal information, please contact us.',
-        },
-      ],
-    },
-    {
-      title: '10. Third-Party Links',
-      content: [
-        {
-          text: 'Our website may contain links to third-party websites. We are not responsible for the privacy practices or content of these external sites. We encourage you to review the privacy policies of any third-party sites you visit.',
-        },
-      ],
-    },
-    {
-      title: '11. Changes to This Privacy Policy',
-      content: [
-        {
-          text: "We may update this privacy policy from time to time. We will notify you of any changes by posting the new privacy policy on this page and updating the 'Last Updated' date. You are advised to review this privacy policy periodically for any changes.",
-        },
-      ],
-    },
-    {
-      title: '12. Contact Information',
+      id: 'contact',
+      title: '7. Contact Information',
       content: [
         {
           text: 'If you have any questions, concerns, or requests regarding this privacy policy or our data practices, please contact us:',
@@ -195,7 +153,6 @@ const PrivacyPolicy = () => {
             'Email: Info@limitlessinfotech.com',
             'Phone: +91 77109 09492',
             'Address: Mumbai, Maharashtra, India',
-            'Data Protection Officer: privacy@limitlessinfotech.com',
           ],
         },
       ],
@@ -206,9 +163,7 @@ const PrivacyPolicy = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
+      transition: { staggerChildren: 0.1 }
     }
   };
 
@@ -217,195 +172,179 @@ const PrivacyPolicy = () => {
     visible: {
       y: 0,
       opacity: 1,
-      transition: {
-        duration: 0.5
-      }
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
     }
   };
 
   return (
     <ErrorBoundary>
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
-      {/* Hero Section */}
-      <motion.section 
-        className="relative py-20 md:py-28 bg-gradient-to-br from-[#2563eb] via-[#1d4ed8] to-[#ffc957] text-[#0a0b0d] overflow-hidden"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div
-          className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8"
-          aria-hidden="true"
-        >
-          <div className="absolute inset-0 bg-pattern-grid opacity-10"></div>
+      <div className="relative min-h-screen bg-dark-900 overflow-hidden selection:bg-primary-500/30">
+        {/* Background Layers */}
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-0 left-[-10%] w-[60%] h-[60%] bg-primary-500/5 blur-[120px] rounded-full" />
+          <div className="absolute inset-0 bg-grid-white/[0.01]" />
         </div>
-        <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div 
-              className="inline-flex items-center space-x-2 bg-[#0a0b0d]/20 px-6 py-3 rounded-full mb-8"
-              variants={itemVariants}
-            >
-              <HiShieldCheck className="w-5 h-5" />
-              <span className="text-sm font-semibold font-['Outfit']">
-                Your Privacy Matters
-              </span>
-            </motion.div>
-            <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-['Outfit'] font-bold mb-6"
-              variants={itemVariants}
-            >
-              Privacy Policy
-            </motion.h1>
-            <motion.p 
-              className="text-xl md:text-2xl text-[#0a0b0d]/90 mb-4 font-['Figtree']"
-              variants={itemVariants}
-            >
-              We are committed to protecting your personal information and your
-              right to privacy
-            </motion.p>
-            <motion.p 
-              className="text-sm text-[#0a0b0d]/80 font-['Figtree']"
-              variants={itemVariants}
-            >
-              Last Updated: {lastUpdated}
-            </motion.p>
-          </div>
-        </div>
-      </motion.section>
 
-      {/* Introduction */}
-      <motion.section 
-        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div className="container-custom max-w-4xl">
-          <motion.div 
-            className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 mb-12 border border-gray-700"
-            initial="hidden"
-            animate="visible"
-            variants={itemVariants}
-          >
-            <h2 className="text-2xl font-['Outfit'] font-bold mb-4 text-white flex items-center">
-              <HiDocumentText className="w-6 h-6 mr-3 text-[#2563eb]" />
-              Introduction
-            </h2>
-            <p className="text-gray-300 leading-relaxed mb-4 font-['Figtree']">
-              Limitless Infotech Solution ("we," "us," or "our") respects your
-              privacy and is committed to protecting your personal data. This
-              privacy policy explains how we collect, use, disclose, and
-              safeguard your information when you visit our website or use our
-              services.
-            </p>
-            <p className="text-gray-300 leading-relaxed font-['Figtree']">
-              Please read this privacy policy carefully. If you do not agree
-              with the terms of this privacy policy, please do not access the
-              site or use our services.
-            </p>
-          </motion.div>
-
-          {/* Policy Sections */}
-          <motion.div 
-            className="space-y-10"
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-          >
-            {sections.map((section, index) => (
-              <motion.div
-                key={index}
-                className="border-b border-gray-700 pb-10 last:border-b-0"
-                variants={itemVariants}
-                transition={{ delay: index * 0.1 }}
+        {/* Hero Section */}
+        <section className="relative pt-40 pb-20 px-6">
+           <div className="max-w-7xl mx-auto text-center">
+              <motion.div 
+                 variants={itemVariants} initial="hidden" animate="visible"
+                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8"
               >
-                <h2 className="text-2xl font-['Outfit'] font-bold mb-6 text-white">
-                  {section.title}
-                </h2>
-                <div className="space-y-4">
-                  {section.content.map((item, idx) => (
-                    <div key={idx}>
-                      {item.subtitle && (
-                        <h3 className="text-lg font-['Outfit'] font-semibold mb-3 text-gray-200">
-                          {item.subtitle}
-                        </h3>
-                      )}
-                      {item.text && (
-                        <p className="text-gray-300 leading-relaxed mb-4 font-['Figtree']">
-                          {item.text}
-                        </p>
-                      )}
-                      {item.list && (
-                        <ul className="space-y-2 ml-4">
-                          {item.list.map((listItem, listIdx) => (
-                            <li key={listIdx} className="flex items-start">
-                              <span className="w-2 h-2 bg-[#2563eb] rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                              <span className="text-gray-300 font-['Figtree']">
-                                {listItem}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                  ))}
-                </div>
+                 <ShieldCheck className="w-4 h-4 text-primary-400" />
+                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-300">Sovereignty Protocol — Privacy Policy</span>
               </motion.div>
-            ))}
-          </motion.div>
 
-          {/* Contact Box */}
-          <motion.div 
-            className="mt-12 bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 border border-gray-700"
-            initial="hidden"
-            animate="visible"
-            variants={itemVariants}
-          >
-            <div className="flex items-start space-x-4">
-              <HiLockClosed className="w-8 h-8 text-[#2563eb] flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="text-xl font-['Outfit'] font-bold mb-3 text-white">
-                  Questions About This Policy?
-                </h3>
-                <p className="text-gray-300 mb-4 font-['Figtree']">
-                  If you have questions or comments about this privacy policy,
-                  please contact our Data Protection Officer:
-                </p>
-                <div className="space-y-2 text-gray-300 font-['Figtree']">
-                  <p>
-                    <strong>Email:</strong> Info@limitlessinfotech.com
-                  </p>
-                  <p>
-                    <strong>Phone:</strong> +91 77109 09492
-                  </p>
-                  <p>
-                    <strong>Address:</strong> Mumbai, Maharashtra, India
-                  </p>
-                </div>
+              <motion.h1 
+                 variants={itemVariants} initial="hidden" animate="visible"
+                 className="text-6xl md:text-8xl font-black mb-8 leading-tight tracking-tighter text-white uppercase italic"
+              >
+                 Data <span className="not-italic bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent underline decoration-white/10 underline-offset-8">Sovereignty</span>
+              </motion.h1>
+
+              <div className="flex justify-center gap-8 mb-16">
+                 <div className="flex items-center gap-2 text-[10px] font-black text-gray-500 uppercase tracking-widest">
+                    <RefreshCw className="w-3 h-3" />
+                    Last Updated: {lastUpdated}
+                 </div>
+                 <div className="flex items-center gap-2 text-[10px] font-black text-primary-400 uppercase tracking-widest">
+                    <UserCheck className="w-3 h-3" />
+                    Global Integrity Approved
+                 </div>
               </div>
-            </div>
-          </motion.div>
+           </div>
+        </section>
 
-          {/* Related Links */}
-          <motion.div 
-            className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
-            initial="hidden"
-            animate="visible"
-            variants={itemVariants}
-          >
-            <Link to="/terms-of-service" className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-xl font-['Figtree'] transition-colors">
-              Terms of Service
-            </Link>
-            <Link to="/cookie-policy" className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-xl font-['Figtree'] transition-colors">
-              Cookie Policy
-            </Link>
-            <Link to="/contact" className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-6 py-3 rounded-xl font-['Figtree'] transition-colors">
-              Contact Us
-            </Link>
-          </motion.div>
-        </div>
-      </motion.section>
-    </div>
+        {/* Content Section */}
+        <section className="py-24 px-6 relative z-10">
+           <div className="max-w-7xl mx-auto">
+              <div className="flex flex-col lg:flex-row gap-16">
+                 {/* Sidebar Navigation */}
+                 <div className="lg:w-1/4">
+                    <motion.div 
+                       variants={itemVariants} initial="hidden" animate="visible"
+                       className="sticky top-32 p-10 rounded-[48px] bg-white/5 border border-white/10 backdrop-blur-3xl"
+                    >
+                       <h3 className="text-[10px] font-black text-primary-400 uppercase tracking-[0.4em] mb-12">Document Nodes</h3>
+                       <nav className="space-y-4">
+                          {sections.map(section => (
+                             <a
+                               key={section.id}
+                               href={`#${section.id}`}
+                               className="block text-sm font-black text-gray-500 hover:text-white uppercase tracking-widest transition-colors py-2 group flex items-center gap-3"
+                             >
+                                <ChevronRight className="w-4 h-4 text-gray-700 group-hover:translate-x-1 group-hover:text-primary-400 transition-all" />
+                                {section.title.split('. ')[1]}
+                             </a>
+                          ))}
+                       </nav>
+
+                       <div className="mt-16 p-8 rounded-[32px] bg-gradient-to-br from-primary-600/20 to-secondary-600/20 border border-white/10">
+                          <Info className="w-6 h-6 text-primary-400 mb-6" />
+                          <h4 className="text-sm font-black text-white italic tracking-tight mb-4 uppercase">Integrity Summary</h4>
+                          <p className="text-[10px] text-gray-400 font-medium leading-relaxed uppercase tracking-widest">
+                             We process data with sub-millisecond encryption. Zero unauthorized node access detected.
+                          </p>
+                       </div>
+                    </motion.div>
+                 </div>
+
+                 {/* Main Legal Content */}
+                 <div className="lg:flex-1 space-y-20">
+                    <motion.div 
+                       variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}
+                       className="p-12 rounded-[56px] bg-white/5 border border-white/10 backdrop-blur-sm"
+                    >
+                       <h2 className="text-3xl font-black text-white mb-8 italic tracking-tight flex items-center gap-4">
+                          <Globe className="w-8 h-8 text-primary-400" />
+                          Introduction Protocols
+                       </h2>
+                       <p className="text-lg text-gray-400 font-medium leading-relaxed italic mb-6">
+                          Limitless Infotech Solution ("we," "us," or "our") respects your privacy and is committed to protecting your personal data. This privacy policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
+                       </p>
+                       <p className="text-lg text-gray-400 font-medium leading-relaxed italic">
+                          Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site or use our services.
+                       </p>
+                    </motion.div>
+
+                    {sections.map((section, index) => (
+                       <motion.div 
+                         key={section.id}
+                         id={section.id}
+                         variants={itemVariants}
+                         initial="hidden"
+                         whileInView="visible"
+                         viewport={{ once: true }}
+                         className="space-y-12"
+                       >
+                          <div className="flex items-center gap-6">
+                             <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
+                                <span className="text-xl font-black text-primary-400 italic">0{index + 1}</span>
+                             </div>
+                             <h2 className="text-4xl font-black text-white italic tracking-tighter uppercase">{section.title.split('. ')[1]}</h2>
+                          </div>
+
+                          <div className="space-y-10 pl-4 md:pl-20">
+                             {section.content.map((item, idx) => (
+                                <div key={idx} className="space-y-6">
+                                   {item.subtitle && (
+                                     <h3 className="text-xl font-black text-white italic tracking-tight">{item.subtitle}</h3>
+                                   )}
+                                   {item.text && (
+                                     <p className="text-gray-400 font-medium leading-relaxed text-lg">{item.text}</p>
+                                   )}
+                                   {item.list && (
+                                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        {item.list.map((listItem, listIdx) => (
+                                          <li key={listIdx} className="flex items-start gap-4 p-6 rounded-3xl bg-white/5 border border-white/5 group hover:border-primary-500/30 transition-all">
+                                             <div className="w-2 h-2 rounded-full bg-primary-400 mt-2 flex-shrink-0 group-hover:scale-125 transition-transform" />
+                                             <span className="text-gray-300 font-medium leading-relaxed">{listItem}</span>
+                                          </li>
+                                        ))}
+                                     </ul>
+                                   )}
+                                </div>
+                             ))}
+                          </div>
+                          {index !== sections.length - 1 && <div className="h-px bg-white/5 w-full" />}
+                       </motion.div>
+                    ))}
+                 </div>
+              </div>
+           </div>
+        </section>
+
+        {/* Global Legal CTA */}
+        <section className="py-40 px-6">
+           <motion.div 
+             initial={{ opacity: 0, y: 30 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             className="max-w-6xl mx-auto p-16 md:p-28 rounded-[88px] bg-gradient-to-br from-primary-600/20 to-secondary-600/20 border border-white/10 text-center relative overflow-hidden"
+           >
+              <div className="relative z-10 space-y-12">
+                 <div className="flex justify-center flex-wrap gap-8 mb-16">
+                    <Link to="/terms-of-service" className="px-10 py-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white hover:text-dark-900 transition-all text-[10px] font-black uppercase tracking-widest flex items-center gap-3">
+                       <FileText className="w-4 h-4" /> Terms of Service
+                    </Link>
+                    <Link to="/contact" className="px-10 py-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white hover:text-dark-900 transition-all text-[10px] font-black uppercase tracking-widest flex items-center gap-3">
+                       <Mail className="w-4 h-4" /> Contact Officer
+                    </Link>
+                 </div>
+                 <h2 className="text-4xl md:text-8xl font-black text-white tracking-tighter italic uppercase leading-none">Inquiry <span className="not-italic bg-gradient-to-r from-primary-400 to-white bg-clip-text text-transparent underline decoration-white/10 underline-offset-8">Protocol</span></h2>
+                 <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-medium">
+                    Our Data Protection Officer is available for any queries regarding nodal processing and privacy architecture.
+                 </p>
+                 <div className="pt-8">
+                    <button className="px-16 py-6 bg-white text-dark-900 font-black rounded-3xl hover:bg-gray-200 transition-all text-sm uppercase tracking-[0.3em] shadow-2xl">
+                       Inquire Now
+                    </button>
+                 </div>
+              </div>
+              <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-primary-500 to-transparent opacity-20" />
+           </motion.div>
+        </section>
+      </div>
     </ErrorBoundary>
   );
 };

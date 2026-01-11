@@ -1,414 +1,137 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Activity, Database, Github, Twitter, Linkedin, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaLinkedinIn,
-  FaInstagram,
-  FaGithub,
-  FaEnvelope,
-  FaPhone,
-  FaMapMarkerAlt,
-} from 'react-icons/fa';
-import {
-  HiCode,
-  HiDeviceMobile,
-  HiCube,
-  HiChartBar,
-  HiLightningBolt,
-  HiSun,
-  HiMoon,
-  HiSparkles,
-} from 'react-icons/hi';
-import { useApp } from '../../../context/AppContext';
-import Image from '../../ui/components/Image';
-import NewsletterForm from '../../../components/forms/newsletter/NewsletterForm';
 
 const Footer = () => {
-  const { theme, changeTheme } = useApp();
-  const currentYear = new Date().getFullYear();
-
-  const toggleTheme = () => {
-    const themes = ['light', 'dark', 'system'];
-    const currentIndex = themes.indexOf(theme);
-    const nextIndex = (currentIndex + 1) % themes.length;
-    changeTheme(themes[nextIndex]);
-  };
-
-  const getThemeIcon = () => {
-    if (theme === 'dark') return <HiMoon className="w-5 h-5" />;
-    if (theme === 'light') return <HiSun className="w-5 h-5" />;
-    return <HiSparkles className="w-5 h-5" />;
-  };
-
-  const quickLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'About Us', path: '/about' },
-    { name: 'Services', path: '/services' },
-    { name: 'Products', path: '/products' },
-    { name: 'Portfolio', path: '/portfolio' },
-    { name: 'Testimonials', path: '/testimonials' },
-    { name: 'Contact Us', path: '/contact' },
-  ];
-
-  const services = [
-    { name: 'Web Development', path: '/services#web', icon: HiCode },
-    {
-      name: 'Mobile App Development',
-      path: '/services#mobile',
-      icon: HiDeviceMobile,
-    },
-    { name: 'Custom Software', path: '/services#software', icon: HiCube },
-    { name: 'CRM Solutions', path: '/services#crm', icon: HiChartBar },
-    {
-      name: 'Business Automation',
-      path: '/services#automation',
-      icon: HiLightningBolt,
-    },
-  ];
-
-  const socialLinks = [
-    {
-      icon: FaFacebookF,
-      url: 'https://facebook.com/limitlessinfotech',
-      label: 'Facebook',
-    },
-    {
-      icon: FaTwitter,
-      url: 'https://twitter.com/limitlessinfotech',
-      label: 'Twitter',
-    },
-    {
-      icon: FaLinkedinIn,
-      url: 'https://linkedin.com/in/limitlessinfotech',
-      label: 'LinkedIn',
-    },
-    {
-      icon: FaInstagram,
-      url: 'https://instagram.com/limitless.infotech',
-      label: 'Instagram',
-    },
-    {
-      icon: FaGithub,
-      url: 'https://github.com/limitlessinfotechsolution',
-      label: 'GitHub',
-    },
-  ];
-
-  return (
-    <footer className="bg-gradient-dark text-gray-300 border-t border-dark-800">
-      {/* Main Footer Content */}
-      <div className="container-custom px-4 md:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-          {/* Company Info */}
-          <div className="space-y-6">
-            <div className="flex items-center space-x-2">
-              <Image
-                src="/images/logos/limitlessinfotech Logo - 3D.png"
-                alt="Limitless Infotech Solution"
-                className="w-20 h-20 object-contain"
-              />
-              <span className="text-2xl font-display font-bold text-white">
-                Limitless Infotech Solution
-              </span>
-            </div>
-
-            <p className="text-gray-400 leading-relaxed">
-              Where Innovation Meets Execution. Empowering Businesses with
-              Technology that is Secure, Unique, and Limitless.
-            </p>
-
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="inline-flex items-center space-x-3 px-5 py-3 bg-gray-100 dark:bg-dark-800 hover:bg-gray-200 dark:hover:bg-dark-700 text-gray-700 dark:text-gray-300 rounded-xl transition-all duration-300 border border-gray-200 dark:border-dark-700 hover:border-primary-500 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-500"
-              title={`Current theme: ${theme}`}
-              aria-label={`Toggle ${theme} mode`}
+    return (
+        <footer className="py-24 px-6 md:px-10 border-t border-white/5 bg-[#0e1114]">
+            <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="max-w-[1440px] mx-auto grid lg:grid-cols-4 gap-20"
             >
-              {getThemeIcon()}
-              <span className="text-sm font-semibold capitalize">
-                {theme} Mode
-              </span>
-            </button>
+                <div className="col-span-1">
+                    <div className="flex items-center gap-3 mb-10">
+                        <div className="w-8 h-8 bg-[#1ba6d6] mask-facet"></div>
+                        <span className="font-black text-white text-xl tracking-tighter">LIMITLESS</span>
+                    </div>
+                    <p className="text-sm text-[#94a3b8] opacity-60 leading-relaxed mb-10">
+                        Technical authority and operational maturity for the next generation of industry leaders.
+                    </p>
+                    <div className="flex gap-4">
+                        <motion.a 
+                             href="https://github.com/limitlessinfotech" 
+                             target="_blank"
+                             rel="noopener noreferrer"
+                            whileHover={{ scale: 1.1, borderColor: '#1ba6d6', color: '#1ba6d6' }}
+                            className="w-10 h-10 border border-white/5 rounded-full flex items-center justify-center text-white cursor-pointer transition-colors"
+                        >
+                            <Github className="w-4 h-4" />
+                        </motion.a>
+                         <motion.a 
+                             href="https://twitter.com/limitlessinfotech" 
+                             target="_blank"
+                             rel="noopener noreferrer"
+                            whileHover={{ scale: 1.1, borderColor: '#1ba6d6', color: '#1ba6d6' }}
+                            className="w-10 h-10 border border-white/5 rounded-full flex items-center justify-center text-white cursor-pointer transition-colors"
+                        >
+                            <Twitter className="w-4 h-4" />
+                        </motion.a>
+                         <motion.a 
+                             href="https://linkedin.com/in/limitlessinfotech" 
+                             target="_blank"
+                             rel="noopener noreferrer"
+                            whileHover={{ scale: 1.1, borderColor: '#1ba6d6', color: '#1ba6d6' }}
+                            className="w-10 h-10 border border-white/5 rounded-full flex items-center justify-center text-white cursor-pointer transition-colors"
+                        >
+                            <Linkedin className="w-4 h-4" />
+                        </motion.a>
+                    </div>
+                </div>
+                
+                <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div>
+                        <h4 className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-white mb-8">Platform</h4>
+                        <ul className="space-y-4 text-sm font-medium text-[#94a3b8] opacity-60">
+                            <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
+                                <Link to="/services">Services</Link>
+                            </motion.li>
+                            <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
+                                <Link to="/products">Neural Products</Link>
+                            </motion.li>
+                            <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
+                                <Link to="/portfolio">Legacy Portfolio</Link>
+                            </motion.li>
+                            <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
+                                <Link to="/compliance">Enterprise Compliance</Link>
+                            </motion.li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-white mb-8">Quick Links</h4>
+                        <ul className="space-y-4 text-sm font-medium text-[#94a3b8] opacity-60">
+                            <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
+                                <Link to="/about">About Nexus</Link>
+                            </motion.li>
+                            <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
+                                <Link to="/careers">Careers</Link>
+                            </motion.li>
+                            <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
+                                <Link to="/pricing">Pricing Protocols</Link>
+                            </motion.li>
+                            <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
+                                <Link to="/contact">Initiate Contact</Link>
+                            </motion.li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-white mb-8">Resources</h4>
+                        <ul className="space-y-4 text-sm font-medium text-[#94a3b8] opacity-60">
+                            <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
+                                <Link to="/blog">Intelligence Hub</Link>
+                            </motion.li>
+                            <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
+                                <Link to="/knowledge-base">Knowledge Base</Link>
+                            </motion.li>
+                            <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
+                                <Link to="/api-documentation">API Reference</Link>
+                            </motion.li>
+                            <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
+                                <Link to="/admin-nexus">Admin Nexus</Link>
+                            </motion.li>
+                        </ul>
+                    </div>
+                </div>
 
-            <div className="flex space-x-3">
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="w-10 h-10 bg-dark-800 hover:bg-primary-600 rounded-lg flex items-center justify-center transition-all duration-300 transform hover:scale-110"
-                >
-                  <social.icon className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3
-              className="text-lg font-semibold text-white mb-6"
-              id="quick-links"
-            >
-              Quick Links
-            </h3>
-            <ul className="space-y-3" aria-labelledby="quick-links">
-              {quickLinks.map((link, index) => (
-                <li key={index}>
-                  <Link
-                    to={link.path}
-                    className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
-                  >
-                    <span className="w-0 h-0.5 bg-primary-400 group-hover:w-4 group-focus:w-4 transition-all duration-300 mr-2"></span>
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h3
-              className="text-lg font-semibold text-white mb-6"
-              id="our-services"
-            >
-              Our Services
-            </h3>
-            <ul className="space-y-3" aria-labelledby="our-services">
-              {services.map((service, index) => (
-                <li key={index}>
-                  <Link
-                    to={service.path}
-                    className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
-                  >
-                    <service.icon className="w-4 h-4 mr-2 group-hover:text-primary-400 group-focus:text-primary-400" />
-                    {service.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Blog & Events */}
-          <div>
-            <h3
-              className="text-lg font-semibold text-white mb-6"
-              id="blog-events"
-            >
-              Blog & Events
-            </h3>
-            <ul className="space-y-3" aria-labelledby="blog-events">
-              <li>
-                <Link
-                  to="/blog"
-                  className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
-                >
-                  <span className="w-0 h-0.5 bg-primary-400 group-hover:w-4 group-focus:w-4 transition-all duration-300 mr-2"></span>
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/blog/limitless-innovation"
-                  className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
-                >
-                  <span className="w-0 h-0.5 bg-primary-400 group-hover:w-4 group-focus:w-4 transition-all duration-300 mr-2"></span>
-                  Innovation Stories
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/events"
-                  className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
-                >
-                  <span className="w-0 h-0.5 bg-primary-400 group-hover:w-4 group-focus:w-4 transition-all duration-300 mr-2"></span>
-                  Events
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/events/webinar-series"
-                  className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
-                >
-                  <span className="w-0 h-0.5 bg-primary-400 group-hover:w-4 group-focus:w-4 transition-all duration-300 mr-2"></span>
-                  Webinar Series
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Career & Resources */}
-          <div>
-            <h3
-              className="text-lg font-semibold text-white mb-6"
-              id="career-resources"
-            >
-              Career & Resources
-            </h3>
-            <ul className="space-y-3" aria-labelledby="career-resources">
-              <li>
-                <Link
-                  to="/careers"
-                  className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
-                >
-                  <span className="w-0 h-0.5 bg-primary-400 group-hover:w-4 group-focus:w-4 transition-all duration-300 mr-2"></span>
-                  Careers
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/careers/open-positions"
-                  className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
-                >
-                  <span className="w-0 h-0.5 bg-primary-400 group-hover:w-4 group-focus:w-4 transition-all duration-300 mr-2"></span>
-                  Open Positions
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/knowledge-base"
-                  className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
-                >
-                  <span className="w-0 h-0.5 bg-primary-400 group-hover:w-4 group-focus:w-4 transition-all duration-300 mr-2"></span>
-                  Knowledge Base
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/api-documentation"
-                  className="text-gray-400 hover:text-primary-400 transition-colors duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
-                >
-                  <span className="w-0 h-0.5 bg-primary-400 group-hover:w-4 group-focus:w-4 transition-all duration-300 mr-2"></span>
-                  API Documentation
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      {/* CTA Section */}
-      <div className="border-t border-dark-800">
-        <div className="container-custom px-4 md:px-6 lg:px-8 py-8">
-          <div className="bg-gradient-to-r from-primary-600/10 to-secondary-600/10 rounded-2xl p-8 text-center">
-            <h3 className="text-2xl font-bold text-white mb-3">
-              Ready to Start Your Project?
-            </h3>
-            <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
-              Build Limitless | Manage Limitless | Grow Limitless with our
-              innovative solutions
-            </p>
-            <Link
-              to="/get-started"
-              className="btn-primary inline-block focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-              aria-label="Get started with our services today"
-            >
-              Get Started Today
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Contact Info & Newsletter */}
-      <div className="border-t border-dark-800 bg-dark-900/50 py-8">
-        <div className="container-custom px-4 md:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h3
-                className="text-lg font-semibold text-white mb-6"
-                id="contact-info"
-              >
-                Contact Us
-              </h3>
-              <ul className="space-y-4" aria-labelledby="contact-info">
-                <li className="flex items-start space-x-3">
-                  <FaEnvelope className="w-5 h-5 text-primary-400 mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="text-sm text-gray-500 mb-1">Email</p>
-                    <a
-                      href="mailto:Info@limitlessinfotech.com"
-                      className="text-gray-300 hover:text-primary-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1 inline-block"
+                <div>
+                    <h4 className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-white mb-8">Operational Desk</h4>
+                    <motion.div 
+                        whileHover={{ scale: 1.02, backgroundColor: "rgba(27, 166, 214, 0.05)" }}
+                        className="p-8 border border-white/5 bg-white/5 mask-facet transition-colors"
                     >
-                      Info@limitlessinfotech.com
-                    </a>
-                  </div>
-                </li>
+                        <p className="text-xs font-bold text-[#1ba6d6] mb-2 uppercase tracking-widest">Global Uplink</p>
+                        <p className="text-sm text-white font-medium mb-6">info@limitlessinfotech.com</p>
+                        <Link to="/contact" className="text-[0.6rem] font-black uppercase tracking-[0.2em] text-[#1ba6d6] hover:text-white transition-colors">
+                            Request Architecture Review →
+                        </Link>
+                    </motion.div>
+                </div>
+            </motion.div>
 
-                <li className="flex items-start space-x-3">
-                  <FaPhone className="w-5 h-5 text-primary-400 mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="text-sm text-gray-500 mb-1">Phone</p>
-                    <a
-                      href="tel:+917710909492"
-                      className="text-gray-300 hover:text-primary-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1 inline-block"
-                    >
-                      +91 77109 09492
-                    </a>
-                  </div>
-                </li>
-
-                <li className="flex items-start space-x-3">
-                  <FaMapMarkerAlt className="w-5 h-5 text-primary-400 mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="text-sm text-gray-500 mb-1">Location</p>
-                    <p className="text-gray-300">Mumbai, Maharashtra, IN</p>
-                  </div>
-                </li>
-              </ul>
+            <div className="max-w-[1440px] mx-auto mt-32 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-10">
+                <p className="text-[10px] font-black tracking-[0.4em] text-[#94a3b8] opacity-30 uppercase">
+                    &copy; {new Date().getFullYear()} Limitless Infotech.
+                </p>
+                <div className="flex gap-12 text-[10px] font-black tracking-[0.2em] text-[#94a3b8] opacity-40 uppercase">
+                    <Link to="/terms-of-service" className="hover:text-white transition-colors">Protocols</Link>
+                    <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy</Link>
+                </div>
             </div>
-
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-6">
-                Stay Updated
-              </h3>
-              <NewsletterForm />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Bar */}
-      <div className="border-t border-dark-800">
-        <div className="container-custom px-4 md:px-6 lg:px-8 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-sm text-gray-500">
-              © {currentYear} Limitless Infotech Solution Pvt Ltd. All rights
-              reserved.
-            </p>
-
-            <div className="flex flex-wrap justify-center gap-6 text-sm">
-              <Link
-                to="/privacy-policy"
-                className="text-gray-500 hover:text-primary-400 transition-colors duration-300"
-              >
-                Privacy Policy
-              </Link>
-              <Link
-                to="/terms-of-service"
-                className="text-gray-500 hover:text-primary-400 transition-colors duration-300"
-              >
-                Terms of Service
-              </Link>
-              <Link
-                to="/cookie-policy"
-                className="text-gray-500 hover:text-primary-400 transition-colors duration-300"
-              >
-                Cookie Policy
-              </Link>
-            </div>
-
-            <p className="text-sm text-gray-500">
-              Crafted with <span className="text-red-500">♥</span> by Limitless
-              Infotech Solution Pvt Ltd.
-            </p>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
+        </footer>
+    );
 };
 
 export default Footer;

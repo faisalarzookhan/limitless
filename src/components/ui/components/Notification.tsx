@@ -1,11 +1,11 @@
 import { forwardRef, useEffect } from 'react';
-import {
-  HiX,
-  HiInformationCircle,
-  HiCheckCircle,
-  HiExclamation,
-  HiExclamationCircle,
-} from 'react-icons/hi';
+import { 
+  X, 
+  Info, 
+  CheckCircle2, 
+  AlertTriangle, 
+  AlertCircle 
+} from 'lucide-react';
 import { NotificationProps } from '../../../types';
 import { generateId } from '../../../utils/accessibility';
 
@@ -38,28 +38,26 @@ const Notification = forwardRef<HTMLDivElement, NotificationProps>(
 
     // Icon mapping
     const iconMap = {
-      success: <HiCheckCircle className="w-5 h-5 text-green-500" />,
-      error: <HiExclamationCircle className="w-5 h-5 text-red-500" />,
-      warning: <HiExclamation className="w-5 h-5 text-yellow-500" />,
-      info: <HiInformationCircle className="w-5 h-5 text-blue-500" />,
+      success: <CheckCircle2 className="w-5 h-5 text-[#25d366]" />,
+      error: <AlertCircle className="w-5 h-5 text-[#ff4d4d]" />,
+      warning: <AlertTriangle className="w-5 h-5 text-[#ffc957]" />,
+      info: <Info className="w-5 h-5 text-[#1ba6d6]" />,
     };
 
     // Background color classes
     const bgColorClasses = {
-      success:
-        'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800',
-      error: 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800',
-      warning:
-        'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800',
-      info: 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800',
+      success: 'bg-[#25d366]/10 border-[#25d366]/20 backdrop-blur-3xl',
+      error: 'bg-[#ff4d4d]/10 border-[#ff4d4d]/20 backdrop-blur-3xl',
+      warning: 'bg-[#ffc957]/10 border-[#ffc957]/20 backdrop-blur-3xl',
+      info: 'bg-[#1ba6d6]/10 border-[#1ba6d6]/20 backdrop-blur-3xl',
     };
 
     // Text color classes
     const textColorClasses = {
-      success: 'text-green-800 dark:text-green-200',
-      error: 'text-red-800 dark:text-red-200',
-      warning: 'text-yellow-800 dark:text-yellow-200',
-      info: 'text-blue-800 dark:text-blue-200',
+      success: 'text-white/90',
+      error: 'text-white/90',
+      warning: 'text-white/90',
+      info: 'text-white/90',
     };
 
     return (
@@ -88,15 +86,13 @@ const Notification = forwardRef<HTMLDivElement, NotificationProps>(
           )}
         </div>
 
-        {closable && (
           <button
             onClick={onClose}
-            className="flex-shrink-0 ml-4 rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+            className="flex-shrink-0 ml-4 p-1 rounded-lg text-white/20 hover:text-white/60 hover:bg-white/5 transition-all focus:outline-none"
             aria-label="Close notification"
           >
-            <HiX className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
-        )}
       </div>
     );
   }

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { HiX } from 'react-icons/hi';
+import { X } from 'lucide-react';
 import { ModalProps } from '../../../types';
 import { trapFocus, generateId } from '../../../utils/accessibility';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Modal: React.FC<ModalProps> = ({
   isOpen,
@@ -35,12 +36,9 @@ const Modal: React.FC<ModalProps> = ({
       document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden';
 
-      // Trap focus within the modal
       if (modalRef.current) {
-        // Wait a tick to ensure DOM is ready
         setTimeout(() => {
           cleanupFocusTrap = trapFocus(modalRef.current!);
-          // Focus the modal container or first focusable element
           const firstFocusable = modalRef.current!.querySelector(
             'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
           ) as HTMLElement;
@@ -60,18 +58,8 @@ const Modal: React.FC<ModalProps> = ({
       if (cleanupFocusTrap) {
         cleanupFocusTrap();
       }
-
-      // Return focus to the element that opened the modal
-      const triggerElement = document.querySelector(
-        `[data-modal-trigger]`
-      ) as HTMLElement;
-      if (triggerElement) {
-        triggerElement.focus();
-      }
     };
   }, [isOpen, onClose]);
-
-  if (!isOpen) return null;
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
@@ -80,42 +68,57 @@ const Modal: React.FC<ModalProps> = ({
   };
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
-      onClick={handleBackdropClick}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby={title ? titleId : undefined}
-      aria-describedby={`${titleId}-description`}
-    >
-      <div
-        ref={modalRef}
-        className={`bg-white dark:bg-dark-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-dark-700 w-full ${sizeClasses[size]} max-h-[90vh] overflow-y-auto focus:outline-none`}
-        tabIndex={-1}
-        role="document"
-      >
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-dark-700">
-          {title && (
-            <h3
-              id={titleId}
-              className="text-xl font-bold text-gray-900 dark:text-white"
-            >
-              {title}
-            </h3>
-          )}
-          <button
-            onClick={onClose}
-            className="p-2 rounded-lg text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500"
-            aria-label="Close modal"
+    <AnimatePresence>
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 isolate"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={title ? titleId : undefined}
+          aria-describedby={`${titleId}-description`}
+        >
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-[#0e1114]/80 backdrop-blur-xl"
+            onClick={handleBackdropClick}
+          />
+          
+          <motion.div
+            ref={modalRef}
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            className={`bg-[#0e1114]/80 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] shadow-2xl w-full ${sizeClasses[size]} max-h-[90vh] overflow-y-auto focus:outline-none relative z-10`}
+            tabIndex={-1}
+            role="document"
           >
-            <HiX className="w-5 h-5" />
-          </button>
+            <div className="flex items-center justify-between p-8 border-b border-white/5">
+              {title && (
+                <h3
+                  id={titleId}
+                  className="text-xs font-black text-white uppercase tracking-[0.4em]"
+                >
+                  {title}
+                </h3>
+              )}
+              <button
+                onClick={onClose}
+                className="p-3 rounded-2xl bg-white/5 text-white/40 hover:text-white hover:bg-white/10 transition-all duration-300 focus:outline-none"
+                aria-label="Close modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div id={`${titleId}-description`} className="p-8">
+              {children}
+            </div>
+          </motion.div>
         </div>
-        <div id={`${titleId}-description`} className="p-6">
-          {children}
-        </div>
-      </div>
-    </div>
+      )}
+    </AnimatePresence>
   );
 };
 

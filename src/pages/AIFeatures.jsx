@@ -1,20 +1,22 @@
 import { useState, memo } from 'react';
-import { motion } from 'framer-motion';
-import '../styles/hero-pattern.css';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  HiLightningBolt,
-  HiChartBar,
-  HiUserGroup,
-  HiClock,
-  HiAcademicCap,
-  HiSparkles,
-  HiTrendingUp,
-  HiTrendingDown,
-  HiCode,
-  HiDatabase,
-  HiChevronRight,
-  HiArrowRight,
-} from 'react-icons/hi';
+  Zap,
+  BarChart3,
+  Users,
+  Clock,
+  GraduationCap,
+  Sparkles,
+  TrendingUp,
+  TrendingDown,
+  Code2,
+  Database,
+  ChevronRight,
+  ArrowRight,
+  ShieldCheck,
+  Cpu,
+  Workflow
+} from 'lucide-react';
 import PredictiveAnalyticsDashboard from '../components/PredictiveAnalyticsDashboard';
 import ErrorBoundary from '../components/ErrorBoundary';
 
@@ -34,7 +36,8 @@ const itemVariants = {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.5
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1]
     }
   }
 };
@@ -46,487 +49,395 @@ const AIFeatures = memo(() => {
   const products = [
     {
       id: 'hr-ims',
-      name: 'HR-IMS',
-      description: 'HR Information Management System',
+      name: 'Alliance Core',
+      description: 'Human Capital Architecture',
     },
     {
       id: 'trackit',
-      name: 'TrackIT',
-      description: 'Project Tracking Solution',
+      name: 'OmniTrack',
+      description: 'Systemic Operational Oversight',
     },
   ];
 
   const features = [
     {
       id: 'predictive-analytics',
-      name: 'Predictive Analytics',
-      icon: HiChartBar,
+      name: 'Predictive Pulse',
+      icon: BarChart3,
     },
     {
       id: 'automated-insights',
-      name: 'Automated Insights',
-      icon: HiLightningBolt,
+      name: 'Neural Insights',
+      icon: Zap,
     },
-    { id: 'ai-recommendations', name: 'AI Recommendations', icon: HiSparkles },
-    { id: 'smart-automation', name: 'Smart Automation', icon: HiLightningBolt },
+    { 
+      id: 'ai-recommendations', 
+      name: 'Strategic Advisory', 
+      icon: Sparkles 
+    },
+    { 
+      id: 'smart-automation', 
+      name: 'Adaptive Flux', 
+      icon: Workflow 
+    },
   ];
 
   const aiCapabilities = [
     {
-      title: 'Predictive Modeling',
+      title: 'Structural Intelligence',
       description:
-        'Forecast trends and outcomes using machine learning algorithms',
+        'Advanced architecture for multi-layered neural processing.',
       benefits: [
-        '95% accuracy in predictions',
-        'Real-time model updates',
-        'Customizable prediction parameters',
+        '98.4% model confidence',
+        'Auto-evolving learning paths',
+        'Parametric optimization',
       ],
-      icon: HiTrendingUp,
-      color: 'from-blue-500 to-cyan-500',
+      icon: Cpu,
+      color: 'from-blue-500 to-cyan-400',
     },
     {
-      title: 'Natural Language Processing',
-      description: 'Understand and process human language for better insights',
+      title: 'Cognitive Processing',
+      description: 'Large-scale intent analysis and pattern recognition.',
       benefits: [
-        'Multi-language support',
-        'Sentiment analysis',
-        'Automated categorization',
+        'Poly-linguistic synthesis',
+        'Sentiment vectoring',
+        'Entity relationship mapping',
       ],
-      icon: HiAcademicCap,
-      color: 'from-purple-500 to-pink-500',
+      icon: GraduationCap,
+      color: 'from-purple-500 to-pink-400',
     },
     {
-      title: 'Automated Decision Making',
-      description: 'AI-powered decisions that improve over time',
+      title: 'Autonomous Flux',
+      description: 'Self-correcting decision cycles for zero-latency operations.',
       benefits: [
-        'Reduced manual intervention',
-        'Faster decision cycles',
-        'Continuous learning algorithms',
+        'Zero-trust verification',
+        'Millisecond convergence',
+        'Evolving decision trees',
       ],
-      icon: HiLightningBolt,
-      color: 'from-green-500 to-emerald-500',
+      icon: Zap,
+      color: 'from-green-500 to-emerald-400',
     },
     {
-      title: 'Anomaly Detection',
-      description: 'Identify unusual patterns and potential issues',
+      title: 'Anomaly Synthesis',
+      description: 'Identifying delta-shifts across massive datasets.',
       benefits: [
-        'Real-time alerts',
-        'Proactive issue resolution',
-        'Customizable thresholds',
+        'Pre-emptive threat identification',
+        'Pattern-shift isolation',
+        'Dynamic thresholding',
       ],
-      icon: HiLightningBolt,
-      color: 'from-yellow-500 to-amber-500',
+      icon: ShieldCheck,
+      color: 'from-amber-400 to-orange-500',
     },
   ];
 
   const useCases = [
     {
-      title: 'HR-IMS: Employee Attrition Prediction',
+      title: 'Talent Dynamics: Risk Mitigation',
       description:
-        'Predict which employees are at risk of leaving and take proactive measures',
+        'Architecting retention strategies by predicting human capital shifts before they manifest.',
       metrics: [
-        { label: 'Accuracy', value: '92%' },
-        { label: 'Time Saved', value: '15h/week' },
-        { label: 'Retention Rate', value: '+18%' },
+        { label: 'Risk Accuracy', value: '94%' },
+        { label: 'Ops Efficiency', value: '+28%' },
+        { label: 'Retention Lift', value: '+15%' },
       ],
-      icon: HiUserGroup,
-      color: 'from-blue-500 to-indigo-500',
+      icon: Users,
     },
     {
-      title: 'TrackIT: Project Success Forecasting',
+      title: 'Operational Flow: Outcome Projection',
       description:
-        'Predict project outcomes and identify potential delays before they happen',
+        'Projecting system stability and delivery timelines with architectural-grade precision.',
       metrics: [
-        { label: 'Accuracy', value: '88%' },
-        { label: 'On-time Delivery', value: '+22%' },
-        { label: 'Budget Adherence', value: '+15%' },
+        { label: 'Forecast Delta', value: '<2%' },
+        { label: 'Throughput', value: '+34%' },
+        { label: 'Reliability', value: '99.9%' },
       ],
-      icon: HiClock,
-      color: 'from-green-500 to-emerald-500',
+      icon: Clock,
     },
   ];
 
   return (
     <ErrorBoundary>
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0b0d] to-[#1a1c20] dark:from-[#0a0b0d] dark:to-[#1a1c20]">
-      {/* Hero Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#ffc957] to-[#0a0b0d] text-white relative overflow-hidden">
-        <div className="absolute inset-0 hero-pattern-bg opacity-20"></div>
-        <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
-          <motion.div 
-            className="max-w-4xl mx-auto text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <motion.div 
-              className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full mb-8"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-            >
-              <HiSparkles className="w-5 h-5" />
-              <span className="text-sm font-semibold font-['Outfit']">AI-Powered Features</span>
-            </motion.div>
-            <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-['Outfit'] font-bold mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-            >
-              AI-Native
-              <br />
-              Features
-            </motion.h1>
-            <motion.p 
-              className="text-xl md:text-2xl text-white/90 mb-8 font-['Figtree']"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-            >
-              Experience the future of business automation with our AI-powered
-              solutions
-            </motion.p>
-            <motion.div 
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
-            >
-              <a
-                href="/contact"
-                className="btn-primary bg-[#ffc957] text-[#0a0b0d] hover:bg-[#ffb830] transition-colors duration-300 font-['Outfit'] font-bold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl"
-              >
-                Request Demo
-              </a>
-              <a
-                href="/innovation-lab"
-                className="btn-outline border-white text-white hover:bg-white hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit'] font-bold px-8 py-4 rounded-lg"
-              >
-                See Innovation Lab
-              </a>
-            </motion.div>
-          </motion.div>
+      <div className="relative min-h-screen bg-dark-900 overflow-hidden">
+        {/* Ambient Gradients */}
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary-500/10 blur-[150px] rounded-full" />
+          <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-secondary-500/10 blur-[150px] rounded-full" />
         </div>
-      </section>
 
-      {/* Feature Selector */}
-      <section className="section-padding bg-[#0a0b0d] dark:bg-[#0a0b0d]">
-        <div className="container-custom">
-          <motion.div 
-            className="max-w-6xl mx-auto"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.div className="text-center mb-12" variants={itemVariants}>
-              <motion.h2 className="text-3xl md:text-4xl font-['Outfit'] font-bold mb-4 text-white">
-                Select Your <span className="text-[#ffc957]">AI Features</span>
-              </motion.h2>
-              <motion.p className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']">
-                Choose the product and feature you want to explore
+        {/* Hero Section */}
+        <section className="relative pt-32 pb-20 px-6">
+          <div className="max-w-7xl mx-auto">
+            <motion.div 
+              initial="hidden"
+              animate="visible"
+              variants={containerVariants}
+              className="text-center"
+            >
+              <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8">
+                <Sparkles className="w-4 h-4 text-primary-400" />
+                <span className="text-sm font-bold text-gray-300 uppercase tracking-widest">Neural Infrastructure</span>
+              </motion.div>
+              
+              <motion.h1 variants={itemVariants} className="text-5xl md:text-8xl font-black mb-8 leading-tight">
+                AI <span className="italic bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent">Integrated</span>
+                <br />
+                Architecture
+              </motion.h1>
+              
+              <motion.p variants={itemVariants} className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-12">
+                Deployment of advanced neural models within our core ecosystems. Experience the shift from reactive tools to proactive architectural intelligence.
               </motion.p>
-            </motion.div>
 
-            {/* Product Selector */}
-            <motion.div className="flex justify-center mb-8" variants={itemVariants}>
-              <div className="inline-flex bg-[#1a1c20] rounded-xl p-1">
-                {products.map(product => (
-                  <button
-                    key={product.id}
-                    onClick={() => setActiveProduct(product.id)}
-                    className={`px-6 py-3 rounded-lg font-medium transition-colors font-['Outfit'] ${
-                      activeProduct === product.id
-                        ? 'bg-[#2563eb] text-white'
-                        : 'text-gray-300 hover:text-white hover:bg-[#2563eb] hover:bg-opacity-20'
-                    }`}
-                  >
-                    {product.name}
-                  </button>
-                ))}
+              <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-6">
+                <button className="px-10 py-5 bg-white text-dark-900 font-black rounded-3xl hover:bg-gray-200 transition-all shadow-xl shadow-white/5">
+                  Initiate Sync
+                </button>
+                <button className="px-10 py-5 bg-white/5 text-white font-bold rounded-3xl border border-white/10 hover:bg-white/10 transition-all flex items-center gap-2">
+                  Architecture Overview <ArrowRight className="w-5 h-5" />
+                </button>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Feature Interface */}
+        <section className="py-24 px-6 relative z-10">
+          <div className="max-w-7xl mx-auto">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="p-1 px-1 rounded-[64px] bg-gradient-to-br from-white/10 via-white/5 to-transparent border border-white/10 overflow-hidden shadow-3xl"
+            >
+              <div className="bg-[#0e1114]/80 backdrop-blur-3xl rounded-[62px] p-8 md:p-16">
+                <div className="flex flex-col lg:flex-row gap-16">
+                  {/* Controls */}
+                  <div className="lg:w-1/3 space-y-12">
+                    <div>
+                      <h2 className="text-sm font-black text-primary-400 uppercase tracking-[0.3em] mb-8">System Selector</h2>
+                      <div className="flex flex-col gap-3">
+                        {products.map(product => (
+                          <button
+                            key={product.id}
+                            onClick={() => setActiveProduct(product.id)}
+                            className={`p-6 rounded-[32px] text-left transition-all relative overflow-hidden group ${
+                              activeProduct === product.id 
+                              ? 'bg-primary-500 text-white shadow-2xl shadow-primary-500/20' 
+                              : 'bg-white/5 text-gray-400 border border-white/5 hover:bg-white/10'
+                            }`}
+                          >
+                            <div className="relative z-10">
+                              <h3 className="font-black text-xl mb-1">{product.name}</h3>
+                              <p className={`text-xs font-bold uppercase tracking-wider ${activeProduct === product.id ? 'text-white/70' : 'text-gray-500'}`}>{product.description}</p>
+                            </div>
+                            {activeProduct === product.id && (
+                              <motion.div 
+                                layoutId="glow"
+                                className="absolute inset-0 bg-gradient-to-r from-primary-400/20 to-transparent pointer-events-none"
+                              />
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <h2 className="text-sm font-black text-primary-400 uppercase tracking-[0.3em] mb-8">Module Matrix</h2>
+                      <div className="grid grid-cols-1 gap-4">
+                        {features.map(feature => (
+                          <button
+                            key={feature.id}
+                            onClick={() => setActiveFeature(feature.id)}
+                            className={`flex items-center gap-4 p-5 rounded-2xl transition-all ${
+                              activeFeature === feature.id 
+                              ? 'bg-white/10 text-white border border-white/20' 
+                              : 'text-gray-500 hover:text-gray-300'
+                            }`}
+                          >
+                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
+                              activeFeature === feature.id ? 'bg-primary-500 text-white' : 'bg-white/5'
+                            }`}>
+                              <feature.icon className="w-5 h-5" />
+                            </div>
+                            <span className="font-bold text-sm tracking-wide">{feature.name}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Visualization */}
+                  <div className="lg:w-2/3">
+                    <div className="h-full rounded-[48px] bg-dark-900/50 border border-white/5 p-8 relative overflow-hidden flex flex-col">
+                      <div className="flex items-center justify-between mb-8">
+                        <div>
+                          <h3 className="text-2xl font-black text-white">{features.find(f => f.id === activeFeature)?.name}</h3>
+                          <p className="text-xs text-gray-500 font-bold uppercase tracking-widest mt-1">Real-time Neural Simulation</p>
+                        </div>
+                        <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20">
+                          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                          <span className="text-[10px] font-black text-green-500 uppercase">System Nominal</span>
+                        </div>
+                      </div>
+
+                      <div className="flex-1 min-h-[400px]">
+                        <PredictiveAnalyticsDashboard productType={activeProduct} />
+                      </div>
+                      
+                      {/* Decorative Grid Overlay */}
+                      <div className="absolute inset-0 bg-grid-white/[0.02] pointer-events-none" />
+                    </div>
+                  </div>
+                </div>
               </div>
             </motion.div>
+          </div>
+        </section>
 
-            {/* Feature Selector */}
-            <motion.div className="flex justify-center mb-12" variants={itemVariants}>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {features.map(feature => {
-                  const Icon = feature.icon;
-                  return (
-                    <button
-                      key={feature.id}
-                      onClick={() => setActiveFeature(feature.id)}
-                      className={`flex flex-col items-center p-4 rounded-xl transition-colors font-['Outfit'] ${
-                        activeFeature === feature.id
-                          ? 'bg-[#2563eb] text-white rounded-lg'
-                          : 'bg-[#1a1c20] text-gray-300 hover:bg-[#2563eb] hover:bg-opacity-20 hover:text-white'
-                      }`}
-                    >
-                      <Icon className="w-6 h-6 mb-2 text-[#ffc957]" />
-                      <span className="text-sm font-medium">
-                        {feature.name}
-                      </span>
+        {/* Capabilities Grid */}
+        <section className="py-32 px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col md:flex-row items-end justify-between mb-20 gap-8">
+              <div className="max-w-2xl">
+                <h2 className="text-4xl md:text-6xl font-black text-white mb-6">Core <span className="bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent italic">Flux</span></h2>
+                <p className="text-xl text-gray-400">Our structural capabilities are designed for high-velocity, high-trust environments.</p>
+              </div>
+              <div className="flex items-center gap-4 text-sm font-bold text-gray-500 uppercase tracking-widest">
+                <span className="text-primary-400">01</span> — Integrated Intelligence
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {aiCapabilities.map((capability, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="group relative p-10 rounded-[48px] bg-white/5 border border-white/10 hover:border-primary-500/30 transition-all duration-500"
+                >
+                  <div className={`w-16 h-16 rounded-3xl bg-gradient-to-br ${capability.color} p-4 flex items-center justify-center shadow-lg mb-8 shadow-primary-500/10`}>
+                    <capability.icon className="w-full h-full text-white" />
+                  </div>
+                  <h3 className="text-2xl font-black text-white mb-4 leading-tight">{capability.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed mb-8">{capability.description}</p>
+                  
+                  <ul className="space-y-4">
+                    {capability.benefits.map((benefit, idx) => (
+                      <li key={idx} className="flex items-center gap-3 text-xs font-bold text-gray-300">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary-400" />
+                        {benefit}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-10 pt-8 border-t border-white/5 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button className="text-[10px] font-black uppercase tracking-[0.2em] text-primary-400 flex items-center gap-2">
+                       Documentation <ChevronRight className="w-3 h-3" />
                     </button>
-                  );
-                })}
-              </div>
-            </motion.div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-            {/* Predictive Analytics Dashboard */}
-            <motion.div className="mb-12" variants={itemVariants}>
-              <div className="bg-[#1a1c20] rounded-2xl p-6 border border-[#2563eb] border-opacity-30">
-                <PredictiveAnalyticsDashboard productType={activeProduct} />
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+        {/* Real-world Impact (Use Cases) */}
+        <section className="py-32 px-6 bg-dark-900/50">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-24">
+              <h2 className="text-4xl md:text-7xl font-black text-white mb-8 italic">Impact <span className="bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent not-italic">Synthesis</span></h2>
+              <p className="text-xl text-gray-500 max-w-2xl mx-auto">Tangible metrics from live architectural deployments.</p>
+            </div>
 
-      {/* AI Capabilities */}
-      <section className="section-padding bg-[#0a0b0d] dark:bg-[#0a0b0d]">
-        <div className="container-custom">
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.div className="text-center mb-16" variants={itemVariants}>
-              <motion.h2 className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4 text-white">
-                AI <span className="text-[#ffc957]">Capabilities</span>
-              </motion.h2>
-              <motion.p className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']">
-                Our advanced AI technologies that power intelligent business
-                solutions
-              </motion.p>
-            </motion.div>
-
-            <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {aiCapabilities.map((capability, index) => {
-                const Icon = capability.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    className="bg-[#1a1c20] rounded-2xl p-8 border border-[#2563eb] border-opacity-30"
-                    variants={itemVariants}
-                    whileHover={{ y: -5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div
-                      className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-2xl mb-6"
-                    >
-                      <Icon className="w-8 h-8 text-white" />
-                    </div>
-
-                    <h3 className="text-2xl font-bold mb-4 text-white font-['Outfit']">
-                      {capability.title}
-                    </h3>
-
-                    <p className="text-gray-300 mb-6 font-['Figtree']">
-                      {capability.description}
-                    </p>
-
-                    <ul className="space-y-3">
-                      {capability.benefits.map((benefit, idx) => (
-                        <li key={idx} className="flex items-center space-x-3">
-                          <div className="w-2 h-2 bg-[#ffc957] rounded-full"></div>
-                          <span className="text-gray-300 font-['Figtree']">
-                            {benefit}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Use Cases */}
-      <section className="section-padding bg-[#0a0b0d] dark:bg-[#0a0b0d]">
-        <div className="container-custom">
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.div className="text-center mb-16" variants={itemVariants}>
-              <motion.h2 className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4 text-white">
-                Real-World <span className="text-[#ffc957]">Use Cases</span>
-              </motion.h2>
-              <motion.p className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']">
-                See how our AI features deliver measurable business value
-              </motion.p>
-            </motion.div>
-
-            <motion.div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {useCases.map((useCase, index) => {
-                const Icon = useCase.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    className="bg-[#1a1c20] rounded-2xl p-8 border border-[#2563eb] border-opacity-30"
-                    variants={itemVariants}
-                    whileHover={{ y: -5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div className="flex items-start mb-6">
-                      <div
-                        className="w-12 h-12 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-lg flex items-center justify-center mr-4"
-                      >
-                        <Icon className="w-6 h-6 text-white" />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              {useCases.map((useCase, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  className="p-12 md:p-16 rounded-[64px] bg-white/5 border border-white/10 relative overflow-hidden group"
+                >
+                  <div className="relative z-10">
+                    <div className="flex items-start gap-8 mb-12">
+                      <div className="w-20 h-20 rounded-[32px] bg-primary-500/10 border border-primary-500/20 flex items-center justify-center flex-shrink-0">
+                        <useCase.icon className="w-10 h-10 text-primary-400" />
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold mb-2 text-white font-['Outfit']">
-                          {useCase.title}
-                        </h3>
-                        <p className="text-gray-300 font-['Figtree']">
-                          {useCase.description}
-                        </p>
+                      <div>
+                        <h3 className="text-3xl font-black text-white mb-3">{useCase.title}</h3>
+                        <p className="text-gray-400 leading-relaxed font-medium">{useCase.description}</p>
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-4 mb-6">
+                    <div className="grid grid-cols-3 gap-8 mb-12">
                       {useCase.metrics.map((metric, idx) => (
-                        <div key={idx} className="text-center">
-                          <div className="text-2xl font-bold text-white mb-1 font-['Outfit']">
-                            {metric.value}
-                          </div>
-                          <div className="text-sm text-gray-300 font-['Figtree']">
-                            {metric.label}
-                          </div>
+                        <div key={idx} className="text-center p-6 rounded-[32px] bg-white/5 border border-white/5">
+                          <div className="text-3xl md:text-4xl font-black text-white mb-1 group-hover:text-primary-400 transition-colors uppercase tracking-tighter">{metric.value}</div>
+                          <div className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{metric.label}</div>
                         </div>
                       ))}
                     </div>
 
-                    <div className="bg-gradient-to-r from-[#2563eb] from-opacity-20 to-[#ffc957] to-opacity-20 rounded-xl p-4 border border-[#2563eb] border-opacity-30">
-                      <h4 className="font-semibold mb-2 text-white font-['Outfit']">
-                        Impact:
-                      </h4>
-                      <p className="text-sm text-gray-300 font-['Figtree']">
-                        {useCase.title.includes('HR-IMS')
-                          ? 'This capability helped reduce employee turnover by 18% and saved an estimated $2.3M in recruitment costs.'
-                          : 'This capability improved project success rates by 22% and reduced delivery delays by 35%.'}
+                    <div className="p-8 rounded-[32px] bg-gradient-to-r from-primary-500/20 to-secondary-500/20 border border-white/10 backdrop-blur-md">
+                      <h4 className="text-xs font-black text-primary-400 uppercase tracking-widest mb-2">Architectural Outcome</h4>
+                      <p className="text-gray-300 text-sm font-medium italic">
+                        "{useCase.title.includes('Talent') 
+                          ? 'Mitigated projected capital loss by 18% through pre-emptive reallocation.' 
+                          : 'Accelerated core throughput by 34% while reducing error-delta to near zero.'}"
                       </p>
                     </div>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+                  </div>
+                  
+                  <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
+                    <useCase.icon className="w-64 h-64" />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-      {/* Technical Stack */}
-      <section className="section-padding bg-[#0a0b0d] dark:bg-[#0a0b0d]">
-        <div className="container-custom">
+        {/* Tech Stack Pulse */}
+        <section className="py-32 px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+               <span className="text-xs font-black text-primary-400 uppercase tracking-[0.5em]">The Stack</span>
+            </div>
+            <div className="flex flex-wrap justify-center gap-12 md:gap-24 opacity-30 grayscale hover:grayscale-0 transition-all">
+               {['TensorFlow', 'PyTorch', 'NVIDIA', 'OpenAI', 'Azure ML', 'AWS', 'Python', 'Keras'].map(tech => (
+                 <span key={tech} className="text-2xl font-black text-white hover:text-primary-400 transition-colors cursor-default">{tech}</span>
+               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Dynamic CTA */}
+        <section className="py-32 px-6">
           <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="max-w-5xl mx-auto p-16 md:p-24 rounded-[72px] bg-gradient-to-br from-primary-600/20 to-secondary-600/20 border border-white/10 backdrop-blur-3xl text-center relative overflow-hidden"
           >
-            <motion.div className="text-center mb-16" variants={itemVariants}>
-              <motion.h2 className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4 text-white">
-                AI <span className="text-[#ffc957]">Technology Stack</span>
-              </motion.h2>
-              <motion.p className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']">
-                The cutting-edge technologies that power our AI solutions
-              </motion.p>
-            </motion.div>
-
-            <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {[
-                { name: 'TensorFlow', icon: HiCode, description: 'ML Framework' },
-                { name: 'Python', icon: HiCode, description: 'Development' },
-                { name: 'PyTorch', icon: HiCode, description: 'Deep Learning' },
-                {
-                  name: 'Scikit-learn',
-                  icon: HiDatabase,
-                  description: 'ML Library',
-                },
-                { name: 'Keras', icon: HiCode, description: 'NN Framework' },
-                {
-                  name: 'OpenAI API',
-                  icon: HiSparkles,
-                  description: 'NLP Models',
-                },
-                {
-                  name: 'AWS SageMaker',
-                  icon: HiChartBar,
-                  description: 'ML Platform',
-                },
-                { name: 'Azure ML', icon: HiChartBar, description: 'Cloud AI' },
-              ].map((tech, index) => {
-                const Icon = tech.icon;
-                return (
-                  <motion.div key={index} className="text-center" variants={itemVariants}>
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#ffc957] rounded-2xl flex items-center justify-center mx-auto mb-4">
-                      <Icon className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="font-bold mb-1 text-white font-['Outfit']">
-                      {tech.name}
-                    </h3>
-                    <p className="text-sm text-gray-300 font-['Figtree']">
-                      {tech.description}
-                    </p>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
+            <div className="relative z-10 space-y-12">
+              <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter italic">Shift your <span className="not-italic bg-gradient-to-r from-primary-200 to-white bg-clip-text text-transparent">Paradigm</span></h2>
+              <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                Connect your existing ecosystem to our neural infrastructure for immediate architectural lift.
+              </p>
+              <div className="flex flex-wrap justify-center gap-6">
+                <button className="px-12 py-5 bg-white text-dark-900 font-black rounded-3xl hover:bg-gray-200 transition-all text-sm uppercase tracking-[0.2em] shadow-2xl shadow-white/10">
+                  Begin Sync
+                </button>
+                <button className="px-12 py-5 bg-white/5 text-white font-bold rounded-3xl border border-white/10 hover:bg-white/10 transition-all text-sm">
+                  Consult Architect
+                </button>
+              </div>
+            </div>
+            <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-primary-500 via-secondary-500 to-primary-500 animate-pulse" />
           </motion.div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-br from-[#2563eb] via-[#ffc957] to-[#0a0b0d] text-white relative overflow-hidden">
-        <div className="absolute inset-0 hero-pattern-bg opacity-20"></div>
-        <div className="container-custom relative z-10">
-          <motion.div 
-            className="text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <motion.h2 
-              className="text-3xl md:text-4xl font-['Outfit'] font-bold mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-            >
-              Ready to Experience AI?
-            </motion.h2>
-            <motion.p 
-              className="text-xl text-white/90 mb-8 max-w-2xl mx-auto font-['Figtree']"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-            >
-              Transform your business with our AI-powered solutions
-            </motion.p>
-            <motion.div 
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-            >
-              <a
-                href="/contact"
-                className="btn-primary bg-[#ffc957] text-[#0a0b0d] hover:bg-[#ffb830] transition-colors duration-300 font-['Outfit'] font-bold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl"
-              >
-                Start Free Trial
-              </a>
-              <a
-                href="/ai-features"
-                className="btn-outline border-white text-white hover:bg-white hover:text-[#0a0b0d] transition-colors duration-300 font-['Outfit'] font-bold px-8 py-4 rounded-lg"
-              >
-                View All Features
-              </a>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
     </ErrorBoundary>
   );
 });

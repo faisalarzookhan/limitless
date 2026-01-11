@@ -1,14 +1,20 @@
 import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  HiChatAlt,
-  HiPaperAirplane,
-  HiLightBulb,
-  HiUser,
-  HiAcademicCap,
-} from 'react-icons/hi';
+  MessageSquare,
+  Send,
+  Lightbulb,
+  User,
+  Cpu,
+  Bot,
+  Sparkles,
+  Zap,
+  Clock,
+  ChevronRight
+} from 'lucide-react';
 
 const NaturalLanguageQuery = ({
-  placeholder = 'Ask anything about our services...',
+  placeholder = 'Initiate query sequence...',
   onQuerySubmit,
 }) => {
   const [query, setQuery] = useState('');
@@ -18,16 +24,15 @@ const NaturalLanguageQuery = ({
   const messagesEndRef = useRef(null);
 
   const sampleQueries = [
-    'Show me all web development services',
-    "What's the cost for mobile app development?",
-    'How do I integrate with your API?',
-    'What security certifications do you have?',
-    'Can you help with AI implementation?',
-    "What's your project timeline for HR-IMS?",
+    'Analyze web engine architecture protocols',
+    'Retrieve mobile interface development costs',
+    'Synchronize third-party API integration data',
+    'Verify security compliance certifications',
+    'Evaluate neural network implementation',
+    'Fetch project timeline for HR-IMS node',
   ];
 
   useEffect(() => {
-    // Set initial suggestions
     setSuggestions(sampleQueries.slice(0, 4));
   }, []);
 
@@ -43,228 +48,169 @@ const NaturalLanguageQuery = ({
     e.preventDefault();
     if (!query.trim()) return;
 
-    // Add user message to conversation
     const userMessage = { type: 'user', content: query, timestamp: new Date() };
     setConversation(prev => [...prev, userMessage]);
 
     setIsLoading(true);
 
-    // Simulate API call to process natural language query
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      // Enterprise Services Uplink
+      const { default: PersistenceService } = await import('../services/enterprise/PersistenceService');
+      const { default: NeuralRepo } = await import('../services/enterprise/NeuralRepositoryService');
 
-    // Generate mock response based on the query
-    const response = generateMockResponse(query);
-    const aiMessage = { type: 'ai', content: response, timestamp: new Date() };
+      // Persistence log
+      await PersistenceService.store('nlq_queries', { query: query });
 
-    setConversation(prev => [...prev, aiMessage]);
-    setQuery('');
-    setIsLoading(false);
-  };
+      // Simulate neural network propagation delay
+      await new Promise(resolve => setTimeout(resolve, 1200 + Math.random() * 800));
 
-  const generateMockResponse = query => {
-    const lowerQuery = query.toLowerCase();
+      const response = await NeuralRepo.query(query);
+      const aiMessage = { type: 'ai', content: response.text, timestamp: new Date() };
 
-    if (
-      lowerQuery.includes('web') ||
-      lowerQuery.includes('website') ||
-      lowerQuery.includes('development')
-    ) {
-      return 'We offer comprehensive web development services including React, Next.js, Node.js, and modern frameworks. Our solutions are responsive, scalable, and SEO-optimized. Typical projects start at $15,000 for basic websites and go up to $100,000+ for complex applications. Would you like to see our portfolio or discuss your specific requirements?';
-    } else if (
-      lowerQuery.includes('mobile') ||
-      lowerQuery.includes('app') ||
-      lowerQuery.includes('ios') ||
-      lowerQuery.includes('android')
-    ) {
-      return 'Our mobile app development services include native iOS and Android development, as well as cross-platform solutions using React Native and Flutter. We handle everything from UI/UX design to deployment and maintenance. Development costs typically range from $25,000 to $150,000 depending on complexity. We also provide ongoing support and feature updates.';
-    } else if (
-      lowerQuery.includes('api') ||
-      lowerQuery.includes('integration')
-    ) {
-      return 'We provide comprehensive API development and integration services. Our RESTful APIs are built with security and scalability in mind, supporting various authentication methods including OAuth, JWT, and API keys. We offer API documentation, rate limiting, and monitoring. Integration with third-party services like Salesforce, HubSpot, and custom systems is also available.';
-    } else if (
-      lowerQuery.includes('security') ||
-      lowerQuery.includes('certification') ||
-      lowerQuery.includes('compliance')
-    ) {
-      return 'We maintain the highest security standards with SOC 2 Type II, GDPR compliance, ISO 27001 certification, and regular security audits. Our development follows secure coding practices, and we implement multi-factor authentication, encryption at rest and in transit, and continuous monitoring. All our solutions are built with security-first architecture.';
-    } else if (
-      lowerQuery.includes('ai') ||
-      lowerQuery.includes('artificial intelligence') ||
-      lowerQuery.includes('machine learning')
-    ) {
-      return 'Our AI services include custom machine learning model development, natural language processing, computer vision, and predictive analytics. We use TensorFlow, PyTorch, and cloud AI services from AWS, Azure, and Google Cloud. Common applications include recommendation engines, chatbots, image recognition, and predictive maintenance systems.';
-    } else if (
-      lowerQuery.includes('hr-ims') ||
-      lowerQuery.includes('hr system') ||
-      lowerQuery.includes('human resources')
-    ) {
-      return 'HR-IMS is our comprehensive HR management system that handles employee records, payroll, benefits administration, performance tracking, and compliance management. It includes features like automated reporting, workflow management, and integration with accounting systems. Implementation typically takes 3-6 months with ongoing support and updates.';
-    } else if (
-      lowerQuery.includes('cost') ||
-      lowerQuery.includes('price') ||
-      lowerQuery.includes('budget')
-    ) {
-      return 'Our pricing varies based on project scope and complexity. Web development starts at $15,000, mobile apps at $25,000, and enterprise solutions from $50,000. We offer fixed-price contracts for well-defined projects and time & materials for ongoing development. Would you like a custom quote for your specific needs?';
-    } else if (
-      lowerQuery.includes('timeline') ||
-      lowerQuery.includes('time') ||
-      lowerQuery.includes('schedule')
-    ) {
-      return 'Project timelines depend on scope and complexity. Basic websites: 4-8 weeks, mobile apps: 8-16 weeks, enterprise solutions: 3-9 months. We follow agile methodology with regular updates and milestone deliveries. Rush projects are possible with additional resources. Would you like to discuss your timeline requirements?';
-    } else {
-      return (
-        'I understand you\'re asking about "' +
-        query +
-        '". We offer a wide range of technology solutions including web development, mobile apps, AI/ML, cloud services, and custom software. Could you provide more details about your specific needs? I can connect you with the right service or direct you to relevant resources in our knowledge base.'
-      );
+      setConversation(prev => [...prev, aiMessage]);
+      setQuery('');
+    } catch (error) {
+      console.error('Cognitive Interface Error:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleSuggestionClick = suggestion => {
     setQuery(suggestion);
-    // Auto-submit when clicking a suggestion
     setTimeout(() => {
       const form = document.getElementById('nlq-form');
-      if (form)
-        form.dispatchEvent(
-          new Event('submit', { cancelable: true, bubbles: true })
-        );
+      if (form) form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
     }, 100);
   };
 
   return (
-    <div className="bg-white dark:bg-dark-800 rounded-2xl shadow-soft border border-gray-100 dark:border-dark-700 overflow-hidden">
-      <div className="p-6 border-b border-gray-200 dark:border-dark-700">
-        <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center">
-            <HiAcademicCap className="w-5 h-5 text-white" />
+    <div className="bg-[#12161b]/80 backdrop-blur-xl border border-white/5 rounded-2xl overflow-hidden shadow-2xl">
+      <div className="p-6 border-b border-white/5 bg-white/[0.02]">
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-[#1ba6d6]/20 rounded-lg border border-[#1ba6d6]/30">
+            <Cpu className="w-5 h-5 text-[#1ba6d6]" />
           </div>
-          <h3 className="font-bold text-gray-900 dark:text-white">
-            Ask AI Assistant
-          </h3>
+          <div>
+            <h3 className="font-bold text-white tracking-tight">Cognitive Interface</h3>
+            <p className="text-xs text-gray-500">Neural assistance for information retrieval</p>
+          </div>
         </div>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-          Ask questions in plain English and get instant answers
-        </p>
       </div>
 
-      <div className="h-96 overflow-y-auto p-4 space-y-4">
-        {conversation.length === 0 && (
-          <div className="text-center py-8">
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
-              <HiChatAlt className="w-8 h-8 text-white" />
-            </div>
-            <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
-              How can I help you today?
-            </h4>
-            <p className="text-gray-600 dark:text-gray-400 text-sm">
-              Try asking about our services, pricing, or technical capabilities
-            </p>
-          </div>
-        )}
-
-        {conversation.map((message, index) => (
-          <div
-            key={index}
-            className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
-          >
-            <div
-              className={`max-w-xs lg:max-w-md px-4 py-2 rounded-2xl ${
-                message.type === 'user'
-                  ? 'bg-blue-500 text-white rounded-br-md'
-                  : 'bg-gray-100 dark:bg-dark-700 text-gray-900 dark:text-white rounded-bl-md'
-              }`}
+      <div className="h-[400px] overflow-y-auto p-6 space-y-6 scrollbar-thin scrollbar-thumb-white/10">
+        <AnimatePresence>
+          {conversation.length === 0 ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="h-full flex flex-col items-center justify-center text-center space-y-4"
             >
-              <div className="flex items-start space-x-2">
-                {message.type === 'ai' && (
-                  <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <HiAcademicCap className="w-3 h-3 text-white" />
-                  </div>
-                )}
-                <div>
-                  <p className="text-sm">{message.content}</p>
-                  <p className="text-xs opacity-70 mt-1">
-                    {message.timestamp.toLocaleTimeString([], {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })}
-                  </p>
-                </div>
-                {message.type === 'user' && (
-                  <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <HiUser className="w-3 h-3 text-white" />
-                  </div>
-                )}
+              <div className="relative">
+                <div className="absolute inset-0 bg-[#1ba6d6]/20 blur-2xl rounded-full" />
+                <Bot className="w-16 h-16 text-[#1ba6d6] relative" />
               </div>
-            </div>
-          </div>
-        ))}
-
-        {isLoading && (
-          <div className="flex justify-start">
-            <div className="max-w-xs lg:max-w-md px-4 py-2 rounded-2xl bg-gray-100 dark:bg-dark-700 text-gray-900 dark:text-white rounded-bl-md">
-              <div className="flex items-center space-x-2">
-                <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center flex-shrink-0">
-                  <HiAcademicCap className="w-3 h-3 text-white" />
+              <div>
+                <h4 className="text-lg font-bold text-white mb-1">Awaiting Transmission</h4>
+                <p className="text-sm text-gray-400 max-w-[240px] mx-auto">
+                  Provide query telemetry or select a preset synchronization protocol below.
+                </p>
+              </div>
+            </motion.div>
+          ) : (
+            conversation.map((message, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: message.type === 'user' ? 20 : -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div
+                  className={`max-w-[85%] px-4 py-3 rounded-2xl flex gap-3 ${
+                    message.type === 'user'
+                      ? 'bg-[#1ba6d6] text-white rounded-tr-none'
+                      : 'bg-white/5 text-gray-200 border border-white/10 rounded-tl-none'
+                  }`}
+                >
+                  {message.type === 'ai' && (
+                    <div className="w-8 h-8 rounded-full bg-[#1ba6d6]/20 flex items-center justify-center flex-shrink-0 border border-[#1ba6d6]/30">
+                      <Sparkles className="w-4 h-4 text-[#1ba6d6]" />
+                    </div>
+                  )}
+                  <div className="flex flex-col gap-1">
+                    <p className="text-sm leading-relaxed">{message.content}</p>
+                    <div className={`flex items-center gap-1 text-[10px] ${message.type === 'user' ? 'text-white/60' : 'text-gray-500'}`}>
+                      <Clock className="w-3 h-3" />
+                      {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </div>
+                  </div>
+                  {message.type === 'user' && (
+                    <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
+                      <User className="w-4 h-4 text-white" />
+                    </div>
+                  )}
                 </div>
-                <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                  <div
-                    className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                    style={{ animationDelay: '0.1s' }}
-                  ></div>
-                  <div
-                    className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                    style={{ animationDelay: '0.2s' }}
-                  ></div>
+              </motion.div>
+            ))
+          )}
+
+          {isLoading && (
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="flex justify-start"
+            >
+              <div className="bg-white/5 border border-white/10 px-4 py-3 rounded-2xl rounded-tl-none">
+                <div className="flex gap-1">
+                  <span className="w-2 h-2 bg-[#1ba6d6] rounded-full animate-bounce" />
+                  <span className="w-2 h-2 bg-[#1ba6d6] rounded-full animate-bounce [animation-delay:0.2s]" />
+                  <span className="w-2 h-2 bg-[#1ba6d6] rounded-full animate-bounce [animation-delay:0.4s]" />
                 </div>
               </div>
-            </div>
-          </div>
-        )}
-
+            </motion.div>
+          )}
+        </AnimatePresence>
         <div ref={messagesEndRef} />
       </div>
 
-      {conversation.length === 0 && suggestions.length > 0 && (
-        <div className="px-4 pb-4">
-          <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-            Try asking:
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {suggestions.map((suggestion, index) => (
-              <button
-                key={index}
-                onClick={() => handleSuggestionClick(suggestion)}
-                className="text-xs bg-gray-100 dark:bg-dark-700 hover:bg-gray-200 dark:hover:bg-dark-600 text-gray-700 dark:text-gray-300 px-3 py-1.5 rounded-lg transition-colors"
-              >
-                {suggestion}
-              </button>
-            ))}
+      <div className="p-4 space-y-4 bg-white/[0.02]">
+        {conversation.length === 0 && suggestions.length > 0 && (
+          <div className="px-2">
+            <p className="text-[10px] uppercase tracking-wider text-gray-500 mb-2 font-bold flex items-center gap-2">
+              <Zap className="w-3 h-3" />
+              Rapid Sync Protocols
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {suggestions.map((suggestion, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleSuggestionClick(suggestion)}
+                  className="text-xs bg-white/5 hover:bg-white/10 border border-white/10 text-gray-400 hover:text-white px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 group"
+                >
+                  {suggestion}
+                  <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <div className="p-4 border-t border-gray-200 dark:border-dark-700">
-        <form onSubmit={handleSubmit} id="nlq-form">
-          <div className="flex space-x-2">
-            <input
-              type="text"
-              value={query}
-              onChange={e => setQuery(e.target.value)}
-              placeholder={placeholder}
-              className="flex-1 px-4 py-2 border border-gray-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-              disabled={isLoading}
-            />
-            <button
-              type="submit"
-              disabled={!query.trim() || isLoading}
-              className="px-4 py-2 bg-gradient-to-br from-blue-500 to-indigo-500 text-white rounded-lg hover:from-blue-600 hover:to-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-            >
-              <HiPaperAirplane className="w-5 h-5" />
-            </button>
-          </div>
+        <form onSubmit={handleSubmit} id="nlq-form" className="relative group">
+          <input
+            type="text"
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            placeholder={placeholder}
+            className="w-full bg-[#12161b]/50 border border-white/10 rounded-xl pl-4 pr-14 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-[#1ba6d6]/50 transition-all"
+            disabled={isLoading}
+          />
+          <button
+            type="submit"
+            disabled={!query.trim() || isLoading}
+            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-[#1ba6d6] text-white rounded-lg hover:bg-[#1ba6d6]/90 disabled:opacity-50 disabled:grayscale transition-all shadow-lg shadow-[#1ba6d6]/20"
+          >
+            <Send className="w-5 h-5" />
+          </button>
         </form>
       </div>
     </div>

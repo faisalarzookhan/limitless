@@ -1,19 +1,24 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  HiX,
-  HiChatAlt2,
-  HiPaperAirplane,
-  HiUser,
-  HiUserCircle,
-  HiSupport,
-  HiLightningBolt,
-  HiInformationCircle,
-  HiLightBulb,
-  HiQuestionMarkCircle,
-  HiCalendar,
-  HiMail,
-} from 'react-icons/hi';
+  X,
+  MessageSquare,
+  Send,
+  User,
+  CircleUser,
+  LifeBuoy,
+  Zap,
+  Info,
+  Lightbulb,
+  HelpCircle,
+  Calendar,
+  Mail,
+  Bot,
+  BrainCircuit,
+  ShieldCheck,
+  Smartphone
+} from 'lucide-react';
 import { sendUserInteractionNotification } from '../../../services/notification/notificationService';
 import CalendarIntegration from '../../CalendarIntegration';
 
@@ -555,177 +560,197 @@ const Chatbot = () => {
   return (
     <div className="fixed bottom-8 right-32 z-50">
       {/* Chatbot Button */}
-      {!isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full shadow-2xl flex items-center justify-center text-white hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:scale-110"
-          aria-label="Open Live Agent chat"
-          title="Live Agent Support"
-        >
-          <HiSupport className="w-8 h-8" />
-          <span className="absolute -top-1 -right-1 w-6 h-6 bg-green-500 text-white text-xs rounded-full flex items-center justify-center">
-            24/7
-          </span>
-        </button>
-      )}
+      <AnimatePresence>
+        {!isOpen && (
+          <motion.button
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            onClick={() => setIsOpen(true)}
+            className="w-16 h-16 bg-[#1ba6d6] rounded-2xl shadow-[0_0_30px_rgba(27,166,214,0.4)] flex items-center justify-center text-white hover:scale-110 transition-all duration-300 group overflow-hidden"
+            aria-label="Open Live Agent chat"
+            title="Live Agent Support"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+            <Bot className="w-8 h-8 relative z-10 group-hover:animate-bounce" />
+            <span className="absolute -top-1 -right-1 w-6 h-6 bg-[#ffc957] text-[#0e1114] text-[0.6rem] font-black rounded-full flex items-center justify-center border-2 border-[#0e1114]">
+              LIVE
+            </span>
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       {/* Chatbot Window */}
-      {isOpen && (
-        <div className="chatbot-window animate-scale-up">
-          {/* Header */}
-          <div className="chatbot-header">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
-                <HiSupport className="w-6 h-6 text-white" />
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: 100, scale: 0.9, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, y: 100, scale: 0.9, filter: 'blur(10px)' }}
+            className="w-[400px] h-[600px] bg-[#0e1114]/95 backdrop-blur-3xl border border-white/10 rounded-[2rem] shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden relative"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-[#1ba6d6]/5 to-transparent pointer-events-none"></div>
+            
+            {/* Header */}
+            <div className="p-6 border-b border-white/5 bg-white/5 backdrop-blur-xl flex items-center justify-between relative z-10">
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 rounded-2xl bg-[#1ba6d6] flex items-center justify-center shadow-[0_0_20px_rgba(27,166,214,0.3)]">
+                  <Bot className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xs font-black text-white uppercase tracking-[0.2em]">Auralis Agent</h3>
+                  <p className="text-[0.6rem] text-[#1ba6d6] font-black uppercase tracking-widest mt-1 flex items-center">
+                    <span className="w-1.5 h-1.5 bg-[#ffc957] rounded-full mr-2 animate-pulse"></span>
+                    Nexus Online
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-semibold text-lg">Live Agent</h3>
-                <p className="text-xs text-white/80">
-                  Ready to assist • Online 24/7
-                </p>
-              </div>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="w-10 h-10 flex items-center justify-center bg-white/5 hover:bg-white/10 rounded-xl transition-all duration-300 group"
+                aria-label="Close chat"
+              >
+                <X className="w-5 h-5 text-white group-hover:rotate-90 transition-transform" />
+              </button>
             </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="p-2 hover:bg-white/20 rounded-lg transition-colors duration-200"
-              aria-label="Close chat"
-            >
-              <HiX className="w-5 h-5" />
-            </button>
-          </div>
 
-          {/* Messages */}
-          <div className="chatbot-messages">
-            {messages.map((message, index) => (
-              <div key={index} className={`chatbot-message ${message.type}`}>
-                <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-gray-200 dark:bg-dark-700">
-                  {message.type === 'bot' ? (
-                    <HiSupport className="w-5 h-5 text-blue-600" />
-                  ) : (
-                    <HiUserCircle className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-                  )}
-                </div>
-                <div className={`chatbot-message-content ${message.type}`}>
-                  <p className="text-sm whitespace-pre-line">{message.text}</p>
-                  <span className="text-xs opacity-70 mt-1 block">
-                    {message.timestamp.toLocaleTimeString([], {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })}
-                  </span>
-                </div>
-              </div>
-            ))}
-
-            {isTyping && (
-              <div className="chatbot-message bot">
-                <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-gray-200 dark:bg-dark-700">
-                  <HiSupport className="w-5 h-5 text-blue-600" />
-                </div>
-                <div className="chatbot-message-content bot">
-                  <div className="flex space-x-2">
-                    <div
-                      className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                      style={{ animationDelay: '0ms' }}
-                    ></div>
-                    <div
-                      className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                      style={{ animationDelay: '150ms' }}
-                    ></div>
-                    <div
-                      className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                      style={{ animationDelay: '300ms' }}
-                    ></div>
+            {/* Messages */}
+            <div className="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-hide">
+              {messages.map((message, index) => (
+                <motion.div 
+                  initial={{ opacity: 0, x: message.type === 'bot' ? -20 : 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  key={index} 
+                  className={`flex ${message.type === 'bot' ? 'justify-start' : 'justify-end'}`}
+                >
+                  <div className={`flex max-w-[80%] ${message.type === 'bot' ? 'flex-row' : 'flex-row-reverse'}`}>
+                    <div className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 mt-1 shadow-2xl ${
+                      message.type === 'bot' ? 'bg-[#1ba6d6] text-white' : 'bg-white/10 text-white'
+                    }`}>
+                      {message.type === 'bot' ? <Bot size={16} /> : <User size={16} />}
+                    </div>
+                    <div className={`mx-3 p-4 rounded-2xl ${
+                      message.type === 'bot' 
+                        ? 'bg-white/5 border border-white/5 rounded-tl-none' 
+                        : 'bg-[#1ba6d6]/20 border border-[#1ba6d6]/30 rounded-tr-none'
+                    }`}>
+                      <p className="text-white text-xs leading-relaxed tracking-wide whitespace-pre-line">
+                        {message.text}
+                      </p>
+                      <span className="text-[0.55rem] text-white/40 mt-2 block uppercase tracking-widest font-black">
+                        {message.timestamp.toLocaleTimeString([], {
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        })}
+                      </span>
+                    </div>
                   </div>
+                </motion.div>
+              ))}
+
+              {isTyping && (
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="flex justify-start"
+                >
+                  <div className="flex flex-row">
+                    <div className="w-8 h-8 rounded-xl bg-[#1ba6d6] flex items-center justify-center flex-shrink-0 shadow-2xl">
+                      <Bot size={16} className="text-white" />
+                    </div>
+                    <div className="mx-3 p-4 bg-white/5 rounded-2xl rounded-tl-none flex space-x-1.5 items-center">
+                      <motion.div animate={{ scale: [1, 1.5, 1] }} transition={{ repeat: Infinity, duration: 1 }} className="w-1.5 h-1.5 bg-[#1ba6d6] rounded-full" />
+                      <motion.div animate={{ scale: [1, 1.5, 1] }} transition={{ repeat: Infinity, duration: 1, delay: 0.2 }} className="w-1.5 h-1.5 bg-[#1ba6d6] rounded-full" />
+                      <motion.div animate={{ scale: [1, 1.5, 1] }} transition={{ repeat: Infinity, duration: 1, delay: 0.4 }} className="w-1.5 h-1.5 bg-[#1ba6d6] rounded-full" />
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+              <div ref={messagesEndRef} />
+            </div>
+
+            {/* Quick Actions */}
+            {messages.length === 1 && (
+              <div className="px-6 py-4 bg-white/5 border-t border-white/5 relative z-10">
+                <div className="flex items-center mb-3">
+                  <Zap className="w-4 h-4 text-[#ffc957] mr-2" />
+                  <p className="text-[0.6rem] text-white/60 font-black uppercase tracking-widest">
+                    Quick Protocols:
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {quickActions.map((action, index) => (
+                    <motion.button
+                      key={index}
+                      whileHover={{ scale: 1.05, backgroundColor: 'rgba(27, 166, 214, 0.1)' }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => handleQuickAction(action.message)}
+                      className="text-[0.6rem] px-4 py-2 border border-white/10 text-white font-black uppercase tracking-widest rounded-xl transition-all duration-300 flex items-center"
+                      aria-label={`Quick action: ${action.label}`}
+                    >
+                      <Lightbulb className="w-3 h-3 mr-2 text-[#1ba6d6]" />
+                      {action.label}
+                    </motion.button>
+                  ))}
                 </div>
               </div>
             )}
 
-            <div ref={messagesEndRef} />
-          </div>
+            {/* Input Area */}
+            <div className="p-6 bg-white/5 backdrop-blur-3xl border-t border-white/5 relative z-10">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="relative flex-1">
+                  <input
+                    type="text"
+                    value={inputMessage}
+                    onChange={e => setInputMessage(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    placeholder="ENTER QUERY..."
+                    className="w-full h-12 px-6 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#1ba6d6] text-[0.7rem] font-black uppercase tracking-[0.2em] text-white placeholder:text-white/20 transition-all"
+                    aria-label="Type your message to the Live Agent"
+                    disabled={isLoading}
+                  />
+                </div>
+                <button
+                  onClick={handleSendMessage}
+                  disabled={!inputMessage.trim() || isLoading}
+                  className="w-12 h-12 bg-[#1ba6d6] text-white rounded-xl hover:scale-105 disabled:opacity-30 disabled:grayscale transition-all flex items-center justify-center shadow-[0_0_15px_rgba(27,166,214,0.3)]"
+                  aria-label="Send message to Live Agent"
+                >
+                  {isLoading ? (
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  ) : (
+                    <Send className="w-5 h-5" />
+                  )}
+                </button>
+              </div>
 
-          {/* Quick Actions */}
-          {messages.length === 1 && (
-            <div className="px-4 py-3 bg-gray-50 dark:bg-dark-700 border-t border-gray-200 dark:border-dark-700">
-              <div className="flex items-center mb-2">
-                <HiLightningBolt className="w-4 h-4 text-blue-500 mr-2" />
-                <p className="text-xs text-gray-600 dark:text-gray-400 font-medium">
-                  Quick Questions:
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {quickActions.map((action, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleQuickAction(action.message)}
-                    className="text-xs px-3 py-1.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full hover:bg-blue-200 dark:hover:bg-blue-800/50 transition-colors duration-200 flex items-center"
-                    aria-label={`Quick action: ${action.label}`}
-                  >
-                    <HiLightBulb className="w-3 h-3 mr-1" />
-                    {action.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Input Area */}
-          <div className="chatbot-input-area">
-            <div className="flex items-center space-x-2">
-              <div className="relative flex-1">
-                <input
-                  type="text"
-                  value={inputMessage}
-                  onChange={e => setInputMessage(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder="Type your message to our Live Agent..."
-                  className="w-full px-4 py-3 pl-10 bg-gray-100 dark:bg-dark-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                  aria-label="Type your message to the Live Agent"
-                  disabled={isLoading}
-                />
-                <HiQuestionMarkCircle className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-              </div>
-              <button
-                onClick={handleSendMessage}
-                disabled={!inputMessage.trim() || isLoading}
-                className="p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center justify-center"
-                aria-label="Send message to Live Agent"
-              >
-                {isLoading ? (
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                ) : (
-                  <HiPaperAirplane className="w-5 h-5 transform rotate-90" />
-                )}
-              </button>
-            </div>
-            <div className="flex flex-col gap-2 mt-2">
-              <div className="flex flex-col gap-2">
+              <div className="grid grid-cols-2 gap-3">
                 <button
                   onClick={connectToAgent}
-                  className="w-full py-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors duration-200 flex items-center justify-center"
-                  aria-label="Connect with a human agent"
+                  className="py-3 px-4 bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl transition-all flex items-center justify-center group"
                 >
-                  <HiUser className="w-4 h-4 mr-2" />
-                  Need to speak with a human?
+                  <User className="w-4 h-4 mr-2 text-[#1ba6d6] group-hover:scale-125 transition-transform" />
+                  <span className="text-[0.55rem] font-black text-white/60 uppercase tracking-widest">Connect Specialist</span>
                 </button>
 
                 <button
                   onClick={() => setShowCalendar(true)}
-                  className="w-full py-2 text-sm font-medium text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg transition-colors duration-200 flex items-center justify-center"
-                  aria-label="Schedule a meeting with Auralis"
+                  className="py-3 px-4 bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl transition-all flex items-center justify-center group"
                 >
-                  <HiCalendar className="w-4 h-4 mr-2" />
-                  Schedule a meeting
+                  <Calendar className="w-4 h-4 mr-2 text-[#ffc957] group-hover:scale-125 transition-transform" />
+                  <span className="text-[0.55rem] font-black text-white/60 uppercase tracking-widest">Book Nexus Meet</span>
                 </button>
               </div>
-              <div className="text-xs text-gray-500 dark:text-gray-400 text-center mt-1">
-                <HiInformationCircle className="w-3 h-3 inline mr-1" />
-                Your conversation is secure and private
+              
+              <div className="text-[0.5rem] text-white/20 font-black uppercase tracking-[0.3em] text-center mt-6 flex items-center justify-center">
+                <ShieldCheck className="w-3 h-3 mr-2" />
+                End-to-End Neural Encryption Active
               </div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Calendar Integration Modal */}
       {showCalendar && (

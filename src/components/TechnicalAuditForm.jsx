@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  HiOutlineGlobeAlt,
-  HiOutlineCode,
-  HiOutlineLightBulb,
-  HiCheckCircle,
-} from 'react-icons/hi';
+  Globe,
+  Code2,
+  Lightbulb,
+  CheckCircle2,
+  ChevronRight,
+  ShieldCheck,
+  BrainCircuit
+} from 'lucide-react';
 import { sendLeadGenerationNotification } from '../services/notification/notificationService';
 
 const TechnicalAuditForm = ({ variant = 'default', onSubmitSuccess }) => {
@@ -55,33 +58,39 @@ const TechnicalAuditForm = ({ variant = 'default', onSubmitSuccess }) => {
 
   if (submitSuccess) {
     return (
-      <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 text-center">
-        <div className="flex items-center justify-center mb-3">
-          <HiCheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
+        animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+        className="bg-[#1ba6d6]/5 border border-[#1ba6d6]/30 rounded-[2rem] p-10 text-center relative overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1ba6d6]/10 to-transparent pointer-events-none"></div>
+        <div className="flex items-center justify-center mb-6 relative z-10">
+          <div className="w-16 h-16 bg-[#1ba6d6] rounded-2xl flex items-center justify-center shadow-[0_0_30px_rgba(27,166,214,0.4)]">
+            <CheckCircle2 className="w-8 h-8 text-white" />
+          </div>
         </div>
-        <h3 className="font-bold text-green-800 dark:text-green-300 mb-1">
-          Audit Requested!
+        <h3 className="text-sm font-black text-white uppercase tracking-[0.3em] mb-4 relative z-10">
+          Protocol Initiated
         </h3>
-        <p className="text-green-700 dark:text-green-400 text-sm">
-          We'll perform a comprehensive technical audit of your site and contact
-          you with results.
+        <p className="text-[0.65rem] text-white/50 font-black uppercase tracking-widest leading-relaxed relative z-10">
+          We'll perform a comprehensive neural audit of your infrastructure and transmit the results shortly.
         </p>
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="space-y-3">
         <label
           htmlFor="url"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.3em]"
         >
-          Website URL *
+          Target URL *
         </label>
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <HiOutlineGlobeAlt className="h-5 w-5 text-gray-400" />
+        <div className="relative group">
+          <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+            <Globe className="h-4 w-4 text-white/20 group-focus-within:text-[#1ba6d6] transition-colors" />
           </div>
           <input
             type="url"
@@ -90,22 +99,22 @@ const TechnicalAuditForm = ({ variant = 'default', onSubmitSuccess }) => {
             value={formData.url}
             onChange={handleChange}
             required
-            className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
-            placeholder="https://example.com"
+            className="w-full pl-12 pr-6 py-5 rounded-2xl bg-white/5 border border-white/5 focus:border-[#1ba6d6]/50 focus:bg-white/10 text-[0.7rem] font-black uppercase tracking-widest text-white placeholder:text-white/20 transition-all duration-500 outline-none"
+            placeholder="HTTPS://SOURCE.COM"
           />
         </div>
       </div>
 
-      <div>
+      <div className="space-y-3">
         <label
           htmlFor="currentStack"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.3em]"
         >
-          Current Tech Stack
+          Neural Architecture
         </label>
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <HiOutlineCode className="h-5 w-5 text-gray-400" />
+        <div className="relative group">
+          <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+            <Code2 className="h-4 w-4 text-white/20 group-focus-within:text-[#1ba6d6] transition-colors" />
           </div>
           <input
             type="text"
@@ -113,22 +122,22 @@ const TechnicalAuditForm = ({ variant = 'default', onSubmitSuccess }) => {
             name="currentStack"
             value={formData.currentStack}
             onChange={handleChange}
-            className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
-            placeholder="e.g., React, Node.js, MongoDB..."
+            className="w-full pl-12 pr-6 py-5 rounded-2xl bg-white/5 border border-white/5 focus:border-[#1ba6d6]/50 focus:bg-white/10 text-[0.7rem] font-black uppercase tracking-widest text-white placeholder:text-white/20 transition-all duration-500 outline-none"
+            placeholder="E.G. REACT, NODE.JS, AWS"
           />
         </div>
       </div>
 
-      <div>
+      <div className="space-y-3">
         <label
           htmlFor="performancePainPoints"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.3em]"
         >
-          Performance Pain Points *
+          Anomaly Analysis *
         </label>
-        <div className="relative">
-          <div className="absolute top-3 left-3">
-            <HiOutlineLightBulb className="h-5 w-5 text-gray-400" />
+        <div className="relative group">
+          <div className="absolute top-6 left-5 flex items-center pointer-events-none">
+            <Lightbulb className="h-4 w-4 text-white/20 group-focus-within:text-[#ffc957] transition-colors" />
           </div>
           <textarea
             id="performancePainPoints"
@@ -137,8 +146,8 @@ const TechnicalAuditForm = ({ variant = 'default', onSubmitSuccess }) => {
             onChange={handleChange}
             required
             rows="4"
-            className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
-            placeholder="Describe any performance issues, slow loading times, or other technical challenges you're experiencing..."
+            className="w-full pl-12 pr-6 py-5 rounded-2xl bg-white/5 border border-white/5 focus:border-[#ffc957]/50 focus:bg-white/10 text-[0.7rem] font-black uppercase tracking-widest text-white placeholder:text-white/20 transition-all duration-500 outline-none resize-none"
+            placeholder="DESCRIBE DETECTED LATENCY OR TECHNICAL ANOMALIES..."
           ></textarea>
         </div>
       </div>
@@ -146,22 +155,36 @@ const TechnicalAuditForm = ({ variant = 'default', onSubmitSuccess }) => {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-primary-700 hover:to-secondary-700 transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+        className="w-full py-6 bg-[#1ba6d6] text-white text-[0.7rem] font-black uppercase tracking-[0.4em] mask-btn hover:scale-[1.02] active:scale-95 disabled:opacity-30 disabled:grayscale transition-all duration-500 shadow-[0_0_30px_rgba(27,166,214,0.3)] flex items-center justify-center group"
       >
         {isSubmitting ? (
           <>
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-            Request Audit...
+            <div className="animate-spin rounded-full h-4 w-4 border-2 border-white/30 border-t-white mr-3"></div>
+            Analyzing Target...
           </>
         ) : (
-          'Request Technical Audit'
+          <>
+            Initiate Neural Audit
+            <ChevronRight className="ml-3 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </>
         )}
       </button>
 
-      <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-2">
-        We'll analyze your site and provide a comprehensive report with
-        recommendations.
-      </p>
+      <div className="flex flex-col items-center space-y-4 py-4">
+        <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-2">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#1ba6d6]" />
+            <span className="text-[0.5rem] text-white/40 font-black uppercase tracking-[0.2em]">Secure Node</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <BrainCircuit className="w-3.5 h-3.5 text-[#ffc957]" />
+            <span className="text-[0.5rem] text-white/40 font-black uppercase tracking-[0.2em]">AI Powered</span>
+          </div>
+        </div>
+        <p className="text-[0.5rem] text-white/20 font-black uppercase tracking-[0.2em] text-center italic">
+          Comprehensive diagnostic protocol will follow within 24 standard cycles.
+        </p>
+      </div>
     </form>
   );
 };

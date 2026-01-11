@@ -1,8 +1,6 @@
 import { useState, useCallback } from 'react';
-import { HiOutlineUser, HiOutlineMail, HiOutlinePhone, HiOutlineBriefcase, HiOutlineDocumentText, HiOutlineLink, HiOutlineAcademicCap, HiOutlineCheckCircle } from 'react-icons/hi';
-import InputField from '../InputField';
-import TextAreaField from '../TextAreaField';
-import SelectField from '../SelectField';
+import { motion, AnimatePresence } from 'framer-motion';
+import { User, Mail, Phone, Briefcase, FileText, Link as LinkIcon, GraduationCap, CheckCircle2, Upload, Send, AlertCircle } from 'lucide-react';
 
 const CareerApplicationForm = ({ jobTitle = 'Open Position', variant = 'default', onSubmit, className = '' }) => {
   const [formData, setFormData] = useState({
@@ -25,7 +23,7 @@ const CareerApplicationForm = ({ jobTitle = 'Open Position', variant = 'default'
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const experiences = [
-    { value: '', label: 'Select Experience Level' },
+    { value: '', label: 'Experience Level' },
     { value: 'entry', label: 'Entry Level (0-1 years)' },
     { value: 'junior', label: 'Junior (1-3 years)' },
     { value: 'mid', label: 'Mid Level (3-5 years)' },
@@ -34,7 +32,7 @@ const CareerApplicationForm = ({ jobTitle = 'Open Position', variant = 'default'
   ];
 
   const educations = [
-    { value: '', label: 'Select Education Level' },
+    { value: '', label: 'Education Level' },
     { value: 'high-school', label: 'High School' },
     { value: 'associate', label: 'Associate Degree' },
     { value: 'bachelor', label: 'Bachelor\'s Degree' },
@@ -43,9 +41,9 @@ const CareerApplicationForm = ({ jobTitle = 'Open Position', variant = 'default'
     { value: 'other', label: 'Other' }
   ];
 
-  const availability = [
-    { value: '', label: 'Select Availability' },
-    { value: 'immediate', label: 'Available Immediately' },
+  const availabilityOptions = [
+    { value: '', label: 'Availability' },
+    { value: 'immediate', label: 'Immediate' },
     { value: '2-weeks', label: '2 Weeks Notice' },
     { value: '1-month', label: '1 Month Notice' },
     { value: '2-months', label: '2 Months Notice' },
@@ -55,25 +53,26 @@ const CareerApplicationForm = ({ jobTitle = 'Open Position', variant = 'default'
   const validate = useCallback(() => {
     const newErrors = {};
 
-    if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
-    if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
+    if (!formData.firstName.trim()) newErrors.firstName = 'Required';
+    if (!formData.lastName.trim()) newErrors.lastName = 'Required';
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = 'Required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
+      newErrors.email = 'Invalid';
     }
-    if (!formData.phone.trim()) newErrors.phone = 'Phone is required';
-    if (!formData.position.trim()) newErrors.position = 'Position is required';
-    if (!formData.experience) newErrors.experience = 'Experience level is required';
-    if (!formData.education) newErrors.education = 'Education level is required';
-    if (!formData.availability) newErrors.availability = 'Availability is required';
-    if (!formData.coverLetter.trim()) newErrors.coverLetter = 'Cover letter is required';
+    if (!formData.phone.trim()) newErrors.phone = 'Required';
+    if (!formData.position.trim()) newErrors.position = 'Required';
+    if (!formData.experience) newErrors.experience = 'Required';
+    if (!formData.education) newErrors.education = 'Required';
+    if (!formData.availability) newErrors.availability = 'Required';
+    if (!formData.coverLetter.trim()) newErrors.coverLetter = 'Required';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   }, [formData]);
 
-  const handleChange = (name, value) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
@@ -83,12 +82,8 @@ const CareerApplicationForm = ({ jobTitle = 'Open Position', variant = 'default'
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      if (file.size > 5 * 1024 * 1024) { // 5MB limit
-        setErrors(prev => ({ ...prev, resume: 'File size must be less than 5MB' }));
-        return;
-      }
-      if (!file.type.includes('pdf') && !file.type.includes('doc') && !file.type.includes('docx')) {
-        setErrors(prev => ({ ...prev, resume: 'Please upload a PDF or DOC file' }));
+      if (file.size > 5 * 1024 * 1024) {
+        setErrors(prev => ({ ...prev, resume: 'Max 5MB' }));
         return;
       }
       setFormData(prev => ({ ...prev, resume: file }));
@@ -100,37 +95,17 @@ const CareerApplicationForm = ({ jobTitle = 'Open Position', variant = 'default'
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     if (!validate()) return;
-
     setIsSubmitting(true);
     
     try {
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
       if (onSubmit) {
         onSubmit({ ...formData, resume: formData.resume ? formData.resume.name : null });
       }
-      
       setIsSubmitted(true);
-      setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        position: jobTitle,
-        experience: '',
-        education: '',
-        portfolio: '',
-        linkedin: '',
-        availability: '',
-        salaryExpectation: '',
-        coverLetter: '',
-        resume: null
-      });
     } catch (error) {
-      console.error('Submission error:', error);
+      console.error('Submission breakdown:', error);
     } finally {
       setIsSubmitting(false);
     }
@@ -138,220 +113,214 @@ const CareerApplicationForm = ({ jobTitle = 'Open Position', variant = 'default'
 
   if (isSubmitted) {
     return (
-      <div className="max-w-2xl mx-auto text-center py-12">
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full mb-6">
-          <HiOutlineCheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="max-w-2xl mx-auto bg-[#1ba6d6]/10 border border-[#1ba6d6]/20 backdrop-blur-xl rounded-2xl p-12 text-center"
+      >
+        <div className="w-16 h-16 bg-[#1ba6d6] rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(27,166,214,0.4)]">
+          <CheckCircle2 color="white" size={32} />
         </div>
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-          Application Submitted Successfully!
-        </h3>
-        <p className="text-gray-600 dark:text-gray-400 mb-6">
-          Thank you for applying for the {jobTitle} position. Our HR team will review your application and contact you within 5-7 business days.
+        <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-2">Transmission Successful</h3>
+        <p className="text-[#94a3b8] text-xs uppercase tracking-widest opacity-60 mb-8 leading-relaxed">
+          Your credentials have been indexed. Our neural network will evaluate your profile.
         </p>
         <button
           onClick={() => setIsSubmitted(false)}
-          className="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors duration-300"
+          className="px-8 py-3 bg-[#1ba6d6] text-white text-[0.6rem] font-black uppercase tracking-[0.2em] mask-btn hover:scale-105 transition-transform"
         >
-          Submit Another Application
+          Submit Alternative Profile
         </button>
-      </div>
+      </motion.div>
     );
   }
 
   return (
     <div className={`max-w-2xl mx-auto ${className}`}>
-      <div className="bg-white dark:bg-dark-800 rounded-2xl shadow-lg dark:shadow-soft-dark border border-gray-200 dark:border-dark-700 p-8">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-4">
-            <HiOutlineBriefcase className="w-6 h-6 text-primary-600 dark:text-primary-400" />
-          </div>
-          <h2 className="text-3xl font-display font-bold text-gray-900 dark:text-white mb-2">
-            Apply for {jobTitle}
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400">
-            Join our team and help us build amazing solutions
-          </p>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <InputField
-              label="First Name"
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="relative group">
+            <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94a3b8] group-focus-within:text-[#1ba6d6] transition-colors" />
+            <input
+              type="text"
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
-              error={errors.firstName}
-              required
-              icon={HiOutlineUser}
-              placeholder="John"
+              className={`w-full bg-white/5 border ${errors.firstName ? 'border-red-500' : 'border-white/10'} focus:border-[#1ba6d6] rounded-xl px-12 py-3 text-white text-sm placeholder:text-white/20 outline-none transition-all duration-300 backdrop-blur-md`}
+              placeholder="Primary Name"
             />
-            <InputField
-              label="Last Name"
+          </div>
+          <div className="relative group">
+            <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94a3b8] group-focus-within:text-[#1ba6d6] transition-colors" />
+            <input
+              type="text"
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              error={errors.lastName}
-              required
-              icon={HiOutlineUser}
-              placeholder="Doe"
+              className={`w-full bg-white/5 border ${errors.lastName ? 'border-red-500' : 'border-white/10'} focus:border-[#1ba6d6] rounded-xl px-12 py-3 text-white text-sm placeholder:text-white/20 outline-none transition-all duration-300 backdrop-blur-md`}
+              placeholder="Secondary Name"
             />
           </div>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <InputField
-              label="Email"
-              name="email"
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="relative group">
+            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94a3b8] group-focus-within:text-[#1ba6d6] transition-colors" />
+            <input
               type="email"
+              name="email"
               value={formData.email}
               onChange={handleChange}
-              error={errors.email}
-              required
-              icon={HiOutlineMail}
-              placeholder="john.doe@example.com"
-            />
-            <InputField
-              label="Phone"
-              name="phone"
-              type="tel"
-              value={formData.phone}
-              onChange={handleChange}
-              error={errors.phone}
-              required
-              icon={HiOutlinePhone}
-              placeholder="+1 (555) 123-4567"
+              className={`w-full bg-white/5 border ${errors.email ? 'border-red-500' : 'border-white/10'} focus:border-[#1ba6d6] rounded-xl px-12 py-3 text-white text-sm placeholder:text-white/20 outline-none transition-all duration-300 backdrop-blur-md`}
+              placeholder="Neural Node (Email)"
             />
           </div>
+          <div className="relative group">
+            <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94a3b8] group-focus-within:text-[#1ba6d6] transition-colors" />
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              className={`w-full bg-white/5 border ${errors.phone ? 'border-red-500' : 'border-white/10'} focus:border-[#1ba6d6] rounded-xl px-12 py-3 text-white text-sm placeholder:text-white/20 outline-none transition-all duration-300 backdrop-blur-md`}
+              placeholder="Signal Link (Phone)"
+            />
+          </div>
+        </div>
 
-          <InputField
-            label="Position Applied For"
+        <div className="relative group">
+          <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94a3b8] group-focus-within:text-[#1ba6d6] transition-colors" />
+          <input
+            type="text"
             name="position"
             value={formData.position}
             onChange={handleChange}
-            error={errors.position}
-            required
-            icon={HiOutlineBriefcase}
-            placeholder="Position Title"
+            className="w-full bg-white/5 border border-white/10 focus:border-[#1ba6d6] rounded-xl px-12 py-3 text-white text-sm placeholder:text-white/20 outline-none transition-all duration-300 backdrop-blur-md"
+            placeholder="Target Vertical (Position)"
           />
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <SelectField
-              label="Experience Level"
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="relative group">
+            <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94a3b8] group-focus-within:text-[#1ba6d6] transition-colors z-10" />
+            <select
               name="experience"
               value={formData.experience}
               onChange={handleChange}
-              error={errors.experience}
-              required
-              options={experiences}
-              icon={HiOutlineBriefcase}
-            />
-            <SelectField
-              label="Education Level"
+              className="w-full bg-[#1a1f24] border border-white/10 focus:border-[#1ba6d6] rounded-xl px-12 py-3 text-white text-sm outline-none transition-all duration-300 appearance-none"
+            >
+              {experiences.map(opt => <option key={opt.value} value={opt.value} className="bg-[#0e1114]">{opt.label}</option>)}
+            </select>
+          </div>
+          <div className="relative group">
+            <GraduationCap className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94a3b8] group-focus-within:text-[#1ba6d6] transition-colors z-10" />
+            <select
               name="education"
               value={formData.education}
               onChange={handleChange}
-              error={errors.education}
-              required
-              options={educations}
-              icon={HiOutlineAcademicCap}
-            />
+              className="w-full bg-[#1a1f24] border border-white/10 focus:border-[#1ba6d6] rounded-xl px-12 py-3 text-white text-sm outline-none transition-all duration-300 appearance-none"
+            >
+              {educations.map(opt => <option key={opt.value} value={opt.value} className="bg-[#0e1114]">{opt.label}</option>)}
+            </select>
           </div>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <InputField
-              label="Portfolio URL (Optional)"
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="relative group">
+            <LinkIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94a3b8] group-focus-within:text-[#1ba6d6] transition-colors" />
+            <input
+              type="url"
               name="portfolio"
               value={formData.portfolio}
               onChange={handleChange}
-              error={errors.portfolio}
-              icon={HiOutlineLink}
-              placeholder="https://your-portfolio.com"
+              className="w-full bg-white/5 border border-white/10 focus:border-[#1ba6d6] rounded-xl px-12 py-3 text-white text-sm placeholder:text-white/20 outline-none transition-all duration-300 backdrop-blur-md"
+              placeholder="Portfolio Artifacts (URL)"
             />
-            <InputField
-              label="LinkedIn Profile (Optional)"
+          </div>
+          <div className="relative group">
+            <LinkIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94a3b8] group-focus-within:text-[#1ba6d6] transition-colors" />
+            <input
+              type="url"
               name="linkedin"
               value={formData.linkedin}
               onChange={handleChange}
-              error={errors.linkedin}
-              icon={HiOutlineLink}
-              placeholder="https://linkedin.com/in/yourprofile"
+              className="w-full bg-white/5 border border-white/10 focus:border-[#1ba6d6] rounded-xl px-12 py-3 text-white text-sm placeholder:text-white/20 outline-none transition-all duration-300 backdrop-blur-md"
+              placeholder="Neural Profile (LinkedIn)"
             />
           </div>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <SelectField
-              label="Availability"
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="relative group">
+            <FileText className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94a3b8] group-focus-within:text-[#1ba6d6] transition-colors z-10" />
+            <select
               name="availability"
               value={formData.availability}
               onChange={handleChange}
-              error={errors.availability}
-              required
-              options={availability}
-              icon={HiOutlineDocumentText}
-            />
-            <InputField
-              label="Salary Expectation (Optional)"
+              className="w-full bg-[#1a1f24] border border-white/10 focus:border-[#1ba6d6] rounded-xl px-12 py-3 text-white text-sm outline-none transition-all duration-300 appearance-none"
+            >
+              {availabilityOptions.map(opt => <option key={opt.value} value={opt.value} className="bg-[#0e1114]">{opt.label}</option>)}
+            </select>
+          </div>
+          <div className="relative group">
+            <FileText className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94a3b8] group-focus-within:text-[#1ba6d6] transition-colors" />
+            <input
+              type="text"
               name="salaryExpectation"
               value={formData.salaryExpectation}
               onChange={handleChange}
-              error={errors.salaryExpectation}
-              icon={HiOutlineDocumentText}
-              placeholder="$80,000 - $100,000"
+              className="w-full bg-white/5 border border-white/10 focus:border-[#1ba6d6] rounded-xl px-12 py-3 text-white text-sm placeholder:text-white/20 outline-none transition-all duration-300 backdrop-blur-md"
+              placeholder="Reward Expectation"
             />
           </div>
+        </div>
 
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-              Resume
-              {errors.resume && <span className="text-red-600 dark:text-red-400 text-sm ml-2">{errors.resume}</span>}
-            </label>
-            <div className="relative">
-              <input
-                type="file"
-                id="resume"
-                accept=".pdf,.doc,.docx"
-                onChange={handleFileChange}
-                className="hidden"
-              />
-              <label
-                htmlFor="resume"
-                className="flex items-center justify-center px-4 py-3 border-2 border-dashed border-gray-300 dark:border-dark-600 rounded-lg cursor-pointer hover:border-primary-500 transition-colors duration-300"
-              >
-                <HiOutlineDocumentText className="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2" />
-                {formData.resume ? formData.resume.name : 'Upload Resume (PDF, DOC, DOCX)'}
-              </label>
-            </div>
-            {errors.resume && (
-              <p className="text-red-600 dark:text-red-400 text-sm mt-1">{errors.resume}</p>
-            )}
-          </div>
+        <div className="relative group">
+          <input
+            type="file"
+            id="resume"
+            accept=".pdf,.doc,.docx"
+            onChange={handleFileChange}
+            className="hidden"
+          />
+          <label
+            htmlFor="resume"
+            className={`flex items-center justify-center gap-4 px-6 py-4 border-2 border-dashed ${errors.resume ? 'border-red-500 bg-red-500/5' : 'border-white/10 bg-white/5'} rounded-xl cursor-pointer hover:border-[#1ba6d6] hover:bg-[#1ba6d6]/5 transition-all group/label backdrop-blur-md`}
+          >
+            <Upload className={`w-5 h-5 ${errors.resume ? 'text-red-500' : 'text-[#94a3b8] group-hover/label:text-[#1ba6d6]'} transition-colors`} />
+            <span className={`text-xs uppercase tracking-[0.2em] font-bold ${errors.resume ? 'text-red-500' : 'text-[#94a3b8] group-hover/label:text-white'} transition-colors`}>
+              {formData.resume ? formData.resume.name : 'Ingest Resume Artifact (PDF/DOC)'}
+            </span>
+          </label>
+        </div>
 
-          <TextAreaField
-            label="Cover Letter"
+        <div className="relative group">
+          <textarea
             name="coverLetter"
             value={formData.coverLetter}
             onChange={handleChange}
-            error={errors.coverLetter}
-            required
-            rows={6}
-            placeholder="Please tell us why you're interested in this position and how your skills and experience make you a great fit for our team..."
+            className={`w-full bg-white/5 border ${errors.coverLetter ? 'border-red-500' : 'border-white/10'} focus:border-[#1ba6d6] rounded-2xl px-6 py-4 text-white text-sm placeholder:text-white/20 outline-none transition-all duration-300 backdrop-blur-md resize-none min-h-[160px]`}
+            placeholder="Structural Narrative (Cover Letter)"
           />
+        </div>
 
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full py-4 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-          >
-            {isSubmitting ? (
-              <div className="flex items-center justify-center">
-                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
-                Processing...
-              </div>
-            ) : (
-              'Submit Application'
-            )}
-          </button>
-        </form>
-      </div>
+        <motion.button
+          whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(27,166,214,0.3)" }}
+          whileTap={{ scale: 0.98 }}
+          disabled={isSubmitting}
+          type="submit"
+          className="w-full py-5 bg-[#1ba6d6] hover:bg-[#1592bd] text-white font-black text-xs uppercase tracking-[0.4em] mask-btn transition-all disabled:opacity-50 flex items-center justify-center gap-3"
+        >
+          {isSubmitting ? (
+            <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+          ) : (
+            <>
+              Commit Architecture
+              <Send size={18} />
+            </>
+          )}
+        </motion.button>
+      </form>
     </div>
   );
 };

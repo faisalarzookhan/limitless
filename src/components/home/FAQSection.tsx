@@ -1,47 +1,42 @@
 import React, { useState } from 'react';
-import { HiChevronDown, HiChevronUp } from 'react-icons/hi';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown, HelpCircle, Zap, ShieldCheck, Cpu } from 'lucide-react';
 
 const faqs = [
   {
-    question: 'What services does Limitless Infotech Solution offer?',
+    question: 'What operational domains does Limitless execute?',
     answer:
-      'We offer comprehensive technology solutions including Web Development, Mobile App Development, Custom Software & Systems, CRM & Task Management Apps, Business Automation & AI Integration, IoT Solutions, Network Installation, and Server Setup. Each service is tailored to meet your specific business needs.',
+      'Our network executes high-fidelity protocols in Web Engine Architecture, Mobile Interface Development, Neural Integration, IoT Mesh Networks, and Core Infrastructure Scaling. Each deployment is architected for maximum security and performance.',
   },
   {
-    question: 'How long does it take to complete a project?',
+    question: 'What is the standard cycle duration for protocol deployment?',
     answer:
-      'Project timelines vary based on complexity and scope. A simple website typically takes 2-4 weeks, while complex web applications may take 2-4 months. Mobile apps generally require 3-6 months, and custom enterprise software can take 3-12 months. We provide detailed timelines during the planning phase and keep you updated throughout development.',
+      'Deployment cycles fluctuate based on node complexity. Standard web engines resolve in 2-4 cycles (weeks), while complex neural applications may require 2-4 quarterly spans. Mobile uplinks typically stabilize within 3-6 cycles.',
   },
   {
-    question: 'What technologies do you use?',
+    question: 'Which neural stacks power the network?',
     answer:
-      'We work with cutting-edge technologies including React, Vue, Angular, Next.js for frontend; Node.js, Python, PHP, .NET for backend; React Native and Flutter for mobile apps; MongoDB, PostgreSQL, MySQL for databases; and AWS, Azure, Google Cloud for cloud infrastructure. We choose the best technology stack for each project based on your specific requirements.',
+      'We leverage cutting-edge neural stacks including React/Next.js for interfaces; Node.js and Python for core logic; and globally distributed cloud clusters (AWS/Azure) for infrastructure. Our stack selection is dynamically optimized for each project protocol.',
   },
   {
-    question: 'Do you provide post-launch support and maintenance?',
+    question: 'Does the network provide persistent maintenance uplinks?',
     answer:
-      'Yes! We offer comprehensive post-launch support including 24/7 technical assistance, regular updates and maintenance, bug fixes, security patches, performance monitoring, and training. We ensure your systems continue to operate flawlessly and stay up-to-date with the latest technologies.',
+      'Yes. We maintain 24/7 technical monitoring, security patch deployment, and persistent performance audits. Our maintenance protocols ensure that your nodes remain optimized against evolving digital vectors.',
   },
   {
-    question: 'How much does a project cost?',
+    question: 'How is resource allocation determined?',
     answer:
-      'Project costs vary based on scope, complexity, timeline, and required features. We believe in transparent pricing and provide detailed quotes after understanding your requirements. Fill out our client requirements form or contact us directly for a personalized quote tailored to your budget and needs.',
+      'Resource requirements are calculated based on deployment scope, expected telemetry volume, and architectural complexity. We provide transparent resource audits and dynamic scaling options to match your operational budget.',
   },
   {
-    question: 'Can you work with our existing systems?',
+    question: 'Can the network synchronize with legacy nodes?',
     answer:
-      'Absolutely! We specialize in integrating with existing systems and can enhance, upgrade, or build upon your current infrastructure. Whether you need to modernize legacy systems or add new features, our team has the expertise to ensure seamless integration.',
+      'Our integration specialists specialize in bridging modern protocols with legacy infrastructure. We can modernize existing nodes, upgrade security layers, or build symbiotic interfaces that ensure seamless data flow across the spectrum.',
   },
   {
-    question:
-      'What makes Limitless different from other development companies?',
+    question: 'What defines the Uniqueness of the Limitless Network?',
     answer:
-      "Our commitment to Total Security, True Uniqueness, and Royal Client Experience sets us apart. We don't just build software – we create transformative solutions that are secure, scalable, and truly unique to your business. Our dedicated team provides white-glove service, ensuring your success at every step.",
-  },
-  {
-    question: 'Do you offer custom CRM solutions?',
-    answer:
-      'Yes! We specialize in custom CRM development tailored to your business processes. Our CRM solutions include customer management, sales tracking, lead management, automated workflows, reporting and analytics, and seamless integration with your existing tools. We build systems that adapt to your needs, not the other way around.',
+      'The network is defined by its Zero-Trust Security, Neural-Grade Uniqueness, and Prime Operator Experience. We dont just deploy code; we architect transformative digital ecosystems that are secure-by-design and resilient for the long horizon.',
   },
 ];
 
@@ -53,42 +48,103 @@ const FAQSection: React.FC = () => {
   };
 
   return (
-    <section className="section-padding bg-white dark:bg-dark-900">
-      <div className="container-custom max-w-4xl">
+    <section className="relative py-24 bg-[#0e1114] overflow-hidden">
+      {/* Background accents */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#1ba6d6]/30 to-transparent" />
+      
+      <div className="container-custom max-w-4xl relative z-10 px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-            Frequently Asked <span className="text-gradient">Questions</span>
-          </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
-            Find answers to common questions about our services
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3 py-1 bg-[#1ba6d6]/10 border border-[#1ba6d6]/20 rounded-full mb-6"
+          >
+            <HelpCircle className="w-4 h-4 text-[#1ba6d6]" />
+            <span className="text-[10px] font-bold text-[#1ba6d6] uppercase tracking-widest">Knowledge Base</span>
+          </motion.div>
+          
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight"
+          >
+            Protocol <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1ba6d6] to-[#0080ff]">Intelligence</span>
+          </motion.h2>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Access core system documentation and operational FAQs to understand our deployment methodologies.
           </p>
         </div>
 
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div key={index} className="faq-item">
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.05 }}
+              className={`group border rounded-2xl transition-all duration-300 ${
+                openFaq === index 
+                  ? 'bg-white/[0.05] border-[#1ba6d6]/50 shadow-[0_0_30px_-10px_rgba(27,166,214,0.3)]' 
+                  : 'bg-white/[0.02] border-white/5 hover:border-white/20'
+              }`}
+            >
               <button
                 onClick={() => toggleFaq(index)}
-                className="w-full flex items-center justify-between text-left"
+                className="w-full flex items-center justify-between text-left p-6"
               >
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white pr-4">
-                  {faq.question}
-                </h3>
-                {openFaq === index ? (
-                  <HiChevronUp className="w-6 h-6 text-primary-600 flex-shrink-0" />
-                ) : (
-                  <HiChevronDown className="w-6 h-6 text-gray-400 flex-shrink-0" />
-                )}
+                <div className="flex items-center gap-4">
+                  <div className={`p-2 rounded-lg border transition-colors ${
+                    openFaq === index 
+                      ? 'bg-[#1ba6d6]/20 border-[#1ba6d6]/30' 
+                      : 'bg-white/5 border-white/10'
+                  }`}>
+                    <Zap className={`w-4 h-4 transition-colors ${
+                      openFaq === index ? 'text-[#1ba6d6]' : 'text-gray-500'
+                    }`} />
+                  </div>
+                  <h3 className={`text-lg font-bold transition-colors ${
+                    openFaq === index ? 'text-white' : 'text-gray-300'
+                  }`}>
+                    {faq.question}
+                  </h3>
+                </div>
+                <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${
+                  openFaq === index ? 'rotate-180 text-[#1ba6d6]' : ''
+                }`} />
               </button>
 
-              {openFaq === index && (
-                <div className="mt-4 pt-4 border-t border-gray-200 dark:border-dark-700 animate-slide-down">
-                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                    {faq.answer}
-                  </p>
-                </div>
-              )}
-            </div>
+              <AnimatePresence>
+                {openFaq === index && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-6 pb-6 pt-0 ml-14">
+                      <div className="h-px w-full bg-white/10 mb-6" />
+                      <p className="text-gray-400 leading-relaxed text-sm">
+                        {faq.answer}
+                      </p>
+                      <div className="mt-4 flex items-center gap-4">
+                        <div className="flex items-center gap-1.5 text-[10px] font-bold text-[#1ba6d6]/70 uppercase tracking-tighter">
+                          <ShieldCheck className="w-3 h-3" />
+                          Verified
+                        </div>
+                        <div className="flex items-center gap-1.5 text-[10px] font-bold text-gray-600 uppercase tracking-tighter">
+                          <Cpu className="w-3 h-3" />
+                          Node v4.2.0
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -97,3 +153,4 @@ const FAQSection: React.FC = () => {
 };
 
 export default FAQSection;
+

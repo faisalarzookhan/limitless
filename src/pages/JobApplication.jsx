@@ -1,102 +1,147 @@
-import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import CareerApplicationForm from '../components/forms/career/CareerApplicationForm';
+import {
+  FileText,
+  User,
+  Mail,
+  Phone,
+  Link2,
+  Upload,
+  Send,
+  Sparkles,
+  ShieldCheck,
+  CheckCircle2,
+  ChevronRight,
+  Briefcase
+} from 'lucide-react';
 import ErrorBoundary from '../components/ErrorBoundary';
 
 const JobApplication = () => {
-  const { jobId } = useParams();
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5
-      }
-    }
+    visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
   };
 
-  // In a real application, you would fetch job details based on the jobId
-  // For now, we'll just render the form
   return (
     <ErrorBoundary>
-    <div className="min-h-screen bg-gradient-to-br from-white dark:from-dark-900 to-gray-100 dark:to-dark-800 bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
-      {/* Header Section */}
-      <motion.section 
-        className="relative py-16 bg-gradient-to-r from-[#2563eb] to-[#ffc957] text-[#0a0b0d]"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div
-          className="absolute inset-0 container-custom px-4 md:px-6 lg:px-8"
-          aria-hidden="true"
-        >
-          <div className="absolute inset-0 bg-pattern-grid opacity-10"></div>
+      <div className="relative min-h-screen bg-dark-900 overflow-hidden text-white selection:bg-primary-500/30 py-40 px-6">
+        {/* Atmosphere */}
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-0 right-[-10%] w-[60%] h-[60%] bg-primary-500/5 blur-[150px] rounded-full" />
+          <div className="absolute inset-0 bg-grid-white/[0.01]" />
         </div>
-        <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.h1 
-              className="text-3xl md:text-4xl lg:text-5xl font-['Outfit'] font-bold mb-4"
-              variants={itemVariants}
-            >
-              Apply for Position
-            </motion.h1>
-            <motion.p 
-              className="text-xl text-[#0a0b0d]/80 font-['Figtree']"
-              variants={itemVariants}
-            >
-              Join our team and help us build the future of technology
-            </motion.p>
-          </div>
-        </div>
-      </motion.section>
 
-      {/* Application Form Section */}
-      <motion.section 
-        className="section-padding bg-gradient-to-br from-white dark:from-dark-900 to-gray-100 dark:to-dark-800 text-gray-900 dark:text-gray-100"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div className="container-custom">
-          <div className="max-w-4xl mx-auto">
-            <motion.div 
-              className="bg-gradient-to-br from-white dark:from-dark-800 to-gray-100 dark:to-dark-700 rounded-3xl p-8 md:p-10 shadow-xl dark:shadow-soft-dark border border-gray-200 dark:border-dark-700"
-              variants={itemVariants}
-            >
-              <div className="text-center mb-8">
-                <motion.h2 
-                  className="text-3xl font-['Outfit'] font-bold text-white mb-2"
-                  variants={itemVariants}
-                >
-                  Job Application
-                </motion.h2>
-                <motion.p 
-                  className="text-gray-300 font-['Figtree']"
-                  variants={itemVariants}
-                >
-                  Fill out the form below to apply for the position
-                </motion.p>
+        <div className="max-w-4xl mx-auto relative z-10">
+           {/* Header */}
+           <div className="text-center mb-16">
+              <motion.div 
+                 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
+                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8"
+              >
+                 <Briefcase className="w-4 h-4 text-primary-400" />
+                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-300">Talent Acquisition — Recruitment Intake Node</span>
+              </motion.div>
+              <h1 className="text-4xl md:text-7xl font-black italic tracking-tighter uppercase leading-none mb-6">
+                 Join the <span className="not-italic bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent underline decoration-white/10 underline-offset-8">Synergy</span>
+              </h1>
+              <p className="text-gray-400 font-medium uppercase tracking-widest text-xs italic">Submit your architectural credentials to the Limitless ecosystem.</p>
+           </div>
+
+           {/* Form Container */}
+           <motion.div 
+              initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
+              className="p-10 md:p-16 rounded-[64px] bg-white/5 border border-white/10 backdrop-blur-3xl relative overflow-hidden"
+           >
+              <form className="relative z-10 space-y-12" onSubmit={(e) => e.preventDefault()}>
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div className="space-y-3">
+                       <label className="text-[10px] font-black text-gray-600 uppercase tracking-widest ml-1 flex items-center gap-2">
+                          <User className="w-3 h-3 text-primary-400" /> Full Name
+                       </label>
+                       <input 
+                          type="text" required
+                          className="w-full bg-dark-950/50 border border-white/10 rounded-2xl p-5 text-white placeholder-gray-700 font-bold focus:ring-2 focus:ring-primary-500/30 outline-none"
+                          placeholder="Architect Name..."
+                       />
+                    </div>
+                    <div className="space-y-3">
+                       <label className="text-[10px] font-black text-gray-600 uppercase tracking-widest ml-1 flex items-center gap-2">
+                          <Mail className="w-3 h-3 text-primary-400" /> Email Node
+                       </label>
+                       <input 
+                          type="email" required
+                          className="w-full bg-dark-950/50 border border-white/10 rounded-2xl p-5 text-white placeholder-gray-700 font-bold focus:ring-2 focus:ring-primary-500/30 outline-none"
+                          placeholder="node@protocol.com"
+                       />
+                    </div>
+                 </div>
+
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div className="space-y-3">
+                       <label className="text-[10px] font-black text-gray-600 uppercase tracking-widest ml-1 flex items-center gap-2">
+                          <Phone className="w-3 h-3 text-primary-400" /> Contact Number
+                       </label>
+                       <input 
+                          type="tel" required
+                          className="w-full bg-dark-950/50 border border-white/10 rounded-2xl p-5 text-white placeholder-gray-700 font-bold focus:ring-2 focus:ring-primary-500/30 outline-none"
+                          placeholder="+1 (000) 000-0000"
+                       />
+                    </div>
+                    <div className="space-y-3">
+                       <label className="text-[10px] font-black text-gray-600 uppercase tracking-widest ml-1 flex items-center gap-2">
+                          <Link2 className="w-3 h-3 text-primary-400" /> Portfolio Hub (URL)
+                       </label>
+                       <input 
+                          type="url"
+                          className="w-full bg-dark-950/50 border border-white/10 rounded-2xl p-5 text-white placeholder-gray-700 font-bold focus:ring-2 focus:ring-primary-500/30 outline-none"
+                          placeholder="https://nexus.com/profile"
+                       />
+                    </div>
+                 </div>
+
+                 <div className="space-y-3">
+                    <label className="text-[10px] font-black text-gray-600 uppercase tracking-widest ml-1 flex items-center gap-2">
+                       <FileText className="w-3 h-3 text-primary-400" /> Professional Manifest (Cover Letter)
+                    </label>
+                    <textarea 
+                       rows="5"
+                       className="w-full bg-dark-950/50 border border-white/10 rounded-[32px] p-8 text-white placeholder-gray-700 font-bold focus:ring-2 focus:ring-primary-500/30 outline-none resize-none"
+                       placeholder="Synthesize your mission and expertise..."
+                    />
+                 </div>
+
+                 <div className="pt-8 flex flex-col items-center">
+                    <div className="w-full p-12 rounded-[48px] border-2 border-dashed border-white/10 hover:border-primary-500/30 transition-all flex flex-col items-center justify-center gap-6 cursor-pointer group bg-dark-950/30 mb-8">
+                       <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                          <Upload className="w-8 h-8 text-gray-600 group-hover:text-primary-400" />
+                       </div>
+                       <div className="text-center">
+                          <p className="text-sm font-black text-white italic tracking-tight uppercase">Upload Credentials (Resume/CV)</p>
+                          <p className="text-[8px] font-black text-gray-700 uppercase tracking-[0.3em] mt-2">PDF | DOCX | MAX 10MB</p>
+                       </div>
+                    </div>
+
+                    <button 
+                       type="submit"
+                       className="px-20 py-8 bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-black rounded-3xl hover:shadow-[0_0_40px_rgba(59,130,246,0.3)] transition-all text-sm uppercase tracking-[0.4em] flex items-center gap-4 group"
+                    >
+                       Initiate Application <Send className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                    </button>
+                 </div>
+              </form>
+              <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-primary-500 to-transparent opacity-20" />
+           </motion.div>
+
+           {/* Security Footnote */}
+           <div className="mt-12 flex items-center justify-center gap-8">
+              <div className="flex items-center gap-2 text-[10px] font-black text-gray-700 uppercase tracking-widest">
+                 <ShieldCheck className="w-3 h-3 text-primary-500" /> Encrypted Transmission
               </div>
-
-              <CareerApplicationForm />
-            </motion.div>
-          </div>
+              <div className="flex items-center gap-2 text-[10px] font-black text-gray-700 uppercase tracking-widest">
+                 <CheckCircle2 className="w-3 h-3 text-secondary-500" /> Registry Verified
+              </div>
+           </div>
         </div>
-      </motion.section>
-    </div>
+      </div>
     </ErrorBoundary>
   );
 };

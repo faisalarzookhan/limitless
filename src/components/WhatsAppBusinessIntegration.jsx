@@ -1,16 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  HiChat,
-  HiPhone,
-  HiPaperAirplane,
-  HiX,
-  HiCheck,
-  HiClock,
-  HiUser,
-  HiSparkles,
-  HiQuestionMarkCircle,
-  HiInformationCircle,
-} from 'react-icons/hi';
+  MessageCircle,
+  Phone,
+  Send,
+  X,
+  Check,
+  Clock,
+  User,
+  Sparkles,
+  HelpCircle,
+  Info,
+  CheckCheck
+} from 'lucide-react';
 import { sendUserInteractionNotification } from '../services/notification/notificationService';
 
 const WhatsAppBusinessIntegration = () => {
@@ -34,76 +36,60 @@ const WhatsAppBusinessIntegration = () => {
     'Schedule a call',
   ];
 
-  const handleSendMessage = async (message = inputMessage) => {
-    // Check if running in browser environment
-    if (typeof window === 'undefined' || typeof document === 'undefined') {
-      console.warn('Not in browser environment, skipping message sending');
-      return;
-    }
-    if (!message.trim()) return;
+  const handleSendMessage = async (messageText = inputMessage) => {
+    if (!messageText.trim()) return;
 
-    const newMessage = {
+    // User Message Execution
+    const userMessage = {
       id: messages.length + 1,
-      text: message,
-      sender: 'Auralis',
+      text: messageText,
+      sender: 'user', // Corrected from 'Auralis'
       timestamp: new Date(),
       status: 'sent',
     };
 
-    setMessages(prev => [...prev, newMessage]);
+    setMessages(prev => [...prev, userMessage]);
     setInputMessage('');
 
-    // Send notification about the user's message
+    // Persistence & Notification Log
     try {
+      const { default: PersistenceService } = await import('../services/enterprise/PersistenceService');
+      await PersistenceService.store('chat_interactions', { text: messageText, type: 'whatsapp' });
+      
       await sendUserInteractionNotification({
-        message: message,
-        sender: 'Auralis',
+        message: messageText,
+        sender: 'user',
         timestamp: new Date().toISOString(),
         page: window.location.pathname,
       });
     } catch (error) {
-      console.error('Error sending WhatsApp chat notification:', error);
+      console.error('Audit Log Error:', error);
     }
 
-    // Simulate bot response
+    // Neural Processing Initiation
     setIsTyping(true);
-    setTimeout(() => {
-      const botResponse = generateBotResponse(message);
-      const responseMessage = {
+    
+    try {
+      const { default: NeuralRepo } = await import('../services/enterprise/NeuralRepositoryService');
+      
+      // Simulate network latency buffer
+      await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1000));
+      
+      const response = await NeuralRepo.query(messageText);
+      
+      const botMessage = {
         id: messages.length + 2,
-        text: botResponse,
+        text: response.text,
         sender: 'Auralis',
         timestamp: new Date(),
         status: 'delivered',
       };
-      setMessages(prev => [...prev, responseMessage]);
+      
+      setMessages(prev => [...prev, botMessage]);
+    } catch (error) {
+      console.error('Neural Logic Error:', error);
+    } finally {
       setIsTyping(false);
-    }, 1500);
-  };
-
-  const generateBotResponse = message => {
-    const lowerMsg = message.toLowerCase();
-
-    if (lowerMsg.includes('service') || lowerMsg.includes('what do you do')) {
-      return 'We offer comprehensive IT solutions including Web Development, Mobile Apps, AI/ML, Cloud Services, and Custom Software. Would you like details about any specific service?';
-    } else if (
-      lowerMsg.includes('price') ||
-      lowerMsg.includes('cost') ||
-      lowerMsg.includes('pricing')
-    ) {
-      return "Our pricing varies by project scope. Web dev starts at $15k, mobile apps at $25k. For accurate pricing, let's discuss your specific needs. Would you like to schedule a consultation?";
-    } else if (lowerMsg.includes('help') || lowerMsg.includes('project')) {
-      return "I'd be happy to help! Could you tell me more about your project requirements? Our team specializes in custom solutions tailored to your business needs.";
-    } else if (
-      lowerMsg.includes('call') ||
-      lowerMsg.includes('meeting') ||
-      lowerMsg.includes('schedule')
-    ) {
-      return 'Great! You can schedule a call with our team directly through our website or I can connect you with a specialist. Would you like me to transfer you?';
-    } else if (lowerMsg.includes('hr-ims') || lowerMsg.includes('trackit')) {
-      return 'HR-IMS and TrackIT are our flagship SaaS products. HR-IMS handles HR management, while TrackIT manages project tracking. Would you like a demo of either product?';
-    } else {
-      return 'Thanks for your message! Our team will get back to you shortly. In the meantime, you can also reach us at +917710909492 or email us at contact@limitlessinfotech.com';
     }
   };
 
@@ -117,133 +103,144 @@ const WhatsAppBusinessIntegration = () => {
 
   return (
     <div className="fixed bottom-6 left-6 z-50">
-      {!isOpen ? (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full shadow-2xl flex items-center justify-center text-white hover:from-green-600 hover:to-emerald-600 transition-all duration-300 transform hover:scale-110"
-          aria-label="Open WhatsApp chat"
-        >
-          <HiChat className="w-8 h-8" />
-          <span className="absolute -top-1 -right-1 w-6 h-6 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
-            24/7
-          </span>
-        </button>
-      ) : (
-        <div className="w-80 h-96 bg-white dark:bg-dark-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-dark-700 flex flex-col overflow-hidden">
-          {/* Header */}
-          <div className="bg-gradient-to-r from-green-500 to-emerald-500 p-4 text-white flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center">
-                <HiChat className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h3 className="font-bold text-lg">WhatsApp Support</h3>
-                <p className="text-xs opacity-80 flex items-center">
-                  <HiClock className="w-3 h-3 mr-1" /> Always available
-                </p>
-              </div>
-            </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="text-white hover:bg-white/20 rounded-full p-1"
-            >
-              <HiX className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 dark:bg-dark-700">
-            {messages.map(message => (
-              <div
-                key={message.id}
-                className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
-                <div
-                  className={`max-w-xs px-3 py-2 rounded-2xl ${
-                    message.sender === 'user'
-                      ? 'bg-green-500 text-white rounded-br-md'
-                      : 'bg-white dark:bg-dark-600 text-gray-900 dark:text-white rounded-bl-md'
-                  }`}
-                >
-                  <p className="text-sm">{message.text}</p>
-                  <div className="flex items-center justify-end mt-1">
-                    <span className="text-xs opacity-70">
-                      {formatTime(message.timestamp)}
-                    </span>
-                    {message.sender === 'user' && (
-                      <HiCheck
-                        className={`w-3 h-3 ml-1 ${message.status === 'read' ? 'text-blue-400' : 'text-gray-400'}`}
-                      />
-                    )}
-                  </div>
+      <AnimatePresence>
+        {!isOpen && (
+          <motion.button
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            onClick={() => setIsOpen(true)}
+            className="w-16 h-16 bg-[#25d366] rounded-2xl shadow-[0_0_30px_rgba(37,211,102,0.4)] flex items-center justify-center text-white hover:scale-110 transition-all duration-300 group relative overflow-hidden"
+            aria-label="Open WhatsApp chat"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+            <MessageCircle className="w-8 h-8 relative z-10 group-hover:rotate-12 transition-transform" />
+            <span className="absolute -top-1 -right-1 w-6 h-6 bg-[#ffc957] text-[#0e1114] text-[0.6rem] font-black rounded-full flex items-center justify-center border-2 border-[#0e1114]">
+              24/7
+            </span>
+          </motion.button>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: 100, scale: 0.9, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, y: 100, scale: 0.9, filter: 'blur(10px)' }}
+            className="w-[380px] h-[550px] bg-[#0e1114]/95 backdrop-blur-3xl border border-white/10 rounded-[2rem] shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden relative"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-[#25d366]/5 to-transparent pointer-events-none"></div>
+            
+            {/* Header */}
+            <div className="p-6 border-b border-white/5 bg-white/5 backdrop-blur-xl flex items-center justify-between relative z-10">
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 rounded-2xl bg-[#25d366] flex items-center justify-center shadow-[0_0_20px_rgba(37,211,102,0.3)]">
+                  <MessageCircle className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xs font-black text-white uppercase tracking-[0.2em]">WhatsApp Protocol</h3>
+                  <p className="text-[0.6rem] text-[#25d366] font-black uppercase tracking-widest mt-1 flex items-center">
+                    <span className="w-1.5 h-1.5 bg-[#25d366] rounded-full mr-2 animate-pulse"></span>
+                    Encrypted Network
+                  </p>
                 </div>
               </div>
-            ))}
+              <button
+                onClick={() => setIsOpen(false)}
+                className="w-10 h-10 flex items-center justify-center bg-white/5 hover:bg-white/10 rounded-xl transition-all duration-300 group"
+              >
+                <X className="w-5 h-5 text-white group-hover:rotate-90 transition-transform" />
+              </button>
+            </div>
 
-            {isTyping && (
-              <div className="flex justify-start">
-                <div className="bg-white dark:bg-dark-600 text-gray-900 dark:text-white rounded-2xl rounded-bl-md px-3 py-2">
-                  <div className="flex space-x-1">
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                    <div
-                      className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                      style={{ animationDelay: '0.1s' }}
-                    ></div>
-                    <div
-                      className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                      style={{ animationDelay: '0.2s' }}
-                    ></div>
+            {/* Messages */}
+            <div className="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-hide">
+              {messages.map(message => (
+                <motion.div 
+                  initial={{ opacity: 0, x: message.sender === 'user' ? 20 : -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  key={message.id} 
+                  className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                >
+                  <div className={`max-w-[85%] p-4 rounded-2xl ${
+                    message.sender === 'user' 
+                      ? 'bg-[#25d366]/20 border border-[#25d366]/30 rounded-tr-none' 
+                      : 'bg-white/5 border border-white/5 rounded-tl-none'
+                  }`}>
+                    <p className="text-white text-xs leading-relaxed tracking-wide">{message.text}</p>
+                    <div className="flex items-center justify-end mt-2 space-x-2">
+                      <span className="text-[0.5rem] text-white/40 font-black uppercase tracking-widest">
+                        {formatTime(message.timestamp)}
+                      </span>
+                      {message.sender === 'user' && (
+                        <CheckCheck className={`w-3 h-3 ${message.status === 'read' ? 'text-[#25d366]' : 'text-white/20'}`} />
+                      )}
+                    </div>
                   </div>
+                </motion.div>
+              ))}
+
+              {isTyping && (
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start">
+                  <div className="p-4 bg-white/5 rounded-2xl rounded-tl-none flex space-x-1.5 items-center">
+                    <motion.div animate={{ scale: [1, 1.5, 1] }} transition={{ repeat: Infinity, duration: 1 }} className="w-1.5 h-1.5 bg-[#25d366] rounded-full" />
+                    <motion.div animate={{ scale: [1, 1.5, 1] }} transition={{ repeat: Infinity, duration: 1, delay: 0.2 }} className="w-1.5 h-1.5 bg-[#25d366] rounded-full" />
+                    <motion.div animate={{ scale: [1, 1.5, 1] }} transition={{ repeat: Infinity, duration: 1, delay: 0.4 }} className="w-1.5 h-1.5 bg-[#25d366] rounded-full" />
+                  </div>
+                </motion.div>
+              )}
+            </div>
+
+            {/* Predefined Messages */}
+            {messages.length <= 2 && (
+              <div className="px-6 py-4 bg-white/5 border-t border-white/5 relative z-10">
+                <div className="flex flex-wrap gap-2">
+                  {predefinedMessages.map((msg, index) => (
+                    <motion.button
+                      key={index}
+                      whileHover={{ scale: 1.05, backgroundColor: 'rgba(37, 211, 102, 0.1)' }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => handlePredefinedMessage(msg)}
+                      className="text-[0.6rem] px-4 py-2 border border-white/10 text-white font-black uppercase tracking-widest rounded-xl transition-all"
+                    >
+                      {msg}
+                    </motion.button>
+                  ))}
                 </div>
               </div>
             )}
-          </div>
 
-          {/* Predefined messages */}
-          {messages.length <= 2 && (
-            <div className="px-3 py-2 border-t border-gray-200 dark:border-dark-600">
-              <div className="flex flex-wrap gap-2">
-                {predefinedMessages.map((msg, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handlePredefinedMessage(msg)}
-                    className="text-xs bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-2 py-1 rounded-lg hover:bg-green-200 dark:hover:bg-green-800/50 transition-colors"
-                  >
-                    {msg}
-                  </button>
-                ))}
+            {/* Input */}
+            <div className="p-6 bg-white/5 backdrop-blur-3xl border-t border-white/5 relative z-10">
+              <div className="flex items-center space-x-3">
+                <div className="relative flex-1">
+                  <input
+                    type="text"
+                    value={inputMessage}
+                    onChange={e => setInputMessage(e.target.value)}
+                    onKeyPress={e => e.key === 'Enter' && handleSendMessage()}
+                    placeholder="ENTER QUERY..."
+                    className="w-full h-12 px-6 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[#25d366] text-[0.7rem] font-black uppercase tracking-[0.2em] text-white placeholder:text-white/20 transition-all"
+                    disabled={isTyping}
+                  />
+                </div>
+                <button
+                  onClick={() => handleSendMessage()}
+                  disabled={!inputMessage.trim()}
+                  className="w-12 h-12 bg-[#25d366] text-white rounded-xl hover:scale-105 disabled:opacity-30 disabled:grayscale transition-all flex items-center justify-center shadow-[0_0_15px_rgba(37,211,102,0.3)]"
+                >
+                  <Send className="w-5 h-5" />
+                </button>
+              </div>
+              
+              <div className="text-[0.5rem] text-white/20 font-black uppercase tracking-[0.3em] text-center mt-6 flex items-center justify-center">
+                <Sparkles className="w-3 h-3 mr-2 text-[#ffc957]" />
+                Neural Nexus Uplink Active
               </div>
             </div>
-          )}
-
-          {/* Input */}
-          <div className="p-3 border-t border-gray-200 dark:border-dark-600 bg-white dark:bg-dark-800">
-            <div className="flex space-x-2">
-              <div className="relative flex-1">
-                <input
-                  type="text"
-                  value={inputMessage}
-                  onChange={e => setInputMessage(e.target.value)}
-                  onKeyPress={e => e.key === 'Enter' && handleSendMessage()}
-                  placeholder="Type your message to our WhatsApp support..."
-                  className="w-full px-4 py-3 pl-10 bg-gray-100 dark:bg-dark-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-sm"
-                  aria-label="Type your message to WhatsApp support"
-                  disabled={isTyping}
-                />
-                <HiQuestionMarkCircle className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-              </div>
-              <button
-                onClick={() => handleSendMessage()}
-                disabled={!inputMessage.trim()}
-                className="w-10 h-10 bg-green-500 hover:bg-green-600 disabled:bg-gray-300 dark:disabled:bg-dark-600 rounded-lg flex items-center justify-center text-white transition-colors"
-                aria-label="Send message to WhatsApp support"
-              >
-                <HiPaperAirplane className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

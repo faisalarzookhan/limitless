@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  HiOutlineGlobeAlt,
-  HiOutlineLightningBolt,
-  HiOutlineShieldCheck,
-  HiOutlineChartBar,
-  HiOutlineDocumentReport,
-  HiOutlineMail,
-  HiOutlineDownload,
-  HiOutlineShare,
-} from 'react-icons/hi';
+  Globe,
+  Zap,
+  ShieldCheck,
+  BarChart3,
+  FileText,
+  Mail,
+  Download,
+  Share2,
+  AlertCircle,
+  CheckCircle2,
+  ArrowRight,
+  Database,
+  Cpu,
+  Lock,
+  Search,
+  RefreshCw,
+  Layout,
+  HardDrive
+} from 'lucide-react';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import LimitlessScore from './LimitlessScore';
@@ -143,391 +154,317 @@ const DigitalHealthAuditor = ({ onAuditComplete, onSandboxRequest }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Digital <span className="text-blue-800">Health Audit</span>
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Get a comprehensive analysis of your website's performance,
-            security, and SEO with our AI-powered auditor
-          </p>
-        </div>
-
-        {!scanResults && !isScanning ? (
-          <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
-            <div className="text-center mb-8">
-              <div className="mx-auto bg-gradient-to-r from-blue-600 to-indigo-600 w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                <HiOutlineGlobeAlt className="w-8 h-8 text-white" />
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                Enter Your Website URL
-              </h2>
-              <p className="text-gray-600">
-                We'll analyze your site's performance, security, and SEO
-              </p>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label
-                  htmlFor="url"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  Website URL
-                </label>
-                <input
-                  type="url"
-                  id="url"
-                  value={url}
-                  onChange={e => setUrl(e.target.value)}
-                  placeholder="https://example.com"
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  placeholder="your@email.com"
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl"
-              >
-                Start Digital Health Audit
-              </button>
-            </form>
+    <div className="min-h-screen bg-[#0e1114] py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1ba6d6]/5 to-transparent pointer-events-none"></div>
+      
+      <div className="max-w-7xl mx-auto relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center space-x-3 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-8">
+            <div className="w-2 h-2 bg-[#1ba6d6] rounded-full animate-pulse shadow-[0_0_10px_rgba(27,166,214,0.8)]"></div>
+            <span className="text-[0.6rem] font-black text-white/60 uppercase tracking-[0.3em]">Neural Diagnostic Terminal</span>
           </div>
-        ) : isScanning ? (
-          <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
-            <div className="text-center">
-              <div className="flex justify-center mb-6">
-                <div className="w-24 h-24">
+          <h1 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter mb-6 leading-none">
+            Digital <span className="text-[#1ba6d6]">Health Auditor</span>
+          </h1>
+          <p className="text-[0.7rem] text-white/40 font-black uppercase tracking-[0.3em] max-w-2xl mx-auto leading-relaxed">
+            Execute a comprehensive neural analysis of your target infrastructure's performance, security matrix, and visibility protocols.
+          </p>
+        </motion.div>
+
+        <AnimatePresence mode="wait">
+          {!scanResults && !isScanning ? (
+            <motion.div 
+              key="audit-form"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="bg-white/5 backdrop-blur-3xl rounded-[3rem] border border-white/10 p-12 max-w-3xl mx-auto overflow-hidden relative"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-[#1ba6d6]/10 to-transparent pointer-events-none"></div>
+              
+              <div className="text-center mb-12 relative z-10">
+                <div className="mx-auto w-20 h-20 bg-[#1ba6d6] rounded-3xl flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(27,166,214,0.3)]">
+                  <Globe className="w-10 h-10 text-white" />
+                </div>
+                <h2 className="text-xs font-black text-white uppercase tracking-[0.4em] mb-4">Initialize Target Scan</h2>
+                <p className="text-[0.6rem] text-white/30 font-black uppercase tracking-[0.2em]">Deploying diagnostic nanobots for structural integrity audit.</p>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
+                <div className="space-y-4">
+                  <label htmlFor="url" className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.3em] ml-2">Target Vector (URL)</label>
+                  <div className="relative group">
+                    <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 group-focus-within:text-[#1ba6d6] transition-colors" />
+                    <input
+                      type="url"
+                      id="url"
+                      value={url}
+                      onChange={e => setUrl(e.target.value)}
+                      placeholder="HTTPS://TARGET-INFRASTRUCTURE.COM"
+                      required
+                      className="w-full bg-white/5 border border-white/5 focus:border-[#1ba6d6]/50 focus:bg-white/10 px-14 py-6 rounded-2xl text-[0.8rem] font-black uppercase tracking-widest text-white placeholder:text-white/10 outline-none transition-all duration-500"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <label htmlFor="email" className="text-[0.6rem] font-black text-white/40 uppercase tracking-[0.3em] ml-2">Secure Reporting Channel</label>
+                  <div className="relative group">
+                    <Mail className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 group-focus-within:text-[#1ba6d6] transition-colors" />
+                    <input
+                      type="email"
+                      id="email"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                      placeholder="OPERATOR@COMMAND.NODE"
+                      required
+                      className="w-full bg-white/5 border border-white/5 focus:border-[#1ba6d6]/50 focus:bg-white/10 px-14 py-6 rounded-2xl text-[0.8rem] font-black uppercase tracking-widest text-white placeholder:text-white/10 outline-none transition-all duration-500"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-6 bg-[#1ba6d6] text-white text-[0.85rem] font-black uppercase tracking-[0.5em] mask-btn hover:scale-[1.02] active:scale-95 transition-all duration-500 shadow-[0_0_50px_rgba(27,166,214,0.4)] flex items-center justify-center group"
+                >
+                  Initiate System Audit
+                  <ArrowRight className="ml-4 w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                </button>
+              </form>
+            </motion.div>
+          ) : isScanning ? (
+            <motion.div 
+              key="audit-scanning"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="bg-white/5 backdrop-blur-3xl rounded-[3rem] border border-white/10 p-16 max-w-2xl mx-auto overflow-hidden relative text-center"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-[#1ba6d6]/10 to-transparent pointer-events-none"></div>
+              
+              <div className="flex justify-center mb-10 relative z-10">
+                <div className="w-32 h-32 relative">
                   <CircularProgressbar
-                    value={Math.floor(Math.random() * 100)}
-                    text={`${Math.floor(Math.random() * 100)}%`}
+                    value={75}
                     styles={buildStyles({
                       rotation: 0.25,
-                      strokeLinecap: 'butt',
-                      textSize: '16px',
-                      pathTransitionDuration: 0.5,
-                      pathColor: `#4F46E5`,
-                      textColor: '#4F46E5',
-                      trailColor: '#E0E7FF',
+                      strokeLinecap: 'round',
+                      pathTransitionDuration: 2,
+                      pathColor: `#1ba6d6`,
+                      trailColor: 'rgba(255,255,255,0.05)',
                     })}
                   />
-                </div>
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                Auditing Your Website
-              </h2>
-              <p className="text-gray-600 mb-6">
-                Analyzing performance, security, and SEO metrics...
-              </p>
-
-              <div className="space-y-3">
-                <div className="flex items-center text-gray-600">
-                  <HiOutlineLightningBolt className="w-5 h-5 mr-2 text-yellow-500" />
-                  <span>Performance metrics</span>
-                </div>
-                <div className="flex items-center text-gray-600">
-                  <HiOutlineShieldCheck className="w-5 h-5 mr-2 text-green-500" />
-                  <span>Security checks</span>
-                </div>
-                <div className="flex items-center text-gray-600">
-                  <HiOutlineChartBar className="w-5 h-5 mr-2 text-blue-500" />
-                  <span>SEO analysis</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="space-y-8">
-            <div className="bg-white rounded-2xl shadow-xl p-8">
-              <div className="flex flex-col md:flex-row items-center justify-between mb-8">
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                    Audit Results for {url}
-                  </h2>
-                  <p className="text-gray-600">
-                    Completed on {new Date().toLocaleDateString()}
-                  </p>
-                </div>
-
-                <div className="mt-4 md:mt-0">
-                  <div className="flex flex-wrap gap-3">
-                    <button
-                      onClick={resetAudit}
-                      className="bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg font-medium transition"
-                    >
-                      New Audit
-                    </button>
-
-                    <button
-                      onClick={async () => {
-                        if (scanResults) {
-                          try {
-                            const pdfBlob = await generateTechnicalAuditReport({
-                              lcp: scanResults.performance.lcp,
-                              fid: scanResults.performance.fid,
-                              cls: scanResults.performance.cls,
-                              fcp: scanResults.performance.fcp,
-                              tti: scanResults.performance.si,
-                              sslStatus: scanResults.security.sslValid
-                                ? 'Valid'
-                                : 'Invalid',
-                              hstsStatus: scanResults.security.hsts
-                                ? 'Configured'
-                                : 'Not Configured',
-                              mixedContent:
-                                scanResults.security.sslIssues &&
-                                scanResults.security.sslIssues.length > 0
-                                  ? 'Issues Found'
-                                  : 'None',
-                              securityHeaders:
-                                scanResults.security.headerIssues &&
-                                scanResults.security.headerIssues.length > 0
-                                  ? 'Issues Found'
-                                  : 'Properly Configured',
-                              vulnerabilities: 'Scan Required',
-                              metaTitle: 'Check Required',
-                              metaDescription: 'Check Required',
-                              headerStructure: 'Check Required',
-                              imageAltText: 'Check Required',
-                              pageSpeed: `${scanResults.speed.loadTime.toFixed(1)}s`,
-                            });
-                            downloadPDF(
-                              pdfBlob,
-                              `Technical-Audit-Report-${new Date().toISOString().split('T')[0]}.pdf`
-                            );
-
-                            // Send notification about PDF download
-                            await sendLeadGenerationNotification({
-                              formType: 'technical-audit-pdf',
-                              email,
-                              url,
-                              timestamp: new Date().toISOString(),
-                              page: window.location.pathname,
-                              userAgent: navigator.userAgent,
-                            });
-                          } catch (error) {
-                            console.error('Error generating PDF:', error);
-                            alert(
-                              'Error generating PDF report. Please try again.'
-                            );
-                          }
-                        }
-                      }}
-                      className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition flex items-center"
-                    >
-                      <HiOutlineDownload className="w-4 h-4 mr-2" />
-                      Download PDF
-                    </button>
-
-                    <button
-                      onClick={async () => {
-                        if (scanResults && email) {
-                          try {
-                            const pdfBlob = await generateTechnicalAuditReport({
-                              lcp: scanResults.performance.lcp,
-                              fid: scanResults.performance.fid,
-                              cls: scanResults.performance.cls,
-                              fcp: scanResults.performance.fcp,
-                              tti: scanResults.performance.si,
-                              sslStatus: scanResults.security.sslValid
-                                ? 'Valid'
-                                : 'Invalid',
-                              hstsStatus: scanResults.security.hsts
-                                ? 'Configured'
-                                : 'Not Configured',
-                              mixedContent:
-                                scanResults.security.sslIssues &&
-                                scanResults.security.sslIssues.length > 0
-                                  ? 'Issues Found'
-                                  : 'None',
-                              securityHeaders:
-                                scanResults.security.headerIssues &&
-                                scanResults.security.headerIssues.length > 0
-                                  ? 'Issues Found'
-                                  : 'Properly Configured',
-                              vulnerabilities: 'Scan Required',
-                              metaTitle: 'Check Required',
-                              metaDescription: 'Check Required',
-                              headerStructure: 'Check Required',
-                              imageAltText: 'Check Required',
-                              pageSpeed: `${scanResults.speed.loadTime.toFixed(1)}s`,
-                            });
-
-                            // In a real implementation, we would send the PDF via email
-                            // For now, we'll just send a notification that an email should be sent
-                            await sendLeadGenerationNotification({
-                              formType: 'technical-audit-email',
-                              email,
-                              url,
-                              subject: 'Your Technical Audit Report',
-                              timestamp: new Date().toISOString(),
-                              page: window.location.pathname,
-                              userAgent: navigator.userAgent,
-                            });
-
-                            alert(
-                              `Report will be sent to ${email}. In a production environment, this would trigger an email with the PDF attachment.`
-                            );
-                          } catch (error) {
-                            console.error('Error preparing email:', error);
-                            alert('Error preparing email. Please try again.');
-                          }
-                        }
-                      }}
-                      className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-medium transition flex items-center"
-                    >
-                      <HiOutlineMail className="w-4 h-4 mr-2" />
-                      Email Report
-                    </button>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <RefreshCw className="w-10 h-10 text-white animate-spin" style={{ animationDuration: '3s' }} />
                   </div>
                 </div>
               </div>
 
+              <h2 className="text-xl font-black text-white uppercase tracking-[0.4em] mb-4 relative z-10">
+                Auditing Target...
+              </h2>
+              <p className="text-[0.6rem] text-white/30 font-black uppercase tracking-[0.2em] mb-12 relative z-10">
+                Decrypting performance nodes and security layers...
+              </p>
+
+              <div className="grid grid-cols-1 gap-4 max-w-xs mx-auto relative z-10">
+                {[
+                  { icon: Zap, text: 'Performance Node Scan', color: '#ffc957' },
+                  { icon: ShieldCheck, text: 'Security Matrix Check', color: '#25d366' },
+                  { icon: BarChart3, text: 'SEO Frequency Tuning', color: '#1ba6d6' }
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center p-4 bg-white/5 border border-white/5 rounded-2xl">
+                    <item.icon className="w-4 h-4 mr-4" style={{ color: item.color }} />
+                    <span className="text-[0.55rem] font-black text-white/50 uppercase tracking-widest">{item.text}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          ) : (
+          <motion.div 
+            key="audit-results"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="space-y-10"
+          >
+            <div className="bg-white/5 backdrop-blur-3xl rounded-[3rem] border border-white/10 p-12 overflow-hidden relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#1ba6d6]/5 to-transparent pointer-events-none"></div>
+              
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-8 mb-16 relative z-10">
+                <div>
+                  <h2 className="text-2xl font-black text-white uppercase tracking-tighter mb-3">
+                    Diagnostic Output: <span className="text-[#1ba6d6]">{url}</span>
+                  </h2>
+                  <p className="text-[0.6rem] text-white/30 font-black uppercase tracking-[0.2em]">
+                    REPORT GENERATED ON {new Date().toLocaleDateString()}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap justify-center gap-4">
+                  <button
+                    onClick={resetAudit}
+                    className="px-6 py-4 bg-white/5 hover:bg-white/10 text-white text-[0.6rem] font-black uppercase tracking-[0.3em] rounded-2xl border border-white/5 transition-all duration-300"
+                  >
+                    Reset Terminal
+                  </button>
+
+                  <button
+                    onClick={async () => {
+                      if (scanResults) {
+                        try {
+                          const pdfBlob = await generateTechnicalAuditReport({
+                            lcp: scanResults.performance.lcp,
+                            fid: scanResults.performance.fid,
+                            cls: scanResults.performance.cls,
+                            fcp: scanResults.performance.fcp,
+                            tti: scanResults.performance.si,
+                            sslStatus: scanResults.security.sslValid ? 'Valid' : 'Invalid',
+                            hstsStatus: scanResults.security.hsts ? 'Configured' : 'Not Configured',
+                            mixedContent: scanResults.security.sslIssues && scanResults.security.sslIssues.length > 0 ? 'Issues Found' : 'None',
+                            securityHeaders: scanResults.security.headerIssues && scanResults.security.headerIssues.length > 0 ? 'Issues Found' : 'Properly Configured',
+                            vulnerabilities: 'Scan Required',
+                            metaTitle: 'Check Required',
+                            metaDescription: 'Check Required',
+                            headerStructure: 'Check Required',
+                            imageAltText: 'Check Required',
+                            pageSpeed: `${scanResults.speed.loadTime.toFixed(1)}s`,
+                          });
+                          downloadPDF(pdfBlob, `Nexus-Audit-${new Date().toISOString().split('T')[0]}.pdf`);
+                          await sendLeadGenerationNotification({
+                            formType: 'technical-audit-pdf',
+                            email, url, timestamp: new Date().toISOString(), page: window.location.pathname, userAgent: navigator.userAgent
+                          });
+                        } catch (error) {
+                          console.error('Error generating PDF:', error);
+                        }
+                      }
+                    }}
+                    className="px-8 py-4 bg-[#1ba6d6] text-white text-[0.6rem] font-black uppercase tracking-[0.3em] rounded-2xl shadow-[0_0_20px_rgba(27,166,214,0.3)] hover:scale-105 transition-all duration-500 flex items-center"
+                  >
+                    <Download className="w-4 h-4 mr-3" />
+                    Export PDF
+                  </button>
+
+                  <button
+                    onClick={async () => {
+                      if (scanResults && email) {
+                        try {
+                          await sendLeadGenerationNotification({
+                            formType: 'technical-audit-email',
+                            email, url, subject: 'Your Technical Audit Report', timestamp: new Date().toISOString(), page: window.location.pathname, userAgent: navigator.userAgent
+                          });
+                          alert(`Diagnostic report transmitted to ${email}.`);
+                        } catch (error) {
+                          console.error('Error preparing email:', error);
+                        }
+                      }
+                    }}
+                    className="px-8 py-4 bg-white text-[#0e1114] text-[0.6rem] font-black uppercase tracking-[0.3em] rounded-2xl hover:scale-105 transition-all duration-500 flex items-center"
+                  >
+                    <Mail className="w-4 h-4 mr-3" />
+                    Transmit Report
+                  </button>
+                </div>
+              </div>
+
               {/* Limitless Score */}
-              <div className="text-center mb-12">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                  Your Limitless Score
+              <div className="flex flex-col items-center justify-center mb-20 relative z-10">
+                <h3 className="text-xs font-black text-white/40 uppercase tracking-[0.4em] mb-12">
+                  Infrastructure Integrity Index
                 </h3>
-                <div className="flex justify-center">
+                <div className="relative group">
+                  <div className="absolute inset-0 bg-[#1ba6d6]/20 blur-[100px] rounded-full group-hover:bg-[#1ba6d6]/30 transition-all duration-1000"></div>
                   <LimitlessScore
                     score={limitlessScore}
-                    size={200}
-                    strokeWidth={8}
+                    size={280}
+                    strokeWidth={10}
                   />
                 </div>
               </div>
 
               {/* Performance Metrics */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <div className="bg-blue-50 p-6 rounded-xl">
-                  <div className="text-blue-800 text-3xl font-bold mb-2">
-                    {scanResults.performance.lcp.toFixed(0)}ms
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 relative z-10">
+                {[
+                  { label: 'Largest Paint', value: `${scanResults.performance.lcp.toFixed(0)}ms`, sub: 'Target < 2500ms', icon: Layout, color: '#1ba6d6' },
+                  { label: 'Layout Shift', value: scanResults.performance.cls.toFixed(2), sub: 'Target < 0.1', icon: Cpu, color: '#25d366' },
+                  { label: 'Input Delay', value: `${scanResults.performance.fid.toFixed(0)}ms`, sub: 'Target < 100ms', icon: Zap, color: '#ffc957' },
+                  { label: 'Latency Node', value: `${scanResults.speed.loadTime.toFixed(1)}s`, sub: 'Target < 3s', icon: HardDrive, color: '#ff4d4d' }
+                ].map((metric, i) => (
+                  <div key={i} className="bg-white/5 border border-white/5 rounded-3xl p-8 hover:bg-white/10 transition-colors group">
+                    <div className="flex justify-between items-start mb-6">
+                      <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-[#1ba6d6]/20 transition-colors">
+                        <metric.icon className="w-5 h-5" style={{ color: metric.color }} />
+                      </div>
+                    </div>
+                    <div className="text-3xl font-black text-white tracking-tighter mb-2">
+                      {metric.value}
+                    </div>
+                    <div className="text-[0.6rem] font-black text-white/60 uppercase tracking-widest">
+                      {metric.label}
+                    </div>
+                    <div className="text-[0.5rem] font-black text-white/20 uppercase tracking-widest mt-2">{metric.sub}</div>
                   </div>
-                  <div className="text-blue-600 font-medium">
-                    Largest Contentful Paint
-                  </div>
-                  <div className="text-sm text-gray-600 mt-1">
-                    Should be &lt; 2500ms
-                  </div>
-                </div>
-
-                <div className="bg-green-50 p-6 rounded-xl">
-                  <div className="text-green-800 text-3xl font-bold mb-2">
-                    {scanResults.performance.cls.toFixed(2)}
-                  </div>
-                  <div className="text-green-600 font-medium">
-                    Cumulative Layout Shift
-                  </div>
-                  <div className="text-sm text-gray-600 mt-1">
-                    Should be &lt; 0.1
-                  </div>
-                </div>
-
-                <div className="bg-purple-50 p-6 rounded-xl">
-                  <div className="text-purple-800 text-3xl font-bold mb-2">
-                    {scanResults.performance.fid.toFixed(0)}ms
-                  </div>
-                  <div className="text-purple-600 font-medium">
-                    First Input Delay
-                  </div>
-                  <div className="text-sm text-gray-600 mt-1">
-                    Should be &lt; 100ms
-                  </div>
-                </div>
-
-                <div className="bg-yellow-50 p-6 rounded-xl">
-                  <div className="text-yellow-800 text-3xl font-bold mb-2">
-                    {scanResults.speed.loadTime.toFixed(1)}s
-                  </div>
-                  <div className="text-yellow-600 font-medium">Load Time</div>
-                  <div className="text-sm text-gray-600 mt-1">
-                    Recommended &lt; 3s
-                  </div>
-                </div>
+                ))}
               </div>
 
               {/* Issues Summary */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                    Performance Issues
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-16 relative z-10">
+                <div className="bg-white/5 border border-white/5 rounded-3xl p-8">
+                  <h4 className="text-[0.6rem] font-black text-[#1ba6d6] uppercase tracking-[0.3em] mb-8 flex items-center">
+                    <Zap className="w-3.5 h-3.5 mr-2" />
+                    Performance Anomalies
                   </h4>
-                  <ul className="space-y-2">
+                  <ul className="space-y-4">
                     {scanResults.speed.issues.map((issue, index) => (
                       <li key={index} className="flex items-start">
-                        <span className="text-red-500 mr-2">•</span>
-                        <span className="text-gray-700">{issue}</span>
+                        <div className="w-1 h-1 rounded-full bg-red-500 mt-1.5 mr-3 flex-shrink-0 animate-pulse"></div>
+                        <span className="text-[0.6rem] font-black text-white/40 uppercase tracking-widest leading-relaxed">{issue}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                    SEO Issues
+                <div className="bg-white/5 border border-white/5 rounded-3xl p-8">
+                  <h4 className="text-[0.6rem] font-black text-[#ffc957] uppercase tracking-[0.3em] mb-8 flex items-center">
+                    <Search className="w-3.5 h-3.5 mr-2" />
+                    Visibility Protocol
                   </h4>
-                  <ul className="space-y-2">
+                  <ul className="space-y-4">
                     {scanResults.seo.issues.map((issue, index) => (
                       <li key={index} className="flex items-start">
-                        <span className="text-red-500 mr-2">•</span>
-                        <span className="text-gray-700">{issue}</span>
+                        <div className="w-1 h-1 rounded-full bg-yellow-500 mt-1.5 mr-3 flex-shrink-0"></div>
+                        <span className="text-[0.6rem] font-black text-white/40 uppercase tracking-widest leading-relaxed">{issue}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                    Security Issues
+                <div className="bg-white/5 border border-white/5 rounded-3xl p-8">
+                  <h4 className="text-[0.6rem] font-black text-[#25d366] uppercase tracking-[0.3em] mb-8 flex items-center">
+                    <ShieldCheck className="w-3.5 h-3.5 mr-2" />
+                    Security Perimeter
                   </h4>
-                  <div className="space-y-3">
+                  <div className="space-y-6">
                     <div>
-                      <div className="font-medium text-sm text-gray-700 mb-1">
-                        SSL Certificate:
-                      </div>
-                      <div
-                        className={`text-sm ${scanResults.security.sslValid ? 'text-green-600' : 'text-red-600'}`}
-                      >
-                        {scanResults.security.sslValid ? 'Valid' : 'Invalid'}
+                      <div className="text-[0.5rem] font-black text-white/20 uppercase tracking-[0.3em] mb-2">SSL Status</div>
+                      <div className={`text-[0.65rem] font-black uppercase tracking-widest ${scanResults.security.sslValid ? 'text-[#25d366]' : 'text-red-500'}`}>
+                        {scanResults.security.sslValid ? 'ENCRYPTED' : 'EXPOSED'}
                       </div>
                     </div>
                     <div>
-                      <div className="font-medium text-sm text-gray-700 mb-1">
-                        Security Grade:
-                      </div>
-                      <div
-                        className={`text-lg font-bold ${scanResults.security.grade === 'A+' || scanResults.security.grade === 'A' ? 'text-green-600' : scanResults.security.grade === 'B' || scanResults.security.grade === 'C' ? 'text-yellow-600' : 'text-red-600'}`}
-                      >
+                      <div className="text-[0.5rem] font-black text-white/20 uppercase tracking-[0.3em] mb-2">Threat Grade</div>
+                      <div className={`text-2xl font-black ${scanResults.security.grade.startsWith('A') ? 'text-[#25d366]' : scanResults.security.grade === 'B' ? 'text-[#ffc957]' : 'text-red-500'}`}>
                         {scanResults.security.grade}
                       </div>
                     </div>
                     <div>
-                      <div className="font-medium text-sm text-gray-700 mb-1">
-                        Overall Score:
-                      </div>
-                      <div className="text-lg font-bold text-blue-600">
-                        {scanResults.security.overallScore}/100
+                      <div className="text-[0.5rem] font-black text-white/20 uppercase tracking-[0.3em] mb-2">Defense Score</div>
+                      <div className="text-xl font-black text-[#1ba6d6]">
+                        {scanResults.security.overallScore}<span className="text-white/20">/100</span>
                       </div>
                     </div>
                   </div>
@@ -535,41 +472,51 @@ const DigitalHealthAuditor = ({ onAuditComplete, onSandboxRequest }) => {
               </div>
 
               {/* Security Recommendations */}
-              <div className="mb-8">
-                <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                  Security Recommendations
+              <div className="relative z-10 bg-[#ffc957]/5 border border-[#ffc957]/10 rounded-3xl p-8">
+                <h4 className="text-[0.6rem] font-black text-[#ffc957] uppercase tracking-[0.4em] mb-8 flex items-center">
+                  <AlertCircle className="w-4 h-4 mr-3" />
+                  Strategic Mitigation Protocols
                 </h4>
-                <ul className="space-y-2">
-                  {scanResults.security.recommendations.map(
-                    (recommendation, index) => (
-                      <li key={index} className="flex items-start">
-                        <span className="text-yellow-500 mr-2">•</span>
-                        <span className="text-gray-700">{recommendation}</span>
-                      </li>
-                    )
-                  )}
-                </ul>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {scanResults.security.recommendations.map((recommendation, index) => (
+                    <div key={index} className="flex items-start p-4 bg-white/5 rounded-2xl border border-white/5">
+                      <div className="w-2 h-2 rounded-full bg-[#ffc957] mt-1.5 mr-4 flex-shrink-0"></div>
+                      <span className="text-[0.6rem] font-black text-white/60 uppercase tracking-widest leading-relaxed">
+                        {recommendation}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
             {/* Call to Action */}
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl shadow-xl p-8 text-white text-center">
-              <h3 className="text-2xl font-bold mb-4">
-                Experience how TrackIT provides the stability you're missing
-              </h3>
-              <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-                Ready to improve your website's performance and resolve these
-                issues? Try our TrackIT solution in our Instant Sandbox.
-              </p>
-              <button
-                onClick={onSandboxRequest}
-                className="bg-yellow-500 hover:bg-yellow-400 text-yellow-900 font-bold py-3 px-8 rounded-lg transition duration-300"
-              >
-                Try TrackIT in Sandbox
-              </button>
-            </div>
-          </div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-gradient-to-br from-[#1ba6d6] to-[#0e1114] rounded-[4rem] p-16 text-center shadow-2xl overflow-hidden relative"
+            >
+              <div className="absolute inset-0 bg-[#0e1114]/50 backdrop-blur-3xl"></div>
+              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
+              
+              <div className="relative z-10">
+                <h3 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter mb-8 leading-none">
+                  Nexus Upgrade <span className="text-white/40">Available</span>
+                </h3>
+                <p className="text-[0.7rem] text-white/60 font-black uppercase tracking-[0.3em] mb-12 max-w-2xl mx-auto leading-relaxed">
+                  Experience the untethered stability of TrackIT. Deploy your target infrastructure into our secure neural sandbox environment for real-time stress testing.
+                </p>
+                <button
+                  onClick={onSandboxRequest}
+                  className="px-12 py-6 bg-white text-[#0e1114] text-[0.8rem] font-black uppercase tracking-[0.5em] mask-btn hover:scale-105 transition-all duration-500 shadow-2xl"
+                >
+                  Initialize Sandbox
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
         )}
+      </AnimatePresence>
       </div>
     </div>
   );

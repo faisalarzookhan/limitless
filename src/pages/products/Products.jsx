@@ -1,25 +1,32 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  HiServer,
-  HiChartBar,
-  HiUsers,
-  HiClock,
-  HiTicket,
-  HiMail,
-  HiDatabase,
-  HiCheckCircle,
-  HiArrowRight,
-  HiLightningBolt,
-  HiShieldCheck,
-  HiCube,
-  HiPlay,
-  HiDownload,
-  HiStar,
-  HiSparkles,
-} from 'react-icons/hi';
+  Server,
+  BarChart3,
+  Users,
+  Clock,
+  Ticket,
+  Mail,
+  Database,
+  CheckCircle2,
+  ArrowRight,
+  Zap,
+  ShieldCheck,
+  Box,
+  Play,
+  Download,
+  Star,
+  Sparkles,
+  ChevronRight,
+  Filter,
+  Search,
+  Cpu,
+  Globe,
+  Activity,
+  X,
+  Plus
+} from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
 
 const Products = () => {
@@ -27,292 +34,170 @@ const Products = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const categories = [
-    { id: 'all', name: 'All Products' },
-    { id: 'management', name: 'Management' },
-    { id: 'tracking', name: 'Tracking & Monitoring' },
-    { id: 'communication', name: 'Communication' },
-    { id: 'development', name: 'Development Tools' },
+    { id: 'all', name: 'Global Registry' },
+    { id: 'management', name: 'Strategic Nodes' },
+    { id: 'tracking', name: 'Telemetry & Audit' },
+    { id: 'communication', name: 'Nexus Channels' },
+    { id: 'development', name: 'Logic Engines' },
   ];
 
   const products = [
     {
       id: 'trackit',
       name: 'TrackIT',
-      tagline: 'Track Everything, Manage Anything',
+      tagline: 'Deterministic Asset Telemetry',
       category: 'tracking',
-      description:
-        'Comprehensive IT asset tracking and management solution for modern enterprises',
-      longDescription:
-        'TrackIT is your complete IT asset management system that helps you track, manage, and optimize all your IT resources. From hardware to software licenses, TrackIT gives you complete visibility and control over your IT infrastructure.',
-      icon: HiServer,
-      color: 'blue',
+      description: 'High-fidelity IT asset monitoring and lifecycle synthesis for modern enterprises.',
+      longDescription: 'TrackIT is a systemic asset management node that provides absolute visibility into hardware, software, and spectral resources. Eliminate nodal decay through real-time telemetry and automated compliance audits.',
+      icon: Server,
+      color: 'primary',
       monthlyPrice: 9999,
       yearlyPrice: 99999,
       features: [
-        'Hardware & Software Asset Tracking',
-        'License Management & Compliance',
-        'Warranty & Maintenance Tracking',
-        'Asset Lifecycle Management',
-        'Depreciation Calculations',
-        'Audit Reports & Compliance',
-        'QR Code Integration',
-        'Real-time Inventory Updates',
-        'Custom Fields & Tags',
-        'Multi-location Support',
+        'Real-time Hardware Telemetry',
+        'Deterministic License Compliance',
+        'Warranty Pulse Monitoring',
+        'Asset Lifecycle Synthesis',
+        'Automated Depreciation Logic',
+        'QR/NFC Registry Integration',
+        'Multi-location Node Support',
       ],
-      targetUsers: [
-        'IT Departments',
-        'System Administrators',
-        'Asset Managers',
-      ],
-      useCases: [
-        'Track all IT assets across multiple locations',
-        'Manage software licenses and renewals',
-        'Generate compliance and audit reports',
-        'Plan hardware refresh cycles',
-      ],
-      metrics: {
-        users: '500+',
-        satisfaction: '4.8/5',
-        uptime: '99.9%',
-      },
+      metrics: { users: '500+', satisfaction: '4.8/5', uptime: '99.9%' },
     },
     {
       id: 'tracko',
       name: 'TrackO',
-      tagline: 'Operations Excellence, Simplified',
+      tagline: 'Operational Logic Optimization',
       category: 'tracking',
-      description:
-        'End-to-end operations tracking and workflow management for peak efficiency',
-      longDescription:
-        'TrackO streamlines your business operations with real-time tracking, workflow automation, and intelligent analytics. Perfect for manufacturing, logistics, and service industries.',
-      icon: HiChartBar,
-      color: 'green',
+      description: 'End-to-end workflow synthesis and performance monitoring for peak efficiency.',
+      longDescription: 'TrackO optimizes operational throughput through real-time bottleneck detection and automated logic flows. Perfect for manufacturing and logistics nodes requiring high-precision tracking.',
+      icon: Activity,
+      color: 'secondary',
       monthlyPrice: 14999,
       yearlyPrice: 149999,
       features: [
-        'Real-time Operations Monitoring',
-        'Workflow Automation',
-        'Task Assignment & Tracking',
-        'Performance Analytics Dashboard',
-        'Resource Allocation',
-        'Process Optimization',
-        'Custom Dashboards',
-        'Integration APIs',
-        'Mobile App Support',
-        'Notification System',
+        'Neural Workflow Automation',
+        'Real-time Throughput Monitoring',
+        'Task Propagation Tracking',
+        'Performance Analytics Registry',
+        'Automated Resource Allocation',
+        'Custom Operational Dashboards',
+        'Edge Logic Integration',
       ],
-      targetUsers: [
-        'Operations Managers',
-        'Process Engineers',
-        'Business Analysts',
-      ],
-      useCases: [
-        'Monitor production floor activities',
-        'Automate repetitive workflows',
-        'Track KPIs and performance metrics',
-        'Optimize resource utilization',
-      ],
-      metrics: {
-        users: '1,000+',
-        satisfaction: '4.7/5',
-        efficiency: '+45%',
-      },
+      metrics: { users: '1K+', satisfaction: '4.7/5', efficiency: '+45%' },
     },
     {
       id: 'hrims',
       name: 'HR-IMS',
-      tagline: 'Empower Your People, Elevate Your Business',
+      tagline: 'Identity & Talent Orchestration',
       category: 'management',
-      description:
-        'Complete HR management solution for modern businesses of all sizes',
-      longDescription:
-        'HR-IMS is your all-in-one human resources management system that handles everything from recruitment to retirement. Streamline HR processes, engage employees, and drive organizational growth.',
-      icon: HiUsers,
-      color: 'purple',
+      description: 'Universal identity management and talent lifecycle synthesis.',
+      longDescription: 'HR-IMS manages the human element of your architecture. From initial nodal synchronization (onboarding) to final archival, it ensures talent integrity and operational harmony.',
+      icon: Users,
+      color: 'primary',
       monthlyPrice: 19999,
       yearlyPrice: 199999,
       popular: true,
       features: [
-        'Employee Database Management',
-        'Recruitment & Onboarding',
-        'Attendance & Leave Management',
-        'Payroll Processing',
-        'Performance Appraisals',
-        'Training & Development',
-        'Employee Self-Service Portal',
-        'Compliance & Reporting',
-        'Document Management',
-        'Mobile Access',
+        'Universal Identity Registry',
+        'Nodal Onboarding Protocols',
+        'Temporal Attendance Logs',
+        'Automated Payroll Logic',
+        'Performance Synthesis Matrix',
+        'Self-Service Registry Access',
+        'Compliance & Reporting Nodes',
       ],
-      targetUsers: ['HR Departments', 'People Operations', 'Business Owners'],
-      useCases: [
-        'Streamline recruitment and onboarding',
-        'Automate payroll and attendance',
-        'Conduct performance reviews',
-        'Manage employee benefits and training',
-      ],
-      metrics: {
-        users: '2,000+',
-        satisfaction: '4.9/5',
-        timesSaved: '20 hrs/week',
-      },
+      metrics: { users: '2K+', satisfaction: '4.9/5', timeSaved: '20h/w' },
     },
     {
       id: 'worktrack',
       name: 'WorkTrack',
-      tagline: 'Know Where Time Goes',
+      tagline: 'Temporal Resource Auditor',
       category: 'tracking',
-      description:
-        'Advanced workforce management and productivity tracking solution',
-      longDescription:
-        'WorkTrack helps you understand how your team spends time, optimize productivity, and improve project profitability. Perfect for agencies, consultancies, and remote teams.',
-      icon: HiClock,
-      color: 'orange',
+      description: 'Advanced workforce synchronization and productivity telemetry.',
+      longDescription: 'WorkTrack decodes the temporal expenditure of your workforce nodes. Gain insights into project-specific throughput and optimize for maximum profitability across remote registries.',
+      icon: Clock,
+      color: 'secondary',
       monthlyPrice: 7999,
       yearlyPrice: 79999,
       features: [
-        'Time Tracking & Timesheets',
-        'Project Time Allocation',
-        'Attendance Management',
-        'Shift Scheduling',
-        'GPS-based Clock In/Out',
-        'Productivity Analytics',
-        'Billable Hours Tracking',
-        'Mobile App Support',
-        'Screenshot Monitoring (Optional)',
-        'Integration with Project Tools',
+        'Precision Time Telemetry',
+        'Project Nodal Allocation',
+        'Geospatial Heartbeat (GPS)',
+        'Productivity Pulse Analytics',
+        'Automated Timesheet Synthesis',
+        'Billable Logic Integrations',
+        'Remote Node Monitoring',
       ],
-      targetUsers: ['Project Managers', 'Team Leads', 'Remote Teams'],
-      useCases: [
-        'Track billable hours for clients',
-        'Monitor remote team productivity',
-        'Schedule shifts and manage attendance',
-        'Generate accurate timesheets',
-      ],
-      metrics: {
-        users: '1,500+',
-        satisfaction: '4.6/5',
-        accuracy: '99%',
-      },
+      metrics: { users: '1.5K+', satisfaction: '4.6/5', accuracy: '99%' },
     },
     {
       id: 'ittms',
       name: 'IT-TMS',
-      tagline: 'Support Made Simple',
+      tagline: 'Resolution Support Engine',
       category: 'management',
-      description: 'Comprehensive IT helpdesk and ticket management system',
-      longDescription:
-        'IT-TMS is your complete IT service management solution that helps you deliver exceptional support. Manage tickets, track SLAs, and keep your users happy.',
-      icon: HiTicket,
-      color: 'red',
+      description: 'Enterprise helpdesk and protocol resolution infrastructure.',
+      longDescription: 'IT-TMS is the primary support node for your ecosystem. Manage ticket propagation, track resolution SLAs, and maintain system integrity through high-fidelity user assistance.',
+      icon: Ticket,
+      color: 'primary',
       monthlyPrice: 12999,
       yearlyPrice: 129999,
       features: [
-        'Ticket Creation & Assignment',
-        'Priority & SLA Management',
-        'Knowledge Base Integration',
-        'Multi-channel Support (Email, Chat, Portal)',
-        'Automated Workflows',
-        'Asset Linking',
-        'Customer Portal',
-        'Analytics & Reporting',
-        'Escalation Rules',
-        'Mobile App',
+        'Ticket Propagation Matrix',
+        'SLA Integrity Monitoring',
+        'Neural Knowledge Repository',
+        'Omnichannel Protocol Support',
+        'Automated Escalation Logic',
+        'Asset Hardware Linking',
+        'Registry User Portal',
       ],
-      targetUsers: ['IT Support Teams', 'Help Desk', 'Service Desk'],
-      useCases: [
-        'Manage IT support tickets',
-        'Track SLA compliance',
-        'Build knowledge base',
-        'Provide multi-channel support',
-      ],
-      metrics: {
-        users: '800+',
-        satisfaction: '4.7/5',
-        resolution: '-40% time',
-      },
+      metrics: { users: '800+', satisfaction: '4.7/5', latency: '-40%' },
     },
     {
       id: 'mailto',
       name: 'MailTO',
-      tagline: 'Email Management, Perfected',
+      tagline: 'Ambient Communication Hub',
       category: 'communication',
-      description: 'Intelligent email management and automation platform',
-      longDescription:
-        'MailTO helps you take control of your inbox with smart automation, team collaboration, and powerful analytics. Perfect for sales teams, support teams, and agencies.',
-      icon: HiMail,
-      color: 'cyan',
+      description: 'Intelligent message orchestration and automation platform.',
+      longDescription: 'MailTO synchronizes your communication nodes with neural intelligence. Automate follow-up sequences and manage high-volume messaging with absolute deterministic accuracy.',
+      icon: Mail,
+      color: 'secondary',
       monthlyPrice: 8999,
       yearlyPrice: 89999,
       features: [
-        'Unified Inbox Management',
-        'Email Automation & Templates',
-        'Campaign Management',
-        'Email Analytics',
-        'Team Collaboration',
-        'Priority Inbox',
-        'Smart Filters & Rules',
-        'SMTP/IMAP Integration',
-        'Contact Management',
-        'Tracking & Reporting',
+        'Unified Message Nexus',
+        'Neural Automation Templates',
+        'Campaign Propagation Engine',
+        'Communication Telemetry',
+        'Team Synergy Channels',
+        'Deterministic Priority Inboxes',
+        'SMTP/IMAP Node Integration',
       ],
-      targetUsers: ['Sales Teams', 'Marketing Departments', 'Customer Support'],
-      useCases: [
-        'Manage team email workflows',
-        'Automate follow-up sequences',
-        'Track email campaigns',
-        'Collaborate on customer emails',
-      ],
-      metrics: {
-        users: '1,200+',
-        satisfaction: '4.8/5',
-        productivity: '+35%',
-      },
+      metrics: { users: '1.2K+', satisfaction: '4.8/5', output: '+35%' },
     },
     {
       id: 'baseless',
       name: 'Baseless',
-      tagline: 'Build APIs at Lightning Speed',
+      tagline: 'Logic Registry Architect',
       category: 'development',
-      description:
-        'Flexible database management and instant API generation platform',
-      longDescription:
-        'Baseless is a revolutionary platform that lets you design databases visually and generate production-ready APIs instantly. Perfect for developers, startups, and rapid prototyping.',
-      icon: HiDatabase,
-      color: 'indigo',
+      description: 'Dynamic database synthesis and instant API generation.',
+      longDescription: 'Baseless allows architects to design logic registries visually and deploy production-ready APIs in sub-milliseconds. The ultimate foundation for rapid architectural evolution.',
+      icon: Database,
+      color: 'primary',
       monthlyPrice: 0,
       yearlyPrice: 0,
-      badge: 'Beta',
+      badge: 'BETA',
       features: [
-        'Visual Database Designer',
-        'Automatic API Generation',
-        'Data Migration Tools',
-        'Backup & Recovery',
-        'Query Builder',
-        'Performance Monitoring',
-        'Multi-database Support (SQL, NoSQL)',
-        'REST API Documentation',
-        'GraphQL Support',
-        'Developer Tools',
+        'Visual Schema Architect',
+        'Instant API Propagation',
+        'Registry Migration Nodes',
+        'Automated Vault Backups',
+        'Neural Query Builder',
+        'REST/GraphQL Synthesis',
+        'Developer Toolkit Access',
       ],
-      targetUsers: [
-        'Developers',
-        'Database Administrators',
-        'System Architects',
-      ],
-      useCases: [
-        'Rapid API prototyping',
-        'Database migration projects',
-        'Build backend without code',
-        'Generate API documentation',
-      ],
-      metrics: {
-        users: '500+ Beta',
-        satisfaction: '4.9/5',
-        speed: '10x faster',
-      },
-    },
+      metrics: { users: '500+', satisfaction: '4.9/5', speed: '10x' },
+    }
   ];
 
   const filteredProducts =
@@ -320,21 +205,8 @@ const Products = () => {
       ? products
       : products.filter(p => p.category === selectedCategory);
 
-  const getColorClasses = color => {
-    const colors = {
-      blue: 'from-[#2563eb] to-[#1e40af]',
-      green: 'from-[#16a34a] to-[#22c55e]',
-      purple: 'from-[#9333ea] to-[#a855f7]',
-      orange: 'from-[#ea580c] to-[#f97316]',
-      red: 'from-[#dc2626] to-[#ef4444]',
-      cyan: 'from-[#0891b2] to-[#06b6d4]',
-      indigo: 'from-[#6366f1] to-[#818cf8]',
-    };
-    return colors[color] || colors.blue;
-  };
-
   const formatPrice = price => {
-    if (price === 0) return 'Free';
+    if (price === 0) return 'NODE FREE';
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
       currency: 'INR',
@@ -342,575 +214,241 @@ const Products = () => {
     }).format(price);
   };
 
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+  };
+
   return (
     <ErrorBoundary>
-      <>
-      <Helmet>
-        <title>Products - Limitless Infotech Solution</title>
-        <meta name="description" content="Explore our suite of 7 enterprise-grade SaaS products that accelerate your business. Ready-to-deploy solutions for management, tracking, communication, and development." />
-        <meta name="keywords" content="saas products, enterprise software, management tools, tracking systems, business automation, it solutions, hr management, project management" />
-        <meta name="author" content="Limitless Infotech Solution" />
-        <meta property="og:title" content="Products - Limitless Infotech Solution" />
-        <meta property="og:description" content="Explore our suite of 7 enterprise-grade SaaS products that accelerate your business. Ready-to-deploy solutions for management, tracking, communication, and development." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.limitlessinfotech.com/products" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Products - Limitless Infotech Solution" />
-        <meta name="twitter:description" content="Explore our suite of 7 enterprise-grade SaaS products that accelerate your business. Ready-to-deploy solutions for management, tracking, communication, and development." />
-        <link rel="canonical" href="https://www.limitlessinfotech.com/products" />
-      </Helmet>
-      <div className="min-h-screen font-sans bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
-        {/* Hero Section - Asymmetrical Layout */}
-        <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#0a0b0d] via-[#1e293b] to-[#0f172a]">
-          {/* Asymmetrical background elements */}
-          <div className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-[#2563eb]/10 to-transparent"></div>
-          <div className="absolute top-1/4 right-0 w-2/5 h-2/3 bg-gradient-to-l from-[#ffc957]/10 to-transparent"></div>
-          <div className="absolute inset-0 bg-architectural-grid opacity-10"></div>
+      <div className="relative min-h-screen bg-dark-900 overflow-hidden text-white selection:bg-primary-500/30">
+        {/* Atmosphere */}
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-0 right-[-10%] w-[60%] h-[60%] bg-primary-500/5 blur-[150px] rounded-full" />
+          <div className="absolute top-1/2 left-[-10%] w-[50%] h-[50%] bg-secondary-500/5 blur-[120px] rounded-full" />
+          <div className="absolute inset-0 bg-grid-white/[0.01]" />
+        </div>
 
-          <div className="container-custom relative z-10">
-            <div className="max-w-4xl mx-auto text-center">
+        {/* Hero Section */}
+        <section className="relative pt-40 pb-24 px-6 text-center">
+           <div className="max-w-7xl mx-auto">
               <motion.div 
-                className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+                 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
+                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8"
               >
-                <HiSparkles className="w-5 h-5" />
-                <span className="text-sm font-semibold">
-                  Enterprise-Grade Solutions
-                </span>
+                 <Sparkles className="w-4 h-4 text-primary-400" />
+                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-300">Neural Registry — SaaS Ecosystem</span>
               </motion.div>
-            
-              <motion.h1 
-                className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 text-white"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                Products That <span className="text-[#ffc957]">Transform</span> Your
-                <br />
-                Business
+              
+              <motion.h1 variants={itemVariants} initial="hidden" animate="visible" className="text-6xl md:text-9xl font-black italic tracking-tighter leading-none mb-8 uppercase">
+                 The Limitless <span className="not-italic bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent underline decoration-white/10 underline-offset-8">Stack</span>
               </motion.h1>
-            
-              <motion.p
-                className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                Ready-to-deploy SaaS solutions that accelerate your business.
-                Choose from our suite of 7 production-ready products or request a
-                custom solution.
+
+              <motion.p variants={itemVariants} initial="hidden" animate="visible" className="text-xl text-gray-400 max-w-3xl mx-auto font-medium leading-relaxed mb-24 italic">
+                 Explore our suite of 7 enterprise-grade SaaS nodes designed to accelerate your business architecture. Fixed-logic solutions for complex operational challenges.
               </motion.p>
-            
-              <motion.div 
-                className="flex flex-wrap justify-center gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-              >
-                <Link
-                  to="/get-started?product=all-products"
-                  className="px-8 py-4 bg-[#ffc957] text-[#0a0b0d] font-bold rounded-xl hover:bg-[#ffbd3a] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                >
-                  Request Demo
-                  <HiPlay className="inline-block ml-2 w-5 h-5" />
-                </Link>
-                <Link to="/pricing" className="px-8 py-4 bg-transparent border-2 border-[#2563eb] text-[#2563eb] font-bold rounded-xl hover:bg-[#2563eb] hover:text-white transition-all duration-300">
-                  View Pricing
-                </Link>
-              </motion.div>
-            </div>
-          </div>
-        </section>
 
-        {/* Category Filter */}
-        <section className="py-12 bg-gradient-to-r from-[#0a0b0d] to-[#1e293b]">
-          <div className="container-custom px-4 md:px-6 lg:px-8">
-            <div className="flex flex-wrap justify-center gap-4">
-              {categories.map(category => (
-                <motion.button
-                  key={category.id}
-                  onClick={() => setSelectedCategory(category.id)}
-                  className={`px-6 py-3 rounded-full transition-all duration-300 font-medium ${
-                    selectedCategory === category.id
-                      ? 'bg-[#2563eb] text-white shadow-lg'
-                      : 'bg-[#1e293b] text-gray-300 hover:text-white hover:bg-[#2563eb]/20'
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {category.name}
-                </motion.button>
-              ))}
-            </div>
-          </div>
-        </section>
+              {/* Protocol Selectors (Filters) */}
+              <div className="flex flex-wrap justify-center gap-6 mb-24">
+                 {categories.map(cat => (
+                    <button 
+                       key={cat.id} 
+                       onClick={() => setSelectedCategory(cat.id)}
+                       className={`px-8 py-4 rounded-[24px] border transition-all duration-500 text-[10px] font-black uppercase tracking-[0.2em] ${
+                         selectedCategory === cat.id 
+                         ? 'bg-white text-dark-900 border-white shadow-2xl scale-105' 
+                         : 'bg-white/5 border-white/10 text-gray-500 hover:text-white hover:bg-white/10'
+                       }`}
+                    >
+                       {cat.name}
+                    </button>
+                 ))}
+              </div>
 
-        {/* Products Grid */}
-        <section className="py-16 bg-gradient-to-br from-[#0a0b0d] to-[#1e293b]">
-          <div className="container-custom px-4 md:px-6 lg:px-8">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProducts.map((product, index) => {
-                const Icon = product.icon;
-                const colorClasses = getColorClasses(product.color);
-
-                return (
-                  <motion.div
-                    key={product.id}
-                    className={`relative bg-[#1e293b] rounded-2xl border ${
-                      product.popular
-                        ? 'border-[#ffc957] shadow-2xl shadow-[#ffc957]/20'
-                        : 'border-[#334155]'
-                    } transition-all duration-300 hover:border-[#2563eb]/50 hover:transform hover:scale-105 overflow-hidden`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                  >
-                    {product.popular && (
-                      <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-                        <span className="bg-[#ffc957] text-[#0a0b0d] px-4 py-2 rounded-full text-sm font-bold flex items-center shadow-lg">
-                          <HiStar className="w-4 h-4 mr-1" />
-                          Most Popular
-                        </span>
-                      </div>
-                    )}
-
-                    {product.badge && (
-                      <div className="absolute -top-4 right-4 z-10">
-                        <span className="bg-[#ffc957] text-[#0a0b0d] px-3 py-1 rounded-full text-xs font-bold">
-                          {product.badge}
-                        </span>
-                      </div>
-                    )}
-
-                    <div className="p-8">
-                      {/* Icon */}
-                      <div
-                        className={`w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#1e40af] rounded-2xl flex items-center justify-center mb-6`}
-                      >
-                        <Icon className="w-8 h-8 text-white" />
-                      </div>
-
-                      {/* Product Name & Tagline */}
-                      <h3 className="text-2xl font-display font-bold text-white mb-2">
-                        {product.name}
-                      </h3>
-                      <p className="text-sm text-[#ffc957] mb-4 font-medium">
-                        {product.tagline}
-                      </p>
-                      <p className="text-gray-300 mb-6 line-clamp-2">
-                        {product.description}
-                      </p>
-
-                      {/* Price */}
-                      <div className="mb-6">
-                        <div className="flex items-baseline">
-                          <span className="text-3xl font-bold text-white">
-                            {formatPrice(product.monthlyPrice)}
-                          </span>
-                          {product.monthlyPrice > 0 && (
-                            <span className="text-gray-400 ml-2">/month</span>
+              {/* Products Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+                 <AnimatePresence mode="popLayout">
+                    {filteredProducts.map((p, idx) => (
+                       <motion.div 
+                          key={p.id}
+                          layout
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.9 }}
+                          transition={{ duration: 0.5, delay: idx * 0.05 }}
+                          className={`group p-10 rounded-[56px] border backdrop-blur-3xl relative overflow-hidden flex flex-col h-full ${
+                             p.popular ? 'bg-primary-500/5 border-primary-500/20' : 'bg-white/5 border-white/10'
+                          }`}
+                       >
+                          {p.popular && (
+                             <div className="absolute top-8 right-8 flex items-center gap-2 px-3 py-1 rounded-full bg-primary-500/20 border border-primary-500/30">
+                                <Star className="w-3 h-3 text-primary-400 fill-primary-400" />
+                                <span className="text-[8px] font-black uppercase tracking-widest text-primary-400">Node Alpha</span>
+                             </div>
                           )}
-                        </div>
-                        {product.monthlyPrice === 0 && (
-                          <p className="text-sm text-[#ffc957] mt-2 font-medium">
-                            Currently in Beta - Free Access
-                          </p>
-                        )}
-                      </div>
+                          {p.badge && (
+                             <div className="absolute top-8 right-8 px-3 py-1 rounded-full bg-secondary-500/20 border border-secondary-500/30">
+                                <span className="text-[8px] font-black uppercase tracking-widest text-secondary-400">{p.badge}</span>
+                             </div>
+                          )}
 
-                      {/* Key Features (Top 5) */}
-                      <ul className="space-y-3 mb-6">
-                        {product.features.slice(0, 5).map((feature, idx) => (
-                          <li key={idx} className="flex items-start text-sm">
-                            <HiCheckCircle className="w-5 h-5 text-[#ffc957] mr-2 flex-shrink-0 mt-0.5" />
-                            <span className="text-gray-300">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
+                          <div className={`w-16 h-16 rounded-2xl bg-${p.color === 'primary' ? 'primary-500' : 'secondary-500'}/10 border border-${p.color === 'primary' ? 'primary-500' : 'secondary-500'}/20 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform`}>
+                             <p.icon className={`w-8 h-8 ${p.color === 'primary' ? 'text-primary-400' : 'text-secondary-400'}`} />
+                          </div>
 
-                      {/* Metrics */}
-                      <div className="mb-6 p-4 bg-[#0f172a]/50 rounded-lg border border-[#334155]">
-                        <div className="grid grid-cols-2 gap-4 text-sm">
-                          {Object.entries(product.metrics).map(([key, value]) => (
-                            <div key={key}>
-                              <div className="text-[#ffc957] font-bold">
-                                {value}
-                              </div>
-                              <div className="text-gray-500 text-xs capitalize">
-                                {key}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+                          <h3 className="text-3xl font-black text-white italic tracking-tighter mb-2 uppercase">{p.name}</h3>
+                          <p className={`text-[10px] font-black uppercase tracking-[0.3em] mb-6 ${p.color === 'primary' ? 'text-primary-400' : 'text-secondary-400'}`}>{p.tagline}</p>
+                          <p className="text-sm text-gray-500 font-medium leading-relaxed italic mb-10 flex-1">"{p.description}"</p>
 
-                      {/* CTAs */}
-                      <div className="space-y-3">
-                        <motion.button
-                          onClick={() => setSelectedProduct(product)}
-                          className="w-full py-3 bg-transparent border-2 border-[#2563eb] text-[#2563eb] font-bold rounded-xl hover:bg-[#2563eb] hover:text-white transition-all duration-300 flex items-center justify-center"
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          Learn More
-                          <HiArrowRight className="ml-2 w-5 h-5" />
-                        </motion.button>
-                        <motion.div
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <Link
-                            to={`/get-started?product=${product.name.replace(/\s+/g, '-').toLowerCase()}`}
-                            className="block w-full py-3 bg-[#ffc957] text-[#0a0b0d] font-bold rounded-xl hover:bg-[#ffbd3a] transition-all duration-300 text-center"
-                          >
-                            Request Demo
-                          </Link>
-                        </motion.div>
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
+                          <div className="mb-10">
+                             <div className="text-3xl font-black text-white italic tracking-tighter">{formatPrice(p.monthlyPrice)}</div>
+                             <div className="text-[8px] font-black text-gray-700 uppercase tracking-widest mt-1">MONTHLY NODAL EXPENDITURE</div>
+                          </div>
+
+                          <div className="space-y-4 mb-10">
+                             {p.features.slice(0, 4).map((f, i) => (
+                                <div key={i} className="flex items-center gap-3 text-xs text-gray-400 font-medium italic">
+                                   <CheckCircle2 className="w-3 h-3 text-primary-400/50" /> {f}
+                                </div>
+                             ))}
+                          </div>
+
+                          <div className="flex flex-col gap-4">
+                             <button 
+                                onClick={() => setSelectedProduct(p)}
+                                className="w-full py-5 bg-white text-dark-900 font-black rounded-3xl hover:bg-gray-200 transition-all text-[10px] uppercase tracking-[0.3em]"
+                             >
+                                Learn More
+                             </button>
+                             <Link 
+                                to={`/get-started?product=${p.id}`}
+                                className="w-full py-5 bg-white/5 text-white border border-white/10 font-bold rounded-3xl hover:bg-white/10 transition-all text-[10px] uppercase tracking-[0.3em] text-center flex items-center justify-center gap-2 group/btn"
+                             >
+                                Request Sync <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                             </Link>
+                          </div>
+                          
+                          <div className="absolute inset-0 bg-grid-white/[0.02]" />
+                       </motion.div>
+                    ))}
+                 </AnimatePresence>
+              </div>
+           </div>
+        </section>
+
+        {/* Global CTA */}
+        <section className="py-40 px-6">
+           <motion.div 
+             initial={{ opacity: 0, y: 30 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             className="max-w-6xl mx-auto p-16 md:p-28 rounded-[88px] bg-gradient-to-br from-primary-600/30 to-secondary-600/30 border border-white/10 text-center relative overflow-hidden"
+           >
+              <div className="relative z-10 space-y-12">
+                 <h2 className="text-4xl md:text-8xl font-black text-white tracking-tighter italic uppercase leading-none">Need a <span className="not-italic bg-gradient-to-r from-primary-400 to-white bg-clip-text text-transparent underline decoration-white/10 underline-offset-8">Custom</span> Node?</h2>
+                 <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-medium">
+                    Our architectural team can build bespoke enterprise-grade solutions tailored to your unique systemic requirements.
+                 </p>
+                 <div className="flex flex-wrap justify-center gap-8 pt-8">
+                    <Link to="/contact" className="px-16 py-6 bg-white text-dark-900 font-black rounded-3xl hover:bg-gray-200 transition-all text-sm uppercase tracking-[0.3em] shadow-2xl">
+                       Consult Architects
+                    </Link>
+                    <Link to="/pricing" className="px-16 py-6 bg-white/5 text-white font-bold rounded-3xl border border-white/10 hover:bg-white/10 transition-all text-sm flex items-center gap-3">
+                       Global Pricing Node <ArrowRight className="w-5 h-5" />
+                    </Link>
+                 </div>
+              </div>
+              <div className="absolute inset-0 bg-grid-white/[0.03]" />
+           </motion.div>
         </section>
 
         {/* Product Detail Modal */}
-        {selectedProduct && (
-          <motion.div
-            className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 overflow-y-auto"
-            onClick={() => setSelectedProduct(null)}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <motion.div
-              className="bg-[#1e293b] rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-[#334155]"
-              onClick={e => e.stopPropagation()}
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-            >
-              <div className="p-8">
-                {/* Header */}
-                <div className="flex items-start justify-between mb-6">
-                  <div className="flex items-center space-x-4">
-                    <div
-                      className={`w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#1e40af] rounded-2xl flex items-center justify-center`}
-                    >
-                      {(() => {
-                        const Icon = selectedProduct.icon;
-                        return Icon ? <Icon className="w-8 h-8 text-white" /> : null;
-                      })()}
-                    </div>
-                    <div>
-                      <h2 className="text-3xl font-display font-bold text-white">
-                        {selectedProduct.name}
-                      </h2>
-                      <p className="text-[#ffc957]">
-                        {selectedProduct.tagline}
-                      </p>
-                    </div>
-                  </div>
-                  <button
+        <AnimatePresence>
+           {selectedProduct && (
+              <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 md:p-12 overflow-y-auto">
+                 <motion.div 
+                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                     onClick={() => setSelectedProduct(null)}
-                    className="text-gray-400 hover:text-white text-2xl font-bold"
-                  >
-                    ×
-                  </button>
-                </div>
+                    className="absolute inset-0 bg-dark-950/90 backdrop-blur-2xl"
+                 />
+                 <motion.div 
+                    initial={{ opacity: 0, scale: 0.95, y: 30 }} 
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: 30 }}
+                    className="relative w-full max-w-5xl bg-dark-900 border border-white/10 rounded-[64px] shadow-2xl overflow-hidden max-h-screen"
+                 >
+                    <div className="p-12 md:p-20 overflow-y-auto max-h-screen custom-scrollbar">
+                       <button 
+                          onClick={() => setSelectedProduct(null)}
+                          className="absolute top-10 right-10 p-4 rounded-full bg-white/5 border border-white/10 hover:bg-white hover:text-dark-900 transition-all z-10"
+                       >
+                          <X className="w-6 h-6" />
+                       </button>
 
-                {/* Long Description */}
-                <p className="text-gray-300 leading-relaxed mb-8">
-                  {selectedProduct.longDescription}
-                </p>
+                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+                          <div>
+                             <div className={`w-20 h-20 rounded-[32px] bg-${selectedProduct.color === 'primary' ? 'primary-500' : 'secondary-500'}/10 border border-${selectedProduct.color === 'primary' ? 'primary-500' : 'secondary-500'}/20 flex items-center justify-center mb-10`}>
+                                <selectedProduct.icon className={`w-10 h-10 ${selectedProduct.color === 'primary' ? 'text-primary-400' : 'text-secondary-400'}`} />
+                             </div>
+                             <h2 className="text-5xl md:text-7xl font-black italic text-white tracking-tighter uppercase mb-6 leading-none">
+                                {selectedProduct.name}
+                             </h2>
+                             <p className={`text-sm font-black uppercase tracking-[0.4em] mb-10 ${selectedProduct.color === 'primary' ? 'text-primary-400' : 'text-secondary-400'}`}>
+                                {selectedProduct.tagline}
+                             </p>
+                             <p className="text-xl text-gray-400 font-medium leading-relaxed italic mb-12">
+                                "{selectedProduct.longDescription}"
+                             </p>
 
-                {/* All Features */}
-                <div className="mb-8">
-                  <h3 className="text-xl font-bold text-white mb-4">
-                    Complete Features
-                  </h3>
-                  <div className="grid md:grid-cols-2 gap-3">
-                    {selectedProduct.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-start">
-                        <HiCheckCircle className="w-5 h-5 text-green-400 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                             <div className="grid grid-cols-3 gap-8 p-8 rounded-[40px] bg-white/5 border border-white/10">
+                                {Object.entries(selectedProduct.metrics).map(([key, val]) => (
+                                   <div key={key} className="text-center">
+                                      <div className="text-xl font-black text-white italic tracking-tighter">{val}</div>
+                                      <div className="text-[8px] font-black text-gray-600 uppercase tracking-widest mt-1">{key}</div>
+                                   </div>
+                                ))}
+                             </div>
+                          </div>
 
-                {/* Target Users */}
-                <div className="mb-8">
-                  <h3 className="text-xl font-bold text-white mb-4">
-                    Perfect For
-                  </h3>
-                  <div className="flex flex-wrap gap-3">
-                    {selectedProduct.targetUsers.map((user, idx) => (
-                      <span
-                        key={idx}
-                        className="px-4 py-2 bg-primary-600/20 text-primary-400 rounded-full text-sm"
-                      >
-                        {user}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                          <div className="space-y-12">
+                             <div>
+                                <h3 className="text-xl font-black text-white italic uppercase tracking-widest mb-8 flex items-center gap-3">
+                                   <Cpu className="w-5 h-5 text-primary-400" /> Full Protocol Features
+                                </h3>
+                                <div className="space-y-4">
+                                   {selectedProduct.features.map((f, i) => (
+                                      <div key={i} className="flex items-center gap-4 p-6 rounded-3xl bg-white/5 border border-white/5 hover:border-primary-500/30 transition-all group">
+                                         <div className="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-primary-500/20 transition-all">
+                                            <CheckCircle2 className="w-4 h-4 text-primary-400" />
+                                         </div>
+                                         <span className="text-sm font-black text-gray-300 uppercase tracking-widest transition-colors">{f}</span>
+                                      </div>
+                                   ))}
+                                </div>
+                             </div>
 
-                {/* Use Cases */}
-                <div className="mb-8">
-                  <h3 className="text-xl font-bold text-white mb-4">
-                    Common Use Cases
-                  </h3>
-                  <ul className="space-y-3">
-                    {selectedProduct.useCases.map((useCase, idx) => (
-                      <li key={idx} className="flex items-start">
-                        <HiLightningBolt className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">{useCase}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* CTAs */}
-                <div className="flex flex-wrap gap-4">
-                  <Link
-                    to={`/get-started?product=${selectedProduct.name.replace(/\s+/g, '-').toLowerCase()}`}
-                    className="btn-primary"
-                  >
-                    Request Demo
-                    <HiPlay className="w-5 h-5 ml-2 inline" />
-                  </Link>
-                  <Link to="/pricing" className="btn-secondary">
-                    View Pricing
-                  </Link>
-                  <Link to="/contact" className="btn-secondary">
-                    Contact Sales
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-
-        {/* Why Choose Our Products */}
-        <section className="py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#1e40af] to-[#0a0b0d] text-white overflow-hidden">
-          <div className="absolute inset-0 bg-architectural-grid opacity-10"></div>
-          <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-16">
-                <motion.div 
-                  className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <HiSparkles className="w-5 h-5" />
-                  <span className="text-sm font-semibold">
-                    Why Choose Us
-                  </span>
-                </motion.div>
-              
-                <motion.h2 
-                  className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 text-white"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                  Unmatched <span className="text-[#ffc957]">Quality</span> &
-                  <br />
-                  Reliability
-                </motion.h2>
-              
-                <motion.p
-                  className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                >
-                  Built with enterprise-grade technology and backed by exceptional
-                  support
-                </motion.p>
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-8">
-                {[
-                  {
-                    icon: HiShieldCheck,
-                    title: 'Enterprise Security',
-                    description:
-                      'Bank-level encryption, SOC2 compliance, and regular security audits',
-                  },
-                  {
-                    icon: HiLightningBolt,
-                    title: 'Lightning Fast',
-                    description:
-                      'Optimized performance with 99.9% uptime and sub-second response times',
-                  },
-                  {
-                    icon: HiUsers,
-                    title: '24/7 Support',
-                    description:
-                      'Dedicated support team available around the clock to help you succeed',
-                  },
-                ].map((benefit, idx) => (
-                  <motion.div
-                    key={idx}
-                    className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:border-[#ffc957]/50 transition-all duration-300"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: idx * 0.1 + 0.3 }}
-                    whileHover={{ y: -10 }}
-                  >
-                    <div className="w-16 h-16 bg-[#ffc957]/20 rounded-xl flex items-center justify-center mb-6 mx-auto">
-                      <benefit.icon className="w-8 h-8 text-[#ffc957]" />
+                             <div className="pt-8 flex flex-col gap-6">
+                                <Link 
+                                   to="/pricing" 
+                                   className="w-full py-6 bg-white text-dark-900 font-black rounded-[32px] text-center text-sm uppercase tracking-[0.3em] hover:bg-gray-200 transition-all"
+                                >
+                                   View Detailed Pricing
+                                </Link>
+                                <Link 
+                                   to={`/get-started?product=${selectedProduct.id}`}
+                                   className="w-full py-6 bg-white/5 text-white border border-white/10 font-black rounded-[32px] text-center text-sm uppercase tracking-[0.3em] hover:bg-white/10 transition-all flex items-center justify-center gap-4"
+                                >
+                                   Request Demo <ArrowRight className="w-5 h-5" />
+                                </Link>
+                             </div>
+                          </div>
+                       </div>
                     </div>
-                    <h3 className="text-2xl font-display font-bold text-center text-white mb-4">
-                      {benefit.title}
-                    </h3>
-                    <p className="text-gray-300 text-center">{benefit.description}</p>
-                  </motion.div>
-                ))}
+                    <div className="absolute inset-0 bg-grid-white/[0.02] pointer-events-none" />
+                 </motion.div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="py-20 md:py-32 bg-gradient-to-br from-[#0a0b0d] via-[#1e293b] to-[#0f172a] overflow-hidden relative">
-          <div className="absolute inset-0 bg-architectural-grid opacity-10"></div>
-          <div className="container-custom px-4 md:px-6 lg:px-8 relative z-10">
-            <div className="max-w-4xl mx-auto text-center">
-              <motion.div 
-                className="inline-flex items-center space-x-2 bg-white/20 px-6 py-3 rounded-full mb-8"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-              >
-                <HiSparkles className="w-5 h-5" />
-                <span className="text-sm font-semibold">
-                  Get Started Today
-                </span>
-              </motion.div>
-            
-              <motion.h2 
-                className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 text-white"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                Ready to Transform Your
-                <br />
-                Business?
-              </motion.h2>
-            
-              <motion.p
-                className="text-xl md:text-2xl text-white/90 mb-8"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                Start with a free demo and see how our products can accelerate
-                your growth
-              </motion.p>
-
-              <motion.div 
-                className="flex flex-wrap justify-center gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-              >
-                <Link
-                  to="/get-started?product=all-products"
-                  className="px-8 py-4 bg-[#ffc957] text-[#0a0b0d] font-bold rounded-xl hover:bg-[#ffbd3a] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                >
-                  Request Demo
-                  <HiArrowRight className="inline-block ml-2 w-5 h-5" />
-                </Link>
-                <Link to="/contact" className="px-8 py-4 bg-transparent border-2 border-[#2563eb] text-[#2563eb] font-bold rounded-xl hover:bg-[#2563eb] hover:text-white transition-all duration-300">
-                  Talk to Sales
-                </Link>
-                <Link to="/pricing" className="px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-xl hover:bg-white hover:text-[#0a0b0d] transition-all duration-300">
-                  View Pricing
-                </Link>
-              </motion.div>
-
-              <motion.p 
-                className="text-gray-400 mt-8 text-sm"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-              >
-                💬 Questions? Call us at{' '}
-                <a
-                  href="tel:+917710909492"
-                  className="text-[#ffc957] hover:underline"
-                >
-                  +91 77109 09492
-                </a>{' '}
-                or email{' '}
-                <a
-                  href="mailto:products@limitlessinfotech.com"
-                  className="text-[#ffc957] hover:underline"
-                >
-                  products@limitlessinfotech.com
-                </a>
-              </motion.p>
-            </div>
-          </div>
-        </section>
-
-        {/* Trust Indicators */}
-        <section className="py-16 bg-gradient-to-r from-[#0a0b0d] to-[#1e293b]">
-          <div className="container-custom px-4 md:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  className="p-6 bg-[#1e293b]/50 rounded-xl border border-[#334155] hover:border-[#2563eb]/50 transition-all duration-300"
-                >
-                  <div className="text-3xl font-bold text-[#ffc957] mb-2">
-                    10,000+
-                  </div>
-                  <div className="text-gray-300 text-sm">Active Users</div>
-                </motion.div>
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  className="p-6 bg-[#1e293b]/50 rounded-xl border border-[#334155] hover:border-[#2563eb]/50 transition-all duration-300"
-                >
-                  <div className="text-3xl font-bold text-[#ffc957] mb-2">99.9%</div>
-                  <div className="text-gray-300 text-sm">Uptime SLA</div>
-                </motion.div>
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  className="p-6 bg-[#1e293b]/50 rounded-xl border border-[#334155] hover:border-[#2563eb]/50 transition-all duration-300"
-                >
-                  <div className="text-3xl font-bold text-[#ffc957] mb-2">4.8/5</div>
-                  <div className="text-gray-300 text-sm">Average Rating</div>
-                </motion.div>
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                  className="p-6 bg-[#1e293b]/50 rounded-xl border border-[#334155] hover:border-[#2563eb]/50 transition-all duration-300"
-                >
-                  <div className="text-3xl font-bold text-[#ffc957] mb-2">24/7</div>
-                  <div className="text-gray-300 text-sm">Support</div>
-                </motion.div>
-              </div>
-            </div>
-          </div>
-        </section>
+           )}
+        </AnimatePresence>
       </div>
-      </>
     </ErrorBoundary>
   );
 };

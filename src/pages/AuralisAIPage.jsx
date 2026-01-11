@@ -1,14 +1,21 @@
-import Layout from '../components/layout/Layout';
+import MainLayout from '../components/layout/MainLayout';
 import Chatbot from '../components/features/chatbot/Chatbot';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  HiChatAlt2,
-  HiCalendar,
-  HiDocumentReport,
-  HiChartBar,
-  HiLightBulb,
-  HiUserGroup,
-} from 'react-icons/hi';
+  MessageSquare,
+  Calendar,
+  FileText,
+  LineChart,
+  Lightbulb,
+  Users,
+  Sparkles,
+  ArrowUpRight,
+  ShieldCheck,
+  Zap,
+  Cpu,
+  Activity,
+  ChevronRight
+} from 'lucide-react';
 import ErrorBoundary from '../components/ErrorBoundary';
 
 const containerVariants = {
@@ -27,375 +34,263 @@ const itemVariants = {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.5
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1]
     }
   }
 };
 
 const AuralisAIPage = () => {
+  const features = [
+    {
+      title: 'Consultative Synthesis',
+      description: 'Auralis processes massive technical datasets to provide strategic architectural guidance.',
+      icon: MessageSquare,
+      color: 'text-primary-400',
+      bg: 'bg-primary-500/10'
+    },
+    {
+      title: 'Scheduling Integration',
+      description: 'Autonomous coordination between complex calendars for immediate consultation.',
+      icon: Calendar,
+      color: 'text-secondary-400',
+      bg: 'bg-secondary-500/10'
+    },
+    {
+      title: 'Structural Reporting',
+      description: 'Generation of high-fidelity architectural audits and technical specifications.',
+      icon: FileText,
+      color: 'text-white',
+      bg: 'bg-white/10'
+    },
+    {
+      title: 'Pattern Analytics',
+      description: 'Identifying systemic shifts and resource optimization paths in real-time.',
+      icon: LineChart,
+      color: 'text-primary-400',
+      bg: 'bg-primary-500/10'
+    },
+    {
+      title: 'Contextual Profiling',
+      description: 'Environment-aware adaptation that customizes the interface for your industry.',
+      icon: Lightbulb,
+      color: 'text-secondary-400',
+      bg: 'bg-secondary-500/10'
+    },
+    {
+      title: 'Collaborative Sandbox',
+      description: 'Instant deployment of shared temporary environments for multi-user evaluation.',
+      icon: Users,
+      color: 'text-white',
+      bg: 'bg-white/10'
+    }
+  ];
+
   return (
     <ErrorBoundary>
-    <Layout>
-      <div className="min-h-screen bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100 py-8 font-sans">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Hero Section */}
-          <motion.div 
-            className="text-center mb-16"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.h1 
-              className="text-4xl md:text-5xl font-bold text-white mb-6 font-['Outfit']"
-              variants={itemVariants}
-            >
-              <span className="text-[#ffc957]">
-                Auralis AI Architect
-              </span>
-            </motion.h1>
-            <motion.p 
-              className="text-xl text-gray-300 max-w-3xl mx-auto mb-8 font-['Figtree']"
-              variants={itemVariants}
-            >
-              Our specialized AI assistant trained on Limitless project
-              whitepapers to answer complex technical queries, schedule
-              consultations, and provide personalized recommendations for your
-              business needs.
-            </motion.p>
-            <motion.div 
-              className="flex flex-wrap justify-center gap-4"
-              variants={itemVariants}
-            >
-              <button className="bg-gradient-to-r from-[#2563eb] to-[#ffc957] text-[#0a0b0d] font-semibold py-3 px-8 rounded-lg hover:from-[#1d4ed8] hover:to-[#ffb830] transition-all duration-300 shadow-lg hover:shadow-xl font-['Outfit']">
-                Start Conversation
-              </button>
-              <button className="bg-transparent border-2 border-[#2563eb] text-white font-semibold py-3 px-8 rounded-lg hover:bg-[#2563eb] transition-colors font-['Outfit']">
-                View Documentation
-              </button>
-            </motion.div>
-          </motion.div>
+      <div className="relative min-h-screen bg-dark-900 overflow-hidden">
+        {/* Ambient background elements */}
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-0 left-[-10%] w-[60%] h-[60%] bg-primary-500/5 blur-[150px] rounded-full" />
+          <div className="absolute bottom-0 right-[-10%] w-[60%] h-[60%] bg-secondary-500/5 blur-[150px] rounded-full" />
+          <div className="absolute inset-0 bg-grid-white/[0.01]" />
+        </div>
 
-          {/* Features Grid */}
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
+        <div className="relative z-10 pt-32 pb-20 px-6">
+          <div className="max-w-7xl mx-auto">
+            {/* Hero Section */}
             <motion.div 
-              className="bg-[#1a1c20] rounded-2xl shadow-lg p-6 border border-[#2563eb] border-opacity-30 hover:shadow-xl transition-shadow"
-              variants={itemVariants}
+              className="text-center mb-32"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
             >
-              <div className="flex items-center mb-4">
-                <div className="p-3 bg-[#2563eb]/20 rounded-lg mr-4">
-                  <HiChatAlt2 className="w-6 h-6 text-[#2563eb]" />
-                </div>
-                <h3 className="text-xl font-semibold text-white font-['Outfit']">
-                  Consultative Intelligence
-                </h3>
-              </div>
-              <p className="text-gray-300 font-['Figtree']">
-                Auralis AI is trained on our project whitepapers to answer
-                complex technical queries and provide detailed insights about
-                our solutions and services.
-              </p>
+              <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8">
+                <Cpu className="w-4 h-4 text-primary-400" />
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-300">Neural Nexus — v2.4</span>
+              </motion.div>
+
+              <motion.h1 
+                className="text-5xl md:text-8xl font-black text-white mb-8 tracking-tighter"
+                variants={itemVariants}
+              >
+                Auralis <span className="italic bg-gradient-to-r from-primary-400 via-white to-secondary-400 bg-clip-text text-transparent">AI Architect</span>
+              </motion.h1>
+
+              <motion.p 
+                className="text-xl text-gray-400 max-w-3xl mx-auto mb-12 font-medium leading-relaxed"
+                variants={itemVariants}
+              >
+                An advanced neural assistant trained on the Limitless technical corpus. Initiate deep-dives, schedule consultations, and architect your digital trajectory in real-time.
+              </motion.p>
+
+              <motion.div 
+                className="flex flex-wrap justify-center gap-6"
+                variants={itemVariants}
+              >
+                <button className="px-10 py-5 bg-white text-dark-900 font-black rounded-3xl hover:bg-gray-200 transition-all shadow-xl shadow-white/5 flex items-center gap-2 group">
+                  Initiate Dialogue
+                  <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </button>
+                <button className="px-10 py-5 bg-white/5 text-white font-bold rounded-3xl border border-white/10 hover:bg-white/10 transition-all">
+                  Documentation Archive
+                </button>
+              </motion.div>
             </motion.div>
 
+            {/* Features Glass Matrix */}
             <motion.div 
-              className="bg-[#1a1c20] rounded-2xl shadow-lg p-6 border border-[#2563eb] border-opacity-30 hover:shadow-xl transition-shadow"
-              variants={itemVariants}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-32"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
             >
-              <div className="flex items-center mb-4">
-                <div className="p-3 bg-[#ffc957]/20 rounded-lg mr-4">
-                  <HiCalendar className="w-6 h-6 text-[#ffc957]" />
-                </div>
-                <h3 className="text-xl font-semibold text-white font-['Outfit']">
-                  Meeting Architect
-                </h3>
-              </div>
-              <p className="text-gray-300 font-['Figtree']">
-                Integrated calendar API allowing Auralis to schedule qualified
-                meetings directly through the conversation interface.
-              </p>
+              {features.map((feature, index) => (
+                <motion.div 
+                  key={index}
+                  variants={itemVariants}
+                  className="group relative p-10 rounded-[48px] bg-white/5 border border-white/10 hover:border-primary-500/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary-500/5 backdrop-blur-sm"
+                >
+                  <div className={`w-14 h-14 rounded-2xl ${feature.bg} flex items-center justify-center mb-8 border border-white/5 group-hover:scale-110 transition-transform`}>
+                    <feature.icon className={`w-6 h-6 ${feature.color}`} />
+                  </div>
+                  <h3 className="text-2xl font-black text-white mb-4 leading-tight">{feature.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed font-medium">
+                    {feature.description}
+                  </p>
+                  
+                  <div className="absolute top-6 right-8 opacity-0 group-hover:opacity-20 transition-opacity">
+                    <feature.icon className="w-12 h-12 text-white" />
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
 
+            {/* Chat Interface Container */}
             <motion.div 
-              className="bg-[#1a1c20] rounded-2xl shadow-lg p-6 border border-[#2563eb] border-opacity-30 hover:shadow-xl transition-shadow"
-              variants={itemVariants}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="relative p-1 rounded-[64px] bg-gradient-to-br from-white/10 via-white/5 to-transparent border border-white/10 mb-32 shadow-3xl overflow-hidden"
             >
-              <div className="flex items-center mb-4">
-                <div className="p-3 bg-[#0a0b0d]/20 rounded-lg mr-4">
-                  <HiDocumentReport className="w-6 h-6 text-[#0a0b0d]" />
-                </div>
-                <h3 className="text-xl font-semibold text-white font-['Outfit']">
-                  Automated Reporting
-                </h3>
-              </div>
-              <p className="text-gray-300 font-['Figtree']">
-                Generate comprehensive technical reports and recommendations
-                based on your specific business requirements and technical
-                challenges.
-              </p>
-            </motion.div>
-
-            <motion.div 
-              className="bg-[#1a1c20] rounded-2xl shadow-lg p-6 border border-[#2563eb] border-opacity-30 hover:shadow-xl transition-shadow"
-              variants={itemVariants}
-            >
-              <div className="flex items-center mb-4">
-                <div className="p-3 bg-[#2563eb]/20 rounded-lg mr-4">
-                  <HiChartBar className="w-6 h-6 text-[#2563eb]" />
-                </div>
-                <h3 className="text-xl font-semibold text-white font-['Outfit']">
-                  Predictive Analytics
-                </h3>
-              </div>
-              <p className="text-gray-300 font-['Figtree']">
-                AI-driven insights for infrastructure scaling and resource
-                optimization based on usage patterns and business projections.
-              </p>
-            </motion.div>
-
-            <motion.div 
-              className="bg-[#1a1c20] rounded-2xl shadow-lg p-6 border border-[#2563eb] border-opacity-30 hover:shadow-xl transition-shadow"
-              variants={itemVariants}
-            >
-              <div className="flex items-center mb-4">
-                <div className="p-3 bg-[#ffc957]/20 rounded-lg mr-4">
-                  <HiLightBulb className="w-6 h-6 text-[#ffc957]" />
-                </div>
-                <h3 className="text-xl font-semibold text-white font-['Outfit']">
-                  Dynamic Content Mapping
-                </h3>
-              </div>
-              <p className="text-gray-300 font-['Figtree']">
-                Site content automatically reshuffles based on the lead's
-                industry identified by Auralis to provide personalized
-                experience.
-              </p>
-            </motion.div>
-
-            <motion.div 
-              className="bg-[#1a1c20] rounded-2xl shadow-lg p-6 border border-[#2563eb] border-opacity-30 hover:shadow-xl transition-shadow"
-              variants={itemVariants}
-            >
-              <div className="flex items-center mb-4">
-                <div className="p-3 bg-[#0a0b0d]/20 rounded-lg mr-4">
-                  <HiUserGroup className="w-6 h-6 text-[#0a0b0d]" />
-                </div>
-                <h3 className="text-xl font-semibold text-white font-['Outfit']">
-                  Collaborative Sandbox
-                </h3>
-              </div>
-              <p className="text-gray-300 font-['Figtree']">
-                Multi-user testing capabilities allowing prospects to invite
-                team members into shared temporary Sandbox environments.
-              </p>
-            </motion.div>
-          </motion.div>
-
-          {/* Auralis Chat Interface */}
-          <motion.div 
-            className="bg-[#1a1c20] rounded-2xl shadow-lg p-6 border border-[#2563eb] border-opacity-30 mb-16"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.div className="flex items-center justify-between mb-6" variants={itemVariants}>
-              <h2 className="text-2xl font-bold text-white font-['Outfit']">
-                Chat with Auralis AI
-              </h2>
-              <div className="flex items-center text-green-400">
-                <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-                <span className="text-sm font-medium">Online</span>
-              </div>
-            </motion.div>
-            <motion.div 
-              className="h-96 relative"
-              variants={itemVariants}
-            >
-              <Chatbot />
-            </motion.div>
-          </motion.div>
-
-          {/* How Auralis Works */}
-          <motion.div 
-            className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.div variants={itemVariants}>
-              <h2 className="text-3xl font-bold text-white mb-6 font-['Outfit']">
-                How Auralis AI Works
-              </h2>
-              <div className="space-y-6">
-                <div className="flex">
-                  <div className="flex-shrink-0 mr-4">
-                    <div className="w-8 h-8 bg-[#2563eb] rounded-full flex items-center justify-center text-white font-bold">
-                      1
+              <div className="bg-[#0e1114]/80 backdrop-blur-3xl rounded-[62px] p-8 md:p-16 relative">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
+                  <div className="flex items-center gap-6">
+                    <div className="relative">
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-400 to-secondary-400 p-0.5">
+                        <div className="w-full h-full rounded-2xl bg-dark-900 flex items-center justify-center">
+                          <Sparkles className="w-8 h-8 text-white" />
+                        </div>
+                      </div>
+                      <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-4 border-[#0e1114] animate-pulse" />
+                    </div>
+                    <div>
+                      <h2 className="text-3xl font-black text-white">Interface Auralis</h2>
+                      <p className="text-xs font-black text-primary-400 uppercase tracking-widest mt-1">High-Trust Neural Channel</p>
                     </div>
                   </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-white mb-2 font-['Outfit']">
-                      Technical Inquiry
-                    </h3>
-                    <p className="text-gray-300 font-['Figtree']">
-                      Auralis processes your technical questions using our
-                      trained knowledge base of project whitepapers and
-                      technical documentation.
-                    </p>
+                  <div className="flex items-center gap-4 text-xs font-bold text-gray-500">
+                    <span className="flex items-center gap-2"><Activity className="w-3 h-3 text-green-500" /> Latency: 24ms</span>
+                    <span className="flex items-center gap-2"><ShieldCheck className="w-3 h-3 text-primary-400" /> E2E Encrypted</span>
                   </div>
                 </div>
 
-                <div className="flex">
-                  <div className="flex-shrink-0 mr-4">
-                    <div className="w-8 h-8 bg-[#2563eb] rounded-full flex items-center justify-center text-white font-bold">
-                      2
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-white mb-2 font-['Outfit']">
-                      Requirement Analysis
-                    </h3>
-                    <p className="text-gray-300 font-['Figtree']">
-                      The AI analyzes your specific requirements and matches
-                      them with our appropriate solutions and services.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex">
-                  <div className="flex-shrink-0 mr-4">
-                    <div className="w-8 h-8 bg-[#2563eb] rounded-full flex items-center justify-center text-white font-bold">
-                      3
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-white mb-2 font-['Outfit']">
-                      Personalized Recommendations
-                    </h3>
-                    <p className="text-gray-300 font-['Figtree']">
-                      Auralis provides tailored recommendations based on your
-                      industry, technical stack, and business objectives.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex">
-                  <div className="flex-shrink-0 mr-4">
-                    <div className="w-8 h-8 bg-[#2563eb] rounded-full flex items-center justify-center text-white font-bold">
-                      4
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-white mb-2 font-['Outfit']">
-                      Scheduling & Follow-up
-                    </h3>
-                    <p className="text-gray-300 font-['Figtree']">
-                      Qualified leads can schedule meetings directly through
-                      Auralis or receive personalized follow-up communications.
-                    </p>
-                  </div>
+                <div className="relative min-h-[600px] rounded-[40px] bg-dark-900/50 border border-white/5 overflow-hidden">
+                  <Chatbot />
+                  {/* Decorative Scanline */}
+                  <div className="absolute inset-x-0 top-0 h-px bg-primary-400/20 shadow-[0_0_15px_rgba(59,130,246,0.3)] animate-scan" />
+                  <div className="absolute inset-0 bg-grid-white/[0.01] pointer-events-none" />
                 </div>
               </div>
             </motion.div>
 
-            <motion.div 
-              className="bg-gradient-to-br from-[#2563eb] via-[#ffc957] to-[#0a0b0d] rounded-2xl p-8 text-white"
-              variants={itemVariants}
-            >
-              <h2 className="text-3xl font-bold mb-6 font-['Outfit']">
-                Benefits of Auralis AI
-              </h2>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <div className="flex-shrink-0 mt-1 mr-3">
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
-                  </div>
-                  <span className="text-[#e2e8f0] font-['Figtree']">
-                    24/7 availability for technical inquiries
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <div className="flex-shrink-0 mt-1 mr-3">
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
-                  </div>
-                  <span className="text-[#e2e8f0] font-['Figtree']">
-                    Instant access to our technical knowledge base
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <div className="flex-shrink-0 mt-1 mr-3">
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
-                  </div>
-                  <span className="text-[#e2e8f0] font-['Figtree']">
-                    Personalized recommendations based on your needs
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <div className="flex-shrink-0 mt-1 mr-3">
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
-                  </div>
-                  <span className="text-[#e2e8f0] font-['Figtree']">
-                    Seamless scheduling with our experts
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <div className="flex-shrink-0 mt-1 mr-3">
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
-                  </div>
-                  <span className="text-[#e2e8f0] font-['Figtree']">
-                    Reduced response time for complex queries
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <div className="flex-shrink-0 mt-1 mr-3">
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
-                  </div>
-                  <span className="text-[#e2e8f0] font-['Figtree']">
-                    Integration with our sandbox environments
-                  </span>
-                </li>
-              </ul>
-            </motion.div>
-          </motion.div>
+            {/* Process Flow */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-32">
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="space-y-12"
+              >
+                <div className="flex items-center gap-4">
+                  <h2 className="text-4xl md:text-6xl font-black text-white italic">EvolutionARY <span className="not-italic block bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent">Workflow</span></h2>
+                </div>
+                
+                <div className="space-y-8">
+                  {[
+                    { step: '01', title: 'Technical Inquiry', desc: 'Auralis deciphers high-complexity queries against our specialized technical knowledge base.' },
+                    { step: '02', title: 'Contextual Logic', desc: 'The AI synthesizes your operational environment to provide grounded, applicable intelligence.' },
+                    { step: '03', title: 'Trajectory Projection', desc: 'Personalized strategic paths are generated based on resource availability and business goals.' },
+                    { step: '04', title: 'Systemic Integration', desc: 'Direct transitions from dialogue to scheduling or sandbox deployment.' }
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-6 group">
+                      <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center font-black text-primary-400 text-sm group-hover:bg-primary-500 group-hover:text-white transition-all">
+                        {item.step}
+                      </div>
+                      <div className="pt-2">
+                        <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                        <p className="text-gray-400 text-sm font-medium leading-relaxed">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
 
-          {/* CTA Section */}
-          <motion.div 
-            className="bg-gradient-to-br from-[#2563eb] via-[#ffc957] to-[#0a0b0d] rounded-2xl shadow-xl p-8 text-white text-center"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.h3 
-              className="text-2xl font-bold mb-4 font-['Outfit']"
-              variants={itemVariants}
-            >
-              Ready to Experience Auralis AI?
-            </motion.h3>
-            <motion.p 
-              className="text-[#e2e8f0] mb-6 max-w-2xl mx-auto font-['Figtree']"
-              variants={itemVariants}
-            >
-              Start a conversation with our AI architect today and get
-              personalized recommendations for your technical challenges.
-            </motion.p>
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="p-16 rounded-[64px] bg-gradient-to-br from-primary-600/20 to-secondary-600/20 border border-white/10 relative overflow-hidden flex flex-col justify-center items-center text-center"
+              >
+                <div className="relative z-10 space-y-8">
+                  <div className="w-24 h-24 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-8 animate-pulse">
+                    <Zap className="w-12 h-12 text-white" />
+                  </div>
+                  <h3 className="text-3xl font-black text-white">Strategic Benefits</h3>
+                  <div className="space-y-4 max-w-sm mx-auto">
+                    {[
+                      '24/7 Architectural Oversight',
+                      'High-Fidelity Knowledge Access',
+                      'Instant Sandbox Environment Generation',
+                      'Deterministic Resource Planning'
+                    ].map(benefit => (
+                      <div key={benefit} className="flex items-center gap-3 text-left text-sm font-bold text-gray-300">
+                        <ShieldCheck className="w-5 h-5 text-primary-400 flex-shrink-0" />
+                        {benefit}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                {/* Visual accents */}
+                <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary-500/20 blur-[100px] rounded-full" />
+                <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-secondary-500/20 blur-[100px] rounded-full" />
+              </motion.div>
+            </div>
+
+            {/* Global CTA */}
             <motion.div 
-              className="flex flex-col sm:flex-row justify-center gap-4"
-              variants={itemVariants}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="p-16 md:p-24 rounded-[72px] bg-gradient-to-br from-dark-950 to-dark-900 border border-white/10 text-center relative overflow-hidden"
             >
-              <button className="bg-[#ffc957] text-[#0a0b0d] font-semibold py-3 px-8 rounded-lg hover:bg-[#ffb830] transition duration-300 font-['Outfit']">
-                Start Chatting Now
-              </button>
-              <button className="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-[#0a0b0d] transition duration-300 font-['Outfit']">
-                Schedule Demo
-              </button>
+              <div className="relative z-10 space-y-12">
+                <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter italic">Experience <span className="not-italic bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent">Unrestricted</span> Support</h2>
+                <div className="flex flex-wrap justify-center gap-6">
+                  <button className="px-12 py-5 bg-white text-dark-900 font-black rounded-3xl hover:bg-gray-200 transition-all text-sm uppercase tracking-[0.2em] shadow-2xl shadow-white/10">
+                    Launch Auralis
+                  </button>
+                  <button className="px-12 py-5 bg-white/5 text-white font-bold rounded-3xl border border-white/10 hover:bg-white/10 transition-all text-sm flex items-center gap-2 group">
+                    View Demo <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </div>
+              </div>
+              <div className="absolute inset-0 bg-grid-white/[0.02]" />
             </motion.div>
-          </motion.div>
+
+          </div>
         </div>
       </div>
-    </Layout>
     </ErrorBoundary>
   );
 };

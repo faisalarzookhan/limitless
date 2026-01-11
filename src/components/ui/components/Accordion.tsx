@@ -1,5 +1,5 @@
 import React, { forwardRef, useState } from 'react';
-import { HiChevronDown } from 'react-icons/hi';
+import { ChevronDown } from 'lucide-react';
 import { AccordionProps, AccordionItemProps } from '../../../types';
 import { generateId } from '../../../utils/accessibility';
 
@@ -12,7 +12,6 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
         e.preventDefault();
         onClick && onClick();
       }
-      // Allow arrow keys to navigate between accordion items
       if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
         e.preventDefault();
         const focusableElements = document.querySelectorAll(
@@ -35,33 +34,33 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
     return (
       <div
         ref={ref}
-        className={`border border-gray-200 dark:border-dark-700 rounded-xl overflow-hidden transition-all duration-300 ${className}`}
+        className={`bg-white/5 border border-white/5 rounded-[2rem] overflow-hidden transition-all duration-500 hover:bg-white/10 ${className}`}
         {...props}
       >
         <button
-          className="w-full flex justify-between items-center p-6 text-left bg-white dark:bg-dark-800 hover:bg-gray-50 dark:hover:bg-dark-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
+          className="w-full flex justify-between items-center p-8 text-left transition-all duration-500 focus:outline-none"
           onClick={onClick}
           onKeyDown={handleKeyDown}
           aria-expanded={isOpen}
           aria-controls={contentId}
           id={`accordion-header-${contentId}`}
         >
-          <span className="font-semibold text-gray-900 dark:text-white">
+          <span className="text-[0.7rem] font-black text-white uppercase tracking-[0.3em]">
             {title}
           </span>
-          <HiChevronDown
-            className={`w-5 h-5 text-gray-500 dark:text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+          <ChevronDown
+            className={`w-4 h-4 text-white/20 transition-transform duration-500 ${isOpen ? 'rotate-180 text-[#1ba6d6]' : ''}`}
             aria-hidden="true"
           />
         </button>
 
         <div
           id={contentId}
-          className={`transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+          className={`transition-all duration-500 ease-in-out overflow-hidden ${isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}
           role="region"
           aria-labelledby={`accordion-header-${contentId}`}
         >
-          <div className="p-6 bg-white dark:bg-dark-800 border-t border-gray-100 dark:border-dark-700">
+          <div className="p-8 bg-white/5 border-t border-white/5 text-[0.65rem] font-black uppercase tracking-widest text-white/40 leading-relaxed">
             {children}
           </div>
         </div>
@@ -71,6 +70,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
 );
 
 AccordionItem.displayName = 'AccordionItem';
+
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   ({ children, className = '', allowMultiple = false, ...props }, ref) => {

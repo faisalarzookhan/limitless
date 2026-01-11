@@ -1,141 +1,90 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  HiCurrencyDollar,
-  HiChartBar,
-  HiLightningBolt,
-  HiUserGroup,
-  HiClock,
-  HiTrendingUp,
-  HiCalculator,
-  HiSparkles,
-} from 'react-icons/hi';
+  DollarSign,
+  BarChart3,
+  Zap,
+  Users,
+  Clock,
+  TrendingUp,
+  Calculator,
+  Sparkles,
+  ArrowRight,
+  ChevronRight,
+  ShieldCheck,
+  Activity,
+  ArrowUpRight
+} from 'lucide-react';
 import ErrorBoundary from '../components/ErrorBoundary';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  }
+};
 
 const ROICalculator = () => {
   const [calculatorType, setCalculatorType] = useState('hr-ims');
   const [inputs, setInputs] = useState({
-    // HR-IMS specific inputs
     hr: {
       employeeCount: 100,
       avgSalary: 50000,
       timeSavedPerEmployee: 2,
       costReductionPercentage: 15,
     },
-    // TrackIT specific inputs
     project: {
       projectCount: 50,
       avgProjectValue: 10000,
       timeToComplete: 30,
       efficiencyGain: 25,
     },
-    // General inputs
     implementationCost: 50000,
     timeframe: 24,
   });
 
   const [results, setResults] = useState(null);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
-
   const calculators = {
     'hr-ims': {
-      title: 'HR-IMS ROI Calculator',
-      description:
-        'Calculate the return on investment for implementing our HR Information Management System',
-      icon: HiUserGroup,
+      title: 'Alliance Core ROI',
+      description: 'Projecting structural savings for human capital architecture deployments.',
+      icon: Users,
+      color: 'text-primary-400',
+      bg: 'bg-primary-500/10',
       inputs: [
-        {
-          id: 'employeeCount',
-          label: 'Number of Employees',
-          type: 'number',
-          min: 1,
-          max: 10000,
-          step: 1,
-        },
-        {
-          id: 'avgSalary',
-          label: 'Average Annual Salary per Employee ($)',
-          type: 'number',
-          min: 10000,
-          max: 500000,
-          step: 1000,
-        },
-        {
-          id: 'timeSavedPerEmployee',
-          label: 'Hours Saved per Employee per Month',
-          type: 'number',
-          min: 0.5,
-          max: 40,
-          step: 0.5,
-        },
-        {
-          id: 'costReductionPercentage',
-          label: 'Percentage Cost Reduction (%)',
-          type: 'number',
-          min: 1,
-          max: 50,
-          step: 1,
-        },
+        { id: 'employeeCount', label: 'Human Assets', type: 'number', min: 1, max: 10000, step: 1, icon: Users },
+        { id: 'avgSalary', label: 'Mean Asset Value ($)', type: 'number', min: 10000, max: 500000, step: 1000, icon: DollarSign },
+        { id: 'timeSavedPerEmployee', label: 'Monthly Flux Gain (hrs)', type: 'number', min: 0.5, max: 40, step: 0.5, icon: Clock },
+        { id: 'costReductionPercentage', label: 'Operational Delta (%)', type: 'number', min: 1, max: 50, step: 1, icon: Activity },
       ],
     },
     trackit: {
-      title: 'TrackIT ROI Calculator',
-      description:
-        'Calculate the return on investment for implementing our Project Tracking Solution',
-      icon: HiChartBar,
+      title: 'OmniTrack ROI',
+      description: 'Quantifying architectural efficiency gains in operational oversight.',
+      icon: BarChart3,
+      color: 'text-secondary-400',
+      bg: 'bg-secondary-500/10',
       inputs: [
-        {
-          id: 'projectCount',
-          label: 'Number of Projects per Year',
-          type: 'number',
-          min: 1,
-          max: 1000,
-          step: 1,
-        },
-        {
-          id: 'avgProjectValue',
-          label: 'Average Project Value ($)',
-          type: 'number',
-          min: 1000,
-          max: 1000000,
-          step: 1000,
-        },
-        {
-          id: 'timeToComplete',
-          label: 'Average Time to Complete (Days)',
-          type: 'number',
-          min: 1,
-          max: 365,
-          step: 1,
-        },
-        {
-          id: 'efficiencyGain',
-          label: 'Efficiency Gain (%)',
-          type: 'number',
-          min: 1,
-          max: 100,
-          step: 1,
-        },
+        { id: 'projectCount', label: 'Annual Streams', type: 'number', min: 1, max: 1000, step: 1, icon: Activity },
+        { id: 'avgProjectValue', label: 'Mean Stream Value ($)', type: 'number', min: 1000, max: 1000000, step: 1000, icon: DollarSign },
+        { id: 'timeToComplete', label: 'Cycle Duration (days)', type: 'number', min: 1, max: 365, step: 1, icon: Clock },
+        { id: 'efficiencyGain', label: 'Throughput Lift (%)', type: 'number', min: 1, max: 100, step: 1, icon: Zap },
       ],
     },
   };
@@ -148,26 +97,17 @@ const ROICalculator = () => {
     let yearlyBenefits = 0;
 
     if (calculatorType === 'hr-ims') {
-      // Calculate HR-IMS benefits
-      const hourlyRate = data.avgSalary / (40 * 52); // 40 hours/week * 52 weeks
+      const hourlyRate = data.avgSalary / (40 * 52);
       const monthlyTimeSavings = data.employeeCount * data.timeSavedPerEmployee;
       const yearlyTimeSavingsValue = monthlyTimeSavings * 12 * hourlyRate;
-      const yearlyCostReduction =
-        (data.avgSalary * data.employeeCount * data.costReductionPercentage) /
-        100;
-
+      const yearlyCostReduction = (data.avgSalary * data.employeeCount * data.costReductionPercentage) / 100;
       yearlySavings = yearlyTimeSavingsValue + yearlyCostReduction;
       yearlyBenefits = yearlySavings;
     } else {
-      // Calculate TrackIT benefits
       const timeReduction = (data.timeToComplete * data.efficiencyGain) / 100;
       const newTimeToComplete = data.timeToComplete - timeReduction;
-      const projectsCompleted =
-        (365 / newTimeToComplete) *
-        (data.projectCount / (365 / data.timeToComplete));
-      const additionalValue =
-        (projectsCompleted - data.projectCount) * data.avgProjectValue;
-
+      const projectsCompleted = (365 / newTimeToComplete) * (data.projectCount / (365 / data.timeToComplete));
+      const additionalValue = (projectsCompleted - data.projectCount) * data.avgProjectValue;
       yearlyBenefits = additionalValue;
       yearlySavings = additionalValue;
     }
@@ -212,462 +152,286 @@ const ROICalculator = () => {
 
   return (
     <ErrorBoundary>
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white">
-      {/* Hero Section */}
-      <motion.section 
-        className="py-20 md:py-32 bg-gradient-to-br from-[#2563eb] via-[#1d4ed8] to-[#ffc957] text-[#0a0b0d]"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div className="container-custom px-4 md:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div 
-              className="inline-flex items-center space-x-2 bg-[#0a0b0d]/20 px-6 py-3 rounded-full mb-8"
-              variants={itemVariants}
-            >
-              <HiCalculator className="w-5 h-5" />
-              <span className="text-sm font-semibold font-['Outfit']">
-                ROI Calculator
-              </span>
-            </motion.div>
-            <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-['Outfit'] font-bold mb-6"
-              variants={itemVariants}
-            >
-              ROI
-              <br />
-              Calculator
-            </motion.h1>
-            <motion.p 
-              className="text-xl md:text-2xl text-[#0a0b0d]/90 mb-8 font-['Figtree']"
-              variants={itemVariants}
-            >
-              Calculate the return on investment for our SaaS solutions
-            </motion.p>
-          </div>
+      <div className="relative min-h-screen bg-dark-900 overflow-hidden">
+        {/* Ambient Gradients */}
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-0 left-[-10%] w-[60%] h-[60%] bg-primary-500/5 blur-[150px] rounded-full" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-secondary-500/5 blur-[150px] rounded-full" />
+          <div className="absolute inset-0 bg-grid-white/[0.01]" />
         </div>
-      </motion.section>
 
-      <motion.section 
-        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div className="container-custom">
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* Calculator Form */}
-            <div className="lg:w-1/2">
-              <motion.div 
-                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 shadow-xl border border-gray-700 sticky top-8"
-                variants={itemVariants}
-              >
-                <div className="mb-8">
-                  <h2 className="text-2xl font-bold mb-2 text-white font-['Outfit']">
-                    Select Product
-                  </h2>
-                  <div className="flex space-x-4">
-                    <motion.button
-                      onClick={() => setCalculatorType('hr-ims')}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className={`flex-1 py-3 px-4 rounded-lg font-medium transition-colors font-['Figtree'] ${
-                        calculatorType === 'hr-ims'
-                          ? 'bg-[#2563eb] text-white'
-                          : 'bg-[#1a1c25] text-gray-300 hover:bg-[#2d303d]'
-                      }`}
-                    >
-                      HR-IMS
-                    </motion.button>
-                    <motion.button
-                      onClick={() => setCalculatorType('trackit')}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className={`flex-1 py-3 px-4 rounded-lg font-medium transition-colors font-['Figtree'] ${
-                        calculatorType === 'trackit'
-                          ? 'bg-[#ffc957] text-[#0a0b0d]'
-                          : 'bg-[#1a1c25] text-gray-300 hover:bg-[#2d303d]'
-                      }`}
-                    >
-                      TrackIT
-                    </motion.button>
-                  </div>
-                </div>
-
-                <h3 className="text-xl font-bold mb-6 text-white flex items-center font-['Outfit']">
-                  <currentCalculator.icon className="w-6 h-6 mr-3 text-[#2563eb]" />
-                  {currentCalculator.title}
-                </h3>
-
-                <p className="text-gray-300 mb-6 font-['Figtree']">
-                  {currentCalculator.description}
-                </p>
-
-                <div className="space-y-6">
-                  {currentCalculator.inputs.map(input => (
-                    <div key={input.id}>
-                      <label className="block text-sm font-medium mb-2 text-gray-300 font-['Figtree']">
-                        {input.label}
-                      </label>
-                      <input
-                        type={input.type}
-                        min={input.min}
-                        max={input.max}
-                        step={input.step}
-                        value={
-                          inputs[
-                            calculatorType === 'hr-ims' ? 'hr' : 'project'
-                          ][input.id]
-                        }
-                        onChange={e =>
-                          updateInput(
-                            calculatorType === 'hr-ims' ? 'hr' : 'project',
-                            input.id,
-                            e.target.value
-                          )
-                        }
-                        className="w-full p-3 border border-gray-600 rounded-lg bg-[#2d303d] text-white font-['Figtree']"
-                      />
-                      <div className="mt-2 flex justify-between text-xs text-gray-400">
-                        <span>Min: {input.min}</span>
-                        <span>Max: {input.max}</span>
-                      </div>
-                    </div>
-                  ))}
-
-                  <div className="border-t border-gray-700 pt-6">
-                    <h4 className="text-lg font-semibold mb-4 text-white font-['Outfit']">
-                      General Parameters
-                    </h4>
-
-                    <div className="space-y-4">
-                      <div>
-                        <label className="block text-sm font-medium mb-2 text-gray-300 font-['Figtree']">
-                          Implementation Cost ($)
-                        </label>
-                        <input
-                          type="number"
-                          min="0"
-                          step="1000"
-                          value={inputs.implementationCost}
-                          onChange={e =>
-                            updateGeneralInput(
-                              'implementationCost',
-                              e.target.value
-                            )
-                          }
-                          className="w-full p-3 border border-gray-600 rounded-lg bg-[#2d303d] text-white font-['Figtree']"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium mb-2 text-gray-300 font-['Figtree']">
-                          Timeframe (Months)
-                        </label>
-                        <input
-                          type="number"
-                          min="1"
-                          max="60"
-                          step="1"
-                          value={inputs.timeframe}
-                          onChange={e =>
-                            updateGeneralInput('timeframe', e.target.value)
-                          }
-                          className="w-full p-3 border border-gray-600 rounded-lg bg-[#2d303d] text-white font-['Figtree']"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+        {/* Hero Section */}
+        <section className="relative pt-32 pb-20 px-6">
+          <div className="max-w-7xl mx-auto">
+            <motion.div 
+               initial="hidden"
+               animate="visible"
+               variants={containerVariants}
+               className="text-center"
+            >
+              <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8">
+                <Calculator className="w-4 h-4 text-primary-400" />
+                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-300">Strategic Audit — ROI Synthesizer</span>
               </motion.div>
-            </div>
+              
+              <motion.h1 variants={itemVariants} className="text-5xl md:text-8xl font-black mb-8 leading-tight tracking-tighter text-white uppercase italic">
+                Return on <span className="not-italic bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent underline decoration-white/10 underline-offset-8">Insight</span>
+              </motion.h1>
+              
+              <motion.p variants={itemVariants} className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-12 font-medium">
+                Quantify the systemic impact of architectural transformation. Our deterministic models provide high-fidelity projections of capital recovery and efficiency gains.
+              </motion.p>
+            </motion.div>
+          </div>
+        </section>
 
-            {/* Results */}
-            <div className="lg:w-1/2">
+        {/* Calculator Interface */}
+        <section className="py-24 px-6 relative z-10">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col xl:flex-row gap-12 items-start">
+              {/* Form Side */}
               <motion.div 
-                className="bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 shadow-xl border border-gray-700"
-                variants={itemVariants}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="w-full xl:w-1/2 p-1 rounded-[48px] bg-gradient-to-br from-white/10 via-white/5 to-transparent border border-white/10 overflow-hidden"
               >
-                <h2 className="text-2xl font-bold mb-6 text-white font-['Outfit']">
-                  ROI Results
-                </h2>
-
-                {results && (
-                  <div className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="bg-gradient-to-br from-[#052e16]/20 to-[#047857]/20 rounded-xl p-6 shadow-lg border border-[#10b981]/30">
-                        <div className="flex items-center mb-3">
-                          <HiCurrencyDollar className="w-6 h-6 text-[#10b981] mr-2" />
-                          <h3 className="font-semibold text-white font-['Outfit']">
-                            Net Benefits
-                          </h3>
-                        </div>
-                        <p className="text-3xl font-bold text-[#10b981] mb-1 font-['Outfit']">
-                          ${results.netBenefits.toLocaleString()}
-                        </p>
-                        <p className="text-sm text-gray-300 font-['Figtree']">
-                          Total value after implementation costs
-                        </p>
+                <div className="bg-[#0e1114]/80 backdrop-blur-3xl rounded-[46px] p-8 md:p-12 space-y-12">
+                   <div className="space-y-6">
+                      <h2 className="text-xs font-black text-primary-400 uppercase tracking-[0.4em]">Core Interface Selector</h2>
+                      <div className="flex gap-4 p-2 rounded-[32px] bg-white/5 border border-white/10">
+                         {Object.keys(calculators).map(type => (
+                           <button
+                             key={type}
+                             onClick={() => setCalculatorType(type)}
+                             className={`flex-1 flex items-center justify-center gap-3 py-5 rounded-[24px] font-black text-sm uppercase tracking-widest transition-all ${
+                               calculatorType === type 
+                               ? 'bg-white text-dark-900 shadow-xl' 
+                               : 'text-gray-500 hover:text-white hover:bg-white/5'
+                             }`}
+                           >
+                              <Calculator className="w-4 h-4" />
+                              {calculators[type].title.split(' ')[0]}
+                           </button>
+                         ))}
                       </div>
+                   </div>
 
-                      <div className="bg-gradient-to-br from-[#1e40af]/20 to-[#3b82f6]/20 rounded-xl p-6 shadow-lg border border-[#3b82f6]/30">
-                        <div className="flex items-center mb-3">
-                          <HiTrendingUp className="w-6 h-6 text-[#3b82f6] mr-2" />
-                          <h3 className="font-semibold text-white font-['Outfit']">
-                            ROI
-                          </h3>
-                        </div>
-                        <p className="text-3xl font-bold text-[#3b82f6] mb-1 font-['Outfit']">
-                          {results.roiPercentage}%
-                        </p>
-                        <p className="text-sm text-gray-300 font-['Figtree']">
-                          Return on investment
-                        </p>
+                   <div className="space-y-8">
+                      <div className="flex items-center justify-between">
+                         <h3 className="text-2xl font-black text-white italic tracking-tight">{currentCalculator.title}</h3>
+                         <div className={`p-3 rounded-2xl ${currentCalculator.bg}`}>
+                            <currentCalculator.icon className={`w-6 h-6 ${currentCalculator.color}`} />
+                         </div>
                       </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="bg-gradient-to-br from-[#7e22ce]/20 to-[#ec4899]/20 rounded-xl p-6 shadow-lg border border-[#ec4899]/30">
-                        <div className="flex items-center mb-3">
-                          <HiClock className="w-6 h-6 text-[#ec4899] mr-2" />
-                          <h3 className="font-semibold text-white font-['Outfit']">
-                            Payback Period
-                          </h3>
-                        </div>
-                        <p className="text-3xl font-bold text-[#ec4899] mb-1 font-['Outfit']">
-                          {results.paybackPeriod} months
-                        </p>
-                        <p className="text-sm text-gray-300 font-['Figtree']">
-                          Time to recover investment
-                        </p>
-                      </div>
-
-                      <div className="bg-gradient-to-br from-[#b45309]/20 to-[#f59e0b]/20 rounded-xl p-6 shadow-lg border border-[#f59e0b]/30">
-                        <div className="flex items-center mb-3">
-                          <HiLightningBolt className="w-6 h-6 text-[#f59e0b] mr-2" />
-                          <h3 className="font-semibold text-white font-['Outfit']">
-                            Annual Savings
-                          </h3>
-                        </div>
-                        <p className="text-3xl font-bold text-[#f59e0b] mb-1 font-['Outfit']">
-                          ${results.yearlySavings.toLocaleString()}
-                        </p>
-                        <p className="text-sm text-gray-300 font-['Figtree']">
-                          Value gained per year
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="bg-[#2d303d] rounded-xl p-6">
-                      <h3 className="font-semibold mb-4 text-white font-['Outfit']">
-                        Breakdown
-                      </h3>
-                      <div className="space-y-3">
-                        <div className="flex justify-between">
-                          <span className="text-gray-300 font-['Figtree']">
-                            Total Benefits ({inputs.timeframe} months):
-                          </span>
-                          <span className="font-medium text-white font-['Figtree']">
-                            ${results.totalBenefits.toLocaleString()}
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-300 font-['Figtree']">
-                            Implementation Cost:
-                          </span>
-                          <span className="font-medium text-white font-['Figtree']">
-                            -${inputs.implementationCost.toLocaleString()}
-                          </span>
-                        </div>
-                        <div className="border-t border-gray-600 pt-3">
-                          <div className="flex justify-between font-semibold">
-                            <span className="text-white font-['Figtree']">
-                              Net Benefits:
-                            </span>
-                            <span
-                              className={`text-lg ${results.netBenefits >= 0 ? 'text-[#10b981]' : 'text-[#ef4444]'}`}
-                            >
-                              ${results.netBenefits.toLocaleString()}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="bg-gradient-to-r from-[#1e40af]/20 to-[#3b82f6]/20 rounded-xl p-6 border border-[#3b82f6]/30">
-                      <h3 className="font-semibold mb-3 text-white font-['Outfit']">
-                        Recommendation
-                      </h3>
-                      <p className="text-gray-300 font-['Figtree']">
-                        {results.roiPercentage > 100
-                          ? `With a ${results.roiPercentage}% ROI, this investment is highly recommended and will provide significant value.`
-                          : results.roiPercentage > 50
-                            ? `With a ${results.roiPercentage}% ROI, this investment is recommended and will provide good value.`
-                            : `With a ${results.roiPercentage}% ROI, consider optimizing implementation costs or increasing expected benefits.`}
+                      <p className="text-sm font-medium text-gray-400 leading-relaxed border-l-2 border-primary-500/30 pl-6 italic">
+                         "{currentCalculator.description}"
                       </p>
-                    </div>
-                  </div>
-                )}
-              </motion.div>
 
-              {/* Industry Benchmarks */}
-              <motion.div 
-                className="mt-8 bg-gradient-to-br from-[#1a1c25] to-[#2d303d] rounded-2xl p-8 shadow-xl border border-gray-700"
-                variants={itemVariants}
-              >
-                <h3 className="text-xl font-bold mb-6 text-white font-['Outfit']">
-                  Industry Benchmarks
-                </h3>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-4 bg-[#2d303d] rounded-lg">
-                    <span className="text-gray-300 font-['Figtree']">
-                      Average HR Software ROI
-                    </span>
-                    <span className="font-semibold text-white font-['Figtree']">
-                      187%
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between p-4 bg-[#2d303d] rounded-lg">
-                    <span className="text-gray-300 font-['Figtree']">
-                      Average Project Management ROI
-                    </span>
-                    <span className="font-semibold text-white font-['Figtree']">
-                      156%
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between p-4 bg-[#2d303d] rounded-lg">
-                    <span className="text-gray-300 font-['Figtree']">
-                      Average Payback Period
-                    </span>
-                    <span className="font-semibold text-white font-['Figtree']">
-                      18 months
-                    </span>
-                  </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                         {currentCalculator.inputs.map(input => (
+                           <div key={input.id} className="space-y-3 group">
+                              <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest group-hover:text-primary-400 transition-colors">
+                                 {input.label}
+                              </label>
+                              <div className="relative">
+                                 <input
+                                   type={input.type}
+                                   min={input.min}
+                                   max={input.max}
+                                   step={input.step}
+                                   value={inputs[calculatorType === 'hr-ims' ? 'hr' : 'project'][input.id]}
+                                   onChange={e => updateInput(calculatorType === 'hr-ims' ? 'hr' : 'project', input.id, e.target.value)}
+                                   className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-bold focus:outline-none focus:ring-2 focus:ring-primary-500/30 transition-all hover:bg-white/10"
+                                 />
+                                 <input.icon className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
+                              </div>
+                           </div>
+                         ))}
+                      </div>
+                   </div>
+
+                   <div className="pt-12 border-t border-white/5 space-y-8">
+                      <h3 className="text-xs font-black text-gray-500 uppercase tracking-[0.4em]">Environmental Parameters</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                         <div className="space-y-3">
+                            <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Architectural Investment ($)</label>
+                            <input
+                              type="number"
+                              value={inputs.implementationCost}
+                              onChange={e => updateGeneralInput('implementationCost', e.target.value)}
+                              className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-bold focus:outline-none focus:ring-2 focus:ring-primary-500/30"
+                            />
+                         </div>
+                         <div className="space-y-3">
+                            <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Projection Epoch (Months)</label>
+                            <div className="relative">
+                               <input
+                                 type="number"
+                                 value={inputs.timeframe}
+                                 onChange={e => updateGeneralInput('timeframe', e.target.value)}
+                                 className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-bold focus:outline-none focus:ring-2 focus:ring-primary-500/30"
+                               />
+                               <Clock className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
+                            </div>
+                         </div>
+                      </div>
+                   </div>
                 </div>
               </motion.div>
+
+              {/* Results Side */}
+              <div className="w-full xl:w-1/2 space-y-12">
+                 <motion.div 
+                   initial={{ opacity: 0, scale: 0.98 }}
+                   whileInView={{ opacity: 1, scale: 1 }}
+                   viewport={{ once: true }}
+                   className="p-10 rounded-[48px] bg-white/5 border border-white/10 backdrop-blur-xl space-y-10"
+                 >
+                   <div className="flex items-center justify-between">
+                      <h2 className="text-2xl font-black text-white italic tracking-tight uppercase">Audit Synthesis</h2>
+                      <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20">
+                         <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                         <span className="text-[10px] font-black text-green-500 uppercase tracking-widest">Projection Stable</span>
+                      </div>
+                   </div>
+
+                   {results && (
+                     <div className="space-y-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                           <div className="p-8 rounded-[40px] bg-gradient-to-br from-primary-500/20 to-secondary-500/20 border border-white/10 hover:border-primary-500/30 transition-all group">
+                              <h4 className="text-[10px] font-black text-primary-400 uppercase tracking-[0.2em] mb-4">Capital Resilience</h4>
+                              <div className="text-4xl font-black text-white tracking-tighter mb-2">${results.netBenefits.toLocaleString()}</div>
+                              <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">Net Outcome (Post-Sync)</p>
+                           </div>
+
+                           <div className="p-8 rounded-[40px] bg-white/5 border border-white/10 hover:border-secondary-500/30 transition-all group">
+                              <h4 className="text-[10px] font-black text-secondary-400 uppercase tracking-[0.2em] mb-4">Neural Lift</h4>
+                              <div className="text-4xl font-black text-white tracking-tighter mb-2">{results.roiPercentage}%</div>
+                              <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">Deterministic ROI</p>
+                           </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                           <div className="p-8 rounded-[40px] bg-white/5 border border-white/10 group">
+                              <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-4">Recovery Epoch</h4>
+                              <div className="text-3xl font-black text-white tracking-tighter mb-2">{results.paybackPeriod} <span className="text-sm italic text-gray-600">MONTHS</span></div>
+                              <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">Sync Point Convergence</p>
+                           </div>
+
+                           <div className="p-8 rounded-[40px] bg-white/5 border border-white/10 group">
+                              <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-4">Annual Throughput</h4>
+                              <div className="text-3xl font-black text-white tracking-tighter mb-2">${results.yearlySavings.toLocaleString()}</div>
+                              <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">Recurring Value Flux</p>
+                           </div>
+                        </div>
+
+                        <div className="p-8 rounded-[40px] bg-dark-950 border border-white/5 relative overflow-hidden">
+                           <div className="relative z-10 space-y-6">
+                              <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em]">Structural Breakdown</h4>
+                              <div className="space-y-4">
+                                 <div className="flex justify-between items-center text-sm font-bold text-gray-400">
+                                    <span>Gross Structural Benefit ({inputs.timeframe}m):</span>
+                                    <span className="text-white">${results.totalBenefits.toLocaleString()}</span>
+                                 </div>
+                                 <div className="flex justify-between items-center text-sm font-bold text-gray-400">
+                                    <span>Sync Investment Overhead:</span>
+                                    <span className="text-red-500">-${inputs.implementationCost.toLocaleString()}</span>
+                                 </div>
+                                 <div className="pt-4 border-t border-white/5 flex justify-between items-center">
+                                    <span className="text-xs font-black text-primary-400 uppercase tracking-widest">NET PROJECTION:</span>
+                                    <span className={`text-2xl font-black tracking-tighter ${results.netBenefits >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                                       ${results.netBenefits.toLocaleString()}
+                                    </span>
+                                 </div>
+                              </div>
+                           </div>
+                           <div className="absolute inset-0 bg-grid-white/[0.01]" />
+                        </div>
+                     </div>
+                   )}
+                 </motion.div>
+
+                 <motion.div 
+                   initial={{ opacity: 0, y: 30 }}
+                   whileInView={{ opacity: 1, y: 0 }}
+                   viewport={{ once: true }}
+                   className="p-10 rounded-[48px] bg-gradient-to-r from-primary-600/20 to-secondary-600/20 border border-white/10"
+                 >
+                    <h3 className="text-lg font-black text-white tracking-tight mb-6 flex items-center gap-3">
+                       <ShieldCheck className="w-5 h-5 text-primary-400" /> Strategic Recommendation
+                    </h3>
+                    <p className="text-gray-300 font-medium leading-relaxed italic">
+                       "{results?.roiPercentage > 100
+                         ? `Substantial neural efficiency detected. Projected ROI of ${results.roiPercentage}% exceeds industry benchmarks by 2.4x. Immediate architectural deployment is advised for maximum capital lift.`
+                         : results?.roiPercentage > 50
+                           ? `Positive flux confirmed. A ${results.roiPercentage}% return indicates strong alignment with systemic goals. Recommended for phased deployment.`
+                           : `Nominal lift projected. We suggest optimizing architectural overhead or increasing input variables to achieve 50%+ convergence.`}"
+                    </p>
+                 </motion.div>
+              </div>
             </div>
           </div>
-        </div>
-      </motion.section>
+        </section>
 
-      {/* How It Works */}
-      <motion.section 
-        className="section-padding bg-gradient-to-br from-[#0a0b0d] to-[#1a1c25] text-white"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div className="container-custom">
-          <motion.div 
-            className="text-center mb-16"
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-          >
-            <motion.h2 
-              className="text-4xl md:text-5xl font-['Outfit'] font-bold mb-4"
-              variants={itemVariants}
-            >
-              How the <span className="text-[#ffc957]">ROI Calculator</span>{' '}
-              Works
-            </motion.h2>
-            <motion.p 
-              className="text-lg text-gray-300 max-w-2xl mx-auto font-['Figtree']"
-              variants={itemVariants}
-            >
-              Our calculator uses industry-standard formulas to estimate your
-              potential return on investment
-            </motion.p>
-          </motion.div>
+        {/* Industry Benchmarks Matrix */}
+        <section className="py-32 px-6 bg-dark-950/50">
+           <div className="max-w-7xl mx-auto">
+              <div className="text-center mb-24">
+                 <h2 className="text-4xl md:text-7xl font-black text-white italic tracking-tighter uppercase mb-8">Nodal <span className="not-italic bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent">Benchmarks</span></h2>
+                 <p className="text-xl text-gray-500 max-w-2xl mx-auto font-medium">Global architectural standard metrics for high-trust software ecosystems.</p>
+              </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Input Your Data',
-                description: 'Enter your specific business metrics and requirements to get personalized calculations',
-                icon: HiCalculator,
-                color: 'from-[#2563eb] to-[#ffc957]',
-              },
-              {
-                title: 'Calculate Benefits',
-                description: 'Our algorithm calculates time savings, cost reductions, and efficiency gains',
-                icon: HiChartBar,
-                color: 'from-[#ffc957] to-[#2563eb]',
-              },
-              {
-                title: 'See Your ROI',
-                description: 'Get detailed breakdown of your potential return on investment and payback period',
-                icon: HiTrendingUp,
-                color: 'from-[#2563eb] to-[#1d4ed8]',
-              },
-            ].map((step, index) => (
-              <motion.div 
-                key={index}
-                className="text-center"
-                initial="hidden"
-                animate="visible"
-                variants={itemVariants}
-                transition={{ delay: index * 0.1 }}
-              >
-                <div className={`w-16 h-16 bg-gradient-to-br ${step.color} rounded-full flex items-center justify-center mx-auto mb-6`}>
-                  <step.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-['Outfit'] font-bold mb-3 text-white">
-                  {step.title}
-                </h3>
-                <p className="text-gray-300 font-['Figtree']">
-                  {step.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.section>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                 {[
+                   { label: 'Cloud-Native HRM ROI', value: '187%', icon: Users },
+                   { label: 'E2E Lifecycle Tracking ROI', value: '156%', icon: BarChart3 },
+                   { label: 'Mean Convergence Epoch', value: '18m', icon: Clock }
+                 ].map((node, idx) => (
+                   <motion.div 
+                     key={idx}
+                     initial={{ opacity: 0, y: 20 }}
+                     whileInView={{ opacity: 1, y: 0 }}
+                     viewport={{ once: true }}
+                     transition={{ delay: idx * 0.1 }}
+                     className="p-10 rounded-[48px] bg-white/5 border border-white/10 text-center hover:bg-white/10 transition-colors group"
+                   >
+                     <div className="w-16 h-16 rounded-3xl bg-white/5 flex items-center justify-center mx-auto mb-8 border border-white/5 group-hover:scale-110 transition-transform">
+                        <node.icon className="w-8 h-8 text-primary-400" />
+                     </div>
+                     <h3 className="text-5xl font-black text-white italic tracking-tighter mb-4">{node.value}</h3>
+                     <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em]">{node.label}</p>
+                   </motion.div>
+                 ))}
+              </div>
+           </div>
+        </section>
 
-      {/* CTA Section */}
-      <motion.section 
-        className="section-padding bg-gradient-to-br from-[#2563eb] to-[#ffc957] text-[#0a0b0d]"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div className="container-custom">
-          <div className="text-center">
-            <motion.h2 
-              className="text-3xl md:text-4xl font-['Outfit'] font-bold mb-4"
-              variants={itemVariants}
-            >
-              Ready to Calculate Your ROI?
-            </motion.h2>
-            <motion.p 
-              className="text-xl text-[#0a0b0d]/90 mb-8 max-w-2xl mx-auto font-['Figtree']"
-              variants={itemVariants}
-            >
-              Use our calculator to see the potential value of our solutions for
-              your business
-            </motion.p>
-            <motion.div 
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
-              variants={itemVariants}
-            >
-              <a
-                href="/roi-calculator"
-                className="bg-[#0a0b0d] text-[#ffc957] hover:bg-[#1a1c25] px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']"
-              >
-                Start Calculating
-              </a>
-              <a
-                href="/contact"
-                className="bg-transparent border border-[#0a0b0d] text-[#0a0b0d] hover:bg-[#0a0b0d] hover:text-[#ffc957] px-8 py-4 rounded-xl font-semibold transition-colors font-['Figtree']"
-              >
-                Speak with an Expert
-              </a>
-            </motion.div>
-          </div>
-        </div>
-      </motion.section>
-    </div>
+        {/* Global CTA */}
+        <section className="py-40 px-6">
+           <motion.div 
+             initial={{ opacity: 0, y: 30 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             className="max-w-5xl mx-auto p-16 md:p-24 rounded-[72px] bg-gradient-to-br from-primary-600/30 to-secondary-600/30 border border-white/10 text-center relative overflow-hidden"
+           >
+              <div className="relative z-10 space-y-12">
+                 <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter italic uppercase">Ready for <span className="not-italic bg-gradient-to-r from-primary-400 to-white bg-clip-text text-transparent underline decoration-white/10 underline-offset-8">Verification</span>?</h2>
+                 <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-medium">
+                    Schedule a deep-fiber audit with our structural architects to refine your ROI projection against real-world technical data.
+                 </p>
+                 <div className="flex flex-wrap justify-center gap-6">
+                    <button className="px-12 py-5 bg-white text-dark-900 font-black rounded-3xl hover:bg-gray-200 transition-all text-sm uppercase tracking-[0.2em] shadow-xl">
+                       Initiate Audit
+                    </button>
+                    <button className="px-12 py-5 bg-white/5 text-white font-bold rounded-3xl border border-white/10 hover:bg-white/10 transition-all text-sm flex items-center gap-2 group">
+                       Architect Consultation <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    </button>
+                 </div>
+              </div>
+              <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-primary-500 via-secondary-500 to-primary-500 animate-pulse" />
+           </motion.div>
+        </section>
+      </div>
     </ErrorBoundary>
   );
 };
