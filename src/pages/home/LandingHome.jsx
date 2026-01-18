@@ -6,8 +6,12 @@ import LandingMetrics from '../../components/home/LandingMetrics';
 import LandingCapabilities from '../../components/home/LandingCapabilities';
 import LandingProcess from '../../components/home/LandingProcess';
 import LandingFoundational from '../../components/home/LandingFoundational';
-import LandingEngagement from '../../components/home/LandingEngagement';
+import LandingContact from '../../components/home/LandingContact';
+import LandingPortfolio from '../../components/home/LandingPortfolio';
+import LandingTestimonials from '../../components/home/LandingTestimonials';
+import TechStack from '../../components/home/TechStack';
 import LandingModal from '../../components/home/LandingModal';
+import ChatWidget from '../../components/chat/ChatWidget';
 
 const LandingHome = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -57,14 +61,22 @@ const LandingHome = () => {
             <LandingMetrics />
 
             <LandingCapabilities />
+            
+            <LandingPortfolio />
+
+            <TechStack />
 
             <LandingProcess />
 
+            <LandingTestimonials />
+
             <LandingFoundational toggleModal={toggleModal} />
 
-            <LandingEngagement toggleModal={toggleModal} />
+            <LandingContact />
 
             <Footer />
+            
+            <ChatWidget />
 
             <LandingModal isOpen={isModalOpen} toggleModal={toggleModal} />
         </div>

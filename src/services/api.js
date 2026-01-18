@@ -465,6 +465,21 @@ export const api = {
     sendMultiple: data => apiClient.post('/notifications/multiple', data),
   },
 
+  // ============= Live Chat =============
+  chat: {
+    // Send message
+    sendMessage: data => apiClient.post('/chat/send', data),
+
+    // Get history
+    getHistory: sessionId => apiClient.get(`/chat/history/${sessionId}`),
+
+    // Start session
+    startSession: data => apiClient.post('/chat/start', data),
+    
+    // End session
+    endSession: sessionId => apiClient.post('/chat/end', { sessionId }),
+  },
+
   // ============= Search =============
   search: {
     // Global search

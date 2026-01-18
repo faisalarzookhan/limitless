@@ -23,6 +23,7 @@ const LandingNavbar = ({ isScrolled, toggleModal }) => {
                     <div className="hidden lg:flex items-center gap-12">
                         <a href="#expertise" className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-[#94a3b8] hover:text-white transition-colors">Expertise</a>
                         <a href="#foundational" className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-[#94a3b8] hover:text-white transition-colors">Foundational</a>
+                        <a href="/blog" className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-[#94a3b8] hover:text-white transition-colors">Insights</a>
                         <a href="#process" className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-[#94a3b8] hover:text-white transition-colors">Process</a>
                         <button onClick={toggleModal} className="px-8 py-3 bg-white text-[#0e1114] text-[0.7rem] font-black uppercase tracking-widest mask-btn hover:bg-[#1ba6d6] hover:text-white">
                             Initiate Project
@@ -39,6 +40,7 @@ const LandingNavbar = ({ isScrolled, toggleModal }) => {
                 <div className="space-y-8 flex flex-col">
                     <a href="#expertise" onClick={toggleMobileMenu} className="text-2xl font-bold text-white hover:text-[#1ba6d6] transition-colors">Expertise</a>
                     <a href="#foundational" onClick={toggleMobileMenu} className="text-2xl font-bold text-white hover:text-[#1ba6d6] transition-colors">Foundational</a>
+                    <a href="/blog" onClick={toggleMobileMenu} className="text-2xl font-bold text-white hover:text-[#1ba6d6] transition-colors">Insights</a>
                     <a href="#process" onClick={toggleMobileMenu} className="text-2xl font-bold text-white hover:text-[#1ba6d6] transition-colors">Process</a>
                     <button onClick={() => { toggleMobileMenu(); toggleModal(); }} className="px-10 py-4 bg-[#1ba6d6] text-white text-sm font-black uppercase tracking-widest mask-btn shadow-xl">
                         Initiate Project

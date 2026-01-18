@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Code, Database, Globe, Layers, Zap, Terminal } from 'lucide-react';
+import { ArrowRight, Terminal } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const LandingHero = ({ toggleModal }) => {
     return (
@@ -18,18 +19,19 @@ const LandingHero = ({ toggleModal }) => {
                         className="inline-flex items-center space-x-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-1.5"
                     >
                         <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
-                        <span className="text-blue-400 text-sm font-medium tracking-wide">Enterprise-Grade Digital Solutions</span>
+                        <span className="text-blue-400 text-sm font-medium tracking-wide">Transforming Ideas into Reality</span>
                     </motion.div>
 
                     <motion.h1 
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-6xl md:text-8xl lg:text-[7rem] font-extrabold text-white leading-[0.9] tracking-tight mb-12"
+                        className="text-5xl md:text-7xl lg:text-7xl font-extrabold text-white leading-[1.1] tracking-tight mb-8"
                     >
-                        Precision <br />
+                        Where Innovation Meets
+                        <br />
                         <span className="bg-gradient-to-r from-[#1ba6d6] via-blue-400 to-[#1ba6d6] bg-clip-text text-transparent bg-300% animate-gradient">
-                            Architectures.
+                            Execution.
                         </span>
                     </motion.h1>
 
@@ -39,7 +41,8 @@ const LandingHero = ({ toggleModal }) => {
                         transition={{ duration: 0.6, delay: 0.4 }}
                         className="text-xl text-[#94a3b8] max-w-xl mb-14 leading-relaxed font-light"
                     >
-                        Limitless Infotech Solution delivers sovereign software ecosystems, hyper-scaled cloud infrastructure, and predictive automation for the global enterprise.
+                        Custom Software Development & Cloud Solutions for Startups. 
+                        We build scalable, secure, and high-performance technology that drives your business forward.
                     </motion.p>
 
                     <motion.div 
@@ -48,22 +51,19 @@ const LandingHero = ({ toggleModal }) => {
                         transition={{ duration: 0.6, delay: 0.6 }}
                         className="flex flex-wrap gap-6"
                     >
-                        <motion.button 
-                            whileHover={{ scale: 1.05, translateY: -5 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={toggleModal} 
-                            className="px-10 py-5 bg-[#1ba6d6] text-white font-black text-sm uppercase tracking-wider mask-btn shadow-2xl shadow-blue-500/20"
+                        <Link
+                            to="/contact"
+                            className="px-10 py-5 bg-[#1ba6d6] text-white font-black text-sm uppercase tracking-wider mask-btn shadow-2xl shadow-blue-500/20 flex items-center gap-2 hover:bg-[#158bb3] transition-colors"
                         >
-                            Architect a Solution
-                        </motion.button>
-                        <motion.a 
-                            whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.05)" }}
-                            href="#expertise" 
-                            className="px-10 py-5 border border-white/10 text-white font-black text-sm uppercase tracking-wider mask-btn flex items-center justify-center gap-2 group"
+                            Get a Free Consultation
+                        </Link>
+                        <Link 
+                            to="/portfolio"
+                            className="px-10 py-5 border border-white/10 text-white font-black text-sm uppercase tracking-wider mask-btn flex items-center justify-center gap-2 group hover:bg-white/5 transition-colors"
                         >
-                            Core Capabilities
+                            View Our Work
                             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </motion.a>
+                        </Link>
                     </motion.div>
                 </div>
 

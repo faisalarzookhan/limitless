@@ -71,7 +71,7 @@ export default {
         'soft-dark': '0 2px 15px -3px rgba(0, 0, 0, 0.25), 0 10px 20px -2px rgba(0, 0, 0, 0.5)',
       },
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'Figtree', 'system-ui', 'sans-serif'],
+        sans: ['Figtree', 'system-ui', 'sans-serif'],
         display: ['Outfit', 'system-ui', 'sans-serif'],
         mono: ['Fira Code', 'monospace'],
       },

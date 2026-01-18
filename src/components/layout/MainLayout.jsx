@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './header/Navbar';
 import Footer from './footer/Footer';
 import FloatingButtons from '../FloatingButtons';
+import ChatWidget from '../chat/ChatWidget';
 import WhatsAppBusinessIntegration from '../WhatsAppBusinessIntegration';
 import PrivacyConsent from '../PrivacyConsent';
 
@@ -18,6 +19,7 @@ const MainLayout = ({ children }) => {
           {children}
         </main>
         <FloatingButtons />
+        <ChatWidget />
         <WhatsAppBusinessIntegration />
         <Footer />
       </div>

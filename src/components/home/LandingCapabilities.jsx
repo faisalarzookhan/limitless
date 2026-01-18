@@ -1,69 +1,74 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code2, Cloud, Zap, ArrowRight } from 'lucide-react';
+import { Code2, Smartphone, Layout, Server, ArrowRight, Cloud } from 'lucide-react';
 
 const LandingCapabilities = () => {
-    const capabilities = [
+    const services = [
         {
             icon: Code2,
             iconColor: 'text-[#1ba6d6]',
-            title: 'Engineering',
-            items: ['Enterprise Platforms', 'API Orchestration', 'Native Ecosystems'],
+            title: 'Web Development',
+            items: ['Custom React/Next.js Apps', 'E-commerce Solutions', 'Progressive Web Apps (PWA)'],
             delay: 0.1
         },
         {
-            icon: Cloud,
+            icon: Smartphone,
             iconColor: 'text-[#f4b41a]',
-            title: 'Infrastructure',
-            items: ['Cloud Sovereign Servers', 'Zero-Trust Security', 'Disaster Recovery'],
+            title: 'Mobile Apps',
+            items: ['iOS & Android (Flutter/React Native)', 'Native Performance', 'Cross-Platform Scalability'],
             delay: 0.2
         },
         {
-            icon: Zap,
+            icon: Layout,
             iconColor: 'text-white',
-            title: 'Intelligence',
-            items: ['Predictive Analytics', 'LLM Integration', 'RPA Pipelines'],
+            title: 'UI/UX Design',
+            items: ['User Research & Prototyping', 'Modern Interface Design', 'Design Systems'],
             delay: 0.3
+        },
+         {
+            icon: Server,
+            iconColor: 'text-[#1ba6d6]',
+            title: 'DevOps & Cloud',
+            items: ['AWS/Azure Infrastructure', 'CI/CD Pipelines', 'Docker & Kubernetes'],
+            delay: 0.4
         }
     ];
 
     return (
-        <section id="expertise" className="py-40 px-6 md:px-10">
+        <section id="services" className="py-32 px-6 md:px-10 bg-[#0e1114]">
             <div className="max-w-[1440px] mx-auto">
                 <motion.div 
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="mb-24 max-w-3xl"
+                    className="mb-20 max-w-3xl"
                 >
-                    <span className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-[#1ba6d6] mb-6 block">Capabilities Framework</span>
-                    <h2 className="text-5xl md:text-6xl font-extrabold text-white mb-8 tracking-tight">Systemic Solutions.</h2>
-                    <p className="text-lg text-[#94a3b8] leading-relaxed">Our engineering practice is built on technical integrity and transparent execution, ensuring long-term architectural stability.</p>
+                    <span className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-[#1ba6d6] mb-6 block">Our Expertise</span>
+                    <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 tracking-tight">Services We Deliver.</h2>
+                    <p className="text-lg text-[#94a3b8] leading-relaxed">End-to-end digital product development tailored for startups and enterprises.</p>
                 </motion.div>
 
-                <div className="grid md:grid-cols-3 gap-1">
-                    {capabilities.map((cap, index) => (
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {services.map((service, index) => (
                         <motion.div 
                             key={index}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: cap.delay }}
-                            whileHover={{ y: -10 }}
-                            className="glass-panel p-12 group hover:bg-white/5 hover:border-white/10 transition-colors duration-500 relative overflow-hidden"
+                            transition={{ duration: 0.6, delay: service.delay }}
+                            whileHover={{ y: -5 }}
+                            className="bg-white/5 border border-white/5 p-8 hover:bg-white/10 hover:border-white/20 transition-all duration-300 rounded-lg group"
                         >
-                            <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity transform group-hover:scale-110 duration-700">
-                                <cap.icon className="w-32 h-32" />
+                            <div className={`w-12 h-12 mb-6 flex items-center justify-center rounded-lg bg-white/5 ${service.iconColor}`}>
+                                <service.icon className="w-6 h-6" />
                             </div>
-                            <div className={`w-12 h-12 mb-10 flex items-center justify-center border border-white/10 rounded-sm ${cap.iconColor}`}>
-                                <cap.icon className="w-6 h-6" />
-                            </div>
-                            <h3 className="text-2xl font-bold text-white mb-8">{cap.title}</h3>
-                            <ul className="space-y-4">
-                                {cap.items.map((item, i) => (
-                                    <li key={i} className={`flex items-center gap-3 text-sm font-medium text-[#94a3b8] group-hover:text-white transition-colors`}>
-                                        <ArrowRight className={`w-4 h-4 ${cap.iconColor}`} /> {item}
+                            <h3 className="text-xl font-bold text-white mb-6">{service.title}</h3>
+                            <ul className="space-y-3">
+                                {service.items.map((item, i) => (
+                                    <li key={i} className={`flex items-start gap-2 text-xs font-medium text-[#94a3b8] group-hover:text-white transition-colors`}>
+                                        <ArrowRight className={`w-3 h-3 mt-0.5 ${service.iconColor}`} /> 
+                                        <span>{item}</span>
                                     </li>
                                 ))}
                             </ul>

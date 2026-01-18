@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Activity, Database, Github, Twitter, Linkedin, Mail } from 'lucide-react';
+import { Github, Twitter, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -18,8 +18,8 @@ const Footer = () => {
                         <div className="w-8 h-8 bg-[#1ba6d6] mask-facet"></div>
                         <span className="font-black text-white text-xl tracking-tighter">LIMITLESS</span>
                     </div>
-                    <p className="text-sm text-[#94a3b8] opacity-60 leading-relaxed mb-10">
-                        Technical authority and operational maturity for the next generation of industry leaders.
+                    <p className="text-sm text-[#94a3b8] leading-relaxed mb-10">
+                        Where Innovation Meets Execution. Empowering startups and enterprises with scalable, secure, and high-performance digital solutions.
                     </p>
                     <div className="flex gap-4">
                         <motion.a 
@@ -41,7 +41,7 @@ const Footer = () => {
                             <Twitter className="w-4 h-4" />
                         </motion.a>
                          <motion.a 
-                             href="https://linkedin.com/in/limitlessinfotech" 
+                             href="https://linkedin.com/company/limitlessinfotech" 
                              target="_blank"
                              rel="noopener noreferrer"
                             whileHover={{ scale: 1.1, borderColor: '#1ba6d6', color: '#1ba6d6' }}
@@ -54,80 +54,81 @@ const Footer = () => {
                 
                 <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-10">
                     <div>
-                        <h4 className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-white mb-8">Platform</h4>
-                        <ul className="space-y-4 text-sm font-medium text-[#94a3b8] opacity-60">
+                        <h4 className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-white mb-8">Services</h4>
+                        <ul className="space-y-4 text-sm font-medium text-[#94a3b8]">
                             <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
-                                <Link to="/services">Services</Link>
+                                <Link to="/services">Web Development</Link>
                             </motion.li>
                             <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
-                                <Link to="/products">Neural Products</Link>
+                                <Link to="/services">Mobile Apps</Link>
                             </motion.li>
                             <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
-                                <Link to="/portfolio">Legacy Portfolio</Link>
+                                <Link to="/services">UI/UX Design</Link>
                             </motion.li>
                             <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
-                                <Link to="/compliance">Enterprise Compliance</Link>
+                                <Link to="/services">DevOps & Cloud</Link>
                             </motion.li>
                         </ul>
                     </div>
                     <div>
                         <h4 className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-white mb-8">Quick Links</h4>
-                        <ul className="space-y-4 text-sm font-medium text-[#94a3b8] opacity-60">
+                        <ul className="space-y-4 text-sm font-medium text-[#94a3b8]">
                             <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
-                                <Link to="/about">About Nexus</Link>
+                                <Link to="/about">About Us</Link>
                             </motion.li>
                             <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
-                                <Link to="/careers">Careers</Link>
+                                <Link to="/portfolio">Portfolio</Link>
                             </motion.li>
                             <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
-                                <Link to="/pricing">Pricing Protocols</Link>
+                                <Link to="/contact">Contact</Link>
                             </motion.li>
-                            <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
-                                <Link to="/contact">Initiate Contact</Link>
+                             <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
+                                <Link to="/blog">Insights</Link>
                             </motion.li>
                         </ul>
                     </div>
                     <div>
-                        <h4 className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-white mb-8">Resources</h4>
-                        <ul className="space-y-4 text-sm font-medium text-[#94a3b8] opacity-60">
-                            <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
-                                <Link to="/blog">Intelligence Hub</Link>
-                            </motion.li>
-                            <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
-                                <Link to="/knowledge-base">Knowledge Base</Link>
-                            </motion.li>
-                            <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
-                                <Link to="/api-documentation">API Reference</Link>
-                            </motion.li>
-                            <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
-                                <Link to="/admin-nexus">Admin Nexus</Link>
-                            </motion.li>
+                        <h4 className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-white mb-8">Contact</h4>
+                         <ul className="space-y-4 text-sm font-medium text-[#94a3b8]">
+                            <li className="flex items-start gap-3">
+                                <MapPin className="w-4 h-4 text-[#1ba6d6] mt-1" />
+                                <span>Mumbai, India<br />Global Remote Teams</span>
+                            </li>
+                             <li className="flex items-center gap-3">
+                                <Mail className="w-4 h-4 text-[#1ba6d6]" />
+                                <span>info@limitlessinfotech.com</span>
+                            </li>
+                             <li className="flex items-center gap-3">
+                                <Phone className="w-4 h-4 text-[#1ba6d6]" />
+                                <span>+91 999 888 7777</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
 
                 <div>
-                    <h4 className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-white mb-8">Operational Desk</h4>
-                    <motion.div 
-                        whileHover={{ scale: 1.02, backgroundColor: "rgba(27, 166, 214, 0.05)" }}
-                        className="p-8 border border-white/5 bg-white/5 mask-facet transition-colors"
-                    >
-                        <p className="text-xs font-bold text-[#1ba6d6] mb-2 uppercase tracking-widest">Global Uplink</p>
-                        <p className="text-sm text-white font-medium mb-6">info@limitlessinfotech.com</p>
-                        <Link to="/contact" className="text-[0.6rem] font-black uppercase tracking-[0.2em] text-[#1ba6d6] hover:text-white transition-colors">
-                            Request Architecture Review →
-                        </Link>
-                    </motion.div>
+                    <h4 className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-white mb-8">Newsletter</h4>
+                    <p className="text-sm text-[#94a3b8] mb-4">Subscribe for latest tech trends.</p>
+                     <div className="relative">
+                        <input 
+                            type="email" 
+                            placeholder="EMAIL ADDRESS" 
+                            className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-xs text-white placeholder:text-white/20 focus:border-[#1ba6d6] focus:outline-none transition-colors"
+                        />
+                        <button className="absolute right-2 top-1.5 p-1.5 bg-[#1ba6d6] rounded text-white hover:bg-[#158bb3] transition-colors">
+                            <Mail size={14} />
+                        </button>
+                    </div>
                 </div>
             </motion.div>
 
-            <div className="max-w-[1440px] mx-auto mt-32 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-10">
-                <p className="text-[10px] font-black tracking-[0.4em] text-[#94a3b8] opacity-30 uppercase">
-                    &copy; {new Date().getFullYear()} Limitless Infotech.
+            <div className="max-w-[1440px] mx-auto mt-24 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p className="text-[10px] font-black tracking-[0.2em] text-[#94a3b8] opacity-50 uppercase">
+                    &copy; {new Date().getFullYear()} Limitless Infotech Solution.
                 </p>
-                <div className="flex gap-12 text-[10px] font-black tracking-[0.2em] text-[#94a3b8] opacity-40 uppercase">
-                    <Link to="/terms-of-service" className="hover:text-white transition-colors">Protocols</Link>
-                    <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy</Link>
+                <div className="flex gap-8 text-[10px] font-black tracking-[0.2em] text-[#94a3b8] opacity-50 uppercase">
+                    <Link to="/terms-of-service" className="hover:text-white transition-colors">Privacy Policy</Link>
+                    <Link to="/cookie-policy" className="hover:text-white transition-colors">Terms of Service</Link>
                 </div>
             </div>
         </footer>
