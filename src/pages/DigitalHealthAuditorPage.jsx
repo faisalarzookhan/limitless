@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import DigitalHealthAuditor from '../components/DigitalHealthAuditor';
 import MainLayout from '../components/layout/MainLayout';
 import {
-  GlobeAlt,
+  Globe,
   Zap,
   ShieldCheck,
   BarChart3,
