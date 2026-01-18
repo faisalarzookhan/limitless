@@ -40,13 +40,14 @@ class AnalyticsAPI {
       }
 
       return await response.json();
+      return await response.json();
     } catch (error) {
-      if (error.name === 'AbortError') {
-        throw new Error('Request timeout. Please try again.');
+      // In production/demo, we don't want analytics failures to break the app or spam console
+      if (import.meta.env.DEV || import.meta.env.VITE_DEBUG_MODE === 'true') {
+         console.warn('Analytics API unavailable (Mock Mode Active):', error.message);
       }
-      
-      console.error('Analytics API error:', error);
-      throw error;
+      // Return mock success to prevent app crash
+      return { success: true, mock: true };
     }
   }
 
