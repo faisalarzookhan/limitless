@@ -1,0 +1,20 @@
+{
+  "name": "Limitless Infotech Solution",
+  "short_name": "Limitless",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0e1114",
+  "theme_color": "#0e1114",
+  "icons": [
+    {
+      "src": "/images/logos/Limitlessinfotech Logo - 3D.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logos/Limitlessinfotech Logo - 3D.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

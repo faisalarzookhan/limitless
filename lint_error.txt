@@ -1,0 +1,25 @@
+
+> limitless-infotech-solution@2.1.9 lint
+> cross-env ESLINT_USE_FLAT_CONFIG=false eslint . --ext js,jsx,ts,tsx --report-unused-disable-directives --max-warnings 0
+
+
+Oops! Something went wrong! :(
+
+ESLint: 9.39.2
+
+Error: .eslintrc:
+	Configuration for rule "react/jsx-wrap-multilines" is invalid:
+	Value {"declaration":"parens-new-line","assignment":"parens-new-line","return":"parens-new-line","arrow":"parens-new-line","parameter":"parens-new-line","props":"parens-new-line"} should NOT have additional properties.
+
+    at ConfigValidator.validateRuleOptions (C:\Redesigned\node_modules\@eslint\eslintrc\dist\eslintrc.cjs:2142:35)
+    at C:\Redesigned\node_modules\@eslint\eslintrc\dist\eslintrc.cjs:2201:18
+    at Array.forEach (<anonymous>)
+    at ConfigValidator.validateRules (C:\Redesigned\node_modules\@eslint\eslintrc\dist\eslintrc.cjs:2198:34)
+    at ConfigValidator.validateConfigArray (C:\Redesigned\node_modules\@eslint\eslintrc\dist\eslintrc.cjs:2326:18)
+    at CascadingConfigArrayFactory._finalizeConfigArray (C:\Redesigned\node_modules\@eslint\eslintrc\dist\eslintrc.cjs:4095:23)
+    at CascadingConfigArrayFactory.getConfigArrayForFile (C:\Redesigned\node_modules\@eslint\eslintrc\dist\eslintrc.cjs:3899:21)
+    at FileEnumerator._iterateFilesRecursive (C:\Redesigned\node_modules\eslint\lib\cli-engine\file-enumerator.js:444:34)
+    at _iterateFilesRecursive.next (<anonymous>)
+    at FileEnumerator.iterateFiles (C:\Redesigned\node_modules\eslint\lib\cli-engine\file-enumerator.js:287:40)
+(node:25012) ESLintRCWarning: You are using an eslintrc configuration file, which is deprecated and support will be removed in v10.0.0. Please migrate to an eslint.config.js file. See https://eslint.org/docs/latest/use/configure/migration-guide for details. An eslintrc configuration file is used because you have the ESLINT_USE_FLAT_CONFIG environment variable set to false. If you want to use an eslint.config.js file, remove the environment variable. If you want to find the location of the eslintrc configuration file, use the --debug flag.
+(Use `node --trace-warnings ...` to show where the warning was created)

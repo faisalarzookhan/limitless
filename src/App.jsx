@@ -58,11 +58,14 @@ const ResponsiveToolkitDemo = lazy(() => import('./pages/ResponsiveToolkitDemo')
 const AuditorToSandboxFlow = lazy(() => import('./pages/AuditorToSandboxFlow'));
 
 // Loading component for lazy-loaded pages
+// Loading component for lazy-loaded pages
 const PageLoader = () => (
-  <div className="flex items-center justify-center min-h-screen bg-white dark:bg-dark-900">
-    <div className="text-center">
-      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600 mx-auto mb-4"></div>
-      <p className="text-gray-900 dark:text-white text-lg">Loading page...</p>
+  <div className="flex items-center justify-center min-h-screen bg-[#0e1114] z-50">
+    <div className="relative">
+      <div className="w-16 h-16 border-4 border-[#1ba6d6]/20 border-t-[#1ba6d6] rounded-full animate-spin"></div>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="w-2 h-2 bg-[#1ba6d6] rounded-full animate-pulse"></div>
+      </div>
     </div>
   </div>
 );

@@ -127,8 +127,9 @@ const Footer = () => {
                     &copy; {new Date().getFullYear()} Limitless Infotech Solution.
                 </p>
                 <div className="flex gap-8 text-[10px] font-black tracking-[0.2em] text-[#94a3b8] opacity-50 uppercase">
-                    <Link to="/terms-of-service" className="hover:text-white transition-colors">Privacy Policy</Link>
-                    <Link to="/cookie-policy" className="hover:text-white transition-colors">Terms of Service</Link>
+                    <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                    <Link to="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
+                    <Link to="/cookie-policy" className="hover:text-white transition-colors">Cookie Policy</Link>
                 </div>
             </div>
         </footer>

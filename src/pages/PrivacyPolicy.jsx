@@ -17,7 +17,7 @@ import {
 import ErrorBoundary from '../components/ErrorBoundary';
 
 const PrivacyPolicy = () => {
-  const lastUpdated = 'January 15, 2024';
+  const lastUpdated = 'January 15, 2026';
 
   const sections = [
     {

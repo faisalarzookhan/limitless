@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, User, Sparkles } from 'lucide-react';
+import { MessageSquare, X, Send, Sparkles } from 'lucide-react';
 import api from '../../services/api';
 
 const ChatWidget = () => {
@@ -41,28 +41,39 @@ const ChatWidget = () => {
                 setMessages(prev => [...prev, botMsg]);
             } else {
                  // Simulate bot response if no backend
-                 simulateBotResponse();
+                 simulateBotResponse(userText);
             }
         } catch (error) {
             console.error("Chat error:", error);
             // Fallback to simulation on error (so the demo still works)
-            simulateBotResponse();
+            simulateBotResponse(userText);
         } finally {
             setIsTyping(false);
         }
     };
 
-    const simulateBotResponse = () => {
+    const simulateBotResponse = (userMessage) => {
         setTimeout(() => {
-            const responses = [
-                "That's a great question! Our specialized team would love to discuss this further.",
-                "We can definitely help with that. Limitless Infotech specializes in scalable digital solutions.",
-                "Would you like to schedule a consultation with our architects?",
-                "I'll connect you with a project manager immediately."
-            ];
-            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+            const lowerMsg = userMessage.toLowerCase();
+            let responseText = "";
+
+            if (lowerMsg.includes('price') || lowerMsg.includes('cost') || lowerMsg.includes('budget') || lowerMsg.includes('quote')) {
+                responseText = "Would you like to schedule a consultation with our architects?";
+            } else if (lowerMsg.includes('yes') || lowerMsg.includes('sure') || lowerMsg.includes('okay')) {
+                responseText = "We can definitely help with that. Limitless Infotech specializes in scalable digital solutions.";
+            } else if (lowerMsg.includes('hi') || lowerMsg.includes('hello') || lowerMsg.includes('hey')) {
+                responseText = "That's a great question! Our specialized team would love to discuss this further.";
+            } else {
+                 const responses = [
+                    "That's a great question! Our specialized team would love to discuss this further.",
+                    "We can definitely help with that. Limitless Infotech specializes in scalable digital solutions.",
+                    "Would you like to schedule a consultation with our architects?",
+                    "I'll connect you with a project manager immediately."
+                ];
+                responseText = responses[Math.floor(Math.random() * responses.length)];
+            }
             
-            const botMsg = { id: Date.now() + 1, type: 'bot', text: randomResponse };
+            const botMsg = { id: Date.now() + 1, type: 'bot', text: responseText };
             setMessages(prev => [...prev, botMsg]);
             setIsTyping(false);
         }, 1500);
