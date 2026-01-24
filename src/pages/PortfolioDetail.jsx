@@ -21,7 +21,8 @@ import {
   Star,
   Target,
   Lightbulb,
-  Settings
+  Settings,
+  Scale
 } from 'lucide-react';
 import ErrorBoundary from '../components/ErrorBoundary';
 
@@ -207,6 +208,46 @@ const PortfolioDetail = () => {
       ],
       icon: Building2,
       color: 'primary'
+    },
+    102: {
+      id: 102,
+      title: 'Wakilni Legitech Platform',
+      client: 'Wakilni Legal Services',
+      industry: 'LegalTech',
+      year: '2023',
+      duration: '9 Months',
+      teamSize: '12 Specialists',
+      description: 'A revolutionary digital legal platform connecting clients with specialized attorneys through a secure, encrypted matching engine.',
+      challenge: 'The legal industry in the region was fragmented, opaque, and reliant on manual paperwork. Clients struggled to find the right counsel.',
+      solution: 'We architected a secure, double-blind matching platform with automated case tracking, secure document vault, and real-time attorney consultation.',
+      implementation: [
+        'Regulatory compliance audit and framework design.',
+        'Development of a semantic matching algorithm for cases.',
+        'Secure document vault with blockchain verification.',
+        'Real-time encrypted video consultation module.',
+        'Automated billing and escrow integration.'
+      ],
+      technologies: ['Next.js', 'Python/Django', 'PostgreSQL', 'WebRTC', 'Hyperledger Fabric'],
+      results: [
+        { metric: 'Matches', value: '10K+', description: 'Successful client-attorney connections.' },
+        { metric: 'Time', value: '-80%', description: 'Reduction in case initiation time.' },
+        { metric: 'Trust', value: '98%', description: 'Client satisfaction score.' }
+      ],
+      testimonial: {
+        text: 'Limitless built more than software; they built a digital justice infrastructure. The security and ease of use are unparalleled.',
+        author: 'Omar Farouk',
+        role: 'CEO, Wakilni',
+        rating: 5
+      },
+      features: [
+        'Semantic Legal Matching',
+        'Blockchain Document Vault',
+        'Encrypted Video Consult',
+        'Smart Contract Escrow',
+        'Case Lifecycle Tracking'
+      ],
+      icon: Scale,
+      color: 'secondary'
     }
   };
 

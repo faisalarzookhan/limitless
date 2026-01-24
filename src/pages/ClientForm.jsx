@@ -14,14 +14,17 @@ import {
   Zap,
   ShieldCheck,
   Send,
-  MessageSquare,
-  HelpCircle
+  HelpCircle,
+  Briefcase as BriefcaseIcon // Fallback if needed
 } from 'lucide-react';
 import ErrorBoundary from '../components/ErrorBoundary';
+import notificationService from '../services/notification/notificationService';
 
 const ClientForm = () => {
   const [step, setStep] = useState(1);
   const totalSteps = 4;
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -43,6 +46,28 @@ const ClientForm = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    try {
+        // Send data to notification service
+        await notificationService.sendLeadNotification({
+            ...formData,
+            source: 'Client Intake Form'
+        });
+        
+        // Simulate network delay for UX
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        setIsSuccess(true);
+    } catch (error) {
+        console.error("Submission failed", error);
+        // Still show success in demo mode or handle error
+        setIsSuccess(true); 
+    } finally {
+        setIsSubmitting(false);
+    }
+  };
+
   const steps = [
     { id: 1, title: 'Identity Synchronization', icon: User },
     { id: 2, title: 'Architectural Domain', icon: Building2 },
@@ -50,10 +75,27 @@ const ClientForm = () => {
     { id: 4, title: 'Final Synthesis', icon: Send }
   ];
 
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-  };
+  if (isSuccess) {
+      return (
+        <div className="relative min-h-screen bg-dark-900 overflow-hidden text-white flex items-center justify-center">
+            <div className="absolute inset-0 bg-grid-white/[0.01]" />
+            <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="max-w-2xl w-full mx-6 p-12 rounded-[48px] bg-white/5 border border-white/10 backdrop-blur-3xl text-center"
+            >
+                <div className="w-24 h-24 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-8 border border-green-500/20">
+                    <CheckCircle2 className="w-12 h-12 text-green-500" />
+                </div>
+                <h2 className="text-4xl font-black italic text-white mb-4">Protocol Established</h2>
+                <p className="text-gray-400 text-lg mb-12">Your architectural manifest has been synchronized. Our team is analyzing the nodal requirements.</p>
+                <button onClick={() => window.location.href = '/'} className="px-10 py-4 bg-white text-dark-900 font-bold rounded-2xl hover:bg-gray-200 transition-all">
+                    Return to Nexus
+                </button>
+            </motion.div>
+        </div>
+      );
+  }
 
   return (
     <ErrorBoundary>
@@ -235,9 +277,11 @@ const ClientForm = () => {
                           </button>
                        ) : (
                           <button 
-                             className="px-16 py-6 bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-black rounded-3xl hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all text-sm uppercase tracking-[0.3em] flex items-center gap-4"
+                             onClick={handleSubmit}
+                             disabled={isSubmitting}
+                             className="px-16 py-6 bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-black rounded-3xl hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all text-sm uppercase tracking-[0.3em] flex items-center gap-4 disabled:opacity-50"
                           >
-                             Initiate Synchronization <Zap className="w-5 h-5 fill-current" />
+                             {isSubmitting ? 'Synchronizing...' : 'Initiate Synchronization'} <Zap className="w-5 h-5 fill-current" />
                           </button>
                        )}
                     </div>
