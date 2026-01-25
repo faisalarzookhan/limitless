@@ -3,7 +3,7 @@
   "private": true,
   "version": "2.1.9",
   "type": "module",
-  "description": "Limitless Infotech Solution - Where Innovation Meets Execution",
+  "description": "Limitless Infotech Solution - Where Innovation Meets Execution v2",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
