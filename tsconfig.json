@@ -16,6 +16,19 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
 
+    /* Path Aliases */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages/*"],
+      "@services/*": ["src/services/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@utils/*": ["src/utils/*"],
+      "@assets/*": ["src/assets/*"],
+      "@context/*": ["src/context/*"]
+    },
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import DigitalHealthAuditor from '../components/DigitalHealthAuditor';
 import MainLayout from '../components/layout/MainLayout';
 import {
@@ -18,6 +19,7 @@ import {
   Monitor
 } from 'lucide-react';
 import ErrorBoundary from '../components/ErrorBoundary';
+import SEO from '../components/SEO/SEO';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -43,15 +45,30 @@ const itemVariants = {
 
 const DigitalHealthAuditorPage = () => {
   const [showSandbox, setShowSandbox] = useState(false);
+  const navigate = useNavigate();
 
   const handleSandboxRequest = () => {
     setShowSandbox(true);
     // In a real implementation, this would open the sandbox
-    alert('Initiating OmniTrack sandbox environment...');
+    navigate('/auditor-to-sandbox');
   };
 
   const handleAuditComplete = (results, url, email) => {
     console.log('Audit completed for:', url);
+    // Store results in persistent reactive node for flow transition
+    const auditArtifact = {
+      id: `audit_${Date.now()}`,
+      url,
+      email,
+      results,
+      timestamp: new Date().toISOString()
+    };
+    localStorage.setItem('limitless_last_audit', JSON.stringify(auditArtifact));
+    
+    // Redirect to deconstruction flow
+    setTimeout(() => {
+       navigate('/auditor-to-sandbox');
+    }, 2000);
   };
 
   const features = [
@@ -123,6 +140,10 @@ const DigitalHealthAuditorPage = () => {
   return (
     <ErrorBoundary>
       <div className="relative min-h-screen bg-dark-900 overflow-hidden">
+        <SEO 
+          title="Digital Health Auditor - Diagnostic Core" 
+          description="Identify technical debt and architect your path to excellence with a high-fidelity diagnostic pulse." 
+        />
         {/* Ambient background particles/glows */}
         <div className="fixed inset-0 pointer-events-none">
           <div className="absolute top-0 left-[-10%] w-[60%] h-[60%] bg-primary-500/5 blur-[150px] rounded-full" />

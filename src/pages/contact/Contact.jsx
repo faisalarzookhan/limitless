@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -27,8 +27,27 @@ import {
 } from 'lucide-react';
 import ContactForm from '../../components/forms/contact/ContactForm';
 import ErrorBoundary from '../../components/ErrorBoundary';
+import { useApp } from '../../context/AppContext';
 
 const Contact = () => {
+  const { toggleChat } = useApp();
+  const formRef = useRef(null);
+  const [initialSubject, setInitialSubject] = useState('');
+
+  const handleAction = (action) => {
+    if (action.title === 'Live Chat Support') {
+      toggleChat(true);
+      return;
+    }
+    
+    if (action.title === 'Schedule Consultation') {
+      setInitialSubject('project');
+    } else if (action.title === 'Request Demo') {
+      setInitialSubject('demo');
+    }
+    
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -218,7 +237,9 @@ const Contact = () => {
                 <h2 className="text-4xl font-bold mb-4">Send us a Message</h2>
                 <p className="text-gray-400">Fill out the details and our specialists will reach out to you within 24 hours.</p>
               </div>
-              <ContactForm />
+              <div ref={formRef}>
+                <ContactForm key={initialSubject} initialSubject={initialSubject} />
+              </div>
             </motion.div>
 
             {/* Sidebar Elements */}
@@ -233,10 +254,10 @@ const Contact = () => {
                 <h3 className="text-2xl font-bold mb-6">Quick Actions</h3>
                 <div className="space-y-4">
                   {quickActions.map((action, index) => (
-                    <Link 
+                    <button 
                       key={index} 
-                      to={action.link}
-                      className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all group"
+                      onClick={() => handleAction(action)}
+                      className="w-full flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all group text-left"
                     >
                       <div className="w-12 h-12 rounded-xl bg-primary-500/10 flex items-center justify-center group-hover:bg-primary-500/20 transition-colors">
                         <action.icon className="w-5 h-5 text-primary-400" />
@@ -245,7 +266,7 @@ const Contact = () => {
                         <h4 className="font-bold text-white text-sm">{action.title}</h4>
                         <p className="text-xs text-gray-400">{action.description}</p>
                       </div>
-                    </Link>
+                    </button>
                   ))}
                 </div>
               </motion.div>

@@ -17,6 +17,11 @@ export const AppProvider = ({ children }) => {
   const [notifications, setNotifications] = useState([]);
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  const toggleChat = (status) => {
+    setIsChatOpen(status !== undefined ? status : !isChatOpen);
+  };
 
   // Theme Management
   useEffect(() => {
@@ -223,6 +228,10 @@ export const AppProvider = ({ children }) => {
     addToWishlist,
     removeFromWishlist,
     isInWishlist,
+
+    // Chat
+    isChatOpen,
+    toggleChat,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

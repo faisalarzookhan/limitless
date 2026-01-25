@@ -25,6 +25,7 @@ import {
   Scale
 } from 'lucide-react';
 import ErrorBoundary from '../components/ErrorBoundary';
+import SEO from '../components/SEO/SEO';
 
 const PortfolioDetail = () => {
   const { id } = useParams();
@@ -258,6 +259,10 @@ const PortfolioDetail = () => {
   return (
     <ErrorBoundary>
       <div className="relative min-h-screen">
+        <SEO 
+          title={`${project.title} - Portfolio Showcase`} 
+          description={project.description} 
+        />
         {/* Ambient background */}
         <div className="fixed inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-0 left-[-10%] w-[70%] h-[70%] bg-primary-500/5 blur-[120px] rounded-full" />

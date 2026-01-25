@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   DollarSign,
@@ -13,427 +13,397 @@ import {
   ChevronRight,
   ShieldCheck,
   Activity,
-  ArrowUpRight
+  ArrowUpRight,
+  Layers,
+  PieChart,
+  LineChart,
+  ArrowDown
 } from 'lucide-react';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+} from 'chart.js';
+import { Line, Bar } from 'react-chartjs-2';
 import ErrorBoundary from '../components/ErrorBoundary';
+import SEO from '../components/SEO/SEO';
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
-
-const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.8,
-      ease: [0.16, 1, 0.3, 1]
-    }
-  }
-};
+// Register Chart.js components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 const ROICalculator = () => {
   const [calculatorType, setCalculatorType] = useState('hr-ims');
   const [inputs, setInputs] = useState({
     hr: {
-      employeeCount: 100,
-      avgSalary: 50000,
-      timeSavedPerEmployee: 2,
-      costReductionPercentage: 15,
+      employeeCount: 150,
+      avgSalary: 65000,
+      turnoverRate: 12,
+      recruitmentCost: 15000,
+      productivityLift: 20,
     },
-    project: {
-      projectCount: 50,
-      avgProjectValue: 10000,
-      timeToComplete: 30,
-      efficiencyGain: 25,
+    tech: {
+      userCount: 500,
+      licensingCost: 25000,
+      uptimeGained: 4,
+      securityRiskReduction: 35,
+      devSpeedIncrease: 25,
     },
-    implementationCost: 50000,
-    timeframe: 24,
+    investment: 75000,
+    maintenance: 12000,
   });
 
-  const [results, setResults] = useState(null);
+  const [projection, setProjection] = useState(null);
 
   const calculators = {
     'hr-ims': {
-      title: 'Alliance Core ROI',
-      description: 'Projecting structural savings for human capital architecture deployments.',
+      title: 'Alliance Core ROI (HRM)',
+      description: 'Human Capital Transformation Modeling',
       icon: Users,
-      color: 'text-primary-400',
-      bg: 'bg-primary-500/10',
+      color: '#1ba6d6',
       inputs: [
-        { id: 'employeeCount', label: 'Human Assets', type: 'number', min: 1, max: 10000, step: 1, icon: Users },
-        { id: 'avgSalary', label: 'Mean Asset Value ($)', type: 'number', min: 10000, max: 500000, step: 1000, icon: DollarSign },
-        { id: 'timeSavedPerEmployee', label: 'Monthly Flux Gain (hrs)', type: 'number', min: 0.5, max: 40, step: 0.5, icon: Clock },
-        { id: 'costReductionPercentage', label: 'Operational Delta (%)', type: 'number', min: 1, max: 50, step: 1, icon: Activity },
-      ],
+        { id: 'employeeCount', label: 'Workforce Size', min: 10, max: 5000, step: 10 },
+        { id: 'avgSalary', label: 'Average Annual Salary ($)', min: 30000, max: 250000, step: 5000 },
+        { id: 'turnoverRate', label: 'Current Turnover (%)', min: 1, max: 40, step: 1 },
+        { id: 'productivityLift', label: 'Target Productivity Lift (%)', min: 5, max: 50, step: 5 },
+      ]
     },
-    trackit: {
-      title: 'OmniTrack ROI',
-      description: 'Quantifying architectural efficiency gains in operational oversight.',
+    'tech': {
+      title: 'Nexus Infrastructure ROI',
+      description: 'Systemic Operational Excellence Projections',
       icon: BarChart3,
-      color: 'text-secondary-400',
-      bg: 'bg-secondary-500/10',
+      color: '#ffc957',
       inputs: [
-        { id: 'projectCount', label: 'Annual Streams', type: 'number', min: 1, max: 1000, step: 1, icon: Activity },
-        { id: 'avgProjectValue', label: 'Mean Stream Value ($)', type: 'number', min: 1000, max: 1000000, step: 1000, icon: DollarSign },
-        { id: 'timeToComplete', label: 'Cycle Duration (days)', type: 'number', min: 1, max: 365, step: 1, icon: Clock },
-        { id: 'efficiencyGain', label: 'Throughput Lift (%)', type: 'number', min: 1, max: 100, step: 1, icon: Zap },
-      ],
-    },
+        { id: 'userCount', label: 'System active Users', min: 50, max: 10000, step: 50 },
+        { id: 'licensingCost', label: 'Legacy License Overhead ($)', min: 5000, max: 500000, step: 5000 },
+        { id: 'uptimeGained', label: 'Operational Uptime Lift (%)', min: 0.1, max: 10, step: 0.1 },
+        { id: 'devSpeedIncrease', label: 'Engineering Throughput Lift (%)', min: 5, max: 100, step: 5 },
+      ]
+    }
   };
 
-  const calculateROI = () => {
-    const data = inputs[calculatorType === 'hr-ims' ? 'hr' : 'project'];
-    const { implementationCost, timeframe } = inputs;
-
-    let yearlySavings = 0;
-    let yearlyBenefits = 0;
+  const calculateProjections = () => {
+    const data = inputs[calculatorType === 'hr-ims' ? 'hr' : 'tech'];
+    const { investment, maintenance } = inputs;
+    
+    let year1Savings = 0;
+    let year2Savings = 0;
+    let year3Savings = 0;
 
     if (calculatorType === 'hr-ims') {
-      const hourlyRate = data.avgSalary / (40 * 52);
-      const monthlyTimeSavings = data.employeeCount * data.timeSavedPerEmployee;
-      const yearlyTimeSavingsValue = monthlyTimeSavings * 12 * hourlyRate;
-      const yearlyCostReduction = (data.avgSalary * data.employeeCount * data.costReductionPercentage) / 100;
-      yearlySavings = yearlyTimeSavingsValue + yearlyCostReduction;
-      yearlyBenefits = yearlySavings;
+      const turnoverSavings = (data.employeeCount * (data.turnoverRate / 100)) * (data.avgSalary * 0.3); // 30% of salary for replacement cost
+      const productivitySavings = (data.employeeCount * data.avgSalary) * (data.productivityLift / 100);
+      year1Savings = (turnoverSavings + productivitySavings) * 0.8; // Year 1 setup stabilization
+      year2Savings = (turnoverSavings + productivitySavings) * 1.1; // Year 2 optimization
+      year3Savings = (turnoverSavings + productivitySavings) * 1.25; // Year 3 mastery
     } else {
-      const timeReduction = (data.timeToComplete * data.efficiencyGain) / 100;
-      const newTimeToComplete = data.timeToComplete - timeReduction;
-      const projectsCompleted = (365 / newTimeToComplete) * (data.projectCount / (365 / data.timeToComplete));
-      const additionalValue = (projectsCompleted - data.projectCount) * data.avgProjectValue;
-      yearlyBenefits = additionalValue;
-      yearlySavings = additionalValue;
+      const uptimeValue = (data.userCount * 50) * data.uptimeGained; // Basic uptime value formula
+      const overheadSavings = data.licensingCost * 0.6; // 60% reduction in legacy overhead
+      const throughputSavings = (data.userCount * 80000 * 0.1) * (data.devSpeedIncrease / 100);
+      year1Savings = (uptimeValue + overheadSavings + throughputSavings) * 0.75;
+      year2Savings = (uptimeValue + overheadSavings + throughputSavings) * 1.15;
+      year3Savings = (uptimeValue + overheadSavings + throughputSavings) * 1.4;
     }
 
-    const totalBenefits = yearlyBenefits * (timeframe / 12);
-    const netBenefits = totalBenefits - implementationCost;
-    const roiPercentage = (netBenefits / implementationCost) * 100;
-    const paybackPeriod = (implementationCost / yearlyBenefits) * 12;
+    const total3YearSavings = year1Savings + year2Savings + year3Savings;
+    const total3YearCost = investment + (maintenance * 3);
+    const netROI = ((total3YearSavings - total3YearCost) / total3YearCost) * 100;
+    const paybackMonths = (investment / (year1Savings / 12));
 
-    setResults({
-      yearlySavings: Math.round(yearlySavings),
-      totalBenefits: Math.round(totalBenefits),
-      netBenefits: Math.round(netBenefits),
-      roiPercentage: Math.round(roiPercentage * 100) / 100,
-      paybackPeriod: Math.round(paybackPeriod * 100) / 100,
-      yearlyBenefits: Math.round(yearlyBenefits),
+    setProjection({
+      years: [Math.round(year1Savings), Math.round(year2Savings), Math.round(year3Savings)],
+      totalSavings: Math.round(total3YearSavings),
+      netROI: Math.round(netROI),
+      payback: Math.round(paybackMonths * 10) / 10,
+      totalCost: Math.round(total3YearCost)
     });
   };
 
   useEffect(() => {
-    calculateROI();
+    calculateProjections();
   }, [inputs, calculatorType]);
 
-  const updateInput = (category, field, value) => {
+  const chartData = useMemo(() => {
+    if (!projection) return null;
+    return {
+      labels: ['Year 1', 'Year 2', 'Year 3'],
+      datasets: [
+        {
+          label: 'Cumulative Benefits ($)',
+          data: [projection.years[0], projection.years[0] + projection.years[1], projection.years[0] + projection.years[1] + projection.years[2]],
+          borderColor: calculatorType === 'hr-ims' ? '#1ba6d6' : '#ffc957',
+          backgroundColor: (context) => {
+            const chart = context.chart;
+            const {ctx, chartArea} = chart;
+            if (!chartArea) return null;
+            const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+            gradient.addColorStop(0, 'rgba(27, 166, 214, 0)');
+            gradient.addColorStop(1, calculatorType === 'hr-ims' ? 'rgba(27, 166, 214, 0.2)' : 'rgba(255, 201, 87, 0.2)');
+            return gradient;
+          },
+          borderWidth: 3,
+          fill: true,
+          tension: 0.4,
+          pointBackgroundColor: '#fff',
+          pointBorderColor: '#1ba6d6',
+          pointBorderWidth: 2,
+          pointRadius: 6,
+          pointHoverRadius: 8
+        }
+      ]
+    };
+  }, [projection, calculatorType]);
+
+  const handleInputChange = (field, value) => {
+    const category = calculatorType === 'hr-ims' ? 'hr' : 'tech';
     setInputs(prev => ({
       ...prev,
-      [category]: {
-        ...prev[category],
-        [field]: parseFloat(value) || 0,
-      },
+      [category]: { ...prev[category], [field]: parseFloat(value) }
     }));
   };
 
-  const updateGeneralInput = (field, value) => {
-    setInputs(prev => ({
-      ...prev,
-      [field]: parseFloat(value) || 0,
-    }));
+  const handleGeneralChange = (field, value) => {
+    setInputs(prev => ({ ...prev, [field]: parseFloat(value) }));
   };
-
-  const currentCalculator = calculators[calculatorType];
 
   return (
     <ErrorBoundary>
-      <div className="relative min-h-screen bg-dark-900 overflow-hidden">
-        {/* Ambient Gradients */}
-        <div className="fixed inset-0 pointer-events-none">
-          <div className="absolute top-0 left-[-10%] w-[60%] h-[60%] bg-primary-500/5 blur-[150px] rounded-full" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-secondary-500/5 blur-[150px] rounded-full" />
-          <div className="absolute inset-0 bg-grid-white/[0.01]" />
-        </div>
+      <SEO 
+        title="Interactive ROI Projection Simulator V2" 
+        description="Quantify the systemic impact of architectural transformation. Our high-fidelity simulator provides 3-year fiscal projections and capital recovery mapping."
+      />
+      
+      <div className="min-h-screen bg-[#0e1114] py-32 px-6 relative overflow-hidden">
+        {/* Architectural Grid Background */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[length:60px_60px] pointer-events-none opacity-20" />
+        <div className="absolute top-0 left-0 w-full h-[1000px] bg-gradient-to-b from-[#1ba6d6]/5 to-transparent pointer-events-none" />
 
-        {/* Hero Section */}
-        <section className="relative pt-32 pb-20 px-6">
-          <div className="max-w-7xl mx-auto">
-            <motion.div 
-               initial="hidden"
-               animate="visible"
-               variants={containerVariants}
-               className="text-center"
-            >
-              <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8">
-                <Calculator className="w-4 h-4 text-primary-400" />
-                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-300">Strategic Audit — ROI Synthesizer</span>
-              </motion.div>
-              
-              <motion.h1 variants={itemVariants} className="text-5xl md:text-8xl font-black mb-8 leading-tight tracking-tighter text-white uppercase italic">
-                Return on <span className="not-italic bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent underline decoration-white/10 underline-offset-8">Insight</span>
-              </motion.h1>
-              
-              <motion.p variants={itemVariants} className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-12 font-medium">
-                Quantify the systemic impact of architectural transformation. Our deterministic models provide high-fidelity projections of capital recovery and efficiency gains.
-              </motion.p>
-            </motion.div>
-          </div>
-        </section>
+        <div className="max-w-7xl mx-auto relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-center mb-20"
+          >
+            <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-8 backdrop-blur-xl">
+              <Calculator className="w-4 h-4 text-[#ffc957]" />
+              <span className="text-[0.6rem] font-bold text-white/50 uppercase tracking-[0.4em]">Audit Tool: ROI Projection V2.0</span>
+            </div>
+            <h1 className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter mb-6 italic">
+              Proving the <span className="text-[#1ba6d6] flip-text">Value</span>
+            </h1>
+            <p className="text-[0.8rem] text-white/30 font-black uppercase tracking-[0.3em] max-w-3xl mx-auto leading-relaxed">
+              deterministic modeling for high-scale enterprise deployments. adjust systemic variables to visualize capital flux and mission-critical ROI.
+            </p>
+          </motion.div>
 
-        {/* Calculator Interface */}
-        <section className="py-24 px-6 relative z-10">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col xl:flex-row gap-12 items-start">
-              {/* Form Side */}
-              <motion.div 
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="w-full xl:w-1/2 p-1 rounded-[48px] bg-gradient-to-br from-white/10 via-white/5 to-transparent border border-white/10 overflow-hidden"
-              >
-                <div className="bg-[#0e1114]/80 backdrop-blur-3xl rounded-[46px] p-8 md:p-12 space-y-12">
-                   <div className="space-y-6">
-                      <h2 className="text-xs font-black text-primary-400 uppercase tracking-[0.4em]">Core Interface Selector</h2>
-                      <div className="flex gap-4 p-2 rounded-[32px] bg-white/5 border border-white/10">
-                         {Object.keys(calculators).map(type => (
-                           <button
-                             key={type}
-                             onClick={() => setCalculatorType(type)}
-                             className={`flex-1 flex items-center justify-center gap-3 py-5 rounded-[24px] font-black text-sm uppercase tracking-widest transition-all ${
-                               calculatorType === type 
-                               ? 'bg-white text-dark-900 shadow-xl' 
-                               : 'text-gray-500 hover:text-white hover:bg-white/5'
-                             }`}
-                           >
-                              <Calculator className="w-4 h-4" />
-                              {calculators[type].title.split(' ')[0]}
-                           </button>
-                         ))}
+          <div className="grid xl:grid-cols-12 gap-10 items-start">
+            {/* Input Panel */}
+            <div className="xl:col-span-4 space-y-8">
+              <div className="bg-white/5 backdrop-blur-3xl rounded-[3rem] border border-white/10 p-10">
+                <h3 className="text-[0.65rem] font-black text-[#1ba6d6] uppercase tracking-[0.3em] mb-10">Interface Matrix</h3>
+                <div className="flex gap-4 mb-12">
+                   {Object.keys(calculators).map(type => (
+                     <button
+                        key={type}
+                        onClick={() => setCalculatorType(type)}
+                        className={`flex-1 py-4 rounded-2xl text-[0.65rem] font-black uppercase tracking-widest transition-all ${
+                          calculatorType === type ? 'bg-white text-black shadow-2xl' : 'bg-white/5 text-white/40 hover:bg-white/10'
+                        }`}
+                     >
+                       {calculators[type].title.split(' ')[0]}
+                     </button>
+                   ))}
+                </div>
+
+                <div className="space-y-10">
+                  {calculators[calculatorType].inputs.map(input => (
+                    <div key={input.id} className="space-y-4">
+                      <div className="flex justify-between items-baseline">
+                         <label className="text-[0.55rem] font-black text-white/40 uppercase tracking-widest">{input.label}</label>
+                         <span className="text-sm font-black text-[#1ba6d6]">{inputs[calculatorType === 'hr-ims' ? 'hr' : 'tech'][input.id].toLocaleString()}</span>
                       </div>
-                   </div>
+                      <input 
+                        type="range"
+                        min={input.min}
+                        max={input.max}
+                        step={input.step}
+                        value={inputs[calculatorType === 'hr-ims' ? 'hr' : 'tech'][input.id]}
+                        onChange={(e) => handleInputChange(input.id, e.target.value)}
+                        className="w-full h-1 bg-white/10 rounded-full appearance-none cursor-pointer accent-[#1ba6d6]"
+                      />
+                    </div>
+                  ))}
+                </div>
 
+                <div className="mt-16 pt-12 border-t border-white/5 space-y-10">
+                   <h4 className="text-[0.55rem] font-black text-white/20 uppercase tracking-[0.3em]">Lifecycle Investment</h4>
                    <div className="space-y-8">
-                      <div className="flex items-center justify-between">
-                         <h3 className="text-2xl font-black text-white italic tracking-tight">{currentCalculator.title}</h3>
-                         <div className={`p-3 rounded-2xl ${currentCalculator.bg}`}>
-                            <currentCalculator.icon className={`w-6 h-6 ${currentCalculator.color}`} />
+                      <div className="space-y-4">
+                         <div className="flex justify-between">
+                            <label className="text-[0.55rem] font-black text-white/40 uppercase tracking-widest">Initial Capital Sync ($)</label>
+                            <span className="text-xs font-bold text-white">${inputs.investment.toLocaleString()}</span>
                          </div>
+                         <input 
+                            type="range" min="10000" max="500000" step="5000"
+                            value={inputs.investment}
+                            onChange={(e) => handleGeneralChange('investment', e.target.value)}
+                            className="w-full h-1 bg-white/10 rounded-full appearance-none accent-white/40"
+                         />
                       </div>
-                      <p className="text-sm font-medium text-gray-400 leading-relaxed border-l-2 border-primary-500/30 pl-6 italic">
-                         "{currentCalculator.description}"
-                      </p>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                         {currentCalculator.inputs.map(input => (
-                           <div key={input.id} className="space-y-3 group">
-                              <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest group-hover:text-primary-400 transition-colors">
-                                 {input.label}
-                              </label>
-                              <div className="relative">
-                                 <input
-                                   type={input.type}
-                                   min={input.min}
-                                   max={input.max}
-                                   step={input.step}
-                                   value={inputs[calculatorType === 'hr-ims' ? 'hr' : 'project'][input.id]}
-                                   onChange={e => updateInput(calculatorType === 'hr-ims' ? 'hr' : 'project', input.id, e.target.value)}
-                                   className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-bold focus:outline-none focus:ring-2 focus:ring-primary-500/30 transition-all hover:bg-white/10"
-                                 />
-                                 <input.icon className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
-                              </div>
-                           </div>
-                         ))}
-                      </div>
-                   </div>
-
-                   <div className="pt-12 border-t border-white/5 space-y-8">
-                      <h3 className="text-xs font-black text-gray-500 uppercase tracking-[0.4em]">Environmental Parameters</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                         <div className="space-y-3">
-                            <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Architectural Investment ($)</label>
-                            <input
-                              type="number"
-                              value={inputs.implementationCost}
-                              onChange={e => updateGeneralInput('implementationCost', e.target.value)}
-                              className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-bold focus:outline-none focus:ring-2 focus:ring-primary-500/30"
-                            />
+                      <div className="space-y-4">
+                         <div className="flex justify-between">
+                            <label className="text-[0.55rem] font-black text-white/40 uppercase tracking-widest">Annual Maintenance ($)</label>
+                            <span className="text-xs font-bold text-white">${inputs.maintenance.toLocaleString()}</span>
                          </div>
-                         <div className="space-y-3">
-                            <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Projection Epoch (Months)</label>
-                            <div className="relative">
-                               <input
-                                 type="number"
-                                 value={inputs.timeframe}
-                                 onChange={e => updateGeneralInput('timeframe', e.target.value)}
-                                 className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-bold focus:outline-none focus:ring-2 focus:ring-primary-500/30"
-                               />
-                               <Clock className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
-                            </div>
-                         </div>
+                         <input 
+                            type="range" min="1000" max="50000" step="1000"
+                            value={inputs.maintenance}
+                            onChange={(e) => handleGeneralChange('maintenance', e.target.value)}
+                            className="w-full h-1 bg-white/10 rounded-full appearance-none accent-white/40"
+                         />
                       </div>
                    </div>
                 </div>
-              </motion.div>
+              </div>
 
-              {/* Results Side */}
-              <div className="w-full xl:w-1/2 space-y-12">
-                 <motion.div 
-                   initial={{ opacity: 0, scale: 0.98 }}
-                   whileInView={{ opacity: 1, scale: 1 }}
-                   viewport={{ once: true }}
-                   className="p-10 rounded-[48px] bg-white/5 border border-white/10 backdrop-blur-xl space-y-10"
-                 >
-                   <div className="flex items-center justify-between">
-                      <h2 className="text-2xl font-black text-white italic tracking-tight uppercase">Audit Synthesis</h2>
-                      <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20">
-                         <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                         <span className="text-[10px] font-black text-green-500 uppercase tracking-widest">Projection Stable</span>
-                      </div>
-                   </div>
-
-                   {results && (
-                     <div className="space-y-8">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                           <div className="p-8 rounded-[40px] bg-gradient-to-br from-primary-500/20 to-secondary-500/20 border border-white/10 hover:border-primary-500/30 transition-all group">
-                              <h4 className="text-[10px] font-black text-primary-400 uppercase tracking-[0.2em] mb-4">Capital Resilience</h4>
-                              <div className="text-4xl font-black text-white tracking-tighter mb-2">${results.netBenefits.toLocaleString()}</div>
-                              <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">Net Outcome (Post-Sync)</p>
-                           </div>
-
-                           <div className="p-8 rounded-[40px] bg-white/5 border border-white/10 hover:border-secondary-500/30 transition-all group">
-                              <h4 className="text-[10px] font-black text-secondary-400 uppercase tracking-[0.2em] mb-4">Neural Lift</h4>
-                              <div className="text-4xl font-black text-white tracking-tighter mb-2">{results.roiPercentage}%</div>
-                              <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">Deterministic ROI</p>
-                           </div>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                           <div className="p-8 rounded-[40px] bg-white/5 border border-white/10 group">
-                              <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-4">Recovery Epoch</h4>
-                              <div className="text-3xl font-black text-white tracking-tighter mb-2">{results.paybackPeriod} <span className="text-sm italic text-gray-600">MONTHS</span></div>
-                              <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">Sync Point Convergence</p>
-                           </div>
-
-                           <div className="p-8 rounded-[40px] bg-white/5 border border-white/10 group">
-                              <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-4">Annual Throughput</h4>
-                              <div className="text-3xl font-black text-white tracking-tighter mb-2">${results.yearlySavings.toLocaleString()}</div>
-                              <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">Recurring Value Flux</p>
-                           </div>
-                        </div>
-
-                        <div className="p-8 rounded-[40px] bg-dark-950 border border-white/5 relative overflow-hidden">
-                           <div className="relative z-10 space-y-6">
-                              <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em]">Structural Breakdown</h4>
-                              <div className="space-y-4">
-                                 <div className="flex justify-between items-center text-sm font-bold text-gray-400">
-                                    <span>Gross Structural Benefit ({inputs.timeframe}m):</span>
-                                    <span className="text-white">${results.totalBenefits.toLocaleString()}</span>
-                                 </div>
-                                 <div className="flex justify-between items-center text-sm font-bold text-gray-400">
-                                    <span>Sync Investment Overhead:</span>
-                                    <span className="text-red-500">-${inputs.implementationCost.toLocaleString()}</span>
-                                 </div>
-                                 <div className="pt-4 border-t border-white/5 flex justify-between items-center">
-                                    <span className="text-xs font-black text-primary-400 uppercase tracking-widest">NET PROJECTION:</span>
-                                    <span className={`text-2xl font-black tracking-tighter ${results.netBenefits >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-                                       ${results.netBenefits.toLocaleString()}
-                                    </span>
-                                 </div>
-                              </div>
-                           </div>
-                           <div className="absolute inset-0 bg-grid-white/[0.01]" />
-                        </div>
-                     </div>
-                   )}
-                 </motion.div>
-
-                 <motion.div 
-                   initial={{ opacity: 0, y: 30 }}
-                   whileInView={{ opacity: 1, y: 0 }}
-                   viewport={{ once: true }}
-                   className="p-10 rounded-[48px] bg-gradient-to-r from-primary-600/20 to-secondary-600/20 border border-white/10"
-                 >
-                    <h3 className="text-lg font-black text-white tracking-tight mb-6 flex items-center gap-3">
-                       <ShieldCheck className="w-5 h-5 text-primary-400" /> Strategic Recommendation
-                    </h3>
-                    <p className="text-gray-300 font-medium leading-relaxed italic">
-                       "{results?.roiPercentage > 100
-                         ? `Substantial neural efficiency detected. Projected ROI of ${results.roiPercentage}% exceeds industry benchmarks by 2.4x. Immediate architectural deployment is advised for maximum capital lift.`
-                         : results?.roiPercentage > 50
-                           ? `Positive flux confirmed. A ${results.roiPercentage}% return indicates strong alignment with systemic goals. Recommended for phased deployment.`
-                           : `Nominal lift projected. We suggest optimizing architectural overhead or increasing input variables to achieve 50%+ convergence.`}"
-                    </p>
-                 </motion.div>
+              <div className="bg-[#ffc957] rounded-[3rem] p-10 flex flex-col gap-6 relative overflow-hidden group">
+                 <div className="absolute top-0 right-0 p-8 opacity-20 transform translate-x-10 -translate-y-10">
+                    <ShieldCheck size={180} className="text-black" />
+                 </div>
+                 <h4 className="text-[0.65rem] font-black text-black uppercase tracking-[0.2em] relative z-10">Enterprise Audit Ready</h4>
+                 <p className="text-[0.75rem] font-bold text-black/80 leading-relaxed relative z-10">
+                    These projections are based on standard LIS architectural benchmarks. For a detailed fiber-optic audit of your specific ecosystem, schedule a session.
+                 </p>
+                 <button className="bg-black text-white py-4 rounded-2xl text-[0.6rem] font-black uppercase tracking-[0.3em] hover:scale-105 transition-transform relative z-10 shadow-2xl">
+                    Initiate Deep Audit
+                 </button>
               </div>
             </div>
-          </div>
-        </section>
 
-        {/* Industry Benchmarks Matrix */}
-        <section className="py-32 px-6 bg-dark-950/50">
-           <div className="max-w-7xl mx-auto">
-              <div className="text-center mb-24">
-                 <h2 className="text-4xl md:text-7xl font-black text-white italic tracking-tighter uppercase mb-8">Nodal <span className="not-italic bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent">Benchmarks</span></h2>
-                 <p className="text-xl text-gray-500 max-w-2xl mx-auto font-medium">Global architectural standard metrics for high-trust software ecosystems.</p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                 {[
-                   { label: 'Cloud-Native HRM ROI', value: '187%', icon: Users },
-                   { label: 'E2E Lifecycle Tracking ROI', value: '156%', icon: BarChart3 },
-                   { label: 'Mean Convergence Epoch', value: '18m', icon: Clock }
-                 ].map((node, idx) => (
-                   <motion.div 
-                     key={idx}
-                     initial={{ opacity: 0, y: 20 }}
-                     whileInView={{ opacity: 1, y: 0 }}
-                     viewport={{ once: true }}
-                     transition={{ delay: idx * 0.1 }}
-                     className="p-10 rounded-[48px] bg-white/5 border border-white/10 text-center hover:bg-white/10 transition-colors group"
-                   >
-                     <div className="w-16 h-16 rounded-3xl bg-white/5 flex items-center justify-center mx-auto mb-8 border border-white/5 group-hover:scale-110 transition-transform">
-                        <node.icon className="w-8 h-8 text-primary-400" />
+            {/* Viz & Results Panel */}
+            <div className="xl:col-span-8 space-y-10">
+               <div className="bg-white/5 backdrop-blur-3xl rounded-[4rem] border border-white/10 p-12 lg:p-16">
+                  <div className="flex flex-col lg:flex-row gap-16 mb-20">
+                     <div className="lg:w-1/2 space-y-12">
+                        <div>
+                           <h2 className="text-[0.6rem] font-black text-white/30 uppercase tracking-[0.4em] mb-4">Total 3-Year Projection</h2>
+                           <div className="text-7xl font-black text-white tracking-tighter">${projection?.totalSavings.toLocaleString()}</div>
+                           <p className="text-[0.65rem] font-bold text-green-500 uppercase tracking-widest mt-2">+ Gross Capital Resilience Unlock</p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-8">
+                            <div className="p-8 rounded-[3rem] bg-white/5 border border-white/5">
+                               <p className="text-[0.5rem] font-black text-white/30 uppercase tracking-widest mb-2">Sync ROI</p>
+                               <div className="text-4xl font-black text-[#1ba6d6] tracking-tighter">{projection?.netROI}%</div>
+                            </div>
+                            <div className="p-8 rounded-[3rem] bg-white/5 border border-white/5">
+                               <p className="text-[0.5rem] font-black text-white/30 uppercase tracking-widest mb-2">Sync Recovery</p>
+                               <div className="text-xl font-black text-white tracking-tighter uppercase italic">{projection?.payback} Months</div>
+                            </div>
+                        </div>
                      </div>
-                     <h3 className="text-5xl font-black text-white italic tracking-tighter mb-4">{node.value}</h3>
-                     <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em]">{node.label}</p>
-                   </motion.div>
-                 ))}
-              </div>
-           </div>
-        </section>
+                     <div className="lg:w-1/2">
+                        <div className="h-[300px] w-full relative">
+                           {chartData && (
+                             <Line 
+                               data={chartData} 
+                               options={{
+                                 responsive: true,
+                                 maintainAspectRatio: false,
+                                 scales: {
+                                   y: { display: false },
+                                   x: { 
+                                     grid: { display: false },
+                                     ticks: { color: 'rgba(255,255,255,0.3)', font: { family: 'Outfit', weight: 'bold', size: 10 } }
+                                   }
+                                 },
+                                 plugins: {
+                                   legend: { display: false },
+                                   tooltip: {
+                                     backgroundColor: '#0e1114',
+                                     titleFont: { size: 12, weight: 'black' },
+                                     bodyFont: { size: 10, weight: 'bold' },
+                                     padding: 20,
+                                     borderRadius: 15,
+                                     borderColor: 'rgba(255,255,255,0.1)',
+                                     borderWidth: 1
+                                   }
+                                 }
+                               }}
+                             />
+                           )}
+                        </div>
+                     </div>
+                  </div>
 
-        {/* Global CTA */}
-        <section className="py-40 px-6">
-           <motion.div 
-             initial={{ opacity: 0, y: 30 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             className="max-w-5xl mx-auto p-16 md:p-24 rounded-[72px] bg-gradient-to-br from-primary-600/30 to-secondary-600/30 border border-white/10 text-center relative overflow-hidden"
-           >
-              <div className="relative z-10 space-y-12">
-                 <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter italic uppercase">Ready for <span className="not-italic bg-gradient-to-r from-primary-400 to-white bg-clip-text text-transparent underline decoration-white/10 underline-offset-8">Verification</span>?</h2>
-                 <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-medium">
-                    Schedule a deep-fiber audit with our structural architects to refine your ROI projection against real-world technical data.
-                 </p>
-                 <div className="flex flex-wrap justify-center gap-6">
-                    <button className="px-12 py-5 bg-white text-dark-900 font-black rounded-3xl hover:bg-gray-200 transition-all text-sm uppercase tracking-[0.2em] shadow-xl">
-                       Initiate Audit
-                    </button>
-                    <button className="px-12 py-5 bg-white/5 text-white font-bold rounded-3xl border border-white/10 hover:bg-white/10 transition-all text-sm flex items-center gap-2 group">
-                       Architect Consultation <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    </button>
-                 </div>
-              </div>
-              <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-primary-500 via-secondary-500 to-primary-500 animate-pulse" />
-           </motion.div>
-        </section>
+                  <div className="space-y-8">
+                     <h4 className="text-[0.65rem] font-black text-[#ffc957] uppercase tracking-[0.4em]">Multi-Year Accumulation Matrix</h4>
+                     <div className="grid md:grid-cols-3 gap-6">
+                        {projection?.years.map((val, i) => (
+                          <div key={i} className="p-10 rounded-[3rem] bg-white/5 border border-white/10 hover:border-white/20 transition-all group">
+                             <div className="flex justify-between items-center mb-6">
+                                <span className="text-[0.6rem] font-black text-white/40 uppercase tracking-widest">Epoch 0{i+1}</span>
+                                <TrendingUp size={14} className="text-green-500 opacity-50 group-hover:opacity-100 transition-opacity" />
+                             </div>
+                             <div className="text-3xl font-black text-white tracking-tighter mb-1">${val.toLocaleString()}</div>
+                             <p className="text-[0.55rem] font-bold text-white/30 uppercase tracking-widest">Incremental Flow</p>
+                          </div>
+                        ))}
+                     </div>
+                  </div>
+               </div>
+
+               <motion.div 
+                 initial={{ opacity: 0, y: 20 }}
+                 whileInView={{ opacity: 1, y: 0 }}
+                 className="grid md:grid-cols-2 gap-10"
+               >
+                  <div className="bg-[#1ba6d6] rounded-[3.5rem] p-12 text-white relative overflow-hidden">
+                     <Layers className="absolute -bottom-10 -right-10 w-64 h-64 text-white opacity-10" />
+                     <h3 className="text-2xl font-black italic uppercase tracking-tight mb-4 relative z-10">Architectural Thesis</h3>
+                     <p className="text-[0.8rem] font-bold leading-relaxed relative z-10 opacity-90">
+                        "Deploying {calculatorType.toUpperCase()} architecture reveals a projected delta of ${((projection?.totalSavings || 0) - (projection?.totalCost || 0)).toLocaleString()} over the next 36 months. Systemic efficiency lift is consistent with Elite Tier LIS benchmarks."
+                     </p>
+                  </div>
+                  <div className="bg-white/5 backdrop-blur-xl rounded-[3.5rem] p-12 border border-white/10 flex flex-col justify-center gap-8">
+                     <div className="flex items-center gap-6">
+                        <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10">
+                           <ShieldCheck className="text-[#1ba6d6]" />
+                        </div>
+                        <div>
+                           <p className="text-[0.55rem] font-black text-white/30 uppercase tracking-widest mb-1">Verify Output</p>
+                           <p className="text-xs font-bold text-white uppercase tracking-wider">Certified Benchmark Validation</p>
+                        </div>
+                     </div>
+                     <Link to="/contact" className="w-full py-5 bg-white text-black text-[0.65rem] font-black uppercase tracking-[0.4em] rounded-2xl text-center hover:scale-105 transition-transform shadow-2xl">
+                        Request Strategy Brief
+                     </Link>
+                  </div>
+               </motion.div>
+            </div>
+          </div>
+        </div>
       </div>
     </ErrorBoundary>
   );
 };
+
+// Internal Import for Link
+import { Link } from 'react-router-dom';
 
 export default ROICalculator;

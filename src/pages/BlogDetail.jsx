@@ -21,8 +21,9 @@ import {
   Twitter,
   Linkedin
 } from 'lucide-react';
-import ErrorBoundary from '../components/ErrorBoundary';
 import { sendUserInteractionNotification } from '../services/notification/notificationService';
+import ErrorBoundary from '../components/ErrorBoundary';
+import SEO from '../components/SEO/SEO';
 
 const BlogDetail = () => {
   const { slug } = useParams();
@@ -151,6 +152,11 @@ const BlogDetail = () => {
   return (
     <ErrorBoundary>
       <div className="relative min-h-screen">
+        <SEO 
+          title={`${post.title} - Dispatch`} 
+          description={post.excerpt} 
+          ogType="article"
+        />
         {/* Reading Progress Indicator */}
         <div className="fixed top-0 left-0 w-full h-[2px] bg-white/5 z-[60]">
           <motion.div 

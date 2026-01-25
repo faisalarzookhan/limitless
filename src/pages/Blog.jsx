@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Clock,
@@ -25,9 +24,11 @@ import {
 import { api } from '../services/api';
 import { useApp } from '../context/AppContext';
 import ErrorBoundary from '../components/ErrorBoundary';
+import SEO from '../components/SEO/SEO';
 
 const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedTag, setSelectedTag] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [blogPosts, setBlogPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -59,48 +60,48 @@ const Blog = () => {
         setBlogPosts([
           {
             id: 1,
-            title: 'The Future of Web Development: Trends to Watch in 2024',
-            slug: 'future-web-development-2024',
-            excerpt: 'Explore the emerging trends and technologies that will shape web development in 2024, from AI integration to progressive web apps.',
-            category: 'web-development',
+            title: 'Neural Architecture: The Rise of Auralis AI',
+            slug: 'neural-architecture-auralis-ai',
+            excerpt: 'Analyzing the structural transition from linear logic to neural synthesis in the next-generation enterprise ecosystems.',
+            category: 'ai-ml',
             author: { name: 'Faisal Khan', role: 'Chief Architect' },
-            publishedAt: '2024-01-15',
-            readTime: '8 min read',
-            tags: ['Architecture', 'Trends', 'AI'],
-            views: 1250,
-            likes: 89,
-            comments: 23,
+            publishedAt: '2024-01-22',
+            readTime: '15 min read',
+            tags: ['AI', 'Neural-Synthesis', 'Architecture'],
+            views: 2450,
+            likes: 189,
+            comments: 45,
             featured: true
           },
           {
             id: 2,
-            title: 'Building Scalable Mobile Apps: Best Practices and Patterns',
-            slug: 'scalable-mobile-apps-best-practices',
-            excerpt: 'Learn the architectural patterns and best practices for building mobile applications that can scale with your business growth.',
-            category: 'mobile-apps',
-            author: { name: 'Sarah Johnson', role: 'Mobile Lead' },
-            publishedAt: '2024-01-10',
+            title: 'Elastic Sculpting: Global Node Orchestration',
+            slug: 'elastic-sculpting-global-nodes',
+            excerpt: 'Orchestrating multi-regional distributed nodes for zero-latency mission-critical enterprise applications.',
+            category: 'web-development',
+            author: { name: 'Taj Nadaf', role: 'Infrastructure Lead' },
+            publishedAt: '2024-01-18',
             readTime: '12 min read',
-            tags: ['Mobile', 'Scalability'],
-            views: 980,
-            likes: 67,
-            comments: 18,
-            featured: false
+            tags: ['Cloud', 'Scalability', 'Nodes'],
+            views: 1890,
+            likes: 134,
+            comments: 28,
+            featured: true
           },
           {
             id: 3,
-            title: 'How AI is Transforming Customer Service Automation',
-            slug: 'ai-customer-service-automation',
-            excerpt: 'Discover how artificial intelligence and machine learning are revolutionizing customer service with intelligent chatbots and automation.',
-            category: 'ai-ml',
-            author: { name: 'Michael Chen', role: 'AI Strategist' },
-            publishedAt: '2024-01-08',
+            title: 'Zero-Trust Synthesis: Security at Scale',
+            slug: 'zero-trust-synthesis-security',
+            excerpt: 'Implementing persistent biometric handshakes and neural encryption buffers across decentralized platform nodes.',
+            category: 'case-studies',
+            author: { name: 'Sarah Johnson', role: 'Security Architect' },
+            publishedAt: '2024-01-12',
             readTime: '10 min read',
-            tags: ['AI', 'Automation'],
-            views: 1450,
+            tags: ['Security', 'Zero-Trust', 'Encryption'],
+            views: 1650,
             likes: 112,
             comments: 34,
-            featured: true
+            featured: false
           }
         ]);
       } finally {
@@ -112,11 +113,14 @@ const Blog = () => {
 
   const filteredPosts = blogPosts.filter(post => {
     const matchesCategory = selectedCategory === 'all' || post.category === selectedCategory;
+    const matchesTag = !selectedTag || post.tags.includes(selectedTag);
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                           post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesCategory && matchesSearch;
+    return matchesCategory && matchesTag && matchesSearch;
   });
+
+  const allTags = [...new Set(blogPosts.flatMap(post => post.tags))];
 
   const featuredPosts = blogPosts.filter(post => post.featured);
 
@@ -133,9 +137,10 @@ const Blog = () => {
   return (
     <ErrorBoundary>
       <div className="relative min-h-screen">
-        <Helmet>
-          <title>Limitless Editorial - Insights & Intelligence</title>
-        </Helmet>
+        <SEO 
+          title="Editorial Intelligence - Strategic Insights" 
+          description="Deep dives into architectural patterns, emerging tech ecosystems, and the future of human-digital interaction." 
+        />
 
         {/* Ambient background */}
         <div className="fixed inset-0 pointer-events-none overflow-hidden">
@@ -168,33 +173,65 @@ const Blog = () => {
 
         {/* Control Bar */}
         <section className="sticky top-20 z-40 px-6 py-6 bg-dark-900/60 backdrop-blur-xl border-y border-white/5">
-          <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 items-center justify-between">
-            <div className="flex flex-wrap items-center gap-2">
-              {categories.map(cat => (
-                <button
-                  key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={`flex items-center gap-2 px-5 py-2.5 rounded-2xl text-sm font-bold transition-all ${
-                    selectedCategory === cat.id 
-                    ? 'bg-primary-500 text-white shadow-lg' 
-                    : 'bg-white/5 text-gray-400 border border-white/5 hover:bg-white/10'
-                  }`}
-                >
-                  <cat.icon className="w-4 h-4" />
-                  {cat.name}
-                </button>
-              ))}
+          <div className="max-w-7xl mx-auto space-y-8">
+            <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
+              <div className="flex flex-wrap items-center gap-3">
+                {categories.map(cat => (
+                  <button
+                    key={cat.id}
+                    onClick={() => setSelectedCategory(cat.id)}
+                    className={`flex items-center gap-3 px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest transition-all ${
+                      selectedCategory === cat.id 
+                      ? 'bg-white text-dark-900 shadow-2xl scale-105' 
+                      : 'bg-white/5 text-gray-400 border border-white/5 hover:bg-white/10 hover:text-white'
+                    }`}
+                  >
+                    <cat.icon className="w-4 h-4" />
+                    {cat.name}
+                  </button>
+                ))}
+              </div>
+
+              <div className="relative w-full lg:w-96 group">
+                <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 group-focus-within:text-primary-400 transition-colors" />
+                <input 
+                  type="text" 
+                  placeholder="Enter keywords for neural retrieval..." 
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-14 pr-6 py-4 rounded-3xl bg-white/5 border border-white/5 text-sm font-bold text-white focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all hover:bg-white/10"
+                />
+              </div>
             </div>
 
-            <div className="relative w-full lg:w-80 group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 group-focus-within:text-primary-400 transition-colors" />
-              <input 
-                type="text" 
-                placeholder="Search dispatch..." 
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 rounded-2xl bg-white/5 border border-white/5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all"
-              />
+            {/* Knowledge Cloud (Tags) */}
+            <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-white/5">
+               <span className="text-[10px] font-black text-gray-600 uppercase tracking-[0.3em] mr-4 flex items-center gap-2">
+                  <Tag className="w-3 h-3" /> Knowledge Cloud:
+               </span>
+               <button 
+                  onClick={() => setSelectedTag(null)}
+                  className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border ${
+                    !selectedTag 
+                    ? 'bg-primary-500/20 border-primary-500/50 text-white shadow-lg shadow-primary-500/10' 
+                    : 'bg-white/5 border-white/10 text-gray-500 hover:text-white hover:bg-white/10'
+                  }`}
+               >
+                  All Nodes
+               </button>
+               {allTags.map(tag => (
+                  <button 
+                    key={tag}
+                    onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
+                    className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border ${
+                      selectedTag === tag 
+                      ? 'bg-secondary-500/20 border-secondary-500/50 text-white shadow-lg shadow-secondary-500/10' 
+                      : 'bg-white/5 border-white/10 text-gray-500 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    {tag}
+                  </button>
+               ))}
             </div>
           </div>
         </section>

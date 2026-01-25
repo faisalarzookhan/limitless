@@ -194,6 +194,24 @@ export const api = {
 
     // Subscribe to newsletter
     subscribe: email => apiClient.post('/contact/subscribe', { email }),
+
+    // Submit Launch Brief mission protocol
+    submitLaunchBrief: data => apiClient.post('/contact/launch-brief', data),
+  },
+
+  // ============= Lead Management =============
+  leads: {
+    // Get all leads (Admin)
+    getAll: params => apiClient.get('/leads', params),
+
+    // Get lead by ID
+    getById: id => apiClient.get(`/leads/${id}`),
+
+    // Update lead status
+    updateStatus: (id, status) => apiClient.patch(`/leads/${id}/status`, { status }),
+
+    // Export leads
+    export: params => apiClient.get('/leads/export', params),
   },
 
   // ============= Portfolio =============

@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -17,6 +18,7 @@ import {
   Microscope
 } from 'lucide-react';
 import ErrorBoundary from '../components/ErrorBoundary';
+import SEO from '../components/SEO/SEO';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -41,6 +43,39 @@ const itemVariants = {
 };
 
 const InnovationLab = () => {
+  const [activeProtocol, setActiveProtocol] = useState('Predictive Failure Isolation');
+  const [logs, setLogs] = useState([]);
+  const logEndRef = useRef(null);
+
+  useEffect(() => {
+    const sequence = [
+      { msg: `INITIALIZING ${activeProtocol.toUpperCase()}`, type: 'info' },
+      { msg: "ESTABLISHING NEURAL UPLINK...", type: 'info' },
+      { msg: "SYNC STABLE. COMMENCING DATA STREAM.", type: 'success' },
+      { msg: "ANALYZING SYSTEMIC DELTA SHIFTS...", type: 'info' },
+      { msg: "FLUX PATTERN IDENTIFIED.", type: 'success' },
+      { msg: "CALCULATING PROBABILITY VECTORS...", type: 'info' },
+      { msg: "INTEGRITY AT 99.4%", type: 'success' }
+    ];
+
+    setLogs([]);
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i < sequence.length) {
+        setLogs(prev => [...prev, { ...sequence[i], id: Date.now() + i, time: new Date().toLocaleTimeString() }]);
+        i++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 1200);
+
+    return () => clearInterval(interval);
+  }, [activeProtocol]);
+
+  useEffect(() => {
+    logEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [logs]);
+
   const researchAreas = [
     {
       id: 'genai',
@@ -141,6 +176,10 @@ const InnovationLab = () => {
   return (
     <ErrorBoundary>
       <div className="relative min-h-screen bg-dark-900 overflow-hidden">
+        <SEO 
+          title="Innovation Lab - R&D Core" 
+          description="Exploring generative synthesis, peripheral compute, and quantum resilience. The Limitless Innovation Lab architects the variables of the digital future." 
+        />
         {/* Ambient background particles/glows */}
         <div className="fixed inset-0 pointer-events-none">
           <div className="absolute top-[-20%] right-[-10%] w-[70%] h-[70%] bg-primary-500/5 blur-[120px] rounded-full" />
@@ -207,6 +246,67 @@ const InnovationLab = () => {
               ))}
             </div>
           </div>
+        </section>
+
+        {/* Interactive Protocol Simulator */}
+        <section className="py-24 px-6 relative z-10">
+            <div className="max-w-7xl mx-auto">
+                <div className="p-1 rounded-[64px] bg-gradient-to-br from-white/10 to-transparent border border-white/10 overflow-hidden">
+                    <div className="bg-[#0e1114]/90 backdrop-blur-3xl rounded-[62px] p-10 lg:p-20">
+                        <div className="flex flex-col lg:flex-row gap-16">
+                            <div className="lg:w-1/3 space-y-10">
+                                <span className="text-[0.6rem] font-black text-[#1ba6d6] uppercase tracking-[0.4em]">Protocol Node 04</span>
+                                <h2 className="text-4xl font-black text-white uppercase italic tracking-tighter">System Protocol <span className="text-[#1ba6d6] not-italic">Simulator</span></h2>
+                                <p className="text-xs font-bold text-gray-500 uppercase tracking-widest leading-relaxed">
+                                    Interact with our laboratory environment. Select a research protocol to visualize neural synthesis sequences and systemic benchmarks in real-time.
+                                </p>
+                                <div className="space-y-4">
+                                    {['Predictive Failure Isolation', 'Neural Codex Synthesis', 'Adaptive Guardian Flux'].map(protocol => (
+                                        <button 
+                                            key={protocol}
+                                            onClick={() => setActiveProtocol(protocol)}
+                                            className={`w-full text-left p-6 rounded-2xl text-[0.6rem] font-black uppercase tracking-widest transition-all ${
+                                                activeProtocol === protocol 
+                                                ? 'bg-[#1ba6d6] text-white shadow-2xl' 
+                                                : 'bg-white/5 text-white/40 border border-white/5 hover:bg-white/10'
+                                            }`}
+                                        >
+                                            {protocol}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="lg:w-2/3 bg-black/40 rounded-[3rem] border border-white/5 p-12 relative overflow-hidden font-mono">
+                                <div className="flex items-center justify-between mb-8">
+                                    <div className="flex gap-2">
+                                        <div className="w-2 h-2 rounded-full bg-red-500/40" />
+                                        <div className="w-2 h-2 rounded-full bg-yellow-500/40" />
+                                        <div className="w-2 h-2 rounded-full bg-green-500/40" />
+                                    </div>
+                                    <span className="text-[0.5rem] font-black text-white/20 uppercase tracking-[0.2em]">LAB_ENV_V4.02</span>
+                                </div>
+                                <div className="space-y-3 h-[300px] overflow-y-auto scrollbar-hide text-[0.65rem] font-bold">
+                                    <AnimatePresence>
+                                        {logs.map((log, i) => (
+                                            <motion.div 
+                                                key={log.id}
+                                                initial={{ opacity: 0, x: -10 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                className={`flex gap-4 ${log.type === 'error' ? 'text-red-400' : log.type === 'success' ? 'text-green-400' : 'text-[#1ba6d6]'}`}
+                                            >
+                                                <span className="text-white/10 whitespace-nowrap">[{log.time}]</span>
+                                                <span className="uppercase tracking-widest">{log.msg}</span>
+                                            </motion.div>
+                                        ))}
+                                    </AnimatePresence>
+                                    <div ref={logEndRef} />
+                                </div>
+                                <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         {/* Research Areas Matrix */}

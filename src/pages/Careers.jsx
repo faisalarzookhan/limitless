@@ -161,10 +161,15 @@ const Careers = () => {
 
   return (
     <ErrorBoundary>
+      <SEO 
+        title="Careers | Join our Engineering Collective"
+        description="Join the Limitless Infotech Solution team. We are looking for architects, engineers, and designers to build the future of enterprise software."
+        keywords="software engineering jobs, remote developer roles, tech careers mumbai, join limitless infotech"
+      />
       <div className="relative min-h-screen">
         {/* Ambient background */}
         <div className="fixed inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-0 right-[-10%] w-[60%] h-[60%] bg-primary-500/5 blur-[150px] rounded-full" />
+          <div className="absolute top-0 left-[-10%] w-[60%] h-[60%] bg-primary-500/5 blur-[150px] rounded-full" />
           <div className="absolute bottom-[-10%] left-[-10%] w-[60%] h-[60%] bg-secondary-500/5 blur-[150px] rounded-full" />
         </div>
 
@@ -181,8 +186,11 @@ const Careers = () => {
               <span className="text-sm font-medium text-gray-300">Architecting Careers</span>
             </motion.div>
             
-            <motion.h1 variants={itemVariants} className="text-5xl md:text-8xl font-bold mb-8 leading-tight">
-              Join the <span className="bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent italic">Collective</span>
+            <motion.h1 variants={itemVariants} className="text-5xl md:text-8xl font-black mb-8 leading-tight tracking-tighter uppercase italic">
+              Join the <br />
+              <span className="bg-gradient-to-r from-[#1ba6d6] via-blue-400 to-[#1ba6d6] bg-clip-text text-transparent">
+                Engineering Collective
+              </span>
             </motion.h1>
             
             <motion.p variants={itemVariants} className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-12">

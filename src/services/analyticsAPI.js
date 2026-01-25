@@ -24,6 +24,12 @@ class AnalyticsAPI {
     };
 
     try {
+      // Proactively skip the network call in dev mode to prevent browser console pollution (net::ERR_CONNECTION_REFUSED)
+      // unless explicitly enabled via environment variable.
+      if (import.meta.env.DEV && import.meta.env.VITE_ENABLE_ANALYTICS_IN_DEV !== 'true') {
+        return { success: true, mock: true };
+      }
+
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), this.timeout);
 
@@ -43,9 +49,9 @@ class AnalyticsAPI {
       return await response.json();
     } catch (error) {
       // In production/demo, we don't want analytics failures to break the app or spam console
-      if (import.meta.env.DEV || import.meta.env.VITE_DEBUG_MODE === 'true') {
-         console.warn('Analytics API unavailable (Mock Mode Active):', error.message);
-      }
+      // if (import.meta.env.DEV || import.meta.env.VITE_DEBUG_MODE === 'true') {
+      //    console.warn('Analytics API unavailable (Mock Mode Active):', error.message);
+      // }
       // Return mock success to prevent app crash
       return { success: true, mock: true };
     }

@@ -59,8 +59,8 @@ const Login = () => {
             >
                 {/* Logo */}
                 <Link to="/" className="flex items-center justify-center gap-4 mb-12 group">
-                    <div className="w-12 h-12 bg-[#1ba6d6] mask-facet flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                        <span className="text-white font-black text-2xl">L</span>
+                    <div className="w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                        <img src="/images/logos/Limitless_Geometric_Logo.png" alt="Limitless" className="w-full h-full object-contain" />
                     </div>
                     <div className="flex flex-col">
                         <span className="text-white font-extrabold tracking-tighter text-2xl leading-none uppercase">LIMITLESS</span>

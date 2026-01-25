@@ -2,12 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, X, Send, Sparkles } from 'lucide-react';
 import api from '../../services/api';
+import { useApp } from '../../context/AppContext';
 
 const ChatWidget = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const { isChatOpen, toggleChat } = useApp();
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([
-        { id: 1, type: 'bot', text: 'Welcome to Limitless Infotech! How can we help you innovate today?' }
+        { id: 1, type: 'bot', text: 'Auralis Node Online. How can we help you innovate today?' }
     ]);
     const [isTyping, setIsTyping] = useState(false);
     const messagesEndRef = useRef(null);
@@ -18,7 +19,7 @@ const ChatWidget = () => {
 
     useEffect(() => {
         scrollToBottom();
-    }, [messages, isOpen]);
+    }, [messages, isChatOpen]);
 
     const handleSend = async (e) => {
         e.preventDefault();
@@ -82,7 +83,7 @@ const ChatWidget = () => {
     return (
         <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-4 pointer-events-auto">
             <AnimatePresence>
-                {isOpen ? (
+                {isChatOpen ? (
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -97,12 +98,15 @@ const ChatWidget = () => {
                                     <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-[#0e1114]"></div>
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-white text-sm">Limitless Assistant</h3>
-                                    <p className="text-[10px] text-gray-400 font-medium uppercase tracking-wider">Online</p>
+                                    <h3 className="font-bold text-white text-sm">Auralis Assistant</h3>
+                                    <p className="text-[10px] text-[#1ba6d6] font-medium uppercase tracking-wider flex items-center">
+                                        <span className="w-1.5 h-1.5 bg-[#1ba6d6] rounded-full mr-1.5 animate-pulse"></span>
+                                        Neural Node Online
+                                    </p>
                                 </div>
                             </div>
                             <button 
-                                onClick={() => setIsOpen(false)}
+                                onClick={() => toggleChat(false)}
                                 className="p-2 hover:bg-white/10 rounded-full transition-colors text-gray-400 hover:text-white"
                             >
                                 <X className="w-5 h-5" />
@@ -166,10 +170,10 @@ const ChatWidget = () => {
             <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setIsOpen(!isOpen)}
+                onClick={() => toggleChat()}
                 className="w-14 h-14 rounded-full bg-[#1ba6d6] shadow-[0_0_20px_rgba(27,166,214,0.4)] flex items-center justify-center text-white hover:bg-[#1595c0] transition-colors"
             >
-                {isOpen ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
+                {isChatOpen ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
             </motion.button>
         </div>
     );

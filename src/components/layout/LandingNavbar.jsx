@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 const LandingNavbar = ({ isScrolled, toggleModal }) => {
@@ -11,8 +12,8 @@ const LandingNavbar = ({ isScrolled, toggleModal }) => {
             <nav id="navbar" className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-[#0e1114]/95 backdrop-blur-md border-b border-white/5 py-4' : 'py-8'}`}>
                 <div className="max-w-[1440px] mx-auto px-6 md:px-10 flex justify-between items-center">
                     <a href="#" className="flex items-center gap-4 group cursor-pointer z-50 relative">
-                        <div className="w-10 h-10 bg-[#1ba6d6] mask-facet flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                            <span className="text-white font-black text-xl">L</span>
+                        <div className="w-10 h-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                            <img src="/images/logos/Limitless_Geometric_Logo.png" alt="Limitless" className="w-full h-full object-contain" />
                         </div>
                         <div className="flex flex-col">
                             <span className="text-white font-extrabold tracking-tighter text-xl leading-none">LIMITLESS</span>
@@ -21,10 +22,10 @@ const LandingNavbar = ({ isScrolled, toggleModal }) => {
                     </a>
                     
                     <div className="hidden lg:flex items-center gap-12">
-                        <a href="#expertise" className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-[#94a3b8] hover:text-white transition-colors">Expertise</a>
-                        <a href="#foundational" className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-[#94a3b8] hover:text-white transition-colors">Foundational</a>
-                        <a href="/blog" className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-[#94a3b8] hover:text-white transition-colors">Insights</a>
-                        <a href="#process" className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-[#94a3b8] hover:text-white transition-colors">Process</a>
+                        <Link to="/services#expertise" className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-[#94a3b8] hover:text-white transition-colors">Expertise</Link>
+                        <Link to="/#foundational" className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-[#94a3b8] hover:text-white transition-colors">Foundational</Link>
+                        <Link to="/blog" className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-[#94a3b8] hover:text-white transition-colors">Insights</Link>
+                        <Link to="/services#workflow" className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-[#94a3b8] hover:text-white transition-colors">Process</Link>
                         <button onClick={toggleModal} className="px-8 py-3 bg-white text-[#0e1114] text-[0.7rem] font-black uppercase tracking-widest mask-btn hover:bg-[#1ba6d6] hover:text-white">
                             Initiate Project
                         </button>
@@ -38,10 +39,10 @@ const LandingNavbar = ({ isScrolled, toggleModal }) => {
 
             <div id="mobile-menu" className={`mobile-menu fixed inset-0 bg-[#0e1114] z-40 flex flex-col items-center justify-center text-center p-8 ${isMobileMenuOpen ? 'active' : ''}`}>
                 <div className="space-y-8 flex flex-col">
-                    <a href="#expertise" onClick={toggleMobileMenu} className="text-2xl font-bold text-white hover:text-[#1ba6d6] transition-colors">Expertise</a>
-                    <a href="#foundational" onClick={toggleMobileMenu} className="text-2xl font-bold text-white hover:text-[#1ba6d6] transition-colors">Foundational</a>
-                    <a href="/blog" onClick={toggleMobileMenu} className="text-2xl font-bold text-white hover:text-[#1ba6d6] transition-colors">Insights</a>
-                    <a href="#process" onClick={toggleMobileMenu} className="text-2xl font-bold text-white hover:text-[#1ba6d6] transition-colors">Process</a>
+                    <Link to="/services#expertise" onClick={toggleMobileMenu} className="text-2xl font-bold text-white hover:text-[#1ba6d6] transition-colors">Expertise</Link>
+                    <Link to="/#foundational" onClick={toggleMobileMenu} className="text-2xl font-bold text-white hover:text-[#1ba6d6] transition-colors">Foundational</Link>
+                    <Link to="/blog" onClick={toggleMobileMenu} className="text-2xl font-bold text-white hover:text-[#1ba6d6] transition-colors">Insights</Link>
+                    <Link to="/services#workflow" onClick={toggleMobileMenu} className="text-2xl font-bold text-white hover:text-[#1ba6d6] transition-colors">Process</Link>
                     <button onClick={() => { toggleMobileMenu(); toggleModal(); }} className="px-10 py-4 bg-[#1ba6d6] text-white text-sm font-black uppercase tracking-widest mask-btn shadow-xl">
                         Initiate Project
                     </button>

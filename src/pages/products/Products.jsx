@@ -28,6 +28,7 @@ import {
   Plus
 } from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
+import SEO from '../../components/SEO/SEO';
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -222,6 +223,10 @@ const Products = () => {
   return (
     <ErrorBoundary>
       <div className="relative min-h-screen bg-dark-900 overflow-hidden text-white selection:bg-primary-500/30">
+        <SEO 
+          title="The Stack - Enterprise SaaS Ecosystem" 
+          description="Explore our suite of enterprise-grade SaaS nodes including TrackIT, HR-IMS, and Baseless. High-fidelity logic engines for complex architectural scale." 
+        />
         {/* Atmosphere */}
         <div className="fixed inset-0 pointer-events-none">
           <div className="absolute top-0 right-[-10%] w-[60%] h-[60%] bg-primary-500/5 blur-[150px] rounded-full" />

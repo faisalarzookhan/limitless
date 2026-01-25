@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
+import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,11 +16,36 @@ export default defineConfig({
         brotliSize: true,
       }),
   ].filter(Boolean),
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+      '@components': path.resolve(__dirname, './src/components'),
+      '@pages': path.resolve(__dirname, './src/pages'),
+      '@services': path.resolve(__dirname, './src/services'),
+      '@hooks': path.resolve(__dirname, './src/hooks'),
+      '@utils': path.resolve(__dirname, './src/utils'),
+      '@assets': path.resolve(__dirname, './src/assets'),
+      '@context': path.resolve(__dirname, './src/context'),
+    },
+  },
   server: {
     port: 5173,
     open: true,
     // Allow requests from any subdomain during development
     cors: true,
+  },
+  optimizeDeps: {
+    include: [
+      'react',
+      'react-dom',
+      'react-is',
+      'react/jsx-runtime',
+      'react/jsx-dev-runtime',
+    ],
+    esbuildOptions: {
+      // Ensure proper module resolution
+      mainFields: ['module', 'main'],
+    },
   },
   build: {
     outDir: 'dist',
@@ -32,7 +58,12 @@ export default defineConfig({
           if (id.includes('node_modules')) {
             // Large libraries that need separate chunks
             if (id.includes('react')) {
-              if (id.includes('react-dom') || id.includes('react/jsx')) {
+              // Keep react, react-dom, react-is together to avoid module initialization issues
+              if (id.includes('react-dom') || id.includes('react/jsx') || id.includes('react-is')) {
+                return 'react';
+              }
+              // Other react packages that should stay with core React
+              if (id.includes('scheduler') || id.includes('prop-types')) {
                 return 'react';
               }
               return 'react';
@@ -55,7 +86,7 @@ export default defineConfig({
             if (id.includes('chart.js') || id.includes('react-chartjs-2')) {
               return 'charts';
             }
-            if (id.includes('jspdf') || id.includes('jspdf-autotable')) {
+            if (id.includes('jspdf') || id.includes('jspdf-autotable') || id.includes('src/services/pdf/')) {
               return 'pdf';
             }
             if (id.includes('canvg')) {
@@ -67,9 +98,6 @@ export default defineConfig({
             if (id.includes('date-fns')) {
               return 'date-fns';
             }
-            if (id.includes('prop-types')) {
-              return 'prop-types';
-            }
             if (id.includes('core-js')) {
               return 'core-js';
             }
@@ -80,11 +108,19 @@ export default defineConfig({
               return 'fflate';
             }
             
+            
             // Group smaller packages into a common vendor chunk to avoid empty chunks
             const nodeModule = id
               .toString()
               .split('node_modules/')[1]
               .split('/')[0];
+            
+            // IMPORTANT: Keep React ecosystem together to prevent module initialization errors
+            const reactEcosystem = ['prop-types', 'scheduler', 'react-is', 'object-assign'];
+            if (reactEcosystem.includes(nodeModule)) {
+              return 'react';
+            }
+            
             const smallPackages = [
               'cookie',
               'set-cookie-parser',
@@ -92,7 +128,6 @@ export default defineConfig({
               'tiny-invariant',
               'tiny-warning',
               'loose-envify',
-              'scheduler',
               'html-parse-stringify',
               'void-elements',
             ];

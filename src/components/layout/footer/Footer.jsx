@@ -15,7 +15,9 @@ const Footer = () => {
             >
                 <div className="col-span-1">
                     <div className="flex items-center gap-3 mb-10">
-                        <div className="w-8 h-8 bg-[#1ba6d6] mask-facet"></div>
+                        <div className="w-8 h-8 flex items-center justify-center">
+                            <img src="/images/logos/Limitless_Geometric_Logo.png" alt="Limitless" className="w-full h-full object-contain" />
+                        </div>
                         <span className="font-black text-white text-xl tracking-tighter">LIMITLESS</span>
                     </div>
                     <p className="text-sm text-[#94a3b8] leading-relaxed mb-10">
@@ -54,54 +56,54 @@ const Footer = () => {
                 
                 <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-10">
                     <div>
-                        <h4 className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-white mb-8">Services</h4>
-                        <ul className="space-y-4 text-sm font-medium text-[#94a3b8]">
+                        <h4 className="text-[0.65rem] font-black tracking-[0.3em] uppercase text-[#1ba6d6] mb-8">Architectural Nodes</h4>
+                        <ul className="space-y-4 text-[0.7rem] font-bold uppercase tracking-widest text-[#94a3b8]">
                             <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
-                                <Link to="/services">Web Development</Link>
+                                <Link to="/services#web">Web Systems</Link>
                             </motion.li>
                             <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
-                                <Link to="/services">Mobile Apps</Link>
+                                <Link to="/services#mobile">Mobile Neural</Link>
                             </motion.li>
                             <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
-                                <Link to="/services">UI/UX Design</Link>
+                                <Link to="/services#expertise">AI & Automation</Link>
                             </motion.li>
                             <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
-                                <Link to="/services">DevOps & Cloud</Link>
+                                <Link to="/services#software">Cloud Infrastructure</Link>
                             </motion.li>
                         </ul>
                     </div>
                     <div>
-                        <h4 className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-white mb-8">Quick Links</h4>
-                        <ul className="space-y-4 text-sm font-medium text-[#94a3b8]">
-                            <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
-                                <Link to="/about">About Us</Link>
+                        <h4 className="text-[0.65rem] font-black tracking-[0.3em] uppercase text-[#ffc957] mb-8">Strategic Intelligence</h4>
+                        <ul className="space-y-4 text-[0.7rem] font-bold uppercase tracking-widest text-[#94a3b8]">
+                            <motion.li whileHover={{ x: 5, color: '#ffc957' }} className="cursor-pointer transition-colors">
+                                <Link to="/roi-calculator">ROI Analytics</Link>
                             </motion.li>
-                            <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
-                                <Link to="/portfolio">Portfolio</Link>
+                            <motion.li whileHover={{ x: 5, color: '#ffc957' }} className="cursor-pointer transition-colors">
+                                <Link to="/innovation-lab">Innovation Lab</Link>
                             </motion.li>
-                            <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
-                                <Link to="/contact">Contact</Link>
+                            <motion.li whileHover={{ x: 5, color: '#ffc957' }} className="cursor-pointer transition-colors">
+                                <Link to="/portfolio">Success Stories</Link>
                             </motion.li>
-                             <motion.li whileHover={{ x: 5, color: '#1ba6d6' }} className="cursor-pointer transition-colors">
-                                <Link to="/blog">Insights</Link>
+                             <motion.li whileHover={{ x: 5, color: '#ffc957' }} className="cursor-pointer transition-colors">
+                                <Link to="/blog">Strategic Insights</Link>
                             </motion.li>
                         </ul>
                     </div>
                     <div>
-                        <h4 className="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-white mb-8">Contact</h4>
-                         <ul className="space-y-4 text-sm font-medium text-[#94a3b8]">
-                            <li className="flex items-start gap-3">
-                                <MapPin className="w-4 h-4 text-[#1ba6d6] mt-1" />
-                                <span>Mumbai, India<br />Global Remote Teams</span>
-                            </li>
-                             <li className="flex items-center gap-3">
-                                <Mail className="w-4 h-4 text-[#1ba6d6]" />
-                                <span>info@limitlessinfotech.com</span>
-                            </li>
-                             <li className="flex items-center gap-3">
-                                <Phone className="w-4 h-4 text-[#1ba6d6]" />
-                                <span>+91 999 888 7777</span>
-                            </li>
+                        <h4 className="text-[0.65rem] font-black tracking-[0.3em] uppercase text-white mb-8">Operations</h4>
+                        <ul className="space-y-4 text-[0.7rem] font-bold uppercase tracking-widest text-[#94a3b8]">
+                            <motion.li whileHover={{ x: 5, color: 'white' }} className="cursor-pointer transition-colors">
+                                <Link to="/careers">Engineering Careers</Link>
+                            </motion.li>
+                             <motion.li whileHover={{ x: 5, color: 'white' }} className="cursor-pointer transition-colors">
+                                <Link to="/about">Our Philosophy</Link>
+                            </motion.li>
+                             <motion.li whileHover={{ x: 5, color: 'white' }} className="cursor-pointer transition-colors">
+                                <Link to="/compliance">Compliance Matrix</Link>
+                            </motion.li>
+                             <motion.li whileHover={{ x: 5, color: 'white' }} className="cursor-pointer transition-colors">
+                                <Link to="/contact">Neural Uplink</Link>
+                            </motion.li>
                         </ul>
                     </div>
                 </div>

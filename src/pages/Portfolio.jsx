@@ -25,6 +25,7 @@ import {
 import { api } from '../services/api';
 import { useApp } from '../context/AppContext';
 import ErrorBoundary from '../components/ErrorBoundary';
+import SEO from '../components/SEO/SEO';
 
 const Portfolio = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -73,7 +74,6 @@ const Portfolio = () => {
         setError(err.message || 'Failed to fetch portfolio projects');
         showError('Displaying curated showcase. Connect for full documentation.');
 
-        // Curated Showcase Data
         setPortfolioProjects([
           {
             id: 101,
@@ -82,12 +82,13 @@ const Portfolio = () => {
             client: 'Enterprise Global',
             industry: 'Logistics',
             description: 'Unified multidimensional ERP for large-scale operations and secure asset management.',
-            image: null,
+            image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop',
             tags: ['Enterprise', 'Scalable', 'Cloud Architecture'],
             results: { efficiency: '+60%', automation: '80%', users: '2k+' },
             year: '2023',
             icon: Building2,
-            color: 'primary'
+            color: 'text-primary-400',
+            glow: 'rgba(27, 166, 214, 0.2)'
           },
           {
             id: 102,
@@ -96,302 +97,232 @@ const Portfolio = () => {
             client: 'MENA Legal Startup',
             industry: 'Legal',
             description: 'Premium matching platform for legal professionals and corporate entities seeking expertise.',
-            image: null,
-            tags: ['Mobile First', 'High Trust', 'Encrypted'],
-            results: { lawyers: '500+', latency: '-80%', satisfaction: '99%' },
+            image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=2070&auto=format&fit=crop',
+            tags: ['Mobile Core', 'Encryption', 'Real-time Sync'],
+            results: { latency: '80%', onboarding: '500+', matching: '99%' },
+            year: '2023',
+            icon: Heart,
+            color: 'text-secondary-400',
+            glow: 'rgba(244, 180, 26, 0.15)'
+          },
+          {
+            id: 103,
+            title: 'Auralis - AI Personalization',
+            category: 'automation',
+            client: 'Retail Dynamic',
+            industry: 'E-commerce',
+            description: 'Neural-engine personalization layer increasing global checkout velocity and precision.',
+            image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop',
+            tags: ['AI Neural', 'Big Data', 'Personalization'],
+            results: { conversion: '+40%', accuracy: '95%', retention: '+25%' },
             year: '2024',
-            icon: Scale,
-            color: 'secondary'
-          },
-          {
-            id: 1,
-            title: 'Visionary CRM Dashboard',
-            category: 'crm',
-            client: 'FinTech Group',
-            industry: 'Finance',
-            description: 'Advanced relational dashboard with real-time analytics and predictive modeling.',
-            image: null,
-            tags: ['FinTech', 'Data Viz', 'Secure'],
-            results: { accuracy: '+95%', productivity: '+40%' },
-            year: '2023',
-            icon: BarChart3,
-            color: 'primary'
-          },
-          {
-            id: 2,
-            title: 'Luxe E-commerce Engine',
-            category: 'ecommerce',
-            client: 'Heritage Brands',
-            industry: 'Retail',
-            description: 'High-conversion e-commerce core with immersive visual storytelling and seamless checkout.',
-            image: null,
-            tags: ['Brand-Led', 'Performance', 'UX'],
-            results: { conversion: '+85%', traffic: '+250%' },
-            year: '2023',
-            icon: ShoppingCart,
-            color: 'secondary'
-          },
-          {
-            id: 3,
-            title: 'LogiFlow Mobile Core',
-            category: 'mobile',
-            client: 'Global Logistics',
-            industry: 'Logistics',
-            description: 'Real-time fleet intelligence and route optimization suite for global distribution networks.',
-            image: null,
-            tags: ['Real-time', 'IoT', 'Optimized'],
-            results: { efficiency: '+60%', fuel: '-30%' },
-            year: '2023',
-            icon: Truck,
-            color: 'primary'
-          },
-          {
-            id: 4,
-            title: 'EduNexus Learning Core',
-            category: 'web',
-            client: 'Academia Int.',
-            industry: 'Education',
-            description: 'Immersive digital learning environment with integrated assessment and progress tracking.',
-            image: null,
-            tags: ['Immersive', 'Scalable', 'LMS'],
-            results: { completion: '+80%', engagement: '+120%' },
-            year: '2023',
-            icon: Globe,
-            color: 'secondary'
+            icon: Zap,
+            color: 'text-white',
+            glow: 'rgba(255, 255, 255, 0.1)'
           }
         ]);
-      } finally {
         setLoading(false);
       }
     };
+
     fetchPortfolioProjects();
-  }, []);
+  }, [showError]);
 
   const filteredProjects = portfolioProjects.filter(project => {
     const matchesCategory = selectedCategory === 'all' || project.category === selectedCategory;
-    const matchesSearch = 
-      project.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.client?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.industry?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.tags?.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+    const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         project.description.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
-  const stats = [
-    { number: '150+', label: 'Digital Assets Built', icon: Briefcase },
-    { number: '50+', label: 'Global Partnerships', icon: Users },
-    { number: '12+', label: 'Innovation Awards', icon: Trophy },
-    { number: '99%', label: 'Retention Rate', icon: Heart }
-  ];
-
   return (
     <ErrorBoundary>
-      <div className="relative min-h-screen">
-        {/* Ambient background */}
+      <div className="relative min-h-screen pb-32">
+        <SEO 
+          title="Architectural Showcase - Limitless Portfolio" 
+          description="Exploring the structural transformations and mission-critical systems engineered by Limitless Infotech." 
+        />
+
         <div className="fixed inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-0 left-[-10%] w-[60%] h-[60%] bg-primary-500/5 blur-[150px] rounded-full" />
-          <div className="absolute bottom-0 right-[-10%] w-[60%] h-[60%] bg-secondary-500/5 blur-[150px] rounded-full" />
+          <div className="absolute top-[10%] right-[-5%] w-[50%] h-[50%] bg-primary-500/5 blur-[120px] rounded-full" />
+          <div className="absolute bottom-[10%] left-[-5%] w-[50%] h-[50%] bg-secondary-500/5 blur-[120px] rounded-full" />
+          <div className="absolute inset-0 bg-grid-white/[0.02]" />
         </div>
 
-        {/* Hero Section */}
-        <section className="relative pt-32 pb-20 px-6 overflow-hidden">
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={containerVariants}
-            className="max-w-7xl mx-auto text-center"
-          >
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8">
-              <Trophy className="w-4 h-4 text-primary-400" />
-              <span className="text-sm font-medium bg-gradient-to-r from-primary-400 to-primary-200 bg-clip-text text-transparent">Architecture of Success</span>
-            </motion.div>
-            
-            <motion.h1 variants={itemVariants} className="text-5xl md:text-8xl font-bold mb-8 leading-tight">
-              A Legacy of <br />
-              <span className="bg-gradient-to-r from-primary-400 via-primary-200 to-secondary-400 bg-clip-text text-transparent">
-                Digital Excellence
-              </span>
-            </motion.h1>
-            
-            <motion.p variants={itemVariants} className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              Explore our curation of high-impact strategic initiatives and digital transformations that have redefined industry standards.
-            </motion.p>
-
-            {/* Metrics */}
-            <motion.div variants={itemVariants} className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 max-w-4xl mx-auto">
-              {stats.map((stat, index) => (
-                <div key={index} className="space-y-2">
-                  <div className="text-3xl md:text-5xl font-bold text-white tracking-tighter">{stat.number}</div>
-                  <div className="text-xs text-gray-500 uppercase tracking-widest font-medium">{stat.label}</div>
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </section>
-
-        {/* Control Bar */}
-        <section className="sticky top-20 z-40 px-6 py-6 bg-dark-900/60 backdrop-blur-xl border-y border-white/5">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-6 items-center justify-between">
-            {/* Filter Chips */}
-            <div className="flex flex-wrap items-center gap-2">
-              {categories.map(cat => (
-                <button
-                  key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={`flex items-center gap-2 px-5 py-2.5 rounded-2xl text-sm font-medium transition-all ${
-                    selectedCategory === cat.id 
-                    ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/20' 
-                    : 'bg-white/5 text-gray-400 border border-white/5 hover:bg-white/10'
-                  }`}
-                >
-                  <cat.icon className="w-4 h-4" />
-                  {cat.name}
-                </button>
-              ))}
-            </div>
-
-            {/* Search Input */}
-            <div className="relative w-full md:w-80 group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 group-focus-within:text-primary-400 transition-colors" />
-              <input 
-                type="text" 
-                placeholder="Search initiatives..." 
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 rounded-2xl bg-white/5 border border-white/5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all"
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* Portfolio Grid */}
-        <section className="py-24 px-6">
+        <section className="relative pt-40 pb-20 px-6">
           <div className="max-w-7xl mx-auto">
-            <AnimatePresence mode="popLayout">
-              {loading ? (
-                <motion.div 
-                  initial={{ opacity: 0 }} 
-                  animate={{ opacity: 1 }} 
-                  exit={{ opacity: 0 }}
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-                >
-                  {[1, 2, 3, 4, 5, 6].map(i => (
-                    <div key={i} className="aspect-[4/5] rounded-4xl bg-white/5 animate-pulse" />
-                  ))}
-                </motion.div>
-              ) : filteredProjects.length > 0 ? (
-                <motion.div 
-                  layout
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-                >
-                  {filteredProjects.map((project, index) => (
-                    <motion.div
-                      layout
-                      key={project.id}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.5, delay: index * 0.05 }}
-                      className="group relative"
-                    >
-                      <Link to={`/portfolio/${project.id}`} className="block h-full cursor-none-special">
-                        <div className="relative h-full aspect-[4/5] rounded-4xl overflow-hidden bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 transition-all duration-500 group-hover:border-primary-500/30">
-                          {/* Inner Content */}
-                          <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                            {/* Decorative Icon Background */}
-                            <div className="absolute top-10 right-10 opacity-5 group-hover:opacity-10 transition-opacity">
-                              {project.icon && <project.icon className="w-40 h-40" />}
-                            </div>
+            <motion.div 
+               initial="hidden"
+               animate="visible"
+               variants={containerVariants}
+               className="text-center max-w-4xl mx-auto"
+            >
+              <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full mb-8 backdrop-blur-md">
+                <Trophy size={14} className="text-secondary-400" />
+                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400">Mission Record</span>
+              </motion.div>
+              
+              <motion.h1 variants={itemVariants} className="text-6xl md:text-8xl font-black text-white italic tracking-tighter uppercase leading-[0.9] mb-10">
+                Architectural <br /> <span className="text-primary-400 not-italic">Showcase.</span>
+              </motion.h1>
+              
+              <motion.p variants={itemVariants} className="text-xl text-gray-500 font-medium italic mb-16 leading-relaxed">
+                Deterministic output from our high-fidelity engineering labs. Secure, low-latency transformations deployed across the global digital perimeter.
+              </motion.p>
 
-                            <div className="relative z-10 space-y-4">
-                              <div className="flex gap-2">
-                                {project.tags?.slice(0, 2).map((tag, i) => (
-                                  <span key={i} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] uppercase tracking-widest text-gray-400">
-                                    {tag}
-                                  </span>
-                                ))}
-                              </div>
-                              <h3 className="text-2xl font-bold text-white group-hover:text-primary-400 transition-colors leading-tight">
-                                {project.title}
-                              </h3>
-                              <p className="text-sm text-gray-400 line-clamp-2 leading-relaxed">
-                                {project.description}
-                              </p>
-                              
-                              <div className="pt-4 flex items-center justify-between">
-                                <span className="text-xs font-bold text-primary-400/80 uppercase tracking-widest">{project.industry}</span>
-                                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-primary-500 transition-all duration-500 group-hover:scale-110">
-                                  <ArrowRight className="w-4 h-4 text-white" />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          
-                          {/* Accent Gradient on Hover */}
-                          <div className={`absolute inset-0 bg-gradient-to-br transition-opacity duration-700 opacity-0 group-hover:opacity-20 ${
-                            project.color === 'primary' ? 'from-primary-500' : 'from-secondary-500'
-                          } to-transparent`} />
-                        </div>
-                      </Link>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              ) : (
-                <motion.div 
-                  initial={{ opacity: 0 }} 
-                  animate={{ opacity: 1 }} 
-                  className="py-32 text-center"
-                >
-                  <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-6">
-                    <Search className="w-8 h-8 text-gray-600" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-2">No initiatives found</h3>
-                  <p className="text-gray-400">Try adjusting your filters or search keywords.</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+              <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-4 mb-20 p-2 bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] w-full max-w-fit mx-auto overflow-hidden">
+                {categories.map((cat) => (
+                  <button
+                    key={cat.id}
+                    onClick={() => setSelectedCategory(cat.id)}
+                    className={`flex items-center gap-3 px-8 py-4 rounded-[2rem] text-xs font-black uppercase tracking-widest transition-all ${
+                      selectedCategory === cat.id 
+                      ? 'bg-white text-dark-900 shadow-xl' 
+                      : 'text-gray-500 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    <cat.icon size={16} />
+                    {cat.name}
+                  </button>
+                ))}
+              </motion.div>
+
+              <motion.div variants={itemVariants} className="relative max-w-2xl mx-auto">
+                <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-600 w-5 h-5" />
+                <input 
+                  type="text"
+                  placeholder="Query Project Registry..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-black/40 border border-white/5 rounded-3xl py-6 pl-16 pr-8 text-white text-[10px] font-black uppercase tracking-[0.2em] focus:border-primary-500/50 focus:outline-none transition-all placeholder:text-gray-800"
+                />
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
-        {/* Dynamic CTA */}
-        <section className="py-24 px-6">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-5xl mx-auto p-12 md:p-20 rounded-[48px] bg-gradient-to-br from-primary-600/20 to-secondary-600/20 border border-white/10 backdrop-blur-xl relative overflow-hidden text-center"
-          >
-            <div className="relative z-10">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to be our next flagship story?</h2>
-              <p className="text-lg text-gray-300 mb-10 max-w-2xl mx-auto">
-                Join our collective of forward-thinking enterprises and transform your digital infrastructure with architectural precision.
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <Link to="/get-started" className="px-10 py-4 bg-primary-500 text-white font-bold rounded-2xl hover:bg-primary-600 transition-all shadow-xl shadow-primary-500/20 flex items-center gap-2 group">
-                  Begin Initiative
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <Link to="/contact" className="px-10 py-4 bg-white/5 text-white font-bold rounded-2xl hover:bg-white/10 border border-white/10 backdrop-blur-md transition-all">
-                  Consultation
-                </Link>
+        <section className="relative px-6">
+          <div className="max-w-7xl mx-auto">
+            {loading ? (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                {[1, 2, 3].map(i => (
+                  <div key={i} className="h-[500px] glass-panel rounded-[3rem] animate-pulse bg-white/5 border border-white/5" />
+                ))}
               </div>
-            </div>
-            {/* Visual pattern */}
-            <div className="absolute inset-0 bg-grid-white/[0.02] pointer-events-none" />
-          </motion.div>
+            ) : (
+              <motion.div 
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="grid md:grid-cols-2 lg:grid-cols-3 gap-10"
+              >
+                <AnimatePresence mode="popLayout">
+                  {filteredProjects.map((project) => (
+                    <Link
+                      to={`/portfolio/${project.id}`}
+                      key={project.id}
+                      className="glass-panel mask-facet relative group flex flex-col h-full bg-dark-900/40 shadow-[0_0_80px_rgba(0,0,0,0.4)] transition-all hover:border-primary-500/20"
+                    >
+                      <div className="h-64 overflow-hidden relative">
+                         {project.image ? (
+                           <img src={project.image} alt={project.title} className="w-full h-full object-cover transform scale-110 group-hover:scale-100 transition-transform duration-1000" />
+                         ) : (
+                           <div className="w-full h-full bg-white/5 flex items-center justify-center">
+                              <project.icon className={`w-20 h-20 ${project.color} opacity-20`} />
+                           </div>
+                         )}
+                         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#0e1114] to-transparent z-10" />
+                         <div className="absolute top-8 left-8 z-20 px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-xl">
+                             <div className="flex items-center gap-2">
+                                <project.icon className={`w-3 h-3 ${project.color}`} />
+                                <span className={`text-[9px] font-black uppercase tracking-[0.3em] ${project.color}`}>{project.industry}</span>
+                             </div>
+                         </div>
+                      </div>
+
+                      <div className="p-10 flex-1 flex flex-col">
+                        <div className="flex items-center justify-between mb-8 group-hover:translate-x-1 transition-transform">
+                          <h3 className="text-2xl font-black text-white italic uppercase tracking-tighter leading-tight max-w-[80%]">{project.title}</h3>
+                          <div className={`w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center ${project.color} group-hover:bg-white group-hover:text-dark-900 transition-all`}>
+                             <ArrowRight className="w-6 h-6" />
+                          </div>
+                        </div>
+
+                        <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest italic leading-relaxed mb-10 line-clamp-3">
+                          {project.description}
+                        </p>
+
+                        <div className="flex flex-wrap gap-2 mb-10">
+                          {project.tags.map((tag, i) => (
+                            <span key={i} className="px-3 py-1.5 bg-white/5 rounded-full text-[8px] font-black text-gray-600 uppercase tracking-widest border border-white/5">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+
+                        <div className="mt-auto pt-10 border-t border-white/5 grid grid-cols-2 gap-6">
+                           {Object.entries(project.results).slice(0, 2).map(([key, val], idx) => (
+                             <div key={idx} className="text-center p-4 bg-white/5 rounded-2xl border border-white/5 group-hover:border-white/10 transition-colors">
+                                <div className="text-lg font-black text-white tracking-tighter mb-1 italic">{val}</div>
+                                <div className="text-[7px] font-black text-gray-600 uppercase tracking-[0.2em]">{key} Recovery</div>
+                             </div>
+                           ))}
+                        </div>
+                      </div>
+
+                      <div 
+                        className="absolute bottom-0 left-0 w-full h-px opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                        style={{ background: `linear-gradient(to right, transparent, ${project.glow}, transparent)` }}
+                      />
+                    </Link>
+                  ))}
+                </AnimatePresence>
+              </motion.div>
+            )}
+
+            {!loading && filteredProjects.length === 0 && (
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center py-40 glass-panel rounded-[3rem] border-white/5 bg-white/2"
+              >
+                <Database size={48} className="text-gray-800 mx-auto mb-6" />
+                <h3 className="text-2xl font-black text-white italic uppercase tracking-tighter mb-4">Registry Null</h3>
+                <p className="text-gray-500 font-bold uppercase tracking-widest">No matching architectural nodes found in the current selector sync.</p>
+              </motion.div>
+            )}
+          </div>
+        </section>
+
+        <section className="pt-40 px-6 text-center">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="max-w-7xl mx-auto p-16 md:p-32 rounded-[5rem] bg-dark-900 border border-white/10 backdrop-blur-3xl relative overflow-hidden group"
+            >
+               <div className="absolute inset-0 bg-primary-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+               <div className="relative z-10 space-y-12">
+                  <h2 className="text-4xl md:text-8xl font-black text-white tracking-tighter uppercase leading-none">Initialize <br /> <span className="italic text-primary-400">Collaboration.</span></h2>
+                  <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed italic">
+                    Our architects are ready to deconstruct your technical debt and rebuild your digital future with deterministic precision.
+                  </p>
+                  <div className="flex flex-wrap justify-center gap-8">
+                     <Link to="/get-started" className="px-14 py-6 bg-white text-dark-900 font-black text-[0.7rem] uppercase tracking-[0.4em] rounded-3xl hover:bg-primary-500 hover:text-white transition-all shadow-2xl flex items-center gap-4 group/btn">
+                  Begin Engagement_
+                  <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+                </Link>
+                     <Link to="/pricing" className="px-14 py-6 bg-white/5 text-white font-black text-[0.7rem] uppercase tracking-[0.4em] rounded-3xl border border-white/10 hover:bg-white/10 backdrop-blur-xl transition-all">
+                        Investment Models
+                     </Link>
+                  </div>
+               </div>
+               <div className="absolute inset-0 bg-grid-white/[0.02] pointer-events-none" />
+            </motion.div>
         </section>
       </div>
     </ErrorBoundary>
   );
 };
-
-// Internal icon for matching scale behavior
-const Scale = (props) => (
-  <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>
-  </svg>
-);
 
 export default Portfolio;

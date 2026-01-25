@@ -9,6 +9,7 @@ import ScrollToTop from './components/ScrollToTop';
 import AnalyticsTracker from './components/AnalyticsTracker';
 import ErrorBoundary from './components/ErrorBoundary';
 import MainLayout from './components/layout/MainLayout';
+import Breadcrumbs from './components/layout/navigation/Breadcrumbs';
 import LandingHome from './pages/home/LandingHome';
 
 // Lazy load page components for code splitting
@@ -52,7 +53,9 @@ const AIFeatures = lazy(() => import('./pages/AIFeatures'));
 const AuralisAIPage = lazy(() => import('./pages/AuralisAIPage'));
 const ApiDocumentation = lazy(() => import('./pages/ApiDocumentation'));
 const KnowledgeBase = lazy(() => import('./pages/KnowledgeBase'));
+const LaunchBriefForm = lazy(() => import('./pages/LaunchBriefForm'));
 const ResponsiveToolkitDemo = lazy(() => import('./pages/ResponsiveToolkitDemo'));
+const AuralisAIDemo = lazy(() => import('./pages/demos/AuralisAIDemo'));
 
 // Subdomain-specific pages
 const AuditorToSandboxFlow = lazy(() => import('./pages/AuditorToSandboxFlow'));
@@ -80,12 +83,17 @@ const App = () => {
           <AnalyticsTracker />
           <SubdomainRouter>
             <Routes>
-              {/* Landing Page Route */}
-              <Route path="/" element={<LandingHome />} />
+              {/* Landing Page Route wrapped in ErrorBoundary */}
+              <Route path="/" element={
+                <ErrorBoundary>
+                  <LandingHome />
+                </ErrorBoundary>
+              } />
 
               {/* All other routes wrapped in MainLayout */}
               <Route path="/*" element={
                 <MainLayout>
+                  <Breadcrumbs />
                   <ErrorBoundary>
                     <Suspense fallback={<PageLoader />}>
                       <Routes>
@@ -130,11 +138,13 @@ const App = () => {
                         <Route path="/whatsapp-integration" element={<WhatsAppIntegrationPage />} />
                         <Route path="/ai-features" element={<AIFeatures />} />
                         <Route path="/auralis-ai" element={<AuralisAIPage />} />
+                        <Route path="/auralis-demo" element={<AuralisAIDemo />} />
                         <Route path="/api-documentation" element={<ApiDocumentation />} />
                         <Route path="/auditor-to-sandbox" element={<AuditorToSandboxFlow />} />
                         
                         {/* Additional specific routes */}
                         <Route path="/knowledge-base" element={<KnowledgeBase />} />
+                        <Route path="/launch-brief" element={<LaunchBriefForm />} />
                         <Route path="/get-started" element={<Contact />} />
                         <Route path="/blog/limitless-innovation" element={<BlogDetail />} />
                         <Route path="/events/webinar-series" element={<EventDetail />} />

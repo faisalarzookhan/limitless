@@ -138,10 +138,10 @@ const WhatsAppBusinessIntegration = () => {
                   <MessageCircle className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xs font-black text-white uppercase tracking-[0.2em]">WhatsApp Protocol</h3>
+                  <h3 className="text-xs font-black text-white uppercase tracking-[0.2em]">Auralis WhatsApp</h3>
                   <p className="text-[0.6rem] text-[#25d366] font-black uppercase tracking-widest mt-1 flex items-center">
                     <span className="w-1.5 h-1.5 bg-[#25d366] rounded-full mr-2 animate-pulse"></span>
-                    Encrypted Network
+                    Encrypted Protocol Active
                   </p>
                 </div>
               </div>
