@@ -65,6 +65,23 @@ const SEO = ({
     ]
   } : null;
 
+  const jsonLdData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Limitless Infotech",
+    "url": "https://limitlessinfotech.com",
+    "logo": "https://limitlessinfotech.com/images/logos/Limitless_Geometric_Logo.png",
+    "contactPoint": [{
+      "@type": "ContactPoint",
+      "telephone": "+91-7710909492",
+      "contactType": "customer service",
+      "email": "info@limitlessinfotech.com"
+    }],
+    "sameAs": [
+      "https://www.linkedin.com/company/limitlessinfotech"
+    ]
+  };
+
   return (
     <Helmet>
       {/* Basic Meta Tags */}
@@ -77,20 +94,21 @@ const SEO = ({
       <meta property="og:type" content={ogType} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description || defaultDescription} />
-      <meta property="og:image" content={ogImage || 'https://limitlessinfotech.com/og-image.jpg'} />
+      <meta property="og:image" content={ogImage || 'https://limitlessinfotech.com/images/og-image.jpg'} />
       <meta property="og:url" content={canonical || window.location.href} />
+      <meta property="og:site_name" content="Limitless Infotech" />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:creator" content={twitterHandle} />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description || defaultDescription} />
-      <meta name="twitter:image" content={ogImage || 'https://limitlessinfotech.com/og-image.jpg'} />
+      <meta name="twitter:image" content={ogImage || 'https://limitlessinfotech.com/images/og-image.jpg'} />
 
       {/* JSON-LD Structured Data */}
-      <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
-      <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
-      {breadcrumbSchema && <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>}
+      <script type="application/ld+json">
+        {JSON.stringify(jsonLdData)}
+      </script>
       
       {schemaData && (
         <script type="application/ld+json">

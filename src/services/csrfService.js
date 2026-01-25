@@ -14,14 +14,14 @@ class CSRFService {
    * @returns {string} CSRF token
    */
   generateToken() {
-    // Generate a random token
+    // Generate a random token using native browser Crypto API
     const randomBytes = new Uint8Array(32);
     if (typeof window !== 'undefined' && window.crypto) {
       window.crypto.getRandomValues(randomBytes);
     } else {
-      // Fallback for Node.js environment
-      const crypto = require('crypto');
-      return crypto.randomBytes(32).toString('hex');
+      // Return a placeholder or empty string if crypto is not available (should not happen in modern browsers)
+      console.error('Crypto API not available');
+      return '';
     }
     
     // Convert to hex string

@@ -20,7 +20,7 @@ import {
 import ErrorBoundary from '../components/ErrorBoundary';
 import notificationService from '../services/notification/notificationService';
 
-const ClientForm = () => {
+const ClientForm = ({ embedded = false }) => {
   const [step, setStep] = useState(1);
   const totalSteps = 4;
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -30,6 +30,7 @@ const ClientForm = () => {
     name: '',
     email: '',
     company: '',
+    companySize: '',
     website: '',
     industry: '',
     serviceType: '',
@@ -99,7 +100,7 @@ const ClientForm = () => {
 
   return (
     <ErrorBoundary>
-      <div className="relative min-h-screen bg-dark-900 overflow-hidden text-white selection:bg-primary-500/30 py-40 px-6">
+      <div className={`relative ${embedded ? '' : 'min-h-screen py-40'} bg-dark-900 overflow-hidden text-white selection:bg-primary-500/30 px-6`}>
         {/* Atmosphere */}
         <div className="fixed inset-0 pointer-events-none">
           <div className="absolute top-0 left-[-10%] w-[60%] h-[60%] bg-primary-500/5 blur-[120px] rounded-full" />
@@ -108,19 +109,21 @@ const ClientForm = () => {
 
         <div className="max-w-4xl mx-auto relative z-10">
            {/* Header */}
-           <div className="text-center mb-16">
-              <motion.div 
-                 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
-                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8"
-              >
-                 <Sparkles className="w-4 h-4 text-primary-400" />
-                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-300">Intake Protocol — Strategic Alignment</span>
-              </motion.div>
-              <h1 className="text-4xl md:text-7xl font-black italic tracking-tighter uppercase leading-none mb-6">
-                 Initiate <span className="not-italic bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent underline decoration-white/10 underline-offset-8">Alignment</span>
-              </h1>
-              <p className="text-gray-400 font-medium uppercase tracking-widest text-xs">Complete the nodal synchronization to join the Limitless ecosystem.</p>
-           </div>
+           {!embedded && (
+             <div className="text-center mb-16">
+                <motion.div 
+                   initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
+                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8"
+                >
+                   <Sparkles className="w-4 h-4 text-primary-400" />
+                   <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-300">Intake Protocol — Strategic Alignment</span>
+                </motion.div>
+                <h1 className="text-4xl md:text-7xl font-black italic tracking-tighter uppercase leading-none mb-6">
+                   Initiate <span className="not-italic bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent underline decoration-white/10 underline-offset-8">Alignment</span>
+                </h1>
+                <p className="text-gray-400 font-medium uppercase tracking-widest text-xs">Complete the nodal synchronization to join the Limitless ecosystem.</p>
+             </div>
+           )}
 
            {/* Progress Bar */}
            <div className="mb-20">
@@ -183,24 +186,37 @@ const ClientForm = () => {
                        <h2 className="text-2xl font-black text-white italic tracking-tight flex items-center gap-4">
                           <Building2 className="w-6 h-6 text-secondary-400" /> 02 // Structural Domain
                        </h2>
-                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                          <div className="space-y-2">
-                             <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Organization Node</label>
-                             <input 
-                                type="text" name="company" value={formData.company} onChange={handleInputChange}
-                                className="w-full bg-dark-950 border border-white/10 rounded-2xl p-5 text-white placeholder-gray-700 font-bold focus:ring-2 focus:ring-primary-500/30 outline-none"
-                                placeholder="Entity Name..."
-                             />
-                          </div>
-                          <div className="space-y-2">
-                             <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Digital Presence (URL)</label>
-                             <input 
-                                type="url" name="website" value={formData.website} onChange={handleInputChange}
-                                className="w-full bg-dark-950 border border-white/10 rounded-2xl p-5 text-white placeholder-gray-700 font-bold focus:ring-2 focus:ring-primary-500/30 outline-none"
-                                placeholder="https://domain.com"
-                             />
-                          </div>
-                       </div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                           <div className="space-y-2">
+                              <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Organization Node</label>
+                              <input 
+                                 type="text" name="company" value={formData.company} onChange={handleInputChange}
+                                 className="w-full bg-dark-950 border border-white/10 rounded-2xl p-5 text-white placeholder-gray-700 font-bold focus:ring-2 focus:ring-primary-500/30 outline-none"
+                                 placeholder="Entity Name..."
+                              />
+                           </div>
+                           <div className="space-y-2">
+                              <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Scale (Headcount)</label>
+                              <select 
+                                 name="companySize" value={formData.companySize} onChange={handleInputChange}
+                                 className="w-full bg-dark-950 border border-white/10 rounded-2xl p-5 text-white font-bold focus:ring-2 focus:ring-primary-500/30 outline-none appearance-none"
+                              >
+                                 <option value="">Select Scale...</option>
+                                 <option value="1-10">1-10 Workers</option>
+                                 <option value="11-50">11-50 Workers</option>
+                                 <option value="51-200">51-200 Workers</option>
+                                 <option value="201+">Enterprise (201+)</option>
+                              </select>
+                           </div>
+                           <div className="space-y-2">
+                              <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Digital Presence (URL)</label>
+                              <input 
+                                 type="url" name="website" value={formData.website} onChange={handleInputChange}
+                                 className="w-full bg-dark-950 border border-white/10 rounded-2xl p-5 text-white placeholder-gray-700 font-bold focus:ring-2 focus:ring-primary-500/30 outline-none"
+                                 placeholder="https://domain.com"
+                              />
+                           </div>
+                        </div>
                     </div>
                  )}
 

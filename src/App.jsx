@@ -56,6 +56,8 @@ const KnowledgeBase = lazy(() => import('./pages/KnowledgeBase'));
 const LaunchBriefForm = lazy(() => import('./pages/LaunchBriefForm'));
 const ResponsiveToolkitDemo = lazy(() => import('./pages/ResponsiveToolkitDemo'));
 const AuralisAIDemo = lazy(() => import('./pages/demos/AuralisAIDemo'));
+const InquiryCenter = lazy(() => import('./pages/InquiryCenter'));
+const SecurityCompliance = lazy(() => import('./pages/SecurityCompliance'));
 
 // Subdomain-specific pages
 const AuditorToSandboxFlow = lazy(() => import('./pages/AuditorToSandboxFlow'));
@@ -145,7 +147,9 @@ const App = () => {
                         {/* Additional specific routes */}
                         <Route path="/knowledge-base" element={<KnowledgeBase />} />
                         <Route path="/launch-brief" element={<LaunchBriefForm />} />
-                        <Route path="/get-started" element={<Contact />} />
+                        <Route path="/inquiry-center" element={<InquiryCenter />} />
+                        <Route path="/get-started" element={<InquiryCenter />} />
+                        <Route path="/security" element={<SecurityCompliance />} />
                         <Route path="/blog/limitless-innovation" element={<BlogDetail />} />
                         <Route path="/events/webinar-series" element={<EventDetail />} />
                         <Route path="/careers/open-positions" element={<Careers />} />

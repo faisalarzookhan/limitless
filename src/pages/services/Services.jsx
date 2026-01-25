@@ -172,19 +172,21 @@ const Services = () => {
               >
                 {/* Visual Side - Overlapping Glass Nodes */}
                 <div className="flex-1 w-full relative">
-                  <div className="aspect-[4/5] md:aspect-video glass-panel mask-facet rounded-[3rem] overflow-hidden bg-dark-900/40 border-white/5 relative group">
+                  <div className="aspect-[4/5] md:aspect-video glass-panel mask-facet rounded-[3rem] overflow-hidden bg-dark-900/40 border-white/5 relative group cursor-crosshair">
                     <div className="absolute inset-0 flex items-center justify-center">
-                       <service.icon className={`w-40 h-40 ${service.color} opacity-[0.03] group-hover:scale-110 transition-transform duration-1000 group-hover:opacity-[0.08]`} />
+                       <service.icon className={`w-40 h-40 ${service.color} opacity-[0.03] group-hover:scale-125 group-hover:rotate-6 transition-all duration-1000 group-hover:opacity-[0.12]`} />
                     </div>
                     {/* Floating Telemetry Nodes */}
-                    <div className="absolute top-12 left-12 p-8 glass-panel mask-facet border-white/10 bg-white/5 backdrop-blur-2xl shadow-2xl animate-float">
+                    <div className="absolute top-12 left-12 p-8 glass-panel mask-facet border-white/10 bg-white/5 backdrop-blur-2xl shadow-2xl animate-float group-hover:bg-white/10 transition-colors">
                         <div className="flex gap-2">
-                           {[1, 2, 3].map(i => <div key={i} className={`w-2 h-2 rounded-full ${service.color} opacity-40`} />)}
+                           {[1, 2, 3].map(i => <div key={i} className={`w-2 h-2 rounded-full ${service.color} opacity-40 group-hover:opacity-100 group-hover:animate-pulse`} />)}
                         </div>
                     </div>
-                    <div className="absolute bottom-12 right-12 p-8 glass-panel mask-facet border-white/10 bg-white/5 backdrop-blur-2xl shadow-2xl animate-float-delayed">
-                        <Activity className={`${service.color} w-6 h-6`} />
+                    <div className="absolute bottom-12 right-12 p-8 glass-panel mask-facet border-white/10 bg-white/5 backdrop-blur-2xl shadow-2xl animate-float-delayed group-hover:bg-white/10 transition-colors">
+                        <Activity className={`${service.color} w-6 h-6 group-hover:scale-110 transition-transform`} />
                     </div>
+                    {/* Hover Pulse Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-primary-500/0 via-transparent to-secondary-500/0 group-hover:from-primary-500/5 group-hover:to-secondary-500/5 transition-all duration-1000" />
                   </div>
                   {/* Background Aura */}
                   <div 

@@ -4,68 +4,65 @@
  * across all limitlessinfotech.com sub-domains.
  */
 
-// Conditional import for crypto (Node.js vs browser)
-let crypto;
-let Buffer;
+// Environment detection
+const isBrowser = typeof window !== 'undefined';
+const isNode = !isBrowser;
 
-if (typeof window === 'undefined') {
-  // Server-side (Node.js) environment
-  try {
-    crypto = require('crypto');
-    Buffer = require('buffer').Buffer;
-  } catch (e) {
-    // Fallback for environments where require is not available
-    crypto = global.crypto || window.crypto;
-    Buffer = global.Buffer || (window.Buffer && window.Buffer.from ? window.Buffer : undefined);
-  }
-} else {
-  // Browser environment - using Web Crypto API
-  crypto = window.crypto;
-  // For browser environments, we'll define a minimal Buffer polyfill if needed
-  if (typeof window.Buffer === 'undefined') {
-    // Create a minimal Buffer-like implementation for basic operations
-    Buffer = {
-      from: (input, encoding = 'utf8') => {
-        if (typeof input === 'string') {
-          if (encoding === 'hex') {
-            // Convert hex string to Uint8Array
-            const bytes = [];
-            for (let i = 0; i < input.length; i += 2) {
-              bytes.push(parseInt(input.substr(i, 2), 16));
-            }
-            return new Uint8Array(bytes);
-          } else {
-            // Convert string to Uint8Array
-            const encoder = new TextEncoder();
-            return encoder.encode(input);
-          }
-        } else if (ArrayBuffer.isView(input)) {
-          // If input is already a typed array, return it
-          return input;
-        } else {
-          // Convert array of numbers to Uint8Array
-          return new Uint8Array(input);
-        }
-      },
-      isBuffer: (obj) => obj instanceof Uint8Array || (obj && typeof obj === 'object' && obj.constructor && obj.constructor.name === 'Buffer')
-    };
-  } else {
-    Buffer = window.Buffer;
-  }
+let cryptoInstance;
+if (isBrowser) {
+  cryptoInstance = window.crypto || window.msCrypto;
 }
 
-// Function to generate random bytes in browser environment
+// Function to generate random bytes in a browser-safe way
 function getRandomBytes(length) {
-  if (typeof window !== 'undefined') {
-    // Browser environment
+  if (isBrowser && cryptoInstance) {
     const array = new Uint8Array(length);
-    crypto.getRandomValues(array);
+    cryptoInstance.getRandomValues(array);
     return array;
-  } else {
-    // Node.js environment
-    return crypto.randomBytes(length);
   }
+  // If we're here, we're likely in a build-time or misconfigured environment
+  console.warn('Native crypto not available, using fallback for non-production usage');
+  const fallback = new Uint8Array(length);
+  for (let i = 0; i < length; i++) {
+    fallback[i] = Math.floor(Math.random() * 256);
+  }
+  return fallback;
 }
+
+// minimal Buffer polyfill for browser usage
+let BufferPolyfill = {
+  from: (input, encoding = 'utf8') => {
+    if (typeof input === 'string') {
+      if (encoding === 'hex') {
+        const bytes = [];
+        for (let i = 0; i < input.length; i += 2) {
+          bytes.push(parseInt(input.substr(i, 2), 16));
+        }
+        return new Uint8Array(bytes);
+      } else {
+        const encoder = new TextEncoder();
+        return encoder.encode(input);
+      }
+    } else if (ArrayBuffer.isView(input)) {
+      return input;
+    } else {
+      return new Uint8Array(input);
+    }
+  },
+  concat: (arrays) => {
+    let totalLength = arrays.reduce((acc, value) => acc + value.length, 0);
+    let result = new Uint8Array(totalLength);
+    let length = 0;
+    for (let array of arrays) {
+      result.set(array, length);
+      length += array.length;
+    }
+    return result;
+  },
+  isBuffer: (obj) => obj instanceof Uint8Array
+};
+
+const Buffer = isBrowser ? (window.Buffer || BufferPolyfill) : BufferPolyfill; // Fallback to polyfill if window.Buffer is missing
 
 // Function to handle environment variables in browser
 function getEnvVariable(key, defaultValue = null) {

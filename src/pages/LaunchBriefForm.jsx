@@ -19,13 +19,14 @@ import SEO from '../components/SEO/SEO';
 import ErrorBoundary from '../components/ErrorBoundary';
 import api from '../services/api';
 
-const LaunchBriefForm = () => {
+const LaunchBriefForm = ({ embedded = false }) => {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [formData, setFormData] = useState({
     companyName: '',
     industry: '',
+    companySize: '',
     projectScope: 'web-ecosystem',
     complexity: 'mid',
     budgetRange: 'tier1',
@@ -70,27 +71,29 @@ const LaunchBriefForm = () => {
         description="Initiate your architectural transformation. Complete the multi-step launch brief to receive a deterministic project strategy and budgetary benchmark."
       />
       
-      <div className="min-h-screen bg-[#0e1114] py-32 px-6 relative overflow-hidden">
+      <div className={`${embedded ? '' : 'min-h-screen py-32'} bg-[#0e1114] px-6 relative overflow-hidden`}>
         {/* Atmosphere */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(27,166,214,0.1),transparent_50%)] pointer-events-none" />
         
         <div className="max-w-4xl mx-auto relative z-10">
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-16"
-          >
-            <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-8 backdrop-blur-xl">
-              <Rocket className="w-4 h-4 text-[#1ba6d6]" />
-              <span className="text-[0.6rem] font-black text-white/50 uppercase tracking-[0.4em]">Protocol: Mission Initiation</span>
-            </div>
-            <h1 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter mb-6 italic">
-              Launch <span className="text-[#1ba6d6] not-italic">Brief</span>
-            </h1>
-            <p className="text-[0.7rem] text-white/30 font-black uppercase tracking-[0.3em] max-w-xl mx-auto leading-relaxed">
-              Define the variables for your digital transformation. Each input recalibrates our systemic projection model.
-            </p>
-          </motion.div>
+          {!embedded && (
+            <motion.div 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center mb-16"
+            >
+              <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-8 backdrop-blur-xl">
+                <Rocket className="w-4 h-4 text-[#1ba6d6]" />
+                <span className="text-[0.6rem] font-black text-white/50 uppercase tracking-[0.4em]">Protocol: Mission Initiation</span>
+              </div>
+              <h1 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter mb-6 italic">
+                Launch <span className="text-[#1ba6d6] not-italic">Brief</span>
+              </h1>
+              <p className="text-[0.7rem] text-white/30 font-black uppercase tracking-[0.3em] max-w-xl mx-auto leading-relaxed">
+                Define the variables for your digital transformation. Each input recalibrates our systemic projection model.
+              </p>
+            </motion.div>
+          )}
 
           {/* Progress Node */}
           <div className="flex justify-between mb-20 relative">
@@ -124,31 +127,46 @@ const LaunchBriefForm = () => {
                        <p className="text-[0.6rem] text-white/30 font-black uppercase tracking-widest">Identify your organizational parameters.</p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-10">
-                       <div className="space-y-3">
-                          <label className="text-[0.55rem] font-black text-white/40 uppercase tracking-widest">Organization Name</label>
-                          <input 
-                            type="text" 
-                            value={formData.companyName}
-                            onChange={(e) => updateField('companyName', e.target.value)}
-                            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-bold outline-none focus:border-[#1ba6d6]/50 transition-all font-sans"
-                            placeholder="e.g. Nexus Corp"
-                          />
-                       </div>
-                       <div className="space-y-3">
-                          <label className="text-[0.55rem] font-black text-white/40 uppercase tracking-widest">Primary Industry</label>
-                          <select 
-                            value={formData.industry}
-                            onChange={(e) => updateField('industry', e.target.value)}
-                            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-bold outline-none focus:border-[#1ba6d6]/50 transition-all font-sans"
-                          >
-                             <option value="" className="bg-[#0e1114]">Select Domain</option>
-                             <option value="fintech" className="bg-[#0e1114]">FinTech Matrix</option>
-                             <option value="healthcare" className="bg-[#0e1114]">HealthTech Ecosystem</option>
-                             <option value="enterprise" className="bg-[#0e1114]">Enterprise Systems</option>
-                          </select>
-                       </div>
-                    </div>
+                     <div className="grid md:grid-cols-3 gap-10">
+                        <div className="space-y-3">
+                           <label className="text-[0.55rem] font-black text-white/40 uppercase tracking-widest">Organization Name</label>
+                           <input 
+                             type="text" 
+                             value={formData.companyName}
+                             onChange={(e) => updateField('companyName', e.target.value)}
+                             className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-bold outline-none focus:border-[#1ba6d6]/50 transition-all font-sans"
+                             placeholder="e.g. Nexus Corp"
+                           />
+                        </div>
+                        <div className="space-y-3">
+                           <label className="text-[0.55rem] font-black text-white/40 uppercase tracking-widest">Primary Industry</label>
+                           <select 
+                             value={formData.industry}
+                             onChange={(e) => updateField('industry', e.target.value)}
+                             className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-bold outline-none focus:border-[#1ba6d6]/50 transition-all font-sans"
+                           >
+                              <option value="" className="bg-[#0e1114]">Select Domain</option>
+                              <option value="fintech" className="bg-[#0e1114]">FinTech Matrix</option>
+                              <option value="healthcare" className="bg-[#0e1114]">HealthTech Ecosystem</option>
+                              <option value="enterprise" className="bg-[#0e1114]">Enterprise Systems</option>
+                              <option value="logistics" className="bg-[#0e1114]">Logistics / Supply</option>
+                           </select>
+                        </div>
+                        <div className="space-y-3">
+                           <label className="text-[0.55rem] font-black text-white/40 uppercase tracking-widest">Headcount</label>
+                           <select 
+                             value={formData.companySize}
+                             onChange={(e) => updateField('companySize', e.target.value)}
+                             className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-bold outline-none focus:border-[#1ba6d6]/50 transition-all font-sans"
+                           >
+                              <option value="" className="bg-[#0e1114]">Select Scale</option>
+                              <option value="1-10" className="bg-[#0e1114]">1 - 10 Nodes</option>
+                              <option value="11-50" className="bg-[#0e1114]">11 - 50 Nodes</option>
+                              <option value="51-200" className="bg-[#0e1114]">51 - 200 Nodes</option>
+                              <option value="201+" className="bg-[#0e1114]">Enterprise Rank (201+)</option>
+                           </select>
+                        </div>
+                     </div>
                   </motion.div>
                 )}
 

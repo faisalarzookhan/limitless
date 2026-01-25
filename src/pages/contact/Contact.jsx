@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import SEO from '../../components/SEO/SEO';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Mail, 
@@ -146,10 +146,10 @@ const Contact = () => {
 
   return (
     <ErrorBoundary>
-      <Helmet>
-        <title>Contact | Limitless Inotech</title>
-        <meta name="description" content="Reach out to Limitless Inotech for secure, unique, and limitless technology solutions." />
-      </Helmet>
+      <SEO 
+        title="Contact | Limitless Inotech" 
+        description="Reach out to Limitless Inotech for secure, unique, and limitless technology solutions." 
+      />
 
       <div className="relative">
         {/* Ambient background accents */}

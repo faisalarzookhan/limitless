@@ -20,7 +20,8 @@ import {
   Sparkles,
   Trophy,
   Users,
-  Briefcase
+  Briefcase,
+  Calendar
 } from 'lucide-react';
 import { api } from '../services/api';
 import { useApp } from '../context/AppContext';
@@ -77,14 +78,17 @@ const Portfolio = () => {
         setPortfolioProjects([
           {
             id: 101,
-            title: 'IVOLEX - Enterprise Resource Planning',
+            title: 'IVOLEX - Enterprise ERP Ecosystem',
             category: 'crm',
             client: 'Enterprise Global',
             industry: 'Logistics',
-            description: 'Unified multidimensional ERP for large-scale operations and secure asset management.',
+            problem: 'Legacy systems caused 40% data leakage and zero real-time visibility across 15 global nodes.',
+            solution: 'Architected a unified multidimensional ERP with neural sync and localized encryption buffers.',
+            impact: 'Reduced operational friction by 60% and digitized $50M+ in assets under secure management.',
+            description: 'Redefining global logistics through neural-grade enterprise resource planning.',
             image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop',
             tags: ['Enterprise', 'Scalable', 'Cloud Architecture'],
-            results: { efficiency: '+60%', automation: '80%', users: '2k+' },
+            results: { efficiency: '+60%', automation: '80%', visibility: '100%' },
             year: '2023',
             icon: Building2,
             color: 'text-primary-400',
@@ -92,11 +96,14 @@ const Portfolio = () => {
           },
           {
             id: 102,
-            title: 'Wakilni - Legal Tech Ecosystem',
+            title: 'Wakilni - Digital Legal Collective',
             category: 'mobile',
             client: 'MENA Legal Startup',
             industry: 'Legal',
-            description: 'Premium matching platform for legal professionals and corporate entities seeking expertise.',
+            problem: 'Manual lawyer-client matching took 48+ hours with high security risks in document exchange.',
+            solution: 'Developed a mobile ecosystem with real-time biometric handshakes and AI-driven matching protocols.',
+            impact: 'Lowered latency to <2 hours and safely processed 10k+ legal filings in the first fiscal year.',
+            description: 'The nexus of legal excellence and mobile-first architectural security.',
             image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=2070&auto=format&fit=crop',
             tags: ['Mobile Core', 'Encryption', 'Real-time Sync'],
             results: { latency: '80%', onboarding: '500+', matching: '99%' },
@@ -107,14 +114,22 @@ const Portfolio = () => {
           },
           {
             id: 103,
-            title: 'Auralis - AI Personalization',
+            title: 'Auralis - AI Checkout Velocity',
             category: 'automation',
             client: 'Retail Dynamic',
             industry: 'E-commerce',
-            description: 'Neural-engine personalization layer increasing global checkout velocity and precision.',
+            problem: 'Static checkout flows resulted in 70% cart abandonment and miscalibrated product suggestions.',
+            solution: 'Integrated a neural-engine personalization layer that predicts user intent via real-time telemetry.',
+            impact: 'Increased checkout velocity by 40% and improved customer lifetime value by +25%.',
+            description: 'Accelerating retail commerce through predictive neural intelligence.',
             image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop',
             tags: ['AI Neural', 'Big Data', 'Personalization'],
             results: { conversion: '+40%', accuracy: '95%', retention: '+25%' },
+            architecture: [
+                { stage: 'Data Ingestion', tech: 'Neural Telemetry' },
+                { stage: 'Processing', tech: 'Auralis Core AI' },
+                { stage: 'Edge Delivery', tech: 'CDN Sync' }
+            ],
             year: '2024',
             icon: Zap,
             color: 'text-white',
@@ -130,8 +145,8 @@ const Portfolio = () => {
 
   const filteredProjects = portfolioProjects.filter(project => {
     const matchesCategory = selectedCategory === 'all' || project.category === selectedCategory;
-    const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         project.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = (project.title?.toLowerCase() || '').includes(searchQuery.toLowerCase()) ||
+                         (project.description?.toLowerCase() || '').includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
@@ -218,63 +233,134 @@ const Portfolio = () => {
               >
                 <AnimatePresence mode="popLayout">
                   {filteredProjects.map((project) => (
-                    <Link
-                      to={`/portfolio/${project.id}`}
+                    <motion.div
                       key={project.id}
-                      className="glass-panel mask-facet relative group flex flex-col h-full bg-dark-900/40 shadow-[0_0_80px_rgba(0,0,0,0.4)] transition-all hover:border-primary-500/20"
+                      layout
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                      className="group relative h-full"
                     >
-                      <div className="h-64 overflow-hidden relative">
-                         {project.image ? (
-                           <img src={project.image} alt={project.title} className="w-full h-full object-cover transform scale-110 group-hover:scale-100 transition-transform duration-1000" />
-                         ) : (
-                           <div className="w-full h-full bg-white/5 flex items-center justify-center">
-                              <project.icon className={`w-20 h-20 ${project.color} opacity-20`} />
-                           </div>
-                         )}
-                         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#0e1114] to-transparent z-10" />
-                         <div className="absolute top-8 left-8 z-20 px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-xl">
-                             <div className="flex items-center gap-2">
-                                <project.icon className={`w-3 h-3 ${project.color}`} />
-                                <span className={`text-[9px] font-black uppercase tracking-[0.3em] ${project.color}`}>{project.industry}</span>
+                      <Link
+                        to={`/portfolio/${project.id}`}
+                        className="glass-panel mask-facet relative flex flex-col h-full bg-dark-900/40 shadow-[0_0_80px_rgba(0,0,0,0.4)] transition-all hover:border-primary-500/30 overflow-hidden"
+                      >
+                        <div className="h-64 overflow-hidden relative">
+                           {project.image ? (
+                             <img 
+                               src={project.image} 
+                               alt={project.title} 
+                               loading="lazy"
+                               className="w-full h-full object-cover transform scale-110 group-hover:scale-100 transition-transform duration-1000" 
+                             />
+                           ) : (
+                             <div className="w-full h-full bg-white/5 flex items-center justify-center">
+                                <project.icon className={`w-20 h-20 ${project.color} opacity-20`} />
                              </div>
-                         </div>
-                      </div>
+                           )}
+                           <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#0e1114] to-transparent z-10" />
+                           <div className="absolute top-8 left-8 z-20 px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-xl">
+                               <div className="flex items-center gap-2">
+                                  <project.icon className={`w-3 h-3 ${project.color}`} />
+                                  <span className={`text-[9px] font-black uppercase tracking-[0.3em] ${project.color}`}>{project.industry}</span>
+                               </div>
+                           </div>
+                        </div>
 
-                      <div className="p-10 flex-1 flex flex-col">
-                        <div className="flex items-center justify-between mb-8 group-hover:translate-x-1 transition-transform">
-                          <h3 className="text-2xl font-black text-white italic uppercase tracking-tighter leading-tight max-w-[80%]">{project.title}</h3>
-                          <div className={`w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center ${project.color} group-hover:bg-white group-hover:text-dark-900 transition-all`}>
-                             <ArrowRight className="w-6 h-6" />
+                        <div className="p-10 flex-1 flex flex-col">
+                          <div className="flex items-center justify-between mb-8 group-hover:translate-x-1 transition-transform">
+                            <h3 className="text-2xl font-black text-white italic uppercase tracking-tighter leading-tight max-w-[80%]">{project.title}</h3>
+                            <div className={`w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center ${project.color} group-hover:bg-white group-hover:text-dark-900 transition-all`}>
+                               <ArrowRight className="w-6 h-6" />
+                            </div>
+                          </div>
+
+                          <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest italic leading-relaxed mb-10 line-clamp-3">
+                            {project.description}
+                          </p>
+
+                          <div className="flex flex-wrap gap-2 mb-10">
+                            {project.tags.map((tag, i) => (
+                              <span key={i} className="px-3 py-1.5 bg-white/5 rounded-full text-[8px] font-black text-gray-600 uppercase tracking-widest border border-white/5">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+
+                          <div className="mt-auto pt-10 border-t border-white/5 grid grid-cols-2 gap-6">
+                             {Object.entries(project.results).slice(0, 2).map(([key, val], idx) => (
+                               <div key={idx} className="text-center p-4 bg-white/5 rounded-2xl border border-white/5 group-hover:border-white/10 transition-colors">
+                                  <div className="text-lg font-black text-white tracking-tighter mb-1 italic">{val}</div>
+                                  <div className="text-[7px] font-black text-gray-600 uppercase tracking-[0.2em]">{key} Recovery</div>
+                               </div>
+                             ))}
                           </div>
                         </div>
 
-                        <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest italic leading-relaxed mb-10 line-clamp-3">
-                          {project.description}
-                        </p>
+                        {/* Detailed Hover Info Overlay */}
+                        <div className="absolute inset-0 bg-dark-900/95 opacity-0 group-hover:opacity-100 transition-all duration-500 z-30 p-10 flex flex-col justify-center items-center text-center backdrop-blur-sm transform translate-y-4 group-hover:translate-y-0">
+                           <div className="w-20 h-20 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center mb-8">
+                              <project.icon className={`w-10 h-10 ${project.color}`} />
+                           </div>
+                           <h4 className="text-2xl font-black text-white uppercase italic tracking-tighter mb-4">{project.title}</h4>
+                           <div className="space-y-6 mb-10">
+                              <div className="flex items-center justify-center gap-4 text-primary-400">
+                                 <Building2 size={16} />
+                                 <span className="text-[10px] font-black uppercase tracking-widest">{project.client}</span>
+                              </div>
+                              <div className="flex items-center justify-center gap-4 text-secondary-400">
+                                 <Calendar size={16} />
+                                 <span className="text-[10px] font-black uppercase tracking-widest">DEPLOYED {project.year}</span>
+                              </div>
+                           </div>
+                           <div className="grid grid-cols-1 w-full gap-4 overflow-y-auto max-h-[300px] pr-2 custom-scrollbar">
+                                <div className="p-6 bg-white/5 rounded-2xl border border-white/10 text-left">
+                                    <h5 className="text-[8px] font-black text-primary-400 uppercase tracking-widest mb-2">The Problem</h5>
+                                    <p className="text-[10px] text-gray-400 group-hover:text-gray-300 leading-relaxed italic">{project.problem}</p>
+                                </div>
+                                <div className="p-6 bg-white/5 rounded-2xl border border-white/10 text-left">
+                                    <h5 className="text-[8px] font-black text-secondary-400 uppercase tracking-widest mb-2">The Solution</h5>
+                                    <p className="text-[10px] text-gray-400 group-hover:text-gray-300 leading-relaxed italic">{project.solution}</p>
+                                </div>
+                                
+                                {project.architecture && (
+                                    <div className="p-6 bg-white/5 rounded-2xl border border-white/10 text-left">
+                                        <h5 className="text-[8px] font-black text-[#1ba6d6] uppercase tracking-widest mb-4">Architecture Depth</h5>
+                                        <div className="flex flex-col gap-3">
+                                            {project.architecture.map((arch, i) => (
+                                                <div key={i} className="flex items-center gap-3">
+                                                    <div className="w-1.5 h-1.5 rounded-full bg-[#1ba6d6]" />
+                                                    <span className="text-[8px] font-black text-white/40 uppercase tracking-widest">{arch.stage}:</span>
+                                                    <span className="text-[8px] font-black text-white uppercase tracking-widest">{arch.tech}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
 
-                        <div className="flex flex-wrap gap-2 mb-10">
-                          {project.tags.map((tag, i) => (
-                            <span key={i} className="px-3 py-1.5 bg-white/5 rounded-full text-[8px] font-black text-gray-600 uppercase tracking-widest border border-white/5">
-                              {tag}
-                            </span>
-                          ))}
+                                <div className="p-6 bg-white/5 rounded-2xl border border-white/10 text-left">
+                                    <h5 className="text-[8px] font-black text-white uppercase tracking-widest mb-2">The Impact</h5>
+                                    <p className="text-[10px] text-gray-400 group-hover:text-gray-300 leading-relaxed italic">{project.impact}</p>
+                                </div>
+                                {Object.entries(project.results).map(([key, val], idx) => (
+                                    <div key={idx} className="flex justify-between items-center px-6 py-4 bg-white/5 rounded-2xl border border-white/10">
+                                        <span className="text-[8px] font-black text-gray-500 uppercase tracking-widest">{key} Metric</span>
+                                        <span className="text-xl font-black text-white italic">{val}</span>
+                                    </div>
+                                ))}
+                           </div>
+                           <div className="mt-10 flex items-center gap-4 text-[#1ba6d6] font-black text-[10px] uppercase tracking-[0.4em]">
+                              Deconstruct Case <ArrowRight size={14} />
+                           </div>
                         </div>
-
-                        <div className="mt-auto pt-10 border-t border-white/5 grid grid-cols-2 gap-6">
-                           {Object.entries(project.results).slice(0, 2).map(([key, val], idx) => (
-                             <div key={idx} className="text-center p-4 bg-white/5 rounded-2xl border border-white/5 group-hover:border-white/10 transition-colors">
-                                <div className="text-lg font-black text-white tracking-tighter mb-1 italic">{val}</div>
-                                <div className="text-[7px] font-black text-gray-600 uppercase tracking-[0.2em]">{key} Recovery</div>
-                             </div>
-                           ))}
-                        </div>
-                      </div>
-
-                      <div 
-                        className="absolute bottom-0 left-0 w-full h-px opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                        style={{ background: `linear-gradient(to right, transparent, ${project.glow}, transparent)` }}
-                      />
-                    </Link>
+                        
+                        <div 
+                          className="absolute bottom-0 left-0 w-full h-px opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                          style={{ background: `linear-gradient(to right, transparent, ${project.glow}, transparent)` }}
+                        />
+                      </Link>
+                    </motion.div>
                   ))}
                 </AnimatePresence>
               </motion.div>

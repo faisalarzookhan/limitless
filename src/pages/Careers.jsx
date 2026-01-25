@@ -25,6 +25,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import ErrorBoundary from '../components/ErrorBoundary';
+import SEO from '../components/SEO/SEO';
 
 const Careers = () => {
   const [searchTerm, setSearchTerm] = useState('');

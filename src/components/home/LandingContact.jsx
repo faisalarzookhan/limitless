@@ -84,20 +84,20 @@ const LandingContact = () => {
                     </p>
                     
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                        <div className="p-6 glass-panel mask-facet border-white/5 group hover:border-primary-500/30 transition-all">
+                        <a href="mailto:Info@limitlessinfotech.com" className="p-6 glass-panel mask-facet border-white/5 group hover:border-primary-500/30 transition-all block">
                             <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-primary-400 mb-6 group-hover:bg-primary-500 group-hover:text-white transition-all">
                                 <Mail size={18} />
                             </div>
-                            <div className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">Direct Node</div>
-                            <div className="text-sm font-bold text-white uppercase italic">hello@limitless.com</div>
-                        </div>
-                        <div className="p-6 glass-panel mask-facet border-white/5 group hover:border-secondary-500/30 transition-all">
+                            <div className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">Email Protocol</div>
+                            <div className="text-sm font-bold text-white uppercase italic">Info@limitlessinfotech.com</div>
+                        </a>
+                        <a href="tel:+917710909492" className="p-6 glass-panel mask-facet border-white/5 group hover:border-secondary-500/30 transition-all block">
                             <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-secondary-400 mb-6 group-hover:bg-secondary-500 group-hover:text-white transition-all">
-                                <ShieldCheck size={18} />
+                                <Activity size={18} />
                             </div>
-                            <div className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">Secure Protocol</div>
-                            <div className="text-sm font-bold text-white uppercase italic">AES-256 Encrypted</div>
-                        </div>
+                            <div className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">Direct Uplink</div>
+                            <div className="text-sm font-bold text-white uppercase italic">+91 77109 09492</div>
+                        </a>
                     </div>
                 </motion.div>
 

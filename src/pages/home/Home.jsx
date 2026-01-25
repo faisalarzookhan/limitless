@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Helmet } from 'react-helmet';
+import SEO from '../../components/SEO/SEO';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -285,20 +285,11 @@ const Home = () => {
   return (
     <ErrorBoundary>
       <>
-      <Helmet>
-        <title>Limitless Infotech Solution - Enterprise Digital Excellence</title>
-        <meta name="description" content="Transform your business with architectural-grade digital solutions. We are the architects of transformation, building tomorrow's technology today." />
-        <meta name="keywords" content="web development, mobile app development, custom software, CRM, business automation, AI integration, enterprise solutions" />
-        <meta name="author" content="Limitless Infotech Solution" />
-        <meta property="og:title" content="Limitless Infotech Solution - Enterprise Digital Excellence" />
-        <meta property="og:description" content="Transform your business with architectural-grade digital solutions. We are the architects of transformation, building tomorrow's technology today." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.limitlessinfotech.com" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Limitless Infotech Solution - Enterprise Digital Excellence" />
-        <meta name="twitter:description" content="Transform your business with architectural-grade digital solutions. We are the architects of transformation, building tomorrow's technology today." />
-        <link rel="canonical" href="https://www.limitlessinfotech.com" />
-      </Helmet>
+      <SEO 
+        title="Limitless Infotech Solution - Enterprise Digital Excellence" 
+        description="Transform your business with architectural-grade digital solutions. We are the architects of transformation, building tomorrow's technology today." 
+        keywords="web development, mobile app development, custom software, CRM, business automation, AI integration, enterprise solutions"
+      />
       <div className="min-h-screen font-sans bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
       {/* Hero Section - Asymmetrical Layout */}
       <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#0a0b0d] via-[#1e293b] to-[#0f172a]">
@@ -499,6 +490,7 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
+            {coreServices.map((service, index) => (
               <motion.div
                 key={index}
                 whileHover={{ y: -10, scale: 1.02 }}
@@ -527,6 +519,7 @@ const Home = () => {
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Link>
               </motion.div>
+            ))}
           </div>
 
           <div className="text-center mt-20">

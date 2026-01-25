@@ -26,12 +26,15 @@ const LandingHero = ({ toggleModal }) => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-5xl md:text-7xl lg:text-7xl font-extrabold text-white leading-[1.1] tracking-tight mb-8"
+                        className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.9] tracking-tighter mb-8 italic uppercase"
                     >
-                        Where Innovation Meets
+                        Design. Build. <br />
+                        <span className="text-[#1ba6d6] not-italic drop-shadow-[0_0_15px_rgba(27,166,214,0.3)]">
+                            Scale Securely
+                        </span>
                         <br />
-                        <span className="bg-gradient-to-r from-[#1ba6d6] via-blue-400 to-[#1ba6d6] bg-clip-text text-transparent bg-300% animate-gradient">
-                            Execution.
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/20">
+                            — at Speed.
                         </span>
                     </motion.h1>
 
@@ -39,10 +42,10 @@ const LandingHero = ({ toggleModal }) => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.4 }}
-                        className="text-xl text-[#94a3b8] max-w-xl mb-14 leading-relaxed font-light"
+                        className="text-[0.7rem] md:text-[0.8rem] text-[#94a3b8] max-w-xl mb-14 leading-relaxed font-black uppercase tracking-[0.3em] opacity-80"
                     >
-                        Custom Software Development & Cloud Solutions for Startups. 
-                        We build scalable, secure, and high-performance technology that drives your business forward.
+                        We help SMBs and enterprises design, build, and scale secure digital products. 
+                        Engineered for high-fidelity stability and reduced time-to-market.
                     </motion.p>
 
                     <motion.div 
@@ -52,10 +55,10 @@ const LandingHero = ({ toggleModal }) => {
                         className="flex flex-wrap gap-6"
                     >
                         <Link
-                            to="/contact"
-                            className="px-10 py-5 bg-[#1ba6d6] text-white font-black text-sm uppercase tracking-wider mask-btn shadow-2xl shadow-blue-500/20 flex items-center gap-2 hover:bg-[#158bb3] transition-colors"
+                            to="/get-started"
+                            className="px-10 py-5 bg-[#1ba6d6] text-white font-black text-xs uppercase tracking-[0.3em] mask-btn shadow-2xl shadow-blue-500/30 flex items-center gap-2 hover:scale-105 transition-all duration-500"
                         >
-                            Get a Free Consultation
+                            Book a free call
                         </Link>
                         <Link 
                             to="/portfolio"
