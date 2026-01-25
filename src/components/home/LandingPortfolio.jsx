@@ -5,31 +5,31 @@ import { ExternalLink, ArrowRight } from 'lucide-react';
 const LandingPortfolio = () => {
     const projects = [
         {
-            title: 'FinTech Dashboard',
-            category: 'Web Application',
-            image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop', // Placeholder - in production use local assets or relevant images
-            problem: 'Legacy system was slow and difficult to scale.',
-            solution: 'Rebuilt using React and Node.js with microservices architecture.',
-            result: '50% faster load times and 99.9% uptime.',
-            tech: ['React', 'Node.js', 'AWS']
+            title: 'IVOLEX - Enterprise ERP',
+            category: 'Enterprise System',
+            image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop', // Business/Dashboard/Analytics
+            problem: 'Fragmented operations across global logistics network.',
+            solution: 'Unified multidimensional ERP with real-time asset tracking.',
+            result: '60% efficiency gain and automated 80% of manual flows.',
+            tech: ['React', 'Node.js', 'PostgreSQL']
         },
         {
-            title: 'HealthCare Mobile App',
-            category: 'Mobile Development',
-            image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2070&auto=format&fit=crop',
-            problem: 'Patients struggled to book appointments efficiently.',
-            solution: 'Native mobile app with real-time scheduling and telemedicine.',
-            result: '3x increase in patient booking conversion.',
-            tech: ['Flutter', 'Firebase', 'WebRTC']
+            title: 'Wakilni - Legal Tech',
+            category: 'Mobile Platform',
+            image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=2070&auto=format&fit=crop', // Legal/Professional/Clean
+            problem: 'Complex bridging between legal professionals and clients.',
+            solution: 'Secure, encrypted matching platform with instant consultation.',
+            result: 'Onboarded 500+ lawyers and reduced latency by 80%.',
+            tech: ['Flutter', 'Firebase', 'E2E Encryption']
         },
         {
-             title: 'E-Commerce Platform',
-            category: 'UI/UX & Development',
-            image: 'https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?q=80&w=2070&auto=format&fit=crop',
-            problem: 'Low conversion rate due to poor user experience.',
-            solution: 'Complete UI redesign and optimized checkout flow.',
-            result: '40% increase in sales revenue within 3 months.',
-            tech: ['Next.js', 'Stripe', 'Tailwind']
+            title: 'Luxe E-commerce Core',
+            category: 'Digital Retail',
+            image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop', // Retail/Fashion/Store
+            problem: 'High traffic but low conversion on legacy storefront.',
+            solution: 'Immersive visual storytelling engine with optimized checkout.',
+            result: '85% increase in conversion and 250% traffic growth.',
+            tech: ['Next.js', 'Stripe', 'Redis']
         }
     ];
 
