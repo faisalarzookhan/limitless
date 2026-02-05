@@ -159,7 +159,7 @@ const Contact = () => {
         </div>
 
         {/* Hero Section */}
-        <section className="relative pt-32 pb-20 px-6 overflow-hidden">
+        <section className="relative pt-12 pb-20 px-6 overflow-hidden">
           <motion.div 
             initial="hidden"
             whileInView="visible"

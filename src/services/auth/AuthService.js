@@ -1,5 +1,6 @@
 // src/services/auth/AuthService.js
 import EnterpriseProtocol from '../enterprise/EnterpriseProtocolService';
+import supabase from '../supabaseClient';
 
 class AuthService {
     constructor() {
@@ -28,6 +29,54 @@ class AuthService {
      * Authenticate user with email and password
      */
     async login(email, password, rememberMe = false) {
+        if (supabase) {
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+                
+                if (error) {
+                    // Fallback to mock users if Supabase fails (optional, or just return error)
+                    // For now, if we have supabase configured, we assume we want to use it.
+                    console.error('[Auth] Supabase login error:', error);
+                    return { success: false, error: error.message };
+                }
+
+                if (data.user) {
+                    // Map Supabase user to App user structure
+                    const user = {
+                        id: data.user.id,
+                        email: data.user.email,
+                        name: data.user.user_metadata?.full_name || data.user.email.split('@')[0],
+                        role: data.user.user_metadata?.role || 'user',
+                        permissions: data.user.user_metadata?.permissions || ['client_portal'] // Default permission
+                    };
+
+                    // For admin email fallback if metadata is empty
+                    if (email === 'admin@limitlessinfotech.com' && user.role === 'user') {
+                         user.role = 'admin';
+                         user.permissions = ['admin_nexus', 'analytics', 'client_portal', 'all'];
+                    }
+
+                    const session = {
+                        user,
+                        token: data.session?.access_token,
+                        timestamp: new Date().toISOString(),
+                        expiresAt: data.session?.expires_at 
+                            ? new Date(data.session.expires_at * 1000).toISOString() 
+                            : this._getExpirationTime(rememberMe)
+                    };
+
+                    localStorage.setItem(this.storageKey, JSON.stringify(session));
+                    EnterpriseProtocol.setProtocol('AUTH_STATUS', 'AUTHENTICATED');
+                    
+                    return { success: true, user };
+                }
+            } catch (err) {
+                 console.error('[Auth] Unexpected error during Supabase login:', err);
+                 // Fall through to mock? No, better to fail if Supabase was intended.
+                 return { success: false, error: 'Authentication failed' };
+            }
+        }
+
         try {
             // Simulate network delay for realistic UX
             await new Promise(resolve => setTimeout(resolve, 800));
@@ -79,7 +128,10 @@ class AuthService {
     /**
      * Logout current user
      */
-    logout() {
+    async logout() {
+        if (supabase) {
+            await supabase.auth.signOut();
+        }
         localStorage.removeItem(this.storageKey);
         EnterpriseProtocol.setProtocol('AUTH_STATUS', 'UNAUTHENTICATED');
         console.info('[Auth] User logged out');

@@ -23,6 +23,7 @@
     "quality:fix": "npm run lint:fix && npm run format"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.95.0",
     "chart.js": "^4.5.1",
     "date-fns": "^4.1.0",
     "framer-motion": "^12.23.26",

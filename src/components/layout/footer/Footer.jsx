@@ -5,13 +5,15 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <footer className="py-24 px-6 md:px-10 border-t border-white/5 bg-[#0e1114]">
+        <footer className="py-20 md:py-24 px-6 md:px-12 border-t border-white/5 bg-[#0e1114] relative overflow-hidden">
+            {/* Ambient Glow */}
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-900/10 blur-[100px] rounded-full pointer-events-none" />
             <motion.div 
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                className="max-w-[1440px] mx-auto grid lg:grid-cols-4 gap-20"
+                className="max-w-[1440px] mx-auto grid lg:grid-cols-4 gap-12 lg:gap-20 relative z-10"
             >
                 <div className="col-span-1">
                     <div className="flex items-center gap-3 mb-10">

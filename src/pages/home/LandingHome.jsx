@@ -20,20 +20,6 @@ const LandingHome = () => {
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        // Observe elements from sub-components.
-        // We use a timeout to ensure sub-components are mounted and rendered
-        const timer = setTimeout(() => {
-            document.querySelectorAll('.on-scroll, .on-scroll-mask').forEach(el => observer.observe(el));
-        }, 100);
-
         const handleScroll = () => {
              if (window.scrollY > 40) {
                 setIsScrolled(true);
@@ -46,7 +32,6 @@ const LandingHome = () => {
         
         return () => {
             window.removeEventListener('scroll', handleScroll);
-            clearTimeout(timer);
         };
     }, []);
 

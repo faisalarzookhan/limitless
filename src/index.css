@@ -100,28 +100,6 @@
     text-shadow: 0 0 20px rgba(27, 166, 214, 0.3);
   }
 
-  .on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition:
-      opacity 0.8s var(--ease-industrial),
-      transform 0.8s var(--ease-industrial);
-  }
-
-  .on-scroll.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .on-scroll-mask {
-    clip-path: inset(0 100% 0 0);
-    transition: clip-path 1.2s var(--ease-industrial);
-  }
-
-  .on-scroll-mask.visible {
-    clip-path: inset(0 0% 0 0);
-  }
-
   .modal-backdrop {
     opacity: 0;
     pointer-events: none;

@@ -18,6 +18,7 @@ import {
 import SEO from '../components/SEO/SEO';
 import ErrorBoundary from '../components/ErrorBoundary';
 import api from '../services/api';
+import PersistenceService from '../services/enterprise/PersistenceService';
 
 const LaunchBriefForm = ({ embedded = false }) => {
   const [step, setStep] = useState(1);
@@ -53,7 +54,16 @@ const LaunchBriefForm = ({ embedded = false }) => {
   const handleSubmit = async () => {
     setIsSubmitting(true);
     try {
-      await api.contact.submitLaunchBrief(formData);
+      // Store in Persistence Service (Supabase/Local)
+      await PersistenceService.store('launch_briefs', formData);
+      
+      // Attempt API call (optional/parallel)
+      try {
+          await api.contact.submitLaunchBrief(formData);
+      } catch (e) {
+          console.warn('API submission failed, but data persisted locally/Supabase', e);
+      }
+      
       setIsSuccess(true);
     } catch (error) {
       console.error('Submission failed:', error);

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   User,
@@ -20,6 +20,7 @@ import csrfService from '../services/csrfService';
 import rateLimitService from '../services/rateLimitService';
 import encryptionService from '../services/auth/encryptionService';
 import { sendLeadGenerationNotification } from '../services/notification/notificationService';
+import PersistenceService from '../services/enterprise/PersistenceService';
 
 const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
   const [formData, setFormData] = useState({
@@ -147,6 +148,9 @@ const DedicatedTeamForm = ({ variant = 'default', onSubmitSuccess }) => {
     };
 
     try {
+      // Store in Persistence Service
+      await PersistenceService.store('dedicated_team_requests', requestData);
+
       // Send notification about the form submission
       await sendLeadGenerationNotification(requestData);
 

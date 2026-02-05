@@ -56,7 +56,7 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
         isScrolled 
           ? 'py-4 bg-[#0e1114]/80 backdrop-blur-2xl border-b border-white/5' 
           : 'py-8 bg-transparent'

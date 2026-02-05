@@ -45,7 +45,7 @@ export default defineConfig({
         manualChunks: (id) => {
           if (id.includes('node_modules')) {
             // Core React ecosystem
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router') || id.includes('scheduler')) {
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router') || id.includes('@remix-run')) {
               return 'vendor-react';
             }
             // Animation libraries
@@ -64,8 +64,8 @@ export default defineConfig({
             if (id.includes('jspdf') || id.includes('html2canvas')) {
               return 'vendor-pdf';
             }
-            // Default vendor chunk for everything else
-            return 'vendor-libs';
+            // Allow Vite to handle the rest automatically to prevent circular dependencies
+            // return 'vendor-libs';
           }
           // Intentionally do NOT group src/ files to allow React.lazy to split chunks naturally
         }

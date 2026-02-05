@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import ErrorBoundary from '../components/ErrorBoundary';
 import notificationService from '../services/notification/notificationService';
+import PersistenceService from '../services/enterprise/PersistenceService';
 
 const ClientForm = ({ embedded = false }) => {
   const [step, setStep] = useState(1);
@@ -50,6 +51,9 @@ const ClientForm = ({ embedded = false }) => {
   const handleSubmit = async () => {
     setIsSubmitting(true);
     try {
+        // Store in Persistence Service
+        await PersistenceService.store('leads', formData);
+
         // Send data to notification service
         await notificationService.sendLeadNotification({
             ...formData,

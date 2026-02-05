@@ -103,14 +103,14 @@ const Services = () => {
   ];
 
   const additionalServices = [
-    { icon: Globe, title: 'IoT Nodes', description: 'Deep hardware-to-digital synching.' },
-    { icon: Server, title: 'Network Security', description: 'Enterprise-grade structural defense.' },
-    { icon: Database, title: 'Cloud Matrix', description: 'AWS & Azure multi-region clusters.' },
-    { icon: Puzzle, title: 'Neural UI/UX', description: 'Designing for high-fidelity engagement.' },
-    { icon: Camera, title: 'Digital Brand Node', description: 'Structural visual identity systems.' },
-    { icon: Cloud, title: 'DevOps Pipelines', description: 'Automated CI/CD architectural parity.' },
-    { icon: RefreshCw, title: 'Continuity Ops', description: '24/7 mission-critical node support.' },
-    { icon: TrendingUp, title: 'Growth Telemetry', description: 'Data-driven market expansion protocols.' }
+    { icon: Globe, title: 'IoT Nodes', description: 'Deep hardware-to-digital synching.', slug: 'iot-nodes' },
+    { icon: Server, title: 'Network Security', description: 'Enterprise-grade structural defense.', slug: 'network-security' },
+    { icon: Database, title: 'Cloud Matrix', description: 'AWS & Azure multi-region clusters.', slug: 'cloud-matrix' },
+    { icon: Puzzle, title: 'Neural UI/UX', description: 'Designing for high-fidelity engagement.', slug: 'neural-ui-ux' },
+    { icon: Camera, title: 'Digital Brand Node', description: 'Structural visual identity systems.', slug: 'digital-brand-node' },
+    { icon: Cloud, title: 'DevOps Pipelines', description: 'Automated CI/CD architectural parity.', slug: 'devops-pipelines' },
+    { icon: RefreshCw, title: 'Continuity Ops', description: '24/7 mission-critical node support.', slug: 'continuity-ops' },
+    { icon: TrendingUp, title: 'Growth Telemetry', description: 'Data-driven market expansion protocols.', slug: 'growth-telemetry' }
   ];
 
   const processStages = [
@@ -136,7 +136,7 @@ const Services = () => {
         </div>
 
         {/* Hero Section */}
-        <section className="relative pt-48 pb-32 px-6 overflow-hidden">
+        <section className="relative pt-12 pb-32 px-6 overflow-hidden">
           <motion.div 
             initial="hidden"
             animate="visible"
@@ -148,7 +148,7 @@ const Services = () => {
               <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400">Node Capabilities</span>
             </motion.div>
             
-            <motion.h1 variants={itemVariants} className="text-6xl md:text-9xl font-black text-white italic tracking-tighter uppercase leading-[0.85] mb-12">
+            <motion.h1 variants={itemVariants} className="text-5xl md:text-8xl font-black text-white italic tracking-tighter uppercase leading-[0.85] mb-12">
               Architectural <br /> <span className="text-primary-400 not-italic">Verticals.</span>
             </motion.h1>
             
@@ -245,20 +245,21 @@ const Services = () => {
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {additionalServices.map((service, index) => (
-                <motion.div 
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  className="p-10 glass-panel mask-facet bg-dark-900/40 border-white/5 group hover:border-primary-500/30 transition-all duration-500"
-                >
-                  <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 group-hover:bg-primary-500 transition-all duration-500">
-                    <service.icon className="w-6 h-6 text-primary-400 group-hover:text-white" />
-                  </div>
-                  <h3 className="text-lg font-black text-white mb-4 italic uppercase tracking-tight">{service.title}</h3>
-                  <p className="text-[0.6rem] font-bold text-gray-500 group-hover:text-gray-400 uppercase tracking-widest leading-relaxed transition-colors italic">{service.description}</p>
-                </motion.div>
+                <Link to={`/services/${service.slug}`} key={index}>
+                    <motion.div 
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.05 }}
+                    className="p-10 glass-panel mask-facet bg-dark-900/40 border-white/5 group hover:border-primary-500/30 transition-all duration-500 h-full"
+                    >
+                    <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 group-hover:bg-primary-500 transition-all duration-500">
+                        <service.icon className="w-6 h-6 text-primary-400 group-hover:text-white" />
+                    </div>
+                    <h3 className="text-lg font-black text-white mb-4 italic uppercase tracking-tight">{service.title}</h3>
+                    <p className="text-[0.6rem] font-bold text-gray-500 group-hover:text-gray-400 uppercase tracking-widest leading-relaxed transition-colors italic">{service.description}</p>
+                    </motion.div>
+                </Link>
               ))}
             </div>
           </div>

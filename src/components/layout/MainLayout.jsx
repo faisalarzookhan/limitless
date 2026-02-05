@@ -15,7 +15,7 @@ const MainLayout = ({ children }) => {
       <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar />
         <PrivacyConsent />
-        <main id="content" className="flex-grow pt-24 md:pt-32">
+        <main id="content" className="flex-grow pt-28 md:pt-36">
           {children}
         </main>
         <FloatingButtons />

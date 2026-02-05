@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
-import api from '../../services/api';
+// import api from '../../services/api'; 
 import PersistenceService from '../../services/enterprise/PersistenceService';
 import EnterpriseProtocolService from '../../services/enterprise/EnterpriseProtocolService';
 import { 
@@ -59,21 +59,22 @@ const AdminNexus = () => {
     useEffect(() => {
         const loadData = async () => {
             try {
-                const leadResponse = await api.leads.getAll();
-                const chatData = await api.chat.getHistory('global'); // Simulation
-                
-                setLeads(Array.isArray(leadResponse?.data) ? leadResponse.data.reverse() : []);
-                setChatLogs(Array.isArray(chatData?.data) ? chatData.data.reverse() : []);
+                // Fetch leads directly from the Persistence Service (supports Supabase & Local)
+                const leadData = await PersistenceService.fetchAll('leads');
+                setLeads(Array.isArray(leadData) ? leadData.reverse() : []);
+
+                // For now, continue to simulate chat logs or fetch from persistence if valid
+                try {
+                     const chatData = await PersistenceService.fetchAll('chat_logs');
+                     setChatLogs(Array.isArray(chatData) ? chatData.reverse() : []);
+                } catch (e) {
+                     // Keep chat logs empty if not implemented
+                     setChatLogs([]);
+                }
+
             } catch (error) {
                 console.error('[AdminNexus] Data loading error:', error);
-                
-                // Fallback to legacy persistence service for backward compatibility during migration
-                try {
-                   const leadData = await PersistenceService.fetchAll('project_leads');
-                   setLeads(Array.isArray(leadData) ? leadData.reverse() : []);
-                } catch (e) {
-                   setLeads([]);
-                }
+                setLeads([]);
             }
         };
         loadData();
